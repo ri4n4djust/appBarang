@@ -1,5 +1,12 @@
 import { createStore } from 'vuex';
 import i18n from '../i18n';
+import createPersistedState from "vuex-persistedstate";
+import auth from './auth';
+import barang from './barang';
+import pelanggan from './pelanggan';
+import room from './room';
+import kode from './kode';
+
 
 export default new createStore({
     state: {
@@ -26,8 +33,8 @@ export default new createStore({
             { code: 'ru', name: 'Russian' },
             { code: 'es', name: 'Spanish' },
             { code: 'sv', name: 'Swedish' },
-            { code: 'tr', name: 'Turkish' },
-        ],
+            { code: 'tr', name: 'Turkish' }
+        ]
     },
     mutations: {
         setLayout(state, payload) {
@@ -41,7 +48,7 @@ export default new createStore({
         },
         toggleLocale(state, value) {
             value = value || 'en';
-            i18n.global.locale = value;
+            i18n.locale = value;
             localStorage.setItem('i18n_locale', value);
             state.locale = value;
         },
@@ -87,13 +94,20 @@ export default new createStore({
             value = value || '';
             localStorage.setItem('layout_style', value);
             state.layout_style = value;
-        },
+        }
     },
     getters: {
         layout(state) {
             return state.layout;
-        },
+        }
     },
     actions: {},
-    modules: {},
+    modules: {
+        auth,
+        barang,
+        pelanggan,
+        kode,
+        room
+    },
+    plugins: [createPersistedState()]
 });
