@@ -21,6 +21,8 @@ mix.js("resources/js/src/main.js", "public/js")
                     __dirname,
                     "resources/js/theme.config.js"
                 ),
+                // 'vue$': 'vue/dist/vue.esm.js',
+                // '@vue/composition-api$': '@vue/composition-api/dist/vue-composition-api.mjs'
             },
         },
         module: {

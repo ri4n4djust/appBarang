@@ -66,5 +66,8 @@
         "resolve-url-loader": "^5.0.0",
         "sass": "^1.49.0",
         "sass-loader": "^12.4.0"
-    }
+    },
+    "resolutions": {
+        "@vueuse/**/vue-demi": "0.11.4"
+      }
 }

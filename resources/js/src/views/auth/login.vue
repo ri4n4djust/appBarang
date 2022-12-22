@@ -92,9 +92,10 @@
     import '@/assets/sass/authentication/auth.scss';
     import { useMeta } from '@/composables/use-meta';
     import { ref, reactive, computed } from 'vue';
-    // import { useState, useActions } from 'vuex-composition-helpers'
+    import { useStore } from 'vuex'
+    // import { useState, useActions } from 'vuex-composition-helpers/dist'
     // const { count } = useState(['count'])
-    // const { incrementCount } = useActions(['incrementCount'])
+    // const { incrementCount } = useActions(['Login'])
 
     useMeta({ title: 'Login Cover' });
 
@@ -105,7 +106,14 @@
     const fullName = computed(() => user.firstName + ' ' + user.lastName)
     function log() {
         console.log(fullName)
+        const {store} = useStore({user})
+        store.dispatch('LogIn').then(() => {
+        // ...
+        alert("tesss")
+        })
+        
     };
+    
     
 
 </script>
