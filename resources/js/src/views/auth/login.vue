@@ -27,7 +27,7 @@
                                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                             <circle cx="12" cy="7" r="4"></circle>
                                         </svg>
-                                        <input type="text" v-model="email" class="form-control" placeholder="Username" />
+                                        <input type="text" v-model="form.email" class="form-control" placeholder="Username" />
                                     </div>
 
                                     <div id="password-field" class="field-wrapper input mb-2">
@@ -46,7 +46,7 @@
                                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                                             <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                                         </svg>
-                                        <input type="password" v-model="password" class="form-control" placeholder="Password" />
+                                        <input type="password" v-model="form.password" class="form-control" placeholder="Password" />
                                     </div>
                                     <div class="d-sm-flex justify-content-between">
                                         <div class="field-wrapper toggle-pass d-flex align-items-center">
@@ -64,7 +64,7 @@
                                     <div class="field-wrapper text-center keep-logged-in">
                                         <div class="checkbox-outline-primary custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" value="true" id="chkRemember" />
-                                            <label class="custom-control-label" @click="log" for="chkRemember">Keep me logged in</label>
+                                            <label class="custom-control-label" @click="login" for="chkRemember">Keep me logged in</label>
                                         </div>
                                     </div>
 
@@ -92,27 +92,41 @@
     import '@/assets/sass/authentication/auth.scss';
     import { useMeta } from '@/composables/use-meta';
     import { ref, reactive, computed } from 'vue';
-    import { useStore } from 'vuex'
-    // import { useState, useActions } from 'vuex-composition-helpers/dist'
+    // import { useStore } from 'vuex'
+    import { useState, useActions } from 'vuex-composition-helpers'
     // const { count } = useState(['count'])
     // const { incrementCount } = useActions(['Login'])
 
     useMeta({ title: 'Login Cover' });
 
-    const email = ref('')
-    const password = ref('')
-    const isActive = ref(false)
-    const user = reactive({ firstName: email, lastName: password, age: 25 })
-    const fullName = computed(() => user.firstName + ' ' + user.lastName)
-    function log() {
-        console.log(fullName)
-        const {store} = useStore({user})
-        store.dispatch('LogIn').then(() => {
-        // ...
+    const form = reactive({
+        email: '',
+        password: ''
+    })
+
+    // const email = ref('')
+    // const password = ref('')
+    // const isActive = ref(false)
+    // const user = reactive({ firstName: email, lastName: password, age: 25 })
+    // const fullName = computed(() => user.firstName + ' ' + user.lastName)
+    function login() {
+        // console.log(fullName)
+        // const {store} = useStore({user})
+        // store.dispatch('LogIn').then(() => {
+        useActions(['LogIn', form]);
         alert("tesss")
-        })
+        // })
         
     };
+    // const store = useStore()
+    // function login(){
+    //     // async () => {
+    //         // await storeCompany({ ...form })
+    //         console.log(form);
+    //         root.$store.dispatch('LogIn', form)
+    //     // }
+    // }
+    // const { login } = useActions(['LogIn', form]);
     
     
 

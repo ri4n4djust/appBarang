@@ -52,7 +52,7 @@
         "vue3-quill": "^0.2.6",
         "vue3-scroll-spy": "^1.0.8",
         "vuex": "^4.0.0",
-        "vuex-composition-helpers": "^1.1.2",
+        "vuex-composition-helpers": "^2.0.3",
         "vuex-persistedstate": "^4.1.0"
     },
     "devDependencies": {
@@ -69,5 +69,5 @@
     },
     "resolutions": {
         "@vueuse/**/vue-demi": "0.11.4"
-      }
+    }
 }
