@@ -88,46 +88,59 @@
     </div>
 </template>
 
-<script setup>
+<script>
     import '@/assets/sass/authentication/auth.scss';
     import { useMeta } from '@/composables/use-meta';
     import { ref, reactive, computed } from 'vue';
     // import { useStore } from 'vuex'
-    import { useState, useActions } from 'vuex-composition-helpers'
+    import { useStore, useState, useActions } from 'vuex-composition-helpers'
     // const { count } = useState(['count'])
     // const { incrementCount } = useActions(['Login'])
 
-    useMeta({ title: 'Login Cover' });
+    export default {
+        setup({root}){
 
-    const form = reactive({
-        email: '',
-        password: ''
-    })
+            useMeta({ title: 'Login Cover' });
+            // const store = {useStore};
+            
+            const form = reactive({
+                email: '',
+                password: ''
+            })
 
-    // const email = ref('')
-    // const password = ref('')
-    // const isActive = ref(false)
-    // const user = reactive({ firstName: email, lastName: password, age: 25 })
-    // const fullName = computed(() => user.firstName + ' ' + user.lastName)
-    function login() {
-        // console.log(fullName)
-        // const {store} = useStore({user})
-        // store.dispatch('LogIn').then(() => {
-        useActions(['LogIn', form]);
-        alert("tesss")
-        // })
-        
-    };
-    // const store = useStore()
-    // function login(){
-    //     // async () => {
-    //         // await storeCompany({ ...form })
-    //         console.log(form);
-    //         root.$store.dispatch('LogIn', form)
-    //     // }
-    // }
-    // const { login } = useActions(['LogIn', form]);
+            // const email = ref('')
+            // const password = ref('')
+            // const isActive = ref(false)
+            // const user = reactive({ firstName: email, lastName: password, age: 25 })
+            // const fullName = computed(() => user.firstName + ' ' + user.lastName)
+            function login() {
+                // console.log(fullName)
+                // const {store} = useStore({user})
+                // store.dispatch('LogIn').then(() => {
+                // store.dispatch(['LogIn', form]);
+                useActions(['LogIn', form]);
+                alert("tesss")
+                // })
+                
+            }
+
+            return {
+                login,
+                form,
+                useMeta,
+
+            }
+            // const store = useStore()
+            // function login(){
+            //     // async () => {
+            //         // await storeCompany({ ...form })
+            //         console.log(form);
+            //         root.$store.dispatch('LogIn', form)
+            //     // }
+            // }
+            // const { login } = useActions(['LogIn', form]);
+        }
     
-    
+    }
 
 </script>
