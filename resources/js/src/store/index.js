@@ -6,6 +6,7 @@ import barang from './barang';
 import pelanggan from './pelanggan';
 import room from './room';
 import kode from './kode';
+import bbm from './bbm';
 
 
 export default new createStore({
@@ -107,7 +108,8 @@ export default new createStore({
         barang,
         pelanggan,
         kode,
-        room
+        room,
+        bbm
     },
-    plugins: [createPersistedState()]
+    // plugins: [createPersistedState()]
 });

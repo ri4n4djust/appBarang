@@ -18,6 +18,12 @@ const routes = [
         component: () => import(/* webpackChunkName: "index2" */ '../views/index2.vue'),
     },
 
+    {
+        path: '/barang',
+        name: 'barang',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexBarang.vue'),
+    },
+
     //components
     {
         path: '/components/tabs',

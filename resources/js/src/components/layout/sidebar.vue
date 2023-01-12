@@ -6,8 +6,8 @@
 
             <perfect-scrollbar class="list-unstyled menu-categories" tag="ul" :options="{ wheelSpeed: 0.5, swipeEasing: !0, minScrollbarLength: 40, maxScrollbarLength: 300, suppressScrollX: true }">
                 <li class="menu">
-                    <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#dashboard" aria-controls="dashboard" aria-expanded="false">
-                        <div class="">
+                    <div class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#dashboard" aria-controls="dashboard" aria-expanded="false">
+                        <router-link to="/" >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"
@@ -23,7 +23,58 @@
                                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                                 <polyline points="9 22 9 12 15 12 15 22"></polyline>
                             </svg>
-                            <span>{{ $t('dashboard') }}</span>
+                            <span>Dashboard</span>
+                            <!-- {{ $t('dashboard') }}</span> -->
+                        </router-link>
+                    </div>
+                </li>
+
+                <li class="menu">
+                    <div class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#components" aria-controls="components" aria-expanded="false">
+                        <router-link to="/barang">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-box"
+                            >
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                            </svg>
+                            <span>Barang</span>
+                        </router-link>
+                            <!-- <span>{{ $t('Barang') }}</span> -->
+                    </div>
+                </li>
+
+                <li class="menu">
+                    <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#datatables" aria-controls="datatables" aria-expanded="false">
+                        <div class="">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-layers"
+                            >
+                                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                <polyline points="2 17 12 22 22 17"></polyline>
+                                <polyline points="2 12 12 17 22 12"></polyline>
+                            </svg>
+                           <span>Master</span> 
+                            <!-- {{ $t('Master') }}</span> -->
                         </div>
                         <div>
                             <svg
@@ -43,16 +94,21 @@
                         </div>
                     </a>
 
-                    <ul id="dashboard" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
+                    <ul id="datatables" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
                         <li>
-                            <router-link to="/" @click="toggleMobileMenu">
-                                {{ $t('sales') }}
-                            </router-link>
+                            <router-link to="/tables/basic" @click="toggleMobileMenu">Pegawai</router-link>
                         </li>
                         <li>
-                            <router-link to="/index2" @click="toggleMobileMenu">
-                                {{ $t('analytics') }}
-                            </router-link>
+                            <router-link to="/tables/striped" @click="toggleMobileMenu">Supplier</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/tables/order-sorting" @click="toggleMobileMenu">Order Sorting</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/tables/multi-column" @click="toggleMobileMenu">Multi Column</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/tables/multiple-tables" @click="toggleMobileMenu">Multiple Tables</router-link>
                         </li>
                     </ul>
                 </li>
@@ -83,7 +139,7 @@
                                 <line x1="1" y1="9" x2="4" y2="9"></line>
                                 <line x1="1" y1="14" x2="4" y2="14"></line>
                             </svg>
-                            <span>{{ $t('apps') }}</span>
+                            <span>Transaksi</span>
                         </div>
                         <div>
                             <svg
@@ -104,16 +160,16 @@
                     </a>
                     <ul id="apps" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
                         <li>
-                            <router-link to="/apps/chat" @click="toggleMobileMenu">Chat</router-link>
+                            <router-link to="/apps/chat" @click="toggleMobileMenu">Pembelian</router-link>
                         </li>
                         <li>
-                            <router-link to="/apps/mailbox" @click="toggleMobileMenu">Mailbox</router-link>
+                            <router-link to="/apps/mailbox" @click="toggleMobileMenu">Penjualan</router-link>
                         </li>
                         <li>
-                            <router-link to="/apps/todo-list" @click="toggleMobileMenu">Todo List</router-link>
+                            <router-link to="/apps/todo-list" @click="toggleMobileMenu">Tera</router-link>
                         </li>
                         <li>
-                            <router-link to="/apps/notes" @click="toggleMobileMenu">Notes</router-link>
+                            <router-link to="/apps/notes" @click="toggleMobileMenu">Opnume</router-link>
                         </li>
                         <li>
                             <router-link to="/apps/scrumboard" @click="toggleMobileMenu">Scrumboard</router-link>
@@ -122,126 +178,7 @@
                             <router-link to="/apps/contacts" @click="toggleMobileMenu">Contacts</router-link>
                         </li>
                         <li>
-                            <a class="dropdown-toggle" href="#appInvoice" data-bs-parent="#apps" data-bs-toggle="collapse" role="button" aria-expanded="false">
-                                Invoice
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    class="feather feather-chevron-right"
-                                >
-                                    <polyline points="9 18 15 12 9 6"></polyline>
-                                </svg>
-                            </a>
-
-                            <ul id="appInvoice" class="collapse list-unstyled sub-submenu">
-                                <li>
-                                    <router-link to="/apps/invoice/list" @click="toggleMobileMenu">List</router-link>
-                                </li>
-                                <li>
-                                    <router-link to="/apps/invoice/preview" @click="toggleMobileMenu">Preview</router-link>
-                                </li>
-                                <li>
-                                    <router-link to="/apps/invoice/add" @click="toggleMobileMenu">Add</router-link>
-                                </li>
-                                <li>
-                                    <router-link to="/apps/invoice/edit" @click="toggleMobileMenu">Edit</router-link>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
                             <router-link to="/apps/calendar" @click="toggleMobileMenu">Calendar</router-link>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="menu">
-                    <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#components" aria-controls="components" aria-expanded="false">
-                        <div class="">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="feather feather-box"
-                            >
-                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
-                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-                                <line x1="12" y1="22.08" x2="12" y2="12"></line>
-                            </svg>
-                            <span>{{ $t('components') }}</span>
-                        </div>
-                        <div>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="feather feather-chevron-right"
-                            >
-                                <polyline points="9 18 15 12 9 6"></polyline>
-                            </svg>
-                        </div>
-                    </a>
-
-                    <ul id="components" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
-                        <li>
-                            <router-link to="/components/tabs" @click="toggleMobileMenu">Tabs</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/components/accordions" @click="toggleMobileMenu">Accordions</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/components/modals" @click="toggleMobileMenu">Modals</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/components/cards" @click="toggleMobileMenu">Cards</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/components/carousel" @click="toggleMobileMenu">Carousel</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/components/countdown" @click="toggleMobileMenu">Countdown</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/components/counter" @click="toggleMobileMenu">Counter</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/components/sweetalert" @click="toggleMobileMenu">Sweet Alerts</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/components/timeline" @click="toggleMobileMenu">Timeline</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/components/notifications" @click="toggleMobileMenu">Notifications</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/components/media-object" @click="toggleMobileMenu">Media Object</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/components/list-group" @click="toggleMobileMenu">List Group</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/components/pricing-table" @click="toggleMobileMenu">Pricing Tables</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/components/lightbox" @click="toggleMobileMenu">Lightbox </router-link>
                         </li>
                     </ul>
                 </li>

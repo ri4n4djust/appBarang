@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Barang;
+use App\Models\Bbm;
 use Illuminate\Support\Facades\DB;
 
 class barangController extends Controller
@@ -21,6 +22,18 @@ class barangController extends Controller
             'message' => 'List Semua Barang',
             'data' => $posts
         ], 200);
+    }
+
+    public function indexBbm(){
+        $bbm = Bbm::get();
+        //$posts = Barang::latest()->get();
+        $count = Barang::count();
+        return response([
+            'success' => true,
+            'message' => 'List Semua bbm',
+            'data' => $bbm
+        ], 200);
+
     }
 
     public function update(Request $request)
