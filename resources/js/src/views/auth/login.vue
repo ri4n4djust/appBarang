@@ -57,14 +57,14 @@
                                             </label>
                                         </div>
                                         <div class="field-wrapper">
-                                            <button class="btn btn-primary">Log In</button>
+                                            <label class="btn btn-primary" @click="login">Log In</label>
                                         </div>
                                     </div>
 
                                     <div class="field-wrapper text-center keep-logged-in">
                                         <div class="checkbox-outline-primary custom-control custom-checkbox">
                                             <input type="checkbox" class="custom-control-input" value="true" id="chkRemember" />
-                                            <label class="custom-control-label" @click="login" for="chkRemember">Keep me logged in</label>
+                                            <label class="custom-control-label"  for="chkRemember">Keep me logged in</label>
                                         </div>
                                     </div>
 
@@ -92,35 +92,44 @@
     import '@/assets/sass/authentication/auth.scss';
     import { useMeta } from '@/composables/use-meta';
     import { ref, reactive, computed } from 'vue';
+    import axios from 'axios';
+    import { useRouter, useRoute } from 'vue-router'
     // import { useStore } from 'vuex'
     import { useStore, useState, useActions } from 'vuex-composition-helpers'
     // const { count } = useState(['count'])
     // const { incrementCount } = useActions(['Login'])
 
     export default {
-        setup({root}){
+        setup(){
 
             useMeta({ title: 'Login Cover' });
             // const store = {useStore};
-            
-            const form = reactive({
+            const form = ref({
                 email: '',
                 password: ''
             })
-
-            // const email = ref('')
-            // const password = ref('')
-            // const isActive = ref(false)
-            // const user = reactive({ firstName: email, lastName: password, age: 25 })
-            // const fullName = computed(() => user.firstName + ' ' + user.lastName)
-            function login() {
-                // console.log(fullName)
-                // const {store} = useStore({user})
-                // store.dispatch('LogIn').then(() => {
-                // store.dispatch(['LogIn', form]);
-                useActions(['LogIn', form]);
-                alert("tesss")
-                // })
+            
+            const router = useRouter()
+            const route = useRoute()
+            // console.log(form.value.email)
+            
+            const login = async () => {
+              try {
+                const email = form.value.email
+                const password = form.value.password
+                let data = await axios.post('/api/login', {
+                    email: email,
+                    password: password
+                })
+                localStorage.setItem('tokenLogin', data.data.token)
+                router.push({
+                   path: '/components/tabs'
+                })
+                console.log(data.data.token)
+                
+              } catch (error) {
+                 console.log(error)
+              }
                 
             }
 
@@ -130,15 +139,7 @@
                 useMeta,
 
             }
-            // const store = useStore()
-            // function login(){
-            //     // async () => {
-            //         // await storeCompany({ ...form })
-            //         console.log(form);
-            //         root.$store.dispatch('LogIn', form)
-            //     // }
-            // }
-            // const { login } = useActions(['LogIn', form]);
+            
         }
     
     }
