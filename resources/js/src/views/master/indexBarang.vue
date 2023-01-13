@@ -50,7 +50,7 @@
 
         <div class="row layout-top-spacing">
 
-        <div class="col-md-6 layout-spacing">
+        <!-- <div class="col-md-4 layout-spacing">
             <div class="widget widget-wallet-balance">
                 <div class="widget-heading d-block">
                     <div class="wallet-usr-info">
@@ -145,16 +145,16 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         
 
-        <div v-for="list in users.bbm" class="col-md-6 layout-spacing"  >
+        <div v-for="list in users.bbm" :key="list.id" class="col-md-4 layout-spacing"  >
             {{ list.message }}
             <div class="widget widget-wallet-balance">
                 <div class="widget-heading d-block">
                     <div class="wallet-balance">
-                        <p>Wallet Balance cvv</p>
+                        <p>Wallet Balance cvv {{ list.nama_bbm }}</p>
                         <h5><span class="w-currency">$</span>2953</h5>
                     </div>
                 </div>
@@ -221,7 +221,7 @@
     // BBM
     const users = computed(() => {
         const bbm = store.getters.StateBbm;
-        return { bbm }
+        return { users, bbm }
     });
 
     
