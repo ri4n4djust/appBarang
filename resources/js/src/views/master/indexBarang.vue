@@ -147,136 +147,14 @@
             </div>
         </div>
 
-        <div class="col-md-6 layout-spacing">
-            <div class="widget widget-wallet-balance">
-                <div class="widget-heading d-block">
-                    <div class="wallet-usr-info">
-                        <div class="usr-name">
-                            <span><img src="@/assets/images/profile-32.jpeg" alt="admin-profile" class="img-fluid" /> Alan Green</span>
-                        </div>
-                        <div class="add">
-                            <span
-                                ><svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    class="feather feather-plus"
-                                >
-                                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                                    <line x1="5" y1="12" x2="19" y2="12"></line></svg
-                            ></span>
-                        </div>
-                    </div>
-                    <div class="wallet-balance">
-                        <p>Wallet Balance</p>
-                        <h5><span class="w-currency">$</span>2953</h5>
-                    </div>
-                </div>
+        
 
-                <div class="widget-amount">
-                    <div class="w-a-info funds-received me-3">
-                        <span
-                            >Received
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="18"
-                                height="18"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="feather feather-chevron-up text-success float-end"
-                            >
-                                <polyline points="18 15 12 9 6 15"></polyline></svg
-                        ></span>
-                        <p>$97.99</p>
-                    </div>
-                    <div class="w-a-info funds-spent">
-                        <span
-                            >Spent
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="18"
-                                height="18"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="2"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="feather feather-chevron-down text-danger float-end"
-                            >
-                                <polyline points="6 9 12 15 18 9"></polyline></svg
-                        ></span>
-                        <p>$53.00</p>
-                    </div>
-                </div>
-
-                <div class="widget-content">
-                    <div class="bills-stats mb-4">
-                        <span>Pending</span>
-                    </div>
-                    <div class="invoice-list">
-                        <div class="inv-detail mb-4">
-                            <div class="info-detail-1">
-                                <p>Netflix</p>
-                                <p><span class="w-currency">$</span> <span class="bill-amount">13.85</span></p>
-                            </div>
-                            <div class="info-detail-2">
-                                <p>BlueHost VPN</p>
-                                <p><span class="w-currency">$</span> <span class="bill-amount">15.66</span></p>
-                            </div>
-                        </div>
-                        <div class="inv-action">
-                            <a href="javascript:;" class="btn view-details btn-outline-secondary">View Details</a>
-                            <a href="javascript:;" class="btn pay-now btn-outline-success">Pay Now $29.51</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6 layout-spacing">
+        <div v-for="list in users.bbm" class="col-md-6 layout-spacing"  >
+            {{ list.message }}
             <div class="widget widget-wallet-balance">
                 <div class="widget-heading d-block">
                     <div class="wallet-balance">
-                        <p>Wallet Balance</p>
-                        <h5><span class="w-currency">$</span>2953</h5>
-                    </div>
-                </div>
-
-                <div class="widget-amount">
-                    <div class="w-a-info funds-received me-3">
-                        <span>Received</span>
-                        <p>$97.99</p>
-                    </div>
-                    <div class="w-a-info funds-spent">
-                        <span>Spent</span>
-                        <p>$53.00</p>
-                    </div>
-                </div>
-
-                <div class="widget-content">
-                    <div class="invoice-list">
-                        <span><img src="@/assets/images/pertamax.png" alt="admin-profile" class="img-fluid"/></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-6 layout-spacing">
-            <div class="widget widget-wallet-balance">
-                <div class="widget-heading d-block">
-                    <div class="wallet-balance">
-                        <p>Wallet Balance</p>
+                        <p>Wallet Balance cvv</p>
                         <h5><span class="w-currency">$</span>2953</h5>
                     </div>
                 </div>
@@ -300,7 +178,7 @@
         </div>
 
 
-          {{ users.getbbm.data }}  
+          {{ users.bbm }}  
             
         </div>
     </div>
@@ -342,10 +220,11 @@
 
     // BBM
     const users = computed(() => {
-        const getbbm = store.getters.StateBbm;
-        // const bbms = store.state.bbm;
-        return { getbbm  }
+        const bbm = store.getters.StateBbm;
+        return { bbm }
     });
+
+    
     onMounted(() => {
         function getData(){
             store.dispatch('GetBbm')
