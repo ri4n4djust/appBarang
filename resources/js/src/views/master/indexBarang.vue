@@ -150,35 +150,36 @@
         
 
         <div v-for="list in users.bbm" :key="list.id" class="col-md-4 layout-spacing"  >
-            {{ list.message }}
             <div class="widget widget-wallet-balance">
                 <div class="widget-heading d-block">
                     <div class="wallet-balance">
-                        <p>Wallet Balance cvv {{ list.nama_bbm }}</p>
-                        <h5><span class="w-currency">$</span>2953</h5>
+                        <p>{{ list.nama_bbm }}</p>
+                        <!-- <h5><span class="w-currency">$</span>2953</h5> -->
                     </div>
                 </div>
 
                 <div class="widget-amount">
                     <div class="w-a-info funds-received me-3">
-                        <span>Received</span>
-                        <p>$97.99</p>
+                        <span>Meter</span>
+                        <p>12465768798</p>
                     </div>
                     <div class="w-a-info funds-spent">
-                        <span>Spent</span>
-                        <p>$53.00</p>
+                        <span>Harga</span>
+                        <p>{{ list.last_price  }}</p>
                     </div>
                 </div>
                 <div class="widget-content">
                     <div class="invoice-list">
-                        <span><img src="@/assets/images/pertamina-dex.png" alt="admin-profile" class="img-fluid"/></span>
+                        <router-link :to="{ name: 'nosel', params: { id: list.id, nama_bbm: list.nama_bbm,last_meter: list.last_meter,last_price: list.last_price } }">
+                        <span><img :src="require(`@/assets/images/${list.logo_bbm}`)" alt="admin-profile" class="img-fluid"/></span>
+                        </router-link>
                     </div>
                 </div>
             </div>
         </div>
 
 
-          {{ users.bbm }}  
+          <!-- {{ users.bbm }}   -->
             
         </div>
     </div>
@@ -187,36 +188,15 @@
     import '@/assets/sass/widgets/widgets.scss';
     import { computed, ref, onMounted } from 'vue';
     import { useStore } from 'vuex';
+    import { useRouter, useRoute } from 'vue-router'
 
     import { useMeta } from '@/composables/use-meta';
     useMeta({ title: 'Widgets' });
 
     const store = useStore();
+    const router = useRouter();
+    const route = useRoute();
 
-    //Statistics
-    const total_visit_series = ref([{ data: [21, 9, 36, 12, 44, 25, 59, 41, 66, 25] }]);
-    const total_visit_options = computed(() => {
-        const is_dark = store.state.is_dark_mode;
-        return {
-            chart: { sparkline: { enabled: true }, dropShadow: { enabled: true, top: 3, left: 1, blur: 3, color: '#009688', opacity: 0.7 } },
-            stroke: { curve: 'smooth', width: 2 },
-            markers: { size: 0 },
-            colors: ['#009688'],
-            grid: { padding: { top: 0, bottom: 0, left: 0 } },
-            tooltip: {
-                theme: is_dark ? 'dark' : 'light',
-                x: { show: false },
-                y: {
-                    title: {
-                        formatter: function formatter() {
-                            return '';
-                        },
-                    },
-                },
-            },
-            responsive: [{ breakPoint: 576, options: { chart: { height: 95 }, grid: { padding: { top: 45, bottom: 0, left: 0 } } } }],
-        };
-    });
 
     // BBM
     const users = computed(() => {

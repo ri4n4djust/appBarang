@@ -7,6 +7,7 @@ import pelanggan from './pelanggan';
 import room from './room';
 import kode from './kode';
 import bbm from './bbm';
+import nosel from './nosel';
 
 
 export default new createStore({
@@ -109,7 +110,8 @@ export default new createStore({
         pelanggan,
         kode,
         room,
-        bbm
+        bbm,
+        nosel
     },
     // plugins: [createPersistedState()]
 });

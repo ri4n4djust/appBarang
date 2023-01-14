@@ -16,7 +16,7 @@ const actions = {
     }, 
     async GetBbm({ commit }){
         let response = await axios.get('api/bbm')
-        commit('setBbm', response.data)
+        commit('setBbm', response.data.data)
     },
     async EditBbm({dispatch}, Bbm) {
         await axios.post('api/update/bbm', Bbm)

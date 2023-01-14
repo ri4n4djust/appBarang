@@ -36,6 +36,25 @@ class barangController extends Controller
 
     }
 
+    public function indexNosel(Request $request){
+        $where = '';
+        $filter = $request->input('key1');
+        if(!empty($filter)){
+            $where = "where r_bbm='$filter' ";
+        };
+        
+        // $bbm = Bbm::get();
+        //$posts = Barang::latest()->get();
+        $nosel = DB::select("Select * from tblnosel_detail $where ");
+        $count = Barang::count();
+        return response([
+            'success' => true,
+            'message' => 'List Semua Nosel',
+            'data' => $nosel
+        ], 200);
+
+    }
+
     public function update(Request $request)
     {        
         try{

@@ -24,6 +24,13 @@ const routes = [
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexBarang.vue'),
     },
 
+    {
+        path: '/nosel',
+        name: 'nosel',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexNosel.vue'),
+        props: true,
+    },
+
     //components
     {
         path: '/components/tabs',

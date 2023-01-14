@@ -40,6 +40,7 @@ Route::get('/kdpelanggan', [App\Http\Controllers\nomorController::class, 'kodePe
 //     return $request->user();
 // });
 Route::get('/bbm', [App\Http\Controllers\barangController::class, 'indexBbm']);
+Route::post('/nosel', [App\Http\Controllers\barangController::class, 'indexNosel']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile', function(Request $request) {
