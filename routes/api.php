@@ -42,6 +42,9 @@ Route::get('/kdpelanggan', [App\Http\Controllers\nomorController::class, 'kodePe
 Route::get('/bbm', [App\Http\Controllers\barangController::class, 'indexBbm']);
 Route::post('/nosel', [App\Http\Controllers\barangController::class, 'indexNosel']);
 
+Route::post('/store/transnosel', [App\Http\Controllers\transaksiNoselController::class, 'simpantrx']);
+Route::post('/transnosel', [App\Http\Controllers\transaksiNoselController::class, 'indexTransNosel']);
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile', function(Request $request) {
         return auth()->user();

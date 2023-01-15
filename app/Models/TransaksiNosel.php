@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class NoselDetail extends Model
+class TransaksiNosel extends Model
 {
     use HasFactory;
-    protected $table = 'tblnosel_detail';
+    protected $table = 'tbltransaksi_nosel';
+
     protected $fillable = [
-        'r_bbm', 'nama_nosel', 'meter_awal', 'meter_akhir', 'harga'
+        'r_bbm', 'r_nosel', 'tgl_transaksi', 'cost_ltr', 'last_price', 'last_meter', 'total'
     ];
 }

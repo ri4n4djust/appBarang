@@ -159,10 +159,6 @@
                 </div>
 
                 <div class="widget-amount">
-                    <div class="w-a-info funds-received me-3">
-                        <span>Meter</span>
-                        <p>12465768798</p>
-                    </div>
                     <div class="w-a-info funds-spent">
                         <span>Harga</span>
                         <p>{{ list.last_price  }}</p>
