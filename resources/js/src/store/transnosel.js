@@ -10,9 +10,9 @@ const getters = {
 };
 
 const actions = {  
-    async CreateTransNosel({dispatch}, nosel) {
-        await axios.post('api/store/transnosel', nosel)
-        await dispatch('GetTransNosel', nosel.id)
+    async CreateTransNosel({dispatch}, transnosel) {
+        await axios.post('api/store/transnosel', transnosel)
+        await dispatch('GetTransNosel')
     }, 
     async GetTransNosel({ commit }, payload){
         let response = await axios.post('api/transnosel', payload)
@@ -32,9 +32,12 @@ const actions = {
 
 };
 const mutations = {
-    setTransNosel(state, nosel){
-        state.nosel = nosel
+    setTransNosel(state, transnosel){
+        state.transnosel = transnosel
     },
+    // GetTransNosel(state, transnosel){
+    //     state.transnosel = transnosel
+    // },
     // DeleteBarang({dispatch}, id) {
     //     axios.delete(`hapus/barang/${id}`)
     //     dispatch('GetBarang')

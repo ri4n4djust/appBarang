@@ -59,9 +59,10 @@ class transaksiNoselController extends Controller
 
     public function indexTransNosel(Request $request){
         $where = '';
-        $filter = $request->input('id_nosel');
+        $filter = $request->input('idnosel');
+        $filter2 = $request->input('r_bbm');
         if(!empty($filter)){
-            $where = "where r_nosel='$filter' ";
+            $where = "where r_nosel='$filter' and r_bbm='$filter2' ";
         };
         
         // $bbm = Bbm::get();

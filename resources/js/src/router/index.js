@@ -19,6 +19,12 @@ const routes = [
     },
 
     {
+        path: '/bbm',
+        name: 'bbm',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexBbm.vue'),
+    },
+
+    {
         path: '/barang',
         name: 'barang',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexBarang.vue'),

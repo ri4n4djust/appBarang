@@ -59,25 +59,25 @@
                                 </div>
                             </div>
                             <div class="media-body">
-                                <h6>{{ nama_bbm  }} {{ list.nama_nosel }}</h6>
+                                <h6>{{ list.nama_nosel }}</h6>
                                 <p class="meta-date-time"></p>
                                 <a href="javascript:;" class="btn btn-secondary">{{ list.meter_akhir }}</a>
                             </div>
                         </div>
                     </div>
                     <div class="widget-content">
-                        <h5>Cost {{ meter_now[index] - list.meter_akhir}} Liter</h5>
-                        <h5>Penjualan {{ (meter_now[index] - list.meter_akhir) * last_price }} </h5>
-                        <h3><input v-model="meter_now[index]" required ></h3>
+                        <h5>Cost {{ Math.abs(meter_now[index] - list.meter_akhir) }} Liter</h5>
+                        <h5>Penjualan {{ Math.abs((meter_now[index] - list.meter_akhir) * last_price) }} </h5>
+                        <h3><input type="text" class="form-control" v-model="meter_now[index]" ></h3>
                         <button type="button" class="btn btn-success mb-2 me-1" @click="saveTransBbm(id_nosel=list.id_nosel, oldmeter=list.meter_akhir, newmeter=meter_now[index],costltr=meter_now[index] - list.meter_akhir,jual=(meter_now[index] - list.meter_akhir) * last_price )">Simpan</button>
                     </div>
                     <div class="widget-content">
-                        hjghjgjhgj
+                        hjghjgjhgj{{ lt }}
                     </div>
                 </div>
             </div>
 
-            <!-- {{nosels.nosel}} -->
+            
 
         </div>
     </div>
@@ -88,6 +88,9 @@
     import flatPickr from 'vue-flatpickr-component';
     import 'flatpickr/dist/flatpickr.css';
     import '@/assets/sass/forms/custom-flatpickr.css';
+
+    import '@/assets/sass/scrollspyNav.scss';
+    import '@/assets/sass/components/custom-sweetalert.scss';
 
     import { computed, ref, onMounted } from 'vue';
     import { useStore } from 'vuex';
@@ -109,7 +112,7 @@
     });
     const date1 = ref(new Date());
     const meter_now = ref({});
-    const list = ref({});
+    const lt = ref(null);
     
     
     
@@ -120,19 +123,38 @@
 
 
     function saveTransBbm(id_nosel,oldmeter,newmeter,costltr,jual){
-        const idbbm = props.id;
-        const harga = ref(props.last_price);
-        const tgl = new Date(date1.value).toISOString().slice(0,10);
-        store.dispatch('CreateTransNosel', {
-            'r_bbm': idbbm,
-            'r_nosel': id_nosel,
-            'tgl_transaksi': tgl, 
-            'cost_ltr': costltr, 
-            'last_price': harga.value, 
-            'last_meter': newmeter, 
-            'total': jual
-        })
-        // console.log(idbbm+'='+oldmeter+'='+newmeter+'='+costltr+'='+jual)
+        // console.log(meter_now.value);
+        // if(meter_now.value === null){
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Signed in successfully',
+                padding: '2em'
+            });
+        // }else{
+            const idbbm = props.id;
+            const harga = ref(props.last_price);
+            const tgl = new Date(date1.value).toISOString().slice(0,10);
+            store.dispatch('CreateTransNosel', {
+                'r_bbm': idbbm,
+                'r_nosel': id_nosel,
+                'tgl_transaksi': tgl, 
+                'cost_ltr': costltr, 
+                'last_price': harga.value, 
+                'last_meter': newmeter, 
+                'total': jual
+            })
+            const lt = store.dispatch('GetTransNosel', {'idnosel': id_nosel, 'r_bbm': idbbm})
+            // listtrans = store.getters.StateTransNosel
+            console.log(lt);
+            return { lt }
+        // }
     }
 
     onMounted(() => {

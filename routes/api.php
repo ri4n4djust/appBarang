@@ -18,7 +18,10 @@ Route::post('/login', [loginController::class, 'login']);
 Route::post('/register', [App\Http\Controllers\loginController::class, 'register']);
 Route::post('/logout', [App\Http\Controllers\loginController::class, 'logout']);
 
-
+//=====BARANG============
+Route::get('/barang', [App\Http\Controllers\barangController::class, 'index']);
+Route::post('/update/barang', [App\Http\Controllers\barangController::class, 'update']);
+Route::delete('/hapus/barang/{id}', [App\Http\Controllers\barangController::class, 'destroy']);
 
 //======PELANGGAN==============
 Route::get('/pelanggan', [App\Http\Controllers\pelangganController::class, 'index']);
@@ -50,10 +53,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         return auth()->user();
     });
 
-    //=====BARANG============
-    Route::get('/barang', [App\Http\Controllers\barangController::class, 'index']);
-    Route::post('/update/barang', [App\Http\Controllers\barangController::class, 'update']);
-    Route::delete('/hapus/barang/{id}', [App\Http\Controllers\barangController::class, 'destroy']);
+    
         
     // API route for logout user
     
