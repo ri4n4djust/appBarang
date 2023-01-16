@@ -15,7 +15,7 @@
             </ul>
         </teleport>
 
-        {{ items.value }}
+        <span>{{ barangs }}</span>
 
         <div class="row layout-top-spacing">
             <div class="col-12 layout-spacing">
@@ -41,7 +41,7 @@
 </template>
 
 <script setup>
-    import { onMounted, ref } from 'vue';
+    import { computed, onMounted, ref } from 'vue';
 
     //pdf export
     import jsPDF from 'jspdf';
@@ -108,8 +108,14 @@
     // };
 
     const bind_data = () => {
-        items.value = store.dispatch('GetBarang');
+        store.dispatch('GetBarang');
     }
+
+    const barangs = computed(() => {
+        items.value = store.getters.StateBarang;
+        // console.log(items)
+        // return { items }
+    });
 
     const export_table = (type) => {
         let cols = columns.value.filter((d) => d != 'profile' && d != 'action');
