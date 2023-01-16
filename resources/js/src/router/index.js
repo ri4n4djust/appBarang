@@ -37,6 +37,20 @@ const routes = [
         props: true,
     },
 
+    // transaksi
+    {
+        path: '/pembelian',
+        name: 'pembelian',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/pembelian.vue'),
+        props: true,
+    },
+    {
+        path: '/penjualan',
+        name: 'penjualan',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/penjualan.vue'),
+        props: true,
+    },
+
     //components
     {
         path: '/components/tabs',

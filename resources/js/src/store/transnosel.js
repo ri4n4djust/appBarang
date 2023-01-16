@@ -6,17 +6,20 @@ const state = {
   };
   
 const getters = {
-    StateTransNosel: state => state.transnosel,
+    STransNosel: state => state.transnosel,
+    
 };
 
 const actions = {  
-    async CreateTransNosel({dispatch}, transnosel) {
-        await axios.post('api/store/transnosel', transnosel)
-        await dispatch('GetTransNosel')
+    async CreateTransNosel({commit}, transnosel) {
+        let response = await axios.post('api/store/transnosel', transnosel)
+        // commit('setTransNosel', response.data.data)
+        // await dispatch('GetTransNosel', payload)
     }, 
     async GetTransNosel({ commit }, payload){
         let response = await axios.post('api/transnosel', payload)
         commit('setTransNosel', response.data.data)
+        
     },
     async EditTransNosel({dispatch}, nosel) {
         await axios.post('api/update/transnosel', nosel)
@@ -34,6 +37,7 @@ const actions = {
 const mutations = {
     setTransNosel(state, transnosel){
         state.transnosel = transnosel
+        // console.log(state.transnosel)
     },
     // GetTransNosel(state, transnosel){
     //     state.transnosel = transnosel

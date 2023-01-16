@@ -35,10 +35,13 @@ class transaksiNoselController extends Controller
                 DB::commit();
             });
             if(is_null($exception)) {
+                $r_bbm = $request->input('r_bbm');
+                $r_nosel = $request->input('r_nosel');
+                $detail = DB::select("Select * from tbltransaksi_nosel where r_bbm=' $r_bbm' and r_nosel='$r_nosel' ");
                 return response()->json([
                     'success' => true,
-                    'message' => 'Post Berhasil Diupdate!',
-                    // 'data' => $nosel
+                    'message' => 'Post Berhasil di insert!',
+                    'data' => $detail
                 ], 200);
             } else {
                 DB::rollback();
@@ -68,7 +71,7 @@ class transaksiNoselController extends Controller
         // $bbm = Bbm::get();
         //$posts = Barang::latest()->get();
         $nosel = DB::select("Select * from tbltransaksi_nosel $where ");
-        $count = Barang::count();
+
         return response([
             'success' => true,
             'message' => 'List transaksi nosel',

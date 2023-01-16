@@ -72,11 +72,15 @@
                         <button type="button" class="btn btn-success mb-2 me-1" @click="saveTransBbm(id_nosel=list.id_nosel, oldmeter=list.meter_akhir, newmeter=meter_now[index],costltr=meter_now[index] - list.meter_akhir,jual=(meter_now[index] - list.meter_akhir) * last_price )">Simpan</button>
                     </div>
                     <div class="widget-content">
-                        hjghjgjhgj{{ lt }}
+                        hjghjgjhgj{{ listtrans.value }}
+                        <div v-for="lis in listtrans.transnosel" :key="lis.id_nosel">
+                            {{ lis.id_nosel }}
+                        </div>
                     </div>
                 </div>
             </div>
 
+            
             
 
         </div>
@@ -112,7 +116,8 @@
     });
     const date1 = ref(new Date());
     const meter_now = ref({});
-    const lt = ref(null);
+    const ls = ref(null);
+    const listtrans = ref([]);
     
     
     
@@ -120,6 +125,7 @@
         const nosel = store.getters.StateNosel;
         return { nosel }
     });
+    
 
 
     function saveTransBbm(id_nosel,oldmeter,newmeter,costltr,jual){
@@ -150,18 +156,32 @@
                 'last_meter': newmeter, 
                 'total': jual
             })
-            const lt = store.dispatch('GetTransNosel', {'idnosel': id_nosel, 'r_bbm': idbbm})
-            // listtrans = store.getters.StateTransNosel
-            console.log(lt);
-            return { lt }
+            getNosel();
+            const old = ref([])
+            if (localStorage.getItem('data')===null){
+                old = [];
+            }else{
+                old = JSON.parse(localStorage.getItem('data'));
+            }
+            // const oldItems = JSON.parse(localStorage.getItem('data')) || [];
+            store.dispatch('GetTransNosel', {'idnosel': id_nosel, 'r_bbm': idbbm})
+            const tr = store.state.transnosel
+            // localStorage.setItem('data', JSON.stringify(tr.transnosel))
+            old.push(tr.transnosel)
+            localStorage.setItem('data',JSON.stringify(old));
+            // localStorage.setItem('nosel'+id_nosel, JSON.stringify({'r_bbm': idbbm, 'r_nosel': id_nosel, 'cost_ltr': costltr,'last_meter': newmeter, 'total': jual, 'tgl': tgl }))
+            // const oldItems = JSON.parse(localStorage.getItem('nosel'+id_nosel)) || [];
+            // store.dispatch('GetTransNosel', {'idnosel': id_nosel, 'r_bbm': idbbm})
+            // listtrans.value = store.state.transnosel //.find(todo => todo.index === id_nosel)
+            // return { saveTransBbm,listtrans}
         // }
+    }
+    const getNosel=() => {
+        const id = props.id;
+        store.dispatch('GetNosel', {'key1': id})
     }
 
     onMounted(() => {
-        function getNosel(){
-            const id = props.id;
-            store.dispatch('GetNosel', {'key1': id})
-        }
         getNosel();
 
         // function getTransBbm(){

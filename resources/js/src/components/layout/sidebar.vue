@@ -185,10 +185,10 @@
                     </a>
                     <ul id="apps" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
                         <li>
-                            <router-link to="/apps/chat" @click="toggleMobileMenu">Pembelian</router-link>
+                            <router-link to="/pembelian" @click="toggleMobileMenu">Pembelian</router-link>
                         </li>
                         <li>
-                            <router-link to="/apps/mailbox" @click="toggleMobileMenu">Penjualan</router-link>
+                            <router-link to="/penjualan" @click="toggleMobileMenu">Penjualan</router-link>
                         </li>
                         <li>
                             <router-link to="/apps/todo-list" @click="toggleMobileMenu">Tera</router-link>
