@@ -19,6 +19,7 @@ class transaksiNoselController extends Controller
                 $post = TransaksiNosel::create([
                     'r_bbm'     => $request->input('r_bbm'),
                     'r_nosel'     => $request->input('r_nosel'),
+                    'r_regu'     => $request->input('r_regu'),
                     'tgl_transaksi'   => $request->input('tgl_transaksi'),
                     'cost_ltr'    => $request->input('cost_ltr'),
                     'last_price'     => $request->input('last_price'),

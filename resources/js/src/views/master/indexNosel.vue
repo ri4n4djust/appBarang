@@ -32,10 +32,11 @@
                             </div>
                             <div class="col-4">
                                 <div class="w-detail">
-                                    <p class="w-title">Regu</p>
-                                    <p class="w-stats">{{ nosels.regu }}</p>
-                                    <multiselect v-model="regu" :searchable="true" :preselect-first="true" selected-label="" select-label="" deselect-label="">
-                                    </multiselect>
+                                    <p class="w-title">Regu {{ regu }}</p>
+                                    <select class="form-select form-select-sm" v-model="regu" >
+                                        <option value="all" :selected="A">All</option>
+                                        <option :value="ls.reguPegawai" v-for="ls in nosels.regu" :key="ls.id_nosel">{{ ls.reguPegawai }}</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-4">
@@ -71,7 +72,7 @@
                         <h5>Cost {{ Math.abs(meter_now[index] - list.meter_akhir) }} Liter</h5>
                         <h5>Penjualan {{ Math.abs((meter_now[index] - list.meter_akhir) * last_price) }} </h5>
                         <h3><input type="text" class="form-control" v-model="meter_now[index]" ></h3>
-                        <button type="button" class="btn btn-success mb-2 me-1" @click="saveTransBbm(id_nosel=list.id_nosel, oldmeter=list.meter_akhir, newmeter=meter_now[index],costltr=meter_now[index] - list.meter_akhir,jual=(meter_now[index] - list.meter_akhir) * last_price )">Simpan</button>
+                        <button type="button" class="btn btn-success mb-2 me-1" @click="saveTransBbm(id_nosel=list.id_nosel,newmeter=meter_now[index],costltr=meter_now[index] - list.meter_akhir,jual=(meter_now[index] - list.meter_akhir) * last_price )">Simpan</button>
                     </div>
                     <div class="widget-content">
                         <!-- {{ nosels.trs }} -->
@@ -91,31 +92,6 @@
         </div>
     </div>
 </template>
-<style>
-    .select2 .multiselect__option--highlight {
-        background: #fff;
-        color: #4361ee;
-    }
-    .select2 .multiselect__option--selected {
-        background-color: rgba(27, 85, 226, 0.23921568627450981);
-        color: #4361ee;
-        font-weight: normal;
-    }
-    .select2 .multiselect__option--disabled {
-        background: inherit !important;
-    }
-    .select2 .multiselect__tag {
-        color: #000;
-        background: #e4e4e4;
-    }
-    .select2 .multiselect__tag-icon:after {
-        color: #000 !important;
-    }
-    .select2 .multiselect__tag-icon:focus,
-    .select2 .multiselect__tag-icon:hover {
-        background: inherit;
-    }
-</style>
 <script setup>
     import '@/assets/sass/widgets/widgets.scss';
 
@@ -125,9 +101,6 @@
 
     import '@/assets/sass/scrollspyNav.scss';
     import '@/assets/sass/components/custom-sweetalert.scss';
-
-    import Multiselect from '@suadelabs/vue3-multiselect';
-    import '@suadelabs/vue3-multiselect/dist/vue3-multiselect.css';
 
     import moment from "moment";
 
@@ -151,8 +124,9 @@
     });
     const date1 = ref(moment().format("YYYY-MM-DD"));
     const meter_now = ref({});
-    const regu = ref();
+    const regu = ref(null);
     // const listtrans = ref([]);
+
     
     
     
@@ -165,9 +139,10 @@
     
 
 
-    function saveTransBbm(id_nosel,oldmeter,newmeter,costltr,jual){
-        // console.log(meter_now.value);
-        // if(meter_now.value === null){
+    function saveTransBbm(id_nosel,newmeter,costltr,jual){
+        // console.log(regu.value);
+        if(regu.value === null){
+            // alert(regu.value)
             const toast =  window.Swal.mixin({
                 toast: true,
                 position: 'top-end',
@@ -176,18 +151,19 @@
                 padding: '2em'
             });
             toast.fire({
-                icon: 'success',
+                icon: 'Error',
                 title: 'Signed in successfully',
                 padding: '2em'
             });
-        // }else{
+        }else{
             const idbbm = props.id;
             const harga = ref(props.last_price);
             // const tgl = date1.value.substring(0, 10)
-            const tgl = new Date(date1.value).toISOString().slice(0,10);
+            const tgl = moment(date1.value).format("YYYY-MM-DD")
             store.dispatch('CreateTransNosel', {
                 'r_bbm': idbbm,
                 'r_nosel': id_nosel,
+                'r_regu': regu.value,
                 'tgl_transaksi': tgl, 
                 'cost_ltr': costltr, 
                 'last_price': harga.value, 
@@ -196,7 +172,7 @@
             })
             getNosel();
             getTrans();
-        // }
+        }
     }
     const getNosel=() => {
         const id = props.id;
