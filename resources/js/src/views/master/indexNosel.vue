@@ -27,7 +27,7 @@
                             <div class="col-4">
                                 <div class="w-detail">
                                     <p class="w-title">{{ nama_bbm  }}</p>
-                                    <p class="w-stats">Harga {{ last_price }}</p>
+                                    <p class="w-stats">Harga  {{ Number(last_price).toLocaleString()}}</p>
                                 </div>
                             </div>
                             <div class="col-4">
@@ -70,7 +70,7 @@
                     </div>
                     <div class="widget-content">
                         <h5>Cost {{ Math.abs(meter_now[index] - list.meter_akhir) }} Liter</h5>
-                        <h5>Penjualan {{ Math.abs((meter_now[index] - list.meter_akhir) * last_price) }} </h5>
+                        <h5>Penjualan {{ new Intl.NumberFormat().format(Math.abs((meter_now[index] - list.meter_akhir) * last_price)) }} </h5>
                         <h3><input type="text" class="form-control" v-model="meter_now[index]" ></h3>
                         <button type="button" class="btn btn-success mb-2 me-1" @click="saveTransBbm(id_nosel=list.id_nosel,newmeter=meter_now[index],costltr=meter_now[index] - list.meter_akhir,jual=(meter_now[index] - list.meter_akhir) * last_price )">Simpan</button>
                     </div>
@@ -151,8 +151,10 @@
                 padding: '2em'
             });
             toast.fire({
-                icon: 'Error',
-                title: 'Signed in successfully',
+                title: 'Error!',
+                text: 'Do you want to continue',
+                icon: 'error',
+                confirmButtonText: 'Cool',
                 padding: '2em'
             });
         }else{
@@ -172,6 +174,18 @@
             })
             getNosel();
             getTrans();
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Signed in successfully',
+                padding: '2em',
+            });
         }
     }
     const getNosel=() => {

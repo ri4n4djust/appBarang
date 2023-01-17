@@ -161,7 +161,7 @@
                 <div class="widget-amount">
                     <div class="w-a-info funds-spent">
                         <span>Harga</span>
-                        <p>{{ list.last_price  }}</p>
+                        <p>{{ new Intl.NumberFormat().format(list.last_price)  }}</p>
                     </div>
                 </div>
                 <div class="widget-content">
