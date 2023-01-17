@@ -102,7 +102,7 @@
                                 select-label=""
                                 deselect-label=""
                             ></multiselect>
-
+                            {{ value }}
                             <div class="code-section-container show-code">
                                 <button type="button" class="btn btn-default toggle-code-snippet" @click="toggleCode('code2')"><span>Code</span></button>
 
@@ -169,7 +169,19 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <multiselect v-model="inputs['input3']" :options="options1" :searchable="true" placeholder="Choose..." selected-label="" select-label="" deselect-label=""></multiselect>
+                            <multiselect 
+                            v-model="value1" 
+                            :options="options6" 
+                            :searchable="true"
+                            track-by="name"
+                            label="name"
+                            placeholder="Choose..." 
+                            selected-label="" 
+                            select-label="" 
+                            deselect-label="">
+                        </multiselect>
+                        {{ value1 }}
+                        <input type="text" v-model="value1.id" class="form-control">
 
                             <div class="code-section-container show-code">
                                 <button type="button" class="btn btn-default toggle-code-snippet" @click="toggleCode('code4')"><span>Code</span></button>
@@ -327,7 +339,7 @@
     const options2 = ref([
         {
             group_name: 'Group 1',
-            list: [{ name: 'orange' }, { name: 'white' }, { name: 'purple' }],
+            list: [{ id: '1', name: 'orange' }, { id: '2', name: 'white' }, { id: '3', name: 'purple' }],
         },
         {
             group_name: 'Group 2',
@@ -335,13 +347,15 @@
         },
         {
             group_name: 'Group 3',
-            list: [{ name: 'aqua' }, { name: 'black' }, { name: 'blue' }],
+            list: [{ id: '1', name: 'orange' }, { id: '2', name: 'white' }, { id: '3', name: 'purple' }],
         },
     ]);
     const options3 = ref([{ name: 'orange' }, { name: 'white', $isDisabled: true }, { name: 'purple' }]);
     const value = ref({ name: 'orange' });
+    const value1 = ref({});
     const options4 = ref(['orange', 'white', 'purple']);
     const options5 = ref(['orange', 'white', 'purple']);
+    const options6 = ref([{id: '1', name: 'orange' }, { id: '2', name: 'white' }, { id: '3', name: 'purple' }]);
 
     const toggleCode = (name) => {
         if (code_arr.value.includes(name)) {

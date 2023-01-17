@@ -111,7 +111,7 @@
                                                         <th class="">Harga</th>
                                                         <th class="">Qty</th>
                                                         <th class="text-end">Total</th>
-                                                        <!-- <th class="text-center">Tax</th> -->
+                                                        <th class="text-center">Aksi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -141,33 +141,82 @@
                                                             </ul>
                                                         </td> -->
                                                         <td class="description">
-                                                            <input type="text" v-model="item.title" class="form-control form-control-sm" placeholder="Item Description" />
+                                                            <multiselect 
+                                                                v-model="brg" 
+                                                                :options="pembelian.barangs" 
+                                                                :searchable="true"
+                                                                track-by="nmBarang"
+                                                                label="nmBarang"
+                                                                open-direction="top"
+                                                                placeholder="Choose..." 
+                                                                selected-label="" 
+                                                                select-label="" 
+                                                                deselect-label="">
+                                                            </multiselect>
+                                                            <!-- <input type="text" v-model="item.title" class="form-control form-control-sm" placeholder="Item Description" /> -->
                                                         </td>
                                                         <td class="rate">
-                                                            <input type="number" v-model="item.rate" class="form-control form-control-sm" placeholder="Price" />
+                                                            <input type="number" v-model="brg.hrgJual" class="form-control form-control-sm" placeholder="Price" />
                                                         </td>
                                                         <td class="text-end qty">
-                                                            <input type="number" v-model="item.quantity" class="form-control form-control-sm" placeholder="Quantity" />
+                                                            <input type="number" v-model="qty" class="form-control form-control-sm" placeholder="Quantity" />
                                                         </td>
                                                         <td class="text-end amount">
-                                                            <input type="number" v-model="item.amount" class="form-control form-control-sm" placeholder="Total" disabled />
+                                                            {{ brg.hrgJual * qty }}
+                                                            <!-- <input type="number" v-model="total" class="form-control form-control-sm" placeholder="Total" disabled /> -->
                                                             <!-- <span class="editable-amount mt-2">
                                                                 <span class="currency">$</span> <span class="amount">{{ item.amount }}</span>
                                                             </span> -->
+                                                            
                                                         </td>
-                                                        <!-- <td class="text-center tax">
-                                                            <div class="checkbox-primary custom-control custom-checkbox">
+                                                        <td class="text-center tax">
+                                                            <button @click="addToCart(brg)" class="btn btn-xs btn-primary">
+                                                                <i data-feather="trash"></i>
+                                                            </button>
+                             <i class="fa fa-fw fa-eye"></i>
+                                                            <!-- <div class="checkbox-primary custom-control custom-checkbox">
                                                                 <input type="checkbox" :id="`chktax-${index}`" v-model="item.is_tax" class="custom-control-input" />
                                                                 <label class="custom-control-label" :for="`chktax-${index}`"></label>
-                                                            </div>
-                                                        </td> -->
+                                                            </div> -->
+                                                        </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
                                         </div>
 
+                                        <div class="inv--product-table-section">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Nama Barang</th>
+                                                            <th>Harga</th>
+                                                            <th>Qty</th>
+                                                            <th>Total</th>
+                                                            <th>Aksi</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr v-for="item, index in cartItems" :key="item.kdBarang">
+                                                            <td>{{ item.nmBarang }}</td>
+                                                            <td>{{ item.qty }}</td>
+                                                            <td>${{ item.hrgJual }}</td>
+                                                            <td>${{ item.total }}</td>
+                                                            <td>
+                                                                <div class="icon-container">
+                                                                    <i data-feather="trash"></i><span class="icon-name"> trash</span>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
                                         <button type="button" class="btn btn-secondary additem btn-sm" @click="add_item()">Add Item</button>
                                     </div>
+
+                                    
 
                                     <div class="invoice-detail-total">
                                         <div class="row">
@@ -256,7 +305,7 @@
 </template>
 
 <script setup>
-    import { onMounted, ref } from 'vue';
+    // import { onMounted, ref } from 'vue';
     import '@/assets/sass/apps/invoice-add.scss';
 
     //flatpickr
@@ -264,10 +313,26 @@
     import 'flatpickr/dist/flatpickr.css';
     import '@/assets/sass/forms/custom-flatpickr.css';
 
+    import Multiselect from '@suadelabs/vue3-multiselect';
+    import '@suadelabs/vue3-multiselect/dist/vue3-multiselect.css';
+
+    import moment from "moment";
+
+    import { computed, ref, onMounted, watch } from 'vue';
+    import { useStore } from 'vuex';
+    import { useRouter, useRoute } from 'vue-router'
+
     import { useMeta } from '@/composables/use-meta';
     useMeta({ title: 'Pembelian' });
 
+    const store = useStore();
+    const router = useRouter();
+    const route = useRoute();
+
     const items = ref([]);
+    const brg = ref([]);
+    const qty = ref(1);
+    const total = ref();
     const selected_file = ref(null);
     const params = ref({
         title: '',
@@ -280,12 +345,30 @@
         bank_info: { no: '', name: '', swift_code: '', country: '' },
         notes: '',
     });
-    const currency_list = ref([]);
-    const selected_currency = ref({ key: 'USD - US Dollar', thumb: 'flags/en.png' });
-    const tax_type_list = ref([]);
-    const selected_tax_type = ref({ key: 'None', value: null });
-    const discount_list = ref([]);
-    const selected_discount = ref({ key: 'None', value: null, type: '' });
+    const cartItems = ref([])
+
+    // const currency_list = ref([]);
+    // const selected_currency = ref({ key: 'USD - US Dollar', thumb: 'flags/en.png' });
+    // const tax_type_list = ref([]);
+    // const selected_tax_type = ref({ key: 'None', value: null });
+    // const discount_list = ref([]);
+    // const selected_discount = ref({ key: 'None', value: null, type: '' });
+
+    watch([ total, qty ], ( newValue ) => {
+        newValue = qty * brg.hrgJual
+        console.log(newValue); //newvalue is an array including both values
+    })
+
+    const pembelian = computed(() => {
+        const barangs = store.getters.StateBarang;
+        // const trs = store.getters.STransNosel;
+        // const regu = store.getters.STransNoselRegu;
+        return { barangs }
+    });
+
+    const getRegu=() => {
+        store.dispatch('GetBarang')
+    }
 
     onMounted(() => {
         //set default data
@@ -297,30 +380,32 @@
         params.value.due_date = dt;
 
         //currency list
-        currency_list.value = [
-            { key: 'USD - US Dollar', thumb: 'flags/en.png' },
-            { key: 'GBP - British Pound', thumb: 'flags/gbp.png' },
-            { key: 'IDR - Indonesian Rupiah', thumb: 'flags/idr.png' },
-            { key: 'INR - Indian Rupee', thumb: 'flags/inr.png' },
-            { key: 'BRL - Brazilian Real', thumb: 'flags/brl.png' },
-            { key: 'EUR - Germany (Euro)', thumb: 'flags/de.png' },
-            { key: 'TRY - Turkish Lira', thumb: 'flags/tr.png' },
-        ];
+        // currency_list.value = [
+        //     { key: 'USD - US Dollar', thumb: 'flags/en.png' },
+        //     { key: 'GBP - British Pound', thumb: 'flags/gbp.png' },
+        //     { key: 'IDR - Indonesian Rupiah', thumb: 'flags/idr.png' },
+        //     { key: 'INR - Indian Rupee', thumb: 'flags/inr.png' },
+        //     { key: 'BRL - Brazilian Real', thumb: 'flags/brl.png' },
+        //     { key: 'EUR - Germany (Euro)', thumb: 'flags/de.png' },
+        //     { key: 'TRY - Turkish Lira', thumb: 'flags/tr.png' },
+        // ];
 
         //tax type list
-        tax_type_list.value = [
-            { key: 'Deducted', value: 10 },
-            { key: 'Per Item', value: 5 },
-            { key: 'On Total', value: 25 },
-            { key: 'None', value: null },
-        ];
+        // tax_type_list.value = [
+        //     { key: 'Deducted', value: 10 },
+        //     { key: 'Per Item', value: 5 },
+        //     { key: 'On Total', value: 25 },
+        //     { key: 'None', value: null },
+        // ];
 
         //discount list
-        discount_list.value = [
-            { key: 'Percent', value: 10, type: 'percent' },
-            { key: 'Flat Amount', value: 25, type: 'amount' },
-            { key: 'None', value: null, type: '' },
-        ];
+        // discount_list.value = [
+        //     { key: 'Percent', value: 10, type: 'percent' },
+        //     { key: 'Flat Amount', value: 25, type: 'amount' },
+        //     { key: 'None', value: null, type: '' },
+        // ];
+        getRegu();
+        // getCart();
     });
 
     const change_file = (event) => {
@@ -338,4 +423,64 @@
     const remove_item = (item) => {
         items.value = items.value.filter((d) => d.id != item.id);
     };
+
+    function addToCart(brg) {
+        // console.log(brg)
+        if (localStorage.getItem('cartItemsP')===null){
+            cartItems.value = [];
+            // console.log(cartItems.value)
+        }else{
+            cartItems.value = JSON.parse(localStorage.getItem('cartItemsP'));
+        }
+            const oldItems = JSON.parse(localStorage.getItem('cartItemsP')) || [];
+            console.log(oldItems)
+            const existingItem = oldItems.find(({ kdBarang }) => kdBarang === brg.kdBarang);
+            if (existingItem) {
+                const objIndex = cartItems.value.findIndex((e => e.kdBarang === brg.kdBarang));
+                const oldName = cartItems.value[objIndex].nmBarang;
+                const oldQty = cartItems.value[objIndex].qty;
+                const newQty = parseInt(oldQty) + parseInt(qty.value) ;
+                cartItems.value[objIndex].qty = parseInt(newQty);
+                localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
+                alert(oldName+' Quantity Update')
+                // getCart();
+                // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
+            }else{
+            cartItems.value.push({kdBarang:brg.kdBarang, nmBarang:brg.nmBarang,hrgJual:brg.hrgJual,qty:qty.value,total:total.value});	
+            localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
+            // getCart();
+            // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
+            alert(brg.nmBarang+ " berhasil disimpan")
+            }
+    }
+    // function removeItem(id) {
+    //     //alert(id)
+    //     var arrayFromStroage = JSON.parse(localStorage.getItem('cartItemsP'));
+    //     const filtered = arrayFromStroage.filter(arrayFromStroage => arrayFromStroage.id !== id);
+    //     localStorage.setItem('cartItemsP', JSON.stringify(filtered));
+    //     //this.items.splice(index, 1)
+    //     this.isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
+    //     this.getCart();
+    //     alert('berhasil dihapus')
+    // }
+    // function updateItem(barcode, index) {
+    //     const cartItems = JSON.parse(localStorage.getItem('cartItemsP'));
+    //     const objIndex = cartItems.findIndex((e => e.barcode === barcode));
+    //     const newQty = parseInt(this.crt[index].qty) ;
+    //     cartItems[objIndex].qty = parseInt(newQty);
+    //     localStorage.setItem('cartItemsP',JSON.stringify(cartItems));
+    //     //alert('Quantity Update')
+    //     this.getCart();
+    //     this.isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
+    // }
+
+    function getCart() {
+        if (localStorage.getItem('cartItemsP')===null){
+            cartItems = localStorage.setItem('cartItemsP', '[]');
+        }else{
+        cartItems = JSON.parse(localStorage.getItem('cartItemsP'));
+    // this.isicart = JSON.parse(localStorage.getItem('cartItemsP')).length;
+        }
+
+    }
 </script>
