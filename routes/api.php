@@ -47,6 +47,7 @@ Route::post('/nosel', [App\Http\Controllers\barangController::class, 'indexNosel
 
 Route::post('/store/transnosel', [App\Http\Controllers\transaksiNoselController::class, 'simpantrx']);
 Route::post('/transnosel', [App\Http\Controllers\transaksiNoselController::class, 'indexTransNosel']);
+Route::post('/transnoselregu', [App\Http\Controllers\transaksiNoselController::class, 'indexTransNoselRegu']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile', function(Request $request) {

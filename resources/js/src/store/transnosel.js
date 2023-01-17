@@ -3,10 +3,12 @@
 import axios from 'axios';
 const state = {
     transnosel: null,
+    transnoselregu: null
   };
   
 const getters = {
     STransNosel: state => state.transnosel,
+    STransNoselRegu: state => state.transnoselregu,
     
 };
 
@@ -19,6 +21,11 @@ const actions = {
     async GetTransNosel({ commit }, payload){
         let response = await axios.post('api/transnosel', payload)
         commit('setTransNosel', response.data.data)
+        
+    },
+    async GetTransNoselRegu({ commit }){
+        let response = await axios.post('api/transnoselregu')
+        commit('setTransNoselRegu', response.data.data)
         
     },
     async EditTransNosel({dispatch}, nosel) {
@@ -37,6 +44,10 @@ const actions = {
 const mutations = {
     setTransNosel(state, transnosel){
         state.transnosel = transnosel
+        // console.log(state.transnosel)
+    },
+    setTransNoselRegu(state, transnoselregu){
+        state.transnoselregu = transnoselregu
         // console.log(state.transnosel)
     },
     // GetTransNosel(state, transnosel){

@@ -62,10 +62,10 @@ class transaksiNoselController extends Controller
 
     public function indexTransNosel(Request $request){
         $where = '';
-        $filter = $request->input('idnosel');
+        $filter = $request->input('tgl');
         $filter2 = $request->input('r_bbm');
         if(!empty($filter)){
-            $where = "where r_nosel='$filter' and r_bbm='$filter2' ";
+            $where = "where r_bbm='$filter2' and tgl_transaksi='$filter' ";
         };
         
         // $bbm = Bbm::get();
@@ -76,6 +76,25 @@ class transaksiNoselController extends Controller
             'success' => true,
             'message' => 'List transaksi nosel',
             'data' => $nosel
+        ], 200);
+
+    }
+    public function indexTransNoselRegu(Request $request){
+        // $where = '';
+        // $filter = $request->input('tgl');
+        // $filter2 = $request->input('r_bbm');
+        // if(!empty($filter)){
+        //     $where = "where r_bbm='$filter2' and tgl_transaksi='$filter' ";
+        // };
+        
+        // $bbm = Bbm::get();
+        //$posts = Barang::latest()->get();
+        $regu = DB::select("SELECT reguPegawai FROM tblpegawai group by reguPegawai order by reguPegawai asc;");
+
+        return response([
+            'success' => true,
+            'message' => 'List transaksi nosel',
+            'data' => $regu
         ], 200);
 
     }

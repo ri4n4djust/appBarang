@@ -690,7 +690,7 @@
     import '@/assets/sass/forms/custom-flatpickr.css';
 
     import { useMeta } from '@/composables/use-meta';
-    useMeta({ title: 'Invoice Add' });
+    useMeta({ title: 'Penjualan' });
 
     const items = ref([]);
     const selected_file = ref(null);
