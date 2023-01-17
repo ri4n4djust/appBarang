@@ -301,16 +301,18 @@
 
 .invoice-detail-items tbody td {
     &.description {
-        width: 365px;
+        width: 230px;
     }
 
-    &.rate,
+    &.rate{
+        width: 80px;
+    }
     &.qty {
-        width: 110px;
+        width: 50px;
     }
 
     &.amount {
-        width: 60px;
+        width: 80px;
     }
 
     &.tax {
