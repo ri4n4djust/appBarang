@@ -220,11 +220,11 @@
 
                                     <div class="invoice-detail-total">
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-4">
                                                 <div class="invoice-actions-btn">
                                                     <div class="invoice-action-btn">
                                                         <div class="row">
-                                                            <div class="col-sm-4">
+                                                            <div class="col-sm-5">
                                                                 <a href="javascript:;" class="btn btn-primary btn-send">Invoice</a>
                                                             </div>
                                                             <div class="col-sm-4">
@@ -239,32 +239,39 @@
                                                 
                                             </div>
 
-                                            <div class="col-md-6">
+                                            <div class="col-md-7">
                                                 <div class="totals-row">
                                                     <div class="invoice-totals-row invoice-summary-subtotal">
-                                                        <div class="invoice-summary-label">Subtotal</div>
+                                                        <div class="invoice-summary-label">Sub Total</div>
+                                                         <div class="invoice-summary-label"></div>
                                                         <div class="invoice-summary-value">
                                                             <div class="subtotal-amount"><span class="currency"></span><span class="amount">{{new Intl.NumberFormat().format(subtotal)}}</span></div>
                                                         </div>
                                                     </div>
                                                     <div class="invoice-totals-row invoice-summary-total">
-                                                        <div class="invoice-summary-label">Discount</div>
+                                                         <div class="invoice-summary-label">Discount</div>
+                                                        <input type="text" class="form-control" >
+                                                        <!-- <div class="invoice-summary-label">Discount</div> -->
                                                         <div class="invoice-summary-value">
                                                             <div class="total-amount"><span class="currency">$</span><span>10</span></div>
                                                         </div>
                                                     </div>
                                                     <div class="invoice-totals-row invoice-summary-tax">
-                                                        <div class="invoice-summary-label">Tax</div>
+                                                        <div class="invoice-summary-label">Pajak</div>
+                                                         <div class="invoice-summary-label"></div>
                                                         <div class="invoice-summary-value">
-                                                            <div class="tax-amount">
+                                                            <!-- <div class="tax-amount"> -->
                                                                 <span>0%</span>
-                                                            </div>
+                                                            <!-- </div> -->
                                                         </div>
                                                     </div>
                                                     <div class="invoice-totals-row invoice-summary-balance-due">
                                                         <div class="invoice-summary-label">Total</div>
+                                                         <div class="invoice-summary-label"></div>
                                                         <div class="invoice-summary-value">
-                                                            <div class="balance-due-amount"><span class="currency">$</span><span>90</span></div>
+                                                            <!-- <div class="balance-due-amount"> -->
+                                                                <span class="currency">$</span><span>90</span>
+                                                            <!-- </div> -->
                                                         </div>
                                                     </div>
                                                 </div>
