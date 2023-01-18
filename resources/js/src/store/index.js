@@ -14,6 +14,7 @@ import transaksi from './transaksi';
 
 export default new createStore({
     state: {
+        pajak: 11,
         layout: 'app',
         is_show_sidebar: true,
         is_show_search: false,

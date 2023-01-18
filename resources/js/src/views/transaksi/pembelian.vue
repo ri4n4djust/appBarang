@@ -37,28 +37,28 @@
                                                     <div class="form-group row">
                                                         <label for="company-name" class="col-sm-3 col-form-label col-form-label-sm">No Nota</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" v-model="params.invoice_no" id="number" class="form-control form-control-sm" placeholder="#0001" />
+                                                            <input type="text" v-model="params.noNota" id="number" class="form-control form-control-sm" placeholder="#0001" />
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="company-email" class="col-sm-3 col-form-label col-form-label-sm">Tgl</label>
                                                         <div class="col-sm-9">
-                                                            <flat-pickr v-model="params.invoice_date" class="form-control form-control-sm flatpickr active" placeholder="Invoice Date"></flat-pickr>
+                                                            <flat-pickr v-model="params.tglNota" class="form-control form-control-sm flatpickr active" placeholder="Invoice Date"></flat-pickr>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="company-address" class="col-sm-3 col-form-label col-form-label-sm">Term</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" v-model="params.due_date" id="company-address" class="form-control form-control-sm" placeholder="XYZ Street" />
+                                                            <input type="text" v-model="params.term" id="company-address" class="form-control form-control-sm" placeholder="XYZ Street" />
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="company-phone" class="col-sm-3 col-form-label col-form-label-sm">Jatuh Tempo</label>
                                                         <div class="col-sm-9">
-                                                            <flat-pickr v-model="params.due_date" class="form-control form-control-sm flatpickr active" placeholder="Due Date"></flat-pickr>
+                                                            <flat-pickr v-model="params.jthTempo" class="form-control form-control-sm flatpickr active" placeholder="Due Date"></flat-pickr>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -71,28 +71,21 @@
                                                         <label for="client-name" class="col-sm-3 col-form-label col-form-label-sm">Name</label>
                                                         <div class="col-sm-9">
                                                             <input type="text" v-model="params.kodeSupplier" />
-                                                            <input type="text" v-model="params.due_date" id="client-name" class="form-control form-control-sm" placeholder="Client Name" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label for="client-email" class="col-sm-3 col-form-label col-form-label-sm">Email</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" v-model="params.due_date" id="client-email" class="form-control form-control-sm" placeholder="name@company.com" />
+                                                            <input type="text" v-model="params.nmSupplier" id="client-name" class="form-control form-control-sm" placeholder="Client Name" />
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="client-address" class="col-sm-3 col-form-label col-form-label-sm">Address</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" v-model="params.due_date" id="client-address" class="form-control form-control-sm" placeholder="XYZ Street" />
+                                                            <input type="text" v-model="params.almtSupplier" id="client-address" class="form-control form-control-sm" placeholder="XYZ Street" />
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="client-phone" class="col-sm-3 col-form-label col-form-label-sm">Phone</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" v-model="params.due_date" id="client-phone" class="form-control form-control-sm" placeholder="(123) 456 789" />
+                                                            <input type="text" v-model="params.tlpSupplier" id="client-phone" class="form-control form-control-sm" placeholder="(123) 456 789" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -221,12 +214,12 @@
 
                                     <div class="invoice-detail-total">
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-md-6">
                                                 <div class="invoice-actions-btn">
                                                     <div class="invoice-action-btn">
                                                         <div class="row">
-                                                            <div class="col-sm-5">
-                                                                <a href="javascript:;" class="btn btn-primary btn-send">Invoice</a>
+                                                            <div class="col-sm-4">
+                                                                <a href="javascript:;" class="btn btn-primary btn-send" @click="taxSelected" v-bind="hide = true">+ pajak</a>
                                                             </div>
                                                             <div class="col-sm-4">
                                                                 <router-link to="/apps/invoice/preview" class="btn btn-dark btn-preview">Preview</router-link>
@@ -240,7 +233,7 @@
                                                 
                                             </div>
 
-                                            <div class="col-md-7">
+                                            <div class="col-md-6">
                                                 <div class="totals-row">
                                                     <div class="invoice-totals-row invoice-summary-subtotal">
                                                         <div class="invoice-summary-label">Sub Total</div>
@@ -250,20 +243,19 @@
                                                         </div>
                                                     </div>
                                                     <div class="invoice-totals-row invoice-summary-total">
-                                                         <div class="invoice-summary-label">Discount</div>
-                                                        <input type="text" class="form-control" >
-                                                        <!-- <div class="invoice-summary-label">Discount</div> -->
+                                                         <div class="invoice-summary-label">Disc</div>
+                                                        <input type="text" v-model="params.disc" class="form-control form-control-sm" >%
+                                                        <div class="invoice-summary-label"></div>
                                                         <div class="invoice-summary-value">
-                                                            <div class="total-amount"><span class="currency">$</span><span>10</span></div>
+                                                            <div class="total-amount"><span class="currency"></span><span>{{ new Intl.NumberFormat().format(Math.floor(subtotal * disc / 100)) }}</span></div>
                                                         </div>
                                                     </div>
                                                     <div class="invoice-totals-row invoice-summary-tax">
                                                         <div class="invoice-summary-label">Pajak</div>
-                                                         <div class="invoice-summary-label"></div>
                                                         <div class="invoice-summary-value">
-                                                            <!-- <div class="tax-amount"> -->
-                                                                <span>0%</span>
-                                                            <!-- </div> -->
+                                                            <div class="tax-amount"><span class="currency"></span>
+                                                                <span>{{ new Intl.NumberFormat().format(Math.floor((subtotal - (subtotal * disc / 100)) * pembelian.pajak/100)) }}</span>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="invoice-totals-row invoice-summary-balance-due">
@@ -271,7 +263,7 @@
                                                          <div class="invoice-summary-label"></div>
                                                         <div class="invoice-summary-value">
                                                             <!-- <div class="balance-due-amount"> -->
-                                                                <span class="currency">$</span><span>90</span>
+                                                                <span>{{ new Intl.NumberFormat().format(Math.floor(total)) }}</span>
                                                             <!-- </div> -->
                                                         </div>
                                                     </div>
@@ -339,32 +331,54 @@
     const brg = ref([]);
     const qty = ref(1);
     const subtotal = ref();
+    const total = ref();
+    const disc = ref(0);
+    const tax = ref();
     const selected_file = ref(null);
     const params = ref({
-        invoice_no: '',
+        noNota: '',
         kodeSupplier: '',
-        invoice_date: '',
-        due_date: '',
+        nmSupplier: '',
+        almtSupplier: '',
+        tlpSupplier: '',
+        tglNota: '',
+        term: '',
+        jthTempo: '',
         notes: '',
+        subtotal: subtotal,
+        tax: tax,
+        disc: disc,
+        total: total,
     });
     const cartItems = ref([])
     // const newValue = ref()
     // const currency_list = ref([]);
-    // const selected_currency = ref({ key: 'USD - US Dollar', thumb: 'flags/en.png' });
-    // const tax_type_list = ref([]);
-    // const selected_tax_type = ref({ key: 'None', value: null });
-    // const discount_list = ref([]);
-    // const selected_discount = ref({ key: 'None', value: null, type: '' });
 
     const pembelian = computed(() => {
         const barangs = store.getters.StateBarang;
         // const trs = store.getters.STransNosel;
-        // const regu = store.getters.STransNoselRegu;
-        return { barangs }
+        const pajak = store.state.pajak;
+        // console.log('pajak : '+ pajak)
+        return { barangs, pajak }
     });
 
     const getBarang=() => {
         store.dispatch('GetBarang')
+    }
+
+    const getTotal=() =>{
+        total.value = subtotal.value - (subtotal.value * disc.value / 100)
+        tax.value = total.value - (total.value * pembelian.pajak /100)
+        // console.log('total :'+total.value)
+        // return { tot }
+    }
+
+    function taxSelected() {
+        const pajak = store.state.pajak;
+        // const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
+        const temppajak = total.value * pajak /100
+        total.value = total.value + temppajak
+        // console.log('total : '+ temptotal + 'pajak :'+temppajak)
     }
 
     const simpanPembelian=() => {
@@ -462,6 +476,7 @@
         }else{
             cartItems.value = JSON.parse(localStorage.getItem('cartItemsP'));
             getSubtotal();
+            getTotal();
             
     // this.isicart = JSON.parse(localStorage.getItem('cartItemsP')).length;
         }
