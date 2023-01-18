@@ -108,10 +108,10 @@
                                                     <tr>
                                                         <!-- <th class=""></th> -->
                                                         <th>Nama Barang</th>
-                                                        <th class="">Harga</th>
-                                                        <th class="">Qty</th>
-                                                        <th class="text-end">Total</th>
-                                                        <th class="text-center">Aksi</th>
+                                                        <th>Harga</th>
+                                                        <th>Qty</th>
+                                                        <th>Total</th>
+                                                        <th>Aksi</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -156,12 +156,12 @@
                                                             <!-- <input type="text" v-model="item.title" class="form-control form-control-sm" placeholder="Item Description" /> -->
                                                         </td>
                                                         <td class="rate">
-                                                            <input type="number" v-model="brg.hrgJual" class="form-control form-control-sm" placeholder="Price" />
+                                                            <input type="text" v-model="brg.hrgJual" class="form-control form-control-sm" placeholder="Price" @keypress="onlyNumber" />
                                                         </td>
-                                                        <td class="text-end qty">
-                                                            <input type="number" v-model="qty" class="form-control form-control-sm" placeholder="Quantity" />
+                                                        <td class="qty">
+                                                            <input type="text" v-model="qty" class="form-control form-control-sm" placeholder="Quantity" @keypress="onlyNumber" />
                                                         </td>
-                                                        <td class="text-end amount">
+                                                        <td class="amount">
                                                             {{ brg.hrgJual * qty }}
                                                             <!-- <input type="number" v-model="total" class="form-control form-control-sm" placeholder="Total" disabled /> -->
                                                             <!-- <span class="editable-amount mt-2">
@@ -169,11 +169,10 @@
                                                             </span> -->
                                                             
                                                         </td>
-                                                        <td class="text-center tax">
+                                                        <td class="tax">
                                                             <button @click="addToCart(brg)" class="btn btn-xs btn-primary">
-                                                                <i data-feather="trash"></i>
+                                                               tambah 
                                                             </button>
-                             <i class="fa fa-fw fa-eye"></i>
                                                             <!-- <div class="checkbox-primary custom-control custom-checkbox">
                                                                 <input type="checkbox" :id="`chktax-${index}`" v-model="item.is_tax" class="custom-control-input" />
                                                                 <label class="custom-control-label" :for="`chktax-${index}`"></label>
@@ -186,7 +185,7 @@
 
                                         <div class="inv--product-table-section">
                                             <div class="table-responsive">
-                                                <table class="table table-hover">
+                                                <table class="table table-hover table-bordered item-table">
                                                     <thead>
                                                         <tr>
                                                             <th>Nama Barang</th>
@@ -197,15 +196,16 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr v-for="item, index in cartItems" :key="item.kdBarang">
-                                                            <td>{{ item.nmBarang }}</td>
-                                                            <td>{{ item.hrgJual }}</td>
-                                                            <td>${{ item.qty }}</td>
-                                                            <td>${{ item.total }}</td>
-                                                            <td>
-                                                                <div class="icon-container">
+                                                        <tr v-for="item in cartItems" :key="item.kdBarang">
+                                                            <td class="description">{{ item.nmBarang }}</td>
+                                                            <td class="rate">{{ new Intl.NumberFormat().format(item.hrgJual) }}</td>
+                                                            <td class="qty">{{ item.qty }}</td>
+                                                            <td class="amount">{{ new Intl.NumberFormat().format(item.total) }}</td>
+                                                            <td class="tax">
+                                                                <button type="button" class="btn btn-secondary additem btn-sm" @click="removeItem(id=item.kdBarang)">Hapus</button>
+                                                                <!-- <div class="icon-container">
                                                                     <i data-feather="trash"></i><span class="icon-name"> trash</span>
-                                                                </div>
+                                                                </div> -->
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -213,7 +213,7 @@
                                             </div>
                                         </div>
 
-                                        <button type="button" class="btn btn-secondary additem btn-sm" @click="add_item()">Add Item</button>
+                                        <!-- <button type="button" class="btn btn-secondary additem btn-sm" @click="add_item()">Add Item</button> -->
                                     </div>
 
                                     
@@ -221,7 +221,21 @@
                                     <div class="invoice-detail-total">
                                         <div class="row">
                                             <div class="col-md-6">
-                                                
+                                                <div class="invoice-actions-btn">
+                                                    <div class="invoice-action-btn">
+                                                        <div class="row">
+                                                            <div class="col-sm-4">
+                                                                <a href="javascript:;" class="btn btn-primary btn-send">Invoice</a>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <router-link to="/apps/invoice/preview" class="btn btn-dark btn-preview">Preview</router-link>
+                                                            </div>
+                                                            <div class="col-sm-4">
+                                                                <a href="javascript:;" class="btn btn-success btn-download">Save</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 
                                             </div>
 
@@ -230,7 +244,7 @@
                                                     <div class="invoice-totals-row invoice-summary-subtotal">
                                                         <div class="invoice-summary-label">Subtotal</div>
                                                         <div class="invoice-summary-value">
-                                                            <div class="subtotal-amount"><span class="currency">$</span><span class="amount">100</span></div>
+                                                            <div class="subtotal-amount"><span class="currency"></span><span class="amount">{{new Intl.NumberFormat().format(subtotal)}}</span></div>
                                                         </div>
                                                     </div>
                                                     <div class="invoice-totals-row invoice-summary-total">
@@ -280,23 +294,7 @@
                             </div>
                         </div>
 
-                        <div class="col-xl-3">
-                            <div class="invoice-actions-btn">
-                                <div class="invoice-action-btn">
-                                    <div class="row">
-                                        <div class="col-xl-12 col-md-4">
-                                            <a href="javascript:;" class="btn btn-primary btn-send">Send Invoice</a>
-                                        </div>
-                                        <div class="col-xl-12 col-md-4">
-                                            <router-link to="/apps/invoice/preview" class="btn btn-dark btn-preview">Preview</router-link>
-                                        </div>
-                                        <div class="col-xl-12 col-md-4">
-                                            <a href="javascript:;" class="btn btn-success btn-download">Save</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -332,7 +330,7 @@
     const items = ref([]);
     const brg = ref([]);
     const qty = ref(1);
-    const total = ref();
+    const subtotal = ref();
     const selected_file = ref(null);
     const params = ref({
         title: '',
@@ -346,18 +344,13 @@
         notes: '',
     });
     const cartItems = ref([])
-
+    // const newValue = ref()
     // const currency_list = ref([]);
     // const selected_currency = ref({ key: 'USD - US Dollar', thumb: 'flags/en.png' });
     // const tax_type_list = ref([]);
     // const selected_tax_type = ref({ key: 'None', value: null });
     // const discount_list = ref([]);
     // const selected_discount = ref({ key: 'None', value: null, type: '' });
-
-    watch([ total, qty ], ( newValue ) => {
-        newValue = qty * brg.hrgJual
-        console.log(newValue); //newvalue is an array including both values
-    })
 
     const pembelian = computed(() => {
         const barangs = store.getters.StateBarang;
@@ -366,7 +359,7 @@
         return { barangs }
     });
 
-    const getRegu=() => {
+    const getBarang=() => {
         store.dispatch('GetBarang')
     }
 
@@ -379,33 +372,9 @@
         dt.setDate(dt.getDate() + 5);
         params.value.due_date = dt;
 
-        //currency list
-        // currency_list.value = [
-        //     { key: 'USD - US Dollar', thumb: 'flags/en.png' },
-        //     { key: 'GBP - British Pound', thumb: 'flags/gbp.png' },
-        //     { key: 'IDR - Indonesian Rupiah', thumb: 'flags/idr.png' },
-        //     { key: 'INR - Indian Rupee', thumb: 'flags/inr.png' },
-        //     { key: 'BRL - Brazilian Real', thumb: 'flags/brl.png' },
-        //     { key: 'EUR - Germany (Euro)', thumb: 'flags/de.png' },
-        //     { key: 'TRY - Turkish Lira', thumb: 'flags/tr.png' },
-        // ];
-
-        //tax type list
-        // tax_type_list.value = [
-        //     { key: 'Deducted', value: 10 },
-        //     { key: 'Per Item', value: 5 },
-        //     { key: 'On Total', value: 25 },
-        //     { key: 'None', value: null },
-        // ];
-
-        //discount list
-        // discount_list.value = [
-        //     { key: 'Percent', value: 10, type: 'percent' },
-        //     { key: 'Flat Amount', value: 25, type: 'amount' },
-        //     { key: 'None', value: null, type: '' },
-        // ];
-        getRegu();
-        // getCart();
+       
+        getBarang();
+        getCart();
     });
 
     const change_file = (event) => {
@@ -433,7 +402,7 @@
             cartItems.value = JSON.parse(localStorage.getItem('cartItemsP'));
         }
             const oldItems = JSON.parse(localStorage.getItem('cartItemsP')) || [];
-            console.log(oldItems)
+            // console.log(oldItems)
             const existingItem = oldItems.find(({ kdBarang }) => kdBarang === brg.kdBarang);
             if (existingItem) {
                 const objIndex = cartItems.value.findIndex((e => e.kdBarang === brg.kdBarang));
@@ -443,26 +412,27 @@
                 cartItems.value[objIndex].qty = parseInt(newQty);
                 localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
                 alert(oldName+' Quantity Update')
-                // getCart();
+                getCart();
                 // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
             }else{
             cartItems.value.push({kdBarang:brg.kdBarang, nmBarang:brg.nmBarang,hrgJual:brg.hrgJual,qty:qty.value,total:qty.value * brg.hrgJual});	
             localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
-            // getCart();
+            getCart();
             // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
             alert(brg.nmBarang+ " berhasil disimpan")
             }
     }
-    // function removeItem(id) {
-    //     //alert(id)
-    //     var arrayFromStroage = JSON.parse(localStorage.getItem('cartItemsP'));
-    //     const filtered = arrayFromStroage.filter(arrayFromStroage => arrayFromStroage.id !== id);
-    //     localStorage.setItem('cartItemsP', JSON.stringify(filtered));
-    //     //this.items.splice(index, 1)
-    //     this.isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
-    //     this.getCart();
-    //     alert('berhasil dihapus')
-    // }
+    function removeItem(id) {
+        // alert(id)
+        const arrayFromStroage = JSON.parse(localStorage.getItem('cartItemsP'));
+        const filtered = arrayFromStroage.filter(arrayFromStroage => arrayFromStroage.kdBarang !== id);
+        localStorage.setItem('cartItemsP', JSON.stringify(filtered));
+        // cartItems.value.splice(index, 1)
+        // this.isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
+        getCart();
+        console.log(filtered)
+        // alert(filtered.nmBarang)
+    }
     // function updateItem(barcode, index) {
     //     const cartItems = JSON.parse(localStorage.getItem('cartItemsP'));
     //     const objIndex = cartItems.findIndex((e => e.barcode === barcode));
@@ -475,12 +445,34 @@
     // }
 
     function getCart() {
+        // subtotal.value = []
         if (localStorage.getItem('cartItemsP')===null){
-            cartItems = localStorage.setItem('cartItemsP', '[]');
+            cartItems.value = localStorage.setItem('cartItemsP', '[]');
+            subtotal.value = 0
         }else{
-        cartItems = JSON.parse(localStorage.getItem('cartItemsP'));
+            cartItems.value = JSON.parse(localStorage.getItem('cartItemsP'));
+            getSubtotal();
+            
     // this.isicart = JSON.parse(localStorage.getItem('cartItemsP')).length;
         }
 
+    }
+    function getSubtotal(){
+        const allItems = JSON.parse(localStorage.getItem('cartItemsP')) || [];
+        let sum = 0;
+        subtotal.value = 0
+        for(let i = 0; i < allItems.length; i++){
+        sum += (parseFloat(allItems[i].total));
+        }
+        subtotal.value = sum
+        // console.log(subtotal.value)
+        // return sum;
+    }
+    function onlyNumber ($event) {
+        //console.log($event.keyCode); //keyCodes value
+        let keyCode = ($event.keyCode ? $event.keyCode : $event.which);
+        if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) { // 46 is dot
+            $event.preventDefault();
+        }   
     }
 </script>

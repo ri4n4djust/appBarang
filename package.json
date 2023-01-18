@@ -48,6 +48,7 @@
         "vue3-form-wizard": "^0.0.4",
         "vue3-google-map": "^0.11.0",
         "vue3-json-excel": "^1.0.10-alpha",
+        "vue3-loading-overlay": "^0.0.0",
         "vue3-nouislider": "^1.0.0",
         "vue3-number-spinner": "^0.0.9",
         "vue3-perfect-scrollbar": "^1.5.5",
