@@ -199,8 +199,8 @@
                                                     <tbody>
                                                         <tr v-for="item, index in cartItems" :key="item.kdBarang">
                                                             <td>{{ item.nmBarang }}</td>
-                                                            <td>{{ item.qty }}</td>
-                                                            <td>${{ item.hrgJual }}</td>
+                                                            <td>{{ item.hrgJual }}</td>
+                                                            <td>${{ item.qty }}</td>
                                                             <td>${{ item.total }}</td>
                                                             <td>
                                                                 <div class="icon-container">
@@ -446,7 +446,7 @@
                 // getCart();
                 // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
             }else{
-            cartItems.value.push({kdBarang:brg.kdBarang, nmBarang:brg.nmBarang,hrgJual:brg.hrgJual,qty:qty.value,total:total.value});	
+            cartItems.value.push({kdBarang:brg.kdBarang, nmBarang:brg.nmBarang,hrgJual:brg.hrgJual,qty:qty.value,total:qty.value * brg.hrgJual});	
             localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
             // getCart();
             // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
