@@ -49,6 +49,9 @@ Route::post('/store/transnosel', [App\Http\Controllers\transaksiNoselController:
 Route::post('/transnosel', [App\Http\Controllers\transaksiNoselController::class, 'indexTransNosel']);
 Route::post('/transnoselregu', [App\Http\Controllers\transaksiNoselController::class, 'indexTransNoselRegu']);
 
+// Pembelian
+Route::post('/store/pembelian', [App\Http\Controllers\pembelianController::class, 'simpanPembelian']);
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile', function(Request $request) {
         return auth()->user();

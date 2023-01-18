@@ -51,7 +51,7 @@
                                                     <div class="form-group row">
                                                         <label for="company-address" class="col-sm-3 col-form-label col-form-label-sm">Term</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" v-model="params.from.address" id="company-address" class="form-control form-control-sm" placeholder="XYZ Street" />
+                                                            <input type="text" v-model="params.due_date" id="company-address" class="form-control form-control-sm" placeholder="XYZ Street" />
                                                         </div>
                                                     </div>
 
@@ -70,28 +70,29 @@
                                                     <div class="form-group row">
                                                         <label for="client-name" class="col-sm-3 col-form-label col-form-label-sm">Name</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" v-model="params.to.name" id="client-name" class="form-control form-control-sm" placeholder="Client Name" />
+                                                            <input type="text" v-model="params.kodeSupplier" />
+                                                            <input type="text" v-model="params.due_date" id="client-name" class="form-control form-control-sm" placeholder="Client Name" />
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="client-email" class="col-sm-3 col-form-label col-form-label-sm">Email</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" v-model="params.to.email" id="client-email" class="form-control form-control-sm" placeholder="name@company.com" />
+                                                            <input type="text" v-model="params.due_date" id="client-email" class="form-control form-control-sm" placeholder="name@company.com" />
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="client-address" class="col-sm-3 col-form-label col-form-label-sm">Address</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" v-model="params.to.address" id="client-address" class="form-control form-control-sm" placeholder="XYZ Street" />
+                                                            <input type="text" v-model="params.due_date" id="client-address" class="form-control form-control-sm" placeholder="XYZ Street" />
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="client-phone" class="col-sm-3 col-form-label col-form-label-sm">Phone</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" v-model="params.to.phone" id="client-phone" class="form-control form-control-sm" placeholder="(123) 456 789" />
+                                                            <input type="text" v-model="params.due_date" id="client-phone" class="form-control form-control-sm" placeholder="(123) 456 789" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -231,7 +232,7 @@
                                                                 <router-link to="/apps/invoice/preview" class="btn btn-dark btn-preview">Preview</router-link>
                                                             </div>
                                                             <div class="col-sm-4">
-                                                                <a href="javascript:;" class="btn btn-success btn-download">Save</a>
+                                                                <a href="javascript:;" @click="simpanPembelian" class="btn btn-success btn-download">Save</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -340,14 +341,10 @@
     const subtotal = ref();
     const selected_file = ref(null);
     const params = ref({
-        title: '',
         invoice_no: '',
-        from: { name: '', email: '', address: '', phone: '' },
-        to: { name: '', email: '', address: '', phone: '' },
-
+        kodeSupplier: '',
         invoice_date: '',
         due_date: '',
-        bank_info: { no: '', name: '', swift_code: '', country: '' },
         notes: '',
     });
     const cartItems = ref([])
@@ -368,6 +365,12 @@
 
     const getBarang=() => {
         store.dispatch('GetBarang')
+    }
+
+    const simpanPembelian=() => {
+        const header =params.value
+        const detail =cartItems.value
+        store.dispatch('CreatePembelian', [header,detail] )
     }
 
     onMounted(() => {

@@ -9,6 +9,7 @@ import kode from './kode';
 import bbm from './bbm';
 import nosel from './nosel';
 import transnosel from './transnosel';
+import transaksi from './transaksi';
 
 
 export default new createStore({
@@ -113,7 +114,8 @@ export default new createStore({
         room,
         bbm,
         nosel,
-        transnosel
+        transnosel,
+        transaksi
     },
     // plugins: [createPersistedState()]
 });

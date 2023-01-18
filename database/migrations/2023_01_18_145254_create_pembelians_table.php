@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tblpersediaan', function (Blueprint $table) {
-            $table->id('idPersediaan');
+        Schema::create('tblpembelian', function (Blueprint $table) {
+            $table->id('idPembelian');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('persediaans');
+        Schema::dropIfExists('pembelians');
     }
 };
