@@ -184,13 +184,13 @@
                                                             <!-- <input type="text" v-model="item.title" class="form-control form-control-sm" placeholder="Item Description" /> -->
                                                         </td>
                                                         <td class="rate">
-                                                            <input type="text" v-model="brg.hrgJual" class="form-control form-control-sm" placeholder="Price" @keypress="onlyNumber" />
+                                                            <input type="text" v-model="brg.hrgPokok" class="form-control form-control-sm" placeholder="Price" @keypress="onlyNumber" />
                                                         </td>
                                                         <td class="qty">
                                                             <input type="text" v-model="qty" class="form-control form-control-sm" placeholder="Quantity" @keypress="onlyNumber" />
                                                         </td>
                                                         <td class="amount">
-                                                            {{ brg.hrgJual * qty }}
+                                                            {{ brg.hrgPokok * qty }}
                                                             <!-- <input type="number" v-model="total" class="form-control form-control-sm" placeholder="Total" disabled /> -->
                                                             <!-- <span class="editable-amount mt-2">
                                                                 <span class="currency">$</span> <span class="amount">{{ item.amount }}</span>
@@ -226,7 +226,7 @@
                                                     <tbody>
                                                         <tr v-for="item in cartItems" :key="item.kdBarang">
                                                             <td class="description">{{ item.nmBarang }}</td>
-                                                            <td class="rate">{{ new Intl.NumberFormat().format(item.hrgJual) }}</td>
+                                                            <td class="rate">{{ new Intl.NumberFormat().format(item.hrgPokok) }}</td>
                                                             <td class="qty">{{ item.qty }}</td>
                                                             <td class="amount">{{ new Intl.NumberFormat().format(item.total) }}</td>
                                                             <td class="tax">
@@ -380,7 +380,7 @@
         jthTempo: '',
         notes: '',
         subtotal: subtotal,
-        tax: tax,
+        tax: 11,
         disc: disc,
         total: total,
     });
@@ -473,7 +473,7 @@
                 getCart();
                 // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
             }else{
-            cartItems.value.push({kdBarang:brg.kdBarang, nmBarang:brg.nmBarang,hrgJual:brg.hrgJual,qty:qty.value,total:qty.value * brg.hrgJual});	
+            cartItems.value.push({kdBarang:brg.kdBarang, nmBarang:brg.nmBarang,hrgPokok:brg.hrgPokok,qty:qty.value,total:qty.value * brg.hrgPokok});	
             localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
             getCart();
             // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;

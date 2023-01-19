@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 19, 2023 at 01:35 AM
+-- Generation Time: Jan 20, 2023 at 12:50 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.25
 
@@ -68,7 +68,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (12, '2023_01_18_054236_create_persediaans_table', 8),
 (13, '2023_01_18_054644_create_persediaan_details_table', 8),
 (14, '2023_01_18_145254_create_pembelians_table', 8),
-(15, '2023_01_18_173900_create_pembelian_details_table', 8);
+(15, '2023_01_18_173900_create_pembelian_details_table', 8),
+(16, '2023_01_20_051650_create_suppliers_table', 9);
 
 -- --------------------------------------------------------
 
@@ -250,39 +251,20 @@ CREATE TABLE `tblbarang` (
 --
 
 INSERT INTO `tblbarang` (`id`, `kdBarang`, `nmBarang`, `hrgPokok`, `hrgJual`, `ktgBarang`, `satuanBarang`, `merek`, `stkBarang`, `stkSatuan`, `qtyMin`, `qtyMax`, `stsBarang`, `deskripsi`, `created_at`, `updated_at`) VALUES
-(44, 'DB-2021-8', 'Paket Kelincit 222', 34, 58, 'KT-2021-1', 'Gram', 'Paket Kelinci', '15', NULL, '200', '5000', '1', 'Paket Kelinci', '2021-04-21 08:06:27', '2022-08-05 00:40:02'),
-(47, 'DB-2021-11', 'Iga Sapi', 90, 110, 'KT-2021-1', 'Gram', 'Iga Sapi', '-105', NULL, '200', '5000', '1', 'Iga Sapi', '2021-04-21 08:09:02', '2021-04-21 08:09:02'),
-(48, 'DB-2021-12', 'Soto Sapi', 50, 60, 'KT-2021-1', 'Gram', 'Soto Sapi', '-38', NULL, '200', '5000', '1', 'Soto Sapi', '2021-04-21 08:12:59', '2021-04-21 08:12:59'),
-(49, 'DB-2021-13', 'Telur Ayam', 1600, 2000, 'KT-2021-1', 'Gram', 'Telur Ayam', '-681', NULL, '200', '5000', '1', 'Telur Ayam', '2021-04-21 08:13:46', '2021-04-21 08:13:46'),
-(50, 'DB-2021-14', 'Udang Cumi', 80, 100, 'KT-2021-1', 'Gram', 'Udang Cumi', '-94', NULL, '200', '5000', '1', 'Udang Cumi', '2021-04-21 08:15:40', '2021-04-21 08:15:40'),
-(51, 'DB-2021-15', 'Spring Roll', 80, 100, 'KT-2021-1', 'Gram', 'Spring Roll', '-72', NULL, '200', '5000', '1', 'Spring Roll', '2021-04-21 08:16:46', '2021-04-21 08:16:46'),
-(52, 'DB-2021-16', 'Kepala Ikan', 33, 50, 'KT-2021-1', 'Gram', 'Kepala Ikan', '-168', NULL, '200', '5000', '1', 'Kepala Ikan', '2021-04-21 08:17:24', '2021-04-21 08:17:24'),
-(53, 'DB-2021-17', 'Mujair', 32, 50, 'KT-2021-1', 'Gram', 'Mujair', '-560', NULL, '200', '5000', '1', 'Mujair', '2021-04-21 08:18:05', '2021-04-21 08:18:05'),
-(54, 'DB-2021-18', 'Buntut', 90, 110, 'KT-2021-1', 'Gram', 'Buntut', '200', NULL, '200', '5000', '1', 'Buntut', '2021-04-21 08:19:01', '2021-04-21 08:19:01'),
-(56, 'DB-2021-20', 'Gurami Kecil', 38, 50, 'KT-2021-1', 'Gram', 'Gurami Kecil', '-315', NULL, '200', '5000', '1', 'Gurami Kecil', '2021-04-21 08:21:47', '2021-04-21 08:21:47'),
-(57, 'DB-2021-21', 'Paha Ayam', 39, 50, 'KT-2021-1', 'Gram', 'Paha Ayam', '-746', NULL, '200', '5000', '1', 'Paha Ayam', '2021-04-21 08:22:37', '2021-04-21 08:22:37'),
-(58, 'DB-2021-22', 'Kentang', 32, 50, 'KT-2021-1', 'Gram', 'Kentang', '-333', NULL, '200', '5000', '1', 'Kentang', '2021-04-21 08:23:09', '2021-04-21 08:23:09'),
-(59, 'DB-2021-23', 'Coca Cola 600ml', 2000, 5000, 'KT-2021-2', 'Botol', 'Coca Cola', '-3', NULL, '200', '5000', '1', 'Coca Cola', '2021-04-21 08:24:59', '2021-04-21 08:24:59'),
-(60, 'DB-2021-24', 'Sprite', 2000, 5000, 'KT-2021-2', 'Botol', 'Coca Cola', '6', NULL, '200', '5000', '1', 'Coca Cola', '2021-04-21 08:25:16', '2021-04-21 08:25:16'),
-(61, 'DB-2021-25', 'Fanta', 2000, 5000, 'KT-2021-2', 'Botol', 'Coca Cola', '0', NULL, '200', '5000', '1', 'Coca Cola', '2021-04-21 08:25:25', '2021-04-21 08:25:25'),
-(62, 'DB-2021-26', 'Air Mineral', 2000, 5000, 'KT-2021-2', 'Botol', 'Coca Cola', '-365', NULL, '200', '5000', '1', 'Coca Cola', '2021-04-21 08:26:13', '2021-04-21 08:26:13'),
-(63, 'DB-2021-27', 'Susu Putih', 9000, 15000, 'KT-2021-2', 'Kaleng', 'Susu Putih', '24', NULL, '200', '5000', '1', 'Susu Putih', '2021-04-21 08:27:42', '2021-04-21 08:27:42'),
-(64, 'DB-2021-28', 'Susu Coklat', 9000, 15000, 'KT-2021-2', 'Kaleng', 'Susu Coklat', '2', NULL, '200', '5000', '1', 'Susu Coklat', '2021-04-21 08:28:04', '2021-04-21 08:28:04'),
-(65, 'DB-2021-29', 'Marjan', 9000, 15000, 'KT-2021-2', 'Kaleng', 'Marjan', '3', NULL, '200', '5000', '1', 'Marjan', '2021-04-21 08:28:39', '2021-04-21 08:28:39'),
-(66, 'DB-2021-30', 'Large Beer', 27000, 35000, 'KT-2021-2', 'Botol', 'Beer Large', '-23', NULL, '200', '5000', '1', 'Beer Large', '2021-04-21 08:29:44', '2021-04-21 08:29:44'),
-(67, 'DB-2021-31', 'Small Beer', 17000, 25000, 'KT-2021-2', 'Botol', 'Beer Small', '-17', NULL, '200', '5000', '1', 'Beer Small', '2021-04-21 08:30:22', '2021-04-21 08:30:22'),
-(68, 'DB-2021-32', 'Krupuk Ale', 6000, 8000, 'KT-2021-1', 'Bungkus', 'Krupuk Ale', '2', NULL, '10', '100', '1', 'Krupuk Ale', '2021-04-21 08:31:13', '2021-04-21 08:31:13'),
-(69, 'DB-2021-33', 'Krupuk Besar', 3000, 8000, 'KT-2021-1', 'Bungkus', 'Krupuk Besar', '3', NULL, '10', '100', '1', 'Krupuk Besar', '2021-04-21 08:32:21', '2021-04-21 08:32:21'),
-(70, 'DB-2021-34', 'Cleo Mini', 800, 1500, 'KT-2021-2', 'Botol', 'Cleo Mini', '-179', NULL, '10', '100', '1', 'Cleo Mini', '2021-04-21 08:33:27', '2021-04-21 08:33:27'),
-(71, 'DB-2021-35', 'Soda Water', 2500, 5000, 'KT-2021-2', 'Botol', 'Soda Water', '-100', NULL, '10', '100', '1', 'Soda Water', '2021-04-21 08:34:33', '2021-04-21 08:34:33'),
-(72, 'DB-2021-36', 'Nasi Putih', 2000, 5000, 'KT-2021-1', 'Porsi', 'Nasi Putih', '11', NULL, '2', '100', '1', 'Nasi Putih', '2021-04-22 05:57:06', '2021-04-22 05:57:06'),
-(73, 'DB-2021-37', 'Jeruk Lumajang', 200, 500, 'KT-2021-2', 'Butir', 'Jeruk', '-3490', NULL, '2', '200', '1', 'Jeruk Lumajang', '2021-04-22 06:57:37', '2021-04-22 06:57:37'),
-(74, 'DB-2021-38', 'Pisang Raja', 300, 500, 'KT-2021-1', 'Pcs', 'Pisang', '-356', NULL, '10', '100', '1', 'Pisang', '2021-04-22 07:00:07', '2022-07-01 18:33:07'),
-(75, 'DB-2021-39', 'Tahu', 300, 500, 'KT-2021-1', 'Gram', 'Tahu', '-9', NULL, '200', '4000', '1', 'Tahu', '2021-04-22 07:55:26', '2021-04-22 07:55:26'),
-(76, 'DB-2021-40', 'Tempe', 300, 500, 'KT-2021-1', 'Gram', 'Tempe', '-15', NULL, '200', '4000', '1', 'Tempe', '2021-04-22 07:55:45', '2021-04-22 07:55:45'),
-(77, 'DB-2021-41', 'Mie', 2000, 5000, 'KT-2021-1', 'Bungkus', 'Mie telor', '-226', NULL, '5', '20', '1', 'Mie telor', '2021-04-22 08:02:33', '2021-04-22 08:02:33'),
-(78, 'DB-2021-42', 'Kangkung', 20, 50, 'KT-2021-1', 'Gram', 'Kangkung', '-183', NULL, '200', '2000', '1', 'Kangkung', '2021-04-22 08:30:41', '2021-04-22 08:30:41'),
-(79, 'DB-2021-43', 'Kelapa Muda', 5000, 15000, 'KT-2021-2', 'Buah', 'Kelapa Muda', '-188', NULL, '5', '100', '1', 'Kelapa Muda', '2021-04-22 08:57:08', '2021-04-22 08:57:08');
+(2, 'BRG0004', 'OLI MESRAN 5L', 200000, 250000, 'KT-2021-2', 'BOTOL', 'MESRAN', '10', NULL, '5', '200', '', 'oli mesin', NULL, NULL);
+
+--
+-- Triggers `tblbarang`
+--
+DELIMITER $$
+CREATE TRIGGER `after_insert` AFTER INSERT ON `tblbarang` FOR EACH ROW BEGIN  
+
+INSERT INTO tblpersediaan (kdPersediaan, nmPersediaan, stokPersediaan, satuanPersediaan, lastPrice, salePrice)
+VALUES (NEW.kdBarang, NEW.nmBarang, NEW.stkBarang, NEW.satuanBarang, NEW.hrgPokok, NEW.hrgJual);
+
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -306,10 +288,9 @@ CREATE TABLE `tblbbm` (
 --
 
 INSERT INTO `tblbbm` (`id`, `code_bbm`, `nama_bbm`, `last_meter`, `last_price`, `logo_bbm`, `created_at`, `updated_at`) VALUES
-(1, 'bbm001', 'PERTAMAX', 12000000, '14900.00', 'pertamax.png', '2023-01-12 12:56:36', '2023-01-12 12:56:36'),
-(2, 'bbm002', 'PERLITE', 12000000, '10000.00', 'pertalite.png', '2023-01-12 12:56:36', '2023-01-12 12:56:36'),
-(3, 'bbm003', 'PERTAMINA DEX', 1876787, '8000.00', 'pertamina-dex.png', '2023-01-12 12:56:36', '2023-01-12 12:56:36'),
-(4, 'bbm004', 'DEX LITE', 234535, '12800.00', 'dexlite.png', '2023-01-14 08:29:46', '2023-01-14 08:29:46');
+(1, 'BRG0001', 'PERTAMAX', 12000000, '14900.00', 'pertamax.png', '2023-01-12 12:56:36', '2023-01-12 12:56:36'),
+(2, 'BRG0002', 'PERLITE', 12000000, '10000.00', 'pertalite.png', '2023-01-12 12:56:36', '2023-01-12 12:56:36'),
+(3, 'BRG0003', 'DEX LITE', 234535, '12800.00', 'dexlite.png', '2023-01-14 08:29:46', '2023-01-14 08:29:46');
 
 -- --------------------------------------------------------
 
@@ -342,8 +323,8 @@ CREATE TABLE `tblkategori` (
 --
 
 INSERT INTO `tblkategori` (`id`, `kodeKtg`, `namaKtg`, `created_at`, `updated_at`) VALUES
-(1, 'KT-2021-1', 'Makanan', '2021-03-19 22:40:29', '2022-02-19 06:11:10'),
-(2, 'KT-2021-2', 'Minuman', '2021-03-19 22:40:36', '2021-03-19 22:40:36');
+(1, 'KT-2021-1', 'BBM', '2021-03-19 22:40:29', '2022-02-19 06:11:10'),
+(2, 'KT-2021-2', 'OLI', '2021-03-19 22:40:36', '2021-03-19 22:40:36');
 
 -- --------------------------------------------------------
 
@@ -439,20 +420,27 @@ INSERT INTO `tblpelanggan` (`id`, `kdPelanggan`, `nmPelanggan`, `almtPelanggan`,
 
 CREATE TABLE `tblpembelian` (
   `idPembelian` bigint UNSIGNED NOT NULL,
-  `noNota` varchar(9) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `noNota` varchar(9) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tglPembelian` datetime NOT NULL,
-  `r_supplier` int DEFAULT NULL,
-  `subTotal` decimal(13,2) DEFAULT NULL,
-  `disc` int DEFAULT NULL,
-  `discPercent` int DEFAULT NULL,
-  `tax` int DEFAULT NULL,
-  `total` decimal(13,2) DEFAULT NULL,
-  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `term` int DEFAULT NULL,
-  `jthTempo` datetime DEFAULT NULL,
+  `r_supplier` int NOT NULL,
+  `subTotal` decimal(13,2) NOT NULL,
+  `disc` int NOT NULL,
+  `discPercent` int NOT NULL,
+  `tax` int NOT NULL,
+  `total` decimal(13,2) NOT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `term` int NOT NULL,
+  `jthTempo` datetime NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tblpembelian`
+--
+
+INSERT INTO `tblpembelian` (`idPembelian`, `noNota`, `tglPembelian`, `r_supplier`, `subTotal`, `disc`, `discPercent`, `tax`, `total`, `note`, `term`, `jthTempo`, `created_at`, `updated_at`) VALUES
+(23, '222', '2023-01-20 00:00:00', 111, '200000.00', 111, 111, 111, '111.00', '111', 111, '2023-01-20 00:00:00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -463,14 +451,27 @@ CREATE TABLE `tblpembelian` (
 CREATE TABLE `tblpembelian_detail` (
   `idPembelianDetail` bigint UNSIGNED NOT NULL,
   `r_noNota` int NOT NULL,
-  `kdBarang` int NOT NULL,
-  `nmBarang` int NOT NULL,
+  `kdBarang` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nmBarang` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `hrgBeli` decimal(13,2) NOT NULL,
   `qty` int NOT NULL,
   `total` decimal(11,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tblpembelian_detail`
+--
+
+INSERT INTO `tblpembelian_detail` (`idPembelianDetail`, `r_noNota`, `kdBarang`, `nmBarang`, `hrgBeli`, `qty`, `total`, `created_at`, `updated_at`) VALUES
+(1, 123, 'DB-2021-16', 'Kepala Ikan', '33999.00', 1, '33999.00', NULL, NULL),
+(2, 123, 'DB-2021-17', 'Mujair', '32777.00', 1, '32777.00', NULL, NULL),
+(3, 333, 'DB-2021-16', 'Kepala Ikan', '33999.00', 1, '33999.00', NULL, NULL),
+(4, 333, 'DB-2021-17', 'Mujair', '32777.00', 1, '32777.00', NULL, NULL),
+(5, 333, 'DB-2021-16', 'Kepala Ikan', '33999.00', 1, '33999.00', '2023-01-19 21:05:32', '2023-01-19 21:05:32'),
+(6, 333, 'DB-2021-17', 'Mujair', '32777.00', 1, '32777.00', '2023-01-19 21:05:32', '2023-01-19 21:05:32'),
+(7, 222, 'BRG0004', 'OLI MESRAN 5L', '200000.00', 4, '200000.00', '2023-01-19 22:48:42', '2023-01-19 22:48:42');
 
 -- --------------------------------------------------------
 
@@ -480,9 +481,25 @@ CREATE TABLE `tblpembelian_detail` (
 
 CREATE TABLE `tblpersediaan` (
   `idPersediaan` bigint UNSIGNED NOT NULL,
+  `kdPersediaan` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nmPersediaan` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `stokPersediaan` int NOT NULL,
+  `satuanPersediaan` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `lastPrice` int DEFAULT NULL,
+  `salePrice` int DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tblpersediaan`
+--
+
+INSERT INTO `tblpersediaan` (`idPersediaan`, `kdPersediaan`, `nmPersediaan`, `stokPersediaan`, `satuanPersediaan`, `lastPrice`, `salePrice`, `created_at`, `updated_at`) VALUES
+(1, 'BRG0001', 'PERTAMAX', 2000, 'liter', 14000, 14900, '2023-01-19 22:24:13', '2023-01-19 22:24:13'),
+(2, 'BRG0002', 'PERTALITE', 5000, 'liter', 9000, 10000, '2023-01-19 22:25:23', '2023-01-19 22:25:23'),
+(3, 'BRG0003', 'DEX LITE', 4500, 'liter', 6500, 8000, '2023-01-19 22:26:32', '2023-01-19 22:26:32'),
+(4, 'BRG0004', 'OLI MESRAN 5L', 14, 'BOTOL', 200000, 250000, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -543,6 +560,18 @@ CREATE TABLE `tblrooms` (
 
 INSERT INTO `tblrooms` (`id`, `roomCode`, `roomName`, `rRoomRate`, `roomDesc`, `roomPic`, `created_at`, `updated_at`) VALUES
 (1, 'R001', 'Deluxe Room 2', '2', 'Rice terace view with balconi', 'pic1.jpg', NULL, '2022-09-02 15:34:57');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblsupplier`
+--
+
+CREATE TABLE `tblsupplier` (
+  `id` bigint UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -731,6 +760,12 @@ ALTER TABLE `tblrooms`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tblsupplier`
+--
+ALTER TABLE `tblsupplier`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tbltransaksi_nosel`
 --
 ALTER TABLE `tbltransaksi_nosel`
@@ -757,7 +792,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -769,7 +804,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `tblbarang`
 --
 ALTER TABLE `tblbarang`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tblbbm`
@@ -811,19 +846,19 @@ ALTER TABLE `tblpelanggan`
 -- AUTO_INCREMENT for table `tblpembelian`
 --
 ALTER TABLE `tblpembelian`
-  MODIFY `idPembelian` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idPembelian` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `tblpembelian_detail`
 --
 ALTER TABLE `tblpembelian_detail`
-  MODIFY `idPembelianDetail` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idPembelianDetail` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tblpersediaan`
 --
 ALTER TABLE `tblpersediaan`
-  MODIFY `idPersediaan` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `idPersediaan` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tblpersediaan_detail`
@@ -842,6 +877,12 @@ ALTER TABLE `tblrates`
 --
 ALTER TABLE `tblrooms`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tblsupplier`
+--
+ALTER TABLE `tblsupplier`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbltransaksi_nosel`

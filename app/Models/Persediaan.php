@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Persediaan extends Model
 {
     use HasFactory;
+    protected $table = 'tblpersediaan';
+    protected $fillable = [
+        'kdPersediaan', 'nmPersediaan', 'stokPerseiaan', 'satuanPersediaan', 'lastPrice', 'salePrice'
+    ];
 }
