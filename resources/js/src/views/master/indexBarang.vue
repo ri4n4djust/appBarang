@@ -15,7 +15,7 @@
             </ul>
         </teleport>
 
-        <span>{{ barangs }}</span>
+        
 
         <div class="row layout-top-spacing">
             <div class="col-12 layout-spacing">
@@ -26,17 +26,59 @@
                             <vue3-json-excel class="btn btn-primary m-1" name="table.xls" :fields="excel_columns()" :json-data="excel_items()">Excel</vue3-json-excel>
                             <button variant="primary" class="btn m-1 btn-primary" @click="export_table('print')">Print</button>
                             <button variant="primary" class="btn m-1 btn-primary" @click="export_table('pdf')">PDF</button>
+<span>{{ barangs }}</span>
                         </div>
 
                         <v-client-table :data="items" :columns="columns" :options="table_option">
-                            <template #action>
+                            <template #action="props">
+                                <div class="custom-dropdown dropdown btn-group ">
+                                    <div class="btn-group" href="#" role="button" id="pendingTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <!-- <button type="button" class="btn btn-blue">Open</button> -->
+                                        <div role="group" class="btn-group">
+                                            <div class="dropdown b-dropdown custom-dropdown show btn-group">
+                                                <a class="btn dropdown-toggle btn-light"
+                                                    ><svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        width="24"
+                                                        height="24"
+                                                        viewBox="0 0 24 24"
+                                                        fill="none"
+                                                        stroke="currentColor"
+                                                        stroke-width="2"
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        class="feather feather-chevron-down"
+                                                    >
+                                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li>
+                                            <a href="javascript:void(0);" class="btn m-1 btn-light" @click="view_row(props.row)"> Edit </a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0);" class="btn m-1 btn-light" @click="view_row(props.row)"> Delete </a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </template>
-                            <template #salary="props"> ${{ props.row.salary }} </template>
                         </v-client-table>
+
+                        
+                        
                     </div>
                 </div>
             </div>
         </div>
+
+
+        <!--  -->
+
+
+        
     </div>
 </template>
 
@@ -77,38 +119,16 @@
         resizableColumns: true,
     });
 
+    
+
     onMounted(() => {
         bind_data();
     });
 
-    // const bind_data1 = () => {
-    //     items.value = [
-    //         { id: 1, name: 'Tiger Nixon', position: 'System Architect', office: 'Edinburgh', age: 61, start_date: '2011/04/25', salary: '320,800' },
-    //         { id: 2, name: 'Garrett Winters', position: 'Accountant', office: 'Tokyo', age: 63, start_date: '2011/07/25', salary: '170,750' },
-    //         { id: 3, name: 'Ashton Cox', position: 'Junior Technical Author', office: 'San Francisco', age: 66, start_date: '2009/01/12', salary: '86,000' },
-    //         { id: 4, name: 'Cedric Kelly', position: 'Senior Javascript Developer', office: 'Edinburgh', age: 22, start_date: '2012/03/29', salary: '433,060' },
-    //         { id: 5, name: 'Airi Satou', position: 'Accountant', office: 'Tokyo', age: 33, start_date: '2008/11/28', salary: '162,700' },
-    //         { id: 6, name: 'Brielle Williamson', position: 'Integration Specialist', office: 'New York', age: 61, start_date: '2012/12/02', salary: '372,000' },
-    //         { id: 7, name: 'Herrod Chandler', position: 'Sales Assistant', office: 'San Francisco', age: 59, start_date: '2012/08/06', salary: '137,500' },
-    //         { id: 8, name: 'Rhona Davidson', position: 'Integration Specialist', office: 'Tokyo', age: 55, start_date: '2010/10/14', salary: '327,900' },
-    //         { id: 9, name: 'Colleen Hurst', position: 'Javascript Developer', office: 'San Francisco', age: 39, start_date: '2009/09/15', salary: '205,500' },
-    //         { id: 10, name: 'Sonya Frost', position: 'Software Engineer', office: 'Edinburgh', age: 23, start_date: '2008/12/13', salary: '103,600' },
-    //         { id: 11, name: 'Jena Gaines', position: 'Office Manager', office: 'London', age: 30, start_date: '2008/12/19', salary: '90,560' },
-    //         { id: 12, name: 'Quinn Flynn', position: 'Support Lead', office: 'Edinburgh', age: 22, start_date: '2013/03/03', salary: '342,000' },
-    //         { id: 13, name: 'Charde Marshall', position: 'Regional Director', office: 'San Francisco', age: 36, start_date: '2008/10/16', salary: '470,600' },
-    //         { id: 14, name: 'Haley Kennedy', position: 'Senior Marketing Designer', office: 'London', age: 43, start_date: '2012/12/18', salary: '313,500' },
-    //         { id: 15, name: 'Tatyana Fitzpatrick', position: 'Regional Director', office: 'London', age: 19, start_date: '2010/03/17', salary: '385,750' },
-    //         { id: 16, name: 'Michael Silva', position: 'Marketing Designer', office: 'London', age: 66, start_date: '2012/11/27', salary: '198,500' },
-    //         { id: 17, name: 'Paul Byrd', position: 'Chief Financial Officer (CFO)', office: 'New York', age: 64, start_date: '2010/06/09', salary: '725,000' },
-    //         { id: 18, name: 'Gloria Little', position: 'Systems Administrator', office: 'New York', age: 59, start_date: '2009/04/10', salary: '237,500' },
-    //         { id: 19, name: 'Bradley Greer', position: 'Software Engineer', office: 'London', age: 41, start_date: '2012/10/13', salary: '132,000' },
-    //         { id: 20, name: 'Dai Rios', position: 'Personnel Lead', office: 'Edinburgh', age: 35, start_date: '2012/09/26', salary: '217,500' },
-    //         { id: 21, name: 'Jenette Caldwell', position: 'Development Lead', office: 'New York', age: 61, start_date: '2011/09/03', salary: '345,000' },
-    //     ];
-    // };
-
+    
     const bind_data = () => {
         store.dispatch('GetBarang');
+        items.value = store.getters.StateBarang;
     }
 
     const barangs = computed(() => {
@@ -223,5 +243,8 @@
             .split(' ')
             .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
             .join(' ');
+    };
+    const view_row = (item) => {
+        alert('ID: ' + item.kdBarang + ', Name: ' + item.nmBarang);
     };
 </script>

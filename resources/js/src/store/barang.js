@@ -17,7 +17,7 @@ const actions = {
     async GetBarang({ commit }){
         let response
         try {
-            response = await axios.get('api/barang')
+            response = await axios.get('/api/barang')
             commit('setBarang', response.data.data)
         } catch (ex) {
             // Handle error

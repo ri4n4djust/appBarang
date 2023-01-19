@@ -93,7 +93,41 @@
                                         </div>
                                     </div>
 
-                                   
+                                    <div class="invoice-detail-terms">
+                                        <div class="row justify-content-between">
+                                            <!-- <div class="col-md-4"> -->
+                                                <div class="form-group md-4">
+                                                    <label for="number">Invoice Number</label>
+                                                    <input type="text"  id="number" class="form-control form-control-sm" placeholder="#0001" />
+                                                </div>
+                                            <!-- </div> -->
+                                            <!-- <div class="col-md-3"> -->
+                                                <div class="form-group mb-1">
+                                                    <label for="date">Invoice Date</label>
+                                                    <flat-pickr  class="form-control form-control-sm flatpickr active" placeholder="Invoice Date"></flat-pickr>
+                                                </div>
+                                            <!-- </div> -->
+                                            <!-- <div class="col-md-1"> -->
+                                                <div class="form-group mb-1">
+                                                    <label for="due">Due Date</label>
+                                                    <flat-pickr  class="form-control form-control-sm flatpickr active" placeholder="Due Date"></flat-pickr>
+                                                </div>
+                                            <!-- </div> -->
+                                            <!-- <div class="col-md-1"> -->
+                                                <div class="form-group mb-1">
+                                                    <label for="date">Invoice Date</label>
+                                                    <flat-pickr  class="form-control form-control-sm flatpickr active" placeholder="Invoice Date"></flat-pickr>
+                                                </div>
+                                            <!-- </div> -->
+
+                                            <!-- <div class="col-md-1"> -->
+                                                <div class="form-group mb-1">
+                                                    <label for="due">Due Date</label>
+                                                    <flat-pickr  class="form-control form-control-sm flatpickr active" placeholder="Due Date"></flat-pickr>
+                                                </div>
+                                            <!-- </div> -->
+                                        </div>
+                                    </div>
 
                                     <div class="invoice-detail-items">
                                         <div class="table-responsive">
