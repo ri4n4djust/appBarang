@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 17, 2023 at 12:57 AM
+-- Generation Time: Jan 19, 2023 at 01:35 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.25
 
@@ -64,7 +64,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (8, '2023_01_14_092711_create_bbm_details_table', 5),
 (9, '2023_01_14_093003_create_nosel_details_table', 5),
 (10, '2023_01_15_020120_create_transaksi_nosels_table', 6),
-(11, '2023_01_17_064557_create_pegawais_table', 7);
+(11, '2023_01_17_064557_create_pegawais_table', 7),
+(12, '2023_01_18_054236_create_persediaans_table', 8),
+(13, '2023_01_18_054644_create_persediaan_details_table', 8),
+(14, '2023_01_18_145254_create_pembelians_table', 8),
+(15, '2023_01_18_173900_create_pembelian_details_table', 8);
 
 -- --------------------------------------------------------
 
@@ -364,7 +368,7 @@ CREATE TABLE `tblnosel_detail` (
 
 INSERT INTO `tblnosel_detail` (`id_nosel`, `r_bbm`, `nama_nosel`, `meter_awal`, `meter_akhir`, `harga`, `created_at`, `updated_at`) VALUES
 (1, 1, 'nosel 1', 83000, 85000, '14900.00', '2023-01-14 09:54:41', '2023-01-16 13:29:27'),
-(2, 1, 'nosel 2', 50000, 5200, '14900.00', '2023-01-14 09:56:59', '2023-01-16 22:37:30'),
+(2, 1, 'nosel 2', 5200, 5500, '14900.00', '2023-01-14 09:56:59', '2023-01-17 09:43:19'),
 (3, 2, 'nosel 1', 23000, 23500, '10000.00', '2023-01-14 09:58:16', '2023-01-16 22:37:59'),
 (4, 1, 'nosel 3', 26000, 26500, '14900.00', '2023-01-14 09:56:59', '2023-01-16 21:06:50'),
 (5, 1, 'nosel 4', 12000, 12500, '14900.00', '2023-01-14 09:56:59', '2023-01-16 13:53:22'),
@@ -430,6 +434,71 @@ INSERT INTO `tblpelanggan` (`id`, `kdPelanggan`, `nmPelanggan`, `almtPelanggan`,
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tblpembelian`
+--
+
+CREATE TABLE `tblpembelian` (
+  `idPembelian` bigint UNSIGNED NOT NULL,
+  `noNota` varchar(9) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tglPembelian` datetime NOT NULL,
+  `r_supplier` int DEFAULT NULL,
+  `subTotal` decimal(13,2) DEFAULT NULL,
+  `disc` int DEFAULT NULL,
+  `discPercent` int DEFAULT NULL,
+  `tax` int DEFAULT NULL,
+  `total` decimal(13,2) DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `term` int DEFAULT NULL,
+  `jthTempo` datetime DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblpembelian_detail`
+--
+
+CREATE TABLE `tblpembelian_detail` (
+  `idPembelianDetail` bigint UNSIGNED NOT NULL,
+  `r_noNota` int NOT NULL,
+  `kdBarang` int NOT NULL,
+  `nmBarang` int NOT NULL,
+  `hrgBeli` decimal(13,2) NOT NULL,
+  `qty` int NOT NULL,
+  `total` decimal(11,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblpersediaan`
+--
+
+CREATE TABLE `tblpersediaan` (
+  `idPersediaan` bigint UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblpersediaan_detail`
+--
+
+CREATE TABLE `tblpersediaan_detail` (
+  `idPersediaanDetail` bigint UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tblrates`
 --
 
@@ -485,7 +554,7 @@ CREATE TABLE `tbltransaksi_nosel` (
   `id` bigint UNSIGNED NOT NULL,
   `r_bbm` int NOT NULL,
   `r_nosel` int NOT NULL,
-  `r_regu` int NOT NULL DEFAULT '0',
+  `r_regu` varchar(5) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
   `tgl_transaksi` datetime NOT NULL,
   `cost_ltr` int NOT NULL,
   `last_price` decimal(13,2) NOT NULL,
@@ -500,32 +569,33 @@ CREATE TABLE `tbltransaksi_nosel` (
 --
 
 INSERT INTO `tbltransaksi_nosel` (`id`, `r_bbm`, `r_nosel`, `r_regu`, `tgl_transaksi`, `cost_ltr`, `last_price`, `last_meter`, `total`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 0, '2023-01-16 00:00:00', 1000, '14900.00', 79000, '14900000.00', '2023-01-16 07:35:42', '2023-01-16 07:35:42'),
-(2, 1, 2, 0, '2023-01-16 00:00:00', 5000, '14900.00', 45000, '74500000.00', '2023-01-16 07:35:59', '2023-01-16 07:35:59'),
-(3, 1, 2, 0, '2023-01-16 00:00:00', 1000, '14900.00', 46000, '14900000.00', '2023-01-16 07:40:39', '2023-01-16 07:40:39'),
-(4, 1, 1, 0, '2023-01-16 00:00:00', 1000, '14900.00', 80000, '14900000.00', '2023-01-16 07:40:55', '2023-01-16 07:40:55'),
-(5, 1, 4, 0, '2023-01-16 00:00:00', 2000, '14900.00', 22000, '29800000.00', '2023-01-16 07:41:20', '2023-01-16 07:41:20'),
-(6, 1, 4, 0, '2023-01-16 00:00:00', 1000, '14900.00', 23000, '14900000.00', '2023-01-16 07:43:28', '2023-01-16 07:43:28'),
-(7, 1, 2, 0, '2023-01-16 00:00:00', 1000, '14900.00', 47000, '14900000.00', '2023-01-16 07:44:33', '2023-01-16 07:44:33'),
-(8, 1, 2, 0, '2023-01-16 00:00:00', 1000, '14900.00', 48000, '14900000.00', '2023-01-16 07:45:59', '2023-01-16 07:45:59'),
-(9, 1, 1, 0, '2023-01-16 00:00:00', 1000, '14900.00', 81000, '14900000.00', '2023-01-16 07:48:11', '2023-01-16 07:48:11'),
-(10, 1, 1, 0, '2023-01-16 00:00:00', 1000, '14900.00', 82000, '14900000.00', '2023-01-16 07:48:37', '2023-01-16 07:48:37'),
-(11, 1, 1, 0, '2023-01-16 00:00:00', 1000, '14900.00', 83000, '14900000.00', '2023-01-16 07:49:37', '2023-01-16 07:49:37'),
-(12, 1, 6, 0, '2023-01-16 00:00:00', 500, '14900.00', 15500, '7450000.00', '2023-01-16 07:52:36', '2023-01-16 07:52:36'),
-(13, 1, 2, 0, '2023-01-16 00:00:00', 1000, '14900.00', 49000, '14900000.00', '2023-01-16 07:54:35', '2023-01-16 07:54:35'),
-(14, 1, 2, 0, '2023-01-16 00:00:00', 1000, '14900.00', 50000, '14900000.00', '2023-01-16 07:55:40', '2023-01-16 07:55:40'),
-(15, 2, 3, 0, '2023-01-16 00:00:00', 1000, '10000.00', 23000, '10000000.00', '2023-01-16 07:56:02', '2023-01-16 07:56:02'),
-(16, 1, 6, 0, '2023-01-16 00:00:00', 500, '14900.00', 16000, '7450000.00', '2023-01-16 07:56:20', '2023-01-16 07:56:20'),
-(17, 1, 1, 0, '2023-01-16 00:00:00', 2000, '14900.00', 85000, '29800000.00', '2023-01-16 13:29:27', '2023-01-16 13:29:27'),
-(18, 1, 4, 0, '2023-01-16 00:00:00', 2000, '14900.00', 25000, '29800000.00', '2023-01-16 13:36:11', '2023-01-16 13:36:11'),
-(19, 1, 5, 0, '2023-01-16 00:00:00', 1000, '14900.00', 11000, '14900000.00', '2023-01-16 13:48:38', '2023-01-16 13:48:38'),
-(20, 1, 5, 0, '2023-01-16 00:00:00', 1000, '14900.00', 12000, '14900000.00', '2023-01-16 13:52:33', '2023-01-16 13:52:33'),
-(21, 1, 5, 0, '2023-01-15 00:00:00', 500, '14900.00', 12500, '7450000.00', '2023-01-16 13:53:22', '2023-01-16 13:53:22'),
-(22, 1, 4, 0, '2023-01-16 00:00:00', 500, '14900.00', 25500, '7450000.00', '2023-01-16 21:01:22', '2023-01-16 21:01:22'),
-(23, 1, 4, 0, '2023-01-16 00:00:00', 500, '14900.00', 26000, '7450000.00', '2023-01-16 21:06:04', '2023-01-16 21:06:04'),
-(24, 1, 4, 0, '2023-01-17 00:00:00', 500, '14900.00', 26500, '7450000.00', '2023-01-16 21:06:50', '2023-01-16 21:06:50'),
-(25, 1, 2, 0, '2023-01-17 00:00:00', -44800, '14900.00', 5200, '-667520000.00', '2023-01-16 22:37:30', '2023-01-16 22:37:30'),
-(26, 2, 3, 0, '2023-01-17 00:00:00', 500, '10000.00', 23500, '5000000.00', '2023-01-16 22:37:59', '2023-01-16 22:37:59');
+(1, 1, 1, '0', '2023-01-16 00:00:00', 1000, '14900.00', 79000, '14900000.00', '2023-01-16 07:35:42', '2023-01-16 07:35:42'),
+(2, 1, 2, '0', '2023-01-16 00:00:00', 5000, '14900.00', 45000, '74500000.00', '2023-01-16 07:35:59', '2023-01-16 07:35:59'),
+(3, 1, 2, '0', '2023-01-16 00:00:00', 1000, '14900.00', 46000, '14900000.00', '2023-01-16 07:40:39', '2023-01-16 07:40:39'),
+(4, 1, 1, '0', '2023-01-16 00:00:00', 1000, '14900.00', 80000, '14900000.00', '2023-01-16 07:40:55', '2023-01-16 07:40:55'),
+(5, 1, 4, '0', '2023-01-16 00:00:00', 2000, '14900.00', 22000, '29800000.00', '2023-01-16 07:41:20', '2023-01-16 07:41:20'),
+(6, 1, 4, '0', '2023-01-16 00:00:00', 1000, '14900.00', 23000, '14900000.00', '2023-01-16 07:43:28', '2023-01-16 07:43:28'),
+(7, 1, 2, '0', '2023-01-16 00:00:00', 1000, '14900.00', 47000, '14900000.00', '2023-01-16 07:44:33', '2023-01-16 07:44:33'),
+(8, 1, 2, '0', '2023-01-16 00:00:00', 1000, '14900.00', 48000, '14900000.00', '2023-01-16 07:45:59', '2023-01-16 07:45:59'),
+(9, 1, 1, '0', '2023-01-16 00:00:00', 1000, '14900.00', 81000, '14900000.00', '2023-01-16 07:48:11', '2023-01-16 07:48:11'),
+(10, 1, 1, '0', '2023-01-16 00:00:00', 1000, '14900.00', 82000, '14900000.00', '2023-01-16 07:48:37', '2023-01-16 07:48:37'),
+(11, 1, 1, '0', '2023-01-16 00:00:00', 1000, '14900.00', 83000, '14900000.00', '2023-01-16 07:49:37', '2023-01-16 07:49:37'),
+(12, 1, 6, '0', '2023-01-16 00:00:00', 500, '14900.00', 15500, '7450000.00', '2023-01-16 07:52:36', '2023-01-16 07:52:36'),
+(13, 1, 2, '0', '2023-01-16 00:00:00', 1000, '14900.00', 49000, '14900000.00', '2023-01-16 07:54:35', '2023-01-16 07:54:35'),
+(14, 1, 2, '0', '2023-01-16 00:00:00', 1000, '14900.00', 50000, '14900000.00', '2023-01-16 07:55:40', '2023-01-16 07:55:40'),
+(15, 2, 3, '0', '2023-01-16 00:00:00', 1000, '10000.00', 23000, '10000000.00', '2023-01-16 07:56:02', '2023-01-16 07:56:02'),
+(16, 1, 6, '0', '2023-01-16 00:00:00', 500, '14900.00', 16000, '7450000.00', '2023-01-16 07:56:20', '2023-01-16 07:56:20'),
+(17, 1, 1, '0', '2023-01-16 00:00:00', 2000, '14900.00', 85000, '29800000.00', '2023-01-16 13:29:27', '2023-01-16 13:29:27'),
+(18, 1, 4, '0', '2023-01-16 00:00:00', 2000, '14900.00', 25000, '29800000.00', '2023-01-16 13:36:11', '2023-01-16 13:36:11'),
+(19, 1, 5, '0', '2023-01-16 00:00:00', 1000, '14900.00', 11000, '14900000.00', '2023-01-16 13:48:38', '2023-01-16 13:48:38'),
+(20, 1, 5, '0', '2023-01-16 00:00:00', 1000, '14900.00', 12000, '14900000.00', '2023-01-16 13:52:33', '2023-01-16 13:52:33'),
+(21, 1, 5, '0', '2023-01-15 00:00:00', 500, '14900.00', 12500, '7450000.00', '2023-01-16 13:53:22', '2023-01-16 13:53:22'),
+(22, 1, 4, '0', '2023-01-16 00:00:00', 500, '14900.00', 25500, '7450000.00', '2023-01-16 21:01:22', '2023-01-16 21:01:22'),
+(23, 1, 4, '0', '2023-01-16 00:00:00', 500, '14900.00', 26000, '7450000.00', '2023-01-16 21:06:04', '2023-01-16 21:06:04'),
+(24, 1, 4, '0', '2023-01-17 00:00:00', 500, '14900.00', 26500, '7450000.00', '2023-01-16 21:06:50', '2023-01-16 21:06:50'),
+(25, 1, 2, '0', '2023-01-17 00:00:00', -44800, '14900.00', 5200, '-667520000.00', '2023-01-16 22:37:30', '2023-01-16 22:37:30'),
+(26, 2, 3, '0', '2023-01-17 00:00:00', 500, '10000.00', 23500, '5000000.00', '2023-01-16 22:37:59', '2023-01-16 22:37:59'),
+(27, 1, 2, 'A', '2023-01-17 00:00:00', 300, '14900.00', 5500, '4470000.00', '2023-01-17 09:43:19', '2023-01-17 09:43:19');
 
 -- --------------------------------------------------------
 
@@ -625,6 +695,30 @@ ALTER TABLE `tblpelanggan`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tblpembelian`
+--
+ALTER TABLE `tblpembelian`
+  ADD PRIMARY KEY (`idPembelian`);
+
+--
+-- Indexes for table `tblpembelian_detail`
+--
+ALTER TABLE `tblpembelian_detail`
+  ADD PRIMARY KEY (`idPembelianDetail`);
+
+--
+-- Indexes for table `tblpersediaan`
+--
+ALTER TABLE `tblpersediaan`
+  ADD PRIMARY KEY (`idPersediaan`);
+
+--
+-- Indexes for table `tblpersediaan_detail`
+--
+ALTER TABLE `tblpersediaan_detail`
+  ADD PRIMARY KEY (`idPersediaanDetail`);
+
+--
 -- Indexes for table `tblrates`
 --
 ALTER TABLE `tblrates`
@@ -663,7 +757,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -714,6 +808,30 @@ ALTER TABLE `tblpelanggan`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
+-- AUTO_INCREMENT for table `tblpembelian`
+--
+ALTER TABLE `tblpembelian`
+  MODIFY `idPembelian` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tblpembelian_detail`
+--
+ALTER TABLE `tblpembelian_detail`
+  MODIFY `idPembelianDetail` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblpersediaan`
+--
+ALTER TABLE `tblpersediaan`
+  MODIFY `idPersediaan` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblpersediaan_detail`
+--
+ALTER TABLE `tblpersediaan_detail`
+  MODIFY `idPersediaanDetail` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `tblrates`
 --
 ALTER TABLE `tblrates`
@@ -729,7 +847,7 @@ ALTER TABLE `tblrooms`
 -- AUTO_INCREMENT for table `tbltransaksi_nosel`
 --
 ALTER TABLE `tbltransaksi_nosel`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `users`
