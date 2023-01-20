@@ -10,6 +10,7 @@ import bbm from './bbm';
 import nosel from './nosel';
 import transnosel from './transnosel';
 import transaksi from './transaksi';
+import supplier from './supplier';
 
 
 export default new createStore({
@@ -116,7 +117,8 @@ export default new createStore({
         bbm,
         nosel,
         transnosel,
-        transaksi
+        transaksi,
+        supplier
     },
     // plugins: [createPersistedState()]
 });

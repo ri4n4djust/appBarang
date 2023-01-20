@@ -51,7 +51,10 @@
                                                     <div class="form-group row">
                                                         <label for="company-address" class="col-sm-3 col-form-label col-form-label-sm">Term</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" v-model="params.term" id="company-address" class="form-control form-control-sm" placeholder="XYZ Street" />
+                                                            <select id="inputState" v-model="params.term" class="form-select">
+                                                                <option value="0" selected>Cash</option>
+                                                                <option value="1">Kredit</option>
+                                                            </select>
                                                         </div>
                                                     </div>
 
@@ -70,22 +73,32 @@
                                                     <div class="form-group row">
                                                         <label for="client-name" class="col-sm-3 col-form-label col-form-label-sm">Name</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" v-model="params.kodeSupplier" />
-                                                            <input type="text" v-model="params.nmSupplier" id="client-name" class="form-control form-control-sm" placeholder="Client Name" />
+                                                            <multiselect 
+                                                                v-model="paramssupplier" 
+                                                                :options="pembelian.suppliers" 
+                                                                :searchable="true"
+                                                                track-by="nmSupplier"
+                                                                label="nmSupplier"
+                                                                open-direction="top"
+                                                                placeholder="Choose..." 
+                                                                selected-label="" 
+                                                                select-label="" 
+                                                                deselect-label="">
+                                                            </multiselect>
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="client-address" class="col-sm-3 col-form-label col-form-label-sm">Address</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" v-model="params.almtSupplier" id="client-address" class="form-control form-control-sm" placeholder="XYZ Street" />
+                                                            <input type="text" v-model="paramssupplier.almtSupplier" id="client-address" class="form-control form-control-sm" placeholder="XYZ Street" />
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="client-phone" class="col-sm-3 col-form-label col-form-label-sm">Phone</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" v-model="params.tlpSupplier" id="client-phone" class="form-control form-control-sm" placeholder="(123) 456 789" />
+                                                            <input type="text" v-model="paramssupplier.tlpSupplier" id="client-phone" class="form-control form-control-sm" placeholder="(123) 456 789" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -93,124 +106,49 @@
                                         </div>
                                     </div>
 
-                                    <div class="invoice-detail-terms">
-                                        <div class="row justify-content-between">
-                                            <!-- <div class="col-md-4"> -->
-                                                <div class="form-group md-4">
-                                                    <label for="number">Invoice Number</label>
-                                                    <input type="text"  id="number" class="form-control form-control-sm" placeholder="#0001" />
-                                                </div>
-                                            <!-- </div> -->
-                                            <!-- <div class="col-md-3"> -->
-                                                <div class="form-group mb-1">
-                                                    <label for="date">Invoice Date</label>
-                                                    <flat-pickr  class="form-control form-control-sm flatpickr active" placeholder="Invoice Date"></flat-pickr>
-                                                </div>
-                                            <!-- </div> -->
-                                            <!-- <div class="col-md-1"> -->
-                                                <div class="form-group mb-1">
-                                                    <label for="due">Due Date</label>
-                                                    <flat-pickr  class="form-control form-control-sm flatpickr active" placeholder="Due Date"></flat-pickr>
-                                                </div>
-                                            <!-- </div> -->
-                                            <!-- <div class="col-md-1"> -->
-                                                <div class="form-group mb-1">
-                                                    <label for="date">Invoice Date</label>
-                                                    <flat-pickr  class="form-control form-control-sm flatpickr active" placeholder="Invoice Date"></flat-pickr>
-                                                </div>
-                                            <!-- </div> -->
-
-                                            <!-- <div class="col-md-1"> -->
-                                                <div class="form-group mb-1">
-                                                    <label for="due">Due Date</label>
-                                                    <flat-pickr  class="form-control form-control-sm flatpickr active" placeholder="Due Date"></flat-pickr>
-                                                </div>
-                                            <!-- </div> -->
+                                    <div class="invoice-detail-items">
+                                        <div class="row">
+                                            <div class="form-group col-md-3">
+                                                <label for="inputCity">NAMA BARANG</label>
+                                                <multiselect 
+                                                    v-model="brg" 
+                                                    :options="pembelian.barangs" 
+                                                    :searchable="true"
+                                                    track-by="nmPersediaan"
+                                                    label="nmPersediaan"
+                                                    open-direction="top"
+                                                    placeholder="Choose..." 
+                                                    selected-label="" 
+                                                    select-label="" 
+                                                    deselect-label="">
+                                                </multiselect>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label for="inputState">HARGA</label>
+                                                <input type="text" v-model="brg.lastPrice" class="form-control form-control-sm" placeholder="Price" @keypress="onlyNumber" />
+                                            </div>
+                                            <div class="form-group col-sm-2">
+                                                <label for="inputZip">QTY</label>
+                                                <input type="text" v-model="qty" class="form-control form-control-sm" placeholder="Quantity" @keypress="onlyNumber" />
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label for="satuan">SATUAN</label>
+                                                <input type="text" v-model="brg.satuanPersediaan" class="form-control form-control-sm" id="satuan" />
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label for="inputZip">TOTAL</label><br>
+                                                {{ new Intl.NumberFormat().format(brg.lastPrice * qty) }}
+                                            </div>
+                                            <div class="form-group col-md-1">
+                                                <label for="aksi">Aksi</label>
+                                                <button @click="addToCart(brg)" class="btn btn-xs btn-primary">
+                                                    + 
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
 
                                     <div class="invoice-detail-items">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered item-table">
-                                                <thead>
-                                                    <tr>
-                                                        <!-- <th class=""></th> -->
-                                                        <th>Nama Barang</th>
-                                                        <th>Harga</th>
-                                                        <th>Qty</th>
-                                                        <th>Total</th>
-                                                        <th>Aksi</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr v-for="(item, index) in items" :key="index">
-                                                        <!-- <td class="delete-item-row">
-                                                            <ul class="table-controls">
-                                                                <li>
-                                                                    <a href="javascript:void(0);" class="delete-item" @click="remove_item(item)">
-                                                                        <svg
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            width="24"
-                                                                            height="24"
-                                                                            viewBox="0 0 24 24"
-                                                                            fill="none"
-                                                                            stroke="currentColor"
-                                                                            stroke-width="2"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round"
-                                                                            class="feather feather-x-circle"
-                                                                        >
-                                                                            <circle cx="12" cy="12" r="10"></circle>
-                                                                            <line x1="15" y1="9" x2="9" y2="15"></line>
-                                                                            <line x1="9" y1="9" x2="15" y2="15"></line>
-                                                                        </svg>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </td> -->
-                                                        <td class="description">
-                                                            <multiselect 
-                                                                v-model="brg" 
-                                                                :options="pembelian.barangs" 
-                                                                :searchable="true"
-                                                                track-by="nmBarang"
-                                                                label="nmBarang"
-                                                                open-direction="top"
-                                                                placeholder="Choose..." 
-                                                                selected-label="" 
-                                                                select-label="" 
-                                                                deselect-label="">
-                                                            </multiselect>
-                                                            <!-- <input type="text" v-model="item.title" class="form-control form-control-sm" placeholder="Item Description" /> -->
-                                                        </td>
-                                                        <td class="rate">
-                                                            <input type="text" v-model="brg.hrgPokok" class="form-control form-control-sm" placeholder="Price" @keypress="onlyNumber" />
-                                                        </td>
-                                                        <td class="qty">
-                                                            <input type="text" v-model="qty" class="form-control form-control-sm" placeholder="Quantity" @keypress="onlyNumber" />
-                                                        </td>
-                                                        <td class="amount">
-                                                            {{ brg.hrgPokok * qty }}
-                                                            <!-- <input type="number" v-model="total" class="form-control form-control-sm" placeholder="Total" disabled /> -->
-                                                            <!-- <span class="editable-amount mt-2">
-                                                                <span class="currency">$</span> <span class="amount">{{ item.amount }}</span>
-                                                            </span> -->
-                                                            
-                                                        </td>
-                                                        <td class="tax">
-                                                            <button @click="addToCart(brg)" class="btn btn-xs btn-primary">
-                                                               tambah 
-                                                            </button>
-                                                            <!-- <div class="checkbox-primary custom-control custom-checkbox">
-                                                                <input type="checkbox" :id="`chktax-${index}`" v-model="item.is_tax" class="custom-control-input" />
-                                                                <label class="custom-control-label" :for="`chktax-${index}`"></label>
-                                                            </div> -->
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-
                                         <div class="inv--product-table-section">
                                             <div class="table-responsive">
                                                 <table class="table table-hover table-bordered item-table">
@@ -363,6 +301,7 @@
 
     const items = ref([]);
     const brg = ref([]);
+    // const supplier = ref([]);
     const qty = ref(1);
     const subtotal = ref();
     const total = ref();
@@ -371,13 +310,24 @@
     const selected_file = ref(null);
     const params = ref({
         noNota: '',
-        kodeSupplier: '',
+        kdSupplier: '',
         nmSupplier: '',
         almtSupplier: '',
         tlpSupplier: '',
-        tglNota: '',
-        term: '',
-        jthTempo: '',
+        tglNota: moment().format("YYYY-MM-DD"),
+        term: 0,
+        jthTempo: moment().format("YYYY-MM-DD"),
+        notes: '',
+        subtotal: subtotal,
+        tax: 11,
+        disc: disc,
+        total: total,
+    });
+    const paramssupplier = ref({
+        noNota: '',
+        tglNota: moment().format("YYYY-MM-DD"),
+        term: 0,
+        jthTempo: moment().format("YYYY-MM-DD"),
         notes: '',
         subtotal: subtotal,
         tax: 11,
@@ -389,15 +339,18 @@
     // const currency_list = ref([]);
 
     const pembelian = computed(() => {
-        const barangs = store.getters.StateBarang;
-        // const trs = store.getters.STransNosel;
+        const barangs = store.getters.StatePersediaan;
+        const suppliers = store.getters.StateSupplier;
         const pajak = store.state.pajak;
-        // console.log('pajak : '+ pajak)
-        return { barangs, pajak }
+        console.log(suppliers)
+        return { barangs, pajak, suppliers }
     });
 
     const getBarang=() => {
-        store.dispatch('GetBarang')
+        store.dispatch('GetPersediaan')
+    }
+    const getSupplier=() => {
+        store.dispatch('GetSupplier')
     }
 
     const getTotal=() =>{
@@ -417,8 +370,12 @@
 
     const simpanPembelian=() => {
         const header =params.value
+        const headers =paramssupplier.value
+        const headerfull = Object.assign(header, headers)
         const detail =cartItems.value
-        store.dispatch('CreatePembelian', [header,detail] )
+        store.dispatch('CreatePembelian', [headerfull,detail] )
+        localStorage.setItem('cartItemsP', '[]');
+        getCart();
     }
 
     onMounted(() => {
@@ -432,6 +389,7 @@
 
        
         getBarang();
+        getSupplier();
         getCart();
     });
 
@@ -439,13 +397,13 @@
         selected_file.value = URL.createObjectURL(event.target.files[0]);
     };
 
-    const add_item = () => {
-        let max_id = 0;
-        if (items.value && items.value.length) {
-            max_id = items.value.reduce((max, character) => (character.id > max ? character.id : max), items.value[0].id);
-        }
-        items.value.push({ id: max_id + 1, title: '', description: '', rate: 0, quantity: 0, amount: 0, is_tax: false });
-    };
+    // const add_item = () => {
+    //     let max_id = 0;
+    //     if (items.value && items.value.length) {
+    //         max_id = items.value.reduce((max, character) => (character.id > max ? character.id : max), items.value[0].id);
+    //     }
+    //     items.value.push({ id: max_id + 1, title: '', description: '', rate: 0, quantity: 0, amount: 0, is_tax: false });
+    // };
 
     const remove_item = (item) => {
         items.value = items.value.filter((d) => d.id != item.id);
@@ -461,10 +419,10 @@
         }
             const oldItems = JSON.parse(localStorage.getItem('cartItemsP')) || [];
             // console.log(oldItems)
-            const existingItem = oldItems.find(({ kdBarang }) => kdBarang === brg.kdBarang);
+            const existingItem = oldItems.find(({ kdPersediaan }) => kdPersediaan === brg.kdPersediaan);
             if (existingItem) {
-                const objIndex = cartItems.value.findIndex((e => e.kdBarang === brg.kdBarang));
-                const oldName = cartItems.value[objIndex].nmBarang;
+                const objIndex = cartItems.value.findIndex((e => e.kdPersediaan === brg.kdPersediaan));
+                const oldName = cartItems.value[objIndex].nmPersediaan;
                 const oldQty = cartItems.value[objIndex].qty;
                 const newQty = parseInt(oldQty) + parseInt(qty.value) ;
                 cartItems.value[objIndex].qty = parseInt(newQty);
@@ -473,11 +431,11 @@
                 getCart();
                 // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
             }else{
-            cartItems.value.push({kdBarang:brg.kdBarang, nmBarang:brg.nmBarang,hrgPokok:brg.hrgPokok,qty:qty.value,total:qty.value * brg.hrgPokok});	
+            cartItems.value.push({kdBarang:brg.kdPersediaan, nmBarang:brg.nmPersediaan,hrgPokok:brg.lastPrice,qty:qty.value,total:qty.value * brg.lastPrice});	
             localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
             getCart();
             // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
-            alert(brg.nmBarang+ " berhasil disimpan")
+            alert(brg.nmPersediaan+ " berhasil disimpan")
             }
     }
     function removeItem(id) {
@@ -488,7 +446,7 @@
         // cartItems.value.splice(index, 1)
         // this.isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
         getCart();
-        console.log(filtered)
+        // console.log(filtered)
         // alert(filtered.nmBarang)
     }
     // function updateItem(barcode, index) {

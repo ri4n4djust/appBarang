@@ -10,6 +10,6 @@ class Persediaan extends Model
     use HasFactory;
     protected $table = 'tblpersediaan';
     protected $fillable = [
-        'kdPersediaan', 'nmPersediaan', 'stokPerseiaan', 'satuanPersediaan', 'lastPrice', 'salePrice'
+        'kdPersediaan', 'nmPersediaan', 'stokPerseiaan', 'satuanPersediaan', 'ktgPersediaan', 'lastPrice', 'salePrice', 'note'
     ];
 }

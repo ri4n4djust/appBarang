@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Barang;
 use App\Models\Bbm;
+use App\Models\Persediaan;
 use Illuminate\Support\Facades\DB;
 
 class barangController extends Controller
@@ -12,7 +13,7 @@ class barangController extends Controller
     //
     public function index()
     {
-        $posts = Barang::join('tblKategori', 'tblBarang.ktgBarang', '=', 'tblKategori.kodeKtg')
+        $posts = Persediaan::join('tblKategori', 'tblBarang.ktgBarang', '=', 'tblKategori.kodeKtg')
                 //->where('tblBarang.stsBarang', '1')
                 ->get(['tblBarang.*', 'tblKategori.namaKtg']);
         //$posts = Barang::latest()->get();
@@ -20,6 +21,20 @@ class barangController extends Controller
         return response([
             'success' => true,
             'message' => 'List Semua Barang',
+            'data' => $posts
+        ], 200);
+    }
+
+    public function indexPersediaan()
+    {
+        $posts = Persediaan::join('tblKategori', 'tblpersediaan.ktgPersediaan', '=', 'tblKategori.kodeKtg')
+                //->where('tblBarang.stsBarang', '1')
+                ->get(['tblPersediaan.*', 'tblKategori.namaKtg']);
+        //$posts = Barang::latest()->get();
+        $count = Barang::count();
+        return response([
+            'success' => true,
+            'message' => 'List Semua Persediaan',
             'data' => $posts
         ], 200);
     }

@@ -21,16 +21,16 @@ class pembelianController extends Controller
                 $noNota = $request[0]['noNota'];
                 $post = DB::table('tblpembelian')->insert([
                     'noNota'     => $request[0]['noNota'],
-                    'r_supplier'     => $request[0]['kodeSupplier'],
+                    'r_supplier'     => $request[0]['kdSupplier'],
                     'subTotal'     => $request[0]['subtotal'],
                     'tglPembelian'   => $tglNota,
-                    'disc'     => $request[0]['kodeSupplier'],
-                    'discPercent'     => $request[0]['kodeSupplier'],
-                    'tax'     => $request[0]['kodeSupplier'],
-                    'total'     => $request[0]['kodeSupplier'],
-                    'note'     => $request[0]['kodeSupplier'],
-                    'term'     => $request[0]['kodeSupplier'],
-                    'jthTempo'     => $tglNota,
+                    'disc'     => $request[0]['disc'],
+                    'discPercent'     => $request[0]['disc'],
+                    'tax'     => $request[0]['tax'],
+                    'total'     => $request[0]['total'],
+                    'note'     => $request[0]['notes'],
+                    'term'     => $request[0]['term'],
+                    'jthTempo'     => $request[0]['jthTempo'],
                 ]);
                 $detpem = $request[1];
                 for ($i = 0; $i < count($detpem); $i++) {

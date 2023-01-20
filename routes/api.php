@@ -23,11 +23,22 @@ Route::get('/barang', [App\Http\Controllers\barangController::class, 'index']);
 Route::post('/update/barang', [App\Http\Controllers\barangController::class, 'update']);
 Route::delete('/hapus/barang/{id}', [App\Http\Controllers\barangController::class, 'destroy']);
 
+//=====PERSEDIAAN============
+Route::get('/persediaan', [App\Http\Controllers\barangController::class, 'indexPersediaan']);
+Route::post('/update/persediaan', [App\Http\Controllers\barangController::class, 'update']);
+Route::delete('/hapus/persediaan/{id}', [App\Http\Controllers\barangController::class, 'destroy']);
+
 //======PELANGGAN==============
 Route::get('/pelanggan', [App\Http\Controllers\pelangganController::class, 'index']);
 Route::post('/tambah/pelanggan', [App\Http\Controllers\pelangganController::class, 'store']);
 Route::post('/update/pelanggan', [App\Http\Controllers\pelangganController::class, 'update']);
 Route::delete('/hapus/pelanggan/{id}', [App\Http\Controllers\pelangganController::class, 'destroy']);
+
+//======SUPPLIER==============
+Route::get('/supplier', [App\Http\Controllers\supplierController::class, 'index']);
+Route::post('/tambah/supplier', [App\Http\Controllers\supplierController::class, 'store']);
+Route::post('/update/supplier', [App\Http\Controllers\supplierController::class, 'update']);
+Route::delete('/hapus/supplier/{id}', [App\Http\Controllers\supplierController::class, 'destroy']);
 
 //======ROOM==============
 Route::get('/room', [App\Http\Controllers\roomController::class, 'index']);

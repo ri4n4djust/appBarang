@@ -3,10 +3,12 @@
 import axios from 'axios';
 const state = {
     barang: [],
+    persediaan: [],
   };
   
 const getters = {
     StateBarang: state => state.barang,
+    StatePersediaan: state => state.persediaan,
 };
 
 const actions = {  
@@ -19,6 +21,23 @@ const actions = {
         try {
             response = await axios.get('/api/barang')
             commit('setBarang', response.data.data)
+        } catch (ex) {
+            // Handle error
+            return
+        }
+    
+        // Handle success
+        // const data = response.body
+        // const data = response.data.data
+        // let response = await axios.get('api/barang')
+        // commit('setBarang', response.data.data)
+        // console.log(data)
+    },
+    async GetPersediaan({ commit }){
+        let response
+        try {
+            response = await axios.get('/api/persediaan')
+            commit('setPersediaan', response.data.data)
         } catch (ex) {
             // Handle error
             return
@@ -47,6 +66,9 @@ const actions = {
 const mutations = {
     setBarang(state, barang){
         state.barang = barang
+    },
+    setPersediaan(state, persediaan){
+        state.persediaan = persediaan
     },
     // DeleteBarang({dispatch}, id) {
     //     axios.delete(`hapus/barang/${id}`)
