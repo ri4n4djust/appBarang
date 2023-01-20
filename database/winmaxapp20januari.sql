@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 20, 2023 at 12:50 AM
+-- Generation Time: Jan 20, 2023 at 03:47 PM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.25
 
@@ -259,8 +259,8 @@ INSERT INTO `tblbarang` (`id`, `kdBarang`, `nmBarang`, `hrgPokok`, `hrgJual`, `k
 DELIMITER $$
 CREATE TRIGGER `after_insert` AFTER INSERT ON `tblbarang` FOR EACH ROW BEGIN  
 
-INSERT INTO tblpersediaan (kdPersediaan, nmPersediaan, stokPersediaan, satuanPersediaan, lastPrice, salePrice)
-VALUES (NEW.kdBarang, NEW.nmBarang, NEW.stkBarang, NEW.satuanBarang, NEW.hrgPokok, NEW.hrgJual);
+INSERT INTO tblpersediaan (kdPersediaan, nmPersediaan, stokPersediaan, satuanPersediaan, ktgPersediaan, lastPrice, salePrice)
+VALUES (NEW.kdBarang, NEW.nmBarang, NEW.stkBarang, NEW.satuanBarang, NEW.ktgBarang, NEW.hrgPokok, NEW.hrgJual);
 
 END
 $$
@@ -278,6 +278,7 @@ CREATE TABLE `tblbbm` (
   `nama_bbm` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_meter` int NOT NULL,
   `last_price` decimal(13,2) NOT NULL,
+  `sale_price` decimal(13,2) NOT NULL,
   `logo_bbm` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -287,10 +288,23 @@ CREATE TABLE `tblbbm` (
 -- Dumping data for table `tblbbm`
 --
 
-INSERT INTO `tblbbm` (`id`, `code_bbm`, `nama_bbm`, `last_meter`, `last_price`, `logo_bbm`, `created_at`, `updated_at`) VALUES
-(1, 'BRG0001', 'PERTAMAX', 12000000, '14900.00', 'pertamax.png', '2023-01-12 12:56:36', '2023-01-12 12:56:36'),
-(2, 'BRG0002', 'PERLITE', 12000000, '10000.00', 'pertalite.png', '2023-01-12 12:56:36', '2023-01-12 12:56:36'),
-(3, 'BRG0003', 'DEX LITE', 234535, '12800.00', 'dexlite.png', '2023-01-14 08:29:46', '2023-01-14 08:29:46');
+INSERT INTO `tblbbm` (`id`, `code_bbm`, `nama_bbm`, `last_meter`, `last_price`, `sale_price`, `logo_bbm`, `created_at`, `updated_at`) VALUES
+(1, 'BRG0001', 'PERTAMAX', 12000000, '14900.00', '14900.00', 'pertamax.png', '2023-01-12 12:56:36', '2023-01-12 12:56:36'),
+(2, 'BRG0002', 'PERLITE', 12000000, '10000.00', '10000.00', 'pertalite.png', '2023-01-12 12:56:36', '2023-01-12 12:56:36'),
+(3, 'BRG0003', 'DEX LITE', 234535, '12800.00', '12800.00', 'dexlite.png', '2023-01-14 08:29:46', '2023-01-14 08:29:46');
+
+--
+-- Triggers `tblbbm`
+--
+DELIMITER $$
+CREATE TRIGGER `tblbbm_after insert` AFTER INSERT ON `tblbbm` FOR EACH ROW BEGIN  
+
+INSERT INTO tblpersediaan (kdPersediaan, nmPersediaan, stokPersediaan, satuanPersediaan, ktgPersediaan, lastPrice, salePrice)
+VALUES (NEW.code_bbm, NEW.nama_bbm, 0, 'Liter', 'KT-2021-1', NEW.last_price, NEW.last_price);
+
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -324,7 +338,8 @@ CREATE TABLE `tblkategori` (
 
 INSERT INTO `tblkategori` (`id`, `kodeKtg`, `namaKtg`, `created_at`, `updated_at`) VALUES
 (1, 'KT-2021-1', 'BBM', '2021-03-19 22:40:29', '2022-02-19 06:11:10'),
-(2, 'KT-2021-2', 'OLI', '2021-03-19 22:40:36', '2021-03-19 22:40:36');
+(2, 'KT-2021-2', 'OLI', '2021-03-19 22:40:36', '2021-03-19 22:40:36'),
+(3, 'KT-2021-2', 'GAS', '2023-01-20 12:13:36', '2023-01-20 12:13:36');
 
 -- --------------------------------------------------------
 
@@ -422,13 +437,13 @@ CREATE TABLE `tblpembelian` (
   `idPembelian` bigint UNSIGNED NOT NULL,
   `noNota` varchar(9) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tglPembelian` datetime NOT NULL,
-  `r_supplier` int NOT NULL,
+  `r_supplier` varchar(9) COLLATE utf8mb4_unicode_ci NOT NULL,
   `subTotal` decimal(13,2) NOT NULL,
   `disc` int NOT NULL,
   `discPercent` int NOT NULL,
   `tax` int NOT NULL,
   `total` decimal(13,2) NOT NULL,
-  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `term` int NOT NULL,
   `jthTempo` datetime NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -440,7 +455,9 @@ CREATE TABLE `tblpembelian` (
 --
 
 INSERT INTO `tblpembelian` (`idPembelian`, `noNota`, `tglPembelian`, `r_supplier`, `subTotal`, `disc`, `discPercent`, `tax`, `total`, `note`, `term`, `jthTempo`, `created_at`, `updated_at`) VALUES
-(23, '222', '2023-01-20 00:00:00', 111, '200000.00', 111, 111, 111, '111.00', '111', 111, '2023-01-20 00:00:00', NULL, NULL);
+(23, '222', '2023-01-20 00:00:00', '111', '200000.00', 111, 111, 111, '111.00', '111', 111, '2023-01-20 00:00:00', NULL, NULL),
+(24, '3434', '2023-01-20 00:00:00', 'SP0002', '220500.00', 0, 0, 11, '220500.00', NULL, 0, '2023-01-20 00:00:00', NULL, NULL),
+(25, '999', '2023-01-20 00:00:00', 'SP0002', '220500.00', 0, 0, 11, '220500.00', NULL, 0, '2023-01-20 00:00:00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -471,7 +488,13 @@ INSERT INTO `tblpembelian_detail` (`idPembelianDetail`, `r_noNota`, `kdBarang`, 
 (4, 333, 'DB-2021-17', 'Mujair', '32777.00', 1, '32777.00', NULL, NULL),
 (5, 333, 'DB-2021-16', 'Kepala Ikan', '33999.00', 1, '33999.00', '2023-01-19 21:05:32', '2023-01-19 21:05:32'),
 (6, 333, 'DB-2021-17', 'Mujair', '32777.00', 1, '32777.00', '2023-01-19 21:05:32', '2023-01-19 21:05:32'),
-(7, 222, 'BRG0004', 'OLI MESRAN 5L', '200000.00', 4, '200000.00', '2023-01-19 22:48:42', '2023-01-19 22:48:42');
+(7, 222, 'BRG0004', 'OLI MESRAN 5L', '200000.00', 4, '200000.00', '2023-01-19 22:48:42', '2023-01-19 22:48:42'),
+(8, 3434, 'BRG0003', 'DEX LITE', '6500.00', 1, '6500.00', '2023-01-20 13:44:27', '2023-01-20 13:44:27'),
+(9, 3434, 'BRG0004', 'OLI MESRAN 5L', '200000.00', 1, '200000.00', '2023-01-20 13:44:27', '2023-01-20 13:44:27'),
+(10, 3434, 'BRG0001', 'PERTAMAX', '14000.00', 1, '14000.00', '2023-01-20 13:44:27', '2023-01-20 13:44:27'),
+(11, 999, 'BRG0003', 'DEX LITE', '6500.00', 1, '6500.00', '2023-01-20 13:46:14', '2023-01-20 13:46:14'),
+(12, 999, 'BRG0004', 'OLI MESRAN 5L', '200000.00', 1, '200000.00', '2023-01-20 13:46:14', '2023-01-20 13:46:14'),
+(13, 999, 'BRG0001', 'PERTAMAX', '14000.00', 1, '14000.00', '2023-01-20 13:46:14', '2023-01-20 13:46:14');
 
 -- --------------------------------------------------------
 
@@ -485,6 +508,7 @@ CREATE TABLE `tblpersediaan` (
   `nmPersediaan` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `stokPersediaan` int NOT NULL,
   `satuanPersediaan` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ktgPersediaan` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `lastPrice` int DEFAULT NULL,
   `salePrice` int DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -495,11 +519,11 @@ CREATE TABLE `tblpersediaan` (
 -- Dumping data for table `tblpersediaan`
 --
 
-INSERT INTO `tblpersediaan` (`idPersediaan`, `kdPersediaan`, `nmPersediaan`, `stokPersediaan`, `satuanPersediaan`, `lastPrice`, `salePrice`, `created_at`, `updated_at`) VALUES
-(1, 'BRG0001', 'PERTAMAX', 2000, 'liter', 14000, 14900, '2023-01-19 22:24:13', '2023-01-19 22:24:13'),
-(2, 'BRG0002', 'PERTALITE', 5000, 'liter', 9000, 10000, '2023-01-19 22:25:23', '2023-01-19 22:25:23'),
-(3, 'BRG0003', 'DEX LITE', 4500, 'liter', 6500, 8000, '2023-01-19 22:26:32', '2023-01-19 22:26:32'),
-(4, 'BRG0004', 'OLI MESRAN 5L', 14, 'BOTOL', 200000, 250000, NULL, NULL);
+INSERT INTO `tblpersediaan` (`idPersediaan`, `kdPersediaan`, `nmPersediaan`, `stokPersediaan`, `satuanPersediaan`, `ktgPersediaan`, `lastPrice`, `salePrice`, `created_at`, `updated_at`) VALUES
+(1, 'BRG0001', 'PERTAMAX', 2002, 'Liter', 'KT-2021-1', 14000, 14900, '2023-01-19 22:24:13', '2023-01-19 22:24:13'),
+(2, 'BRG0002', 'PERTALITE', 5000, 'Liter', 'KT-2021-1', 9000, 10000, '2023-01-19 22:25:23', '2023-01-19 22:25:23'),
+(3, 'BRG0003', 'DEX LITE', 4502, 'Liter', 'KT-2021-1', 6500, 8000, '2023-01-19 22:26:32', '2023-01-19 22:26:32'),
+(4, 'BRG0004', 'OLI MESRAN 5L', 16, 'BOTOL', 'KT-2021-2', 200000, 250000, '2023-01-20 12:14:45', '2023-01-20 12:14:45');
 
 -- --------------------------------------------------------
 
@@ -569,9 +593,23 @@ INSERT INTO `tblrooms` (`id`, `roomCode`, `roomName`, `rRoomRate`, `roomDesc`, `
 
 CREATE TABLE `tblsupplier` (
   `id` bigint UNSIGNED NOT NULL,
+  `kdSupplier` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nmSupplier` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `almtSupplier` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tlpSupplier` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `picSupplier` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tblsupplier`
+--
+
+INSERT INTO `tblsupplier` (`id`, `kdSupplier`, `nmSupplier`, `almtSupplier`, `tlpSupplier`, `picSupplier`, `created_at`, `updated_at`) VALUES
+(1, 'SP0001', 'CASH', 'DENPASAR', '08187654', 'MAS', '2023-01-20 13:30:05', '2023-01-20 13:30:05'),
+(2, 'SP0002', 'PT BBM NUSANTARA', 'KARANGASEM', '987654', 'OM', '2023-01-20 13:30:48', '2023-01-20 13:30:48'),
+(3, 'SP0003', 'PT MIGAS', 'DENPASAR', '787686', 'ANDI', '2023-01-20 13:44:37', '2023-01-20 13:44:37');
 
 -- --------------------------------------------------------
 
@@ -810,7 +848,7 @@ ALTER TABLE `tblbarang`
 -- AUTO_INCREMENT for table `tblbbm`
 --
 ALTER TABLE `tblbbm`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tblbbm_detail`
@@ -822,7 +860,7 @@ ALTER TABLE `tblbbm_detail`
 -- AUTO_INCREMENT for table `tblkategori`
 --
 ALTER TABLE `tblkategori`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tblnosel_detail`
@@ -846,19 +884,19 @@ ALTER TABLE `tblpelanggan`
 -- AUTO_INCREMENT for table `tblpembelian`
 --
 ALTER TABLE `tblpembelian`
-  MODIFY `idPembelian` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `idPembelian` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `tblpembelian_detail`
 --
 ALTER TABLE `tblpembelian_detail`
-  MODIFY `idPembelianDetail` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idPembelianDetail` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tblpersediaan`
 --
 ALTER TABLE `tblpersediaan`
-  MODIFY `idPersediaan` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idPersediaan` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tblpersediaan_detail`
@@ -882,7 +920,7 @@ ALTER TABLE `tblrooms`
 -- AUTO_INCREMENT for table `tblsupplier`
 --
 ALTER TABLE `tblsupplier`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbltransaksi_nosel`
