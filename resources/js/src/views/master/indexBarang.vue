@@ -245,6 +245,7 @@
             .join(' ');
     };
     const view_row = (item) => {
+        
         alert('ID: ' + item.kdBarang + ', Name: ' + item.nmBarang);
     };
 </script>

@@ -35,25 +35,25 @@ class pembelianController extends Controller
                 $detpem = $request[1];
                 for ($i = 0; $i < count($detpem); $i++) {
 
-                    $kdBarang = $detpem[$i]['kdBarang'];
-                    $qty = $detpem[$i]['qty'];
-                    $brg = DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->first();
-                    $oldStok = $brg->stokPersediaan;
-                    DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->update([
-                        'stokPersediaan' => $oldStok + $qty,
-                    ]);
+                        $kdBarang = $detpem[$i]['kdBarang'];
+                        $qty = $detpem[$i]['qty'];
+                        $brg = DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->first();
+                        $oldStok = $brg->stokPersediaan;
+                        DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->update([
+                            'stokPersediaan' => $oldStok + $qty,
+                        ]);
 
-                    $detail[] = [
-                        'r_noNota' => $noNota,
-                        'kdBarang' => $kdBarang,
-                        'nmBarang' => $detpem[$i]['nmBarang'],
-                        'hrgBeli' => $detpem[$i]['hrgPokok'],
-                        'qty' => $qty,
-                        'total' => $detpem[$i]['total'],
-                        'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-                    ];
-                }
+                        $detail[] = [
+                            'r_noNota' => $noNota,
+                            'kdBarang' => $kdBarang,
+                            'nmBarang' => $detpem[$i]['nmBarang'],
+                            'hrgBeli' => $detpem[$i]['hrgPokok'],
+                            'qty' => $qty,
+                            'total' => $detpem[$i]['total'],
+                            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                        ];
+                    }
                 PembelianDetail::insert($detail);
 
                 DB::commit();
