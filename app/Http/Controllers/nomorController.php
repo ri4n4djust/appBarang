@@ -7,30 +7,25 @@ use App\Models\Pelanggan;
 use App\Models\Barang;
 use App\Models\Persediaan;
 use App\Models\Pembelian;
+use App\Models\Penjualan;
 use App\Models\Supplier;
 
 class nomorController extends Controller
 {
     //
-    public function noNota($id)
+    public function kodePenjualan()
     {
-        $newid =  strlen($id);
-        if($newid === 1){
-            $id = '0'.$id;
-        }elseif($newid === 2){
-            $id = $id;
-        }
-
+       
         $count = Penjualan::all();
         if($count->isEmpty()){
             $tahun = date('Y');
             
-            $post = 'INV'.$tahun.'0'.$id.'0'.'1';
+            $post = 'INV'.$tahun.'00'.'1';
             return response()->json([
                 'success' => true,
                 'message' => 'Detail Post!',
-                'noNota'    => $post,
-                'panjang' => $newid
+                'kdPenjualan'    => $post,
+                // 'panjang' => $newid
             ], 200);
         }else{
             $no = 0 ;
@@ -39,24 +34,24 @@ class nomorController extends Controller
             $kodeBaru = $terakhir + 1  ;
 
             $tahun = date('Y');
-            $post = 'INV'.$tahun.'0'.$id.'0'.$kodeBaru;
+            $post = 'INV'.$tahun.'00'.$kodeBaru;
             
 
             if (Penjualan::where('noNota', $post)->exists()) {
                 $kodeBarulagi = $kodeBaru + 1 ;
-                $post = 'INV'.$tahun.'0'.$id.'0'.$kodeBarulagi;
+                $post = 'INV'.$tahun.'00'.$kodeBarulagi;
                 return response()->json([
                     'success' => true,
                     'message' => 'Detail Post!',
-                    'noNota'    => $post,
-                    'panjang' => $newid
+                    'kdPenjualan'    => $post,
+                    // 'panjang' => $newid
                 ], 200);
             } else {
                 return response()->json([
                     'success' => true,
                     'message' => 'Post Tidak Ditemukan!',
-                    'noNota'    => $post,
-                    'panjang' => $newid
+                    'kdPenjualan'    => $post,
+                    // 'panjang' => $newid
                 ], 200);
             }
         }

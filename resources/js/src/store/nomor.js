@@ -9,6 +9,7 @@ const state = {
 const getters = {
     NoBarang: state => state.nobarang,
     NoPembelian: state => state.nopembelian,
+    NoPenjualan: state => state.nopenjualan,
 };
 
 const actions = {  
@@ -20,6 +21,18 @@ const actions = {
         } catch (ex) {
             // Handle error
             alert('error no pembelian')
+            return
+        }
+    
+    },
+    async GetNoPenjualan({ commit }){
+        let response
+        try {
+            response = await axios.get('/api/kdpenjualan')
+            commit('setNoPenjualan', response.data.kdPenjualan)
+        } catch (ex) {
+            // Handle error
+            alert('error no penjualan')
             return
         }
     
@@ -41,6 +54,9 @@ const actions = {
 const mutations = {
     setNoPembelian(state, pembelian){
         state.nopembelian = pembelian
+    },
+    setNoPenjualan(state, penjualan){
+        state.nopenjualan = penjualan
     },
     setNoBarang(state, barang){
         state.nobarang = barang

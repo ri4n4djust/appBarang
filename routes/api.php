@@ -50,6 +50,7 @@ Route::delete('/hapus/room/{id}', [App\Http\Controllers\roomController::class, '
 Route::get('/kdbarang', [App\Http\Controllers\nomorController::class, 'kodeBarang']);
 Route::get('/kdsupplier', [App\Http\Controllers\nomorController::class, 'kodeSupplier']);
 Route::get('/kdpembelian', [App\Http\Controllers\nomorController::class, 'kodePembelian']);
+Route::get('/kdpenjualan', [App\Http\Controllers\nomorController::class, 'kodePenjualan']);
 // Route::get('/kdpelanggan', [App\Http\Controllers\nomorController::class, 'kodePelanggan']);
 Route::get('/kdkategori', [App\Http\Controllers\nomorController::class, 'kodeKategori']);
 Route::get('/kdopnum', [App\Http\Controllers\nomorController::class, 'kodeStokOpname']);

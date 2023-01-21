@@ -1,6 +1,6 @@
 import axios from 'axios';
 const state = {
-    pelanggan: null,
+    pelanggan: [],
   };
   
 const getters = {
@@ -9,17 +9,21 @@ const getters = {
 
 const actions = {  
     async CreatePelanggan({dispatch}, pel) {
-        await axios.post('tambah/pelanggan', pel)
+        await axios.post('/api/tambah/pelanggan', pel)
         await dispatch('GetPelanggan')
     }, 
     async GetPelanggan({ commit }){
-        let response = await axios.get('pelanggan')
-        commit('setPelanggan', response.data)
-    },
-    async EditPelanggan({dispatch}, Brg) {
-        await axios.post('update/pelanggan', Brg)
-        await dispatch('GetPelanggan')
-        // await commit('setUser', detUser.data.user)
+        // let response = await axios.get('/api/pelanggan')
+        // commit('setPelanggan', response.data.data)
+        let response
+        try {
+            response = await axios.get('/api/pelanggan')
+            commit('setPelanggan', response.data.data)
+        } catch (ex) {
+            // Handle error
+            alert('error get pelanggan')
+            return
+        }
     },
     async DeletePelanggan({dispatch}, id) {
         await axios.delete(`hapus/pelanggan/${id}`)
