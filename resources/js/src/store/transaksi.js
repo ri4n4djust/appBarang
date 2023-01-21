@@ -20,7 +20,7 @@ const actions = {
             localStorage.setItem('cartItemsP', '[]')
             const toast = window.Swal.mixin({
                 toast: true,
-                position: 'top-end',
+                position: 'top-center',
                 showConfirmButton: false,
                 timer: 3000,
                 padding: '2em',
@@ -34,7 +34,7 @@ const actions = {
             // Handle error
             const toast =  window.Swal.mixin({
                 toast: true,
-                position: 'top-end',
+                position: 'top-center',
                 showConfirmButton: false,
                 timer: 3000,
                 padding: '2em'

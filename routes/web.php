@@ -14,4 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/{any}', [AppController::class, 'index'])->where('any', '.*');
+
+
+Route::get('/auth/login', [AppController::class, 'index'])->name('login');
+
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/profile', function(Request $request) {
+        return auth()->user();
+    });
+    Route::get('/{any}', [AppController::class, 'index'])->where('any', '.*');
+    // Route::get('/persediaan', [App\Http\Controllers\barangController::class, 'indexPersediaan']);
+        
+    // API route for logout user
+    
+});

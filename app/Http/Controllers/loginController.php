@@ -67,10 +67,11 @@ class loginController extends Controller
             ->json(['data' => $user,'access_token' => $token, 'token_type' => 'Bearer', ]);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        auth()->logout();
+        // auth()->logout();
         // auth()->user()->tokens()->delete();
+        $request->user()->currentAccessToken()->delete();
         return response()->json([
             'success'    => true
         ], 200);

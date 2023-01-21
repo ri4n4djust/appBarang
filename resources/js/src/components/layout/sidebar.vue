@@ -196,14 +196,92 @@
                         <li>
                             <router-link to="/apps/notes" @click="toggleMobileMenu">Opnume</router-link>
                         </li>
+                    </ul>
+                </li>
+
+                <li class="menu">
+                    <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#forms" aria-controls="forms" aria-expanded="false">
+                        <div class="">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-clipboard"
+                            >
+                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                            </svg>
+                            <span>Laporan</span>
+                        </div>
+                        <div>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="feather feather-chevron-right"
+                            >
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+                    </a>
+
+                    <ul id="forms" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
                         <li>
-                            <router-link to="/apps/scrumboard" @click="toggleMobileMenu">Scrumboard</router-link>
+                            <router-link to="/forms/basic" @click="toggleMobileMenu">Basic</router-link>
                         </li>
                         <li>
-                            <router-link to="/apps/contacts" @click="toggleMobileMenu">Contacts</router-link>
+                            <router-link to="/forms/input-group" @click="toggleMobileMenu">Input Group</router-link>
                         </li>
                         <li>
-                            <router-link to="/apps/calendar" @click="toggleMobileMenu">Calendar</router-link>
+                            <router-link to="/forms/layouts" @click="toggleMobileMenu">Layouts</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/forms/validation" @click="toggleMobileMenu">Validation</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/forms/input-mask" @click="toggleMobileMenu">Input Mask</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/forms/select2" @click="toggleMobileMenu">Select2</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/forms/touchspin" @click="toggleMobileMenu">TouchSpin</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/forms/checkbox-radio" @click="toggleMobileMenu">Checkbox &amp; Radio</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/forms/switches" @click="toggleMobileMenu">Switches</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/forms/wizards" @click="toggleMobileMenu">Wizards</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/forms/file-upload" @click="toggleMobileMenu">File Upload</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/forms/quill-editor" @click="toggleMobileMenu">Quill Editor</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/forms/markdown-editor" @click="toggleMobileMenu">Markdown Editor</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/forms/date-picker" @click="toggleMobileMenu">Date &amp; Range Picker </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/forms/clipboard" @click="toggleMobileMenu">Clipboard</router-link>
                         </li>
                     </ul>
                 </li>

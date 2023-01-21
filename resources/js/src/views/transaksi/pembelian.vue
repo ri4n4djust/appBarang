@@ -19,7 +19,7 @@
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="doc-container">
                     <div class="row">
-                        <div class="col-xl-9">
+                        <div class="col-xl-12">
                             <div class="invoice-content">
                                 <div class="invoice-detail-body">
                                     <div class="invoice-detail-title">
