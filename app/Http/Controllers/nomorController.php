@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pelanggan;
 use App\Models\Barang;
+use App\Models\Persediaan;
+use App\Models\Pembelian;
+use App\Models\Supplier;
 
 class nomorController extends Controller
 {
@@ -60,10 +63,10 @@ class nomorController extends Controller
     }
     public function kodeBarang()
     {
-        $count = Barang::all();
+        $count = Persediaan::all();
         if($count->isEmpty()){
             $tahun = date('Y');
-            $post = 'DB-'.$tahun.'-'.'1';
+            $post = 'BRG'.$tahun.'000'.'1';
             return response()->json([
                 'success' => true,
                 'message' => 'Detail Post!',
@@ -71,18 +74,18 @@ class nomorController extends Controller
             ], 200);
         }else{
             $no = 0 ;
-            $count = Barang::all()->last();
+            $count = Persediaan::all()->last();
             //$kodeBaru = $count->kdBarang  ;
-            $terakhir = substr($count->kdBarang, 8,  20);
+            $terakhir = substr($count->kdPersediaan, 4,  20);
             $kodeBaru = $terakhir + 1  ;
 
-            $tahun = date('Y');
-            $post = 'DB-'.$tahun.'-'.$kodeBaru;
+            // $tahun = date('Y');
+            $post = 'BRG'.$kodeBaru;
 
-            if (Barang::where('kdBarang', $post)->exists()) {
+            if (Persediaan::where('kdPersediaan', $post)->exists()) {
                 // exists
                 $kodeBarulagi = $kodeBaru + 1 ;
-                $post = 'DB-'.$tahun.'-'.$kodeBarulagi;
+                $post = 'BRG'.$kodeBarulagi;
                 return response()->json([
                     'success' => true,
                     'message' => 'Detail Post!',
@@ -106,7 +109,7 @@ class nomorController extends Controller
         $count = Pembelian::all();
         if($count->isEmpty()){
             $tahun = date('Y');
-            $post = 'PB-'.$tahun.'-'.'1';
+            $post = 'PB'.$tahun.'-'.'1';
             return response()->json([
                 'success' => true,
                 'message' => 'Detail Post!',
@@ -116,15 +119,15 @@ class nomorController extends Controller
 
             $no = 0 ;
             $count = Pembelian::all()->last();
-            $terakhir = substr($count->noNotaPembelian, 8,  20);
+            $terakhir = substr($count->noNota, 7,  20);
             $kodeBaru = $terakhir + 1  ;
 
             $tahun = date('Y');
-            $post = 'PB-'.$tahun.'-'.$kodeBaru;
+            $post = 'PB'.$tahun.'-'.$kodeBaru;
 
-            if (Pembelian::where('noNotaPembelian', $post)->exists()) {
+            if (Pembelian::where('noNota', $post)->exists()) {
                 $kodeBarulagi = $kodeBaru + 1 ;
-                $post = 'PB-'.$tahun.'-'.$kodeBarulagi;
+                $post = 'PB'.$tahun.'-'.$kodeBarulagi;
                 return response()->json([
                     'success' => true,
                     'message' => 'Detail Post!',
@@ -145,7 +148,7 @@ class nomorController extends Controller
         $count = Supplier::all();
         if($count->isEmpty()){
             $tahun = date('Y');
-            $post = 'SP-'.$tahun.'-'.'1';
+            $post = 'SP000'.'1';
             return response()->json([
                 'success' => true,
                 'message' => 'Detail Post!',
@@ -154,15 +157,15 @@ class nomorController extends Controller
         }else{
             $no = 0 ;
             $count = Supplier::all()->last();
-            $terakhir = substr($count->kdSupplier, 8,  20);
+            $terakhir = substr($count->kdSupplier, 3,  20);
             $kodeBaru = $terakhir + 1  ;
 
-            $tahun = date('Y');
-            $post = 'SP-'.$tahun.'-'.$kodeBaru;
+            // $tahun = date('Y');
+            $post = 'SP'.$kodeBaru;
 
             if (Supplier::where('kdSupplier', $post)->exists()) {
                 $kodeBarulagi = $kodeBaru + 1 ;
-                $post = 'SP-'.$tahun.'-'.$kodeBarulagi;
+                $post = 'SP'.$kodeBarulagi;
                 return response()->json([
                     'success' => true,
                     'message' => 'Detail Post!',

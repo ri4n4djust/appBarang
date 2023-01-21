@@ -77,6 +77,7 @@
                                                                 v-model="paramssupplier" 
                                                                 :options="pembelian.suppliers" 
                                                                 :searchable="true"
+                                                                :allow-empty="false"
                                                                 track-by="nmSupplier"
                                                                 label="nmSupplier"
                                                                 open-direction="top"
@@ -119,8 +120,7 @@
                                                     open-direction="top"
                                                     placeholder="Choose..." 
                                                     selected-label="" 
-                                                    select-label="" 
-                                                    deselect-label="">
+                                                    select-label="" >
                                                 </multiselect>
                                             </div>
                                             <div class="form-group col-md-2">
@@ -157,6 +157,7 @@
                                                             <th>Nama Barang</th>
                                                             <th>Harga</th>
                                                             <th>Qty</th>
+                                                            <th>Satuan</th>
                                                             <th>Total</th>
                                                             <th>Aksi</th>
                                                         </tr>
@@ -166,6 +167,7 @@
                                                             <td class="description">{{ item.nmBarang }}</td>
                                                             <td class="rate">{{ new Intl.NumberFormat().format(item.hrgPokok) }}</td>
                                                             <td class="qty">{{ item.qty }}</td>
+                                                            <td class="qty">{{ item.satuan }}</td>
                                                             <td class="amount">{{ new Intl.NumberFormat().format(item.total) }}</td>
                                                             <td class="tax">
                                                                 <button type="button" class="btn btn-secondary additem btn-sm" @click="removeItem(id=item.kdBarang)">Hapus</button>
@@ -186,6 +188,7 @@
 
                                     <div class="invoice-detail-total">
                                         <div class="row">
+
                                             <div class="col-md-6">
                                                 <div class="invoice-actions-btn">
                                                     <div class="invoice-action-btn">
@@ -194,7 +197,8 @@
                                                                 <a href="javascript:;" class="btn btn-primary btn-send" @click="taxSelected" v-bind="hide = true">+ pajak</a>
                                                             </div>
                                                             <div class="col-sm-4">
-                                                                <router-link to="/apps/invoice/preview" class="btn btn-dark btn-preview">Preview</router-link>
+                                                                <!-- <router-link to="/apps/invoice/preview" class="btn btn-dark btn-preview">Preview</router-link> -->
+                                                                <a href="javascript:;" @click="addPayment" class="btn btn-dark btn-preview" data-bs-toggle="modal" data-bs-target="#modalPayment">Pembayaran</a>
                                                             </div>
                                                             <div class="col-sm-4">
                                                                 <a href="javascript:;" @click="simpanPembelian" class="btn btn-success btn-download">Save</a>
@@ -202,7 +206,35 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                
+                                            </div>
+
+                                            <div class="modal fade" id="modalPayment" tabindex="-1" role="dialog" aria-labelledby="modalPayment" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="modalPayment">Vertically Aligned</h5>
+                                                            <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <h4 class="modal-heading mb-4 mt-2">Aligned Center</h4>
+                                                            <multiselect 
+                                                                v-model="paramsacc" 
+                                                                :options="pembelian.accs" 
+                                                                :searchable="true"
+                                                                track-by="name"
+                                                                label="name"
+                                                                open-direction="top"
+                                                                placeholder="Choose..." 
+                                                                selected-label="" 
+                                                                select-label="" >
+                                                            </multiselect>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn" data-dismiss="modal" data-bs-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
+                                                            <button type="button" class="btn btn-primary">Save</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
 
                                             <div class="col-md-6">
@@ -301,19 +333,16 @@
 
     const items = ref([]);
     const brg = ref([]);
-    // const supplier = ref([]);
+    const nopembelian = ref([]);
     const qty = ref(1);
     const subtotal = ref();
     const total = ref();
     const disc = ref(0);
     const tax = ref();
     const selected_file = ref(null);
+    const payment = ref([]);
     const params = ref({
-        noNota: '',
-        kdSupplier: '',
-        nmSupplier: '',
-        almtSupplier: '',
-        tlpSupplier: '',
+        noNota: nopembelian,
         tglNota: moment().format("YYYY-MM-DD"),
         term: 0,
         jthTempo: moment().format("YYYY-MM-DD"),
@@ -324,15 +353,18 @@
         total: total,
     });
     const paramssupplier = ref({
-        noNota: '',
-        tglNota: moment().format("YYYY-MM-DD"),
-        term: 0,
-        jthTempo: moment().format("YYYY-MM-DD"),
-        notes: '',
-        subtotal: subtotal,
-        tax: 11,
-        disc: disc,
-        total: total,
+        kdSupplier: '',
+        nmSupplier: '',
+        almtSupplier: '',
+        tlpSupplier: '',
+
+    });
+    const paramsacc = ref({
+        noAcc: '',
+        nmAcc: '',
+        nilai: '',
+        // tlpSupplier: '',
+
     });
     const cartItems = ref([])
     // const newValue = ref()
@@ -341,9 +373,11 @@
     const pembelian = computed(() => {
         const barangs = store.getters.StatePersediaan;
         const suppliers = store.getters.StateSupplier;
+        const accs = store.getters.StateAcc;
+        nopembelian.value = store.getters.NoPembelian;
         const pajak = store.state.pajak;
-        console.log(suppliers)
-        return { barangs, pajak, suppliers }
+        // console.log(suppliers)
+        return { barangs, pajak, suppliers, nopembelian, accs }
     });
 
     const getBarang=() => {
@@ -352,6 +386,13 @@
     const getSupplier=() => {
         store.dispatch('GetSupplier')
     }
+    const getNoPembelian=() => {
+        store.dispatch('GetNoPembelian')
+    }
+    const getAcc=() => {
+        store.dispatch('GetAcc')
+    }
+
 
     const getTotal=() =>{
         total.value = subtotal.value - (subtotal.value * disc.value / 100)
@@ -371,11 +412,11 @@
     const simpanPembelian=() => {
         const header =params.value
         const headers =paramssupplier.value
-        const headerfull = Object.assign(header, headers)
-        const detail =cartItems.value
-        store.dispatch('CreatePembelian', [headerfull,detail] )
-        localStorage.setItem('cartItemsP', '[]');
-        getCart();
+            const headerfull = Object.assign(header, headers)
+            const detail =cartItems.value
+            store.dispatch('CreatePembelian', [headerfull,detail] )
+            setTimeout(function() { getCart(); }, 5000);
+            getNoPembelian();
     }
 
     onMounted(() => {
@@ -387,10 +428,13 @@
         dt.setDate(dt.getDate() + 5);
         params.value.due_date = dt;
 
+        // console.log(paramssupplier.value)
        
         getBarang();
+        getAcc();
         getSupplier();
         getCart();
+        getNoPembelian();
     });
 
     const change_file = (event) => {
@@ -419,10 +463,10 @@
         }
             const oldItems = JSON.parse(localStorage.getItem('cartItemsP')) || [];
             // console.log(oldItems)
-            const existingItem = oldItems.find(({ kdPersediaan }) => kdPersediaan === brg.kdPersediaan);
+            const existingItem = oldItems.find(({ kdBarang }) => kdBarang === brg.kdPersediaan);
             if (existingItem) {
-                const objIndex = cartItems.value.findIndex((e => e.kdPersediaan === brg.kdPersediaan));
-                const oldName = cartItems.value[objIndex].nmPersediaan;
+                const objIndex = cartItems.value.findIndex((e => e.kdBarang === brg.kdPersediaan));
+                const oldName = cartItems.value[objIndex].nmBarang;
                 const oldQty = cartItems.value[objIndex].qty;
                 const newQty = parseInt(oldQty) + parseInt(qty.value) ;
                 cartItems.value[objIndex].qty = parseInt(newQty);
@@ -431,7 +475,7 @@
                 getCart();
                 // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
             }else{
-            cartItems.value.push({kdBarang:brg.kdPersediaan, nmBarang:brg.nmPersediaan,hrgPokok:brg.lastPrice,qty:qty.value,total:qty.value * brg.lastPrice});	
+            cartItems.value.push({kdBarang:brg.kdPersediaan, nmBarang:brg.nmPersediaan,hrgPokok:brg.lastPrice,qty:qty.value,satuan:brg.satuanPersediaan,total:qty.value * brg.lastPrice});	
             localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
             getCart();
             // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
@@ -474,6 +518,12 @@
         }
 
     }
+
+    const addPayment = () => {
+        payment.value = localStorage.setItem('payment', '[]');
+        // alert('add payment')
+    };
+
     function getSubtotal(){
         const allItems = JSON.parse(localStorage.getItem('cartItemsP')) || [];
         let sum = 0;

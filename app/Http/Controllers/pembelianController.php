@@ -31,6 +31,8 @@ class pembelianController extends Controller
                     'note'     => $request[0]['notes'],
                     'term'     => $request[0]['term'],
                     'jthTempo'     => $request[0]['jthTempo'],
+                    'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                 ]);
                 $detpem = $request[1];
                 for ($i = 0; $i < count($detpem); $i++) {
@@ -80,5 +82,14 @@ class pembelianController extends Controller
          ], 400);
         }
 
+    }
+
+    public function linkAccount(){
+        $listakun = DB::select('SELECT * FROM link_acc'); 
+        return response()->json([
+            'success' => true,
+            'message' => 'List Link acc',
+            'data' => $listakun
+        ], 200);
     }
 }

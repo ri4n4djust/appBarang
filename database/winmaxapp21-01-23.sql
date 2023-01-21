@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 20, 2023 at 03:47 PM
+-- Generation Time: Jan 21, 2023 at 01:15 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.25
 
@@ -36,6 +36,36 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `link_acc`
+--
+
+CREATE TABLE `link_acc` (
+  `id` int NOT NULL,
+  `acc_id` int NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `link` varchar(50) NOT NULL,
+  `date_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `link_acc`
+--
+
+INSERT INTO `link_acc` (`id`, `acc_id`, `name`, `link`, `date_create`, `date_update`) VALUES
+(1, 31000, 'MODAL', 'modal', '2022-06-21 15:00:24', '2022-12-30 00:01:02'),
+(20, 62310, 'BIAYA NON OPERASIONAL LAIN', 'opnum_persediaan', '2022-06-21 15:00:26', '2022-12-30 00:01:02'),
+(22, 23210, 'PPN MASUKAN', 'ppn_masukan', '2022-06-21 15:00:26', '2022-12-30 00:01:02'),
+(23, 23220, 'PPN KELUARAN', 'ppn_keluaran', '2022-06-21 15:00:26', '2022-12-30 00:01:02'),
+(35, 21300, 'HUTANG USAHA', 'hutang_usaha', '2022-09-22 07:51:05', '2022-12-30 00:01:02'),
+(50, 21100, 'HUTANG PIHAK KETIGA', 'hutang_pihak3', '2022-09-25 10:31:17', '2022-12-30 00:01:02'),
+(53, 21400, 'PENDAPATAN DITERIMA DIMUKA', 'hutang_pendapatan', '2022-09-25 10:32:10', '2022-12-30 00:01:02'),
+(61, 11300, 'PIUTANG PENDAPATAN', 'piutang_pendapatan', '2022-09-25 10:37:15', '2022-12-30 00:01:02'),
+(62, 11310, 'PIUTANG BARU', 'piutang_baru', '2022-09-25 10:37:34', '2022-12-30 00:01:02');
 
 -- --------------------------------------------------------
 
@@ -220,6 +250,29 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (112, 'App\\Models\\User', 1, 'ApiToken', 'fda30c92d64e90afbadb184dc3b29f5f790fffea01eddd3af8c9bd19e5f80e54', '[\"*\"]', NULL, '2022-08-31 03:22:22', '2022-08-31 03:22:22'),
 (113, 'App\\Models\\User', 1, 'ApiToken', '72bb34a38bea3a0dc05ba6d5871c0d96374feb103b871b36c1b6a9c1d325f150', '[\"*\"]', NULL, '2023-01-12 01:02:44', '2023-01-12 01:02:44'),
 (114, 'App\\Models\\User', 1, 'ApiToken', 'b500909787a84ba89af7f8f4c981ef05ded6ceb2924c201999b6c9943dbd89c2', '[\"*\"]', NULL, '2023-01-15 00:32:29', '2023-01-15 00:32:29');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `rekening_anggaran`
+--
+
+CREATE TABLE `rekening_anggaran` (
+  `id_rekening` int NOT NULL,
+  `nomor_rekening` varchar(20) NOT NULL,
+  `nama_rekening` varchar(225) NOT NULL,
+  `anggaran` decimal(12,2) NOT NULL DEFAULT '0.00',
+  `parent_id` int NOT NULL,
+  `level` int NOT NULL DEFAULT '1',
+  `view_level` int NOT NULL DEFAULT '0',
+  `tipe` varchar(1) NOT NULL DEFAULT 'D',
+  `rlocation` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `tahun_anggaran` int NOT NULL DEFAULT '2022',
+  `date_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `user_create` varchar(10) DEFAULT NULL,
+  `user_update` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -455,9 +508,11 @@ CREATE TABLE `tblpembelian` (
 --
 
 INSERT INTO `tblpembelian` (`idPembelian`, `noNota`, `tglPembelian`, `r_supplier`, `subTotal`, `disc`, `discPercent`, `tax`, `total`, `note`, `term`, `jthTempo`, `created_at`, `updated_at`) VALUES
-(23, '222', '2023-01-20 00:00:00', '111', '200000.00', 111, 111, 111, '111.00', '111', 111, '2023-01-20 00:00:00', NULL, NULL),
-(24, '3434', '2023-01-20 00:00:00', 'SP0002', '220500.00', 0, 0, 11, '220500.00', NULL, 0, '2023-01-20 00:00:00', NULL, NULL),
-(25, '999', '2023-01-20 00:00:00', 'SP0002', '220500.00', 0, 0, 11, '220500.00', NULL, 0, '2023-01-20 00:00:00', NULL, NULL);
+(27, 'PB2023-1', '2023-01-21 00:00:00', 'SP0002', '206500.00', 0, 0, 11, '206500.00', NULL, 0, '2023-01-21 00:00:00', NULL, NULL),
+(28, 'PB2023-2', '2023-01-21 00:00:00', 'SP0003', '28462000.00', 0, 0, 11, '28462000.00', NULL, 0, '2023-01-21 00:00:00', NULL, NULL),
+(29, 'PB2023-3', '2023-01-21 00:00:00', 'SP0002', '279000.00', 0, 0, 11, '279000.00', NULL, 0, '2023-01-21 00:00:00', NULL, NULL),
+(30, 'PB2023-4', '2023-01-21 00:00:00', 'SP0002', '304000.00', 0, 0, 11, '304000.00', NULL, 0, '2023-01-21 00:00:00', NULL, NULL),
+(31, 'PB2023-5', '2023-01-21 00:00:00', 'SP0002', '226000.00', 0, 0, 11, '226000.00', NULL, 0, '2023-01-21 00:00:00', '2023-01-20 20:40:09', '2023-01-20 20:40:09');
 
 -- --------------------------------------------------------
 
@@ -467,7 +522,7 @@ INSERT INTO `tblpembelian` (`idPembelian`, `noNota`, `tglPembelian`, `r_supplier
 
 CREATE TABLE `tblpembelian_detail` (
   `idPembelianDetail` bigint UNSIGNED NOT NULL,
-  `r_noNota` int NOT NULL,
+  `r_noNota` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `kdBarang` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nmBarang` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `hrgBeli` decimal(13,2) NOT NULL,
@@ -482,19 +537,16 @@ CREATE TABLE `tblpembelian_detail` (
 --
 
 INSERT INTO `tblpembelian_detail` (`idPembelianDetail`, `r_noNota`, `kdBarang`, `nmBarang`, `hrgBeli`, `qty`, `total`, `created_at`, `updated_at`) VALUES
-(1, 123, 'DB-2021-16', 'Kepala Ikan', '33999.00', 1, '33999.00', NULL, NULL),
-(2, 123, 'DB-2021-17', 'Mujair', '32777.00', 1, '32777.00', NULL, NULL),
-(3, 333, 'DB-2021-16', 'Kepala Ikan', '33999.00', 1, '33999.00', NULL, NULL),
-(4, 333, 'DB-2021-17', 'Mujair', '32777.00', 1, '32777.00', NULL, NULL),
-(5, 333, 'DB-2021-16', 'Kepala Ikan', '33999.00', 1, '33999.00', '2023-01-19 21:05:32', '2023-01-19 21:05:32'),
-(6, 333, 'DB-2021-17', 'Mujair', '32777.00', 1, '32777.00', '2023-01-19 21:05:32', '2023-01-19 21:05:32'),
-(7, 222, 'BRG0004', 'OLI MESRAN 5L', '200000.00', 4, '200000.00', '2023-01-19 22:48:42', '2023-01-19 22:48:42'),
-(8, 3434, 'BRG0003', 'DEX LITE', '6500.00', 1, '6500.00', '2023-01-20 13:44:27', '2023-01-20 13:44:27'),
-(9, 3434, 'BRG0004', 'OLI MESRAN 5L', '200000.00', 1, '200000.00', '2023-01-20 13:44:27', '2023-01-20 13:44:27'),
-(10, 3434, 'BRG0001', 'PERTAMAX', '14000.00', 1, '14000.00', '2023-01-20 13:44:27', '2023-01-20 13:44:27'),
-(11, 999, 'BRG0003', 'DEX LITE', '6500.00', 1, '6500.00', '2023-01-20 13:46:14', '2023-01-20 13:46:14'),
-(12, 999, 'BRG0004', 'OLI MESRAN 5L', '200000.00', 1, '200000.00', '2023-01-20 13:46:14', '2023-01-20 13:46:14'),
-(13, 999, 'BRG0001', 'PERTAMAX', '14000.00', 1, '14000.00', '2023-01-20 13:46:14', '2023-01-20 13:46:14');
+(14, 'PB2023-1', 'BRG0004', 'OLI MESRAN 5L', '200000.00', 1, '200000.00', '2023-01-20 19:06:41', '2023-01-20 19:06:41'),
+(15, 'PB2023-1', 'BRG0003', 'DEX LITE', '6500.00', 1, '6500.00', '2023-01-20 19:06:41', '2023-01-20 19:06:41'),
+(16, 'PB2023-2', 'BRG0001', 'PERTAMAX', '14000.00', 133, '1862000.00', '2023-01-20 19:09:33', '2023-01-20 19:09:33'),
+(17, 'PB2023-2', 'BRG0004', 'OLI MESRAN 5L', '200000.00', 133, '26600000.00', '2023-01-20 19:09:33', '2023-01-20 19:09:33'),
+(18, 'PB2023-3', 'BRG0002', 'PERTALITE', '9000.00', 18, '162000.00', '2023-01-20 20:27:33', '2023-01-20 20:27:33'),
+(19, 'PB2023-3', 'BRG0003', 'DEX LITE', '6500.00', 18, '117000.00', '2023-01-20 20:27:33', '2023-01-20 20:27:33'),
+(20, 'PB2023-4', 'BRG0004', 'OLI MESRAN 5L', '200000.00', 1, '200000.00', '2023-01-20 20:29:20', '2023-01-20 20:29:20'),
+(21, 'PB2023-4', 'BRG0003', 'DEX LITE', '6500.00', 16, '104000.00', '2023-01-20 20:29:20', '2023-01-20 20:29:20'),
+(22, 'PB2023-5', 'BRG0004', 'OLI MESRAN 5L', '200000.00', 15, '200000.00', '2023-01-20 20:40:09', '2023-01-20 20:40:09'),
+(23, 'PB2023-5', 'BRG0003', 'DEX LITE', '6500.00', 4, '26000.00', '2023-01-20 20:40:09', '2023-01-20 20:40:09');
 
 -- --------------------------------------------------------
 
@@ -520,10 +572,10 @@ CREATE TABLE `tblpersediaan` (
 --
 
 INSERT INTO `tblpersediaan` (`idPersediaan`, `kdPersediaan`, `nmPersediaan`, `stokPersediaan`, `satuanPersediaan`, `ktgPersediaan`, `lastPrice`, `salePrice`, `created_at`, `updated_at`) VALUES
-(1, 'BRG0001', 'PERTAMAX', 2002, 'Liter', 'KT-2021-1', 14000, 14900, '2023-01-19 22:24:13', '2023-01-19 22:24:13'),
-(2, 'BRG0002', 'PERTALITE', 5000, 'Liter', 'KT-2021-1', 9000, 10000, '2023-01-19 22:25:23', '2023-01-19 22:25:23'),
-(3, 'BRG0003', 'DEX LITE', 4502, 'Liter', 'KT-2021-1', 6500, 8000, '2023-01-19 22:26:32', '2023-01-19 22:26:32'),
-(4, 'BRG0004', 'OLI MESRAN 5L', 16, 'BOTOL', 'KT-2021-2', 200000, 250000, '2023-01-20 12:14:45', '2023-01-20 12:14:45');
+(1, 'BRG0001', 'PERTAMAX', 2135, 'Liter', 'KT-2021-1', 14000, 14900, '2023-01-19 22:24:13', '2023-01-19 22:24:13'),
+(2, 'BRG0002', 'PERTALITE', 5018, 'Liter', 'KT-2021-1', 9000, 10000, '2023-01-19 22:25:23', '2023-01-19 22:25:23'),
+(3, 'BRG0003', 'DEX LITE', 4541, 'Liter', 'KT-2021-1', 6500, 8000, '2023-01-19 22:26:32', '2023-01-19 22:26:32'),
+(4, 'BRG0004', 'OLI MESRAN 5L', 166, 'BOTOL', 'KT-2021-2', 200000, 250000, '2023-01-20 12:14:45', '2023-01-20 12:14:45');
 
 -- --------------------------------------------------------
 
@@ -700,6 +752,13 @@ ALTER TABLE `failed_jobs`
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
+-- Indexes for table `link_acc`
+--
+ALTER TABLE `link_acc`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `link` (`link`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -718,6 +777,12 @@ ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indexes for table `rekening_anggaran`
+--
+ALTER TABLE `rekening_anggaran`
+  ADD PRIMARY KEY (`id_rekening`);
 
 --
 -- Indexes for table `tblbarang`
@@ -827,6 +892,12 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `link_acc`
+--
+ALTER TABLE `link_acc`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -837,6 +908,12 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
+
+--
+-- AUTO_INCREMENT for table `rekening_anggaran`
+--
+ALTER TABLE `rekening_anggaran`
+  MODIFY `id_rekening` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tblbarang`
@@ -884,13 +961,13 @@ ALTER TABLE `tblpelanggan`
 -- AUTO_INCREMENT for table `tblpembelian`
 --
 ALTER TABLE `tblpembelian`
-  MODIFY `idPembelian` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `idPembelian` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `tblpembelian_detail`
 --
 ALTER TABLE `tblpembelian_detail`
-  MODIFY `idPembelianDetail` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `idPembelianDetail` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `tblpersediaan`

@@ -48,6 +48,11 @@ Route::delete('/hapus/room/{id}', [App\Http\Controllers\roomController::class, '
 
 //==========PENOMORAN=============
 Route::get('/kdbarang', [App\Http\Controllers\nomorController::class, 'kodeBarang']);
+Route::get('/kdsupplier', [App\Http\Controllers\nomorController::class, 'kodeSupplier']);
+Route::get('/kdpembelian', [App\Http\Controllers\nomorController::class, 'kodePembelian']);
+// Route::get('/kdpelanggan', [App\Http\Controllers\nomorController::class, 'kodePelanggan']);
+Route::get('/kdkategori', [App\Http\Controllers\nomorController::class, 'kodeKategori']);
+Route::get('/kdopnum', [App\Http\Controllers\nomorController::class, 'kodeStokOpname']);
 Route::get('/kdpelanggan', [App\Http\Controllers\nomorController::class, 'kodePelanggan']);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -62,6 +67,7 @@ Route::post('/transnoselregu', [App\Http\Controllers\transaksiNoselController::c
 
 // Pembelian
 Route::post('/store/pembelian', [App\Http\Controllers\pembelianController::class, 'simpanPembelian']);
+Route::get('/linkacc', [App\Http\Controllers\pembelianController::class, 'linkAccount']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile', function(Request $request) {
