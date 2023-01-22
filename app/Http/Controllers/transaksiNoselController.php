@@ -16,9 +16,15 @@ class transaksiNoselController extends Controller
         try{
             $exception = DB::transaction(function() use ($request){ 
                 $id_nosel = $request->input('r_nosel');
+                $kdtr = $request->input('kd_trans');
+                $count = DB::table('tbltransaksi_nosel')
+                        ->where('kd_trans', 'like', $kdtr . '%')
+                        ->count();
+                $n = 1 + $count;
                 $post = TransaksiNosel::create([
                     'r_bbm'     => $request->input('r_bbm'),
                     'r_nosel'     => $request->input('r_nosel'),
+                    'kd_trans'     => $kdtr.$n,
                     'r_regu'     => $request->input('r_regu'),
                     'tgl_transaksi'   => $request->input('tgl_transaksi'),
                     'cost_ltr'    => $request->input('cost_ltr'),
@@ -26,12 +32,20 @@ class transaksiNoselController extends Controller
                     'last_meter'   => $request->input('last_meter'),
                     'total'    => $request->input('total'),
                 ]);
+                $costLiter = $request->input('cost_ltr');
+                $kdBbm = $request->input('kd_bbm');
+                $hrg = $request->input('last_price');
                 // $mtr_awal = DB::select("select meter_akhir from tblnosel_detail where id_nosel='$id_nosel' ");
                 $mtr_awal = DB::table('tblnosel_detail')->select('meter_akhir')->where('id_nosel', $id_nosel)->first();
                 $update = NoselDetail::where('id_nosel', $id_nosel)->update([
                     'meter_awal'   => $mtr_awal->meter_akhir,
                     'meter_akhir'   => $request->input('last_meter'),
                     'harga'   => $request->input('last_price'),
+                ]);
+                $oldStok = DB::table('tblpersediaan')->select('stokPersediaan')->where('kdPersediaan', $kdBbm)->first();
+                DB::table('tblpersediaan')->where('kdPersediaan', $kdBbm)->update([
+                    'stokPersediaan' => $oldStok->stokPersediaan - $costLiter,
+                    'salePrice' => $hrg,
                 ]);
                 DB::commit();
             });

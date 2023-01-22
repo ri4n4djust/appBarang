@@ -51,6 +51,15 @@ const routes = [
         props: true,
     },
 
+    // laporan
+    {
+        path: '/rekapan/harian',
+        name: 'rekapan',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/rekapanHarian.vue'),
+        props: true,
+    },
+    
+
     //components
     {
         path: '/components/tabs',

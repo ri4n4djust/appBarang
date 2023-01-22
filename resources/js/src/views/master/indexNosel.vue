@@ -32,9 +32,9 @@
                             </div>
                             <div class="col-4">
                                 <div class="w-detail">
-                                    <p class="w-title">Regu {{ regu }}</p>
+                                    <p class="w-title">Regu </p>
                                     <select class="form-select form-select-sm" v-model="regu" >
-                                        <option value="all" :selected="A">All</option>
+                                        <option value="all" selected>All</option>
                                         <option :value="ls.reguPegawai" v-for="ls in nosels.regu" :key="ls.id_nosel">{{ ls.reguPegawai }}</option>
                                     </select>
                                 </div>
@@ -72,7 +72,7 @@
                         <h5>Cost {{ Math.abs(meter_now[index] - list.meter_akhir) }} Liter</h5>
                         <h5>Penjualan {{ new Intl.NumberFormat().format(Math.abs((meter_now[index] - list.meter_akhir) * last_price)) }} </h5>
                         <h3><input type="text" class="form-control" v-model="meter_now[index]" ></h3>
-                        <button type="button" class="btn btn-success mb-2 me-1" @click="saveTransBbm(id_nosel=list.id_nosel,newmeter=meter_now[index],costltr=meter_now[index] - list.meter_akhir,jual=(meter_now[index] - list.meter_akhir) * last_price )">Simpan</button>
+                        <button type="button" class="btn btn-success mb-2 me-1" @click="saveTransBbm(id_nosel=list.id_nosel,code_bbm=list.r_code_bbm,newmeter=meter_now[index],costltr=meter_now[index] - list.meter_akhir,jual=(meter_now[index] - list.meter_akhir) * last_price )">Simpan</button>
                     </div>
                     <div class="widget-content">
                         <!-- {{ nosels.trs }} -->
@@ -139,31 +139,34 @@
     
 
 
-    function saveTransBbm(id_nosel,newmeter,costltr,jual){
+    function saveTransBbm(id_nosel,code_bbm,newmeter,costltr,jual){
         // console.log(regu.value);
-        if(regu.value === null){
-            // alert(regu.value)
-            const toast =  window.Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000,
-                padding: '2em'
-            });
-            toast.fire({
-                title: 'Error!',
-                text: 'Do you want to continue',
-                icon: 'error',
-                confirmButtonText: 'Cool',
-                padding: '2em'
-            });
-        }else{
+        // if(regu.value === null || newmeter === ''){
+        //     // alert(regu.value)
+        //     const toast =  window.Swal.mixin({
+        //         toast: true,
+        //         position: 'top-end',
+        //         showConfirmButton: false,
+        //         timer: 3000,
+        //         padding: '2em'
+        //     });
+        //     toast.fire({
+        //         title: 'Error!',
+        //         text: 'Mohon Lengkapi data',
+        //         icon: 'error',
+        //         confirmButtonText: 'Cool',
+        //         padding: '2em'
+        //     });
+        // }else{
             const idbbm = props.id;
             const harga = ref(props.last_price);
             // const tgl = date1.value.substring(0, 10)
             const tgl = moment(date1.value).format("YYYY-MM-DD")
+            const tglc = moment(date1.value).format("YYYYMMDD")
             store.dispatch('CreateTransNosel', {
                 'r_bbm': idbbm,
+                'kd_bbm': code_bbm,
+                'kd_trans': idbbm+id_nosel+tglc,
                 'r_nosel': id_nosel,
                 'r_regu': regu.value,
                 'tgl_transaksi': tgl, 
@@ -174,19 +177,19 @@
             })
             getNosel();
             getTrans();
-            const toast = window.Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000,
-                padding: '2em',
-            });
-            toast.fire({
-                icon: 'success',
-                title: 'Signed in successfully',
-                padding: '2em',
-            });
-        }
+        //     const toast = window.Swal.mixin({
+        //         toast: true,
+        //         position: 'top-end',
+        //         showConfirmButton: false,
+        //         timer: 3000,
+        //         padding: '2em',
+        //     });
+        //     toast.fire({
+        //         icon: 'success',
+        //         title: 'Signed in successfully',
+        //         padding: '2em',
+        //     });
+        // }
     }
     const getNosel=() => {
         const id = props.id;

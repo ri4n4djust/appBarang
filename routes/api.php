@@ -40,11 +40,11 @@ Route::post('/tambah/supplier', [App\Http\Controllers\supplierController::class,
 Route::post('/update/supplier', [App\Http\Controllers\supplierController::class, 'update']);
 Route::delete('/hapus/supplier/{id}', [App\Http\Controllers\supplierController::class, 'destroy']);
 
-//======ROOM==============
-Route::get('/room', [App\Http\Controllers\roomController::class, 'index']);
-Route::post('/tambah/room', [App\Http\Controllers\roomController::class, 'store']);
-Route::post('/update/room', [App\Http\Controllers\roomController::class, 'update']);
-Route::delete('/hapus/room/{id}', [App\Http\Controllers\roomController::class, 'destroy']);
+//======LAPORAN==============
+Route::get('/laporan-bbm', [App\Http\Controllers\laporanController::class, 'laporanBbm']);
+Route::get('/laporan-brg', [App\Http\Controllers\laporanController::class, 'laporanBrg']);
+// Route::post('/update/room', [App\Http\Controllers\roomController::class, 'update']);
+// Route::delete('/hapus/room/{id}', [App\Http\Controllers\roomController::class, 'destroy']);
 
 //==========PENOMORAN=============
 Route::get('/kdbarang', [App\Http\Controllers\nomorController::class, 'kodeBarang']);
@@ -69,6 +69,9 @@ Route::post('/transnoselregu', [App\Http\Controllers\transaksiNoselController::c
 // Pembelian
 Route::post('/store/pembelian', [App\Http\Controllers\pembelianController::class, 'simpanPembelian']);
 Route::get('/linkacc', [App\Http\Controllers\pembelianController::class, 'linkAccount']);
+
+// Penjualan
+Route::post('/store/penjualan', [App\Http\Controllers\penjualanController::class, 'simpanPenjualan']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile', function(Request $request) {

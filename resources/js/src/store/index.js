@@ -12,6 +12,7 @@ import transnosel from './transnosel';
 import transaksi from './transaksi';
 import supplier from './supplier';
 import nomor from './nomor';
+import laporan from './laporan';
 
 
 export default new createStore({
@@ -120,7 +121,8 @@ export default new createStore({
         transnosel,
         transaksi,
         supplier,
-        nomor
+        nomor,
+        laporan
     },
     // plugins: [createPersistedState()]
 });

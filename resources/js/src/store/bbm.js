@@ -11,20 +11,20 @@ const getters = {
 
 const actions = {  
     async CreatePost({dispatch}, post) {
-        await axios.post('api/bbm', post)
+        await axios.post('/api/bbm', post)
         await dispatch('GetBbm')
     }, 
     async GetBbm({ commit }){
-        let response = await axios.get('api/bbm')
+        let response = await axios.get('/api/bbm')
         commit('setBbm', response.data.data)
     },
     async EditBbm({dispatch}, Bbm) {
-        await axios.post('api/update/bbm', Bbm)
+        await axios.post('/api/update/bbm', Bbm)
         await dispatch('GetBbm')
         // await commit('setUser', detUser.data.user)
     },
     async DeleteBbm({dispatch}, id) {
-        await axios.delete(`api/hapus/bbm/${id}`)
+        await axios.delete(`/api/hapus/bbm/${id}`)
         await dispatch('GetBbm')
         // await commit('setUser', detUser.data.user)
     },

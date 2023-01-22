@@ -30,14 +30,14 @@ class nomorController extends Controller
         }else{
             $no = 0 ;
             $count = Penjualan::all()->last();
-            $terakhir = substr($count->noNota, 11);
+            $terakhir = substr($count->noPenjualan, 7);
             $kodeBaru = $terakhir + 1  ;
 
             $tahun = date('Y');
             $post = 'INV'.$tahun.'00'.$kodeBaru;
             
 
-            if (Penjualan::where('noNota', $post)->exists()) {
+            if (Penjualan::where('noPenjualan', $post)->exists()) {
                 $kodeBarulagi = $kodeBaru + 1 ;
                 $post = 'INV'.$tahun.'00'.$kodeBarulagi;
                 return response()->json([

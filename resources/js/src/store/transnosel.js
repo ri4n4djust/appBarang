@@ -14,9 +14,40 @@ const getters = {
 
 const actions = {  
     async CreateTransNosel({commit}, transnosel) {
-        let response = await axios.post('api/store/transnosel', transnosel)
+        let response
+        try {
+            response = await axios.post('api/store/transnosel', transnosel)
         // commit('setTransNosel', response.data.data)
         // await dispatch('GetTransNosel', payload)
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Transaksi berhasil tersimpan',
+                padding: '2em',
+            });
+        } catch (ex) {
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'Mohon Lengkapi Data',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            return
+        }
     }, 
     async GetTransNosel({ commit }, payload){
         let response = await axios.post('api/transnosel', payload)

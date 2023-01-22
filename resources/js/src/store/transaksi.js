@@ -3,11 +3,13 @@
 import axios from 'axios';
 const state = {
     pembelian: [],
+    penjualan:[],
     linkacc: []
   };
   
 const getters = {
     StatePembelian: state => state.pembelian,
+    StatePenjualan: state => state.penjualan,
     StateAcc: state => state.linkacc,
 };
 
@@ -28,6 +30,43 @@ const actions = {
             toast.fire({
                 icon: 'success',
                 title: 'Pembelian berhasil tersimpan',
+                padding: '2em',
+            });
+        } catch (ex) {
+            // Handle error
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'Mohon Lengkapi Data',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            return
+        }
+        // await dispatch('GetPembelian')
+    },
+    async CreatePenjualan({dispatch}, detail) {
+        let response
+        try {
+            response = await axios.post('api/store/penjualan', detail)
+            localStorage.setItem('cartItemsPen', '[]')
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Penjualan berhasil tersimpan',
                 padding: '2em',
             });
         } catch (ex) {

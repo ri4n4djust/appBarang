@@ -239,13 +239,13 @@
 
                     <ul id="forms" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
                         <li>
-                            <router-link to="/forms/basic" @click="toggleMobileMenu">Basic</router-link>
+                            <router-link to="/rekapan/harian" @click="toggleMobileMenu">Rekapan Harian</router-link>
                         </li>
                         <li>
-                            <router-link to="/forms/input-group" @click="toggleMobileMenu">Input Group</router-link>
+                            <router-link to="/forms/input-group" @click="toggleMobileMenu">Laporan Penjualan BBM</router-link>
                         </li>
                         <li>
-                            <router-link to="/forms/layouts" @click="toggleMobileMenu">Layouts</router-link>
+                            <router-link to="/forms/layouts" @click="toggleMobileMenu">Laporan Penjualan NON BBM</router-link>
                         </li>
                         <li>
                             <router-link to="/forms/validation" @click="toggleMobileMenu">Validation</router-link>
@@ -265,24 +265,7 @@
                         <li>
                             <router-link to="/forms/switches" @click="toggleMobileMenu">Switches</router-link>
                         </li>
-                        <li>
-                            <router-link to="/forms/wizards" @click="toggleMobileMenu">Wizards</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/forms/file-upload" @click="toggleMobileMenu">File Upload</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/forms/quill-editor" @click="toggleMobileMenu">Quill Editor</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/forms/markdown-editor" @click="toggleMobileMenu">Markdown Editor</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/forms/date-picker" @click="toggleMobileMenu">Date &amp; Range Picker </router-link>
-                        </li>
-                        <li>
-                            <router-link to="/forms/clipboard" @click="toggleMobileMenu">Clipboard</router-link>
-                        </li>
+                        
                     </ul>
                 </li>
 

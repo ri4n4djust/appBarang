@@ -4,13 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Models\PembelianDetail;
-use App\Models\Persediaan;
-
-class pembelianController extends Controller
+use App\Models\PenjualanDetail;
+class penjualanController extends Controller
 {
     //
-    public function simpanPembelian(Request $request){
+    public function simpanPenjualan(Request $request){
 
         try{
             $exception = DB::transaction(function() use ($request){ 
@@ -19,17 +17,19 @@ class pembelianController extends Controller
                 // array kkey 1 = Detail
                 $tglNota = $request[0]['tglNota'];
                 $noNota = $request[0]['noNota'];
-                $post = DB::table('tblpembelian')->insert([
-                    'noNota'     => $request[0]['noNota'],
-                    'r_supplier'     => $request[0]['kdSupplier'],
-                    'subTotal'     => $request[0]['subtotal'],
-                    'tglPembelian'   => $tglNota,
-                    'disc'     => $request[0]['disc'],
-                    'discPercent'     => $request[0]['disc'],
-                    'tax'     => $request[0]['tax'],
-                    'total'     => $request[0]['total'],
-                    'note'     => $request[0]['notes'],
-                    'term'     => $request[0]['term'],
+                $total =  $request[0]['subtotal'];
+                $diskon = $total * $request[0]['disc'] / 100;
+                $post = DB::table('tblpenjualan')->insert([
+                    'noPenjualan'     => $request[0]['noNota'],
+                    'r_pelanggan'     => $request[0]['kdPelanggan'],
+                    'subTotalPenjualan'     => $request[0]['subtotal'],
+                    'tglPenjualan'   => $tglNota,
+                    'discPenjualan'     => $diskon,
+                    'discPercentP'     => $request[0]['disc'],
+                    'taxPenjualan'     => $request[0]['tax'],
+                    'totalPenjualan'     => $request[0]['subtotal'],
+                    'notePenjualan'     => $request[0]['notes'],
+                    'termPenjualan'     => $request[0]['term'],
                     'jthTempo'     => $request[0]['jthTempo'],
                     'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                     'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
@@ -39,29 +39,31 @@ class pembelianController extends Controller
 
                         $kdBarang = $detpem[$i]['kdBarang'];
                         $qty = $detpem[$i]['qty'];
+                        $hrg = $detpem[$i]['hrgJual'];
                         $brg = DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->first();
                         $oldStok = $brg->stokPersediaan;
                         DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->update([
-                            'stokPersediaan' => $oldStok + $qty,
-                            'lastPrice' => $detpem[$i]['hrgPokok'],
+                            'stokPersediaan' => $oldStok - $qty,
+                            'salePrice' => $hrg,
                         ]);
                         DB::table('tblbarang')->where('kdBarang', $kdBarang)->update([
-                            'stkBarang' => $oldStok + $qty,
-                            'hrgPokok' => $detpem[$i]['hrgPokok'],
+                            'stkBarang' => $oldStok - $qty,
+                            'hrgJual' => $hrg,
                         ]);
 
                         $detail[] = [
-                            'r_noNota' => $noNota,
-                            'kdBarang' => $kdBarang,
-                            'nmBarang' => $detpem[$i]['nmBarang'],
-                            'hrgBeli' => $detpem[$i]['hrgPokok'],
+                            'r_noPenjualan' => $noNota,
+                            'r_kdBarang' => $kdBarang,
+                            'r_nmBarang' => $detpem[$i]['nmBarang'],
+                            'hrgJual' => $detpem[$i]['hrgJual'],
+                            'satuanJual' => $detpem[$i]['satuan'],
                             'qty' => $qty,
-                            'total' => $detpem[$i]['total'],
+                            'totalJual' => $detpem[$i]['total'],
                             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                         ];
                     }
-                PembelianDetail::insert($detail);
+                PenjualanDetail::insert($detail);
 
                 DB::commit();
             });
@@ -87,14 +89,5 @@ class pembelianController extends Controller
          ], 400);
         }
 
-    }
-
-    public function linkAccount(){
-        $listakun = DB::select('SELECT * FROM link_acc'); 
-        return response()->json([
-            'success' => true,
-            'message' => 'List Link acc',
-            'data' => $listakun
-        ], 200);
     }
 }
