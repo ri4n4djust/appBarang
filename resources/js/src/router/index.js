@@ -58,7 +58,18 @@ const routes = [
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/rekapanHarian.vue'),
         props: true,
     },
-    
+    {
+        path: '/laporan/bbm',
+        name: 'laporan-bbm',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/laporanBbm.vue'),
+        props: true,
+    },
+    {
+        path: '/laporan/barang',
+        name: 'laporan-barang',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/laporanBarang.vue'),
+        props: true,
+    },
 
     //components
     {

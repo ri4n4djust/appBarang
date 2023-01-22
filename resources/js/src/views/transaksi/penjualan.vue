@@ -227,7 +227,7 @@
                                                             <div class="total-amount"><span class="currency"></span><span>{{ new Intl.NumberFormat().format(Math.floor(subtotal * disc / 100)) }}</span></div>
                                                         </div>
                                                     </div>
-                                                    <div class="invoice-totals-row invoice-summary-tax">
+                                                    <div class="invoice-totals-row invoice-summary-tax" ref="divpajak">
                                                         <div class="invoice-summary-label">Pajak</div>
                                                         <div class="invoice-summary-value">
                                                             <div class="tax-amount"><span class="currency"></span>
@@ -340,6 +340,7 @@
 
     });
     const cartItemsPen = ref([])
+    const divpajak = ref(false)
     // const newValue = ref()
     // const currency_list = ref([]);
 
@@ -379,6 +380,7 @@
         // const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
         const temppajak = total.value * pajak /100
         total.value = total.value + temppajak
+        divpajak.value = true
         // console.log('total : '+ temptotal + 'pajak :'+temppajak)
     }
 
@@ -401,7 +403,9 @@
         dt.setDate(dt.getDate() + 5);
         params.value.due_date = dt;
 
+        divpajak.value = false
         // console.log(paramssupplier.value)
+        
        
         getBarang();
         getAcc();

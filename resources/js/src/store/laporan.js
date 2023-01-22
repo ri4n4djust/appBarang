@@ -17,10 +17,10 @@ const actions = {
         await dispatch('GetBarang')
     }, 
 
-    async GetLaporanBbm({ commit }){
+    async GetLaporanBbm({ commit }, lapbbm){
         let response
         try {
-            response = await axios.get('/api/laporan-bbm')
+            response = await axios.post('/api/laporan-bbm', lapbbm)
             commit('setLaporanBbm', response.data.data)
         } catch (ex) {
             // Handle error

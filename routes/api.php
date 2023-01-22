@@ -41,7 +41,7 @@ Route::post('/update/supplier', [App\Http\Controllers\supplierController::class,
 Route::delete('/hapus/supplier/{id}', [App\Http\Controllers\supplierController::class, 'destroy']);
 
 //======LAPORAN==============
-Route::get('/laporan-bbm', [App\Http\Controllers\laporanController::class, 'laporanBbm']);
+Route::post('/laporan-bbm', [App\Http\Controllers\laporanController::class, 'laporanBbm']);
 Route::get('/laporan-brg', [App\Http\Controllers\laporanController::class, 'laporanBrg']);
 // Route::post('/update/room', [App\Http\Controllers\roomController::class, 'update']);
 // Route::delete('/hapus/room/{id}', [App\Http\Controllers\roomController::class, 'destroy']);
