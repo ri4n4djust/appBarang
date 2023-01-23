@@ -111,6 +111,7 @@
     import '@/assets/sass/forms/custom-flatpickr.css';
 
     import { useStore } from 'vuex';
+    import { useRouter, useRoute } from 'vue-router'
 
     import moment from "moment";
 
@@ -118,6 +119,7 @@
     useMeta({ title: 'Data Laporan Penjualan BBM' });
 
     const store = useStore();
+    const router = useRouter()
 
     const columns = ref(['noPenjualan', 'tglPenjualan', 'nmPelanggan', 'subTotalPenjualan', 'discPenjualan', 'taxPenjualan', 'totalPenjualan', 'action']);
     const items = ref([]);
@@ -235,8 +237,10 @@
             });
             // tot =+val[d];
             let sum = 0;
+            let sumtax = 0;
             records.forEach(element => {
             sum +=  parseInt(element.totalPenjualan);
+            sumtax +=  parseInt(element.taxPenjualan);
             });
 
             // console.log(sum)
@@ -246,7 +250,8 @@
             rowhtml += '</tbody>';
             rowhtml += '<tfoot><tr>'
 
-            rowhtml += '<th></th><th></th><th></th><th></th><th></th><th>Total</th>:<th>'+Number(sum).toLocaleString()+'</th>'
+            rowhtml += '<th></th><th></th><th></th><th></th><th>Total</th><th>'+Number(sumtax).toLocaleString()+'</th><th>'+Number(sum).toLocaleString()+'</th></tr>'
+            rowhtml += '<tr><th></th><th></th><th></th><th></th><th>Total Net</th><th></th><th>'+Number(sum - sumtax).toLocaleString()+'</th>'
             rowhtml += '</tr></tfoot></table>'
             var winPrint = window.open('', '', 'left=0,top=0,width=1000,height=600,toolbar=0,scrollbars=0,status=0');
             winPrint.document.write('<title>Print</title>' + rowhtml);
@@ -297,7 +302,7 @@
             .join(' ');
     };
     const edit_row = (item) => {
-        // router.push({ name: 'user', params: { username: 'eduardo' } })
+        router.push({ name: 'pembelian', params: { data: item } })
         alert('ID: '+ item);
     };
 </script>

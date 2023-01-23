@@ -194,8 +194,12 @@
                                                     <div class="invoice-action-btn">
                                                         <div class="row">
                                                             <div class="col-sm-4">
-                                                                <a href="javascript:;" class="btn btn-primary btn-send" @click="taxSelected" >+ pajak</a>
-                                                                <a href="javascript:;" class="btn btn-primary btn-send" @click="taxRemove" >- pajak</a>
+                                                                <div v-if="divpajak">
+                                                                    <a href="javascript:;" class="btn btn-primary btn-send" @click="taxRemove" >- pajak</a>
+                                                                </div>
+                                                                <div v-if="!divpajak">
+                                                                    <a href="javascript:;" class="btn btn-primary btn-send" @click="taxSelected" >+ pajak</a>
+                                                                </div>
                                                             </div>
                                                             <div class="col-sm-4">
                                                                 <!-- <router-link to="/apps/invoice/preview" class="btn btn-dark btn-preview">Preview</router-link> -->
@@ -222,7 +226,7 @@
                                                     </div>
                                                     <div class="invoice-totals-row invoice-summary-total">
                                                          <div class="invoice-summary-label">Disc</div>
-                                                        <input type="text" v-model="params.disc" class="form-control form-control-sm" >%
+                                                        <input type="text" v-model="params.disc" @keyup="getTotal" class="form-control form-control-sm" >%
                                                         <div class="invoice-summary-label"></div>
                                                         <div class="invoice-summary-value">
                                                             <div class="total-amount"><span class="currency"></span><span>{{ new Intl.NumberFormat().format(Math.floor(subtotal * disc / 100)) }}</span></div>
@@ -352,9 +356,9 @@
         const pelanggans = store.getters.StatePelanggan;
         const accs = store.getters.StateAcc;
         nopenjualan.value = store.getters.NoPenjualan;
-        const pajak = ref(store.state.pajak);
+        // const pajak = ref(store.state.pajak);
         // console.log(suppliers)
-        return { barangs, pajak, pelanggans, nopenjualan, accs }
+        return { barangs, pelanggans, nopenjualan, accs }
     });
 
     const getBarang=() => {
@@ -373,28 +377,30 @@
 
     const getTotal=() =>{
         const pajak = store.state.pajak;
+        const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
         total.value = (subtotal.value - (subtotal.value * disc.value / 100))
-        tax.value = total.value * pajak /100
+        tax.value = temptotal * pajak /100
         
-        console.log('total :'+tax.value)
+        console.log('total tanpa pajak :'+tax.value)
         // return { tot }
     }
     const getTotalWtax=() =>{
         const pajak = store.state.pajak;
-        tax.value = total.value * pajak /100
+        const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
+        tax.value = temptotal * pajak /100
         total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + tax.value
         
         
-        console.log('total :'+tax.value)
+        console.log('total dengan pajak:'+tax.value)
         // return { tot }
     }
 
     function taxSelected() {
-        // const pajak = store.state.pajak;
-        // const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
-        // const temppajak = total.value * pajak /100
+        const pajak = store.state.pajak;
+        const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
+        // const temppajak = temptotal * pajak /100
         
-        // tax.value = total.value * pajak /100
+        tax.value = temptotal * pajak /100
         total.value = total.value + tax.value
         // total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + tax.value
         divpajak.value = true
@@ -404,11 +410,11 @@
     }
 
     function taxRemove() {
-        // const pajak = store.state.pajak;
-        // const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
+        const pajak = store.state.pajak;
+        const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
         // const temppajak = total.value * pajak /100
         
-        // tax.value = total.value * pajak /100
+        tax.value = temptotal * pajak /100
         total.value = total.value - tax.value
         // total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + tax.value
         divpajak.value = false
@@ -541,7 +547,6 @@
             tax.value = 0
         }else{
             cartItemsPen.value = JSON.parse(localStorage.getItem('cartItemsPen'));
-            
             getSubtotal();
             getTotal();
             
