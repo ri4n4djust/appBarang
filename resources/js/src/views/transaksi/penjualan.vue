@@ -227,11 +227,13 @@
                                                             <div class="total-amount"><span class="currency"></span><span>{{ new Intl.NumberFormat().format(Math.floor(subtotal * disc / 100)) }}</span></div>
                                                         </div>
                                                     </div>
-                                                    <div class="invoice-totals-row invoice-summary-tax" ref="divpajak">
-                                                        <div class="invoice-summary-label">Pajak</div>
-                                                        <div class="invoice-summary-value">
-                                                            <div class="tax-amount"><span class="currency"></span>
-                                                                <span>{{ new Intl.NumberFormat().format(Math.floor((subtotal - (subtotal * disc / 100)) * penjualan.pajak/100)) }}</span>
+                                                    <div v-show="divpajak">
+                                                        <div class="invoice-totals-row invoice-summary-tax" >
+                                                            <div class="invoice-summary-label">Pajak</div>
+                                                            <div class="invoice-summary-value">
+                                                                <div class="tax-amount"><span class="currency"></span>
+                                                                    <span>{{ new Intl.NumberFormat().format(Math.floor((subtotal - (subtotal * disc / 100)) * penjualan.pajak/100)) }}</span>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -311,7 +313,7 @@
     const subtotal = ref();
     const total = ref();
     const disc = ref(0);
-    const tax = ref();
+    const tax = ref(0);
     const selected_file = ref(null);
     const payment = ref([]);
     const params = ref({
@@ -321,7 +323,7 @@
         jthTempo: moment().format("YYYY-MM-DD"),
         notes: '',
         subtotal: subtotal,
-        tax: 11,
+        tax: tax,
         disc: disc,
         total: total,
     });
@@ -349,7 +351,7 @@
         const pelanggans = store.getters.StatePelanggan;
         const accs = store.getters.StateAcc;
         nopenjualan.value = store.getters.NoPenjualan;
-        const pajak = store.state.pajak;
+        const pajak = ref(store.state.pajak);
         // console.log(suppliers)
         return { barangs, pajak, pelanggans, nopenjualan, accs }
     });
@@ -369,42 +371,55 @@
 
 
     const getTotal=() =>{
-        total.value = subtotal.value - (subtotal.value * disc.value / 100)
-        tax.value = total.value - (total.value * penjualan.pajak /100)
-        // console.log('total :'+total.value)
+        const pajak = store.state.pajak;
+        total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + tax.value
+        tax.value = total.value * pajak /100
+        
+        console.log('total :'+tax.value)
         // return { tot }
     }
 
     function taxSelected() {
-        const pajak = store.state.pajak;
+        // const pajak = store.state.pajak;
         // const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
-        const temppajak = total.value * pajak /100
-        total.value = total.value + temppajak
+        // const temppajak = total.value * pajak /100
+        
+        // tax.value = total.value * pajak /100
+        total.value = total.value + tax.value
+        // total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + tax.value
         divpajak.value = true
+        // console.log(tax.value)
+        // getTotal()
         // console.log('total : '+ temptotal + 'pajak :'+temppajak)
     }
 
     const simpanPenjualan=() => {
         const header =params.value
         const headers =paramspelanggan.value
-            const headerfull = Object.assign(header, headers)
-            const detail =cartItemsPen.value
-            store.dispatch('CreatePenjualan', [headerfull,detail] )
-            setTimeout(function() { getCart(); }, 5000);
-            getNoPenjualan();
+        const headerfull = Object.assign(header, headers)
+        const detail =cartItemsPen.value
+        store.dispatch('CreatePenjualan', [headerfull,detail] )
+        total.value = 0
+        subtotal.value = 0
+        tax.value = 0
+        setTimeout(function() { 
+            getCart(); 
+        }, 5000);
+        getNoPenjualan();
+        total.value = 0
     }
 
     onMounted(() => {
         //set default data
-        items.value.push({ id: 1, title: '', description: '', rate: 0, quantity: 0, amount: 100, is_tax: false });
+        // items.value.push({ id: 1, title: '', description: '', rate: 0, quantity: 0, amount: 100, is_tax: false });
 
-        let dt = new Date();
-        params.value.invoice_date = JSON.parse(JSON.stringify(dt));
-        dt.setDate(dt.getDate() + 5);
-        params.value.due_date = dt;
+        // let dt = new Date();
+        // params.value.invoice_date = JSON.parse(JSON.stringify(dt));
+        // dt.setDate(dt.getDate() + 5);
+        // params.value.due_date = dt;
 
         divpajak.value = false
-        // console.log(paramssupplier.value)
+        console.log(divpajak.value)
         
        
         getBarang();
@@ -414,9 +429,9 @@
         getNoPenjualan();
     });
 
-    const change_file = (event) => {
-        selected_file.value = URL.createObjectURL(event.target.files[0]);
-    };
+    // const change_file = (event) => {
+    //     selected_file.value = URL.createObjectURL(event.target.files[0]);
+    // };
 
     // const add_item = () => {
     //     let max_id = 0;
@@ -426,9 +441,9 @@
     //     items.value.push({ id: max_id + 1, title: '', description: '', rate: 0, quantity: 0, amount: 0, is_tax: false });
     // };
 
-    const remove_item = (item) => {
-        items.value = items.value.filter((d) => d.id != item.id);
-    };
+    // const remove_item = (item) => {
+    //     items.value = items.value.filter((d) => d.id != item.id);
+    // };
 
     function addToCart(brg) {
         // console.log(brg)
@@ -485,9 +500,15 @@
         // subtotal.value = []
         if (localStorage.getItem('cartItemsPen')===null){
             cartItemsPen.value = localStorage.setItem('cartItemsPen', '[]');
-            subtotal.value = 0
+            // subtotal.value = 0
+            // total.value = 0
+        }else if(localStorage.getItem('cartItemsPen')==='[]'){
+            // alert('masi kosong')
+            cartItemsPen.value = localStorage.setItem('cartItemsPen', '[]')
+
         }else{
             cartItemsPen.value = JSON.parse(localStorage.getItem('cartItemsPen'));
+            
             getSubtotal();
             getTotal();
             

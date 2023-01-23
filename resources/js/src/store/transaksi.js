@@ -56,7 +56,6 @@ const actions = {
         let response
         try {
             response = await axios.post('api/store/penjualan', detail)
-            localStorage.setItem('cartItemsPen', '[]')
             const toast = window.Swal.mixin({
                 toast: true,
                 position: 'top-center',
@@ -69,6 +68,7 @@ const actions = {
                 title: 'Penjualan berhasil tersimpan',
                 padding: '2em',
             });
+            localStorage.setItem('cartItemsPen', '[]')
         } catch (ex) {
             // Handle error
             const toast =  window.Swal.mixin({

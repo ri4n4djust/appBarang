@@ -32,11 +32,9 @@
                             <div class="row">
                                 <div class="col-md-7">
                                     <div class="input-group mb-4">
-                                        <label>Dari</label>
                                         <flat-pickr v-model="sorting.startDate" 
                                             class="form-control form-control-sm">
                                         </flat-pickr>
-                                        <label>Sampai</label>
                                         <flat-pickr v-model="sorting.endDate" 
                                             class="form-control form-control-sm">
                                         </flat-pickr>

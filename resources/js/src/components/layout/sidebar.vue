@@ -242,10 +242,10 @@
                             <router-link to="/rekapan/harian" @click="toggleMobileMenu">Rekapan Harian</router-link>
                         </li>
                         <li>
-                            <router-link to="/laporan/bbm" @click="toggleMobileMenu">Laporan Penjualan BBM</router-link>
+                            <router-link to="/laporan/bbm" @click="toggleMobileMenu">Penjualan BBM</router-link>
                         </li>
                         <li>
-                            <router-link to="/laporan/barang" @click="toggleMobileMenu">Laporan Penjualan NON BBM</router-link>
+                            <router-link to="/laporan/barang" @click="toggleMobileMenu">Penjualan NON BBM</router-link>
                         </li>
                         <li>
                             <router-link to="/forms/validation" @click="toggleMobileMenu">Validation</router-link>

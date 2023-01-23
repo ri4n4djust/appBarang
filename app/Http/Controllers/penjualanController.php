@@ -27,7 +27,7 @@ class penjualanController extends Controller
                     'discPenjualan'     => $diskon,
                     'discPercentP'     => $request[0]['disc'],
                     'taxPenjualan'     => $request[0]['tax'],
-                    'totalPenjualan'     => $request[0]['subtotal'],
+                    'totalPenjualan'     => $request[0]['total'],
                     'notePenjualan'     => $request[0]['notes'],
                     'termPenjualan'     => $request[0]['term'],
                     'jthTempo'     => $request[0]['jthTempo'],

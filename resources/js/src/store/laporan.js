@@ -28,10 +28,10 @@ const actions = {
             return
         }
     },
-    async GetLaporanBarang({ commit }){
+    async GetLaporanBarang({ commit }, lapbrg){
         let response
         try {
-            response = await axios.get('/api/laporan-barang')
+            response = await axios.post('/api/laporan-barang', lapbrg)
             commit('setLaporanBarang', response.data.data)
         } catch (ex) {
             // Handle error

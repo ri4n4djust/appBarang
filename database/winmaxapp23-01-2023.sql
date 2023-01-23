@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 22, 2023 at 04:07 AM
+-- Generation Time: Jan 23, 2023 at 01:10 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.25
 
@@ -191,7 +191,8 @@ CREATE TABLE `tblbarang` (
 --
 
 INSERT INTO `tblbarang` (`id`, `kdBarang`, `nmBarang`, `hrgPokok`, `hrgJual`, `ktgBarang`, `satuanBarang`, `merek`, `stkBarang`, `stkSatuan`, `qtyMin`, `qtyMax`, `stsBarang`, `deskripsi`, `created_at`, `updated_at`) VALUES
-(2, 'BRG0004', 'OLI MESRAN 5L', 220000, 250000, 'KT-2021-2', 'BOTOL', 'MESRAN', '160', NULL, '5', '200', '', 'oli mesin', NULL, NULL);
+(2, 'BRG0004', 'OLI MESRAN 5L', 220000, 250000, 'KT-2021-2', 'BOTOL', 'MESRAN', '129', NULL, '5', '200', '', 'oli mesin', NULL, NULL),
+(3, 'BRG0005', 'GAS ELPIGI 12KG', 18000, 220000, 'KT-2021-3', 'TABUNG', 'ELPIGI', '20', NULL, '5', '200', '1', 'Tabung gas elipgi', '2023-01-23 00:04:44', '2023-01-23 00:04:44');
 
 --
 -- Triggers `tblbarang`
@@ -306,12 +307,12 @@ CREATE TABLE `tblnosel_detail` (
 INSERT INTO `tblnosel_detail` (`id_nosel`, `r_bbm`, `r_code_bbm`, `nama_nosel`, `meter_awal`, `meter_akhir`, `harga`, `created_at`, `updated_at`) VALUES
 (1, 1, 'BRG0001', 'nosel 1', 85300, 85500, '14900.00', '2023-01-14 09:54:41', '2023-01-22 01:34:04'),
 (2, 1, 'BRG0001', 'nosel 2', 6500, 7000, '14900.00', '2023-01-14 09:56:59', '2023-01-22 01:45:42'),
-(3, 2, 'BRG0002', 'nosel 1', 23500, 24000, '10000.00', '2023-01-14 09:58:16', '2023-01-21 23:48:07'),
+(3, 2, 'BRG0002', 'nosel 1', 24500, 25000, '10000.00', '2023-01-14 09:58:16', '2023-01-22 04:28:41'),
 (4, 1, 'BRG0001', 'nosel 3', 26000, 26500, '14900.00', '2023-01-14 09:56:59', '2023-01-16 21:06:50'),
 (5, 1, 'BRG0001', 'nosel 4', 12000, 12500, '14900.00', '2023-01-14 09:56:59', '2023-01-16 13:53:22'),
 (6, 1, 'BRG0001', 'nosel 5', 15500, 16000, '14900.00', '2023-01-14 09:56:59', '2023-01-16 07:56:20'),
-(7, 2, 'BRG0002', 'nosel 2', 23500, 24000, '10000.00', '2023-01-14 09:58:16', '2023-01-22 00:21:26'),
-(8, 2, 'BRG0002', 'nosel 3', 21000, 22000, '10000.00', '2023-01-14 09:58:16', '2023-01-16 22:37:59'),
+(7, 2, 'BRG0002', 'nosel 2', 24000, 24500, '10000.00', '2023-01-14 09:58:16', '2023-01-22 04:28:49'),
+(8, 2, 'BRG0002', 'nosel 3', 22000, 22500, '10000.00', '2023-01-14 09:58:16', '2023-01-22 04:28:54'),
 (9, 2, 'BRG0002', 'nosel 4', 21000, 22000, '10000.00', '2023-01-14 09:58:16', '2023-01-16 22:37:59'),
 (10, 1, 'BRG0001', 'nosel 6', 15500, 16000, '14900.00', '2023-01-14 09:56:59', '2023-01-16 07:56:20'),
 (11, 2, 'BRG0002', 'nosel 5', 21000, 22000, '10000.00', '2023-01-14 09:58:16', '2023-01-16 22:37:59'),
@@ -462,7 +463,7 @@ CREATE TABLE `tblpenjualan` (
   `subTotalPenjualan` decimal(13,2) NOT NULL,
   `discPenjualan` decimal(13,2) NOT NULL,
   `discPercentP` int NOT NULL,
-  `taxPenjualan` int NOT NULL,
+  `taxPenjualan` decimal(10,2) NOT NULL,
   `totalPenjualan` decimal(13,2) NOT NULL,
   `notePenjualan` varchar(225) DEFAULT NULL,
   `termPenjualan` int DEFAULT NULL,
@@ -470,16 +471,6 @@ CREATE TABLE `tblpenjualan` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `tblpenjualan`
---
-
-INSERT INTO `tblpenjualan` (`idPenjualan`, `noPenjualan`, `tglPenjualan`, `r_pelanggan`, `subTotalPenjualan`, `discPenjualan`, `discPercentP`, `taxPenjualan`, `totalPenjualan`, `notePenjualan`, `termPenjualan`, `jthTempo`, `created_at`, `updated_at`) VALUES
-(4, 'INV2023001', '2023-01-22 00:00:00', 'PL02022033', '250000.00', '0.00', 0, 11, '250000.00', NULL, 0, '2023-01-22 00:00:00', '2023-01-21 22:51:44', '2023-01-21 22:51:44'),
-(5, 'INV2023002', '2023-01-22 00:00:00', 'PL02022031', '250000.00', '0.00', 0, 11, '250000.00', NULL, 0, '2023-01-22 00:00:00', '2023-01-21 22:55:50', '2023-01-21 22:55:50'),
-(6, 'INV2023003', '2023-01-21 00:00:00', 'PL02022032', '250000.00', '0.00', 0, 11, '250000.00', NULL, 1, '2023-01-28 00:00:00', '2023-01-21 22:58:52', '2023-01-21 22:58:52'),
-(7, 'INV2023004', '2023-01-22 00:00:00', 'PL02022032', '2500000.00', '125000.00', 5, 11, '2500000.00', NULL, 0, '2023-01-22 00:00:00', '2023-01-21 22:59:51', '2023-01-21 22:59:51');
 
 -- --------------------------------------------------------
 
@@ -499,16 +490,6 @@ CREATE TABLE `tblpenjualan_detail` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `tblpenjualan_detail`
---
-
-INSERT INTO `tblpenjualan_detail` (`idDetailPenjualan`, `r_noPenjualan`, `r_kdBarang`, `r_nmBarang`, `hrgJual`, `qty`, `satuanJual`, `totalJual`, `created_at`, `updated_at`) VALUES
-(1, 'INV2023001', 'BRG0004', 'OLI MESRAN 5L', '250000.00', 1, 'BOTOL', '250000.00', '2023-01-21 22:51:44', '2023-01-21 22:51:44'),
-(2, 'INV2023002', 'BRG0004', 'OLI MESRAN 5L', '250000.00', 2, 'BOTOL', '250000.00', '2023-01-21 22:55:50', '2023-01-21 22:55:50'),
-(3, 'INV2023003', 'BRG0004', 'OLI MESRAN 5L', '250000.00', 1, 'BOTOL', '250000.00', '2023-01-21 22:58:53', '2023-01-21 22:58:53'),
-(4, 'INV2023004', 'BRG0004', 'OLI MESRAN 5L', '250000.00', 10, 'BOTOL', '2500000.00', '2023-01-21 22:59:51', '2023-01-21 22:59:51');
 
 -- --------------------------------------------------------
 
@@ -535,9 +516,10 @@ CREATE TABLE `tblpersediaan` (
 
 INSERT INTO `tblpersediaan` (`idPersediaan`, `kdPersediaan`, `nmPersediaan`, `stokPersediaan`, `satuanPersediaan`, `ktgPersediaan`, `lastPrice`, `salePrice`, `created_at`, `updated_at`) VALUES
 (1, 'BRG0001', 'PERTAMAX', 835, 'Liter', 'KT-2021-1', '14000.00', '14900.00', '2023-01-19 22:24:13', '2023-01-19 22:24:13'),
-(2, 'BRG0002', 'PERTALITE', 4018, 'Liter', 'KT-2021-1', '9000.00', '10000.00', '2023-01-19 22:25:23', '2023-01-19 22:25:23'),
+(2, 'BRG0002', 'PERTALITE', 2018, 'Liter', 'KT-2021-1', '9000.00', '10000.00', '2023-01-19 22:25:23', '2023-01-19 22:25:23'),
 (3, 'BRG0003', 'DEX LITE', 4541, 'Liter', 'KT-2021-1', '6500.00', '8000.00', '2023-01-19 22:26:32', '2023-01-19 22:26:32'),
-(4, 'BRG0004', 'OLI MESRAN 5L', 160, 'BOTOL', 'KT-2021-2', '220000.00', '250000.00', '2023-01-20 12:14:45', '2023-01-20 12:14:45');
+(4, 'BRG0004', 'OLI MESRAN 5L', 129, 'BOTOL', 'KT-2021-2', '220000.00', '250000.00', '2023-01-20 12:14:45', '2023-01-20 12:14:45'),
+(6, 'BRG0005', 'GAS ELPIGI 12KG', 20, 'TABUNG', 'KT-2021-2', '18000.00', '220000.00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -655,7 +637,11 @@ INSERT INTO `tbltransaksi_nosel` (`id`, `r_bbm`, `r_nosel`, `kd_trans`, `r_regu`
 (2, 1, 2, '12202301221', 'A', '2023-01-22 00:00:00', 500, '14900.00', 6500, '7450000.00', '2023-01-22 01:18:29', '2023-01-22 01:18:29'),
 (3, 1, 1, '11202301222', 'A', '2023-01-22 00:00:00', 100, '14900.00', 85300, '1490000.00', '2023-01-22 01:33:27', '2023-01-22 01:33:27'),
 (4, 1, 1, '11202301223', 'A', '2023-01-22 00:00:00', 200, '14900.00', 85500, '2980000.00', '2023-01-22 01:34:04', '2023-01-22 01:34:04'),
-(5, 1, 2, '12202301222', 'A', '2023-01-22 00:00:00', 500, '14900.00', 7000, '7450000.00', '2023-01-22 01:45:42', '2023-01-22 01:45:42');
+(5, 1, 2, '12202301222', 'A', '2023-01-22 00:00:00', 500, '14900.00', 7000, '7450000.00', '2023-01-22 01:45:42', '2023-01-22 01:45:42'),
+(6, 2, 3, '23202301221', 'A', '2023-01-22 00:00:00', 500, '10000.00', 24500, '5000000.00', '2023-01-22 03:10:28', '2023-01-22 03:10:28'),
+(7, 2, 3, '23202301211', 'A', '2023-01-21 00:00:00', 500, '10000.00', 25000, '5000000.00', '2023-01-22 04:28:41', '2023-01-22 04:28:41'),
+(8, 2, 7, '27202301211', 'A', '2023-01-21 00:00:00', 500, '10000.00', 24500, '5000000.00', '2023-01-22 04:28:49', '2023-01-22 04:28:49'),
+(9, 2, 8, '28202301211', 'A', '2023-01-21 00:00:00', 500, '10000.00', 22500, '5000000.00', '2023-01-22 04:28:54', '2023-01-22 04:28:54');
 
 -- --------------------------------------------------------
 
@@ -872,7 +858,7 @@ ALTER TABLE `rekening_anggaran`
 -- AUTO_INCREMENT for table `tblbarang`
 --
 ALTER TABLE `tblbarang`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tblbbm`
@@ -926,19 +912,19 @@ ALTER TABLE `tblpembelian_detail`
 -- AUTO_INCREMENT for table `tblpenjualan`
 --
 ALTER TABLE `tblpenjualan`
-  MODIFY `idPenjualan` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idPenjualan` bigint NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tblpenjualan_detail`
 --
 ALTER TABLE `tblpenjualan_detail`
-  MODIFY `idDetailPenjualan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idDetailPenjualan` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tblpersediaan`
 --
 ALTER TABLE `tblpersediaan`
-  MODIFY `idPersediaan` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idPersediaan` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tblpersediaan_detail`
@@ -968,7 +954,7 @@ ALTER TABLE `tblsupplier`
 -- AUTO_INCREMENT for table `tbltransaksi_nosel`
 --
 ALTER TABLE `tbltransaksi_nosel`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `users`
