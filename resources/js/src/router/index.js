@@ -50,6 +50,14 @@ const routes = [
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/penjualan.vue'),
         props: true,
     },
+    {
+        path: '/editpenjualan',
+        name: 'editpenjualan',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/editpenjualan.vue'),
+        props: true,
+    },
+    
+
 
     // laporan
     {

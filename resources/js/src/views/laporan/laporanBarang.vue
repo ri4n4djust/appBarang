@@ -302,7 +302,7 @@
             .join(' ');
     };
     const edit_row = (item) => {
-        router.push({ name: 'pembelian', params: { data: item } })
-        alert('ID: '+ item);
+        router.push({ name: 'editpenjualan', params: {noPenjualan: item.noPenjualan}  })
+        // alert('ID: '+ item.noPenjualan);
     };
 </script>

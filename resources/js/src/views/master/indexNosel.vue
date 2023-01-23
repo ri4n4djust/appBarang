@@ -208,6 +208,7 @@
         getNosel();
         getTrans();
         getRegu();
+        // console.log(props.nama_bbm)
 
         // function getTransBbm(){
         //     // const bbmnosel = 
