@@ -468,8 +468,11 @@
                 const objIndex = cartItems.value.findIndex((e => e.kdBarang === brg.kdPersediaan));
                 const oldName = cartItems.value[objIndex].nmBarang;
                 const oldQty = cartItems.value[objIndex].qty;
+                const oldTotal = cartItems.value[objIndex].total;
                 const newQty = parseInt(oldQty) + parseInt(qty.value) ;
+                const newTotal = parseInt(oldTotal) + parseInt(qty.value * brg.lastPrice) ;
                 cartItems.value[objIndex].qty = parseInt(newQty);
+                cartItems.value[objIndex].total = parseInt(newTotal);
                 localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
                 alert(oldName+' Quantity Update')
                 getCart();

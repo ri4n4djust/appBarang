@@ -194,7 +194,8 @@
                                                     <div class="invoice-action-btn">
                                                         <div class="row">
                                                             <div class="col-sm-4">
-                                                                <a href="javascript:;" class="btn btn-primary btn-send" @click="taxSelected" v-bind="hide = true">+ pajak</a>
+                                                                <a href="javascript:;" class="btn btn-primary btn-send" @click="taxSelected" >+ pajak</a>
+                                                                <a href="javascript:;" class="btn btn-primary btn-send" @click="taxRemove" >- pajak</a>
                                                             </div>
                                                             <div class="col-sm-4">
                                                                 <!-- <router-link to="/apps/invoice/preview" class="btn btn-dark btn-preview">Preview</router-link> -->
@@ -232,7 +233,7 @@
                                                             <div class="invoice-summary-label">Pajak</div>
                                                             <div class="invoice-summary-value">
                                                                 <div class="tax-amount"><span class="currency"></span>
-                                                                    <span>{{ new Intl.NumberFormat().format(Math.floor((subtotal - (subtotal * disc / 100)) * penjualan.pajak/100)) }}</span>
+                                                                    <span>{{ new Intl.NumberFormat().format(Math.floor( tax )) }}</span>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -372,8 +373,17 @@
 
     const getTotal=() =>{
         const pajak = store.state.pajak;
-        total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + tax.value
+        total.value = (subtotal.value - (subtotal.value * disc.value / 100))
         tax.value = total.value * pajak /100
+        
+        console.log('total :'+tax.value)
+        // return { tot }
+    }
+    const getTotalWtax=() =>{
+        const pajak = store.state.pajak;
+        tax.value = total.value * pajak /100
+        total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + tax.value
+        
         
         console.log('total :'+tax.value)
         // return { tot }
@@ -389,7 +399,21 @@
         // total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + tax.value
         divpajak.value = true
         // console.log(tax.value)
-        // getTotal()
+        getTotalWtax()
+        // console.log('total : '+ temptotal + 'pajak :'+temppajak)
+    }
+
+    function taxRemove() {
+        // const pajak = store.state.pajak;
+        // const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
+        // const temppajak = total.value * pajak /100
+        
+        // tax.value = total.value * pajak /100
+        total.value = total.value - tax.value
+        // total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + tax.value
+        divpajak.value = false
+        // console.log(tax.value)
+        getTotal()
         // console.log('total : '+ temptotal + 'pajak :'+temppajak)
     }
 
@@ -407,6 +431,7 @@
         }, 5000);
         getNoPenjualan();
         total.value = 0
+        divpajak.value = false
     }
 
     onMounted(() => {
@@ -460,8 +485,11 @@
                 const objIndex = cartItemsPen.value.findIndex((e => e.kdBarang === brg.kdBarang));
                 const oldName = cartItemsPen.value[objIndex].nmBarang;
                 const oldQty = cartItemsPen.value[objIndex].qty;
+                const oldTotal = cartItemsPen.value[objIndex].total;
                 const newQty = parseInt(oldQty) + parseInt(qty.value) ;
+                const newTotal = parseInt(oldTotal) + parseInt(qty.value * brg.hrgJual) ;
                 cartItemsPen.value[objIndex].qty = parseInt(newQty);
+                cartItemsPen.value[objIndex].total = parseInt(newTotal);
                 localStorage.setItem('cartItemsPen',JSON.stringify(cartItemsPen.value));
                 alert(oldName+' Quantity Update')
                 getCart();
@@ -482,6 +510,8 @@
         // cartItems.value.splice(index, 1)
         // this.isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
         getCart();
+        // subtotal.value = 0
+        // total.value = 0
         // console.log(filtered)
         // alert(filtered.nmBarang)
     }
@@ -505,7 +535,10 @@
         }else if(localStorage.getItem('cartItemsPen')==='[]'){
             // alert('masi kosong')
             cartItemsPen.value = localStorage.setItem('cartItemsPen', '[]')
-
+            getTotal();
+            subtotal.value = 0
+            total.value = 0
+            tax.value = 0
         }else{
             cartItemsPen.value = JSON.parse(localStorage.getItem('cartItemsPen'));
             

@@ -219,13 +219,13 @@
             rowhtml += '<tbody>';
             records.map((item) => {
                 rowhtml += '<tr>';
-                rowhtml += '<td>'+item.kd_trans+'</td>';
-                rowhtml += '<td>'+item.nama_bbm+'</td>';
-                rowhtml += '<td>'+item.r_regu+'</td>';
-                rowhtml += '<td>'+moment(item.tgl_transaksi).format("DD-MM-YYYY")+'</td>';
-                rowhtml += '<td>'+Number(item.last_price).toLocaleString()+'</td>';
-                rowhtml += '<td>'+Number(item.cost_ltr).toLocaleString()+'</td>';
-                rowhtml += '<td>'+Number(item.total).toLocaleString()+'</td>';
+                rowhtml += '<td>'+item.noPenjualan+'</td>';
+                rowhtml += '<td>'+moment(item.tglPenjualan).format("DD-MM-YYYY")+'</td>';
+                rowhtml += '<td>'+item.nmPelanggan+'</td>';
+                rowhtml += '<td>'+Number(item.subTotalPenjualan).toLocaleString()+'</td>';
+                rowhtml += '<td>'+Number(item.discPenjualan).toLocaleString()+'</td>';
+                rowhtml += '<td>'+Number(item.taxPenjualan).toLocaleString()+'</td>';
+                rowhtml += '<td>'+Number(item.totalPenjualan).toLocaleString()+'</td>';
                 rowhtml += '</tr>';
                 // cols.map((d) => {
                 //     let val = item[d] ? item[d] : '';
@@ -236,7 +236,7 @@
             // tot =+val[d];
             let sum = 0;
             records.forEach(element => {
-            sum +=  parseInt(element.total);
+            sum +=  parseInt(element.totalPenjualan);
             });
 
             // console.log(sum)
