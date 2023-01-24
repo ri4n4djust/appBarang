@@ -144,7 +144,7 @@
         resizableColumns: true,
     });
     const sorting = ref({
-        startDate: moment().format("YYYY-MM-DD"),
+        startDate: moment().subtract(30,'d').format("YYYY-MM-DD"),
         endDate: moment().format("YYYY-MM-DD")
     });
 
@@ -302,7 +302,8 @@
             .join(' ');
     };
     const edit_row = (item) => {
-        router.push({ name: 'editpenjualan', params: {noPenjualan: item.noPenjualan}  })
+        router.push({ name: 'editpenjualan' })
+        store.dispatch('CreateEditPenjualan', item);
         // alert('ID: '+ item.noPenjualan);
     };
 </script>

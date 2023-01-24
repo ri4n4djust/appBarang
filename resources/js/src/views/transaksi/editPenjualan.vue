@@ -311,14 +311,14 @@
     const router = useRouter();
     const route = useRoute();
 
-    const props = defineProps({
-        nopenjualan: String,
-    });
-    nopenjualan = props.nopenjualan;
+    // const props = defineProps({
+    //     nopenjualan: String,
+    // });
+    // nopenjualan = props.nopenjualan;
 
     const items = ref([]);
     const brg = ref([]);
-    const nopenjualan = ref(nopenjualan);
+    const nopenjualan = ref([]);
     const qty = ref(1);
     const subtotal = ref();
     const total = ref();
@@ -327,7 +327,7 @@
     const selected_file = ref(null);
     const payment = ref([]);
     const params = ref({
-        noNota: nopenjualan,
+        noNota: '',
         tglNota: moment().format("YYYY-MM-DD"),
         term: 0,
         jthTempo: moment().format("YYYY-MM-DD"),
@@ -455,7 +455,7 @@
         // params.value.due_date = dt;
 
         divpajak.value = false
-        console.log(props.nopenjualan)
+        // console.log(item.nopenjualan)
         
        
         // getBarang();

@@ -4,13 +4,15 @@ import axios from 'axios';
 const state = {
     pembelian: [],
     penjualan:[],
-    linkacc: []
+    linkacc: [],
+    editpenjualan: [],
   };
   
 const getters = {
     StatePembelian: state => state.pembelian,
     StatePenjualan: state => state.penjualan,
     StateAcc: state => state.linkacc,
+    SeditPenjualan: state => state.editpenjualan
 };
 
 const actions = {
@@ -112,7 +114,10 @@ const actions = {
         }
     },
     
-    
+    async CreateEditPenjualan({commit}, item) {
+        // await axios.post('/api/tambah/pelanggan', pel)
+        await commit('setEditPenjualan', item)
+    },
 
 };
 const mutations = {
@@ -122,6 +127,9 @@ const mutations = {
     setAcc(state, acc){
         state.linkacc = acc
     },
+    setEditPenjualan(state, editjual){
+        state.editpenjualan = editjual
+    }
     // DeleteBarang({dispatch}, id) {
     //     axios.delete(`hapus/barang/${id}`)
     //     dispatch('GetBarang')
