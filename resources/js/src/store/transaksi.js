@@ -145,7 +145,7 @@ const actions = {
     async CreateEditPenjualan({commit}, item) {
         // await axios.post('/api/tambah/pelanggan', pel)
         await commit('setEditPenjualan', item)
-        localStorage.setItem('headerEditPen', JSON.stringify(item))
+        localStorage.setItem('headerEditPen', JSON.stringify([item]))
     },
 
 };

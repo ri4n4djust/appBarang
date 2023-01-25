@@ -19,7 +19,8 @@ class penjualanController extends Controller
                 $noNota = $request[0]['noNota'];
                 $total =  $request[0]['subtotal'];
                 $diskon = $total * $request[0]['disc'] / 100;
-                $post = DB::table('tblpenjualan')->insert([
+                
+                $post = DB::table('tblpenjualan')->upsert([
                     'noPenjualan'     => $request[0]['noNota'],
                     'r_pelanggan'     => $request[0]['kdPelanggan'],
                     'subTotalPenjualan'     => $request[0]['subtotal'],
@@ -33,7 +34,23 @@ class penjualanController extends Controller
                     'jthTempo'     => $request[0]['jthTempo'],
                     'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                     'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-                ]);
+                ],
+                [ 
+                    'r_pelanggan'     => $request[0]['kdPelanggan'],
+                    'subTotalPenjualan'     => $request[0]['subtotal'],
+                    'tglPenjualan'   => $tglNota,
+                    'discPenjualan'     => $diskon,
+                    'discPercentP'     => $request[0]['disc'],
+                    'taxPenjualan'     => $request[0]['tax'],
+                    'totalPenjualan'     => $request[0]['total'],
+                    'notePenjualan'     => $request[0]['notes'],
+                    'termPenjualan'     => $request[0]['term'],
+                    'jthTempo'     => $request[0]['jthTempo'],
+                    'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                ]
+            );
+                PenjualanDetail::where('r_noPenjualan', $noNota)->delete();
                 $detpem = $request[1];
                 for ($i = 0; $i < count($detpem); $i++) {
 
