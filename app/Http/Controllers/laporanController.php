@@ -37,4 +37,19 @@ class laporanController extends Controller
             'data' => $lap
         ], 200);
     }
+
+    public function pembelianBrg(Request $request){
+        $startDate = $request->input('startDate');
+        $endDate = $request->input('endDate');
+        $lap = DB::table('tblpembelian')
+                ->join('tblsupplier', 'tblpembelian.r_supplier', 'tblsupplier.kdSupplier')
+                ->select('tblpembelian.*', 'tblsupplier.nmSupplier')
+                ->whereBetween('tblpembelian.tglPembelian', [$startDate, $endDate])
+                ->get();
+        return response()->json([
+            'success' => true,
+            'message' => 'Laporan pembelian Barang',
+            'data' => $lap
+        ], 200);
+    }
 }

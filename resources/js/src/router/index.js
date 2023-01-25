@@ -29,6 +29,11 @@ const routes = [
         name: 'barang',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexBarang.vue'),
     },
+    {
+        path: '/persediaan',
+        name: 'persediaan',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexPersediaan.vue'),
+    },
 
     {
         path: '/nosel',
@@ -67,15 +72,21 @@ const routes = [
         props: true,
     },
     {
-        path: '/laporan/bbm',
-        name: 'laporan-bbm',
-        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/laporanBbm.vue'),
+        path: '/laporan/penjualan-bbm',
+        name: 'penjualan-bbm',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/penjualanBbm.vue'),
         props: true,
     },
     {
-        path: '/laporan/barang',
-        name: 'laporan-barang',
-        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/laporanBarang.vue'),
+        path: '/laporan/penjualan-barang',
+        name: 'penjualan-barang',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/penjualanBarang.vue'),
+        props: true,
+    },
+    {
+        path: '/laporan/pembelian-persediaan',
+        name: 'pembelian-persediaan',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/pembelianPersediaan.vue'),
         props: true,
     },
 

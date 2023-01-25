@@ -121,13 +121,13 @@
 
                     <ul id="datatables" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
                         <li>
-                            <router-link to="/tables/basic" @click="toggleMobileMenu">Pegawai</router-link>
+                            <router-link to="/pegawai" @click="toggleMobileMenu">Pegawai</router-link>
                         </li>
                         <li>
-                            <router-link to="/tables/striped" @click="toggleMobileMenu">Supplier</router-link>
+                            <router-link to="/supplier" @click="toggleMobileMenu">Supplier</router-link>
                         </li>
                         <li>
-                            <router-link to="/tables/order-sorting" @click="toggleMobileMenu">Order Sorting</router-link>
+                            <router-link to="/persediaan" @click="toggleMobileMenu">Persediaan</router-link>
                         </li>
                         <li>
                             <router-link to="/tables/multi-column" @click="toggleMobileMenu">Multi Column</router-link>
@@ -191,10 +191,10 @@
                             <router-link to="/penjualan" @click="toggleMobileMenu">Penjualan</router-link>
                         </li>
                         <li>
-                            <router-link to="/apps/todo-list" @click="toggleMobileMenu">Tera</router-link>
+                            <router-link to="/tera" @click="toggleMobileMenu">Tera</router-link>
                         </li>
                         <li>
-                            <router-link to="/apps/notes" @click="toggleMobileMenu">Opnume</router-link>
+                            <router-link to="/opnum" @click="toggleMobileMenu">Opnum</router-link>
                         </li>
                     </ul>
                 </li>
@@ -242,13 +242,13 @@
                             <router-link to="/rekapan/harian" @click="toggleMobileMenu">Rekapan Harian</router-link>
                         </li>
                         <li>
-                            <router-link to="/laporan/bbm" @click="toggleMobileMenu">Penjualan BBM</router-link>
+                            <router-link to="/laporan/penjualan-bbm" @click="toggleMobileMenu">Penjualan BBM</router-link>
                         </li>
                         <li>
-                            <router-link to="/laporan/barang" @click="toggleMobileMenu">Penjualan NON BBM</router-link>
+                            <router-link to="/laporan/penjualan-barang" @click="toggleMobileMenu">Penjualan NON BBM</router-link>
                         </li>
                         <li>
-                            <router-link to="/forms/validation" @click="toggleMobileMenu">Validation</router-link>
+                            <router-link to="/laporan/pembelian-persediaan" @click="toggleMobileMenu">Pembelian Persediaan</router-link>
                         </li>
                         <li>
                             <router-link to="/forms/input-mask" @click="toggleMobileMenu">Input Mask</router-link>

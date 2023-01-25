@@ -479,7 +479,7 @@
         // setTimeout(function() { 
         //     getCart(); 
         // }, 5000);
-        router.push({ name: 'laporan-barang' })
+        router.push({ name: 'penjualan-barang' })
         total.value = 0
         divpajak.value = false
     }

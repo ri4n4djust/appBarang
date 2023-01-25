@@ -26,12 +26,6 @@ const actions = {
             return
         }
     
-        // Handle success
-        // const data = response.body
-        // const data = response.data.data
-        // let response = await axios.get('api/barang')
-        // commit('setBarang', response.data.data)
-        // console.log(data)
     },
     async GetPersediaan({ commit }){
         let response
@@ -43,12 +37,6 @@ const actions = {
             return
         }
     
-        // Handle success
-        // const data = response.body
-        // const data = response.data.data
-        // let response = await axios.get('api/barang')
-        // commit('setBarang', response.data.data)
-        // console.log(data)
     },
     async EditBarang({dispatch}, Brg) {
         await axios.post('api/update/barang', Brg)
