@@ -287,7 +287,7 @@
 </template>
 
 <script setup>
-    // import { onMounted, ref } from 'vue';
+    import { computed, onMounted, ref, onBeforeMount } from 'vue';
     import '@/assets/sass/apps/invoice-add.scss';
 
     //flatpickr
@@ -300,7 +300,6 @@
 
     import moment from "moment";
 
-    import { computed, ref, onMounted, watch } from 'vue';
     import { useStore } from 'vuex';
     import { useRouter, useRoute } from 'vue-router'
 
@@ -450,7 +449,7 @@
         // params.value.due_date = dt;
 
         divpajak.value = false
-        console.log(divpajak.value)
+        console.log('on mount page penjualan')
         
        
         getBarang();

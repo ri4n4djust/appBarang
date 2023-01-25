@@ -90,4 +90,15 @@ class penjualanController extends Controller
         }
 
     }
+
+    public function getDetailPenjualan(Request $request){
+        $noPenjualan = $request->input('kd');
+
+        $data = PenjualanDetail::where('r_noPenjualan', $noPenjualan)->get();
+        return response()->json([
+            'success' => true,
+            'message' => 'Detail Penjualan!',
+            'data' => $data
+        ], 200);
+    }
 }

@@ -14,7 +14,6 @@
                 </li>
             </ul>
         </teleport>
-
         <div class="row invoice layout-top-spacing layout-spacing">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                 <div class="doc-container">
@@ -67,43 +66,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-xl-5 invoice-address-client">
 
-                                                <div class="invoice-address-client-fields">
-                                                    <div class="form-group row">
-                                                        <label for="client-name" class="col-sm-3 col-form-label col-form-label-sm">Pelanggan</label>
-                                                        <div class="col-sm-9">
-                                                            <multiselect 
-                                                                v-model="paramspelanggan" 
-                                                                :options="penjualan.pelanggans" 
-                                                                :searchable="true"
-                                                                :allow-empty="false"
-                                                                track-by="nmPelanggan"
-                                                                label="nmPelanggan"
-                                                                open-direction="top"
-                                                                placeholder="Choose..." 
-                                                                selected-label="" 
-                                                                select-label="" 
-                                                                deselect-label="">
-                                                            </multiselect>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label for="client-address" class="col-sm-3 col-form-label col-form-label-sm">Address</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" v-model="paramspelanggan.almtPelanggan" id="client-address" class="form-control form-control-sm" placeholder="XYZ Street" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label for="client-phone" class="col-sm-3 col-form-label col-form-label-sm">Phone</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" v-model="paramspelanggan.noHpPelanggan" id="client-phone" class="form-control form-control-sm" placeholder="(123) 456 789" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
 
@@ -187,73 +150,7 @@
                                     
 
                                     <div class="invoice-detail-total">
-                                        <div class="row">
-
-                                            <div class="col-md-6">
-                                                <div class="invoice-actions-btn">
-                                                    <div class="invoice-action-btn">
-                                                        <div class="row">
-                                                            <div class="col-sm-4">
-                                                                <div v-if="divpajak">
-                                                                    <a href="javascript:;" class="btn btn-primary btn-send" @click="taxRemove" >- pajak</a>
-                                                                </div>
-                                                                <div v-if="!divpajak">
-                                                                    <a href="javascript:;" class="btn btn-primary btn-send" @click="taxSelected" >+ pajak</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-4">
-                                                                <!-- <router-link to="/apps/invoice/preview" class="btn btn-dark btn-preview">Preview</router-link> -->
-                                                                <a href="javascript:;" @click="addPayment" class="btn btn-dark btn-preview" data-bs-toggle="modal" data-bs-target="#modalPayment">Pembayaran</a>
-                                                            </div>
-                                                            <div class="col-sm-4">
-                                                                <a href="javascript:;" @click="simpanPenjualan" class="btn btn-success btn-download">Save</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            
-
-                                            <div class="col-md-6">
-                                                <div class="totals-row">
-                                                    <div class="invoice-totals-row invoice-summary-subtotal">
-                                                        <div class="invoice-summary-label">Sub Total</div>
-                                                         <div class="invoice-summary-label"></div>
-                                                        <div class="invoice-summary-value">
-                                                            <div class="subtotal-amount"><span class="currency"></span><span class="amount">{{new Intl.NumberFormat().format(subtotal)}}</span></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="invoice-totals-row invoice-summary-total">
-                                                         <div class="invoice-summary-label">Disc</div>
-                                                        <input type="text" v-model="params.disc" @keyup="getTotal" class="form-control form-control-sm" >%
-                                                        <div class="invoice-summary-label"></div>
-                                                        <div class="invoice-summary-value">
-                                                            <div class="total-amount"><span class="currency"></span><span>{{ new Intl.NumberFormat().format(Math.floor(subtotal * disc / 100)) }}</span></div>
-                                                        </div>
-                                                    </div>
-                                                    <div v-show="divpajak">
-                                                        <div class="invoice-totals-row invoice-summary-tax" >
-                                                            <div class="invoice-summary-label">Pajak</div>
-                                                            <div class="invoice-summary-value">
-                                                                <div class="tax-amount"><span class="currency"></span>
-                                                                    <span>{{ new Intl.NumberFormat().format(Math.floor( tax )) }}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="invoice-totals-row invoice-summary-balance-due">
-                                                        <div class="invoice-summary-label">Total</div>
-                                                         <div class="invoice-summary-label"></div>
-                                                        <div class="invoice-summary-value">
-                                                            <!-- <div class="balance-due-amount"> -->
-                                                                <span>{{ new Intl.NumberFormat().format(Math.floor(total)) }}</span>
-                                                            <!-- </div> -->
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
 
                                     <div class="invoice-detail-note">
@@ -263,7 +160,7 @@
                                                     <label for="invoice-detail-notes" class="col-sm-12 col-form-label col-form-label-sm">Notes:</label>
                                                     <div class="col-sm-12">
                                                         <textarea
-                                                            v-model="params.notes"
+                                                            v-model="headerfull.notes"
                                                             rows="3"
                                                             id="invoice-detail-notes"
                                                             class="form-control"
@@ -284,10 +181,10 @@
             </div>
         </div>
     </div>
-</template>
 
+</template>
 <script setup>
-    // import { onMounted, ref } from 'vue';
+ import { computed, onMounted, ref, onBeforeMount, onUnmounted } from 'vue';
     import '@/assets/sass/apps/invoice-add.scss';
 
     //flatpickr
@@ -300,7 +197,7 @@
 
     import moment from "moment";
 
-    import { computed, ref, onMounted, watch } from 'vue';
+
     import { useStore } from 'vuex';
     import { useRouter, useRoute } from 'vue-router'
 
@@ -311,74 +208,82 @@
     const router = useRouter();
     const route = useRoute();
 
-    // const props = defineProps({
-    //     nopenjualan: String,
-    // });
-    // nopenjualan = props.nopenjualan;
-
-    const items = ref([]);
-    const brg = ref([]);
-    const nopenjualan = ref([]);
-    const qty = ref(1);
-    const subtotal = ref();
-    const total = ref();
-    const disc = ref(0);
-    const tax = ref(0);
-    const selected_file = ref(null);
-    const payment = ref([]);
-    const params = ref({
-        noNota: '',
-        tglNota: moment().format("YYYY-MM-DD"),
-        term: 0,
-        jthTempo: moment().format("YYYY-MM-DD"),
-        notes: '',
-        subtotal: subtotal,
-        tax: tax,
-        disc: disc,
-        total: total,
-    });
-    const paramspelanggan = ref({
-        kdPelanggan: '',
-        nmPelanggan: '',
-        almtPelanggan: '',
-        noHpPelanggan: '',
-
-    });
-    const paramsacc = ref({
-        noAcc: '',
-        nmAcc: '',
-        nilai: '',
-        // tlpSupplier: '',
-
-    });
     const cartItemsPen = ref([])
-    const divpajak = ref(false)
-    // const newValue = ref()
-    // const currency_list = ref([]);
+    const headerfull = ref([])
+    const subtotal = ref(headerfull.value.totalPenjualan);
+    const brg = ref([]);
+    const qty = ref(1);
+    const oldnota = ref(headerfull.value.noPenjualan);
+
+    const params = ref({
+        noNota: oldnota,
+        tglNota: moment().format("YYYY-MM-DD"),
+        term: headerfull.value.termPenjualan,
+        jthTempo: moment().format("YYYY-MM-DD"),
+        notes: headerfull.value.notePenjualan,
+        subtotal: subtotal,
+        // tax: tax,
+        // disc: disc,
+        // total: total,
+    });
+    
+
+   
+   
 
     const penjualan = computed(() => {
         const barangs = store.getters.StateBarang;
-        const pelanggans = store.getters.StatePelanggan;
+        const pelanggans = store.getters.SeditPenjualan;
         const accs = store.getters.StateAcc;
-        nopenjualan.value = store.getters.NoPenjualan;
-        // const pajak = ref(store.state.pajak);
-        // console.log(suppliers)
-        return { barangs, pelanggans, nopenjualan, accs }
+        // // nopenjualan.value = store.getters.NoPenjualan;
+        // // const pajak = ref(store.state.pajak);
+        // // console.log(suppliers)
+        return { barangs, pelanggans, accs }
     });
 
-    const getBarang=() => {
-        store.dispatch('GetBarang')
-    }
+    onMounted(  () => {
+        console.log(headerfull.value)
+        // getCart();
+        try {
+            // store.dispatch('GetBarang')
+            // cartItemsPen.value = JSON.parse(localStorage.getItem('cartItemsPen'))
+        } catch(e) {
+            // cartItemsPen.value = []
+        }
+    });
+
+    onBeforeMount(() => {
+        setTimeout(() => {
+            console.log(' before onmount edit')
+            try {
+                store.dispatch('GetBarang')
+                cartItemsPen.value = JSON.parse(localStorage.getItem('cartItemsPen'))
+                headerfull.value = JSON.parse(localStorage.getItem('headerEditPen'))
+            } catch(e) {
+                cartItemsPen.value = []
+            }
+        }, 1) // 1 seems to work better for me than 0
+    })
+
+    onUnmounted(() => {
+        // window.onbeforeunload = null
+        // alert('kal tutup')
+        localStorage.setItem('cartItemsPen', '[]')
+        localStorage.setItem('headerEditPen', '[]')
+    })
+
+    // const getBarang=() => {
+    //     store.dispatch('GetBarang')
+    // }
     const getPelanggan=() => {
         store.dispatch('GetPelanggan')
     }
-    const getNoPenjualan=() => {
-        store.dispatch('GetNoPenjualan')
-    }
+    // const getNoPenjualan=() => {
+    //     store.dispatch('GetNoPenjualan')
+    // }
     const getAcc=() => {
         store.dispatch('GetAcc')
     }
-
 
     const getTotal=() =>{
         const pajak = store.state.pajak;
@@ -445,98 +350,6 @@
         divpajak.value = false
     }
 
-    onMounted(() => {
-        //set default data
-        // items.value.push({ id: 1, title: '', description: '', rate: 0, quantity: 0, amount: 100, is_tax: false });
-
-        // let dt = new Date();
-        // params.value.invoice_date = JSON.parse(JSON.stringify(dt));
-        // dt.setDate(dt.getDate() + 5);
-        // params.value.due_date = dt;
-
-        divpajak.value = false
-        // console.log(item.nopenjualan)
-        
-       
-        // getBarang();
-        // getAcc();
-        // getPelanggan();
-        // getCart();
-        // getNoPenjualan();
-    });
-
-    // const change_file = (event) => {
-    //     selected_file.value = URL.createObjectURL(event.target.files[0]);
-    // };
-
-    // const add_item = () => {
-    //     let max_id = 0;
-    //     if (items.value && items.value.length) {
-    //         max_id = items.value.reduce((max, character) => (character.id > max ? character.id : max), items.value[0].id);
-    //     }
-    //     items.value.push({ id: max_id + 1, title: '', description: '', rate: 0, quantity: 0, amount: 0, is_tax: false });
-    // };
-
-    // const remove_item = (item) => {
-    //     items.value = items.value.filter((d) => d.id != item.id);
-    // };
-
-    function addToCart(brg) {
-        // console.log(brg)
-        if (localStorage.getItem('cartItemsPen')===null){
-            cartItemsPen.value = [];
-            // console.log(cartItems.value)
-        }else{
-            cartItemsPen.value = JSON.parse(localStorage.getItem('cartItemsPen'));
-        }
-            const oldItems = JSON.parse(localStorage.getItem('cartItemsPen')) || [];
-            // console.log(oldItems)
-            const existingItem = oldItems.find(({ kdBarang }) => kdBarang === brg.kdBarang);
-            if (existingItem) {
-                const objIndex = cartItemsPen.value.findIndex((e => e.kdBarang === brg.kdBarang));
-                const oldName = cartItemsPen.value[objIndex].nmBarang;
-                const oldQty = cartItemsPen.value[objIndex].qty;
-                const oldTotal = cartItemsPen.value[objIndex].total;
-                const newQty = parseInt(oldQty) + parseInt(qty.value) ;
-                const newTotal = parseInt(oldTotal) + parseInt(qty.value * brg.hrgJual) ;
-                cartItemsPen.value[objIndex].qty = parseInt(newQty);
-                cartItemsPen.value[objIndex].total = parseInt(newTotal);
-                localStorage.setItem('cartItemsPen',JSON.stringify(cartItemsPen.value));
-                alert(oldName+' Quantity Update')
-                getCart();
-                // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
-            }else{
-            cartItemsPen.value.push({kdBarang:brg.kdBarang, nmBarang:brg.nmBarang,hrgJual:brg.hrgJual,qty:qty.value,satuan:brg.satuanBarang,total:qty.value * brg.hrgJual});	
-            localStorage.setItem('cartItemsPen',JSON.stringify(cartItemsPen.value));
-            getCart();
-            // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
-            alert(brg.nmBarang+ " berhasil disimpan")
-            }
-    }
-    function removeItem(id) {
-        // alert(id)
-        const arrayFromStroage = JSON.parse(localStorage.getItem('cartItemsPen'));
-        const filtered = arrayFromStroage.filter(arrayFromStroage => arrayFromStroage.kdBarang !== id);
-        localStorage.setItem('cartItemsPen', JSON.stringify(filtered));
-        // cartItems.value.splice(index, 1)
-        // this.isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
-        getCart();
-        // subtotal.value = 0
-        // total.value = 0
-        // console.log(filtered)
-        // alert(filtered.nmBarang)
-    }
-    // function updateItem(barcode, index) {
-    //     const cartItems = JSON.parse(localStorage.getItem('cartItemsP'));
-    //     const objIndex = cartItems.findIndex((e => e.barcode === barcode));
-    //     const newQty = parseInt(this.crt[index].qty) ;
-    //     cartItems[objIndex].qty = parseInt(newQty);
-    //     localStorage.setItem('cartItemsP',JSON.stringify(cartItems));
-    //     //alert('Quantity Update')
-    //     this.getCart();
-    //     this.isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
-    // }
-
     function getCart() {
         // subtotal.value = []
         if (localStorage.getItem('cartItemsPen')===null){
@@ -583,4 +396,5 @@
             $event.preventDefault();
         }   
     }
+
 </script>

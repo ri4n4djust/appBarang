@@ -113,10 +113,39 @@ const actions = {
             return
         }
     },
+
+    async GetDetailPenjualan({ commit }, kdPenjualan){
+        let response
+        try {
+            response = await axios.post('/api/getdetail-penjualan', kdPenjualan)
+            // commit('setAcc', response.data.data)
+            var dataArr = response.data.data
+
+            const arr = [];
+            for (let i = 0; i < dataArr.length; i++) {
+                // console.log({kdBarang : dataArr[i].r_kdBarang, nmBarang : dataArr[i].r_nmBarang,});
+                arr.push ({
+                    'kdBarang' : dataArr[i].r_kdBarang,
+                    'nmBarang' : dataArr[i].r_nmBarang,
+                    'hrgJual' : dataArr[i].hrgJual,
+                    'qty' : dataArr[i].qty,
+                    'satuan' : dataArr[i].satuanJual,
+                    'total' : dataArr[i].totalJual
+                })
+              }
+            // console.log(arr)
+
+            localStorage.setItem('cartItemsPen', JSON.stringify(arr))
+        } catch (ex) {
+            // Handle error
+            return
+        }
+    },
     
     async CreateEditPenjualan({commit}, item) {
         // await axios.post('/api/tambah/pelanggan', pel)
         await commit('setEditPenjualan', item)
+        localStorage.setItem('headerEditPen', JSON.stringify(item))
     },
 
 };

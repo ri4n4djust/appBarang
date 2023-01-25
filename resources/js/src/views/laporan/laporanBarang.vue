@@ -76,10 +76,12 @@
                                     </div>
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li>
-                                            <a href="javascript:void(0);" class="btn m-1 btn-light" @click="edit_row(props.row)"> Edit </a>
+                                            <!-- <a href="javascript:void(0);" class="btn m-1 btn-light" @click="edit_row(props.row)"> Edit </a> -->
+                                            <router-link to="/editpenjualan" class="btn m-1 btn-light" @click="edit_row(props.row)">Edit</router-link>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0);" class="btn m-1 btn-light" @click="view_row(props.row)"> Delete </a>
+                                            <router-link :to="{ name: 'nosel', params: { id: props.row } }">coba</router-link>
+                                            <!-- <a href="javascript:void(0);" class="btn m-1 btn-light" @click="view_row(props.row)"> Delete </a> -->
                                         </li>
                                     </ul>
                                 </div>
@@ -100,7 +102,7 @@
 </template>
 
 <script setup>
-    import { computed, onMounted, ref } from 'vue';
+    import { computed, onMounted, ref, onBeforeMount } from 'vue';
 
     //pdf export
     import jsPDF from 'jspdf';
@@ -152,7 +154,12 @@
 
     onMounted(() => {
         bind_data();
+        console.log('on mount pagr')
     });
+    onBeforeMount(() => {
+        console.log(' before onmount')
+        
+    })
 
     
     const bind_data = () => {
@@ -302,8 +309,9 @@
             .join(' ');
     };
     const edit_row = (item) => {
-        router.push({ name: 'editpenjualan' })
+        store.dispatch('GetDetailPenjualan', {kd : item.noPenjualan})
         store.dispatch('CreateEditPenjualan', item);
+        // router.push({ path: '/editpenjualan' })
         // alert('ID: '+ item.noPenjualan);
     };
 </script>

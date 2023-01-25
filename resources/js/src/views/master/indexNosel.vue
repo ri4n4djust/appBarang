@@ -208,7 +208,7 @@
         getNosel();
         getTrans();
         getRegu();
-        // console.log(props.nama_bbm)
+        console.log('onmount index nosel')
 
         // function getTransBbm(){
         //     // const bbmnosel = 

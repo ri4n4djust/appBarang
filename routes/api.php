@@ -72,6 +72,7 @@ Route::get('/linkacc', [App\Http\Controllers\pembelianController::class, 'linkAc
 
 // Penjualan
 Route::post('/store/penjualan', [App\Http\Controllers\penjualanController::class, 'simpanPenjualan']);
+Route::post('/getdetail-penjualan', [App\Http\Controllers\penjualanController::class, 'getDetailPenjualan']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile', function(Request $request) {
