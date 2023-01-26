@@ -24,7 +24,7 @@
                                     <div class="invoice-detail-title">
                                        
                                         <div class="invoice-title">
-                                            Invoice Penjualan {{ headerfull }}
+                                            Invoice Penjualan
                                         </div>
                                     </div>
 
@@ -138,7 +138,8 @@
                                             </div>
                                             <div class="form-group col-md-2">
                                                 <label for="inputZip">TOTAL</label><br>
-                                                {{ new Intl.NumberFormat().format(brg.hrgJual * qty) }}
+                                                <!-- {{ new Intl.NumberFormat().format(brg.hrgJual * qty) }} -->
+                                                <input type="text" v-model="tot" class="form-control form-control-sm" placeholder="Quantity" @keypress="onlyNumber" />
                                             </div>
                                             <div class="form-group col-md-1">
                                                 <label for="aksi">Aksi</label>
@@ -324,6 +325,7 @@
     const tax = ref(0);
     const brg = ref({});
     const qty = ref(1);
+    const tot = ref();
     const divpajak = ref(false)
     // const oldnota = ref(headerfull.value.noPenjualan);
     // let nop = headerfull[0].noPenjualan;
@@ -355,10 +357,10 @@
         const barangs = store.getters.StateBarang;
         const pelanggans = store.getters.StatePelanggan;
         const accs = store.getters.StateAcc;
-        // // nopenjualan.value = store.getters.NoPenjualan;
+        tot.value = brg.value.hrgJual * qty.value;
         // // const pajak = ref(store.state.pajak);
         // // console.log(suppliers)
-        return { barangs, pelanggans, accs }
+        return { barangs, pelanggans, accs, tot }
     });
 
     

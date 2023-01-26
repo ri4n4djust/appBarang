@@ -57,7 +57,7 @@
                                         <!-- <button type="button" class="btn btn-blue">Open</button> -->
                                         <div role="group" class="btn-group">
                                             <div class="dropdown b-dropdown custom-dropdown show btn-group">
-                                                <a class="btn dropdown-toggle btn-light"
+                                                <a class="btn dropdown-toggle btn-dark"
                                                     ><svg
                                                         xmlns="http://www.w3.org/2000/svg"
                                                         width="24"
@@ -79,10 +79,10 @@
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li>
                                             <!-- <a href="javascript:void(0);" class="btn m-1 btn-light" @click="edit_row(props.row)"> Edit </a> -->
-                                            <router-link to="/editpenjualan" class="btn m-1 btn-light" @click="edit_row(props.row)">Edit</router-link>
+                                            <router-link to="/editpenjualan" class="dropdown-item" @click="edit_row(props.row)">Edit</router-link>
                                         </li>
                                         <li>
-                                            <router-link :to="{ name: 'nosel', params: { id: props.row } }">coba</router-link>
+                                            <router-link :to="{ name: 'nosel', params: { id: props.row } }" class="dropdown-item">coba</router-link>
                                             <!-- <a href="javascript:void(0);" class="btn m-1 btn-light" @click="view_row(props.row)"> Delete </a> -->
                                         </li>
                                     </ul>

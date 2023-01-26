@@ -24070,7 +24070,7 @@ var __default__ = {
     var expose = _ref.expose;
     expose();
     (0,_composables_use_meta__WEBPACK_IMPORTED_MODULE_4__.useMeta)({
-      title: 'Sales Admin'
+      title: 'App Admin'
     });
     var store = (0,vuex__WEBPACK_IMPORTED_MODULE_5__.useStore)();
     var layout = (0,vue__WEBPACK_IMPORTED_MODULE_2__.computed)(function () {
@@ -25245,13 +25245,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "render": () => (/* binding */ render)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _assets_images_logo_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/assets/images/logo.svg */ "./resources/js/src/assets/images/logo.svg");
-/* harmony import */ var _assets_images_logo_svg__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_assets_images_logo_svg__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _assets_images_profile_15_jpeg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/assets/images/profile-15.jpeg */ "./resources/js/src/assets/images/profile-15.jpeg");
-/* harmony import */ var _assets_images_profile_15_jpeg__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_assets_images_profile_15_jpeg__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _assets_images_profile_16_jpeg__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/assets/images/profile-16.jpeg */ "./resources/js/src/assets/images/profile-16.jpeg");
-/* harmony import */ var _assets_images_profile_16_jpeg__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_assets_images_profile_16_jpeg__WEBPACK_IMPORTED_MODULE_3__);
-
+/* harmony import */ var _assets_images_pom_jpg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/assets/images/pom.jpg */ "./resources/js/src/assets/images/pom.jpg");
+/* harmony import */ var _assets_images_pom_jpg__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_assets_images_pom_jpg__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _assets_images_user_jpg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/assets/images/user.jpg */ "./resources/js/src/assets/images/user.jpg");
+/* harmony import */ var _assets_images_user_jpg__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_assets_images_user_jpg__WEBPACK_IMPORTED_MODULE_2__);
 
 
 
@@ -25269,7 +25266,7 @@ var _hoisted_4 = {
 };
 
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-  src: (_assets_images_logo_svg__WEBPACK_IMPORTED_MODULE_1___default()),
+  src: (_assets_images_pom_jpg__WEBPACK_IMPORTED_MODULE_1___default()),
   "class": "navbar-logo",
   alt: "logo"
 }, null, -1
@@ -25280,7 +25277,7 @@ var _hoisted_6 = {
   "class": "nav-item theme-text"
 };
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" CORK ");
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" SPBU ");
 
 var _hoisted_8 = {
   "class": "d-none horizontal-menu"
@@ -25414,368 +25411,31 @@ var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 
 var _hoisted_27 = [_hoisted_25, _hoisted_26];
 var _hoisted_28 = {
-  "class": "dropdown nav-item language-dropdown btn-group"
-};
-var _hoisted_29 = {
-  href: "javascript:;",
-  id: "ddllang",
-  "data-bs-toggle": "dropdown",
-  "aria-expanded": "false",
-  "class": "btn dropdown-toggle btn-icon-only nav-link"
-};
-var _hoisted_30 = ["src"];
-var _hoisted_31 = {
-  "class": "dropdown-menu",
-  "aria-labelledby": "ddllang"
-};
-var _hoisted_32 = ["onClick"];
-var _hoisted_33 = ["src"];
-
-var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)();
-
-var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "dropdown nav-item message-dropdown btn-group"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  href: "javascript:;",
-  id: "ddlmsg",
-  "data-bs-toggle": "dropdown",
-  "aria-expanded": "false",
-  "class": "btn dropdown-toggle btn-icon-only nav-link"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-mail"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  d: "M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polyline", {
-  points: "22,6 12,13 2,6"
-})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", {
-  "class": "dropdown-menu dropdown-menu-right",
-  "aria-labelledby": "ddlmsg"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
-  role: "presentation"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  role: "menuitem",
-  href: "#",
-  target: "_self",
-  "class": "dropdown-item"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "media media"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "media-aside align-self-start"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "avatar avatar-xl"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "avatar-title rounded-circle"
-}, "KY")])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "media-body"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
-  "class": "usr-name"
-}, "Kara Young"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "msg-title"
-}, "ACCOUNT UPDATE")])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
-  role: "presentation"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  role: "menuitem",
-  href: "#",
-  target: "_self",
-  "class": "dropdown-item"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "media media"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "media-aside align-self-start"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-  src: (_assets_images_profile_15_jpeg__WEBPACK_IMPORTED_MODULE_2___default()),
-  alt: "avatar"
-})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "media-body"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
-  "class": "usr-name"
-}, "Daisy Anderson"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "msg-title"
-}, "ACCOUNT UPDATE")])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
-  role: "presentation"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  role: "menuitem",
-  href: "#",
-  target: "_self",
-  "class": "dropdown-item"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "media media"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "media-aside align-self-start"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "avatar avatar-xl"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "avatar-title rounded-circle"
-}, "OG")])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "media-body"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h5", {
-  "class": "usr-name"
-}, "Oscar Garner"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": "msg-title"
-}, "ACCOUNT UPDATE")])])])])])], -1
-/* HOISTED */
-);
-
-var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "dropdown nav-item notification-dropdown btn-group"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  href: "javascript:;",
-  id: "ddlnotify",
-  "data-bs-toggle": "dropdown",
-  "aria-expanded": "false",
-  "class": "btn dropdown-toggle btn-icon-only nav-link"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-bell"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  d: "M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  d: "M13.73 21a2 2 0 0 1-3.46 0"
-})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
-  "class": "badge badge-success"
-})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", {
-  "class": "dropdown-menu dropdown-menu-right",
-  "aria-labelledby": "ddlnotify"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
-  role: "presentation"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  href: "javascript:;",
-  "class": "dropdown-item"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "media server-log"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "media-aside align-self-start"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-server"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("rect", {
-  x: "2",
-  y: "2",
-  width: "20",
-  height: "8",
-  rx: "2",
-  ry: "2"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("rect", {
-  x: "2",
-  y: "14",
-  width: "20",
-  height: "8",
-  rx: "2",
-  ry: "2"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("line", {
-  x1: "6",
-  y1: "6",
-  x2: "6",
-  y2: "6"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("line", {
-  x1: "6",
-  y1: "18",
-  x2: "6",
-  y2: "18"
-})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "media-body"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "data-info"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", {
-  "class": ""
-}, "Server Rebooted"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", {
-  "class": ""
-}, "45 min ago")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "icon-status"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-x"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("line", {
-  x1: "18",
-  y1: "6",
-  x2: "6",
-  y2: "18"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("line", {
-  x1: "6",
-  y1: "6",
-  x2: "18",
-  y2: "18"
-})])])])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
-  role: "presentation"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", {
-  role: "separator",
-  "aria-orientation": "horizontal",
-  size: "0",
-  "class": "dropdown-divider"
-})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
-  role: "presentation"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  href: "javascript:;",
-  "class": "dropdown-item"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "media"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "media-aside align-self-start"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-heart"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  d: "M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "media-body"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "data-info"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", null, "Licence Expiring Soon"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "8 hrs ago")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "icon-status"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-x"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("line", {
-  x1: "18",
-  y1: "6",
-  x2: "6",
-  y2: "18"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("line", {
-  x1: "6",
-  y1: "6",
-  x2: "18",
-  y2: "18"
-})])])])])])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
-  role: "presentation"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("hr", {
-  role: "separator",
-  "aria-orientation": "horizontal",
-  size: "0",
-  "class": "dropdown-divider"
-})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
-  role: "presentation"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  href: "javascript:;",
-  "class": "dropdown-item"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "media file-upload"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "media-aside align-self-start"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-file-text"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  d: "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polyline", {
-  points: "14 2 14 8 20 8"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("line", {
-  x1: "16",
-  y1: "13",
-  x2: "8",
-  y2: "13"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("line", {
-  x1: "16",
-  y1: "17",
-  x2: "8",
-  y2: "17"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polyline", {
-  points: "10 9 9 9 8 9"
-})])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "media-body"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "data-info"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h6", null, "Kelly Portfolio.pdf"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "670 kb")]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "icon-status"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-check"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polyline", {
-  points: "20 6 9 17 4 12"
-})])])])])])])])], -1
-/* HOISTED */
-);
-
-var _hoisted_37 = {
   "class": "dropdown nav-item user-profile-dropdown btn-group"
 };
 
-var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   href: "javascript:;",
   id: "ddluser",
   "data-bs-toggle": "dropdown",
   "aria-expanded": "false",
   "class": "btn dropdown-toggle btn-icon-only user nav-link"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-  src: (_assets_images_profile_16_jpeg__WEBPACK_IMPORTED_MODULE_3___default()),
+  src: (_assets_images_user_jpg__WEBPACK_IMPORTED_MODULE_2___default()),
   alt: "avatar"
 })], -1
 /* HOISTED */
 );
 
-var _hoisted_39 = {
+var _hoisted_30 = {
   "class": "dropdown-menu dropdown-menu-right",
   "aria-labelledby": "ddluser"
 };
-var _hoisted_40 = {
+var _hoisted_31 = {
   role: "presentation"
 };
 
-var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   width: "24",
   height: "24",
@@ -25796,13 +25456,13 @@ var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_42 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Profile ");
+var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Profile ");
 
-var _hoisted_43 = {
+var _hoisted_34 = {
   role: "presentation"
 };
 
-var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   width: "24",
   height: "24",
@@ -25821,13 +25481,13 @@ var _hoisted_44 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Inbox ");
+var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Inbox ");
 
-var _hoisted_46 = {
+var _hoisted_37 = {
   role: "presentation"
 };
 
-var _hoisted_47 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   width: "24",
   height: "24",
@@ -25851,13 +25511,13 @@ var _hoisted_47 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_48 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Lock Screen ");
+var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Lock Screen ");
 
-var _hoisted_49 = {
+var _hoisted_40 = {
   role: "presentation"
 };
 
-var _hoisted_50 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   width: "24",
   height: "24",
@@ -25881,16 +25541,16 @@ var _hoisted_50 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_51 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Sign Out ");
+var _hoisted_42 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Sign Out ");
 
-var _hoisted_52 = {
+var _hoisted_43 = {
   "class": "sub-header-container"
 };
-var _hoisted_53 = {
+var _hoisted_44 = {
   "class": "header navbar navbar-expand-sm"
 };
 
-var _hoisted_54 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   width: "24",
   height: "24",
@@ -25920,688 +25580,17 @@ var _hoisted_54 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_55 = [_hoisted_54];
+var _hoisted_46 = [_hoisted_45];
 
-var _hoisted_56 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_47 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   id: "breadcrumb",
   "class": "vue-portal-target"
 }, null, -1
 /* HOISTED */
 );
 
-var _hoisted_57 = {
-  "class": "topbar-nav header navbar",
-  role: "banner"
-};
-var _hoisted_58 = {
-  "class": "topbar"
-};
-var _hoisted_59 = {
-  "class": "list-unstyled menu-categories",
-  id: "topAccordion"
-};
-var _hoisted_60 = {
-  "class": "menu single-menu"
-};
-var _hoisted_61 = {
-  href: "javascript:;",
-  "class": "dropdown-toggle autodroprown"
-};
-var _hoisted_62 = {
-  "class": ""
-};
-
-var _hoisted_63 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-home"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  d: "M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polyline", {
-  points: "9 22 9 12 15 12 15 22"
-})], -1
-/* HOISTED */
-);
-
-var _hoisted_64 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-chevron-down"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polyline", {
-  points: "6 9 12 15 18 9"
-})], -1
-/* HOISTED */
-);
-
-var _hoisted_65 = {
-  "class": "collapse submenu list-unstyled"
-};
-var _hoisted_66 = {
-  "class": "menu single-menu"
-};
-var _hoisted_67 = {
-  href: "javascript:;",
-  "class": "dropdown-toggle"
-};
-var _hoisted_68 = {
-  "class": ""
-};
-
-var _hoisted_69 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-cpu\"><rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"2\" ry=\"2\"></rect><rect x=\"9\" y=\"9\" width=\"6\" height=\"6\"></rect><line x1=\"9\" y1=\"1\" x2=\"9\" y2=\"4\"></line><line x1=\"15\" y1=\"1\" x2=\"15\" y2=\"4\"></line><line x1=\"9\" y1=\"20\" x2=\"9\" y2=\"23\"></line><line x1=\"15\" y1=\"20\" x2=\"15\" y2=\"23\"></line><line x1=\"20\" y1=\"9\" x2=\"23\" y2=\"9\"></line><line x1=\"20\" y1=\"14\" x2=\"23\" y2=\"14\"></line><line x1=\"1\" y1=\"9\" x2=\"4\" y2=\"9\"></line><line x1=\"1\" y1=\"14\" x2=\"4\" y2=\"14\"></line></svg>", 1);
-
-var _hoisted_70 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-chevron-down"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polyline", {
-  points: "6 9 12 15 18 9"
-})], -1
-/* HOISTED */
-);
-
-var _hoisted_71 = {
-  "class": "collapse submenu list-unstyled"
-};
-
-var _hoisted_72 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Chat");
-
-var _hoisted_73 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Mailbox");
-
-var _hoisted_74 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Todo List");
-
-var _hoisted_75 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Notes");
-
-var _hoisted_76 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Scrumboard");
-
-var _hoisted_77 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Contacts");
-
-var _hoisted_78 = {
-  "class": "sub-sub-submenu-list"
-};
-
-var _hoisted_79 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  href: "javascript:;"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Invoice "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-chevron-right"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polyline", {
-  points: "9 18 15 12 9 6"
-})])], -1
-/* HOISTED */
-);
-
-var _hoisted_80 = {
-  "class": "collapse list-unstyled sub-submenu"
-};
-
-var _hoisted_81 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("List");
-
-var _hoisted_82 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Preview");
-
-var _hoisted_83 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Add");
-
-var _hoisted_84 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Edit");
-
-var _hoisted_85 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Calendar");
-
-var _hoisted_86 = {
-  "class": "menu single-menu"
-};
-var _hoisted_87 = {
-  href: "javascript:;",
-  "class": "dropdown-toggle"
-};
-var _hoisted_88 = {
-  "class": ""
-};
-
-var _hoisted_89 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-box"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  d: "M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polyline", {
-  points: "3.27 6.96 12 12.01 20.73 6.96"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("line", {
-  x1: "12",
-  y1: "22.08",
-  x2: "12",
-  y2: "12"
-})], -1
-/* HOISTED */
-);
-
-var _hoisted_90 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-chevron-down"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polyline", {
-  points: "6 9 12 15 18 9"
-})], -1
-/* HOISTED */
-);
-
-var _hoisted_91 = {
-  "class": "collapse submenu list-unstyled"
-};
-
-var _hoisted_92 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Tabs");
-
-var _hoisted_93 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Accordions");
-
-var _hoisted_94 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Modals");
-
-var _hoisted_95 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Cards");
-
-var _hoisted_96 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Carousel");
-
-var _hoisted_97 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Countdown");
-
-var _hoisted_98 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Counter");
-
-var _hoisted_99 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Sweet Alerts");
-
-var _hoisted_100 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Timeline");
-
-var _hoisted_101 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Notifications");
-
-var _hoisted_102 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Media Object");
-
-var _hoisted_103 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("List Group");
-
-var _hoisted_104 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Pricing Tables");
-
-var _hoisted_105 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Lightbox ");
-
-var _hoisted_106 = {
-  "class": "menu single-menu"
-};
-var _hoisted_107 = {
-  href: "javascript:;",
-  "class": "dropdown-toggle"
-};
-var _hoisted_108 = {
-  "class": ""
-};
-
-var _hoisted_109 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-zap"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polygon", {
-  points: "13 2 3 14 12 14 11 22 21 10 12 10 13 2"
-})], -1
-/* HOISTED */
-);
-
-var _hoisted_110 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-chevron-down"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polyline", {
-  points: "6 9 12 15 18 9"
-})], -1
-/* HOISTED */
-);
-
-var _hoisted_111 = {
-  "class": "collapse submenu list-unstyled"
-};
-
-var _hoisted_112 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Alerts");
-
-var _hoisted_113 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Avatar");
-
-var _hoisted_114 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Badges");
-
-var _hoisted_115 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Breadcrumbs");
-
-var _hoisted_116 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Buttons");
-
-var _hoisted_117 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Button Groups");
-
-var _hoisted_118 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Color Library");
-
-var _hoisted_119 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Dropdown");
-
-var _hoisted_120 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Infobox");
-
-var _hoisted_121 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Jumbotron");
-
-var _hoisted_122 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Loader");
-
-var _hoisted_123 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Pagination");
-
-var _hoisted_124 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Popovers");
-
-var _hoisted_125 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Progress Bar");
-
-var _hoisted_126 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Search");
-
-var _hoisted_127 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Tooltips");
-
-var _hoisted_128 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Treeview");
-
-var _hoisted_129 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Typography");
-
-var _hoisted_130 = {
-  "class": "menu single-menu"
-};
-var _hoisted_131 = {
-  href: "javascript:;",
-  "class": "dropdown-toggle"
-};
-var _hoisted_132 = {
-  "class": ""
-};
-
-var _hoisted_133 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-layout"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("rect", {
-  x: "3",
-  y: "3",
-  width: "18",
-  height: "18",
-  rx: "2",
-  ry: "2"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("line", {
-  x1: "3",
-  y1: "9",
-  x2: "21",
-  y2: "9"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("line", {
-  x1: "9",
-  y1: "21",
-  x2: "9",
-  y2: "9"
-})], -1
-/* HOISTED */
-);
-
-var _hoisted_134 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-chevron-down"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polyline", {
-  points: "6 9 12 15 18 9"
-})], -1
-/* HOISTED */
-);
-
-var _hoisted_135 = {
-  "class": "collapse submenu list-unstyled"
-};
-
-var _hoisted_136 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Basic");
-
-var _hoisted_137 = {
-  "class": "sub-sub-submenu-list"
-};
-
-var _hoisted_138 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  href: "javascript:;",
-  "class": "dropdown-toggle"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" DataTables "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-chevron-right"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polyline", {
-  points: "9 18 15 12 9 6"
-})])], -1
-/* HOISTED */
-);
-
-var _hoisted_139 = {
-  "class": "collapse list-unstyled sub-submenu"
-};
-
-var _hoisted_140 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Basic");
-
-var _hoisted_141 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Striped Table");
-
-var _hoisted_142 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Order Sorting");
-
-var _hoisted_143 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Multi Column");
-
-var _hoisted_144 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Multiple Tables");
-
-var _hoisted_145 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Alt. Pagination");
-
-var _hoisted_146 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Custom");
-
-var _hoisted_147 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Range Search");
-
-var _hoisted_148 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Export");
-
-var _hoisted_149 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Live DOM ordering");
-
-var _hoisted_150 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Miscellaneous");
-
-var _hoisted_151 = {
-  "class": "menu single-menu"
-};
-var _hoisted_152 = {
-  href: "javascript:;",
-  "class": "dropdown-toggle"
-};
-var _hoisted_153 = {
-  "class": ""
-};
-
-var _hoisted_154 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-clipboard"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  d: "M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("rect", {
-  x: "8",
-  y: "2",
-  width: "8",
-  height: "4",
-  rx: "1",
-  ry: "1"
-})], -1
-/* HOISTED */
-);
-
-var _hoisted_155 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-chevron-down"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polyline", {
-  points: "6 9 12 15 18 9"
-})], -1
-/* HOISTED */
-);
-
-var _hoisted_156 = {
-  "class": "collapse submenu list-unstyled"
-};
-
-var _hoisted_157 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Basic");
-
-var _hoisted_158 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Input Group");
-
-var _hoisted_159 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Layouts");
-
-var _hoisted_160 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Validation");
-
-var _hoisted_161 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Input Mask");
-
-var _hoisted_162 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Select2");
-
-var _hoisted_163 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("TouchSpin");
-
-var _hoisted_164 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Checkbox & Radio");
-
-var _hoisted_165 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Switches");
-
-var _hoisted_166 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Wizards");
-
-var _hoisted_167 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("File Upload");
-
-var _hoisted_168 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Quill Editor");
-
-var _hoisted_169 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Markdown Editor");
-
-var _hoisted_170 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Date & Range Picker ");
-
-var _hoisted_171 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Clipboard");
-
-var _hoisted_172 = {
-  "class": "menu single-menu"
-};
-var _hoisted_173 = {
-  href: "javascript:;",
-  "class": "dropdown-toggle"
-};
-var _hoisted_174 = {
-  "class": ""
-};
-
-var _hoisted_175 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-file"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("path", {
-  d: "M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polyline", {
-  points: "13 2 13 9 20 9"
-})], -1
-/* HOISTED */
-);
-
-var _hoisted_176 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-chevron-down"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polyline", {
-  points: "6 9 12 15 18 9"
-})], -1
-/* HOISTED */
-);
-
-var _hoisted_177 = {
-  "class": "collapse submenu list-unstyled"
-};
-
-var _hoisted_178 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Helpdesk");
-
-var _hoisted_179 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Contact Form");
-
-var _hoisted_180 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("FAQ");
-
-var _hoisted_181 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("FAQ 2");
-
-var _hoisted_182 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Privacy Policy");
-
-var _hoisted_183 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  target: "_blank",
-  href: "/pages/coming-soon"
-}, "Coming Soon")], -1
-/* HOISTED */
-);
-
-var _hoisted_184 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Blank Page");
-
-var _hoisted_185 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Sample Page");
-
-var _hoisted_186 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Profile");
-
-var _hoisted_187 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Account Settings");
-
-var _hoisted_188 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<li class=\"sub-sub-submenu-list\"><a href=\"javascript:;\" class=\"dropdown-toggle\"> Error <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-right\"><polyline points=\"9 18 15 12 9 6\"></polyline></svg></a><ul class=\"collapse list-unstyled sub-submenu\"><li><a target=\"_blank\" href=\"/pages/error404\">404</a></li><li><a target=\"_blank\" href=\"/pages/error500\">500</a></li><li><a target=\"_blank\" href=\"/pages/error503\">503</a></li><li><a target=\"_blank\" href=\"/pages/maintenence\">Maintanence</a></li></ul></li><li class=\"sub-sub-submenu-list\"><a href=\"javascript:;\" class=\"dropdown-toggle\"> Login <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-right\"><polyline points=\"9 18 15 12 9 6\"></polyline></svg></a><ul class=\"collapse list-unstyled sub-submenu\"><li><a target=\"_blank\" href=\"/auth/login\">Login Cover</a></li><li><a target=\"_blank\" href=\"/auth/login-boxed\">Login Boxed</a></li></ul></li><li class=\"sub-sub-submenu-list\"><a href=\"javascript:;\" class=\"dropdown-toggle\"> Register <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-right\"><polyline points=\"9 18 15 12 9 6\"></polyline></svg></a><ul class=\"collapse list-unstyled sub-submenu\"><li><a target=\"_blank\" href=\"/auth/register\">Register Cover</a></li><li><a target=\"_blank\" href=\"/auth/register-boxed\">Register Boxed</a></li></ul></li><li class=\"sub-sub-submenu-list\"><a href=\"javascript:;\" class=\"dropdown-toggle\"> Password Recovery <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-right\"><polyline points=\"9 18 15 12 9 6\"></polyline></svg></a><ul class=\"collapse list-unstyled sub-submenu\"><li><a target=\"_blank\" href=\"/auth/pass-recovery\">Recover ID Cover</a></li><li><a target=\"_blank\" href=\"/auth/pass-recovery-boxed\">Recover ID Boxed</a></li></ul></li><li class=\"sub-sub-submenu-list\"><a href=\"javascript:;\" class=\"dropdown-toggle\"> Lockscreen <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-chevron-right\"><polyline points=\"9 18 15 12 9 6\"></polyline></svg></a><ul class=\"collapse list-unstyled sub-submenu\"><li><a target=\"_blank\" href=\"/auth/lockscreen\">Unlock Cover</a></li><li><a target=\"_blank\" href=\"/auth/lockscreen-boxed\">Unlock Boxed</a></li></ul></li>", 5);
-
-var _hoisted_193 = {
-  "class": "menu single-menu"
-};
-var _hoisted_194 = {
-  href: "javascript:;",
-  "class": "dropdown-toggle"
-};
-var _hoisted_195 = {
-  "class": ""
-};
-
-var _hoisted_196 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-plus-circle"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("circle", {
-  cx: "12",
-  cy: "12",
-  r: "10"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("line", {
-  x1: "12",
-  y1: "8",
-  x2: "12",
-  y2: "16"
-}), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("line", {
-  x1: "8",
-  y1: "12",
-  x2: "16",
-  y2: "12"
-})], -1
-/* HOISTED */
-);
-
-var _hoisted_197 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
-  xmlns: "http://www.w3.org/2000/svg",
-  width: "24",
-  height: "24",
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  "stroke-width": "2",
-  "stroke-linecap": "round",
-  "stroke-linejoin": "round",
-  "class": "feather feather-chevron-down"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("polyline", {
-  points: "6 9 12 15 18 9"
-})], -1
-/* HOISTED */
-);
-
-var _hoisted_198 = {
-  "class": "collapse submenu list-unstyled"
-};
-
-var _hoisted_199 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Drag and Drop");
-
-var _hoisted_200 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Widgets");
-
-var _hoisted_201 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Charts");
-
-var _hoisted_202 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Font Icons");
-
-var _hoisted_203 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  target: "_blank",
-  href: "https://cork-vue.sbthemes.com"
-}, " Documentation ")], -1
-/* HOISTED */
-);
-
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
-
-  var _component_perfect_scrollbar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("perfect-scrollbar");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  BEGIN NAVBAR  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("header", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/"
@@ -26676,46 +25665,38 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[4] || (_cache[4] = function ($event) {
       return $setup.toggleMode('light');
     })
-  }, _hoisted_27)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_29, [$setup.selectedLang ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("img", {
-    key: 0,
-    src: __webpack_require__("./resources/js/src/assets/images/flags sync recursive ^\\.\\/.*\\.png$")("./".concat($setup.selectedLang.code, ".png")),
-    "class": "flag-width",
-    alt: "flag"
-  }, null, 8
-  /* PROPS */
-  , _hoisted_30)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_perfect_scrollbar, null, {
+  }, _hoisted_27)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"dropdown nav-item language-dropdown btn-group\">\r\n                        <a href=\"javascript:;\" id=\"ddllang\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" class=\"btn dropdown-toggle btn-icon-only nav-link\">\r\n                            <img v-if=\"selectedLang\" :src=\"require(`@/assets/images/flags/${selectedLang.code}.png`)\" class=\"flag-width\" alt=\"flag\" />\r\n                        </a>\r\n                        <ul class=\"dropdown-menu\" aria-labelledby=\"ddllang\">\r\n                            <perfect-scrollbar>\r\n                                <li v-for=\"item in countryList\" :key=\"item.code\">\r\n                                    <a href=\"javascript:;\" class=\"dropdown-item d-flex align-items-center\" :class=\"{ active: $i18n.locale === item.code }\" @click.prevent=\"changeLanguage(item)\">\r\n                                        <img :src=\"require(`@/assets/images/flags/${item.code}.png`)\" class=\"flag-width\" alt=\"\" /> <span>{{ item.name }}</span>\r\n                                    </a>\r\n                                </li>\r\n                            </perfect-scrollbar>\r\n                        </ul>\r\n                    </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"dropdown nav-item message-dropdown btn-group\">\r\n                        <a href=\"javascript:;\" id=\"ddlmsg\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" class=\"btn dropdown-toggle btn-icon-only nav-link\">\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-mail\"\r\n                            >\r\n                                <path d=\"M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z\"></path>\r\n                                <polyline points=\"22,6 12,13 2,6\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"dropdown-menu dropdown-menu-right\" aria-labelledby=\"ddlmsg\">\r\n                            <li role=\"presentation\">\r\n                                <a role=\"menuitem\" href=\"#\" target=\"_self\" class=\"dropdown-item\">\r\n                                    <div class=\"media media\">\r\n                                        <div class=\"media-aside align-self-start\">\r\n                                            <div class=\"avatar avatar-xl\"><span class=\"avatar-title rounded-circle\">KY</span></div>\r\n                                        </div>\r\n                                        <div class=\"media-body\">\r\n                                            <h5 class=\"usr-name\">Kara Young</h5>\r\n                                            <p class=\"msg-title\">ACCOUNT UPDATE</p>\r\n                                        </div>\r\n                                    </div>\r\n                                </a>\r\n                            </li>\r\n                            <li role=\"presentation\">\r\n                                <a role=\"menuitem\" href=\"#\" target=\"_self\" class=\"dropdown-item\">\r\n                                    <div class=\"media media\">\r\n                                        <div class=\"media-aside align-self-start\">\r\n                                            <img src=\"@/assets/images/profile-15.jpeg\" alt=\"avatar\" />\r\n                                        </div>\r\n                                        <div class=\"media-body\">\r\n                                            <h5 class=\"usr-name\">Daisy Anderson</h5>\r\n                                            <p class=\"msg-title\">ACCOUNT UPDATE</p>\r\n                                        </div>\r\n                                    </div>\r\n                                </a>\r\n                            </li>\r\n                            <li role=\"presentation\">\r\n                                <a role=\"menuitem\" href=\"#\" target=\"_self\" class=\"dropdown-item\">\r\n                                    <div class=\"media media\">\r\n                                        <div class=\"media-aside align-self-start\">\r\n                                            <div class=\"avatar avatar-xl\"><span class=\"avatar-title rounded-circle\">OG</span></div>\r\n                                        </div>\r\n                                        <div class=\"media-body\">\r\n                                            <h5 class=\"usr-name\">Oscar Garner</h5>\r\n                                            <p class=\"msg-title\">ACCOUNT UPDATE</p>\r\n                                        </div>\r\n                                    </div>\r\n                                </a>\r\n                            </li>\r\n                        </ul>\r\n                    </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"dropdown nav-item notification-dropdown btn-group\">\r\n                        <a href=\"javascript:;\" id=\"ddlnotify\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" class=\"btn dropdown-toggle btn-icon-only nav-link\">\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-bell\"\r\n                            >\r\n                                <path d=\"M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9\"></path>\r\n                                <path d=\"M13.73 21a2 2 0 0 1-3.46 0\"></path>\r\n                            </svg>\r\n                            <span class=\"badge badge-success\"></span>\r\n                        </a>\r\n                        <ul class=\"dropdown-menu dropdown-menu-right\" aria-labelledby=\"ddlnotify\">\r\n                            <li role=\"presentation\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-item\">\r\n                                    <div class=\"media server-log\">\r\n                                        <div class=\"media-aside align-self-start\">\r\n                                            <svg\r\n                                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                                width=\"24\"\r\n                                                height=\"24\"\r\n                                                viewBox=\"0 0 24 24\"\r\n                                                fill=\"none\"\r\n                                                stroke=\"currentColor\"\r\n                                                stroke-width=\"2\"\r\n                                                stroke-linecap=\"round\"\r\n                                                stroke-linejoin=\"round\"\r\n                                                class=\"feather feather-server\"\r\n                                            >\r\n                                                <rect x=\"2\" y=\"2\" width=\"20\" height=\"8\" rx=\"2\" ry=\"2\"></rect>\r\n                                                <rect x=\"2\" y=\"14\" width=\"20\" height=\"8\" rx=\"2\" ry=\"2\"></rect>\r\n                                                <line x1=\"6\" y1=\"6\" x2=\"6\" y2=\"6\"></line>\r\n                                                <line x1=\"6\" y1=\"18\" x2=\"6\" y2=\"18\"></line>\r\n                                            </svg>\r\n                                        </div>\r\n                                        <div class=\"media-body\">\r\n                                            <div class=\"data-info\">\r\n                                                <h6 class=\"\">Server Rebooted</h6>\r\n                                                <p class=\"\">45 min ago</p>\r\n                                            </div>\r\n\r\n                                            <div class=\"icon-status\">\r\n                                                <svg\r\n                                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                                    width=\"24\"\r\n                                                    height=\"24\"\r\n                                                    viewBox=\"0 0 24 24\"\r\n                                                    fill=\"none\"\r\n                                                    stroke=\"currentColor\"\r\n                                                    stroke-width=\"2\"\r\n                                                    stroke-linecap=\"round\"\r\n                                                    stroke-linejoin=\"round\"\r\n                                                    class=\"feather feather-x\"\r\n                                                >\r\n                                                    <line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"></line>\r\n                                                    <line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"></line>\r\n                                                </svg>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </a>\r\n                            </li>\r\n                            <li role=\"presentation\"><hr role=\"separator\" aria-orientation=\"horizontal\" size=\"0\" class=\"dropdown-divider\" /></li>\r\n                            <li role=\"presentation\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-item\">\r\n                                    <div class=\"media\">\r\n                                        <div class=\"media-aside align-self-start\">\r\n                                            <svg\r\n                                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                                width=\"24\"\r\n                                                height=\"24\"\r\n                                                viewBox=\"0 0 24 24\"\r\n                                                fill=\"none\"\r\n                                                stroke=\"currentColor\"\r\n                                                stroke-width=\"2\"\r\n                                                stroke-linecap=\"round\"\r\n                                                stroke-linejoin=\"round\"\r\n                                                class=\"feather feather-heart\"\r\n                                            >\r\n                                                <path\r\n                                                    d=\"M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z\"\r\n                                                ></path>\r\n                                            </svg>\r\n                                        </div>\r\n                                        <div class=\"media-body\">\r\n                                            <div class=\"data-info\">\r\n                                                <h6>Licence Expiring Soon</h6>\r\n                                                <p>8 hrs ago</p>\r\n                                            </div>\r\n                                            <div class=\"icon-status\">\r\n                                                <svg\r\n                                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                                    width=\"24\"\r\n                                                    height=\"24\"\r\n                                                    viewBox=\"0 0 24 24\"\r\n                                                    fill=\"none\"\r\n                                                    stroke=\"currentColor\"\r\n                                                    stroke-width=\"2\"\r\n                                                    stroke-linecap=\"round\"\r\n                                                    stroke-linejoin=\"round\"\r\n                                                    class=\"feather feather-x\"\r\n                                                >\r\n                                                    <line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"></line>\r\n                                                    <line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"></line>\r\n                                                </svg>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </a>\r\n                            </li>\r\n                            <li role=\"presentation\"><hr role=\"separator\" aria-orientation=\"horizontal\" size=\"0\" class=\"dropdown-divider\" /></li>\r\n                            <li role=\"presentation\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-item\">\r\n                                    <div class=\"media file-upload\">\r\n                                        <div class=\"media-aside align-self-start\">\r\n                                            <svg\r\n                                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                                width=\"24\"\r\n                                                height=\"24\"\r\n                                                viewBox=\"0 0 24 24\"\r\n                                                fill=\"none\"\r\n                                                stroke=\"currentColor\"\r\n                                                stroke-width=\"2\"\r\n                                                stroke-linecap=\"round\"\r\n                                                stroke-linejoin=\"round\"\r\n                                                class=\"feather feather-file-text\"\r\n                                            >\r\n                                                <path d=\"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z\"></path>\r\n                                                <polyline points=\"14 2 14 8 20 8\"></polyline>\r\n                                                <line x1=\"16\" y1=\"13\" x2=\"8\" y2=\"13\"></line>\r\n                                                <line x1=\"16\" y1=\"17\" x2=\"8\" y2=\"17\"></line>\r\n                                                <polyline points=\"10 9 9 9 8 9\"></polyline>\r\n                                            </svg>\r\n                                        </div>\r\n                                        <div class=\"media-body\">\r\n                                            <div class=\"data-info\">\r\n                                                <h6>Kelly Portfolio.pdf</h6>\r\n                                                <p>670 kb</p>\r\n                                            </div>\r\n                                            <div class=\"icon-status\">\r\n                                                <svg\r\n                                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                                    width=\"24\"\r\n                                                    height=\"24\"\r\n                                                    viewBox=\"0 0 24 24\"\r\n                                                    fill=\"none\"\r\n                                                    stroke=\"currentColor\"\r\n                                                    stroke-width=\"2\"\r\n                                                    stroke-linecap=\"round\"\r\n                                                    stroke-linejoin=\"round\"\r\n                                                    class=\"feather feather-check\"\r\n                                                >\r\n                                                    <polyline points=\"20 6 9 17 4 12\"></polyline>\r\n                                                </svg>\r\n                                            </div>\r\n                                        </div></div\r\n                                ></a>\r\n                            </li>\r\n                        </ul>\r\n                    </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [_hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: "/users/profile",
+    "class": "dropdown-item"
+  }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($setup.countryList, function (item) {
-        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("li", {
-          key: item.code
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-          href: "javascript:;",
-          "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["dropdown-item d-flex align-items-center", {
-            active: _ctx.$i18n.locale === item.code
-          }]),
-          onClick: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
-            return $setup.changeLanguage(item);
-          }, ["prevent"])
-        }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
-          src: __webpack_require__("./resources/js/src/assets/images/flags sync recursive ^\\.\\/.*\\.png$")("./".concat(item.code, ".png")),
-          "class": "flag-width",
-          alt: ""
-        }, null, 8
-        /* PROPS */
-        , _hoisted_33), _hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.name), 1
-        /* TEXT */
-        )], 10
-        /* CLASS, PROPS */
-        , _hoisted_32)]);
-      }), 128
-      /* KEYED_FRAGMENT */
-      ))];
+      return [_hoisted_32, _hoisted_33];
     }),
     _: 1
     /* STABLE */
 
-  })])]), _hoisted_35, _hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_37, [_hoisted_38, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/users/profile",
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: "/apps/mailbox",
+    "class": "dropdown-item"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_35, _hoisted_36];
+    }),
+    _: 1
+    /* STABLE */
+
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: "/auth/lockscreen",
+    "class": "dropdown-item"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_38, _hoisted_39];
+    }),
+    _: 1
+    /* STABLE */
+
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: "/auth/login",
     "class": "dropdown-item"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -26724,829 +25705,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/apps/mailbox",
-    "class": "dropdown-item"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_44, _hoisted_45];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_46, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/auth/lockscreen",
-    "class": "dropdown-item"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_47, _hoisted_48];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_49, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/auth/login",
-    "class": "dropdown-item"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_50, _hoisted_51];
-    }),
-    _: 1
-    /* STABLE */
-
-  })])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  END NAVBAR  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  BEGIN NAVBAR  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_52, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("header", _hoisted_53, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  })])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  END NAVBAR  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  BEGIN NAVBAR  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("header", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: "javascript:void(0);",
     "class": "sidebarCollapse",
     "data-placement": "bottom",
     onClick: _cache[5] || (_cache[5] = function ($event) {
       return _ctx.$store.commit('toggleSideBar', !_ctx.$store.state.is_show_sidebar);
     })
-  }, _hoisted_55), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Portal vue/Teleport for Breadcrumb "), _hoisted_56])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  END NAVBAR  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  BEGIN TOPBAR  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_57, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_58, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_59, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_60, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_61, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_62, [_hoisted_63, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('dashboard')), 1
-  /* TEXT */
-  )]), _hoisted_64]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_65, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('sales')), 1
-      /* TEXT */
-      )];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/index2"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('analytics')), 1
-      /* TEXT */
-      )];
-    }),
-    _: 1
-    /* STABLE */
-
-  })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_66, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_67, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_68, [_hoisted_69, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('apps')), 1
-  /* TEXT */
-  )]), _hoisted_70]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_71, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/apps/chat"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_72];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/apps/mailbox"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_73];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/apps/todo-list"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_74];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/apps/notes"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_75];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/apps/scrumboard"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_76];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/apps/contacts"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_77];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_78, [_hoisted_79, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_80, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/apps/invoice/list"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_81];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/apps/invoice/preview"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_82];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/apps/invoice/add"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_83];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/apps/invoice/edit"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_84];
-    }),
-    _: 1
-    /* STABLE */
-
-  })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/apps/calendar"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_85];
-    }),
-    _: 1
-    /* STABLE */
-
-  })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_86, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_87, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_88, [_hoisted_89, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('components')), 1
-  /* TEXT */
-  )]), _hoisted_90]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_91, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/components/tabs"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_92];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/components/accordions"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_93];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/components/modals"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_94];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/components/cards"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_95];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/components/carousel"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_96];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/components/countdown"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_97];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/components/counter"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_98];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/components/sweetalert"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_99];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/components/timeline"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_100];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/components/notifications"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_101];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/components/media-object"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_102];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/components/list-group"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_103];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/components/pricing-table"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_104];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/components/lightbox"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_105];
-    }),
-    _: 1
-    /* STABLE */
-
-  })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_106, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_107, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_108, [_hoisted_109, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('ui_kit')), 1
-  /* TEXT */
-  )]), _hoisted_110]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_111, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/elements/alerts"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_112];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/elements/avatar"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_113];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/elements/badges"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_114];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/elements/breadcrumbs"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_115];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/elements/buttons"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_116];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/elements/buttons-group"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_117];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/elements/color-library"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_118];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/elements/dropdown"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_119];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/elements/infobox"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_120];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/elements/jumbotron"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_121];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/elements/loader"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_122];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/elements/pagination"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_123];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/elements/popovers"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_124];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/elements/progress-bar"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_125];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/elements/search"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_126];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/elements/tooltips"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_127];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/elements/treeview"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_128];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/elements/typography"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_129];
-    }),
-    _: 1
-    /* STABLE */
-
-  })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_130, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_131, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_132, [_hoisted_133, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('tables')), 1
-  /* TEXT */
-  )]), _hoisted_134]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_135, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/tables/basic"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_136];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_137, [_hoisted_138, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_139, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/tables/basic"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_140];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/tables/striped"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_141];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/tables/order-sorting"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_142];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/tables/multi-column"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_143];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/tables/multiple-tables"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_144];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/tables/alt-pagination"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_145];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/tables/custom"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_146];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/tables/range-search"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_147];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/tables/export"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_148];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/tables/live-dom-ordering"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_149];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/tables/miscellaneous"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_150];
-    }),
-    _: 1
-    /* STABLE */
-
-  })])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_151, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_152, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_153, [_hoisted_154, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('forms')), 1
-  /* TEXT */
-  )]), _hoisted_155]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_156, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/forms/basic"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_157];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/forms/input-group"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_158];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/forms/layouts"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_159];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/forms/validation"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_160];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/forms/input-mask"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_161];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/forms/select2"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_162];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/forms/touchspin"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_163];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/forms/checkbox-radio"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_164];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/forms/switches"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_165];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/forms/wizards"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_166];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/forms/file-upload"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_167];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/forms/quill-editor"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_168];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/forms/markdown-editor"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_169];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/forms/date-picker"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_170];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/forms/clipboard"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_171];
-    }),
-    _: 1
-    /* STABLE */
-
-  })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_172, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_173, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_174, [_hoisted_175, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('pages')), 1
-  /* TEXT */
-  )]), _hoisted_176]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_177, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/pages/helpdesk"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_178];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/pages/contact-us"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_179];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/pages/faq"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_180];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/pages/faq2"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_181];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/pages/privacy-policy"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_182];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), _hoisted_183, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/pages/blank-page"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_184];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/pages/sample"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_185];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/users/profile"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_186];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/users/account-setting"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_187];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), _hoisted_188])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_193, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", _hoisted_194, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_195, [_hoisted_196, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$t('more')), 1
-  /* TEXT */
-  )]), _hoisted_197]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_198, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/dragndrop"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_199];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/widgets"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_200];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/charts/apex-chart"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_201];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/font-icons"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_202];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), _hoisted_203])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  END TOPBAR  ")]);
+  }, _hoisted_46), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Portal vue/Teleport for Breadcrumb "), _hoisted_47])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  END NAVBAR  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  BEGIN TOPBAR  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"topbar-nav header navbar\" role=\"banner\">\r\n            <nav class=\"topbar\">\r\n                <ul class=\"list-unstyled menu-categories\" id=\"topAccordion\">\r\n                    <li class=\"menu single-menu\">\r\n                        <a href=\"javascript:;\" class=\"dropdown-toggle autodroprown\">\r\n                            <div class=\"\">\r\n                                <svg\r\n                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                    width=\"24\"\r\n                                    height=\"24\"\r\n                                    viewBox=\"0 0 24 24\"\r\n                                    fill=\"none\"\r\n                                    stroke=\"currentColor\"\r\n                                    stroke-width=\"2\"\r\n                                    stroke-linecap=\"round\"\r\n                                    stroke-linejoin=\"round\"\r\n                                    class=\"feather feather-home\"\r\n                                >\r\n                                    <path d=\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"></path>\r\n                                    <polyline points=\"9 22 9 12 15 12 15 22\"></polyline>\r\n                                </svg>\r\n                                <span>{{ $t('dashboard') }}</span>\r\n                            </div>\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-chevron-down\"\r\n                            >\r\n                                <polyline points=\"6 9 12 15 18 9\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"collapse submenu list-unstyled\">\r\n                            <li>\r\n                                <router-link to=\"/\"> {{ $t('sales') }} </router-link>\r\n                            </li>\r\n                            <li>\r\n                                <router-link to=\"/index2\">{{ $t('analytics') }}</router-link>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n\r\n                    <li class=\"menu single-menu\">\r\n                        <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                            <div class=\"\">\r\n                                <svg\r\n                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                    width=\"24\"\r\n                                    height=\"24\"\r\n                                    viewBox=\"0 0 24 24\"\r\n                                    fill=\"none\"\r\n                                    stroke=\"currentColor\"\r\n                                    stroke-width=\"2\"\r\n                                    stroke-linecap=\"round\"\r\n                                    stroke-linejoin=\"round\"\r\n                                    class=\"feather feather-cpu\"\r\n                                >\r\n                                    <rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"2\" ry=\"2\"></rect>\r\n                                    <rect x=\"9\" y=\"9\" width=\"6\" height=\"6\"></rect>\r\n                                    <line x1=\"9\" y1=\"1\" x2=\"9\" y2=\"4\"></line>\r\n                                    <line x1=\"15\" y1=\"1\" x2=\"15\" y2=\"4\"></line>\r\n                                    <line x1=\"9\" y1=\"20\" x2=\"9\" y2=\"23\"></line>\r\n                                    <line x1=\"15\" y1=\"20\" x2=\"15\" y2=\"23\"></line>\r\n                                    <line x1=\"20\" y1=\"9\" x2=\"23\" y2=\"9\"></line>\r\n                                    <line x1=\"20\" y1=\"14\" x2=\"23\" y2=\"14\"></line>\r\n                                    <line x1=\"1\" y1=\"9\" x2=\"4\" y2=\"9\"></line>\r\n                                    <line x1=\"1\" y1=\"14\" x2=\"4\" y2=\"14\"></line>\r\n                                </svg>\r\n                                <span>{{ $t('apps') }}</span>\r\n                            </div>\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-chevron-down\"\r\n                            >\r\n                                <polyline points=\"6 9 12 15 18 9\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"collapse submenu list-unstyled\">\r\n                            <li><router-link to=\"/apps/chat\">Chat</router-link></li>\r\n                            <li><router-link to=\"/apps/mailbox\">Mailbox</router-link></li>\r\n                            <li><router-link to=\"/apps/todo-list\">Todo List</router-link></li>\r\n                            <li><router-link to=\"/apps/notes\">Notes</router-link></li>\r\n                            <li><router-link to=\"/apps/scrumboard\">Scrumboard</router-link></li>\r\n                            <li><router-link to=\"/apps/contacts\">Contacts</router-link></li>\r\n\r\n                            <li class=\"sub-sub-submenu-list\">\r\n                                <a href=\"javascript:;\">\r\n                                    Invoice\r\n                                    <svg\r\n                                        xmlns=\"http://www.w3.org/2000/svg\"\r\n                                        width=\"24\"\r\n                                        height=\"24\"\r\n                                        viewBox=\"0 0 24 24\"\r\n                                        fill=\"none\"\r\n                                        stroke=\"currentColor\"\r\n                                        stroke-width=\"2\"\r\n                                        stroke-linecap=\"round\"\r\n                                        stroke-linejoin=\"round\"\r\n                                        class=\"feather feather-chevron-right\"\r\n                                    >\r\n                                        <polyline points=\"9 18 15 12 9 6\"></polyline>\r\n                                    </svg>\r\n                                </a>\r\n                                <ul class=\"collapse list-unstyled sub-submenu\">\r\n                                    <li><router-link to=\"/apps/invoice/list\">List</router-link></li>\r\n                                    <li><router-link to=\"/apps/invoice/preview\">Preview</router-link></li>\r\n                                    <li><router-link to=\"/apps/invoice/add\">Add</router-link></li>\r\n                                    <li><router-link to=\"/apps/invoice/edit\">Edit</router-link></li>\r\n                                </ul>\r\n                            </li>\r\n                            <li><router-link to=\"/apps/calendar\">Calendar</router-link></li>\r\n                        </ul>\r\n                    </li>\r\n\r\n                    <li class=\"menu single-menu\">\r\n                        <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                            <div class=\"\">\r\n                                <svg\r\n                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                    width=\"24\"\r\n                                    height=\"24\"\r\n                                    viewBox=\"0 0 24 24\"\r\n                                    fill=\"none\"\r\n                                    stroke=\"currentColor\"\r\n                                    stroke-width=\"2\"\r\n                                    stroke-linecap=\"round\"\r\n                                    stroke-linejoin=\"round\"\r\n                                    class=\"feather feather-box\"\r\n                                >\r\n                                    <path d=\"M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z\"></path>\r\n                                    <polyline points=\"3.27 6.96 12 12.01 20.73 6.96\"></polyline>\r\n                                    <line x1=\"12\" y1=\"22.08\" x2=\"12\" y2=\"12\"></line>\r\n                                </svg>\r\n                                <span>{{ $t('components') }}</span>\r\n                            </div>\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-chevron-down\"\r\n                            >\r\n                                <polyline points=\"6 9 12 15 18 9\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"collapse submenu list-unstyled\">\r\n                            <li><router-link to=\"/components/tabs\">Tabs</router-link></li>\r\n                            <li><router-link to=\"/components/accordions\">Accordions</router-link></li>\r\n                            <li><router-link to=\"/components/modals\">Modals</router-link></li>\r\n                            <li><router-link to=\"/components/cards\">Cards</router-link></li>\r\n                            <li><router-link to=\"/components/carousel\">Carousel</router-link></li>\r\n                            <li><router-link to=\"/components/countdown\">Countdown</router-link></li>\r\n                            <li><router-link to=\"/components/counter\">Counter</router-link></li>\r\n                            <li><router-link to=\"/components/sweetalert\">Sweet Alerts</router-link></li>\r\n                            <li><router-link to=\"/components/timeline\">Timeline</router-link></li>\r\n                            <li><router-link to=\"/components/notifications\">Notifications</router-link></li>\r\n                            <li><router-link to=\"/components/media-object\">Media Object</router-link></li>\r\n                            <li><router-link to=\"/components/list-group\">List Group</router-link></li>\r\n                            <li><router-link to=\"/components/pricing-table\">Pricing Tables</router-link></li>\r\n                            <li><router-link to=\"/components/lightbox\"> Lightbox </router-link></li>\r\n                        </ul>\r\n                    </li>\r\n\r\n                    <li class=\"menu single-menu\">\r\n                        <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                            <div class=\"\">\r\n                                <svg\r\n                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                    width=\"24\"\r\n                                    height=\"24\"\r\n                                    viewBox=\"0 0 24 24\"\r\n                                    fill=\"none\"\r\n                                    stroke=\"currentColor\"\r\n                                    stroke-width=\"2\"\r\n                                    stroke-linecap=\"round\"\r\n                                    stroke-linejoin=\"round\"\r\n                                    class=\"feather feather-zap\"\r\n                                >\r\n                                    <polygon points=\"13 2 3 14 12 14 11 22 21 10 12 10 13 2\"></polygon>\r\n                                </svg>\r\n                                <span>{{ $t('ui_kit') }}</span>\r\n                            </div>\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-chevron-down\"\r\n                            >\r\n                                <polyline points=\"6 9 12 15 18 9\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"collapse submenu list-unstyled\">\r\n                            <li><router-link to=\"/elements/alerts\">Alerts</router-link></li>\r\n                            <li><router-link to=\"/elements/avatar\">Avatar</router-link></li>\r\n                            <li><router-link to=\"/elements/badges\">Badges</router-link></li>\r\n                            <li><router-link to=\"/elements/breadcrumbs\">Breadcrumbs</router-link></li>\r\n                            <li><router-link to=\"/elements/buttons\">Buttons</router-link></li>\r\n                            <li><router-link to=\"/elements/buttons-group\">Button Groups</router-link></li>\r\n                            <li><router-link to=\"/elements/color-library\">Color Library</router-link></li>\r\n                            <li><router-link to=\"/elements/dropdown\">Dropdown</router-link></li>\r\n                            <li><router-link to=\"/elements/infobox\">Infobox</router-link></li>\r\n                            <li><router-link to=\"/elements/jumbotron\">Jumbotron</router-link></li>\r\n                            <li><router-link to=\"/elements/loader\">Loader</router-link></li>\r\n                            <li><router-link to=\"/elements/pagination\">Pagination</router-link></li>\r\n                            <li><router-link to=\"/elements/popovers\">Popovers</router-link></li>\r\n                            <li><router-link to=\"/elements/progress-bar\">Progress Bar</router-link></li>\r\n                            <li><router-link to=\"/elements/search\">Search</router-link></li>\r\n                            <li><router-link to=\"/elements/tooltips\">Tooltips</router-link></li>\r\n                            <li><router-link to=\"/elements/treeview\">Treeview</router-link></li>\r\n                            <li><router-link to=\"/elements/typography\">Typography</router-link></li>\r\n                        </ul>\r\n                    </li>\r\n\r\n                    <li class=\"menu single-menu\">\r\n                        <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                            <div class=\"\">\r\n                                <svg\r\n                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                    width=\"24\"\r\n                                    height=\"24\"\r\n                                    viewBox=\"0 0 24 24\"\r\n                                    fill=\"none\"\r\n                                    stroke=\"currentColor\"\r\n                                    stroke-width=\"2\"\r\n                                    stroke-linecap=\"round\"\r\n                                    stroke-linejoin=\"round\"\r\n                                    class=\"feather feather-layout\"\r\n                                >\r\n                                    <rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"2\" ry=\"2\"></rect>\r\n                                    <line x1=\"3\" y1=\"9\" x2=\"21\" y2=\"9\"></line>\r\n                                    <line x1=\"9\" y1=\"21\" x2=\"9\" y2=\"9\"></line>\r\n                                </svg>\r\n                                <span>{{ $t('tables') }}</span>\r\n                            </div>\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-chevron-down\"\r\n                            >\r\n                                <polyline points=\"6 9 12 15 18 9\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"collapse submenu list-unstyled\">\r\n                            <li><router-link to=\"/tables/basic\">Basic</router-link></li>\r\n                            <li class=\"sub-sub-submenu-list\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                                    DataTables\r\n                                    <svg\r\n                                        xmlns=\"http://www.w3.org/2000/svg\"\r\n                                        width=\"24\"\r\n                                        height=\"24\"\r\n                                        viewBox=\"0 0 24 24\"\r\n                                        fill=\"none\"\r\n                                        stroke=\"currentColor\"\r\n                                        stroke-width=\"2\"\r\n                                        stroke-linecap=\"round\"\r\n                                        stroke-linejoin=\"round\"\r\n                                        class=\"feather feather-chevron-right\"\r\n                                    >\r\n                                        <polyline points=\"9 18 15 12 9 6\"></polyline>\r\n                                    </svg>\r\n                                </a>\r\n                                <ul class=\"collapse list-unstyled sub-submenu\">\r\n                                    <li><router-link to=\"/tables/basic\">Basic</router-link></li>\r\n                                    <li><router-link to=\"/tables/striped\">Striped Table</router-link></li>\r\n                                    <li><router-link to=\"/tables/order-sorting\">Order Sorting</router-link></li>\r\n                                    <li><router-link to=\"/tables/multi-column\">Multi Column</router-link></li>\r\n                                    <li><router-link to=\"/tables/multiple-tables\">Multiple Tables</router-link></li>\r\n                                    <li><router-link to=\"/tables/alt-pagination\">Alt. Pagination</router-link></li>\r\n                                    <li><router-link to=\"/tables/custom\">Custom</router-link></li>\r\n                                    <li><router-link to=\"/tables/range-search\">Range Search</router-link></li>\r\n                                    <li><router-link to=\"/tables/export\">Export</router-link></li>\r\n                                    <li><router-link to=\"/tables/live-dom-ordering\">Live DOM ordering</router-link></li>\r\n                                    <li><router-link to=\"/tables/miscellaneous\">Miscellaneous</router-link></li>\r\n                                </ul>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n\r\n                    <li class=\"menu single-menu\">\r\n                        <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                            <div class=\"\">\r\n                                <svg\r\n                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                    width=\"24\"\r\n                                    height=\"24\"\r\n                                    viewBox=\"0 0 24 24\"\r\n                                    fill=\"none\"\r\n                                    stroke=\"currentColor\"\r\n                                    stroke-width=\"2\"\r\n                                    stroke-linecap=\"round\"\r\n                                    stroke-linejoin=\"round\"\r\n                                    class=\"feather feather-clipboard\"\r\n                                >\r\n                                    <path d=\"M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2\"></path>\r\n                                    <rect x=\"8\" y=\"2\" width=\"8\" height=\"4\" rx=\"1\" ry=\"1\"></rect>\r\n                                </svg>\r\n                                <span>{{ $t('forms') }}</span>\r\n                            </div>\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-chevron-down\"\r\n                            >\r\n                                <polyline points=\"6 9 12 15 18 9\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"collapse submenu list-unstyled\">\r\n                            <li><router-link to=\"/forms/basic\">Basic</router-link></li>\r\n                            <li><router-link to=\"/forms/input-group\">Input Group</router-link></li>\r\n                            <li><router-link to=\"/forms/layouts\">Layouts</router-link></li>\r\n                            <li><router-link to=\"/forms/validation\">Validation</router-link></li>\r\n                            <li><router-link to=\"/forms/input-mask\">Input Mask</router-link></li>\r\n                            <li><router-link to=\"/forms/select2\">Select2</router-link></li>\r\n                            <li><router-link to=\"/forms/touchspin\">TouchSpin</router-link></li>\r\n                            <li><router-link to=\"/forms/checkbox-radio\">Checkbox &amp; Radio</router-link></li>\r\n                            <li><router-link to=\"/forms/switches\">Switches</router-link></li>\r\n                            <li><router-link to=\"/forms/wizards\">Wizards</router-link></li>\r\n                            <li><router-link to=\"/forms/file-upload\">File Upload</router-link></li>\r\n                            <li><router-link to=\"/forms/quill-editor\">Quill Editor</router-link></li>\r\n                            <li><router-link to=\"/forms/markdown-editor\">Markdown Editor</router-link></li>\r\n                            <li><router-link to=\"/forms/date-picker\">Date &amp; Range Picker </router-link></li>\r\n                            <li><router-link to=\"/forms/clipboard\">Clipboard</router-link></li>\r\n                        </ul>\r\n                    </li>\r\n\r\n                    <li class=\"menu single-menu\">\r\n                        <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                            <div class=\"\">\r\n                                <svg\r\n                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                    width=\"24\"\r\n                                    height=\"24\"\r\n                                    viewBox=\"0 0 24 24\"\r\n                                    fill=\"none\"\r\n                                    stroke=\"currentColor\"\r\n                                    stroke-width=\"2\"\r\n                                    stroke-linecap=\"round\"\r\n                                    stroke-linejoin=\"round\"\r\n                                    class=\"feather feather-file\"\r\n                                >\r\n                                    <path d=\"M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z\"></path>\r\n                                    <polyline points=\"13 2 13 9 20 9\"></polyline>\r\n                                </svg>\r\n                                <span>{{ $t('pages') }}</span>\r\n                            </div>\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-chevron-down\"\r\n                            >\r\n                                <polyline points=\"6 9 12 15 18 9\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"collapse submenu list-unstyled\">\r\n                            <li><router-link to=\"/pages/helpdesk\">Helpdesk</router-link></li>\r\n                            <li><router-link to=\"/pages/contact-us\">Contact Form</router-link></li>\r\n                            <li><router-link to=\"/pages/faq\">FAQ</router-link></li>\r\n                            <li><router-link to=\"/pages/faq2\">FAQ 2</router-link></li>\r\n                            <li><router-link to=\"/pages/privacy-policy\">Privacy Policy</router-link></li>\r\n                            <li><a target=\"_blank\" href=\"/pages/coming-soon\">Coming Soon</a></li>\r\n                            <li><router-link to=\"/pages/blank-page\">Blank Page</router-link></li>\r\n                            <li><router-link to=\"/pages/sample\">Sample Page</router-link></li>\r\n\r\n                            <li><router-link to=\"/users/profile\">Profile</router-link></li>\r\n                            <li><router-link to=\"/users/account-setting\">Account Settings</router-link></li>\r\n                            <li class=\"sub-sub-submenu-list\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                                    Error\r\n                                    <svg\r\n                                        xmlns=\"http://www.w3.org/2000/svg\"\r\n                                        width=\"24\"\r\n                                        height=\"24\"\r\n                                        viewBox=\"0 0 24 24\"\r\n                                        fill=\"none\"\r\n                                        stroke=\"currentColor\"\r\n                                        stroke-width=\"2\"\r\n                                        stroke-linecap=\"round\"\r\n                                        stroke-linejoin=\"round\"\r\n                                        class=\"feather feather-chevron-right\"\r\n                                    >\r\n                                        <polyline points=\"9 18 15 12 9 6\"></polyline>\r\n                                    </svg>\r\n                                </a>\r\n                                <ul class=\"collapse list-unstyled sub-submenu\">\r\n                                    <li><a target=\"_blank\" href=\"/pages/error404\">404</a></li>\r\n                                    <li><a target=\"_blank\" href=\"/pages/error500\">500</a></li>\r\n                                    <li><a target=\"_blank\" href=\"/pages/error503\">503</a></li>\r\n                                    <li><a target=\"_blank\" href=\"/pages/maintenence\">Maintanence</a></li>\r\n                                </ul>\r\n                            </li>\r\n                            <li class=\"sub-sub-submenu-list\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                                    Login\r\n                                    <svg\r\n                                        xmlns=\"http://www.w3.org/2000/svg\"\r\n                                        width=\"24\"\r\n                                        height=\"24\"\r\n                                        viewBox=\"0 0 24 24\"\r\n                                        fill=\"none\"\r\n                                        stroke=\"currentColor\"\r\n                                        stroke-width=\"2\"\r\n                                        stroke-linecap=\"round\"\r\n                                        stroke-linejoin=\"round\"\r\n                                        class=\"feather feather-chevron-right\"\r\n                                    >\r\n                                        <polyline points=\"9 18 15 12 9 6\"></polyline>\r\n                                    </svg>\r\n                                </a>\r\n                                <ul class=\"collapse list-unstyled sub-submenu\">\r\n                                    <li><a target=\"_blank\" href=\"/auth/login\">Login Cover</a></li>\r\n                                    <li><a target=\"_blank\" href=\"/auth/login-boxed\">Login Boxed</a></li>\r\n                                </ul>\r\n                            </li>\r\n                            <li class=\"sub-sub-submenu-list\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                                    Register\r\n                                    <svg\r\n                                        xmlns=\"http://www.w3.org/2000/svg\"\r\n                                        width=\"24\"\r\n                                        height=\"24\"\r\n                                        viewBox=\"0 0 24 24\"\r\n                                        fill=\"none\"\r\n                                        stroke=\"currentColor\"\r\n                                        stroke-width=\"2\"\r\n                                        stroke-linecap=\"round\"\r\n                                        stroke-linejoin=\"round\"\r\n                                        class=\"feather feather-chevron-right\"\r\n                                    >\r\n                                        <polyline points=\"9 18 15 12 9 6\"></polyline>\r\n                                    </svg>\r\n                                </a>\r\n                                <ul class=\"collapse list-unstyled sub-submenu\">\r\n                                    <li><a target=\"_blank\" href=\"/auth/register\">Register Cover</a></li>\r\n                                    <li><a target=\"_blank\" href=\"/auth/register-boxed\">Register Boxed</a></li>\r\n                                </ul>\r\n                            </li>\r\n\r\n                            <li class=\"sub-sub-submenu-list\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                                    Password Recovery\r\n                                    <svg\r\n                                        xmlns=\"http://www.w3.org/2000/svg\"\r\n                                        width=\"24\"\r\n                                        height=\"24\"\r\n                                        viewBox=\"0 0 24 24\"\r\n                                        fill=\"none\"\r\n                                        stroke=\"currentColor\"\r\n                                        stroke-width=\"2\"\r\n                                        stroke-linecap=\"round\"\r\n                                        stroke-linejoin=\"round\"\r\n                                        class=\"feather feather-chevron-right\"\r\n                                    >\r\n                                        <polyline points=\"9 18 15 12 9 6\"></polyline>\r\n                                    </svg>\r\n                                </a>\r\n                                <ul class=\"collapse list-unstyled sub-submenu\">\r\n                                    <li><a target=\"_blank\" href=\"/auth/pass-recovery\">Recover ID Cover</a></li>\r\n                                    <li><a target=\"_blank\" href=\"/auth/pass-recovery-boxed\">Recover ID Boxed</a></li>\r\n                                </ul>\r\n                            </li>\r\n\r\n                            <li class=\"sub-sub-submenu-list\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                                    Lockscreen\r\n                                    <svg\r\n                                        xmlns=\"http://www.w3.org/2000/svg\"\r\n                                        width=\"24\"\r\n                                        height=\"24\"\r\n                                        viewBox=\"0 0 24 24\"\r\n                                        fill=\"none\"\r\n                                        stroke=\"currentColor\"\r\n                                        stroke-width=\"2\"\r\n                                        stroke-linecap=\"round\"\r\n                                        stroke-linejoin=\"round\"\r\n                                        class=\"feather feather-chevron-right\"\r\n                                    >\r\n                                        <polyline points=\"9 18 15 12 9 6\"></polyline>\r\n                                    </svg>\r\n                                </a>\r\n                                <ul class=\"collapse list-unstyled sub-submenu\">\r\n                                    <li><a target=\"_blank\" href=\"/auth/lockscreen\">Unlock Cover</a></li>\r\n                                    <li><a target=\"_blank\" href=\"/auth/lockscreen-boxed\">Unlock Boxed</a></li>\r\n                                </ul>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n\r\n                    <li class=\"menu single-menu\">\r\n                        <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                            <div class=\"\">\r\n                                <svg\r\n                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                    width=\"24\"\r\n                                    height=\"24\"\r\n                                    viewBox=\"0 0 24 24\"\r\n                                    fill=\"none\"\r\n                                    stroke=\"currentColor\"\r\n                                    stroke-width=\"2\"\r\n                                    stroke-linecap=\"round\"\r\n                                    stroke-linejoin=\"round\"\r\n                                    class=\"feather feather-plus-circle\"\r\n                                >\r\n                                    <circle cx=\"12\" cy=\"12\" r=\"10\"></circle>\r\n                                    <line x1=\"12\" y1=\"8\" x2=\"12\" y2=\"16\"></line>\r\n                                    <line x1=\"8\" y1=\"12\" x2=\"16\" y2=\"12\"></line>\r\n                                </svg>\r\n                                <span>{{ $t('more') }}</span>\r\n                            </div>\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-chevron-down\"\r\n                            >\r\n                                <polyline points=\"6 9 12 15 18 9\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"collapse submenu list-unstyled\">\r\n                            <li><router-link to=\"/dragndrop\">Drag and Drop</router-link></li>\r\n                            <li><router-link to=\"/widgets\">Widgets</router-link></li>\r\n                            <li><router-link to=\"/charts/apex-chart\">Charts</router-link></li>\r\n                            <li><router-link to=\"/font-icons\">Font Icons</router-link></li>\r\n                            <li>\r\n                                <a target=\"_blank\" href=\"https://cork-vue.sbthemes.com\"> Documentation </a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                </ul>\r\n            </nav>\r\n        </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  END TOPBAR  ")]);
 }
 
 /***/ }),
@@ -27748,7 +25914,7 @@ var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNo
 
 var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Persediaan");
 
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Multi Column");
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Rekening Kas");
 
 var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Multiple Tables");
 
@@ -27921,7 +26087,7 @@ var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNo
 
 var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Pembelian Persediaan");
 
-var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Input Mask");
+var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Laporan Opnum");
 
 var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Select2");
 
@@ -28792,7 +26958,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         /* STABLE */
 
       })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-        to: "/tables/multi-column",
+        to: "/kas",
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -28892,7 +27058,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         /* STABLE */
 
       })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-        to: "/forms/input-mask",
+        to: "/laporan/opnum",
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
@@ -30492,7 +28658,7 @@ var usePageTitle = function usePageTitle(pageTitle) {
 };
 var useMeta = function useMeta(data) {
   return (0,_vueuse_head__WEBPACK_IMPORTED_MODULE_1__.useHead)(_objectSpread(_objectSpread({}, data), {}, {
-    title: "".concat(data.title, " | CORK - Multipurpose Bootstrap Dashboard Template")
+    title: "".concat(data.title, " | Sistem Informasi POM BENSIN")
   }));
 };
 
@@ -30731,6 +28897,13 @@ var routes = [//dashboard
   name: 'pembelian-persediaan',
   component: function component() {
     return __webpack_require__.e(/*! import() | components-tabs */ "components-tabs").then(__webpack_require__.bind(__webpack_require__, /*! ../views/laporan/pembelianPersediaan.vue */ "./resources/js/src/views/laporan/pembelianPersediaan.vue"));
+  },
+  props: true
+}, {
+  path: '/laporan/opnum',
+  name: 'laporan-opnum',
+  component: function component() {
+    return __webpack_require__.e(/*! import() | components-tabs */ "components-tabs").then(__webpack_require__.bind(__webpack_require__, /*! ../views/laporan/laporanOpnum.vue */ "./resources/js/src/views/laporan/laporanOpnum.vue"));
   },
   props: true
 }, //components
@@ -31856,21 +30029,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var _i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../i18n */ "./resources/js/src/i18n.js");
-/* harmony import */ var vuex_persistedstate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex-persistedstate */ "./node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js");
-/* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./auth */ "./resources/js/src/store/auth.js");
-/* harmony import */ var _barang__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./barang */ "./resources/js/src/store/barang.js");
-/* harmony import */ var _pelanggan__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pelanggan */ "./resources/js/src/store/pelanggan.js");
-/* harmony import */ var _room__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./room */ "./resources/js/src/store/room.js");
-/* harmony import */ var _kode__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./kode */ "./resources/js/src/store/kode.js");
-/* harmony import */ var _bbm__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./bbm */ "./resources/js/src/store/bbm.js");
-/* harmony import */ var _nosel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./nosel */ "./resources/js/src/store/nosel.js");
-/* harmony import */ var _transnosel__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./transnosel */ "./resources/js/src/store/transnosel.js");
-/* harmony import */ var _transaksi__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./transaksi */ "./resources/js/src/store/transaksi.js");
-/* harmony import */ var _supplier__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./supplier */ "./resources/js/src/store/supplier.js");
-/* harmony import */ var _nomor__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./nomor */ "./resources/js/src/store/nomor.js");
-/* harmony import */ var _laporan__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./laporan */ "./resources/js/src/store/laporan.js");
+/* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./auth */ "./resources/js/src/store/auth.js");
+/* harmony import */ var _barang__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./barang */ "./resources/js/src/store/barang.js");
+/* harmony import */ var _pelanggan__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pelanggan */ "./resources/js/src/store/pelanggan.js");
+/* harmony import */ var _room__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./room */ "./resources/js/src/store/room.js");
+/* harmony import */ var _kode__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./kode */ "./resources/js/src/store/kode.js");
+/* harmony import */ var _bbm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./bbm */ "./resources/js/src/store/bbm.js");
+/* harmony import */ var _nosel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./nosel */ "./resources/js/src/store/nosel.js");
+/* harmony import */ var _transnosel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./transnosel */ "./resources/js/src/store/transnosel.js");
+/* harmony import */ var _transaksi__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./transaksi */ "./resources/js/src/store/transaksi.js");
+/* harmony import */ var _supplier__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./supplier */ "./resources/js/src/store/supplier.js");
+/* harmony import */ var _nomor__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./nomor */ "./resources/js/src/store/nomor.js");
+/* harmony import */ var _laporan__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./laporan */ "./resources/js/src/store/laporan.js");
+
+ // import createPersistedState from "vuex-persistedstate";
 
 
 
@@ -31884,9 +30058,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_14__.createStore({
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new vuex__WEBPACK_IMPORTED_MODULE_13__.createStore({
   state: {
     pajak: 11,
     layout: 'app',
@@ -32010,18 +30182,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   actions: {},
   modules: {
-    auth: _auth__WEBPACK_IMPORTED_MODULE_2__["default"],
-    barang: _barang__WEBPACK_IMPORTED_MODULE_3__["default"],
-    pelanggan: _pelanggan__WEBPACK_IMPORTED_MODULE_4__["default"],
-    kode: _kode__WEBPACK_IMPORTED_MODULE_6__["default"],
-    room: _room__WEBPACK_IMPORTED_MODULE_5__["default"],
-    bbm: _bbm__WEBPACK_IMPORTED_MODULE_7__["default"],
-    nosel: _nosel__WEBPACK_IMPORTED_MODULE_8__["default"],
-    transnosel: _transnosel__WEBPACK_IMPORTED_MODULE_9__["default"],
-    transaksi: _transaksi__WEBPACK_IMPORTED_MODULE_10__["default"],
-    supplier: _supplier__WEBPACK_IMPORTED_MODULE_11__["default"],
-    nomor: _nomor__WEBPACK_IMPORTED_MODULE_12__["default"],
-    laporan: _laporan__WEBPACK_IMPORTED_MODULE_13__["default"]
+    auth: _auth__WEBPACK_IMPORTED_MODULE_1__["default"],
+    barang: _barang__WEBPACK_IMPORTED_MODULE_2__["default"],
+    pelanggan: _pelanggan__WEBPACK_IMPORTED_MODULE_3__["default"],
+    kode: _kode__WEBPACK_IMPORTED_MODULE_5__["default"],
+    room: _room__WEBPACK_IMPORTED_MODULE_4__["default"],
+    bbm: _bbm__WEBPACK_IMPORTED_MODULE_6__["default"],
+    nosel: _nosel__WEBPACK_IMPORTED_MODULE_7__["default"],
+    transnosel: _transnosel__WEBPACK_IMPORTED_MODULE_8__["default"],
+    transaksi: _transaksi__WEBPACK_IMPORTED_MODULE_9__["default"],
+    supplier: _supplier__WEBPACK_IMPORTED_MODULE_10__["default"],
+    nomor: _nomor__WEBPACK_IMPORTED_MODULE_11__["default"],
+    laporan: _laporan__WEBPACK_IMPORTED_MODULE_12__["default"]
   } // plugins: [createPersistedState()]
 
 }));
@@ -32151,7 +30323,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var state = {
   laporanbbm: [],
   laporanbarang: [],
-  pembelianpersediaan: []
+  pembelianpersediaan: [],
+  laporanopnum: []
 };
 var getters = {
   SlaporanBbm: function SlaporanBbm(state) {
@@ -32162,6 +30335,9 @@ var getters = {
   },
   SlaporanPembelian: function SlaporanPembelian(state) {
     return state.pembelianpersediaan;
+  },
+  SlaporanOpnum: function SlaporanOpnum(state) {
+    return state.laporanopnum;
   }
 };
 var actions = {
@@ -32287,30 +30463,40 @@ var actions = {
       }, _callee4, null, [[1, 8]]);
     }))();
   },
-  EditBarang: function EditBarang(_ref5, Brg) {
+  GetLaporanOpnum: function GetLaporanOpnum(_ref5, opnum) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
-      var dispatch;
+      var commit, response;
       return _regeneratorRuntime().wrap(function _callee5$(_context5) {
         while (1) {
           switch (_context5.prev = _context5.next) {
             case 0:
-              dispatch = _ref5.dispatch;
-              _context5.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('api/update/barang', Brg);
+              commit = _ref5.commit;
+              _context5.prev = 1;
+              _context5.next = 4;
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/laporan-opnum', opnum);
 
-            case 3:
-              _context5.next = 5;
-              return dispatch('GetBarang');
+            case 4:
+              response = _context5.sent;
+              commit('setLaporanOpnum', response.data.data);
+              _context5.next = 12;
+              break;
 
-            case 5:
+            case 8:
+              _context5.prev = 8;
+              _context5.t0 = _context5["catch"](1);
+              // Handle error
+              alert('error load laporan opnum barang');
+              return _context5.abrupt("return");
+
+            case 12:
             case "end":
               return _context5.stop();
           }
         }
-      }, _callee5);
+      }, _callee5, null, [[1, 8]]);
     }))();
   },
-  DeleteBarang: function DeleteBarang(_ref6, id) {
+  EditBarang: function EditBarang(_ref6, Brg) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
       var dispatch;
       return _regeneratorRuntime().wrap(function _callee6$(_context6) {
@@ -32319,7 +30505,7 @@ var actions = {
             case 0:
               dispatch = _ref6.dispatch;
               _context6.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("api/hapus/barang/".concat(id));
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('api/update/barang', Brg);
 
             case 3:
               _context6.next = 5;
@@ -32332,6 +30518,29 @@ var actions = {
         }
       }, _callee6);
     }))();
+  },
+  DeleteBarang: function DeleteBarang(_ref7, id) {
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
+      var dispatch;
+      return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+        while (1) {
+          switch (_context7.prev = _context7.next) {
+            case 0:
+              dispatch = _ref7.dispatch;
+              _context7.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("api/hapus/barang/".concat(id));
+
+            case 3:
+              _context7.next = 5;
+              return dispatch('GetBarang');
+
+            case 5:
+            case "end":
+              return _context7.stop();
+          }
+        }
+      }, _callee7);
+    }))();
   }
 };
 var mutations = {
@@ -32343,6 +30552,9 @@ var mutations = {
   },
   setLaporanPembelian: function setLaporanPembelian(state, belibarang) {
     state.pembelianpersediaan = belibarang;
+  },
+  setLaporanOpnum: function setLaporanOpnum(state, op) {
+    state.laporanopnum = op;
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -33710,9 +31922,9 @@ __webpack_require__.r(__webpack_exports__);
 var $themeConfig = {
   lang: 'en',
   // en, da, de, el, es, fr, hu, it, ja, pl, pt, ru, sv, tr, zh
-  theme: 'light',
+  theme: 'dark',
   // light, dark, system
-  navigation: 'vertical',
+  navigation: 'collapsible-vertical',
   // vertical, collapsible-vertical, horizontal
   layout: 'full' // full, boxed-layout, large-boxed-layout
 
@@ -40798,213 +39010,13 @@ module.exports = "/images/features_overview-71862ac4115d9b272d6c0bf32e4d6943.svg
 
 /***/ }),
 
-/***/ "./resources/js/src/assets/images/flags/brl.png":
-/*!******************************************************!*\
-  !*** ./resources/js/src/assets/images/flags/brl.png ***!
-  \******************************************************/
+/***/ "./resources/js/src/assets/images/pom.jpg":
+/*!************************************************!*\
+  !*** ./resources/js/src/assets/images/pom.jpg ***!
+  \************************************************/
 /***/ ((module) => {
 
-module.exports = "/images/flags/brl-2ad52dfcea08d3bb525017ccf37602f0.png";
-
-/***/ }),
-
-/***/ "./resources/js/src/assets/images/flags/da.png":
-/*!*****************************************************!*\
-  !*** ./resources/js/src/assets/images/flags/da.png ***!
-  \*****************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/flags/da-ffa22e6bbb0cac01d1a5db76acdba2b8.png";
-
-/***/ }),
-
-/***/ "./resources/js/src/assets/images/flags/de.png":
-/*!*****************************************************!*\
-  !*** ./resources/js/src/assets/images/flags/de.png ***!
-  \*****************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/flags/de-79533ce9c8ed6c79abfac7ed134476ab.png";
-
-/***/ }),
-
-/***/ "./resources/js/src/assets/images/flags/el.png":
-/*!*****************************************************!*\
-  !*** ./resources/js/src/assets/images/flags/el.png ***!
-  \*****************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/flags/el-57b9ae6c3893dfebaac3b0c129429836.png";
-
-/***/ }),
-
-/***/ "./resources/js/src/assets/images/flags/en.png":
-/*!*****************************************************!*\
-  !*** ./resources/js/src/assets/images/flags/en.png ***!
-  \*****************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/flags/en-0bf4ad0d28f63b642778f95dd9fc6798.png";
-
-/***/ }),
-
-/***/ "./resources/js/src/assets/images/flags/es.png":
-/*!*****************************************************!*\
-  !*** ./resources/js/src/assets/images/flags/es.png ***!
-  \*****************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/flags/es-0199c4d1a04215dab0805d77d9552ba7.png";
-
-/***/ }),
-
-/***/ "./resources/js/src/assets/images/flags/fr.png":
-/*!*****************************************************!*\
-  !*** ./resources/js/src/assets/images/flags/fr.png ***!
-  \*****************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/flags/fr-74f8f17f23babcd88c358505418f9e53.png";
-
-/***/ }),
-
-/***/ "./resources/js/src/assets/images/flags/gbp.png":
-/*!******************************************************!*\
-  !*** ./resources/js/src/assets/images/flags/gbp.png ***!
-  \******************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/flags/gbp-22c3b45322c8bfbf914d897fe3456888.png";
-
-/***/ }),
-
-/***/ "./resources/js/src/assets/images/flags/hu.png":
-/*!*****************************************************!*\
-  !*** ./resources/js/src/assets/images/flags/hu.png ***!
-  \*****************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/flags/hu-c9fae00d70793c90f5cf6d34f827b365.png";
-
-/***/ }),
-
-/***/ "./resources/js/src/assets/images/flags/idr.png":
-/*!******************************************************!*\
-  !*** ./resources/js/src/assets/images/flags/idr.png ***!
-  \******************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/flags/idr-8a883e29bff7e593fa72aac52de34ea4.png";
-
-/***/ }),
-
-/***/ "./resources/js/src/assets/images/flags/inr.png":
-/*!******************************************************!*\
-  !*** ./resources/js/src/assets/images/flags/inr.png ***!
-  \******************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/flags/inr-a12a8f35bafc95e3b8efd77ccdf776f7.png";
-
-/***/ }),
-
-/***/ "./resources/js/src/assets/images/flags/it.png":
-/*!*****************************************************!*\
-  !*** ./resources/js/src/assets/images/flags/it.png ***!
-  \*****************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/flags/it-4b7b3694f266ce144565f775ca23c06a.png";
-
-/***/ }),
-
-/***/ "./resources/js/src/assets/images/flags/ja.png":
-/*!*****************************************************!*\
-  !*** ./resources/js/src/assets/images/flags/ja.png ***!
-  \*****************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/flags/ja-e921cd518f61c580d95dd43d678ee515.png";
-
-/***/ }),
-
-/***/ "./resources/js/src/assets/images/flags/jp.png":
-/*!*****************************************************!*\
-  !*** ./resources/js/src/assets/images/flags/jp.png ***!
-  \*****************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/flags/jp-e921cd518f61c580d95dd43d678ee515.png";
-
-/***/ }),
-
-/***/ "./resources/js/src/assets/images/flags/pl.png":
-/*!*****************************************************!*\
-  !*** ./resources/js/src/assets/images/flags/pl.png ***!
-  \*****************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/flags/pl-b3b82dba19a04821475c734fa513aed9.png";
-
-/***/ }),
-
-/***/ "./resources/js/src/assets/images/flags/pt.png":
-/*!*****************************************************!*\
-  !*** ./resources/js/src/assets/images/flags/pt.png ***!
-  \*****************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/flags/pt-0ee734c1de9487d276da7a8287889e2a.png";
-
-/***/ }),
-
-/***/ "./resources/js/src/assets/images/flags/ru.png":
-/*!*****************************************************!*\
-  !*** ./resources/js/src/assets/images/flags/ru.png ***!
-  \*****************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/flags/ru-9384cfed48a9f596e8b4961635ff7397.png";
-
-/***/ }),
-
-/***/ "./resources/js/src/assets/images/flags/sv.png":
-/*!*****************************************************!*\
-  !*** ./resources/js/src/assets/images/flags/sv.png ***!
-  \*****************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/flags/sv-98fd7e14274c4a44e51bcaef8cd3c225.png";
-
-/***/ }),
-
-/***/ "./resources/js/src/assets/images/flags/tr.png":
-/*!*****************************************************!*\
-  !*** ./resources/js/src/assets/images/flags/tr.png ***!
-  \*****************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/flags/tr-c540f7fcb34f9a89524fd63db23a6898.png";
-
-/***/ }),
-
-/***/ "./resources/js/src/assets/images/flags/zh.png":
-/*!*****************************************************!*\
-  !*** ./resources/js/src/assets/images/flags/zh.png ***!
-  \*****************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/flags/zh-c09baeaa5e808f1d39bd305e33fd7c65.png";
-
-/***/ }),
-
-/***/ "./resources/js/src/assets/images/logo.svg":
-/*!*************************************************!*\
-  !*** ./resources/js/src/assets/images/logo.svg ***!
-  \*************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/logo-f3ca33532c7beec3e8ff7b381e03196c.svg";
+module.exports = "/images/pom-6148d7942dfaf03e4081101acc67e55c.jpg";
 
 /***/ }),
 
@@ -41088,26 +39100,6 @@ module.exports = "/images/profile-13-8d35c0a20b5d253c2d7a849a86bd4fa8.jpeg";
 
 /***/ }),
 
-/***/ "./resources/js/src/assets/images/profile-15.jpeg":
-/*!********************************************************!*\
-  !*** ./resources/js/src/assets/images/profile-15.jpeg ***!
-  \********************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/profile-15-327abbec0495f24f6f4d2c7c5103e200.jpeg";
-
-/***/ }),
-
-/***/ "./resources/js/src/assets/images/profile-16.jpeg":
-/*!********************************************************!*\
-  !*** ./resources/js/src/assets/images/profile-16.jpeg ***!
-  \********************************************************/
-/***/ ((module) => {
-
-module.exports = "/images/profile-16-68a87b53e613292be0fb23a42db51310.jpeg";
-
-/***/ }),
-
 /***/ "./resources/js/src/assets/images/profile-32.jpeg":
 /*!********************************************************!*\
   !*** ./resources/js/src/assets/images/profile-32.jpeg ***!
@@ -41145,6 +39137,16 @@ module.exports = "/images/profile-5-05b70ad96255ec3cdf0a840f74fa41d3.jpeg";
 /***/ ((module) => {
 
 module.exports = "/images/profile-7-72dcc5961b1b6ee0a1e6284c72fae404.jpeg";
+
+/***/ }),
+
+/***/ "./resources/js/src/assets/images/user.jpg":
+/*!*************************************************!*\
+  !*** ./resources/js/src/assets/images/user.jpg ***!
+  \*************************************************/
+/***/ ((module) => {
+
+module.exports = "/images/user-35f1968a8f670496f370394132cf468c.jpg";
 
 /***/ }),
 
@@ -68132,23 +66134,6 @@ function compileToFunction(template, options) {
 
 /***/ }),
 
-/***/ "./node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js":
-/*!*************************************************************************!*\
-  !*** ./node_modules/vuex-persistedstate/dist/vuex-persistedstate.es.js ***!
-  \*************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-var r=function(r){return function(r){return!!r&&"object"==typeof r}(r)&&!function(r){var t=Object.prototype.toString.call(r);return"[object RegExp]"===t||"[object Date]"===t||function(r){return r.$$typeof===e}(r)}(r)},e="function"==typeof Symbol&&Symbol.for?Symbol.for("react.element"):60103;function t(r,e){return!1!==e.clone&&e.isMergeableObject(r)?u(Array.isArray(r)?[]:{},r,e):r}function n(r,e,n){return r.concat(e).map(function(r){return t(r,n)})}function o(r){return Object.keys(r).concat(function(r){return Object.getOwnPropertySymbols?Object.getOwnPropertySymbols(r).filter(function(e){return r.propertyIsEnumerable(e)}):[]}(r))}function c(r,e){try{return e in r}catch(r){return!1}}function u(e,i,a){(a=a||{}).arrayMerge=a.arrayMerge||n,a.isMergeableObject=a.isMergeableObject||r,a.cloneUnlessOtherwiseSpecified=t;var f=Array.isArray(i);return f===Array.isArray(e)?f?a.arrayMerge(e,i,a):function(r,e,n){var i={};return n.isMergeableObject(r)&&o(r).forEach(function(e){i[e]=t(r[e],n)}),o(e).forEach(function(o){(function(r,e){return c(r,e)&&!(Object.hasOwnProperty.call(r,e)&&Object.propertyIsEnumerable.call(r,e))})(r,o)||(i[o]=c(r,o)&&n.isMergeableObject(e[o])?function(r,e){if(!e.customMerge)return u;var t=e.customMerge(r);return"function"==typeof t?t:u}(o,n)(r[o],e[o],n):t(e[o],n))}),i}(e,i,a):t(i,a)}u.all=function(r,e){if(!Array.isArray(r))throw new Error("first argument should be an array");return r.reduce(function(r,t){return u(r,t,e)},{})};var i=u;function a(r){var e=(r=r||{}).storage||window&&window.localStorage,t=r.key||"vuex";function n(r,e){var t=e.getItem(r);try{return"string"==typeof t?JSON.parse(t):"object"==typeof t?t:void 0}catch(r){}}function o(){return!0}function c(r,e,t){return t.setItem(r,JSON.stringify(e))}function u(r,e){return Array.isArray(e)?e.reduce(function(e,t){return function(r,e,t,n){return!/^(__proto__|constructor|prototype)$/.test(e)&&((e=e.split?e.split("."):e.slice(0)).slice(0,-1).reduce(function(r,e){return r[e]=r[e]||{}},r)[e.pop()]=t),r}(e,t,(n=r,void 0===(n=((o=t).split?o.split("."):o).reduce(function(r,e){return r&&r[e]},n))?void 0:n));var n,o},{}):r}function a(r){return function(e){return r.subscribe(e)}}(r.assertStorage||function(){e.setItem("@@",1),e.removeItem("@@")})(e);var f,s=function(){return(r.getState||n)(t,e)};return r.fetchBeforeUse&&(f=s()),function(n){r.fetchBeforeUse||(f=s()),"object"==typeof f&&null!==f&&(n.replaceState(r.overwrite?f:i(n.state,f,{arrayMerge:r.arrayMerger||function(r,e){return e},clone:!1})),(r.rehydrated||function(){})(n)),(r.subscriber||a)(n)(function(n,i){(r.filter||o)(n)&&(r.setState||c)(t,(r.reducer||u)(i,r.paths),e)})}}/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (a);
-//# sourceMappingURL=vuex-persistedstate.es.js.map
-
-
-/***/ }),
-
 /***/ "./node_modules/vuex/dist/vuex.esm-bundler.js":
 /*!****************************************************!*\
   !*** ./node_modules/vuex/dist/vuex.esm-bundler.js ***!
@@ -69635,57 +67620,6 @@ var index = {
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (index);
 
 
-
-/***/ }),
-
-/***/ "./resources/js/src/assets/images/flags sync recursive ^\\.\\/.*\\.png$":
-/*!******************************************************************!*\
-  !*** ./resources/js/src/assets/images/flags/ sync ^\.\/.*\.png$ ***!
-  \******************************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var map = {
-	"./brl.png": "./resources/js/src/assets/images/flags/brl.png",
-	"./da.png": "./resources/js/src/assets/images/flags/da.png",
-	"./de.png": "./resources/js/src/assets/images/flags/de.png",
-	"./el.png": "./resources/js/src/assets/images/flags/el.png",
-	"./en.png": "./resources/js/src/assets/images/flags/en.png",
-	"./es.png": "./resources/js/src/assets/images/flags/es.png",
-	"./fr.png": "./resources/js/src/assets/images/flags/fr.png",
-	"./gbp.png": "./resources/js/src/assets/images/flags/gbp.png",
-	"./hu.png": "./resources/js/src/assets/images/flags/hu.png",
-	"./idr.png": "./resources/js/src/assets/images/flags/idr.png",
-	"./inr.png": "./resources/js/src/assets/images/flags/inr.png",
-	"./it.png": "./resources/js/src/assets/images/flags/it.png",
-	"./ja.png": "./resources/js/src/assets/images/flags/ja.png",
-	"./jp.png": "./resources/js/src/assets/images/flags/jp.png",
-	"./pl.png": "./resources/js/src/assets/images/flags/pl.png",
-	"./pt.png": "./resources/js/src/assets/images/flags/pt.png",
-	"./ru.png": "./resources/js/src/assets/images/flags/ru.png",
-	"./sv.png": "./resources/js/src/assets/images/flags/sv.png",
-	"./tr.png": "./resources/js/src/assets/images/flags/tr.png",
-	"./zh.png": "./resources/js/src/assets/images/flags/zh.png"
-};
-
-
-function webpackContext(req) {
-	var id = webpackContextResolve(req);
-	return __webpack_require__(id);
-}
-function webpackContextResolve(req) {
-	if(!__webpack_require__.o(map, req)) {
-		var e = new Error("Cannot find module '" + req + "'");
-		e.code = 'MODULE_NOT_FOUND';
-		throw e;
-	}
-	return map[req];
-}
-webpackContext.keys = function webpackContextKeys() {
-	return Object.keys(map);
-};
-webpackContext.resolve = webpackContextResolve;
-module.exports = webpackContext;
-webpackContext.id = "./resources/js/src/assets/images/flags sync recursive ^\\.\\/.*\\.png$";
 
 /***/ }),
 
@@ -74460,7 +72394,7 @@ module.exports = JSON.parse('{"dashboard":"仪表盘","sales":"销售量","analy
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/chunks/" + chunkId + "." + {"index2":"3f2f5b1faba69db1","components-tabs":"e5bf2a82ce32b2ed","components-accordions":"958ef92098fb530f","components-modals":"e6514e571555b5c0","components-cards":"e7583a4cf5564f04","components-carousel":"8563fc4e88cba5e0","components-timeline":"d2cc574d0084a746","components-media-object":"d265e1f0556c5b23","components-list-group":"20680dcbffabc997","components-pricing-table":"b87be2673dcf64d6","components-notifications":"9206fc33e5c150fe","components-lightbox":"b9458fb55cd5c6f3","components-countdown":"e221fbc8b2816ca0","components-counter":"f7283742d443ef25","components-sweetalert":"5594131df6de8802","font-icons":"a2506faf3ba6a9f7","pages-helpdesk":"dcb617b851894fab","pages-contact-us":"2b82aa6a11b77c2e","pages-faq":"08ea3b394d276c8f","pages-faq2":"b3656798f889ae16","pages-privacy-policy":"5b1dba6f010460d1","pages-coming-soon":"3625eb8d5e9f9c18","pages-error404":"b6b7b2f9a83218ee","pages-error500":"3339dbd448847368","pages-error503":"a95ec8c784080110","pages-maintenence":"3d08473adb247530","pages-blank-page":"0c1ac99ccc41961d","pages-sample":"9994ba18d7cb12e8","auth-login-boxed":"0210010dc42dcaf9","auth-register-boxed":"d614be638b7cb772","auth-lockscreen-boxed":"32b2d256b6dca6d3","auth-pass-recovery-boxed":"57ba933f69001944","auth-login":"f26df28bf02ed8ff","auth-register":"a5f635bb185472b7","auth-lockscreen":"f692ce3fe9e2f169","auth-pass-recovery":"4cc4878d9baefab2","elements-alerts":"cce791b51da55ebf","elements-avatar":"808a6756ade77be7","elements-badges":"ceecf745922b9465","elements-breadcrumbs":"1722a5e9bc7f1a7d","elements-buttons":"fdac3a00bec52991","elements-buttons-group":"df319f66de56889a","elements-color-library":"b9c63e419c8c300b","elements-dropdown":"72e3ecb8205bc421","elements-infobox":"399934d0b9db2526","elements-jumbotron":"2709e4f6917a11df","elements-loader":"3b649aacbbfa08fc","elements-pagination":"21204cc9b1c64185","elements-popovers":"130b77ef0926b915","elements-progress-bar":"30e876cd9de41f5b","elements-search":"24f5472cee2d0d5f","elements-tooltips":"3a4ec3115056b6b3","elements-treeview":"bca134389bae1a9b","elements-typography":"73589d9887283e94","tables":"b2299a34fc0077d8","users-profile":"49b36e78cefd7a4d","users-account-setting":"8a78452ac615966d","dragndrop":"2ead4516f66797f9","charts-apex-chart":"d2f00a623aa3eb04","widgets":"b7fa9c006c6aebb0","forms-basic":"e774256dd6bf57bd","forms-input-group":"b0a3fce5817ce26b","forms-layouts":"e821a21bb2a879bf","forms-validation":"defac56a58186d1e","forms-checkbox-radio":"8c34dd2d66375144","forms-switches":"d60eef87f12531fd","forms-wizards":"77004ec359284e8d","forms-file-upload":"bd9f24848a2ef3ab","forms-clipboard":"0121ffa0f1ea0fc2","forms-date-picker":"52e788a5ab0cfd5b","forms-input-mask":"07ba756f40e98ad2","forms-quill-editor":"9e844664b525b753","forms-touchspin":"51e9b225799b1f12","forms-markdown-editor":"b8621b45c5b9f34b","forms-select2":"3275ea104c3e4206","apps-chat":"7dac0ae6d7a4b0a7","apps-mailbox":"a03427643f383ed7","apps-todo-list":"9a40985eb471a29c","apps-contacts":"cf1b68e4f46e918c","apps-notes":"36ecb7aab3e00af0","apps-scrumboard":"84af3a190bfda676","apps-calendar":"bcd6e575d633f439","apps-invoice-list":"6fc73a510df404ba","apps-invoice-preview":"d9edd83168389f6b","apps-invoice-add":"a6672603cebf366c","apps-invoice-edit":"7fa8ea67f019c0a3","tables-basic":"accd1005371fe815","tables-striped":"c14f35060df00cfc","tables-order-sorting":"58cc150f515bdba7","tables-multi-column":"512dcd5543375daf","tables-multiple-tables":"3cd0712f58b2a919","tables-alt-pagination":"83a6a0f7048933e6","tables-custom":"8990bac657189acb","tables-range-search":"10af2f97198a32b7","tables-export":"8e3566c03660ab0e","tables-live-dom-ordering":"f380465fda483f23","tables-miscellaneous":"494458b9d511a56d","node_modules_html2canvas_dist_html2canvas_js":"5475dc17eb928a5a","node_modules_dompurify_dist_purify_js":"9dabfec756329575","node_modules_canvg_lib_index_es_js":"84de45b397df7f27"}[chunkId] + ".js";
+/******/ 			return "js/chunks/" + chunkId + "." + {"index2":"3f2f5b1faba69db1","components-tabs":"6345867e439738da","components-accordions":"958ef92098fb530f","components-modals":"e6514e571555b5c0","components-cards":"e7583a4cf5564f04","components-carousel":"8563fc4e88cba5e0","components-timeline":"7ae9d528985dc414","components-media-object":"d265e1f0556c5b23","components-list-group":"20680dcbffabc997","components-pricing-table":"b87be2673dcf64d6","components-notifications":"9206fc33e5c150fe","components-lightbox":"b9458fb55cd5c6f3","components-countdown":"e221fbc8b2816ca0","components-counter":"f7283742d443ef25","components-sweetalert":"5594131df6de8802","font-icons":"a2506faf3ba6a9f7","pages-helpdesk":"dcb617b851894fab","pages-contact-us":"2b82aa6a11b77c2e","pages-faq":"08ea3b394d276c8f","pages-faq2":"b3656798f889ae16","pages-privacy-policy":"5b1dba6f010460d1","pages-coming-soon":"3625eb8d5e9f9c18","pages-error404":"b6b7b2f9a83218ee","pages-error500":"3339dbd448847368","pages-error503":"a95ec8c784080110","pages-maintenence":"3d08473adb247530","pages-blank-page":"0c1ac99ccc41961d","pages-sample":"9994ba18d7cb12e8","auth-login-boxed":"ca553c948dfff916","auth-register-boxed":"d614be638b7cb772","auth-lockscreen-boxed":"32b2d256b6dca6d3","auth-pass-recovery-boxed":"57ba933f69001944","auth-login":"11978aa9265265c9","auth-register":"a5f635bb185472b7","auth-lockscreen":"f692ce3fe9e2f169","auth-pass-recovery":"4cc4878d9baefab2","elements-alerts":"cce791b51da55ebf","elements-avatar":"808a6756ade77be7","elements-badges":"ceecf745922b9465","elements-breadcrumbs":"1722a5e9bc7f1a7d","elements-buttons":"fdac3a00bec52991","elements-buttons-group":"df319f66de56889a","elements-color-library":"b9c63e419c8c300b","elements-dropdown":"72e3ecb8205bc421","elements-infobox":"399934d0b9db2526","elements-jumbotron":"67620b84089a4b94","elements-loader":"3b649aacbbfa08fc","elements-pagination":"21204cc9b1c64185","elements-popovers":"130b77ef0926b915","elements-progress-bar":"30e876cd9de41f5b","elements-search":"3adec085aacb42c4","elements-tooltips":"3a4ec3115056b6b3","elements-treeview":"bca134389bae1a9b","elements-typography":"ac9cf4c49da4113a","tables":"4180a3dbf533efbf","users-profile":"49b36e78cefd7a4d","users-account-setting":"8a78452ac615966d","dragndrop":"45472aaa1012adce","charts-apex-chart":"d2f00a623aa3eb04","widgets":"b7fa9c006c6aebb0","forms-basic":"e774256dd6bf57bd","forms-input-group":"b0a3fce5817ce26b","forms-layouts":"e821a21bb2a879bf","forms-validation":"defac56a58186d1e","forms-checkbox-radio":"8c34dd2d66375144","forms-switches":"d60eef87f12531fd","forms-wizards":"77004ec359284e8d","forms-file-upload":"bd9f24848a2ef3ab","forms-clipboard":"0121ffa0f1ea0fc2","forms-date-picker":"52e788a5ab0cfd5b","forms-input-mask":"07ba756f40e98ad2","forms-quill-editor":"9e844664b525b753","forms-touchspin":"51e9b225799b1f12","forms-markdown-editor":"b8621b45c5b9f34b","forms-select2":"3275ea104c3e4206","apps-chat":"2f3f981559d727c3","apps-mailbox":"72614a4baf535902","apps-todo-list":"9a40985eb471a29c","apps-contacts":"2fc9b020d3e4c68f","apps-notes":"36ecb7aab3e00af0","apps-scrumboard":"84af3a190bfda676","apps-calendar":"bcd6e575d633f439","apps-invoice-list":"6adec5885f40362a","apps-invoice-preview":"d9edd83168389f6b","apps-invoice-add":"773586c6ccfacffb","apps-invoice-edit":"7832a9412d5a620f","tables-basic":"accd1005371fe815","tables-striped":"c14f35060df00cfc","tables-order-sorting":"58cc150f515bdba7","tables-multi-column":"43e657d448646d7c","tables-multiple-tables":"3cd0712f58b2a919","tables-alt-pagination":"83a6a0f7048933e6","tables-custom":"39496378736424b2","tables-range-search":"10af2f97198a32b7","tables-export":"7958cc46f4eda1ff","tables-live-dom-ordering":"f380465fda483f23","tables-miscellaneous":"74dcfb9379618afd","node_modules_html2canvas_dist_html2canvas_js":"5475dc17eb928a5a","node_modules_dompurify_dist_purify_js":"9dabfec756329575","node_modules_canvg_lib_index_es_js":"84de45b397df7f27"}[chunkId] + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	

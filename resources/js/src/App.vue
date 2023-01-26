@@ -11,7 +11,7 @@
     import { useMeta } from '@/composables/use-meta';
     import { useStore } from 'vuex';
 
-    useMeta({ title: 'Sales Admin' });
+    useMeta({ title: 'App Admin' });
 
     const store = useStore();
 

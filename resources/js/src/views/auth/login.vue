@@ -121,7 +121,7 @@
                     email: email,
                     password: password
                 })
-                // localStorage.setItem('tokenLogin', data.data.token)
+                localStorage.setItem('tokenLogin', data.data)
                 router.push({
                    path: '/bbm'
                 })

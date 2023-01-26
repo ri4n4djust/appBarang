@@ -7,6 +7,7 @@ use App\Models\Barang;
 use App\Models\Bbm;
 use App\Models\Persediaan;
 use App\Models\Opnum;
+use App\Models\OpnumDetail;
 use Illuminate\Support\Facades\DB;
 
 class barangController extends Controller
@@ -137,22 +138,60 @@ class barangController extends Controller
             $exception = DB::transaction(function() use ($request){ 
                 $kdOpnum = $request[0]['kdOpnum'];
                 $userOpnum = $request[0]['userOpnum'];
+                $totalOpnum = $request[0]['totalOpnum'];
                 $tglOpnum = date("Y-m-d", strtotime($request[0]['tglOpnum']));
                 $post = Opnum::upsert([
-                    'kdOpnume'     => $request[0]['noNota'],
-                    'tglOpnum'     => $request[0]['kdSupplier'],
-                    'subTotal'     => $request[0]['subtotal'],
-                    'tglPembelian'   => $tglNota,
-                    'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-                ],
-                [
+                        'kdOpnum'     => $kdOpnum,
+                        'tglOpnum'     => $tglOpnum,
+                        'totalOpnum'     => $totalOpnum,
+                        'userOpnum'   => $userOpnum,
+                        'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                    ],
+                    [
+                        'tglOpnum'     => $tglOpnum,
+                        'totalOpnum'     => $totalOpnum,
+                        'userOpnum'   => $userOpnum,
+                        'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                    ]
+                );
 
-                ]
-            
-            );
+                OpnumDetail::where('r_opnum', $kdOpnum)->delete();
+                $detop = $request[1];
+                for ($i = 0; $i < count($detop); $i++) {
 
+                        $kdBarang = $detop[$i]['kdBarang'];
+                        $nmBarang = $detop[$i]['nmBarang'];
+                        $qty = $detop[$i]['qty'];
+                        $selisih = $detop[$i]['selisih'];
+                        $total = $detop[$i]['total'];
+                        // $hrg = $detop[$i]['hrgJual'];
 
+                        // $brg = DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->first();
+                        // $oldStok = $brg->stokPersediaan;
+                        DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->update([
+                            'stokPersediaan' => $qty,
+                            // 'salePrice' => $hrg,
+                        ]);
+
+                        DB::table('tblbarang')->where('kdBarang', $kdBarang)->update([
+                            'stkBarang' => $qty,
+                            // 'hrgJual' => $hrg,
+                        ]);
+
+                        $detail[] = [
+                            'r_opnum' => $kdOpnum,
+                            'r_kdPersediaan' => $kdBarang,
+                            'nmPersediaan' => $nmBarang,
+                            'selisihOpnum' => $selisih,
+                            'nilaiOpnum' => $detop[$i]['total'],
+                            'keteranganOpnum' => $detop[$i]['keterangan'],
+                            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                        ];
+                    }
+                    OpnumDetail::insert($detail);
 
             DB::commit();
             });

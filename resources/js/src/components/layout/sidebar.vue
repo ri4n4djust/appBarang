@@ -130,7 +130,7 @@
                             <router-link to="/persediaan" @click="toggleMobileMenu">Persediaan</router-link>
                         </li>
                         <li>
-                            <router-link to="/tables/multi-column" @click="toggleMobileMenu">Multi Column</router-link>
+                            <router-link to="/kas" @click="toggleMobileMenu">Rekening Kas</router-link>
                         </li>
                         <li>
                             <router-link to="/tables/multiple-tables" @click="toggleMobileMenu">Multiple Tables</router-link>
@@ -251,7 +251,7 @@
                             <router-link to="/laporan/pembelian-persediaan" @click="toggleMobileMenu">Pembelian Persediaan</router-link>
                         </li>
                         <li>
-                            <router-link to="/forms/input-mask" @click="toggleMobileMenu">Input Mask</router-link>
+                            <router-link to="/laporan/opnum" @click="toggleMobileMenu">Laporan Opnum</router-link>
                         </li>
                         <li>
                             <router-link to="/forms/select2" @click="toggleMobileMenu">Select2</router-link>

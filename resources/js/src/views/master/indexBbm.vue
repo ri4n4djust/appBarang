@@ -150,28 +150,30 @@
         
 
         <div v-for="list in users.bbm" :key="list.id" class="col-md-4 layout-spacing"  >
-            <div class="widget widget-wallet-balance">
-                <div class="widget-heading d-block">
-                    <div class="wallet-balance">
-                        <p>{{ list.nama_bbm }}</p>
-                        <!-- <h5><span class="w-currency">$</span>2953</h5> -->
+            <router-link :to="{ name: 'nosel', params: { id: list.id, nama_bbm: list.nama_bbm,last_meter: list.last_meter,last_price: list.last_price } }">
+                <div class="widget widget-wallet-balance">
+                    <div class="widget-heading d-block">
+                        <div class="wallet-balance">
+                            <p>{{ list.nama_bbm }}</p>
+                            <!-- <h5><span class="w-currency">$</span>2953</h5> -->
+                        </div>
                     </div>
-                </div>
 
-                <div class="widget-amount">
-                    <div class="w-a-info funds-spent">
-                        <span>Harga</span>
-                        <p>{{ new Intl.NumberFormat().format(list.last_price)  }}</p>
+                    <div class="widget-amount">
+                        <div class="w-a-info funds-spent">
+                            <span>Harga</span>
+                            <p>{{ new Intl.NumberFormat().format(list.last_price)  }}</p>
+                        </div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="invoice-list">
+                            
+                            <span><img :src="require(`@/assets/images/${list.logo_bbm}`)" alt="admin-profile" class="img-fluid"/></span>
+                            
+                        </div>
                     </div>
                 </div>
-                <div class="widget-content">
-                    <div class="invoice-list">
-                        <router-link :to="{ name: 'nosel', params: { id: list.id, nama_bbm: list.nama_bbm,last_meter: list.last_meter,last_price: list.last_price } }">
-                        <span><img :src="require(`@/assets/images/${list.logo_bbm}`)" alt="admin-profile" class="img-fluid"/></span>
-                        </router-link>
-                    </div>
-                </div>
-            </div>
+            </router-link>
         </div>
 
 

@@ -22,8 +22,6 @@
                 <div class="panel br-6">
                     <div class="custom-table panel-body p-0">
                         <div class="d-flex flex-wrap justify-content-center justify-content-sm-start px-3 pt-3 pb-0">
-                            <button variant="primary" class="btn m-1 btn-primary" @click="export_table('csv')">CSV</button>
-                            <vue3-json-excel class="btn btn-primary m-1" name="table.xls" :fields="excel_columns()" :json-data="excel_items()">Excel</vue3-json-excel>
                             <button variant="primary" class="btn m-1 btn-primary" @click="export_table('print')">Print</button>
                             <button variant="primary" class="btn m-1 btn-primary" @click="export_table('pdf')">PDF</button>
 <span>{{ barangs }}</span>
@@ -36,7 +34,7 @@
                                         <!-- <button type="button" class="btn btn-blue">Open</button> -->
                                         <div role="group" class="btn-group">
                                             <div class="dropdown b-dropdown custom-dropdown show btn-group">
-                                                <a class="btn dropdown-toggle btn-light"
+                                                <a class="btn dropdown-toggle btn-dark"
                                                     ><svg
                                                         xmlns="http://www.w3.org/2000/svg"
                                                         width="24"
@@ -57,10 +55,10 @@
                                     </div>
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li>
-                                            <a href="javascript:void(0);" class="btn m-1 btn-light" @click="view_row(props.row)"> Edit </a>
+                                            <a href="javascript:void(0);" class="dropdown-item" @click="view_row(props.row)"> Edit </a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0);" class="btn m-1 btn-light" @click="view_row(props.row)"> Delete </a>
+                                            <a href="javascript:void(0);" class="dropdown-item" @click="view_row(props.row)"> Delete </a>
                                         </li>
                                     </ul>
                                 </div>

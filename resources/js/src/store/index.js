@@ -1,6 +1,6 @@
 import { createStore } from 'vuex';
 import i18n from '../i18n';
-import createPersistedState from "vuex-persistedstate";
+// import createPersistedState from "vuex-persistedstate";
 import auth from './auth';
 import barang from './barang';
 import pelanggan from './pelanggan';

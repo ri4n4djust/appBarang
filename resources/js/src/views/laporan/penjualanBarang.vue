@@ -32,10 +32,12 @@
                             <div class="row">
                                 <div class="col-md-7">
                                     <div class="input-group mb-4">
-                                        <flat-pickr v-model="sorting.startDate" 
+                                        <flat-pickr v-model="sorting.startDate"
+                                        :config="{dateFormat: 'd-m-Y'}" 
                                             class="form-control form-control-sm">
                                         </flat-pickr>
-                                        <flat-pickr v-model="sorting.endDate" 
+                                        <flat-pickr v-model="sorting.endDate"
+                                        :config="{dateFormat: 'd-m-Y'}" 
                                             class="form-control form-control-sm">
                                         </flat-pickr>
                                         <button variant="primary" class="btn m-1 btn-primary" @click="bind_data()" >CARI</button>
@@ -46,16 +48,17 @@
                         </div>
 
                         <v-client-table :data="items" :columns="columns" :options="table_option">
-                            <template #tgl_transaksi="props"> {{ moment(props.row.tgl_transaksi).format("DD-MM-YYYY") }} </template>
-                            <template #last_price="props"> {{ Number(props.row.last_price).toLocaleString() }} </template>
-                            <template #total="props"> {{ Number(props.row.totalPenjualan).toLocaleString() }} </template>
+                            <template #tglPenjualan="props"> {{ moment(props.row.tglPenjualan).format("DD-MM-YYYY") }} </template>
+                            <template #subTotalPenjualan="props"> {{ Number(props.row.subTotalPenjualan).toLocaleString() }} </template>
+                            <template #totalPenjualan="props"> {{ Number(props.row.totalPenjualan).toLocaleString() }} </template>
+                            <template #taxPenjualan="props"> {{ Number(props.row.taxPenjualan).toLocaleString() }} </template>
                             <template #action="props">
                                 <div class="custom-dropdown dropdown btn-group ">
                                     <div class="btn-group" href="#" role="button" id="pendingTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <!-- <button type="button" class="btn btn-blue">Open</button> -->
                                         <div role="group" class="btn-group">
                                             <div class="dropdown b-dropdown custom-dropdown show btn-group">
-                                                <a class="btn dropdown-toggle btn-light"
+                                                <a class="btn dropdown-toggle btn-dark"
                                                     ><svg
                                                         xmlns="http://www.w3.org/2000/svg"
                                                         width="24"
@@ -77,10 +80,10 @@
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li>
                                             <!-- <a href="javascript:void(0);" class="btn m-1 btn-light" @click="edit_row(props.row)"> Edit </a> -->
-                                            <router-link to="/editpenjualan" class="btn m-1 btn-light" @click="edit_row(props.row)">Edit</router-link>
+                                            <router-link to="/editpenjualan" class="dropdown-item" @click="edit_row(props.row)">Edit</router-link>
                                         </li>
                                         <li>
-                                            <router-link :to="{ name: 'nosel', params: { id: props.row } }">coba</router-link>
+                                            <router-link :to="{ name: 'nosel', params: { id: props.row } }" class="dropdown-item">coba</router-link>
                                             <!-- <a href="javascript:void(0);" class="btn m-1 btn-light" @click="view_row(props.row)"> Delete </a> -->
                                         </li>
                                     </ul>
@@ -146,8 +149,8 @@
         resizableColumns: true,
     });
     const sorting = ref({
-        startDate: moment().subtract(30,'d').format("YYYY-MM-DD"),
-        endDate: moment().format("YYYY-MM-DD")
+        startDate: moment().subtract(30,'d').format("D-M-YYYY"),
+        endDate: moment().format("D-M-YYYY")
     });
 
     

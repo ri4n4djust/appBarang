@@ -6,8 +6,8 @@
                     <div class="page-header">
                         <nav class="breadcrumb-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="javascript:;">DataTables</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"><span>HTML5 Export</span></li>
+                                <li class="breadcrumb-item"><a href="javascript:;">Daftar</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span>Barang</span></li>
                             </ol>
                         </nav>
                     </div>
@@ -22,21 +22,21 @@
                 <div class="panel br-6">
                     <div class="custom-table panel-body p-0">
                         <div class="d-flex flex-wrap justify-content-center justify-content-sm-start px-3 pt-3 pb-0">
-                            <button variant="primary" class="btn m-1 btn-primary" @click="export_table('csv')">CSV</button>
-                            <vue3-json-excel class="btn btn-primary m-1" name="table.xls" :fields="excel_columns()" :json-data="excel_items()">Excel</vue3-json-excel>
                             <button variant="primary" class="btn m-1 btn-primary" @click="export_table('print')">Print</button>
                             <button variant="primary" class="btn m-1 btn-primary" @click="export_table('pdf')">PDF</button>
 <span>{{ barangs }}</span>
                         </div>
 
                         <v-client-table :data="items" :columns="columns" :options="table_option">
+                            <template #hrgJual="props"> {{ Number(props.row.hrgJual).toLocaleString() }} </template>
+                            <template #hrgPokok="props"> {{ Number(props.row.hrgPokok).toLocaleString() }} </template>
                             <template #action="props">
                                 <div class="custom-dropdown dropdown btn-group ">
                                     <div class="btn-group" href="#" role="button" id="pendingTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <!-- <button type="button" class="btn btn-blue">Open</button> -->
                                         <div role="group" class="btn-group">
                                             <div class="dropdown b-dropdown custom-dropdown show btn-group">
-                                                <a class="btn dropdown-toggle btn-light"
+                                                <a class="btn dropdown-toggle btn-dark"
                                                     ><svg
                                                         xmlns="http://www.w3.org/2000/svg"
                                                         width="24"
@@ -57,10 +57,10 @@
                                     </div>
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li>
-                                            <a href="javascript:void(0);" class="btn m-1 btn-light" @click="view_row(props.row)"> Edit </a>
+                                            <a href="javascript:void(0);" class="dropdown-item" @click="view_row(props.row)"> Edit </a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0);" class="btn m-1 btn-light" @click="view_row(props.row)"> Delete </a>
+                                            <a href="javascript:void(0);" class="dropdown-item" @click="view_row(props.row)"> Delete </a>
                                         </li>
                                     </ul>
                                 </div>

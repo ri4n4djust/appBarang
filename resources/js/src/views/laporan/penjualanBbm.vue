@@ -32,10 +32,12 @@
                             <div class="row">
                                 <div class="col-md-7">
                                     <div class="input-group mb-4">
-                                        <flat-pickr v-model="sorting.startDate" 
+                                        <flat-pickr v-model="sorting.startDate"
+                                        :config="{dateFormat: 'd-m-Y'}" 
                                             class="form-control form-control-sm">
                                         </flat-pickr>
                                         <flat-pickr v-model="sorting.endDate" 
+                                        :config="{dateFormat: 'd-m-Y'}"
                                             class="form-control form-control-sm">
                                         </flat-pickr>
                                         <button variant="primary" class="btn m-1 btn-primary" @click="bind_data()" >CARI</button>
@@ -55,7 +57,7 @@
                                         <!-- <button type="button" class="btn btn-blue">Open</button> -->
                                         <div role="group" class="btn-group">
                                             <div class="dropdown b-dropdown custom-dropdown show btn-group">
-                                                <a class="btn dropdown-toggle btn-light"
+                                                <a class="btn dropdown-toggle btn-dark"
                                                     ><svg
                                                         xmlns="http://www.w3.org/2000/svg"
                                                         width="24"
@@ -76,10 +78,10 @@
                                     </div>
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li>
-                                            <a href="javascript:void(0);" class="btn m-1 btn-light" @click="edit_row(props.row)"> Edit </a>
+                                            <a href="javascript:void(0);" class="dropdown-item" @click="edit_row(props.row)"> Edit </a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0);" class="btn m-1 btn-light" @click="view_row(props.row)"> Delete </a>
+                                            <a href="javascript:void(0);" class="dropdown-item" @click="view_row(props.row)"> Delete </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -121,7 +123,7 @@
 
     const store = useStore();
 
-    const columns = ref(['kd_trans', 'nama_bbm', 'r_regu', 'tgl_transaksi', 'last_price', 'cost_ltr', 'total', 'action']);
+    const columns = ref(['kd_trans', 'nama_bbm', 'nama_nosel' ,'r_regu', 'tgl_transaksi', 'last_price', 'cost_ltr', 'total', 'action']);
     const items = ref([]);
     const table_option = ref({
         perPage: 10,
@@ -144,8 +146,8 @@
         resizableColumns: true,
     });
     const sorting = ref({
-        startDate: moment().format("YYYY-MM-DD"),
-        endDate: moment().format("YYYY-MM-DD")
+        startDate: moment().format("D-M-YYYY"),
+        endDate: moment().format("D-M-YYYY")
     });
 
     
@@ -223,6 +225,7 @@
                 rowhtml += '<tr>';
                 rowhtml += '<td>'+item.kd_trans+'</td>';
                 rowhtml += '<td>'+item.nama_bbm+'</td>';
+                rowhtml += '<td>'+item.nama_nosel+'</td>';
                 rowhtml += '<td>'+item.r_regu+'</td>';
                 rowhtml += '<td>'+moment(item.tgl_transaksi).format("DD-MM-YYYY")+'</td>';
                 rowhtml += '<td>'+Number(item.last_price).toLocaleString()+'</td>';
@@ -248,7 +251,7 @@
             rowhtml += '</tbody>';
             rowhtml += '<tfoot><tr>'
 
-            rowhtml += '<th></th><th></th><th></th><th></th><th></th><th>Total</th>:<th>'+Number(sum).toLocaleString()+'</th>'
+            rowhtml += '<th></th><th></th><th></th><th></th><th></th><th></th><th>Total</th>:<th>'+Number(sum).toLocaleString()+'</th>'
             rowhtml += '</tr></tfoot></table>'
             var winPrint = window.open('', '', 'left=0,top=0,width=1000,height=600,toolbar=0,scrollbars=0,status=0');
             winPrint.document.write('<title>Print</title>' + rowhtml);

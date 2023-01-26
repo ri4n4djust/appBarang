@@ -64,23 +64,69 @@
                             <div class="media-body">
                                 <h6> {{ list.nama_nosel }}</h6>
                                 <p class="meta-date-time"></p>
-                                <a href="javascript:;" class="btn btn-secondary">{{ list.meter_akhir }}</a>
+                                <a href="javascript:;" class="btn btn-secondary">{{ Number(list.meter_akhir).toLocaleString() }}</a>
                             </div>
                         </div>
                     </div>
                     <div class="widget-content">
-                        <h5>Cost {{ Math.abs(meter_now[index] - list.meter_akhir) }} Liter</h5>
-                        <h5>Penjualan {{ new Intl.NumberFormat().format(Math.abs((meter_now[index] - list.meter_akhir) * last_price)) }} </h5>
+                        <div class="widget widget-transaction">
+                            <div class="widget-content">
+                                <div class="transactions-list">
+                                    <div>
+                                        <div class="t-name">
+                                            <h4>{{ Math.abs(meter_now[index] - list.meter_akhir) }}</h4>
+                                            <p>Liter</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="t-name">
+                                            <h4>{{ Number(Math.abs((meter_now[index] - list.meter_akhir) * last_price)).toLocaleString() }}</h4>
+                                            <p>Nilai Penjualan</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+                            </div>
+                        </div>
                         <h3><input type="text" class="form-control" v-model="meter_now[index]" ></h3>
                         <button type="button" class="btn btn-success mb-2 me-1" @click="saveTransBbm(id_nosel=list.id_nosel,code_bbm=list.r_code_bbm,newmeter=meter_now[index],costltr=meter_now[index] - list.meter_akhir,jual=(meter_now[index] - list.meter_akhir) * last_price )">Simpan</button>
+                        <button type="button" class="btn btn-success mb-2 me-1" @click="kompliment()">kompliment</button>
                     </div>
                     <div class="widget-content">
                         <!-- {{ nosels.trs }} -->
-                        <div v-for="lis in nosels.trs" :key="lis.id_nosel">
+                        <!-- <div v-for="lis in nosels.trs" :key="lis.id_nosel">
                             <span v-if="list.id_nosel === lis.r_nosel">
                                 <h5>{{ lis.r_nosel }}</h5>
                             </span>
-                            
+                        </div> -->
+                        <div class="widget-content table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th><div class="td-content">Regu</div></th>
+                                        <th><div class="td-content">Liter</div></th>
+                                        <th><div class="td-content">Total</div></th>
+                                        <th><div class="td-content">Aksi</div></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="lis in nosels.trs" :key="lis.id_nosel">
+                                        <!-- <span v-if="list.id_nosel === lis.r_nosel"> -->
+                                            <!-- <h5>{{ lis.r_nosel }}</h5> -->
+                                            <td><div v-if="list.id_nosel === lis.r_nosel" class="td-content text-primary">{{ lis.r_regu }}</div></td>
+                                            <td><div v-if="list.id_nosel === lis.r_nosel" class="td-content">{{ lis.cost_ltr }}</div></td>
+                                            <td><div v-if="list.id_nosel === lis.r_nosel" class="td-content">{{ Number(lis.total).toLocaleString() }}</div></td>
+                                            <td>
+                                                <div v-if="list.id_nosel === lis.r_nosel" class="icon-content-container" >
+                                                    <div class="icon-container"><i class="far fa-edit"></i><span class="icon-name"></span></div>
+                                                </div>
+                                            </td>
+                                        <!-- </span> -->
+                                        
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -101,6 +147,12 @@
 
     import '@/assets/sass/scrollspyNav.scss';
     import '@/assets/sass/components/custom-sweetalert.scss';
+
+    import '@/assets/sass/scrollspyNav.scss';
+    import '@/assets/sass/font-icons/fontawesome/css/regular.css';
+    import '@/assets/sass/font-icons/fontawesome/css/fontawesome.css';
+    import highlight from '@/components/plugins/highlight.vue';
+    import feather from 'feather-icons';
 
     import moment from "moment";
 

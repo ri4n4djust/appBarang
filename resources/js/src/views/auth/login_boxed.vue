@@ -5,6 +5,11 @@
                 <div class="form-form-wrap">
                     <div class="form-container">
                         <div class="form-content">
+                            <div class="media">
+                                <div class="w-img">
+                                    <img src="@/assets/images/pom-bensin.png" alt="img-fluid" />
+                                </div>
+                            </div>
                             <h1 class="">Sign In</h1>
                             <p class="">Log in to your account to continue.</p>
 
@@ -27,7 +32,7 @@
                                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                             <circle cx="12" cy="7" r="4"></circle>
                                         </svg>
-                                        <input type="text" class="form-control" placeholder="e.g John_Doe" />
+                                        <input type="text" v-model="form.email" class="form-control" placeholder="e.g John_Doe" />
                                     </div>
 
                                     <div id="password-field" class="field-wrapper input mb-2">
@@ -50,7 +55,7 @@
                                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                                             <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
                                         </svg>
-                                        <input :type="pwd_type" class="form-control" placeholder="Password" />
+                                        <input :type="pwd_type" v-model="form.password" class="form-control" placeholder="Password" />
                                         <svg
                                             @click="set_pwd_type"
                                             xmlns="http://www.w3.org/2000/svg"
@@ -71,11 +76,11 @@
                                     </div>
                                     <div class="d-sm-flex justify-content-between">
                                         <div class="field-wrapper">
-                                            <button type="submit" class="btn btn-primary">Log In</button>
+                                            <button @click="login" class="btn btn-primary">Log In</button>
                                         </div>
                                     </div>
 
-                                    <div class="division">
+                                    <!-- <div class="division">
                                         <span>OR</span>
                                     </div>
 
@@ -116,9 +121,9 @@
                                             </svg>
                                             <span class="brand-name">Github</span>
                                         </a>
-                                    </div>
+                                    </div> -->
 
-                                    <p class="signup-link">Not registered ? <router-link to="/auth/register-boxed">Create an account</router-link></p>
+                                    <!-- <p class="signup-link">Not registered ? <router-link to="/auth/register-boxed">Create an account</router-link></p> -->
                                 </div>
                             </form>
                         </div>
@@ -133,6 +138,9 @@
     import { ref } from 'vue';
     import '@/assets/sass/authentication/auth-boxed.scss';
 
+    import axios from 'axios';
+    import { useRouter, useRoute } from 'vue-router'
+
     import { useMeta } from '@/composables/use-meta';
     useMeta({ title: 'Login Boxed' });
 
@@ -145,4 +153,34 @@
             pwd_type.value = 'password';
         }
     };
+
+    const form = ref({
+        email: '',
+        password: ''
+    })
+    
+    const router = useRouter()
+    const route = useRoute()
+    // console.log(form.value.email)
+    
+    const login = async () => {
+        try {
+        const email = form.value.email
+        const password = form.value.password
+        let data = await axios.post('/api/login', {
+            email: email,
+            password: password
+        })
+        localStorage.setItem('tokenLogin', data.data)
+        router.push({
+            path: '/bbm'
+        })
+        console.log(data.data)
+        
+        } catch (error) {
+            console.log(error)
+        }
+        
+    }
+
 </script>

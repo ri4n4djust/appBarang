@@ -89,6 +89,7 @@
                                             <th role="columnheader" scope="col" aria-colindex="3"><div>stok</div></th>
                                             <th role="columnheader" scope="col" aria-colindex="4"><div>satuan</div></th>
                                             <th role="columnheader" scope="col" aria-colindex="5"><div>Qty</div></th>
+                                            <th role="columnheader" scope="col" aria-colindex="5"><div>Keterangan</div></th>
                                             <th role="columnheader" scope="col" aria-colindex="5"><div>Selisih</div></th>
                                         </tr>
                                     </thead>
@@ -102,6 +103,11 @@
                                                 <div :style="{ 'width': inp + 'px' }">
                                                 <input type="text" class="form-control form-control-sm col-sm-2" v-model="item_now[index]" >
                                                 </div>
+                                            </td>
+                                            <td aria-colindex="5" role="cell">
+                                                <div :style="{ 'width': inp + 'px' }">
+                                                <input type="text" class="form-control form-control-sm col-sm-2" v-model="keterangan[index]" >
+                                                </div>    
                                             </td>
                                             <td aria-colindex="5" role="cell">{{ item.stokPersediaan - item_now[index] }}</td>
 
@@ -162,12 +168,15 @@
     const store = useStore();
     const table_1 = ref([]);
     const item_now = ref({});
+    const keterangan = ref({});
     const noopnum = ref([]);
+    const total = ref([]);
     const inp = ref(80);
     const headopnum = ref({
         kdOpnum : noopnum,
         tglOpnum: moment().format("D-M-YYYY"),
-        userOpnum: ''
+        userOpnum: '1',
+        totalOpnum: total
     })
 
     // const pembelian = computed(() => {
@@ -202,24 +211,32 @@
         for (let i = 0; i < dataArr.length; i++) {
             // console.log({kdBarang : dataArr[i].r_kdBarang, nmBarang : dataArr[i].r_nmBarang,});
             let subto = dataArr[i].lastPrice * (dataArr[i].stokPersediaan - item_now.value[i])
-            arr.push ({
-                'kdBarang' : dataArr[i].kdPersediaan,
-                'nmBarang' : dataArr[i].nmPersediaan,
-                // 'hrgJual' : dataArr[i].hrgJual,
-                'qty' : item_now.value[i],
-                'selisih' : dataArr[i].stokPersediaan - item_now.value[i],
-                'total' : subto
-            })
-        alert(subto)
+            let ket = keterangan.value[i]
+            if (!isNaN(subto)) {
+                if(!ket){
+                    ket = '-'
+                }
+                arr.push ({
+                    'kdBarang' : dataArr[i].kdPersediaan,
+                    'nmBarang' : dataArr[i].nmPersediaan,
+                    'keterangan' : ket,
+                    'qty' : item_now.value[i],
+                    'selisih' : dataArr[i].stokPersediaan - item_now.value[i],
+                    'total' : subto
+                })
                 tota += parseInt(subto)
+                total.value = tota
+                // alert(subto)
+            }
+        
         }
-        
-        
-        console.log(tota)
+        // console.log(tota)
         // const headerfull = Object.assign(header, headers)
-        // const detail =cartItemsPen.value
         store.dispatch('CreateOpnum', [headopnum.value,arr])
-    
+        getNoOpnum();
+        bind_data();
+        item_now.value = ''
+        keterangan.value = ''
     }
 
 

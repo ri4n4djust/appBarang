@@ -137,7 +137,8 @@
                                             </div>
                                             <div class="form-group col-md-2">
                                                 <label for="inputZip">TOTAL</label><br>
-                                                {{ new Intl.NumberFormat().format(brg.hrgJual * qty) }}
+                                                <!-- {{ new Intl.NumberFormat().format(brg.hrgJual * qty) }} -->
+                                                <input type="text" v-model="tot" class="form-control form-control-sm" placeholder="Quantity" @keypress="onlyNumber" />
                                             </div>
                                             <div class="form-group col-md-1">
                                                 <label for="aksi">Aksi</label>
@@ -244,11 +245,11 @@
                                                     </div>
                                                     <div class="invoice-totals-row invoice-summary-balance-due">
                                                         <div class="invoice-summary-label">Total</div>
-                                                         <div class="invoice-summary-label"></div>
+                                                         <!-- <div class="invoice-summary-label"></div> -->
                                                         <div class="invoice-summary-value">
-                                                            <!-- <div class="balance-due-amount"> -->
+                                                            <div class="balance-due-amount"><span class="currency"></span>
                                                                 <span>{{ new Intl.NumberFormat().format(Math.floor(total)) }}</span>
-                                                            <!-- </div> -->
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -319,6 +320,7 @@
     const disc = ref(0);
     const tax = ref(0);
     const selected_file = ref(null);
+    const tot = ref();
     const payment = ref([]);
     const params = ref({
         noNota: nopenjualan,
@@ -355,9 +357,10 @@
         const pelanggans = store.getters.StatePelanggan;
         const accs = store.getters.StateAcc;
         nopenjualan.value = store.getters.NoPenjualan;
+        tot.value = brg.value.hrgJual * qty.value;
         // const pajak = ref(store.state.pajak);
         // console.log(suppliers)
-        return { barangs, pelanggans, nopenjualan, accs }
+        return { barangs, pelanggans, nopenjualan, accs, tot }
     });
 
     const getBarang=() => {

@@ -6,11 +6,11 @@
                 <ul class="navbar-item theme-brand flex-row text-center">
                     <li class="nav-item theme-logo">
                         <router-link to="/">
-                            <img src="@/assets/images/logo.svg" class="navbar-logo" alt="logo" />
+                            <img src="@/assets/images/pom.jpg" class="navbar-logo" alt="logo" />
                         </router-link>
                     </li>
                     <li class="nav-item theme-text">
-                        <router-link to="/" class="nav-link"> CORK </router-link>
+                        <router-link to="/" class="nav-link"> SPBU </router-link>
                     </li>
                 </ul>
                 <div class="d-none horizontal-menu">
@@ -123,7 +123,7 @@
                         </a>
                     </div>
 
-                    <div class="dropdown nav-item language-dropdown btn-group">
+                    <!-- <div class="dropdown nav-item language-dropdown btn-group">
                         <a href="javascript:;" id="ddllang" data-bs-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-icon-only nav-link">
                             <img v-if="selectedLang" :src="require(`@/assets/images/flags/${selectedLang.code}.png`)" class="flag-width" alt="flag" />
                         </a>
@@ -136,9 +136,9 @@
                                 </li>
                             </perfect-scrollbar>
                         </ul>
-                    </div>
+                    </div> -->
 
-                    <div class="dropdown nav-item message-dropdown btn-group">
+                    <!-- <div class="dropdown nav-item message-dropdown btn-group">
                         <a href="javascript:;" id="ddlmsg" data-bs-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-icon-only nav-link">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -197,9 +197,9 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
 
-                    <div class="dropdown nav-item notification-dropdown btn-group">
+                    <!-- <div class="dropdown nav-item notification-dropdown btn-group">
                         <a href="javascript:;" id="ddlnotify" data-bs-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-icon-only nav-link">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -365,11 +365,11 @@
                                 ></a>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
 
                     <div class="dropdown nav-item user-profile-dropdown btn-group">
                         <a href="javascript:;" id="ddluser" data-bs-toggle="dropdown" aria-expanded="false" class="btn dropdown-toggle btn-icon-only user nav-link">
-                            <img src="@/assets/images/profile-16.jpeg" alt="avatar" />
+                            <img src="@/assets/images/user.jpg" alt="avatar" />
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="ddluser">
                             <li role="presentation">
@@ -487,7 +487,7 @@
         </div>
         <!--  END NAVBAR  -->
         <!--  BEGIN TOPBAR  -->
-        <div class="topbar-nav header navbar" role="banner">
+        <!-- <div class="topbar-nav header navbar" role="banner">
             <nav class="topbar">
                 <ul class="list-unstyled menu-categories" id="topAccordion">
                     <li class="menu single-menu">
@@ -1069,7 +1069,7 @@
                     </li>
                 </ul>
             </nav>
-        </div>
+        </div> -->
         <!--  END TOPBAR  -->
     </div>
 </template>

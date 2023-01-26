@@ -95,6 +95,12 @@ const routes = [
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/pembelianPersediaan.vue'),
         props: true,
     },
+    {
+        path: '/laporan/opnum',
+        name: 'laporan-opnum',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/laporanOpnum.vue'),
+        props: true,
+    },
 
     //components
     {
