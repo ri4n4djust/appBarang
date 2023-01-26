@@ -7,7 +7,7 @@
                         <div class="form-content">
                             <div class="media">
                                 <div class="w-img">
-                                    <img src="@/assets/images/pom-bensin.png" alt="img-fluid" />
+                                    <img src="@/assets/images/pom-bensin.png" class="img-fluid" alt="img-fluid" />
                                 </div>
                             </div>
                             <h1 class="">Sign In</h1>
@@ -76,7 +76,7 @@
                                     </div>
                                     <div class="d-sm-flex justify-content-between">
                                         <div class="field-wrapper">
-                                            <button @click="login" class="btn btn-primary">Log In</button>
+                                            <label @click="login" class="btn btn-primary">Log In</label>
                                         </div>
                                     </div>
 
@@ -165,20 +165,47 @@
     
     const login = async () => {
         try {
-        const email = form.value.email
-        const password = form.value.password
-        let data = await axios.post('/api/login', {
-            email: email,
-            password: password
-        })
-        localStorage.setItem('tokenLogin', data.data)
-        router.push({
-            path: '/bbm'
-        })
-        console.log(data.data)
+            const email = form.value.email
+            const password = form.value.password
+            let data = await axios.post('/api/login', {
+                email: email,
+                password: password
+            })
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Berhasil Login',
+                padding: '2em',
+            });
+            localStorage.setItem('tokenLogin', JSON.stringify(data.data))
+            router.push({
+                path: '/bbm'
+            })
+            // console.log(data.data)
         
         } catch (error) {
-            console.log(error)
+            // console.log(error)
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'User atau password Salah',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            return
         }
         
     }

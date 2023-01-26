@@ -146,7 +146,7 @@
         resizableColumns: true,
     });
     const sorting = ref({
-        startDate: moment().format("D-M-YYYY"),
+        startDate: moment().subtract(30,'d').format("D-M-YYYY"),
         endDate: moment().format("D-M-YYYY")
     });
 

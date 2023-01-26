@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\PenjualanDetail;
+use App\Models\GeneralLedger;
 class penjualanController extends Controller
 {
     //
@@ -19,6 +20,11 @@ class penjualanController extends Controller
                 $noNota = $request[0]['noNota'];
                 $total =  $request[0]['subtotal'];
                 $diskon = $total * $request[0]['disc'] / 100;
+                $type = $request[0]['term'];
+                $piutang = 0;
+                if($type == '1'){
+                    $piutang = $total;
+                }
                 
                 $post = DB::table('tblpenjualan')->upsert([
                     'noPenjualan'     => $request[0]['noNota'],
@@ -32,6 +38,8 @@ class penjualanController extends Controller
                     'notePenjualan'     => $request[0]['notes'],
                     'termPenjualan'     => $request[0]['term'],
                     'jthTempo'     => $request[0]['jthTempo'],
+                    'typeBayar'     => $request[0]['term'],
+                    'piutangPenjualan'     => $piutang,
                     'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                     'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                 ],
