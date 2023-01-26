@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Barang;
 use App\Models\Bbm;
 use App\Models\Persediaan;
+use App\Models\Opnum;
 use Illuminate\Support\Facades\DB;
 
 class barangController extends Controller
@@ -129,5 +130,53 @@ class barangController extends Controller
                 'message' => 'Post Gagal Dihapus!',
             ], 500);
         }
+    }
+
+    public function simpanOpnum(Request $request){
+        try{
+            $exception = DB::transaction(function() use ($request){ 
+                $kdOpnum = $request[0]['kdOpnum'];
+                $userOpnum = $request[0]['userOpnum'];
+                $tglOpnum = date("Y-m-d", strtotime($request[0]['tglOpnum']));
+                $post = Opnum::upsert([
+                    'kdOpnume'     => $request[0]['noNota'],
+                    'tglOpnum'     => $request[0]['kdSupplier'],
+                    'subTotal'     => $request[0]['subtotal'],
+                    'tglPembelian'   => $tglNota,
+                    'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                ],
+                [
+
+                ]
+            
+            );
+
+
+
+            DB::commit();
+            });
+            if(is_null($exception)) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Post Berhasil di insert!',
+                    // 'data' => $detail
+                ], 200);
+            } else {
+                DB::rollback();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Post Gagal Diupdate!',
+                ], 500);
+            }
+        } catch (\Exception $e) {
+            //DB::rollback();
+            // something went wrong
+            return response()->json([
+             'success' => false,
+             'message' => 'exception'.$e,
+         ], 400);
+        }
+
     }
 }

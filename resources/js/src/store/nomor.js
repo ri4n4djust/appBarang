@@ -4,12 +4,14 @@ import axios from 'axios';
 const state = {
     nopembelian: [],
     nobarang: [],
+    noopnum: [],
   };
   
 const getters = {
     NoBarang: state => state.nobarang,
     NoPembelian: state => state.nopembelian,
     NoPenjualan: state => state.nopenjualan,
+    NoOpnum: state => state.noopnum,
 };
 
 const actions = {  
@@ -49,6 +51,18 @@ const actions = {
         }
     
     },
+    async GetNoOpnum({ commit }){
+        let response
+        try {
+            response = await axios.get('/api/kdopnum')
+            commit('setNoOpnum', response.data.kdOpnum)
+        } catch (ex) {
+            // Handle error
+            alert('error no opnum')
+            return
+        }
+    
+    },
 
 };
 const mutations = {
@@ -60,6 +74,9 @@ const mutations = {
     },
     setNoBarang(state, barang){
         state.nobarang = barang
+    },
+    setNoOpnum(state, op){
+        state.noopnum = op
     },
 
 };

@@ -97,7 +97,7 @@ const actions = {
     async CreateOpnum({dispatch}, detail) {
         let response
         try {
-            response = await axios.post('api/store/penjualan', detail)
+            response = await axios.post('api/store/opnum', detail)
             const toast = window.Swal.mixin({
                 toast: true,
                 position: 'top-center',
@@ -110,7 +110,7 @@ const actions = {
                 title: 'Penjualan berhasil tersimpan',
                 padding: '2em',
             });
-            localStorage.setItem('cartItemsPen', '[]')
+            // localStorage.setItem('cartItemsPen', '[]')
         } catch (ex) {
             // Handle error
             const toast =  window.Swal.mixin({

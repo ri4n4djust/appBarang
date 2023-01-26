@@ -9,6 +9,7 @@ use App\Models\Persediaan;
 use App\Models\Pembelian;
 use App\Models\Penjualan;
 use App\Models\Supplier;
+use App\Models\Opnum;
 
 class nomorController extends Controller
 {
@@ -256,42 +257,42 @@ class nomorController extends Controller
 
     public function kodeStokOpname()
     {
-        $count = StokOpname::all();
+        $count = Opnum::all();
         if($count->isEmpty()){
-            $tahun = date('Y');
-            $post = 'OP-'.$tahun.'-'.'1';
+            $tahun = date('mY');
+            $post = 'OP'.$tahun.'1';
             return response()->json([
                 'success' => true,
                 'message' => 'Detail Post!',
-                'noStokOpname'    => $post
+                'kdOpnum'    => $post
             ], 200);
         }else{
 
             $no = 0 ;
-            $count = StokOpname::all()->last();
-            $terakhir = substr($count->noStokOpname, 8,  20);
+            $count = Opnum::all()->last();
+            $terakhir = substr($count->kdOpnum, 8,  20);
             $kodeBaru = $terakhir + 1  ;
 
-            $tahun = date('Y');
-            $post = 'OP-'.$tahun.'-'.$kodeBaru;
+            $tahun = date('mY');
+            $post = 'OP'.$tahun.''.$kodeBaru;
 
-            if (StokOpname::where('noStokOpname', $post)->exists()) {
-                $count = StokOpname::all()->last();
-                $terakhir = substr($count->noStokOpname, 8,  20);
+            if (Opnum::where('kdOpnum', $post)->exists()) {
+                $count = Opnum::all()->last();
+                $terakhir = substr($count->kdOpnum, 8,  20);
                 $kodeBarulagi = $kodeBaru + 1 ;
-                $post = 'OP-'.$tahun.'-'.$kodeBarulagi;
+                $post = 'OP'.$tahun.$kodeBarulagi;
                 return response()->json([
                     'success' => true,
                     'message' => 'Detail Post!',
-                    'noStokOpname'    => $post
+                    'kdOpnum'    => $post
                 ], 200);
             } else {
-                $tahun = date('Y');
+                $tahun = date('mY');
                 //$post = 'OP-'.$tahun.'-'.'1';
                 return response()->json([
                     'success' => true,
                     'message' => 'Detail Post!',
-                    'noStokOpname'    => $post
+                    'kdOpnum'    => $post
                 ], 200);
             }
         }

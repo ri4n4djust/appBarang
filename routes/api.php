@@ -20,6 +20,7 @@ Route::post('/logout', [App\Http\Controllers\loginController::class, 'logout']);
 
 //=====BARANG============
 Route::get('/barang', [App\Http\Controllers\barangController::class, 'index']);
+Route::post('/store/opnum', [App\Http\Controllers\barangController::class, 'simpanOpnum']);
 Route::post('/update/barang', [App\Http\Controllers\barangController::class, 'update']);
 Route::delete('/hapus/barang/{id}', [App\Http\Controllers\barangController::class, 'destroy']);
 

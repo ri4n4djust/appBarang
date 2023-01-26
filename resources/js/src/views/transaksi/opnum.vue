@@ -48,7 +48,7 @@
                             <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
                             <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
                         </svg>
-                        Stok Opnum
+                        Stok Opnum 
                     </div>
                 </div>
             </div>
@@ -65,8 +65,19 @@
                             </div>
                         </div>
                         <div class="d-flex flex-wrap justify-content-center justify-content-sm-start px-3 pt-3 pb-0">
-                            <button variant="primary" class="btn m-1 btn-primary" @click="simpanOpnum()">Simpan</button>
-                            <button variant="primary" class="btn m-1 btn-primary" @click="export_table('pdf')">PDF</button>
+                            <!-- <div class="row"> -->
+                                <div class="col-md-4">
+                                    <div class="input-group mb-4">
+                                        <input type="text" class="form-control form-control-sm" v-model="headopnum.kdOpnum">
+                                        <flatPickr v-model="headopnum.tglOpnum" 
+                                            :config="{dateFormat: 'd-m-Y'}"
+                                            class="form-control form-control-sm">
+                                        </flatPickr>
+                                        <button variant="primary" class="btn m-1 btn-primary" @click="simpanOpnum()">Simpan</button>
+                                        <!-- <button variant="primary" class="btn m-1 btn-primary" @click="export_table('pdf')">PDF</button> -->
+                                    </div>
+                                </div>
+                            <!-- </div> -->
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
@@ -82,7 +93,7 @@
                                         </tr>
                                     </thead>
                                     <tbody role="rowgroup">
-                                        <tr v-for="item, index in table_1" :key="item.idPersediaan" role="row">
+                                        <tr v-for="item, index in table_1" :key="item.index" role="row">
                                             <td aria-colindex="1" role="cell">{{ item.kdPersediaan }}</td>
                                             <td aria-colindex="2" role="cell">{{ item.nmPersediaan }}</td>
                                             <td aria-colindex="3" role="cell">{{ item.stokPersediaan }}</td>
@@ -132,13 +143,18 @@
 </template>
 
 <script setup>
-    import { onMounted, ref } from 'vue';
+    import { onMounted, ref, computed } from 'vue';
 
     import '@/assets/sass/scrollspyNav.scss';
     import '@/assets/sass/tables/table-basic.scss';
 
+    import flatPickr from 'vue-flatpickr-component';
+    import 'flatpickr/dist/flatpickr.css';
+    import '@/assets/sass/forms/custom-flatpickr.css';
+
     import { useStore } from 'vuex';
     
+    import moment from "moment";
 
     import { useMeta } from '@/composables/use-meta';
     useMeta({ title: 'Tables' });
@@ -146,15 +162,34 @@
     const store = useStore();
     const table_1 = ref([]);
     const item_now = ref({});
+    const noopnum = ref([]);
     const inp = ref(80);
+    const headopnum = ref({
+        kdOpnum : noopnum,
+        tglOpnum: moment().format("D-M-YYYY"),
+        userOpnum: ''
+    })
+
+    // const pembelian = computed(() => {
+    //     noopnum.value = store.getters.NoOpnum;
+    //     // console.log(suppliers)
+    //     return { noopnum }
+    // });
 
     onMounted(() => {
         bind_data();
+        getNoOpnum();
     });
+
+    const getNoOpnum= async() => {
+        await store.dispatch('GetNoOpnum')
+        noopnum.value = store.getters.NoOpnum;
+    }
 
     const bind_data = async () => {
         await store.dispatch('GetPersediaan');
         table_1.value = store.getters.StatePersediaan;
+        
     }
 
     const simpanOpnum=() => {
@@ -163,21 +198,28 @@
 
         var dataArr = table_1.value
         const arr = [];
+        let tota = 0;
         for (let i = 0; i < dataArr.length; i++) {
             // console.log({kdBarang : dataArr[i].r_kdBarang, nmBarang : dataArr[i].r_nmBarang,});
+            var subto = dataArr[i].lastPrice * (dataArr[i].stokPersediaan - item_now.value[i])
             arr.push ({
                 'kdBarang' : dataArr[i].kdPersediaan,
                 'nmBarang' : dataArr[i].nmPersediaan,
                 // 'hrgJual' : dataArr[i].hrgJual,
-                'qty' : item_now[i],
-                'selisih' : dataArr[i].stokPersediaan - item_now[i],
-                'total' : dataArr[i].totalJual
+                'qty' : item_now.value[i],
+                'selisih' : dataArr[i].stokPersediaan - item_now.value[i],
+                'total' : subto
             })
-            }
-        console.log(arr)
+            dataArr[i].forEach(element => {
+                tota +=  parseInt(element.subto);
+            });
+        }
+        
+        
+        console.log(tota)
         // const headerfull = Object.assign(header, headers)
         // const detail =cartItemsPen.value
-        // store.dispatch('CreatePenjualan', [headerfull,detail] )
+        store.dispatch('CreateOpnum', [headopnum.value,arr])
     
     }
 
