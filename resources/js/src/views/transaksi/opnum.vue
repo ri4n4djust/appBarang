@@ -201,7 +201,7 @@
         let tota = 0;
         for (let i = 0; i < dataArr.length; i++) {
             // console.log({kdBarang : dataArr[i].r_kdBarang, nmBarang : dataArr[i].r_nmBarang,});
-            var subto = dataArr[i].lastPrice * (dataArr[i].stokPersediaan - item_now.value[i])
+            let subto = dataArr[i].lastPrice * (dataArr[i].stokPersediaan - item_now.value[i])
             arr.push ({
                 'kdBarang' : dataArr[i].kdPersediaan,
                 'nmBarang' : dataArr[i].nmPersediaan,
@@ -210,9 +210,8 @@
                 'selisih' : dataArr[i].stokPersediaan - item_now.value[i],
                 'total' : subto
             })
-            dataArr[i].forEach(element => {
-                tota +=  parseInt(element.subto);
-            });
+        alert(subto)
+                tota += parseInt(subto)
         }
         
         
