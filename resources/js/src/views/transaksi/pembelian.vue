@@ -137,7 +137,8 @@
                                             </div>
                                             <div class="form-group col-md-2">
                                                 <label for="inputZip">TOTAL</label><br>
-                                                {{ new Intl.NumberFormat().format(brg.lastPrice * qty) }}
+                                                <!-- {{ new Intl.NumberFormat().format(brg.lastPrice * qty) }} -->
+                                                <input type="text" v-model="tot" class="form-control form-control-sm" placeholder="Quantity" @keypress="onlyNumber" />
                                             </div>
                                             <div class="form-group col-md-1">
                                                 <label for="aksi">Aksi</label>
@@ -342,6 +343,7 @@
     const brg = ref([]);
     const nopembelian = ref([]);
     const qty = ref(1);
+    const tot = ref();
     const subtotal = ref();
     const total = ref();
     const disc = ref(0);
@@ -383,8 +385,9 @@
         const accs = store.getters.StateAcc;
         nopembelian.value = store.getters.NoPembelian;
         const pajak = store.state.pajak;
+        tot.value = brg.value.lastPrice * qty.value;
         // console.log(suppliers)
-        return { barangs, pajak, suppliers, nopembelian, accs }
+        return { barangs, pajak, suppliers, nopembelian, accs, tot }
     });
 
     const getBarang=() => {

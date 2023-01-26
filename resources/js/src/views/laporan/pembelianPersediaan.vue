@@ -32,10 +32,12 @@
                             <div class="row">
                                 <div class="col-md-7">
                                     <div class="input-group mb-4">
-                                        <flat-pickr v-model="sorting.startDate" 
+                                        <flat-pickr v-model="sorting.startDate"
+                                            :config="{dateFormat: 'd-m-Y'}" 
                                             class="form-control form-control-sm">
                                         </flat-pickr>
                                         <flat-pickr v-model="sorting.endDate" 
+                                            :config="{dateFormat: 'd-m-Y'}"
                                             class="form-control form-control-sm">
                                         </flat-pickr>
                                         <button variant="primary" class="btn m-1 btn-primary" @click="bind_data()" >CARI</button>
@@ -46,8 +48,8 @@
                         </div>
 
                         <v-client-table :data="items" :columns="columns" :options="table_option">
-                            <template #tgl_transaksi="props"> {{ moment(props.row.tglPembelian).format("DD-MM-YYYY") }} </template>
-                            <template #last_price="props"> {{ Number(props.row.subTotal).toLocaleString() }} </template>
+                            <template #tglPembelian="props"> {{ moment(props.row.tglPembelian).format("D-M-YYYY") }} </template>
+                            <template #subTotal="props"> {{ Number(props.row.subTotal).toLocaleString() }} </template>
                             <template #total="props"> {{ Number(props.row.total).toLocaleString() }} </template>
                             <template #action="props">
                                 <div class="custom-dropdown dropdown btn-group ">
@@ -146,8 +148,8 @@
         resizableColumns: true,
     });
     const sorting = ref({
-        startDate: moment().subtract(30,'d').format("YYYY-MM-DD"),
-        endDate: moment().format("YYYY-MM-DD")
+        startDate: moment().subtract(30,'d').format("D-M-YYYY"),
+        endDate: moment().format("D-M-YYYY")
     });
 
     

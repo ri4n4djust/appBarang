@@ -6,13 +6,15 @@ const state = {
     penjualan:[],
     linkacc: [],
     editpenjualan: [],
+    stokopnum: [],
   };
   
 const getters = {
     StatePembelian: state => state.pembelian,
     StatePenjualan: state => state.penjualan,
     StateAcc: state => state.linkacc,
-    SeditPenjualan: state => state.editpenjualan
+    SeditPenjualan: state => state.editpenjualan,
+    SstokOpnum: state => state.stokopnum
 };
 
 const actions = {
@@ -55,6 +57,44 @@ const actions = {
         // await dispatch('GetPembelian')
     },
     async CreatePenjualan({dispatch}, detail) {
+        let response
+        try {
+            response = await axios.post('api/store/penjualan', detail)
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Penjualan berhasil tersimpan',
+                padding: '2em',
+            });
+            localStorage.setItem('cartItemsPen', '[]')
+        } catch (ex) {
+            // Handle error
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'Mohon Lengkapi Data',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            return
+        }
+        // await dispatch('GetPembelian')
+    },
+
+    async CreateOpnum({dispatch}, detail) {
         let response
         try {
             response = await axios.post('api/store/penjualan', detail)

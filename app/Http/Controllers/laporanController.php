@@ -39,8 +39,8 @@ class laporanController extends Controller
     }
 
     public function pembelianBrg(Request $request){
-        $startDate = $request->input('startDate');
-        $endDate = $request->input('endDate');
+        $startDate = date("Y-m-d", strtotime($request->input('startDate')));
+        $endDate = date("Y-m-d", strtotime($request->input('endDate')));
         $lap = DB::table('tblpembelian')
                 ->join('tblsupplier', 'tblpembelian.r_supplier', 'tblsupplier.kdSupplier')
                 ->select('tblpembelian.*', 'tblsupplier.nmSupplier')

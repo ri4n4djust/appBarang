@@ -61,6 +61,12 @@ const routes = [
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/editpenjualan.vue'),
         props: true,
     },
+    {
+        path: '/opnum',
+        name: 'opnum',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/opnum.vue'),
+        props: true,
+    },
     
 
 
