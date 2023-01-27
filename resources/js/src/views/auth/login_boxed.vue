@@ -76,7 +76,8 @@
                                     </div>
                                     <div class="d-sm-flex justify-content-between">
                                         <div class="field-wrapper">
-                                            <label @click="login" class="btn btn-primary">Log In</label>
+                                            <a href="javascript:;" class="btn btn-primary w-100 mb-4 me-2" @click="login" >Log In</a>
+                                            <!-- <button type="button" class="btn btn-success mb-2 me-1" @click="kompliment()">kompliment</button> -->
                                         </div>
                                     </div>
 

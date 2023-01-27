@@ -10,7 +10,12 @@ import store from '../store';
 
 const routes = [
     //dashboard
-    { path: '/', name: 'Home', component: Home },
+    { 
+        path: '/', 
+        name: 'Home', 
+        redirect: '/auth/login-boxed'
+        // component: Home 
+    },
 
     {
         path: '/index2',
@@ -22,23 +27,27 @@ const routes = [
         path: '/bbm',
         name: 'bbm',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexBbm.vue'),
+        meta: { requiresAuth: true },
     },
 
     {
         path: '/barang',
         name: 'barang',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexBarang.vue'),
+        meta: { requiresAuth: true },
     },
     {
         path: '/persediaan',
         name: 'persediaan',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexPersediaan.vue'),
+        meta: { requiresAuth: true },
     },
 
     {
         path: '/nosel',
         name: 'nosel',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexNosel.vue'),
+        // meta: { requiresAuth: true },
         props: true,
     },
 
@@ -59,13 +68,15 @@ const routes = [
         path: '/editpenjualan',
         name: 'editpenjualan',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/editpenjualan.vue'),
-        props: true,
+        // props: true,
+        meta: { requiresAuth: true },
     },
     {
         path: '/opnum',
         name: 'opnum',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/opnum.vue'),
-        props: true,
+        // props: true,
+        meta: { requiresAuth: true },
     },
     
 
@@ -638,13 +649,29 @@ const router = new createRouter({
     },
 });
 
-
+// if (store.getters.isAuthenticated) {
+//     console.log('authenticated user');
+//     next('timeline')
+//   }
 
 router.beforeEach((to, from, next) => {
-    if (to.meta && to.meta.layout && to.meta.layout == 'auth' ) {
+    if(to.matched.some(record => record.meta.requiresAuth)) {
+      if (store.getters.isAuthenticated) { // jika user sudah login maka route akan diteruskan
+        next()
+        return
+      }
+      next('/auth/login-boxed') // jika tidak maka akan redirect ke halaman login
+    } else {
+      next()
+    }
+  })
+
+router.beforeEach((to, from, next) => {
+    if (to.meta && to.meta.layout && to.meta.layout == 'auth') {
         store.commit('setLayout', 'auth');
     } else {
         store.commit('setLayout', 'app');
+        console.log('unauthenticated user');
     }
     next(true);
 });

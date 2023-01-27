@@ -7,7 +7,7 @@
             <perfect-scrollbar class="list-unstyled menu-categories" tag="ul" :options="{ wheelSpeed: 0.5, swipeEasing: !0, minScrollbarLength: 40, maxScrollbarLength: 300, suppressScrollX: true }">
                 <li class="menu">
                     <div class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#dashboard" aria-controls="dashboard" aria-expanded="false">
-                        <router-link to="/" >
+                        <router-link to="/index2" >
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 width="24"

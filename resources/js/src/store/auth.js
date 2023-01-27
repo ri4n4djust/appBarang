@@ -2,10 +2,11 @@
 import axios from 'axios';
 const state = {
     user: [],
+    token: '',
   };
   
 const getters = {
-    isAuthenticated: state => !!state.user,    
+    isAuthenticated: state => !!state.token,    
     StateUser: state => state.user,
 
 };
@@ -35,7 +36,8 @@ const actions = {
                 title: 'Berhasil Login',
                 padding: '2em',
             });
-            localStorage.setItem('tokenLogin', JSON.stringify(response.data.user))
+            localStorage.setItem('tokenLogin', JSON.stringify(response.data.token))
+            commit('setToken', response.data.token)
             return response
         } catch (error) {
             // Handle error
@@ -70,8 +72,12 @@ const mutations = {
     setUser(state, email){
         state.user = email
     },
+    setToken(state, token){
+        state.token = token
+    },
     LogOut(state){
         state.user = [];
+        state.token = ''
     },
 };
 
