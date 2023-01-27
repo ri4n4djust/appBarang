@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 const state = {
-    user: null,
+    user: [],
   };
   
 const getters = {
@@ -20,15 +20,49 @@ const actions = {
         await dispatch('LogIn', UserForm)
     },
     async LogIn({commit}, User) {
-        const detUser = await axios.post('login', User)
-        await commit('setUser', detUser.data.user)
+        try {
+            const response = await axios.post('/api/login', User)
+            await commit('setUser', response.data.user)
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Berhasil Login',
+                padding: '2em',
+            });
+            localStorage.setItem('tokenLogin', JSON.stringify(response.data.user))
+            return response
+        } catch (error) {
+            // Handle error
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'Username atau password salah',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            throw 'jhjhvjnhv'
+        }
+
     },
     
     async LogOut({commit}){
-        let user = null
-        // const vuex = JSON.parse(localStorage.getItem('vuex'));
+        let user = []
+        localStorage.removeItem('tokenLogin');
         // localStorage.removeItem('vuex');
-        commit('logout', user)
+        commit('LogOut', user)
     }  
 
 };
@@ -37,7 +71,7 @@ const mutations = {
         state.user = email
     },
     LogOut(state){
-        state.user = null;
+        state.user = [];
     },
 };
 

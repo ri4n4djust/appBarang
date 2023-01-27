@@ -433,7 +433,8 @@
                                 </router-link>
                             </li>
                             <li role="presentation">
-                                <router-link to="/auth/login" class="dropdown-item">
+                                <router-link to="/auth/login-boxed" @click="logOut" class="dropdown-item">
+                                <!-- <a  @click="logOut" class="dropdown-item"> -->
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"
@@ -451,6 +452,7 @@
                                         <line x1="21" y1="12" x2="9" y2="12"></line>
                                     </svg>
                                     Sign Out
+                                <!-- </a> -->
                                 </router-link>
                             </li>
                         </ul>
@@ -1078,12 +1080,16 @@
     import { onMounted, ref } from 'vue';
     import { useI18n } from 'vue-i18n';
     import { useStore } from 'vuex';
+    import { useRouter, useRoute } from 'vue-router'
     const store = useStore();
+
 
     const selectedLang = ref(null);
     const countryList = ref(store.state.countryList);
 
     const i18n = useI18n();
+    const router = useRouter()
+    const route = useRoute()
 
     onMounted(() => {
         selectedLang.value = window.$appSetting.toggleLanguage();
@@ -1095,7 +1101,8 @@
     };
 
     const logOut = () => {
-
+        store.dispatch('LogOut');
+        router.push({path: '/auth/login-boxed'})
         
     }
 

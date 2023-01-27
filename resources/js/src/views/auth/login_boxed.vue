@@ -141,10 +141,14 @@
     import axios from 'axios';
     import { useRouter, useRoute } from 'vue-router'
 
+    import { useStore } from 'vuex';
+    
+
     import { useMeta } from '@/composables/use-meta';
     useMeta({ title: 'Login Boxed' });
 
     const pwd_type = ref('password');
+    const store = useStore();
 
     const set_pwd_type = () => {
         if (pwd_type.value === 'password') {
@@ -164,49 +168,17 @@
     // console.log(form.value.email)
     
     const login = async () => {
-        try {
-            const email = form.value.email
-            const password = form.value.password
-            let data = await axios.post('/api/login', {
-                email: email,
-                password: password
+            store.dispatch('LogIn', form.value)
+            .then(response => {
+                // console.log('result: ', response)
+                router.push({path: '/bbm'})
             })
-            const toast = window.Swal.mixin({
-                toast: true,
-                position: 'top-center',
-                showConfirmButton: false,
-                timer: 3000,
-                padding: '2em',
-            });
-            toast.fire({
-                icon: 'success',
-                title: 'Berhasil Login',
-                padding: '2em',
-            });
-            localStorage.setItem('tokenLogin', JSON.stringify(data.data))
-            router.push({
-                path: '/bbm'
+            .catch(error => {
+                // console.log('error: ', error)
+                return
             })
-            // console.log(data.data)
-        
-        } catch (error) {
-            // console.log(error)
-            const toast =  window.Swal.mixin({
-                toast: true,
-                position: 'top-center',
-                showConfirmButton: false,
-                timer: 3000,
-                padding: '2em'
-            });
-            toast.fire({
-                title: 'Error!',
-                text: 'User atau password Salah',
-                icon: 'error',
-                // confirmButtonText: 'Cool',
-                padding: '2em'
-            });
-            return
-        }
+            
+            
         
     }
 

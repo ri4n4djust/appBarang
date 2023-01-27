@@ -638,8 +638,10 @@ const router = new createRouter({
     },
 });
 
+
+
 router.beforeEach((to, from, next) => {
-    if (to.meta && to.meta.layout && to.meta.layout == 'auth') {
+    if (to.meta && to.meta.layout && to.meta.layout == 'auth' ) {
         store.commit('setLayout', 'auth');
     } else {
         store.commit('setLayout', 'app');
