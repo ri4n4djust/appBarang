@@ -1094,6 +1094,11 @@
         window.$appSetting.toggleMode(mode);
     };
 
+    const logOut = () => {
+
+        
+    }
+
     const changeLanguage = (item) => {
         selectedLang.value = item;
         window.$appSetting.toggleLanguage(item);
