@@ -17,7 +17,7 @@ class barangController extends Controller
     {
         $posts = Barang::join('tblkategori', 'tblbarang.ktgBarang', '=', 'tblkategori.kodeKtg')
                 //->where('tblBarang.stsBarang', '1')
-                ->get(['tblBarang.*', 'tblkategori.namaKtg']);
+                ->get(['tblbarang.*', 'tblkategori.namaKtg']);
         //$posts = Barang::latest()->get();
         $count = Barang::count();
         return response([
