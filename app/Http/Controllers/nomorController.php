@@ -62,7 +62,7 @@ class nomorController extends Controller
         $count = Persediaan::all();
         if($count->isEmpty()){
             $tahun = date('Y');
-            $post = 'BRG'.$tahun.'000'.'1';
+            $post = 'BRG'.'000'.'1';
             return response()->json([
                 'success' => true,
                 'message' => 'Detail Post!',
@@ -72,16 +72,16 @@ class nomorController extends Controller
             $no = 0 ;
             $count = Persediaan::all()->last();
             //$kodeBaru = $count->kdBarang  ;
-            $terakhir = substr($count->kdPersediaan, 4,  20);
+            $terakhir = substr($count->kdPersediaan, 6,  20);
             $kodeBaru = $terakhir + 1  ;
 
             // $tahun = date('Y');
-            $post = 'BRG'.$kodeBaru;
+            $post = 'BRG'.'000'.$kodeBaru;
 
             if (Persediaan::where('kdPersediaan', $post)->exists()) {
                 // exists
                 $kodeBarulagi = $kodeBaru + 1 ;
-                $post = 'BRG'.$kodeBarulagi;
+                $post = 'BRG'.'000'.$kodeBarulagi;
                 return response()->json([
                     'success' => true,
                     'message' => 'Detail Post!',

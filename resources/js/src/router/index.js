@@ -34,7 +34,7 @@ const routes = [
         path: '/barang',
         name: 'barang',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexBarang.vue'),
-        meta: { requiresAuth: true },
+        // meta: { requiresAuth: true },
     },
     {
         path: '/persediaan',

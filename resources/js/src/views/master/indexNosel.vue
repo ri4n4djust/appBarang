@@ -28,6 +28,7 @@
                                 <div class="w-detail">
                                     <p class="w-title">{{ nama_bbm  }}</p>
                                     <p class="w-stats">Harga  {{ Number(last_price).toLocaleString()}}</p>
+                                    <router-link :to="{ name: 'bbm'}" class="btn btn-secondary btn-danger">Kembali</router-link>
                                 </div>
                             </div>
                             <div class="col-4">

@@ -4,17 +4,49 @@ import axios from 'axios';
 const state = {
     barang: [],
     persediaan: [],
+    kategori: [],
   };
   
 const getters = {
     StateBarang: state => state.barang,
     StatePersediaan: state => state.persediaan,
+    StateKategori: state => state.kategori,
 };
 
 const actions = {  
-    async CreatePost({dispatch}, post) {
-        await axios.post('api/post', post)
-        await dispatch('GetBarang')
+    async CreateBarang({dispatch}, post) {
+        try{
+            await axios.post('api/store/barang', post)
+            await dispatch('GetBarang')
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Berhasil Simpan Barang',
+                padding: '2em',
+            });
+        } catch (err){
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'gagal disimpan',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+
+        }
     }, 
     async GetBarang({ commit }){
         let response
@@ -32,6 +64,17 @@ const actions = {
         try {
             response = await axios.get('/api/persediaan')
             commit('setPersediaan', response.data.data)
+        } catch (ex) {
+            // Handle error
+            return
+        }
+    
+    },
+    async GetKategori({ commit }){
+        let response
+        try {
+            response = await axios.get('/api/kategori')
+            commit('setKategori', response.data.data)
         } catch (ex) {
             // Handle error
             return
@@ -57,6 +100,9 @@ const mutations = {
     },
     setPersediaan(state, persediaan){
         state.persediaan = persediaan
+    },
+    setKategori(state, kategori){
+        state.kategori = kategori
     },
     // DeleteBarang({dispatch}, id) {
     //     axios.delete(`hapus/barang/${id}`)

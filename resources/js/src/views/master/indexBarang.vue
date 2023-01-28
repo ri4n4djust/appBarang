@@ -22,8 +22,9 @@
                 <div class="panel br-6">
                     <div class="custom-table panel-body p-0">
                         <div class="d-flex flex-wrap justify-content-center justify-content-sm-start px-3 pt-3 pb-0">
-                            <button variant="primary" class="btn m-1 btn-primary" @click="export_table('print')">Print</button>
-                            <button variant="primary" class="btn m-1 btn-primary" @click="export_table('pdf')">PDF</button>
+                            <button class="btn btn-primary mb-2 me-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Tambah</button>
+                            <button class="btn btn-primary mb-2 me-2" @click="export_table('print')">Print</button>
+                            <button class="btn btn-primary mb-2 me-2" @click="export_table('pdf')">PDF</button>
 <span>{{ barangs }}</span>
                         </div>
 
@@ -60,7 +61,7 @@
                                             <a href="javascript:void(0);" class="dropdown-item" @click="view_row(props.row)"> Edit </a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0);" class="dropdown-item" @click="view_row(props.row)"> Delete </a>
+                                            <a href="javascript:void(0);" class="dropdown-item" @click="delete_row(props.row)"> Delete </a>
                                         </li>
                                     </ul>
                                 </div>
@@ -72,13 +73,76 @@
                     </div>
                 </div>
             </div>
+
+            <!-- <div v-show="modalinput" > -->
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Barang</h5>
+                                <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="row mb-4">
+                                        <div class="col-sm-4">
+                                            <label for="inputState">Kode</label>
+                                            <input v-model="input.kdB" class="form-control" placeholder="Kode" disabled />
+                                        </div>
+                                        <div class="col-sm">
+                                            <label for="inputState">Nama</label>
+                                            <input v-model="input.nmB" class="form-control" placeholder="Nama Barang" />
+                                        </div>
+                                        <div class="col-sm">
+                                            <label for="inputState">Satuan</label>
+                                            <input v-model="input.satuanB" class="form-control" placeholder="Satuan" />
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-sm-4">
+                                            <label for="inputState">Kategori</label>
+                                            <select class="form-select" v-model="input.kdktg">
+                                                <option v-for="ktg in ktgs" :value="ktg.kodeKtg" :key="ktg.id">{{ ktg.namaKtg }}</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm">
+                                            <label for="inputState">Harga Beli</label>
+                                            <input v-model="input.hrgBeli" class="form-control" placeholder="Harga Beli" @keypress="onlyNumber" />
+                                        </div>
+                                        <div class="col-sm">
+                                            <label for="inputState">Harga Jual</label>
+                                            <input v-model="input.hrgJual" class="form-control" placeholder="Harga Jual" @keypress="onlyNumber" />
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-sm-4">
+                                            <label for="inputState">Merek</label>
+                                            <input v-model="input.merek" class="form-control" placeholder="Merek" />
+                                        </div>
+                                        <div class="col-sm">
+                                            <label for="inputState">Qty Min</label>
+                                            <input v-model="input.qtyMin" class="form-control" placeholder="Qty Min" @keypress="onlyNumber" />
+                                        </div>
+                                        <div class="col-sm">
+                                            <label for="inputState">Qty Max</label>
+                                            <input v-model="input.qtyMax" class="form-control" placeholder="Qty Max" @keypress="onlyNumber" />
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn" data-dismiss="modal" data-bs-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
+                                <button type="button" class="btn btn-primary" @click="simpan_barang">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- </div> -->
+
+
         </div>
-
-
         <!--  -->
-
-
-        
+    
     </div>
 </template>
 
@@ -97,6 +161,8 @@
     const store = useStore();
 
     const columns = ref(['kdBarang', 'nmBarang', 'hrgPokok', 'hrgJual', 'namaKtg', 'stkBarang', 'action']);
+
+    const modalinput = ref(false);
     const items = ref([]);
     const table_option = ref({
         perPage: 10,
@@ -119,10 +185,25 @@
         resizableColumns: true,
     });
 
+    const kdbrg = ref([])
+    const input = ref({
+        kdB: kdbrg,
+        kdktg: ktgs,
+        nmB: '',
+        satuanB: '',
+        hrgBeli: '',
+        hrgJual: '',
+        merek: '',
+        qtyMin: '',
+        qtyMax: '',
+    })
+
     
 
     onMounted(() => {
         bind_data();
+        getKtg();
+        getkd();
     });
 
     
@@ -133,9 +214,34 @@
 
     const barangs = computed(() => {
         items.value = store.getters.StateBarang;
+        kdbrg.value = store.getters.NoBarang;
         // console.log(items)
-        // return { items }
+        // return { kdbrg }
     });
+
+    // input.value = computed(() => {
+    //     kdbrg.value = store.getters.NoBarang;
+    // })
+
+    const ktgs = ref([]);
+    const getKtg = async () => {
+        await store.dispatch('GetKategori');
+        ktgs.value = store.getters.StateKategori;
+        // console.log(ktgs.value)
+    }
+    // const kdbrg = ref([])
+    const getkd = async () => {
+        await store.dispatch('GetNoBarang');
+        kdbrg.value = store.getters.NoBarang;
+        // console.log(kdbrg.value)
+    }
+
+    const simpan_barang = () => {
+        const isi = input.value
+        store.dispatch('CreateBarang', isi )
+        bind_data();
+        getkd()
+    }
 
     const export_table = (type) => {
         let cols = columns.value.filter((d) => d != 'profile' && d != 'action');
@@ -245,7 +351,35 @@
             .join(' ');
     };
     const view_row = (item) => {
-        
+        modalinput.value = true
         alert('ID: ' + item.kdBarang + ', Name: ' + item.nmBarang);
     };
+
+    const delete_row = (item) => {
+        modalinput.value = true
+        // alert('ID: ' + item.kdBarang + ', Name: ' + item.nmBarang);
+        new window.Swal({
+            title: 'Anda Yahin?',
+            text: "Hapus Nama Barang !" +item.nmBarang,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Delete',
+            padding: '2em'
+        }).then(result => {
+            if (result.value) {
+                store.dispatch('DeleteBarang', item.id);
+                bind_data();
+                new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
+
+            }
+        });
+    };
+
+    function onlyNumber ($event) {
+        //console.log($event.keyCode); //keyCodes value
+        let keyCode = ($event.keyCode ? $event.keyCode : $event.which);
+        if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) { // 46 is dot
+            $event.preventDefault();
+        }   
+    }
 </script>

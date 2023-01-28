@@ -72,6 +72,15 @@ class barangController extends Controller
 
     }
 
+    public function indexKategori(){
+        $kat = DB::table('tblkategori')->get();
+        return response([
+            'success' => true,
+            'message' => 'List Semua Kategori',
+            'data' => $kat
+        ], 200);
+    }
+
     public function update(Request $request)
     {        
         try{
@@ -116,7 +125,7 @@ class barangController extends Controller
     public function destroy($id)
     {
         $post = Barang::findOrFail($id);
-        $kodebarang = $post->kdBarang;
+        // $kodebarang = $post->kdBarang;
         
         $post->delete();
 
@@ -199,6 +208,78 @@ class barangController extends Controller
                 return response()->json([
                     'success' => true,
                     'message' => 'Post Berhasil di insert!',
+                    // 'data' => $detail
+                ], 200);
+            } else {
+                DB::rollback();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Post Gagal Diupdate!',
+                ], 500);
+            }
+        } catch (\Exception $e) {
+            //DB::rollback();
+            // something went wrong
+            return response()->json([
+             'success' => false,
+             'message' => 'exception'.$e,
+         ], 400);
+        }
+
+    }
+
+    public function simpanBarang(Request $request){
+        try{
+            $exception = DB::transaction(function() use ($request){ 
+                $kdBarang = $request->input('kdB');
+                $nmBarang = $request->input('nmB');
+                $satuan = $request->input('satuanB');
+                $kategori = $request->input('kdktg');
+                $hrgBeli = $request->input('hrgBeli');
+                $hrgJual = $request->input('hrgJual');
+                $merek = $request->input('merek');
+                $qtymin = $request->input('qtyMin');
+                $qtymax = $request->input('qtyMax');
+
+                // $tglOpnum = date("Y-m-d", strtotime($request[0]['tglOpnum']));
+                $post = Barang::upsert([
+                        'kdBarang'     => $kdBarang,
+                        'nmBarang'     => $nmBarang,
+                        'hrgPokok'     => $hrgBeli,
+                        'hrgJual'       => $hrgJual,
+                        'ktgBarang'   => $kategori,
+                        'stkBarang'   => '0',
+                        'stsBarang'   => '0',
+                        'satuanBarang'     => $satuan,
+                        'merek'     => $merek,
+                        'qtyMin'       => $qtymin,
+                        'qtyMax'   => $qtymax,
+                        'deskripsi'     => 'des',
+                        'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                    ],
+                    [
+                        'nmBarang'     => $nmBarang,
+                        'hrgPokok'     => $hrgBeli,
+                        'hrgJual'       => $hrgJual,
+                        'ktgBarang'   => $kategori,
+                        'satuanBarang'     => $satuan,
+                        'merek'     => $merek,
+                        'qtyMin'       => $qtymin,
+                        'qtyMax'   => $qtymax,
+                        'deskripsi'     => 'des',
+                        'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                    ]
+                );
+
+                
+            DB::commit();
+            });
+            if(is_null($exception)) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Barang Berhasil di insert!',
                     // 'data' => $detail
                 ], 200);
             } else {
