@@ -269,7 +269,7 @@
                     </ul>
                 </li>
 
-                <li class="menu">
+                <!-- <li class="menu">
                     <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#elements" aria-controls="elements" aria-expanded="false">
                         <div class="">
                             <svg
@@ -861,7 +861,7 @@
                             <span>{{ $t('documentation') }}</span>
                         </div>
                     </a>
-                </li>
+                </li> -->
             </perfect-scrollbar>
         </nav>
     </div>
