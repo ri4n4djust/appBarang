@@ -15,7 +15,7 @@ class barangController extends Controller
     //
     public function index()
     {
-        $posts = Barang::join('tblkategori', 'tblBarang.ktgBarang', '=', 'tblkategori.kodeKtg')
+        $posts = Barang::join('tblkategori', 'tblbarang.ktgBarang', '=', 'tblkategori.kodeKtg')
                 //->where('tblBarang.stsBarang', '1')
                 ->get(['tblBarang.*', 'tblkategori.namaKtg']);
         //$posts = Barang::latest()->get();
