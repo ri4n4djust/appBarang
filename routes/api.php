@@ -47,6 +47,7 @@ Route::delete('/hapus/supplier/{id}', [App\Http\Controllers\supplierController::
 
 //======LAPORAN==============
 Route::post('/laporan-bbm', [App\Http\Controllers\laporanController::class, 'laporanBbm']);
+Route::post('/aplusan', [App\Http\Controllers\laporanController::class, 'aplusan']);
 Route::post('/laporan-barang', [App\Http\Controllers\laporanController::class, 'laporanBrg']);
 Route::post('/laporan-opnum', [App\Http\Controllers\laporanController::class, 'laporanOpnum']);
 
@@ -70,7 +71,9 @@ Route::get('/kdpelanggan', [App\Http\Controllers\nomorController::class, 'kodePe
 Route::get('/bbm', [App\Http\Controllers\barangController::class, 'indexBbm']);
 Route::post('/nosel', [App\Http\Controllers\barangController::class, 'indexNosel']);
 
-Route::post('/store/transnosel', [App\Http\Controllers\transaksiNoselController::class, 'simpantrx']);
+// Route::post('/store/transnosel', [App\Http\Controllers\transaksiNoselController::class, 'simpantrx']);
+Route::post('/store/transnosel', [App\Http\Controllers\transaksiNoselController::class, 'saveNoselArray']);
+
 Route::post('/transnosel', [App\Http\Controllers\transaksiNoselController::class, 'indexTransNosel']);
 Route::post('/transnoselregu', [App\Http\Controllers\transaksiNoselController::class, 'indexTransNoselRegu']);
 

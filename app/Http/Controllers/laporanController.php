@@ -68,5 +68,22 @@ class laporanController extends Controller
             'data' => $lap
         ], 200);
     }
+
+    public function aplusan(Request $request){
+        $startDate = date("Y-m-d", strtotime($request->input('startDate')));
+        // $endDate = date("Y-m-d", strtotime($request->input('endDate')));
+        $lap = DB::table('tbltransaksi_nosel')
+                ->join('tblbbm', 'tblbbm.id', 'tbltransaksi_nosel.r_bbm')
+                ->join('tblnosel_detail', 'tblnosel_detail.id_nosel', 'tbltransaksi_nosel.r_nosel')
+                ->select('tbltransaksi_nosel.*', 'tblbbm.nama_bbm', 'tblnosel_detail.nama_nosel')
+                ->where('tbltransaksi_nosel.tgl_transaksi', [$startDate])
+                ->get();
+        return response()->json([
+            'success' => true,
+            'message' => 'Laporan Penjualan BBM',
+            'data' => $lap
+        ], 200);
+
+    }
     
 }

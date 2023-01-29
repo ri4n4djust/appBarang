@@ -27,7 +27,7 @@ const routes = [
         path: '/bbm',
         name: 'bbm',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexBbm.vue'),
-        meta: { requiresAuth: true },
+        // meta: { requiresAuth: true },
     },
 
     {
@@ -40,7 +40,7 @@ const routes = [
         path: '/persediaan',
         name: 'persediaan',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexPersediaan.vue'),
-        meta: { requiresAuth: true },
+        // meta: { requiresAuth: true },
     },
 
     {
@@ -69,14 +69,14 @@ const routes = [
         name: 'editpenjualan',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/editpenjualan.vue'),
         // props: true,
-        meta: { requiresAuth: true },
+        // meta: { requiresAuth: true },
     },
     {
         path: '/opnum',
         name: 'opnum',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/opnum.vue'),
         // props: true,
-        meta: { requiresAuth: true },
+        // meta: { requiresAuth: true },
     },
     
 

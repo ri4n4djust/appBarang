@@ -24,14 +24,18 @@
                     </div>
                     <div class="widget-content">
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col">
                                 <div class="w-detail">
                                     <p class="w-title">{{ nama_bbm  }}</p>
-                                    <p class="w-stats">Harga  {{ Number(last_price).toLocaleString()}}</p>
-                                    <router-link :to="{ name: 'bbm'}" class="btn btn-secondary btn-danger">Kembali</router-link>
+                                    <!-- <p class="w-stats">Harga  {{ Number(last_price).toLocaleString()}}</p> -->
+                                    <button class="btn btn-primary mb-2 me-1" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">KUPON</button>
+                                    <button class="btn btn-primary mb-2 me-1" data-bs-toggle="modal" data-bs-target="#modalBiaya">BIAYA</button>
+                                    <button class="btn btn-primary mb-2 me-1" data-bs-toggle="modal" data-bs-target="#modalLinkAja">LINK AJA</button>
+                                    <button class="btn btn-primary mb-2 me-1" @click="simpan_all">SIMPAN</button>
+                                    <router-link :to="{ name: 'bbm'}" class="btn btn-secondary btn-danger mb-2 me-1">Kembali</router-link>
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-2">
                                 <div class="w-detail">
                                     <p class="w-title">Regu </p>
                                     <select class="form-select form-select-sm" v-model="regu" >
@@ -40,7 +44,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-2">
                                 <div class="w-detail">
                                     <p class="w-title">Tanggal</p>
                                     <flat-pickr v-model="date1" 
@@ -49,11 +53,87 @@
                                 </div>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-4 layout-spacing" v-for="list, index in nosels.nosel" :key="list.id_nosel">
+            <div class="col-md-12 layout-spacing">
+                <div class="widget widget-statistics">
+
+                    <div class="widget-content">
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="w-detail">
+                                   
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="2">Kupon</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody role="rowgroup">
+                                                <tr v-for="k in nosels.kupon" :key="k.kdp" >
+                                                    <td aria-colindex="1" role="cell">{{ k.kdp }}</td>
+                                                    <td aria-colindex="2" role="cell">{{ k.nilaiKupon }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="w-detail">
+                                    
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th colspan="2">Biaya</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody role="rowgroup">
+                                                <tr v-for="k in nosels.kupon" :key="k.kdp" >
+                                                    <td aria-colindex="1" role="cell">{{ k.kdp }}</td>
+                                                    <td aria-colindex="2" role="cell">{{ k.nilaiKupon }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="w-detail">
+                                    
+                                    <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2">Biaya</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody role="rowgroup">
+                                        <tr v-for="k in nosels.kupon" :key="k.kdp" >
+                                            <td aria-colindex="1" role="cell">{{ k.kdp }}</td>
+                                            <td aria-colindex="2" role="cell">{{ k.nilaiKupon }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="col-md-4 layout-spacing" v-for="list, index in nosels.nosel" :key="list.id_nosel">
                 <div class="widget widget-card-two">
                     <div class="widget-heading">
                         <div class="media">
@@ -66,6 +146,7 @@
                                 <h6> {{ list.nama_nosel }}</h6>
                                 <p class="meta-date-time"></p>
                                 <a href="javascript:;" class="btn btn-secondary">{{ Number(list.meter_akhir).toLocaleString() }}</a>
+                                <a href="javascript:;" class="btn btn-secondary">{{ Number(list.harga).toLocaleString() }}</a>
                             </div>
                         </div>
                     </div>
@@ -81,7 +162,7 @@
                                     </div>
                                     <div>
                                         <div class="t-name">
-                                            <h4>{{ Number(Math.abs((meter_now[index] - list.meter_akhir) * last_price)).toLocaleString() }}</h4>
+                                            <h4>{{ Number(Math.abs((meter_now[index] - list.meter_akhir) * list.harga)).toLocaleString() }}</h4>
                                             <p>Nilai Penjualan</p>
                                         </div>
                                     </div>
@@ -91,16 +172,17 @@
                             </div>
                         </div>
                         <h3><input type="text" class="form-control" v-model="meter_now[index]" ></h3>
-                        <button type="button" class="btn btn-success mb-2 me-1" @click="saveTransBbm(id_nosel=list.id_nosel,code_bbm=list.r_code_bbm,newmeter=meter_now[index],costltr=meter_now[index] - list.meter_akhir,jual=(meter_now[index] - list.meter_akhir) * last_price )">Simpan</button>
-                        <button type="button" class="btn btn-success mb-2 me-1" @click="kompliment()">kompliment</button>
+                        <button type="button" class="btn btn-success mb-2 me-1" @click="saveTransBbm(id_nosel=list.id_nosel,
+                                                                                                    code_bbm=list.r_bbm,
+                                                                                                    kodeBrg = list.r_code_bbm,
+                                                                                                    oldmeter=list.meter_akhir,
+                                                                                                    newmeter=meter_now[index],
+                                                                                                    hrg=list.harga,
+                                                                                                    costltr=meter_now[index] - list.meter_akhir,
+                                                                                                    jual=(meter_now[index] - list.meter_akhir) * list.harga
+                                                                                                     )">Simpan</button>
                     </div>
                     <div class="widget-content">
-                        <!-- {{ nosels.trs }} -->
-                        <!-- <div v-for="lis in nosels.trs" :key="lis.id_nosel">
-                            <span v-if="list.id_nosel === lis.r_nosel">
-                                <h5>{{ lis.r_nosel }}</h5>
-                            </span>
-                        </div> -->
                         <div class="widget-content table-responsive">
                             <table class="table">
                                 <thead>
@@ -113,8 +195,6 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="lis in nosels.trs" :key="lis.id_nosel">
-                                        <!-- <span v-if="list.id_nosel === lis.r_nosel"> -->
-                                            <!-- <h5>{{ lis.r_nosel }}</h5> -->
                                             <td><div v-if="list.id_nosel === lis.r_nosel" class="td-content text-primary">{{ lis.r_regu }}</div></td>
                                             <td><div v-if="list.id_nosel === lis.r_nosel" class="td-content">{{ lis.cost_ltr }}</div></td>
                                             <td><div v-if="list.id_nosel === lis.r_nosel" class="td-content">{{ Number(lis.total).toLocaleString() }}</div></td>
@@ -123,7 +203,6 @@
                                                     <div class="icon-container"><i class="far fa-edit"></i><span class="icon-name"></span></div>
                                                 </div>
                                             </td>
-                                        <!-- </span> -->
                                         
                                     </tr>
                                 </tbody>
@@ -131,11 +210,40 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
-            
-            
+            <Kupon/>
+            <Biaya/>
 
+        </div>
+
+        <div class="table-responsive">
+            <table role="table" aria-busy="false" aria-colcount="5" class="table table-hover table-bordered" >
+                <thead role="rowgroup">
+                    <tr role="row">
+                        <th role="columnheader" scope="col" aria-colindex="1"><div>Nozel</div></th>
+                        <th role="columnheader" scope="col" aria-colindex="2"><div>Meter Awal</div></th>
+                        <th role="columnheader" scope="col" aria-colindex="3"><div>Meter Akhir</div></th>
+                        <th role="columnheader" scope="col" aria-colindex="4"><div>Volume</div></th>
+                        <th role="columnheader" scope="col" aria-colindex="5"><div>Harga</div></th>
+                        <th role="columnheader" scope="col" aria-colindex="4"><div>Total</div></th>
+                    </tr>
+                </thead>
+                <tbody role="rowgroup">
+                    <tr role="row" v-for="list, index in nosels.nosel" :key="list.id_nosel">
+                        <td aria-colindex="1" role="cell"> {{ list.nama_nosel }}</td>
+                        <td aria-colindex="2" role="cell">{{ Number(list.meter_akhir).toLocaleString() }}</td>
+                        <td aria-colindex="3" role="cell"><input type="text" class="form-control" v-model="meter_now[index]" ></td>
+                        <td aria-colindex="4" role="cell">
+                            <div :style="{ 'width': inp + 'px' }">
+                                {{ Math.abs(meter_now[index] - list.meter_akhir) }}
+                            </div>
+                        </td>
+                        <td aria-colindex="5" role="cell">{{ Number(list.harga).toLocaleString() }}</td>
+                        <td aria-colindex="5" role="cell" class="text-end">{{ Number(Math.abs((meter_now[index] - list.meter_akhir) * list.harga)).toLocaleString() }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </template>
@@ -152,8 +260,9 @@
     import '@/assets/sass/scrollspyNav.scss';
     import '@/assets/sass/font-icons/fontawesome/css/regular.css';
     import '@/assets/sass/font-icons/fontawesome/css/fontawesome.css';
-    import highlight from '@/components/plugins/highlight.vue';
     import feather from 'feather-icons';
+    import Kupon from './kupon.vue';
+    import Biaya from './biaya.vue';
 
     import moment from "moment";
 
@@ -178,6 +287,7 @@
     const date1 = ref(moment().format("YYYY-MM-DD"));
     const meter_now = ref({});
     const regu = ref(null);
+    const inp = ref(50);
     // const listtrans = ref([]);
 
     
@@ -187,63 +297,91 @@
         const nosel = store.getters.StateNosel;
         const trs = store.getters.STransNosel;
         const regu = store.getters.STransNoselRegu;
-        return { nosel, trs, regu }
+        const kupon = store.getters.Skupon;
+        return { nosel, trs, regu, kupon }
     });
     
+    const simpan_all = () =>{
+        const nosel = store.getters.StateNosel;
+        // console.log(nosel)
 
-
-    function saveTransBbm(id_nosel,code_bbm,newmeter,costltr,jual){
-        // console.log(regu.value);
-        // if(regu.value === null || newmeter === ''){
-        //     // alert(regu.value)
-        //     const toast =  window.Swal.mixin({
-        //         toast: true,
-        //         position: 'top-end',
-        //         showConfirmButton: false,
-        //         timer: 3000,
-        //         padding: '2em'
-        //     });
-        //     toast.fire({
-        //         title: 'Error!',
-        //         text: 'Mohon Lengkapi data',
-        //         icon: 'error',
-        //         confirmButtonText: 'Cool',
-        //         padding: '2em'
-        //     });
-        // }else{
-            const idbbm = props.id;
-            const harga = ref(props.last_price);
-            // const tgl = date1.value.substring(0, 10)
-            const tgl = moment(date1.value).format("YYYY-MM-DD")
-            const tglc = moment(date1.value).format("YYYYMMDD")
-            store.dispatch('CreateTransNosel', {
-                'r_bbm': idbbm,
-                'kd_bbm': code_bbm,
-                'kd_trans': idbbm+id_nosel+tglc,
+        const tgl = moment(date1.value).format("YYYY-MM-DD")
+        const tglc = moment(date1.value).format("YYYYMMDD")
+        
+        var dataArr = nosel
+        const arr = [];
+        let tota = 0;
+        for (let i = 0; i < dataArr.length; i++) {
+            // console.log({kdBarang : dataArr[i].r_kdBarang, nmBarang : dataArr[i].r_nmBarang,});
+            let id_nosel = dataArr[i].id_nosel
+            let cost = parseInt(meter_now.value[i]) - parseInt(dataArr[i].meter_akhir);
+            let subto = dataArr[i].harga * cost;
+            let last_meter =  meter_now.value[i];
+            // let ket = keterangan.value[i]
+            // if (!isNaN(subto)){
+            //     last_meter = '0';
+            // } else{
+            //     last_meter =  meter_now.value[i];
+            // }
+            arr.push ({
+                'kd_bbm': dataArr[i].r_bbm,
+                'kodeBrg': dataArr[i].r_code_bbm,
+                'kd_trans': tglc+regu.value,
                 'r_nosel': id_nosel,
                 'r_regu': regu.value,
                 'tgl_transaksi': tgl, 
-                'cost_ltr': costltr, 
-                'last_price': harga.value, 
-                'last_meter': newmeter, 
-                'total': jual
+                'cost_ltr': cost, 
+                'last_price': dataArr[i].harga,
+                'awal_meter': dataArr[i].meter_akhir,
+                'last_meter':   meter_now.value[i],
+                'total': subto
             })
-            getNosel();
-            getTrans();
-        //     const toast = window.Swal.mixin({
-        //         toast: true,
-        //         position: 'top-end',
-        //         showConfirmButton: false,
-        //         timer: 3000,
-        //         padding: '2em',
-        //     });
-        //     toast.fire({
-        //         icon: 'success',
-        //         title: 'Signed in successfully',
-        //         padding: '2em',
-        //     });
-        // }
+            tota += parseInt(subto)
+            // total.value = tota
+                console.log(tota)
+        
+        }
+        // console.log(arr)
+        const arr_k = [];
+        const arr_kupon = store.getters.Skupon;
+        let totak = 0;
+        for (let i = 0; i < arr_kupon.length; i++) {
+            arr_k.push ({
+                'kdPelanggan': arr_kupon[i].kdp,
+                'tglKupon': arr_kupon[i].tglKupon,
+                'r_regu': regu.value,
+                'nilai': arr_kupon[i].nilaiKupon,
+                // 'tgl_transaksi': tgl, 
+            })
+        }
+        store.dispatch('CreateTransNosel', [arr,arr_k ])
+
     }
+
+
+    // function saveTransBbm(id_nosel,code_bbm,kode_brg,oldmeter,newmeter,hrg,costltr,jual){
+    //         // const idbbm = props.id;
+    //         // const harga = ref(props.last_price);
+    //         // const tgl = date1.value.substring(0, 10)
+    //         const tgl = moment(date1.value).format("YYYY-MM-DD")
+    //         const tglc = moment(date1.value).format("YYYYMMDD")
+    //         store.dispatch('CreateTransNosel', {
+    //             // 'r_bbm': idbbm,
+    //             'kd_bbm': code_bbm,
+    //             'kodeBrg': kode_brg,
+    //             'kd_trans': code_bbm+id_nosel+tglc,
+    //             'r_nosel': id_nosel,
+    //             'r_regu': regu.value,
+    //             'tgl_transaksi': tgl, 
+    //             'cost_ltr': costltr, 
+    //             'last_price': hrg, 
+    //             'awal_meter': oldmeter,
+    //             'last_meter': newmeter, 
+    //             'total': jual
+    //         })
+    //         getNosel();
+    //         getTrans();
+    // }
     const getNosel=() => {
         const id = props.id;
         store.dispatch('GetNosel', {'key1': id})

@@ -130,7 +130,7 @@
                             <router-link to="/persediaan" @click="toggleMobileMenu">Persediaan</router-link>
                         </li>
                         <li>
-                            <router-link to="/kas" @click="toggleMobileMenu">Rekening Kas</router-link>
+                            <router-link to="/kas" @click="toggleMobileMenu">Buku Kas</router-link>
                         </li>
                         <li>
                             <router-link to="/tables/multiple-tables" @click="toggleMobileMenu">Multiple Tables</router-link>
@@ -185,7 +185,10 @@
                     </a>
                     <ul id="apps" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
                         <li>
-                            <router-link to="/pembelian" @click="toggleMobileMenu">Pembelian</router-link>
+                            <router-link to="/po-bbm" @click="toggleMobileMenu">PO BBM</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/pembelian" @click="toggleMobileMenu">Kedatangan BBM</router-link>
                         </li>
                         <li>
                             <router-link to="/penjualan" @click="toggleMobileMenu">Penjualan</router-link>
@@ -194,7 +197,10 @@
                             <router-link to="/tera" @click="toggleMobileMenu">Tera</router-link>
                         </li>
                         <li>
-                            <router-link to="/opnum" @click="toggleMobileMenu">Opnum</router-link>
+                            <router-link to="/opnum-bbm" @click="toggleMobileMenu">Opnum BBM</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/opnum" @click="toggleMobileMenu">Opnum Barang</router-link>
                         </li>
                     </ul>
                 </li>

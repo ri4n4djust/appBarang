@@ -5,7 +5,8 @@ const state = {
     laporanbbm: [],
     laporanbarang: [],
     pembelianpersediaan: [],
-    laporanopnum: []
+    laporanopnum: [],
+    aplusan: [],
   };
   
 const getters = {
@@ -13,6 +14,7 @@ const getters = {
     SlaporanBarang: state => state.laporanbarang,
     SlaporanPembelian: state => state.pembelianpersediaan,
     SlaporanOpnum: state => state.laporanopnum,
+    Saplusan: state => state.aplusan,
 };
 
 const actions = {  
@@ -65,6 +67,17 @@ const actions = {
             return
         }
     },
+    async GetAplusan({ commit }, aplus){
+        let response
+        try {
+            response = await axios.post('/api/aplusan', aplus)
+            commit('setAplusan', response.data.data)
+        } catch (ex) {
+            // Handle error
+            alert('error load Aplusan bbm')
+            return
+        }
+    },
     async EditBarang({dispatch}, Brg) {
         await axios.post('api/update/barang', Brg)
         await dispatch('GetBarang')
@@ -90,6 +103,9 @@ const mutations = {
     },
     setLaporanOpnum(state, op){
         state.laporanopnum = op
+    },
+    setAplusan(state, ap){
+        state.aplusan = ap
     },
 
 };

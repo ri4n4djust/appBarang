@@ -178,6 +178,8 @@
         sum +=  parseInt(element.total);
         });
 
+        
+
         // console.log(sum)
         // return { items }
     });

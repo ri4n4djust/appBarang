@@ -7,6 +7,7 @@ const state = {
     linkacc: [],
     editpenjualan: [],
     stokopnum: [],
+    kupon: [],
   };
   
 const getters = {
@@ -14,7 +15,8 @@ const getters = {
     StatePenjualan: state => state.penjualan,
     StateAcc: state => state.linkacc,
     SeditPenjualan: state => state.editpenjualan,
-    SstokOpnum: state => state.stokopnum
+    SstokOpnum: state => state.stokopnum,
+    Skupon: state => state.kupon
 };
 
 const actions = {
@@ -132,6 +134,48 @@ const actions = {
         // await dispatch('GetPembelian')
     },
 
+    async CreateTransKupon({dispatch}, detail) {
+        let response
+        try {
+            response = await axios.post('api/trans/kupon', detail)
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Penjualan berhasil tersimpan',
+                padding: '2em',
+            });
+            // localStorage.setItem('cartItemsPen', '[]')
+        } catch (ex) {
+            // Handle error
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'Mohon Lengkapi Data',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            return
+        }
+        // await dispatch('GetPembelian')
+    },
+
+    async NewKupon({ commit }, data){
+            commit('setKupon', data)
+    },
+
     async GetPembelian({ commit }){
         let response
         try {
@@ -198,6 +242,9 @@ const mutations = {
     },
     setEditPenjualan(state, editjual){
         state.editpenjualan = editjual
+    },
+    setKupon(state, data){
+        state.kupon = data
     }
     // DeleteBarang({dispatch}, id) {
     //     axios.delete(`hapus/barang/${id}`)

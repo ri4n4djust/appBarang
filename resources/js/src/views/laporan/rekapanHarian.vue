@@ -17,61 +17,270 @@
 
         
 
-        <div class="row layout-top-spacing">
-            <div class="col-12 layout-spacing">
-                <div class="panel br-6">
-                    <div class="custom-table panel-body p-0">
-                        <div class="d-flex flex-wrap justify-content-center justify-content-sm-start px-3 pt-3 pb-0">
-                            <button variant="primary" class="btn m-1 btn-primary" @click="export_table('print')">Print</button>
-                            <button variant="primary" class="btn m-1 btn-primary" @click="export_table('pdf')">PDF</button>
-<span>{{ barangs }}</span>
-                        </div>
+        <div class="row invoice layout-top-spacing layout-spacing apps-invoice">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="doc-container">
+                    <div class="row">
+                        <div class="col-xl-9">
+                            <div class="invoice-container">
+                                <div class="invoice-inbox">
+                                    <div id="ct" class="">
+                                        <div class="invoice-00001">
+                                            <div class="content-section">
+                                                
 
-                        <v-client-table :data="items" :columns="columns" :options="table_option">
-                            <template #action="props">
-                                <div class="custom-dropdown dropdown btn-group ">
-                                    <div class="btn-group" href="#" role="button" id="pendingTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <!-- <button type="button" class="btn btn-blue">Open</button> -->
-                                        <div role="group" class="btn-group">
-                                            <div class="dropdown b-dropdown custom-dropdown show btn-group">
-                                                <a class="btn dropdown-toggle btn-dark"
-                                                    ><svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        width="24"
-                                                        height="24"
-                                                        viewBox="0 0 24 24"
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        stroke-width="2"
-                                                        stroke-linecap="round"
-                                                        stroke-linejoin="round"
-                                                        class="feather feather-chevron-down"
-                                                    >
-                                                        <polyline points="6 9 12 15 18 9"></polyline>
-                                                    </svg>
-                                                </a>
+                                                <div class="inv--detail-section inv--customer-detail-section">
+                                                    <div class="row">
+                                                        <!-- <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4 align-self-center">
+                                                            <p class="inv-to">Invoice To</p>
+                                                        </div>
+
+                                                        <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 align-self-center order-sm-0 order-1 inv--payment-info">
+                                                            <h6 class="inv-title">Payment Info:</h6>
+                                                        </div> -->
+
+                                                        <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4">
+                                                            <p class="inv-customer-name">Jesse Cory</p>
+                                                            <p class="inv-street-addr">405 Mulberry Rd. Mc Grady, NC, 28649</p>
+                                                            <p class="inv-email-address">redq@company.com</p>
+                                                            <p class="inv-email-address">(128) 666 070</p>
+                                                        </div>
+
+                                                        <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 col-12 order-sm-0 order-1">
+                                                            <div class="inv--payment-info">
+                                                                <p><span class="inv-subtitle">Bank Name:</span> <span>Bank of America</span></p>
+                                                                <p><span class="inv-subtitle">Account Number: </span> <span>1234567890</span></p>
+                                                                <p><span class="inv-subtitle">SWIFT code:</span> <span>VS70134</span></p>
+                                                                <p><span class="inv-subtitle">Country: </span> <span>United States</span></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="inv--product-table-section">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Nozzel</th>
+                                                                    <th>Meter Awal</th>
+                                                                    <th>Meter Akhir</th>
+                                                                    <th>Volume/Liter</th>
+                                                                    <th>Harga</th>
+                                                                    <th>Total</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr v-for="(item, i) in items" :key="item.id">
+                                                                    <td>{{ item.nama_nosel }}</td>
+                                                                    <td>{{ item.awal_meter }}</td>
+                                                                    <td>{{ item.last_meter }}</td>
+                                                                    <td>{{ item.cost_ltr }}</td>
+                                                                    <td>{{ Number(item.last_price).toLocaleString() }}</td>
+                                                                    <td>{{ Number(item.total).toLocaleString() }}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                            <tfoot>
+                                                                <tr>
+                                                                    <th colspan="2">
+                                                                        <table class="table table-hover">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th colspan="2">Langganan Kupon</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody role="rowgroup">
+                                                                                <tr >
+                                                                                    <td aria-colindex="1" role="cell">Total</td>
+                                                                                    <td aria-colindex="2" role="cell">6757</td>
+                                                                                </tr>
+                                                                                <tr >
+                                                                                    <td aria-colindex="1" role="cell">Total</td>
+                                                                                    <td aria-colindex="2" role="cell">6757</td>
+                                                                                </tr>
+                                                                                <tr >
+                                                                                    <td aria-colindex="1" role="cell">Total</td>
+                                                                                    <td aria-colindex="2" role="cell">6757</td>
+                                                                                </tr>
+                                                                                <tr >
+                                                                                    <td aria-colindex="1" role="cell">Total</td>
+                                                                                    <td aria-colindex="2" role="cell">6757</td>
+                                                                                </tr>
+                                                                                <tr >
+                                                                                    <td aria-colindex="1" role="cell">Total</td>
+                                                                                    <td aria-colindex="2" role="cell">6757</td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </th>
+                                                                    <th colspan="2">
+                                                                        <table class="table table-hover">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th colspan="2">Total Penjualan Regu A</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody role="rowgroup">
+                                                                                <tr >
+                                                                                    <td aria-colindex="1" role="cell">Total</td>
+                                                                                    <td aria-colindex="2" role="cell">6757</td>
+                                                                                </tr>
+                                                                                <tr >
+                                                                                    <td aria-colindex="1" role="cell">Total</td>
+                                                                                    <td aria-colindex="2" role="cell">6757</td>
+                                                                                </tr>
+                                                                                <tr >
+                                                                                    <td aria-colindex="1" role="cell">Total</td>
+                                                                                    <td aria-colindex="2" role="cell">6757</td>
+                                                                                </tr>
+                                                                                <tr >
+                                                                                    <td aria-colindex="1" role="cell">Total</td>
+                                                                                    <td aria-colindex="2" role="cell">6757</td>
+                                                                                </tr>
+                                                                                <tr >
+                                                                                    <td aria-colindex="1" role="cell">Total</td>
+                                                                                    <td aria-colindex="2" role="cell">6757</td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </th>
+                                                                    <th colspan="2">
+                                                                        <table class="table table-hover">
+                                                                            <thead role="rowgroup">
+                                                                                <tr >
+                                                                                    <th aria-colindex="1" role="cell">Total</th>
+                                                                                    <th aria-colindex="2" role="cell">{{ Number(totaljual).toLocaleString() }}</th>
+                                                                                </tr>
+                                                                                <tr >
+                                                                                    <th aria-colindex="1" role="cell">Kupon</th>
+                                                                                    <th aria-colindex="2" role="cell">6757</th>
+                                                                                </tr>
+                                                                                <tr >
+                                                                                    <th aria-colindex="1" role="cell">Link Aja</th>
+                                                                                    <th aria-colindex="2" role="cell">6757</th>
+                                                                                </tr>
+                                                                                <tr >
+                                                                                    <th aria-colindex="1" role="cell">Biaya</th>
+                                                                                    <th aria-colindex="2" role="cell">6757</th>
+                                                                                </tr>
+                                                                                <tr >
+                                                                                    <th aria-colindex="1" role="cell">Total Cash</th>
+                                                                                    <th aria-colindex="2" role="cell">6757</th>
+                                                                                </tr>
+                                                                                <tr >
+                                                                                    <th aria-colindex="1" role="cell">Saldo Plus</th>
+                                                                                    <th aria-colindex="2" role="cell">6757</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                        </table>
+                                                                    </th>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                <div class="inv--detail-section inv--customer-detail-section">
+                                                    <div class="row">
+                                                        <!-- <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4 align-self-center">
+                                                            <p class="inv-to">Invoice To</p>
+                                                        </div>
+
+                                                        <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 align-self-center order-sm-0 order-1 inv--payment-info">
+                                                            <h6 class="inv-title">Payment Info:</h6>
+                                                        </div> -->
+
+                                                        <div class="col-sm-4">
+                                                            <p class="inv-customer-name">Jesse Cory</p>
+                                                            <p class="inv-street-addr">405 Mulberry Rd. Mc Grady, NC, 28649</p>
+                                                            <p class="inv-email-address">redq@company.com</p>
+                                                            <p class="inv-email-address">(128) 666 070</p>
+                                                        </div>
+
+                                                        <div class="col-sm-4">
+                                                            <p class="inv-customer-name">Jesse Cory</p>
+                                                            <p class="inv-street-addr">405 Mulberry Rd. Mc Grady, NC, 28649</p>
+                                                            <p class="inv-email-address">redq@company.com</p>
+                                                            <p class="inv-email-address">(128) 666 070</p>
+                                                        </div>
+
+                                                        <div class="col-sm-4">
+                                                            <p class="inv-customer-name">Jesse Cory</p>
+                                                            <p class="inv-street-addr">405 Mulberry Rd. Mc Grady, NC, 28649</p>
+                                                            <p class="inv-email-address">redq@company.com</p>
+                                                            <p class="inv-email-address">(128) 666 070</p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <!-- <div class="inv--total-amounts">
+                                                    <div class="row mt-4">
+                                                        <div class="col-sm-5 col-12 order-sm-0 order-1"></div>
+                                                        <div class="col-sm-7 col-12 order-sm-1 order-0">
+                                                            <div class="text-sm-end">
+                                                                <div class="row">
+                                                                    <div class="col-sm-8 col-7">
+                                                                        <p class="">Sub Total:</p>
+                                                                    </div>
+                                                                    <div class="col-sm-4 col-5">
+                                                                        <p class="">$3155</p>
+                                                                    </div>
+                                                                    <div class="col-sm-8 col-7">
+                                                                        <p class="">Tax Amount:</p>
+                                                                    </div>
+                                                                    <div class="col-sm-4 col-5">
+                                                                        <p class="">$700</p>
+                                                                    </div>
+                                                                    <div class="col-sm-8 col-7">
+                                                                        <p class="discount-rate">Discount : <span class="discount-percentage">5%</span></p>
+                                                                    </div>
+                                                                    <div class="col-sm-4 col-5">
+                                                                        <p class="">$10</p>
+                                                                    </div>
+                                                                    <div class="col-sm-8 col-7 grand-total-title">
+                                                                        <h4 class="">Grand Total :</h4>
+                                                                    </div>
+                                                                    <div class="col-sm-4 col-5 grand-total-amount">
+                                                                        <h4 class="">$3845</h4>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div> -->
+
+                                                <div class="inv--note">
+                                                    <div class="row mt-4">
+                                                        <div class="col-sm-12 col-12 order-sm-0 order-1">
+                                                            <p>Note: Thank you for doing Business with us.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <ul class="dropdown-menu dropdown-menu-end">
-                                        <li>
-                                            <a href="javascript:void(0);" class="dropdown-item" @click="view_row(props.row)"> Edit </a>
-                                        </li>
-                                        <li>
-                                            <a href="javascript:void(0);" class="dropdown-item" @click="view_row(props.row)"> Delete </a>
-                                        </li>
-                                    </ul>
                                 </div>
-                            </template>
-                        </v-client-table>
+                            </div>
+                        </div>
 
-                        
-                        
+                        <div class="col-xl-3">
+                            <div class="invoice-actions-btn">
+                                <div class="invoice-action-btn">
+                                    <div class="row">
+                                      
+                                        <div class="col-xl-12 col-md-3 col-sm-6">
+                                            <a href="javascript:;" class="btn btn-secondary btn-print action-print" @click="print()">Print</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
-
 
         <!--  -->
 
@@ -87,53 +296,67 @@
     import jsPDF from 'jspdf';
     import 'jspdf-autotable';
 
+    import '@/assets/sass/scrollspyNav.scss';
+    import '@/assets/sass/tables/table-basic.scss';
+    import '@/assets/sass/apps/invoice-preview.scss';
+
+    import moment from "moment";
+
     import { useStore } from 'vuex';
+    import { useRouter, useRoute } from 'vue-router'
 
     import { useMeta } from '@/composables/use-meta';
-    useMeta({ title: 'Data Barang' });
+import { async } from 'q';
+    useMeta({ title: 'Aplusan' });
 
     const store = useStore();
 
-    const columns = ref(['kdBarang', 'nmBarang', 'hrgPokok', 'hrgJual', 'namaKtg', 'stkBarang', 'action']);
+    const totaljual = ref();
+
     const items = ref([]);
-    const table_option = ref({
-        perPage: 10,
-        perPageValues: [5, 10, 20, 50],
-        skin: 'table table-hover',
-        columnsClasses: { action: 'actions text-center' },
-        pagination: { nav: 'scroll', chunk: 5 },
-        texts: {
-            count: 'Showing {from} to {to} of {count}',
-            filter: '',
-            filterPlaceholder: 'Search...',
-            limit: 'Results:',
-        },
-        sortable: ['kdBarang', 'nmBarang', 'hrgPokok', 'hrgJual', 'namaKtg', 'stkBarang',],
-        sortIcon: {
-            base: 'sort-icon-none',
-            up: 'sort-icon-asc',
-            down: 'sort-icon-desc',
-        },
-        resizableColumns: true,
+    const sorting = ref({
+        startDate: moment().format("D-M-YYYY"),
+        // endDate: moment().format("D-M-YYYY")
     });
 
     
 
     onMounted(() => {
         bind_data();
+        // total_aplusan();
     });
 
     
-    const bind_data = () => {
-        store.dispatch('GetBarang');
-        items.value = store.getters.StateBarang;
+    const bind_data = async () => {
+        await store.dispatch('GetAplusan', sorting.value);
+        items.value = store.getters.Saplusan;
+        // let ar = items.value ;
+        let sum = 0;
+        items.value.forEach(element => {
+            sum +=  parseInt(Number(element.total));
+            // alert(sum);
+        });
+        totaljual.value = sum
+        console.log(sum)
     }
 
     const barangs = computed(() => {
-        items.value = store.getters.StateBarang;
+        items.value = store.getters.Saplusan;
         // console.log(items)
         // return { items }
     });
+    
+    // const total_aplusan = async () =>{
+    //     await store.dispatch('GetAplusan', sorting.value);
+    //     // items.value = store.getters.Saplusan;
+    //     let arr = store.getters.Saplusan;
+    //     let sum = 0;
+    //     arr.forEach(element => {
+    //         sum +=  parseInt(element.total);
+    //     });
+    //     // totaljual.value = sum;
+    //     console.log(sum)
+    // }
 
     const export_table = (type) => {
         let cols = columns.value.filter((d) => d != 'profile' && d != 'action');
@@ -245,5 +468,8 @@
     const view_row = (item) => {
         
         alert('ID: ' + item.kdBarang + ', Name: ' + item.nmBarang);
+    };
+    const print = () => {
+        window.print();
     };
 </script>

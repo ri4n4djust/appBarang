@@ -5,6 +5,7 @@ const state = {
     nopembelian: [],
     nobarang: [],
     noopnum: [],
+    // nokupon: [],
   };
   
 const getters = {
@@ -12,6 +13,7 @@ const getters = {
     NoPembelian: state => state.nopembelian,
     NoPenjualan: state => state.nopenjualan,
     NoOpnum: state => state.noopnum,
+    // NoKupon: state => state.nokupon
 };
 
 const actions = {  
@@ -47,6 +49,18 @@ const actions = {
         } catch (ex) {
             // Handle error
             alert('error no barang')
+            return
+        }
+    
+    },
+    async GetNoOpnum({ commit }){
+        let response
+        try {
+            response = await axios.get('/api/kdopnum')
+            commit('setNoOpnum', response.data.kdOpnum)
+        } catch (ex) {
+            // Handle error
+            alert('error no opnum')
             return
         }
     
