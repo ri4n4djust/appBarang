@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 27, 2023 at 12:46 AM
+-- Generation Time: Jan 30, 2023 at 01:45 AM
 -- Server version: 8.0.31
 -- PHP Version: 8.0.25
 
@@ -29,13 +29,13 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `failed_jobs` (
   `id` bigint UNSIGNED NOT NULL,
-  `uuid` varchar(255) NOT NULL,
-  `connection` mediumtext NOT NULL,
-  `queue` mediumtext NOT NULL,
-  `payload` longtext NOT NULL,
-  `exception` longtext NOT NULL,
+  `uuid` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `connection` mediumtext COLLATE utf8mb4_general_ci NOT NULL,
+  `queue` mediumtext COLLATE utf8mb4_general_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_general_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_general_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -46,11 +46,11 @@ CREATE TABLE `failed_jobs` (
 CREATE TABLE `link_acc` (
   `id` int NOT NULL,
   `acc_id` int NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `link` varchar(50) NOT NULL,
+  `name` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `link` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `date_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `link_acc`
@@ -75,9 +75,9 @@ INSERT INTO `link_acc` (`id`, `acc_id`, `name`, `link`, `date_create`, `date_upd
 
 CREATE TABLE `migrations` (
   `id` int UNSIGNED NOT NULL,
-  `migration` varchar(255) NOT NULL,
+  `migration` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `batch` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `migrations`
@@ -101,7 +101,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (15, '2023_01_18_173900_create_pembelian_details_table', 8),
 (19, '2023_01_25_205144_create_opnums_table', 9),
 (20, '2023_01_25_205534_create_opnum_details_table', 10),
-(21, '2023_01_27_054617_create_general_ledgers_table', 11);
+(21, '2023_01_27_054617_create_general_ledgers_table', 11),
+(22, '2023_01_28_222515_create_kupons_table', 12);
 
 -- --------------------------------------------------------
 
@@ -110,10 +111,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) NOT NULL,
-  `token` varchar(255) NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -123,15 +124,15 @@ CREATE TABLE `password_resets` (
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) NOT NULL,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `tokenable_id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `token` varchar(64) NOT NULL,
-  `abilities` mediumtext,
+  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_general_ci NOT NULL,
+  `abilities` mediumtext COLLATE utf8mb4_general_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `personal_access_tokens`
@@ -142,7 +143,50 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 (2, 'App\\Models\\User', 1, 'ApiToken', 'fdfd2079dabd38afd54d2525a81aa693c734fc59709919d0fb6e7fa930f9ec33', '[\"*\"]', NULL, '2023-01-21 11:19:51', '2023-01-21 11:19:51'),
 (3, 'App\\Models\\User', 1, 'ApiToken', '6b9dd6a19edacbdc3882902e6d4c11e00c52a6efb9435648d41d71cf215f1d84', '[\"*\"]', NULL, '2023-01-26 21:23:44', '2023-01-26 21:23:44'),
 (4, 'App\\Models\\User', 1, 'ApiToken', 'f75866907573a376464d5b7ffd407e896017186e5b1ac0d573ab9f80ac4857f0', '[\"*\"]', NULL, '2023-01-26 21:26:13', '2023-01-26 21:26:13'),
-(5, 'App\\Models\\User', 1, 'ApiToken', '9625608f63a3190265e388f297b9db7985b00f06abb1780dd5e24db8395d0f7f', '[\"*\"]', NULL, '2023-01-26 21:41:01', '2023-01-26 21:41:01');
+(5, 'App\\Models\\User', 1, 'ApiToken', '9625608f63a3190265e388f297b9db7985b00f06abb1780dd5e24db8395d0f7f', '[\"*\"]', NULL, '2023-01-26 21:41:01', '2023-01-26 21:41:01'),
+(6, 'App\\Models\\User', 1, 'ApiToken', '88f5c4897d259933b398944c5653fb8116d34b36e19cda9b9e92d553c5e5962f', '[\"*\"]', NULL, '2023-01-27 11:16:12', '2023-01-27 11:16:12'),
+(7, 'App\\Models\\User', 1, 'ApiToken', 'e8d8f4ecbde6f3e7d7b0189351333e3a057f86bf2e825ab28c928679c705634f', '[\"*\"]', NULL, '2023-01-27 11:38:15', '2023-01-27 11:38:15'),
+(8, 'App\\Models\\User', 1, 'ApiToken', 'ab9f1ae4a3e51a81b676f0d04d3edbdc40cf00a74a843de5fa376503b87ccc93', '[\"*\"]', NULL, '2023-01-27 11:42:14', '2023-01-27 11:42:14'),
+(9, 'App\\Models\\User', 1, 'ApiToken', 'ee36c45463b1650476dbb30ac7c2db0812dbbf9f79ecd75cbd76bcdcc25f8a0d', '[\"*\"]', NULL, '2023-01-27 11:44:36', '2023-01-27 11:44:36'),
+(10, 'App\\Models\\User', 1, 'ApiToken', 'e512f064bd81c781c256a6de3d7fcfed429e712a14e9d420f6f930f32967ad8a', '[\"*\"]', NULL, '2023-01-27 12:04:21', '2023-01-27 12:04:21'),
+(11, 'App\\Models\\User', 1, 'ApiToken', 'b39dd0ff8440af9197138402af597e159b12d28aa5d8db7e6428d4a1ca7a7be4', '[\"*\"]', NULL, '2023-01-27 12:08:39', '2023-01-27 12:08:39'),
+(12, 'App\\Models\\User', 1, 'ApiToken', 'eff7a7d6a464642945d8e44f276e3c746c183cd34baa9dbb14428ebb691247e4', '[\"*\"]', NULL, '2023-01-27 12:22:39', '2023-01-27 12:22:39'),
+(13, 'App\\Models\\User', 1, 'ApiToken', 'b8c76f0afd50c1eb001b1ed95c00ac0979f5d4736ba69aa93af062b809397431', '[\"*\"]', NULL, '2023-01-27 12:27:47', '2023-01-27 12:27:47'),
+(14, 'App\\Models\\User', 1, 'ApiToken', 'd7603cd0b423e9368c3b8def077b19299def3f1639ee15aeeb8f052f609d8493', '[\"*\"]', NULL, '2023-01-27 12:30:24', '2023-01-27 12:30:24'),
+(15, 'App\\Models\\User', 1, 'ApiToken', 'cbea163d8c4bcf8fb4c49d79a5348ca934266a1de316cd0d8366cda7b1bac895', '[\"*\"]', NULL, '2023-01-27 12:31:35', '2023-01-27 12:31:35'),
+(16, 'App\\Models\\User', 1, 'ApiToken', 'bfcc24cdff7550e8ba1c7a5269f6fb3a2773ac70d32bbf3e50e24013d50eb6f6', '[\"*\"]', NULL, '2023-01-27 12:33:34', '2023-01-27 12:33:34'),
+(17, 'App\\Models\\User', 1, 'ApiToken', 'bb4a42eaef171dd457b6d66022808375220977e156ba1dc374daf34a2651de87', '[\"*\"]', NULL, '2023-01-27 12:34:05', '2023-01-27 12:34:05'),
+(18, 'App\\Models\\User', 1, 'ApiToken', 'c908f0454c4351ab5248b59d097936d3e00a2156d9898b2dbcb9f2b34bcdf9ff', '[\"*\"]', NULL, '2023-01-27 12:36:29', '2023-01-27 12:36:29'),
+(19, 'App\\Models\\User', 1, 'ApiToken', '24a4c78944df2c61666d3886bc452dc4145a05ba2125ae457a7b9c2fef1d35bf', '[\"*\"]', NULL, '2023-01-27 12:36:38', '2023-01-27 12:36:38'),
+(20, 'App\\Models\\User', 1, 'ApiToken', '18fbeab2794ad50df48ce9901f37bfa406a9e1fecd80024b4a06107246ae0b16', '[\"*\"]', NULL, '2023-01-27 12:36:43', '2023-01-27 12:36:43'),
+(21, 'App\\Models\\User', 1, 'ApiToken', 'e4ed70b67f481a0dd5b8e5d70689fcc1959ab8002c7423b863d93c82f6ade3e5', '[\"*\"]', NULL, '2023-01-27 12:37:57', '2023-01-27 12:37:57'),
+(22, 'App\\Models\\User', 1, 'ApiToken', '4aacb9757c6b98048804ed4ab031502d94eba65823fd24bf39abb61ae571b15b', '[\"*\"]', NULL, '2023-01-27 12:40:26', '2023-01-27 12:40:26'),
+(23, 'App\\Models\\User', 1, 'ApiToken', 'e40dbd910496874015fc3659c235be360892adfecbbe95c038b5227ac11a100c', '[\"*\"]', NULL, '2023-01-27 12:40:43', '2023-01-27 12:40:43'),
+(24, 'App\\Models\\User', 1, 'ApiToken', '14fcd68e5c9def50311bd3515933f8cd451db254117dbdef87fb49342bf847dd', '[\"*\"]', NULL, '2023-01-27 12:42:58', '2023-01-27 12:42:58'),
+(25, 'App\\Models\\User', 1, 'ApiToken', '0c7469bd11d050bfe4b9dfc94035cb0448a925086d6442f646b32ca17d434f40', '[\"*\"]', NULL, '2023-01-27 12:48:37', '2023-01-27 12:48:37'),
+(26, 'App\\Models\\User', 1, 'ApiToken', 'de566d7b3d6a93f1444ae5def89f8febe7681a7e8af614dad8660ab7c0e4a0e6', '[\"*\"]', NULL, '2023-01-27 12:52:26', '2023-01-27 12:52:26'),
+(27, 'App\\Models\\User', 1, 'ApiToken', '7b2cd289a3ac1b6434e029cb40e2bf83930bda4a6f17a6e1de9202f82d1b2a0b', '[\"*\"]', NULL, '2023-01-27 12:52:36', '2023-01-27 12:52:36'),
+(28, 'App\\Models\\User', 1, 'ApiToken', '816f01ea3828b9ea1f31a52f83fdab519e0e3f280e706d4d33703b5786fb7781', '[\"*\"]', NULL, '2023-01-27 12:52:40', '2023-01-27 12:52:40'),
+(29, 'App\\Models\\User', 1, 'ApiToken', 'ed1babad547dd42e7b022582545824fbbef57b424f2d0f5737ae747a51212be4', '[\"*\"]', NULL, '2023-01-27 12:53:45', '2023-01-27 12:53:45'),
+(30, 'App\\Models\\User', 1, 'ApiToken', '6e4f4cb06d2d38be32851cee024b17502d0a8dd090bd9533eaa51b1a5f90ade4', '[\"*\"]', NULL, '2023-01-27 13:07:25', '2023-01-27 13:07:25'),
+(31, 'App\\Models\\User', 1, 'ApiToken', '27dca5f4a337c3486ea5079fad2d4162b4fa450d1bf67d32c5611c25f9ea0ebe', '[\"*\"]', NULL, '2023-01-27 13:07:44', '2023-01-27 13:07:44'),
+(32, 'App\\Models\\User', 1, 'ApiToken', '51e87493539330a9c85b7c04f91042fa8eb555ec901efa996c53e789695a29f4', '[\"*\"]', NULL, '2023-01-27 13:11:22', '2023-01-27 13:11:22'),
+(33, 'App\\Models\\User', 1, 'ApiToken', 'a550b600f26d453c14836e14f1ddf9e7d34dbb0dd444d300d82c99933d8280d3', '[\"*\"]', NULL, '2023-01-27 13:11:39', '2023-01-27 13:11:39'),
+(34, 'App\\Models\\User', 1, 'ApiToken', '11dd50e00cafbb459d7649732820f5ac4f08e848541b28394bbf181fc7fbca2a', '[\"*\"]', NULL, '2023-01-27 13:12:26', '2023-01-27 13:12:26'),
+(35, 'App\\Models\\User', 1, 'ApiToken', '31b9809cffd720dcba8759b49ca49bb5fdae3e97445e834f38e29a356a91d8a7', '[\"*\"]', NULL, '2023-01-27 13:12:35', '2023-01-27 13:12:35'),
+(36, 'App\\Models\\User', 1, 'ApiToken', '56878db2c47bd2332d1c6040b77794eb5bfbd940117103872d762eaa49cda228', '[\"*\"]', NULL, '2023-01-27 13:12:39', '2023-01-27 13:12:39'),
+(37, 'App\\Models\\User', 1, 'ApiToken', '3d2c75b7905b41cca4138b12caddbc2a964111da9f01b73fe2d225bf0281ebee', '[\"*\"]', NULL, '2023-01-27 13:13:13', '2023-01-27 13:13:13'),
+(38, 'App\\Models\\User', 1, 'ApiToken', '03a5b5a1646f3eba843e4bf29e61a9f2c511b03319569d3d81f02bcb11dcd60d', '[\"*\"]', NULL, '2023-01-27 13:17:42', '2023-01-27 13:17:42'),
+(39, 'App\\Models\\User', 1, 'ApiToken', '9454efc3227654d8d079489bec2a24ff48c329e8748617efad05f56847daeac2', '[\"*\"]', NULL, '2023-01-27 13:18:12', '2023-01-27 13:18:12'),
+(40, 'App\\Models\\User', 1, 'ApiToken', '6bbf2667c842b68f358034e653043fcb5cd501435abc37b7118f94408cc1fff4', '[\"*\"]', NULL, '2023-01-27 13:19:51', '2023-01-27 13:19:51'),
+(41, 'App\\Models\\User', 1, 'ApiToken', 'daa4c7a5079c0af2e5553957dc0a19d17fedf742194935ddaaa4025e9a9ab8cd', '[\"*\"]', NULL, '2023-01-27 13:22:25', '2023-01-27 13:22:25'),
+(42, 'App\\Models\\User', 1, 'ApiToken', 'cf351eae8b1b1688fb2834627f9e63613b84a7f3ca398bf14e6a98568b07b427', '[\"*\"]', NULL, '2023-01-27 21:33:43', '2023-01-27 21:33:43'),
+(43, 'App\\Models\\User', 1, 'ApiToken', '58ecffdc7013a5d16163e0d2e4db44e3d1bd97d3b952f599a7b69d89d83aa277', '[\"*\"]', NULL, '2023-01-27 23:14:14', '2023-01-27 23:14:14'),
+(44, 'App\\Models\\User', 1, 'ApiToken', 'd7bc41ae7872b9c23fff910de7572dba8fa9e54db6407910bbd2eb8747d302e2', '[\"*\"]', NULL, '2023-01-27 23:32:42', '2023-01-27 23:32:42'),
+(45, 'App\\Models\\User', 1, 'ApiToken', 'ca2885b10ac5af10bb725e460360bb5bcbcaa161a2b33a6a14408a73c3c97860', '[\"*\"]', NULL, '2023-01-28 10:42:01', '2023-01-28 10:42:01'),
+(46, 'App\\Models\\User', 1, 'ApiToken', '923c73028217a56e46d443a4e0cd89e94600c324a2e12b7f557c8a0f013d2a0f', '[\"*\"]', NULL, '2023-01-28 11:04:42', '2023-01-28 11:04:42'),
+(47, 'App\\Models\\User', 1, 'ApiToken', '66352d9bfb8cdfa085edb8ed137d3b635620fac4d4fe91831623b4d67d90521b', '[\"*\"]', NULL, '2023-01-28 13:30:40', '2023-01-28 13:30:40'),
+(48, 'App\\Models\\User', 1, 'ApiToken', 'e215c3c67a9beccd0b1ab0fe6ea25a5eb8675d0590f46669193fe41885c4e664', '[\"*\"]', NULL, '2023-01-28 13:39:25', '2023-01-28 13:39:25');
 
 -- --------------------------------------------------------
 
@@ -152,20 +196,20 @@ INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `n
 
 CREATE TABLE `rekening_anggaran` (
   `id_rekening` int NOT NULL,
-  `nomor_rekening` varchar(20) NOT NULL,
-  `nama_rekening` varchar(225) NOT NULL,
+  `nomor_rekening` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `nama_rekening` varchar(225) COLLATE utf8mb4_general_ci NOT NULL,
   `anggaran` decimal(12,2) NOT NULL DEFAULT '0.00',
   `parent_id` int NOT NULL,
   `level` int NOT NULL DEFAULT '1',
   `view_level` int NOT NULL DEFAULT '0',
-  `tipe` varchar(1) NOT NULL DEFAULT 'D',
-  `rlocation` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `tipe` varchar(1) COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'D',
+  `rlocation` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `tahun_anggaran` int NOT NULL DEFAULT '2022',
   `date_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_update` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `user_create` varchar(10) DEFAULT NULL,
-  `user_update` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `user_create` varchar(10) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `user_update` varchar(10) COLLATE utf8mb4_general_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -175,30 +219,30 @@ CREATE TABLE `rekening_anggaran` (
 
 CREATE TABLE `tblbarang` (
   `id` bigint UNSIGNED NOT NULL,
-  `kdBarang` varchar(255) NOT NULL,
-  `nmBarang` varchar(255) NOT NULL,
+  `kdBarang` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `nmBarang` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `hrgPokok` double NOT NULL,
   `hrgJual` double NOT NULL,
-  `ktgBarang` char(255) NOT NULL,
-  `satuanBarang` char(255) NOT NULL,
-  `merek` char(255) NOT NULL,
-  `stkBarang` char(255) NOT NULL,
-  `stkSatuan` char(255) DEFAULT NULL,
-  `qtyMin` char(255) NOT NULL,
-  `qtyMax` char(255) NOT NULL,
-  `stsBarang` mediumtext NOT NULL,
-  `deskripsi` mediumtext NOT NULL,
+  `ktgBarang` char(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `satuanBarang` char(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `merek` char(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `stkBarang` char(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `stkSatuan` char(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `qtyMin` char(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `qtyMax` char(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `stsBarang` mediumtext COLLATE utf8mb4_general_ci NOT NULL,
+  `deskripsi` mediumtext COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblbarang`
 --
 
 INSERT INTO `tblbarang` (`id`, `kdBarang`, `nmBarang`, `hrgPokok`, `hrgJual`, `ktgBarang`, `satuanBarang`, `merek`, `stkBarang`, `stkSatuan`, `qtyMin`, `qtyMax`, `stsBarang`, `deskripsi`, `created_at`, `updated_at`) VALUES
-(2, 'BRG0004', 'OLI MESRAN 5L', 220000, 250000, 'KT-2021-2', 'BOTOL', 'MESRAN', '153', NULL, '5', '200', '', 'oli mesin', NULL, NULL),
-(3, 'BRG0005', 'GAS ELPIGI 12KG', 17000, 220000, 'KT-2021-3', 'TABUNG', 'ELPIGI', '50', NULL, '5', '200', '1', 'Tabung gas elipgi', '2023-01-23 00:04:44', '2023-01-23 00:04:44');
+(2, 'BRG0004', 'OLI MESRAN 5L', 220000, 250000, 'KT-2021-2', 'BOTOL', 'MESRAN', '151', NULL, '5', '200', '', 'oli mesin', NULL, NULL),
+(3, 'BRG0005', 'GAS ELPIGI 12KG', 17000, 220000, 'KT-2021-3', 'TABUNG', 'ELPIGI', '47', NULL, '5', '200', '1', 'Tabung gas elipgi', '2023-01-23 00:04:44', '2023-01-23 00:04:44');
 
 --
 -- Triggers `tblbarang`
@@ -221,24 +265,25 @@ DELIMITER ;
 
 CREATE TABLE `tblbbm` (
   `id` bigint UNSIGNED NOT NULL,
-  `code_bbm` varchar(10) NOT NULL,
-  `nama_bbm` varchar(255) NOT NULL,
+  `code_bbm` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
+  `nama_bbm` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `last_meter` int NOT NULL,
   `last_price` decimal(13,2) NOT NULL,
   `sale_price` decimal(13,2) NOT NULL,
-  `logo_bbm` varchar(255) NOT NULL,
+  `stokBbm` decimal(13,2) NOT NULL,
+  `logo_bbm` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblbbm`
 --
 
-INSERT INTO `tblbbm` (`id`, `code_bbm`, `nama_bbm`, `last_meter`, `last_price`, `sale_price`, `logo_bbm`, `created_at`, `updated_at`) VALUES
-(1, 'BRG0001', 'PERTAMAX', 12000000, '14900.00', '14900.00', 'pertamax.png', '2023-01-12 12:56:36', '2023-01-12 12:56:36'),
-(2, 'BRG0002', 'PERLITE', 12000000, '10000.00', '10000.00', 'pertalite.png', '2023-01-12 12:56:36', '2023-01-12 12:56:36'),
-(3, 'BRG0003', 'DEX LITE', 234535, '12800.00', '12800.00', 'dexlite.png', '2023-01-14 08:29:46', '2023-01-14 08:29:46');
+INSERT INTO `tblbbm` (`id`, `code_bbm`, `nama_bbm`, `last_meter`, `last_price`, `sale_price`, `stokBbm`, `logo_bbm`, `created_at`, `updated_at`) VALUES
+(1, 'BRG0001', 'PERTAMAX', 12000000, '14900.00', '14900.00', '-21651.00', 'pertamax.png', '2023-01-12 12:56:36', '2023-01-12 12:56:36'),
+(2, 'BRG0002', 'PERLITE', 12000000, '10000.00', '10000.00', '-12707.00', 'pertalite.png', '2023-01-12 12:56:36', '2023-01-12 12:56:36'),
+(3, 'BRG0003', 'DEX LITE', 234535, '12800.00', '12800.00', '0.00', 'dexlite.png', '2023-01-14 08:29:46', '2023-01-14 08:29:46');
 
 --
 -- Triggers `tblbbm`
@@ -263,7 +308,23 @@ CREATE TABLE `tblbbm_detail` (
   `id` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblbiaya`
+--
+
+CREATE TABLE `tblbiaya` (
+  `id_biaya` bigint NOT NULL,
+  `kd_trans` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `tglBiaya` datetime NOT NULL,
+  `keterangan_biaya` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `jumlah` decimal(13,2) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -273,15 +334,15 @@ CREATE TABLE `tblbbm_detail` (
 
 CREATE TABLE `tblgeneral_ledger` (
   `idGl` bigint UNSIGNED NOT NULL,
-  `kdGl` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kdGl` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `r_rekening` int NOT NULL,
   `tglGl` datetime NOT NULL,
   `debet` decimal(13,2) NOT NULL,
   `kredit` decimal(13,2) NOT NULL,
-  `keterangan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keterangan` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -291,11 +352,11 @@ CREATE TABLE `tblgeneral_ledger` (
 
 CREATE TABLE `tblkategori` (
   `id` bigint UNSIGNED NOT NULL,
-  `kodeKtg` varchar(255) NOT NULL,
-  `namaKtg` varchar(255) NOT NULL,
+  `kodeKtg` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `namaKtg` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblkategori`
@@ -309,38 +370,63 @@ INSERT INTO `tblkategori` (`id`, `kodeKtg`, `namaKtg`, `created_at`, `updated_at
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tblkupon`
+--
+
+CREATE TABLE `tblkupon` (
+  `id` bigint UNSIGNED NOT NULL,
+  `kd_trans` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `r_regu` varchar(5) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `tgl_trans` datetime NOT NULL,
+  `r_kdPelanggan` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `total` decimal(13,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblkupon`
+--
+
+INSERT INTO `tblkupon` (`id`, `kd_trans`, `r_regu`, `tgl_trans`, `r_kdPelanggan`, `total`, `created_at`, `updated_at`) VALUES
+(7, '20230130A', 'A', '2023-01-30 00:00:00', 'PL02022036', '150000.00', '2023-01-29 22:25:07', '2023-01-29 22:25:07'),
+(8, '20230130A', 'A', '2023-01-30 00:00:00', 'PL02022032', '3000.00', '2023-01-29 22:25:07', '2023-01-29 22:25:07');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tblnosel_detail`
 --
 
 CREATE TABLE `tblnosel_detail` (
   `id_nosel` bigint UNSIGNED NOT NULL,
   `r_bbm` int NOT NULL,
-  `r_code_bbm` varchar(20) NOT NULL,
-  `nama_nosel` varchar(50) NOT NULL,
+  `r_code_bbm` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `nama_nosel` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `meter_awal` int NOT NULL,
   `meter_akhir` int NOT NULL,
   `harga` decimal(13,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblnosel_detail`
 --
 
 INSERT INTO `tblnosel_detail` (`id_nosel`, `r_bbm`, `r_code_bbm`, `nama_nosel`, `meter_awal`, `meter_akhir`, `harga`, `created_at`, `updated_at`) VALUES
-(1, 1, 'BRG0001', 'Nozzle 1', 85300, 85500, '14900.00', '2023-01-14 09:54:41', '2023-01-22 01:34:04'),
-(2, 1, 'BRG0001', 'Nozzle 2', 6500, 7000, '14900.00', '2023-01-14 09:56:59', '2023-01-22 01:45:42'),
-(3, 2, 'BRG0002', 'Nozzle 1', 24500, 25000, '10000.00', '2023-01-14 09:58:16', '2023-01-22 04:28:41'),
-(4, 1, 'BRG0001', 'Nozzle 3', 26000, 26500, '14900.00', '2023-01-14 09:56:59', '2023-01-16 21:06:50'),
-(5, 1, 'BRG0001', 'Nozzle 4', 12000, 12500, '14900.00', '2023-01-14 09:56:59', '2023-01-16 13:53:22'),
-(6, 1, 'BRG0001', 'Nozzle 5', 15500, 16000, '14900.00', '2023-01-14 09:56:59', '2023-01-16 07:56:20'),
-(7, 2, 'BRG0002', 'Nozzle 2', 25500, 25600, '10000.00', '2023-01-14 09:58:16', '2023-01-26 14:18:17'),
-(8, 2, 'BRG0002', 'Nozzle 3', 22000, 22500, '10000.00', '2023-01-14 09:58:16', '2023-01-22 04:28:54'),
-(9, 2, 'BRG0002', 'Nozzle 4', 21000, 22000, '10000.00', '2023-01-14 09:58:16', '2023-01-16 22:37:59'),
-(10, 1, 'BRG0001', 'Nozzle 6', 15500, 16000, '14900.00', '2023-01-14 09:56:59', '2023-01-16 07:56:20'),
-(11, 2, 'BRG0002', 'Nozzle 5', 21000, 22000, '10000.00', '2023-01-14 09:58:16', '2023-01-16 22:37:59'),
-(12, 2, 'BRG0002', 'Nozzle 6', 21000, 22000, '10000.00', '2023-01-14 09:58:16', '2023-01-16 22:37:59');
+(1, 1, 'BRG0001', 'PX 1', 110000, 112001, '14900.00', '2023-01-14 09:54:41', '2023-01-29 22:25:07'),
+(2, 1, 'BRG0001', 'PX 2', 5600, 7001, '14900.00', '2023-01-14 09:56:59', '2023-01-29 22:25:07'),
+(3, 2, 'BRG0002', 'PL 1', 28000, 29001, '25100.00', '2023-01-14 09:58:16', '2023-01-29 22:25:07'),
+(4, 1, 'BRG0001', 'PX 3', 29999, 30001, '14900.00', '2023-01-14 09:56:59', '2023-01-29 22:25:07'),
+(5, 1, 'BRG0001', 'PX 4', 14000, 15001, '14900.00', '2023-01-14 09:56:59', '2023-01-29 22:25:07'),
+(6, 1, 'BRG0001', 'PX 5', 16500, 17001, '14900.00', '2023-01-14 09:56:59', '2023-01-29 22:25:07'),
+(7, 2, 'BRG0002', 'PL 2', 26000, 27001, '10000.00', '2023-01-14 09:58:16', '2023-01-29 22:25:07'),
+(8, 2, 'BRG0002', 'PL 3', 22500, 24001, '10000.00', '2023-01-14 09:58:16', '2023-01-29 22:25:07'),
+(9, 2, 'BRG0002', 'PL 4', 22000, 23001, '10000.00', '2023-01-14 09:58:16', '2023-01-29 22:25:07'),
+(10, 2, 'BRG0002', 'PL 5', 16000, 17001, '14900.00', '2023-01-14 09:56:59', '2023-01-29 22:25:07'),
+(11, 2, 'BRG0002', 'PL 6', 22000, 23001, '10000.00', '2023-01-14 09:58:16', '2023-01-29 22:25:07'),
+(12, 2, 'BRG0002', 'PL 7', 22000, 25001, '10000.00', '2023-01-14 09:58:16', '2023-01-29 22:25:07');
 
 -- --------------------------------------------------------
 
@@ -350,13 +436,13 @@ INSERT INTO `tblnosel_detail` (`id_nosel`, `r_bbm`, `r_code_bbm`, `nama_nosel`, 
 
 CREATE TABLE `tblopnum` (
   `id` bigint UNSIGNED NOT NULL,
-  `kdOpnum` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kdOpnum` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
   `tglOpnum` datetime NOT NULL,
   `totalOpnum` decimal(10,2) NOT NULL,
-  `userOpnum` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `userOpnum` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblopnum`
@@ -368,7 +454,8 @@ INSERT INTO `tblopnum` (`id`, `kdOpnum`, `tglOpnum`, `totalOpnum`, `userOpnum`, 
 (14, 'OP0120233', '2023-01-26 00:00:00', '-1190000.00', '1', '2023-01-26 09:17:06', '2023-01-26 09:17:06'),
 (15, 'OP0120234', '2023-01-26 00:00:00', '-1190000.00', '1', '2023-01-26 09:18:30', '2023-01-26 09:18:30'),
 (16, 'OP0120235', '2023-01-26 00:00:00', '-1190000.00', '1', '2023-01-26 09:18:54', '2023-01-26 09:18:54'),
-(17, 'OP0120236', '2023-01-26 00:00:00', '-928000.00', '1', '2023-01-26 09:20:01', '2023-01-26 09:20:01');
+(17, 'OP0120236', '2023-01-26 00:00:00', '-928000.00', '1', '2023-01-26 09:20:01', '2023-01-26 09:20:01'),
+(18, 'OP0120237', '2023-01-29 00:00:00', '-720000.00', '1', '2023-01-29 01:43:56', '2023-01-29 01:43:56');
 
 -- --------------------------------------------------------
 
@@ -378,15 +465,15 @@ INSERT INTO `tblopnum` (`id`, `kdOpnum`, `tglOpnum`, `totalOpnum`, `userOpnum`, 
 
 CREATE TABLE `tblopnum_detail` (
   `id` bigint UNSIGNED NOT NULL,
-  `r_opnum` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `r_kdPersediaan` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nmPersediaan` varchar(225) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `r_opnum` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `r_kdPersediaan` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `nmPersediaan` varchar(225) COLLATE utf8mb4_general_ci NOT NULL,
   `selisihOpnum` int NOT NULL,
   `nilaiOpnum` decimal(10,2) NOT NULL,
-  `keteranganOpnum` text COLLATE utf8mb4_unicode_ci,
+  `keteranganOpnum` text COLLATE utf8mb4_general_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblopnum_detail`
@@ -404,7 +491,8 @@ INSERT INTO `tblopnum_detail` (`id`, `r_opnum`, `r_kdPersediaan`, `nmPersediaan`
 (15, 'OP0120235', 'BRG0004', 'OLI MESRAN 5L', -5, '-1100000.00', 'hilang', '2023-01-26 09:18:54', '2023-01-26 09:18:54'),
 (16, 'OP0120235', 'BRG0005', 'GAS ELPIGI 12KG', -5, '-90000.00', 'kompliment', '2023-01-26 09:18:54', '2023-01-26 09:18:54'),
 (17, 'OP0120236', 'BRG0001', 'PERTAMAX', -65, '-910000.00', '-', '2023-01-26 09:20:01', '2023-01-26 09:20:01'),
-(18, 'OP0120236', 'BRG0002', 'PERTALITE', -2, '-18000.00', 'kompliment', '2023-01-26 09:20:01', '2023-01-26 09:20:01');
+(18, 'OP0120236', 'BRG0002', 'PERTALITE', -2, '-18000.00', 'kompliment', '2023-01-26 09:20:01', '2023-01-26 09:20:01'),
+(19, 'OP0120237', 'BRG0002', 'PERTALITE', -80, '-720000.00', '-', '2023-01-29 01:43:56', '2023-01-29 01:43:56');
 
 -- --------------------------------------------------------
 
@@ -414,14 +502,14 @@ INSERT INTO `tblopnum_detail` (`id`, `r_opnum`, `r_kdPersediaan`, `nmPersediaan`
 
 CREATE TABLE `tblpegawai` (
   `id` bigint UNSIGNED NOT NULL,
-  `kdPegawai` varchar(10) NOT NULL,
-  `nmPegawai` varchar(255) NOT NULL,
-  `almtPegawai` text NOT NULL,
-  `noTlp` varchar(20) NOT NULL,
-  `reguPegawai` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'A',
+  `kdPegawai` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
+  `nmPegawai` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `almtPegawai` text COLLATE utf8mb4_general_ci NOT NULL,
+  `noTlp` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `reguPegawai` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'A',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblpegawai`
@@ -442,26 +530,30 @@ INSERT INTO `tblpegawai` (`id`, `kdPegawai`, `nmPegawai`, `almtPegawai`, `noTlp`
 
 CREATE TABLE `tblpelanggan` (
   `id` bigint UNSIGNED NOT NULL,
-  `kdPelanggan` varchar(255) NOT NULL,
-  `nmPelanggan` varchar(255) NOT NULL,
-  `almtPelanggan` varchar(255) NOT NULL,
-  `noHpPelanggan` varchar(255) NOT NULL,
-  `rolePelanggan` varchar(255) DEFAULT NULL,
-  `emailPelanggan` varchar(255) DEFAULT NULL,
-  `path` varchar(255) DEFAULT NULL,
+  `kdPelanggan` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `nmPelanggan` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `almtPelanggan` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `noHpPelanggan` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `rolePelanggan` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `emailPelanggan` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `path` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `deposit` decimal(13,2) DEFAULT '0.00',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblpelanggan`
 --
 
-INSERT INTO `tblpelanggan` (`id`, `kdPelanggan`, `nmPelanggan`, `almtPelanggan`, `noHpPelanggan`, `rolePelanggan`, `emailPelanggan`, `path`, `created_at`, `updated_at`) VALUES
-(30, 'PL02022030', 'dsf', 'fsdf', 'fsdf', 'fsdf', 'fdsf', 'user-avtar.svg', '2022-08-04 21:42:35', '2022-08-04 21:42:35'),
-(31, 'PL02022031', 'cscd', 'scdsc', 'csdc', 'cscs', 'csc', 'user-avtar.svg', '2022-08-04 21:42:50', '2022-08-04 21:42:50'),
-(32, 'PL02022032', 'sdf', 'fsdf', 'sdf', 'fsdf', 'sf', 'user-avtar.svg', '2022-08-18 04:12:11', '2022-08-18 04:12:11'),
-(33, 'PL02022033', 'aaa', 'aaa', 'aa', 'aa', 'aa', 'user-avtar.svg', '2022-08-18 04:12:32', '2022-08-18 04:12:32');
+INSERT INTO `tblpelanggan` (`id`, `kdPelanggan`, `nmPelanggan`, `almtPelanggan`, `noHpPelanggan`, `rolePelanggan`, `emailPelanggan`, `path`, `deposit`, `created_at`, `updated_at`) VALUES
+(30, 'PL02022030', 'SURFING', '-', '-', '-', '-', 'user-avtar.svg', '-380000.00', '2022-08-04 21:42:35', '2022-08-04 21:42:35'),
+(31, 'PL02022031', 'MIROR', '-', '-', '-', '-', 'user-avtar.svg', '0.00', '2022-08-04 21:42:50', '2022-08-04 21:42:50'),
+(32, 'PL02022032', 'SMA 1 KUTA', '-', '-', '-', '-', 'user-avtar.svg', '-3000.00', '2022-08-18 04:12:11', '2022-08-18 04:12:11'),
+(33, 'PL02022033', 'KUNJA', '-', '-', '-', '-', 'user-avtar.svg', '0.00', '2022-08-18 04:12:32', '2022-08-18 04:12:32'),
+(34, 'PL02022034', 'CAFE DELMAR', '-', '-', '-', '-', '-', '0.00', '2023-01-29 13:05:53', '2023-01-29 13:05:53'),
+(35, 'PL02022035', 'PETS CONTROL', '-', '-', '-', '-', '-', '-300000.00', '2023-01-29 13:06:57', '2023-01-29 13:06:57'),
+(36, 'PL02022036', 'KAYU RAJA', '-', '-', '-', '-', '-', '-750000.00', '2023-01-29 13:09:28', '2023-01-29 13:09:28');
 
 -- --------------------------------------------------------
 
@@ -471,20 +563,20 @@ INSERT INTO `tblpelanggan` (`id`, `kdPelanggan`, `nmPelanggan`, `almtPelanggan`,
 
 CREATE TABLE `tblpembelian` (
   `idPembelian` bigint UNSIGNED NOT NULL,
-  `noNota` varchar(9) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `noNota` varchar(9) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `tglPembelian` datetime NOT NULL,
-  `r_supplier` varchar(9) NOT NULL,
+  `r_supplier` varchar(9) COLLATE utf8mb4_general_ci NOT NULL,
   `subTotal` decimal(13,2) NOT NULL,
   `disc` int NOT NULL,
   `discPercent` int NOT NULL,
   `tax` int NOT NULL,
   `total` decimal(13,2) NOT NULL,
-  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `term` int NOT NULL,
   `jthTempo` datetime NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblpembelian`
@@ -509,15 +601,15 @@ INSERT INTO `tblpembelian` (`idPembelian`, `noNota`, `tglPembelian`, `r_supplier
 
 CREATE TABLE `tblpembelian_detail` (
   `idPembelianDetail` bigint UNSIGNED NOT NULL,
-  `r_noNota` varchar(20) NOT NULL,
-  `kdBarang` varchar(10) NOT NULL,
-  `nmBarang` varchar(255) NOT NULL,
+  `r_noNota` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `kdBarang` varchar(10) COLLATE utf8mb4_general_ci NOT NULL,
+  `nmBarang` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `hrgBeli` decimal(13,2) NOT NULL,
   `qty` int NOT NULL,
   `total` decimal(11,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblpembelian_detail`
@@ -547,22 +639,22 @@ INSERT INTO `tblpembelian_detail` (`idPembelianDetail`, `r_noNota`, `kdBarang`, 
 
 CREATE TABLE `tblpenjualan` (
   `idPenjualan` bigint NOT NULL,
-  `noPenjualan` varchar(20) NOT NULL,
+  `noPenjualan` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
   `tglPenjualan` datetime NOT NULL,
-  `r_pelanggan` varchar(20) NOT NULL,
+  `r_pelanggan` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
   `subTotalPenjualan` decimal(13,2) NOT NULL,
   `discPenjualan` decimal(13,2) NOT NULL,
   `discPercentP` int NOT NULL,
   `taxPenjualan` decimal(10,2) NOT NULL,
   `totalPenjualan` decimal(13,2) NOT NULL,
-  `notePenjualan` varchar(225) DEFAULT NULL,
+  `notePenjualan` varchar(225) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `termPenjualan` int DEFAULT NULL,
   `jthTempo` datetime DEFAULT NULL,
-  `typeBayar` varchar(5) NOT NULL,
+  `typeBayar` varchar(5) COLLATE utf8mb4_general_ci NOT NULL,
   `piutangPenjualan` decimal(10,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblpenjualan`
@@ -571,7 +663,7 @@ CREATE TABLE `tblpenjualan` (
 INSERT INTO `tblpenjualan` (`idPenjualan`, `noPenjualan`, `tglPenjualan`, `r_pelanggan`, `subTotalPenjualan`, `discPenjualan`, `discPercentP`, `taxPenjualan`, `totalPenjualan`, `notePenjualan`, `termPenjualan`, `jthTempo`, `typeBayar`, `piutangPenjualan`, `created_at`, `updated_at`) VALUES
 (1, 'INV2023001', '2023-01-24 00:00:00', 'PL02022033', '470000.00', '0.00', 0, '51700.00', '470000.00', NULL, 0, '2023-01-24 00:00:00', '', '0.00', '2023-01-23 20:22:11', '2023-01-23 20:22:11'),
 (2, 'INV2023002', '2023-01-24 00:00:00', 'PL02022032', '470000.00', '0.00', 0, '51700.00', '470000.00', NULL, 0, '2023-01-24 00:00:00', '', '0.00', '2023-01-23 20:23:03', '2023-01-23 20:23:03'),
-(3, 'INV2023003', '2023-01-25 00:00:00', 'PL02022030', '940000.00', '0.00', 0, '103400.00', '940000.00', NULL, 0, '2023-01-25 00:00:00', '', '0.00', '2023-01-24 23:00:06', '2023-01-24 23:00:06'),
+(3, 'INV2023003', '2023-01-25 00:00:00', 'PL02022030', '1160000.00', '0.00', 0, '127600.00', '1160000.00', NULL, 0, '2023-01-27 00:00:00', '0', '0.00', '2023-01-27 13:23:10', '2023-01-27 13:23:10'),
 (4, 'INV2023004', '2023-01-27 00:00:00', 'PL02022032', '250000.00', '0.00', 0, '27500.00', '250000.00', NULL, 1, '2023-01-31 00:00:00', '1', '250000.00', '2023-01-26 20:57:32', '2023-01-26 20:57:32'),
 (5, 'INV2023005', '2023-01-27 00:00:00', 'PL02022032', '250000.00', '0.00', 0, '27500.00', '250000.00', NULL, 0, '2023-01-27 00:00:00', '0', '0.00', '2023-01-26 20:58:19', '2023-01-26 20:58:19');
 
@@ -583,16 +675,16 @@ INSERT INTO `tblpenjualan` (`idPenjualan`, `noPenjualan`, `tglPenjualan`, `r_pel
 
 CREATE TABLE `tblpenjualan_detail` (
   `idDetailPenjualan` int NOT NULL,
-  `r_noPenjualan` varchar(20) NOT NULL,
-  `r_kdBarang` varchar(20) NOT NULL,
-  `r_nmBarang` varchar(50) NOT NULL,
+  `r_noPenjualan` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `r_kdBarang` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `r_nmBarang` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `hrgJual` decimal(13,2) NOT NULL,
   `qty` int NOT NULL,
-  `satuanJual` varchar(50) NOT NULL,
+  `satuanJual` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `totalJual` decimal(13,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblpenjualan_detail`
@@ -603,10 +695,10 @@ INSERT INTO `tblpenjualan_detail` (`idDetailPenjualan`, `r_noPenjualan`, `r_kdBa
 (2, 'INV2023001', 'BRG0004', 'OLI MESRAN 5L', '250000.00', 1, 'BOTOL', '250000.00', '2023-01-23 20:22:11', '2023-01-23 20:22:11'),
 (3, 'INV2023002', 'BRG0005', 'GAS ELPIGI 12KG', '220000.00', 1, 'TABUNG', '220000.00', '2023-01-23 20:23:03', '2023-01-23 20:23:03'),
 (4, 'INV2023002', 'BRG0004', 'OLI MESRAN 5L', '250000.00', 1, 'BOTOL', '250000.00', '2023-01-23 20:23:03', '2023-01-23 20:23:03'),
-(5, 'INV2023003', 'BRG0005', 'GAS ELPIGI 12KG', '220000.00', 2, 'TABUNG', '440000.00', '2023-01-24 23:00:06', '2023-01-24 23:00:06'),
-(6, 'INV2023003', 'BRG0004', 'OLI MESRAN 5L', '250000.00', 2, 'BOTOL', '500000.00', '2023-01-24 23:00:06', '2023-01-24 23:00:06'),
 (7, 'INV2023004', 'BRG0004', 'OLI MESRAN 5L', '250000.00', 1, 'BOTOL', '250000.00', '2023-01-26 20:57:32', '2023-01-26 20:57:32'),
-(8, 'INV2023005', 'BRG0004', 'OLI MESRAN 5L', '250000.00', 1, 'BOTOL', '250000.00', '2023-01-26 20:58:19', '2023-01-26 20:58:19');
+(8, 'INV2023005', 'BRG0004', 'OLI MESRAN 5L', '250000.00', 1, 'BOTOL', '250000.00', '2023-01-26 20:58:19', '2023-01-26 20:58:19'),
+(9, 'INV2023003', 'BRG0005', 'GAS ELPIGI 12KG', '220000.00', 3, 'TABUNG', '660000.00', '2023-01-27 13:23:10', '2023-01-27 13:23:10'),
+(10, 'INV2023003', 'BRG0004', 'OLI MESRAN 5L', '250000.00', 2, 'BOTOL', '500000.00', '2023-01-27 13:23:10', '2023-01-27 13:23:10');
 
 -- --------------------------------------------------------
 
@@ -616,27 +708,27 @@ INSERT INTO `tblpenjualan_detail` (`idDetailPenjualan`, `r_noPenjualan`, `r_kdBa
 
 CREATE TABLE `tblpersediaan` (
   `idPersediaan` bigint UNSIGNED NOT NULL,
-  `kdPersediaan` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `nmPersediaan` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `kdPersediaan` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `nmPersediaan` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `stokPersediaan` int NOT NULL,
-  `satuanPersediaan` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `ktgPersediaan` varchar(20) NOT NULL,
+  `satuanPersediaan` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `ktgPersediaan` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
   `lastPrice` decimal(10,2) DEFAULT NULL,
   `salePrice` decimal(10,2) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblpersediaan`
 --
 
 INSERT INTO `tblpersediaan` (`idPersediaan`, `kdPersediaan`, `nmPersediaan`, `stokPersediaan`, `satuanPersediaan`, `ktgPersediaan`, `lastPrice`, `salePrice`, `created_at`, `updated_at`) VALUES
-(1, 'BRG0001', 'PERTAMAX', 900, 'Liter', 'KT-2021-1', '14000.00', '14900.00', '2023-01-19 22:24:13', '2023-01-19 22:24:13'),
-(2, 'BRG0002', 'PERTALITE', 920, 'Liter', 'KT-2021-1', '9000.00', '10000.00', '2023-01-19 22:25:23', '2023-01-19 22:25:23'),
+(1, 'BRG0001', 'PERTAMAX', -36851, 'Liter', 'KT-2021-1', '14000.00', '14900.00', '2023-01-19 22:24:13', '2023-01-19 22:24:13'),
+(2, 'BRG0002', 'PERTALITE', -11907, 'Liter', 'KT-2021-1', '9000.00', '10000.00', '2023-01-19 22:25:23', '2023-01-19 22:25:23'),
 (3, 'BRG0003', 'DEX LITE', 4541, 'Liter', 'KT-2021-1', '6500.00', '8000.00', '2023-01-19 22:26:32', '2023-01-19 22:26:32'),
-(4, 'BRG0004', 'OLI MESRAN 5L', 153, 'BOTOL', 'KT-2021-2', '220000.00', '250000.00', '2023-01-20 12:14:45', '2023-01-20 12:14:45'),
-(6, 'BRG0005', 'GAS ELPIGI 12KG', 50, 'TABUNG', 'KT-2021-2', '17000.00', '220000.00', NULL, NULL);
+(4, 'BRG0004', 'OLI MESRAN 5L', 151, 'BOTOL', 'KT-2021-2', '220000.00', '250000.00', '2023-01-20 12:14:45', '2023-01-20 12:14:45'),
+(6, 'BRG0005', 'GAS ELPIGI 12KG', 47, 'TABUNG', 'KT-2021-2', '17000.00', '220000.00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -648,7 +740,7 @@ CREATE TABLE `tblpersediaan_detail` (
   `idPersediaanDetail` bigint UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -658,14 +750,14 @@ CREATE TABLE `tblpersediaan_detail` (
 
 CREATE TABLE `tblrates` (
   `id` bigint UNSIGNED NOT NULL,
-  `rateCode` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `rateName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `rateCode` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `rateName` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `ratePrice` decimal(17,2) NOT NULL,
   `rateStart` datetime NOT NULL,
   `rateEnd` datetime NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblrates`
@@ -682,14 +774,14 @@ INSERT INTO `tblrates` (`id`, `rateCode`, `rateName`, `ratePrice`, `rateStart`, 
 
 CREATE TABLE `tblrooms` (
   `id` bigint UNSIGNED NOT NULL,
-  `roomCode` varchar(20) NOT NULL,
-  `roomName` varchar(50) NOT NULL,
-  `rRoomRate` varchar(5) NOT NULL,
-  `roomDesc` mediumtext NOT NULL,
-  `roomPic` varchar(255) NOT NULL,
+  `roomCode` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `roomName` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `rRoomRate` varchar(5) COLLATE utf8mb4_general_ci NOT NULL,
+  `roomDesc` mediumtext COLLATE utf8mb4_general_ci NOT NULL,
+  `roomPic` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblrooms`
@@ -706,14 +798,14 @@ INSERT INTO `tblrooms` (`id`, `roomCode`, `roomName`, `rRoomRate`, `roomDesc`, `
 
 CREATE TABLE `tblsupplier` (
   `id` bigint UNSIGNED NOT NULL,
-  `kdSupplier` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `nmSupplier` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `almtSupplier` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `tlpSupplier` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `picSupplier` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `kdSupplier` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `nmSupplier` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `almtSupplier` varchar(225) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `tlpSupplier` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `picSupplier` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tblsupplier`
@@ -734,34 +826,35 @@ CREATE TABLE `tbltransaksi_nosel` (
   `id` bigint UNSIGNED NOT NULL,
   `r_bbm` int NOT NULL,
   `r_nosel` int NOT NULL,
-  `kd_trans` varchar(20) NOT NULL,
-  `r_regu` varchar(5) NOT NULL DEFAULT '0',
+  `kd_trans` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `r_regu` varchar(5) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `tgl_transaksi` datetime NOT NULL,
-  `cost_ltr` int NOT NULL,
+  `last_meter` decimal(13,2) DEFAULT NULL,
+  `awal_meter` decimal(13,2) NOT NULL,
+  `cost_ltr` decimal(13,2) DEFAULT NULL,
   `last_price` decimal(13,2) NOT NULL,
-  `last_meter` int NOT NULL,
-  `total` decimal(13,2) NOT NULL,
+  `total` decimal(13,2) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `tbltransaksi_nosel`
 --
 
-INSERT INTO `tbltransaksi_nosel` (`id`, `r_bbm`, `r_nosel`, `kd_trans`, `r_regu`, `tgl_transaksi`, `cost_ltr`, `last_price`, `last_meter`, `total`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, '11202301221', 'A', '2023-01-22 00:00:00', 100, '14900.00', 85200, '1490000.00', '2023-01-22 01:02:06', '2023-01-22 01:02:06'),
-(2, 1, 2, '12202301221', 'A', '2023-01-22 00:00:00', 500, '14900.00', 6500, '7450000.00', '2023-01-22 01:18:29', '2023-01-22 01:18:29'),
-(3, 1, 1, '11202301222', 'A', '2023-01-22 00:00:00', 100, '14900.00', 85300, '1490000.00', '2023-01-22 01:33:27', '2023-01-22 01:33:27'),
-(4, 1, 1, '11202301223', 'A', '2023-01-22 00:00:00', 200, '14900.00', 85500, '2980000.00', '2023-01-22 01:34:04', '2023-01-22 01:34:04'),
-(5, 1, 2, '12202301222', 'A', '2023-01-22 00:00:00', 500, '14900.00', 7000, '7450000.00', '2023-01-22 01:45:42', '2023-01-22 01:45:42'),
-(6, 2, 3, '23202301221', 'A', '2023-01-22 00:00:00', 500, '10000.00', 24500, '5000000.00', '2023-01-22 03:10:28', '2023-01-22 03:10:28'),
-(7, 2, 3, '23202301211', 'A', '2023-01-21 00:00:00', 500, '10000.00', 25000, '5000000.00', '2023-01-22 04:28:41', '2023-01-22 04:28:41'),
-(8, 2, 7, '27202301211', 'A', '2023-01-21 00:00:00', 500, '10000.00', 24500, '5000000.00', '2023-01-22 04:28:49', '2023-01-22 04:28:49'),
-(9, 2, 8, '28202301211', 'A', '2023-01-21 00:00:00', 500, '10000.00', 22500, '5000000.00', '2023-01-22 04:28:54', '2023-01-22 04:28:54'),
-(10, 2, 7, '27202301261', 'A', '2023-01-26 00:00:00', 500, '10000.00', 25000, '5000000.00', '2023-01-26 13:39:53', '2023-01-26 13:39:53'),
-(11, 2, 7, '27202301262', 'B', '2023-01-26 00:00:00', 500, '10000.00', 25500, '5000000.00', '2023-01-26 14:04:11', '2023-01-26 14:04:11'),
-(12, 2, 7, '27202301263', 'B', '2023-01-26 00:00:00', 100, '10000.00', 25600, '1000000.00', '2023-01-26 14:18:17', '2023-01-26 14:18:17');
+INSERT INTO `tbltransaksi_nosel` (`id`, `r_bbm`, `r_nosel`, `kd_trans`, `r_regu`, `tgl_transaksi`, `last_meter`, `awal_meter`, `cost_ltr`, `last_price`, `total`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, '20230130A', 'A', '2023-01-30 00:00:00', '112001.00', '110000.00', '2001.00', '14900.00', '29814900.00', '2023-01-29 22:25:07', '2023-01-29 22:25:07'),
+(2, 1, 2, '20230130A', 'A', '2023-01-30 00:00:00', '7001.00', '5600.00', '1401.00', '14900.00', '20874900.00', '2023-01-29 22:25:07', '2023-01-29 22:25:07'),
+(3, 2, 3, '20230130A', 'A', '2023-01-30 00:00:00', '29001.00', '28000.00', '1001.00', '25100.00', '25125100.00', '2023-01-29 22:25:07', '2023-01-29 22:25:07'),
+(4, 1, 4, '20230130A', 'A', '2023-01-30 00:00:00', '30001.00', '29999.00', '2.00', '14900.00', '29800.00', '2023-01-29 22:25:07', '2023-01-29 22:25:07'),
+(5, 1, 5, '20230130A', 'A', '2023-01-30 00:00:00', '15001.00', '14000.00', '1001.00', '14900.00', '14914900.00', '2023-01-29 22:25:07', '2023-01-29 22:25:07'),
+(6, 1, 6, '20230130A', 'A', '2023-01-30 00:00:00', '17001.00', '16500.00', '501.00', '14900.00', '7464900.00', '2023-01-29 22:25:07', '2023-01-29 22:25:07'),
+(7, 2, 7, '20230130A', 'A', '2023-01-30 00:00:00', '27001.00', '26000.00', '1001.00', '10000.00', '10010000.00', '2023-01-29 22:25:07', '2023-01-29 22:25:07'),
+(8, 2, 8, '20230130A', 'A', '2023-01-30 00:00:00', '24001.00', '22500.00', '1501.00', '10000.00', '15010000.00', '2023-01-29 22:25:07', '2023-01-29 22:25:07'),
+(9, 2, 9, '20230130A', 'A', '2023-01-30 00:00:00', '23001.00', '22000.00', '1001.00', '10000.00', '10010000.00', '2023-01-29 22:25:07', '2023-01-29 22:25:07'),
+(10, 2, 10, '20230130A', 'A', '2023-01-30 00:00:00', '17001.00', '16000.00', '1001.00', '14900.00', '14914900.00', '2023-01-29 22:25:07', '2023-01-29 22:25:07'),
+(11, 2, 11, '20230130A', 'A', '2023-01-30 00:00:00', '23001.00', '22000.00', '1001.00', '10000.00', '10010000.00', '2023-01-29 22:25:07', '2023-01-29 22:25:07'),
+(12, 2, 12, '20230130A', 'A', '2023-01-30 00:00:00', '25001.00', '22000.00', '3001.00', '10000.00', '30010000.00', '2023-01-29 22:25:07', '2023-01-29 22:25:07');
 
 -- --------------------------------------------------------
 
@@ -771,21 +864,21 @@ INSERT INTO `tbltransaksi_nosel` (`id`, `r_bbm`, `r_nosel`, `kd_trans`, `r_regu`
 
 CREATE TABLE `users` (
   `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', 'admin@gmail.com', '2022-06-21 02:08:43', '$2y$10$1M/zZK917.HJrYuNrWF2yued.SVCPw89I5RVZqliW9ndVZAUSmuFu', NULL, '2022-06-21 02:08:43', '2022-06-21 02:08:43');
+(1, 'admin', 'admin', '2022-06-21 02:08:43', '$2y$10$1M/zZK917.HJrYuNrWF2yued.SVCPw89I5RVZqliW9ndVZAUSmuFu', NULL, '2022-06-21 02:08:43', '2022-06-21 02:08:43');
 
 --
 -- Indexes for dumped tables
@@ -850,6 +943,12 @@ ALTER TABLE `tblbbm_detail`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tblbiaya`
+--
+ALTER TABLE `tblbiaya`
+  ADD PRIMARY KEY (`id_biaya`);
+
+--
 -- Indexes for table `tblgeneral_ledger`
 --
 ALTER TABLE `tblgeneral_ledger`
@@ -859,6 +958,12 @@ ALTER TABLE `tblgeneral_ledger`
 -- Indexes for table `tblkategori`
 --
 ALTER TABLE `tblkategori`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tblkupon`
+--
+ALTER TABLE `tblkupon`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -980,13 +1085,13 @@ ALTER TABLE `link_acc`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `rekening_anggaran`
@@ -1013,6 +1118,12 @@ ALTER TABLE `tblbbm_detail`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `tblbiaya`
+--
+ALTER TABLE `tblbiaya`
+  MODIFY `id_biaya` bigint NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `tblgeneral_ledger`
 --
 ALTER TABLE `tblgeneral_ledger`
@@ -1025,6 +1136,12 @@ ALTER TABLE `tblkategori`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `tblkupon`
+--
+ALTER TABLE `tblkupon`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `tblnosel_detail`
 --
 ALTER TABLE `tblnosel_detail`
@@ -1034,13 +1151,13 @@ ALTER TABLE `tblnosel_detail`
 -- AUTO_INCREMENT for table `tblopnum`
 --
 ALTER TABLE `tblopnum`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tblopnum_detail`
 --
 ALTER TABLE `tblopnum_detail`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tblpegawai`
@@ -1052,7 +1169,7 @@ ALTER TABLE `tblpegawai`
 -- AUTO_INCREMENT for table `tblpelanggan`
 --
 ALTER TABLE `tblpelanggan`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `tblpembelian`
@@ -1070,13 +1187,13 @@ ALTER TABLE `tblpembelian_detail`
 -- AUTO_INCREMENT for table `tblpenjualan`
 --
 ALTER TABLE `tblpenjualan`
-  MODIFY `idPenjualan` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idPenjualan` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tblpenjualan_detail`
 --
 ALTER TABLE `tblpenjualan_detail`
-  MODIFY `idDetailPenjualan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idDetailPenjualan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tblpersediaan`

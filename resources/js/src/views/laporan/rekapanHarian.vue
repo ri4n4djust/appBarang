@@ -343,7 +343,7 @@ import { async } from 'q';
         let totalPrice = items.value.filter(
             (item) => item.r_bbm === "1"
         ).reduce((accumulator, item) => {
-            return Number(accumulator) += Number(item.total);
+            return accumulator += Number(item.total);
         }, 0);
 
         console.log(totalPrice)
