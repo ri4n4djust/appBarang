@@ -122,23 +122,15 @@
                                                                             </thead>
                                                                             <tbody role="rowgroup">
                                                                                 <tr >
-                                                                                    <td aria-colindex="1" role="cell">Total</td>
+                                                                                    <td aria-colindex="1" role="cell">PERTAMAX</td>
                                                                                     <td aria-colindex="2" role="cell">6757</td>
                                                                                 </tr>
                                                                                 <tr >
-                                                                                    <td aria-colindex="1" role="cell">Total</td>
+                                                                                    <td aria-colindex="1" role="cell">PERTALITE</td>
                                                                                     <td aria-colindex="2" role="cell">6757</td>
                                                                                 </tr>
                                                                                 <tr >
-                                                                                    <td aria-colindex="1" role="cell">Total</td>
-                                                                                    <td aria-colindex="2" role="cell">6757</td>
-                                                                                </tr>
-                                                                                <tr >
-                                                                                    <td aria-colindex="1" role="cell">Total</td>
-                                                                                    <td aria-colindex="2" role="cell">6757</td>
-                                                                                </tr>
-                                                                                <tr >
-                                                                                    <td aria-colindex="1" role="cell">Total</td>
+                                                                                    <td aria-colindex="1" role="cell">DEXLITE</td>
                                                                                     <td aria-colindex="2" role="cell">6757</td>
                                                                                 </tr>
                                                                             </tbody>
@@ -153,7 +145,7 @@
                                                                                 </tr>
                                                                                 <tr >
                                                                                     <th aria-colindex="1" role="cell">Kupon</th>
-                                                                                    <th aria-colindex="2" role="cell">6757</th>
+                                                                                    <th aria-colindex="2" role="cell">{{ Number(totalkupon).toLocaleString() }}</th>
                                                                                 </tr>
                                                                                 <tr >
                                                                                     <th aria-colindex="1" role="cell">Link Aja</th>
@@ -312,8 +304,10 @@ import { async } from 'q';
     const store = useStore();
 
     const totaljual = ref();
+    const totalkupon = ref();
 
     const items = ref([]);
+    const kupon = ref([]);
     const sorting = ref({
         startDate: moment().format("D-M-YYYY"),
         // endDate: moment().format("D-M-YYYY")
@@ -329,7 +323,8 @@ import { async } from 'q';
     
     const bind_data = async () => {
         await store.dispatch('GetAplusan', sorting.value);
-        items.value = store.getters.Saplusan;
+        items.value = store.getters.Saplusan[0];
+        kupon.value = store.getters.Saplusan[1];
         // let ar = items.value ;
         let sum = 0;
         items.value.forEach(element => {
@@ -337,7 +332,21 @@ import { async } from 'q';
             // alert(sum);
         });
         totaljual.value = sum
-        console.log(sum)
+
+        let sumk = 0;
+        kupon.value.forEach(elem => {
+            sumk +=  parseInt(Number(elem.total));
+            // alert(sum);
+        });
+        totalkupon.value = sumk
+        
+        let totalPrice = items.value.filter(
+            (item) => item.r_bbm === "1"
+        ).reduce((accumulator, item) => {
+            return Number(accumulator) += Number(item.total);
+        }, 0);
+
+        console.log(totalPrice)
     }
 
     const barangs = computed(() => {

@@ -95,7 +95,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody role="rowgroup">
-                                                <tr v-for="k in nosels.kupon" :key="k.kdp" >
+                                                <tr v-for="b in nosels.biaya" :key="b.ket" >
                                                     <td aria-colindex="1" role="cell">{{ k.kdp }}</td>
                                                     <td aria-colindex="2" role="cell">{{ k.nilaiKupon }}</td>
                                                 </tr>
@@ -112,7 +112,7 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th colspan="2">Biaya</th>
+                                            <th colspan="2">Link Aja</th>
                                         </tr>
                                     </thead>
                                     <tbody role="rowgroup">
@@ -231,16 +231,16 @@
                 </thead>
                 <tbody role="rowgroup">
                     <tr role="row" v-for="list, index in nosels.nosel" :key="list.id_nosel">
-                        <td aria-colindex="1" role="cell"> {{ list.nama_nosel }}</td>
-                        <td aria-colindex="2" role="cell">{{ Number(list.meter_akhir).toLocaleString() }}</td>
-                        <td aria-colindex="3" role="cell"><input type="text" class="form-control" v-model="meter_now[index]" ></td>
-                        <td aria-colindex="4" role="cell">
-                            <div :style="{ 'width': inp + 'px' }">
-                                {{ Math.abs(meter_now[index] - list.meter_akhir) }}
+                        <td> {{ list.nama_nosel }}</td>
+                        <td>{{ Number(list.meter_akhir).toLocaleString() }}</td>
+                        <td >
+                            <div :style="{ 'width': inpt + 'px' }">
+                                <input type="text" class="form-control form-control-sm col-sm-4" v-model="meter_now[index]" >
                             </div>
                         </td>
-                        <td aria-colindex="5" role="cell">{{ Number(list.harga).toLocaleString() }}</td>
-                        <td aria-colindex="5" role="cell" class="text-end">{{ Number(Math.abs((meter_now[index] - list.meter_akhir) * list.harga)).toLocaleString() }}</td>
+                        <td>{{ Math.abs(meter_now[index] - list.meter_akhir) }}</td>
+                        <td>{{ Number(list.harga).toLocaleString() }}</td>
+                        <td>{{ Number(Math.abs((meter_now[index] - list.meter_akhir) * list.harga)).toLocaleString() }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -287,7 +287,7 @@
     const date1 = ref(moment().format("YYYY-MM-DD"));
     const meter_now = ref({});
     const regu = ref(null);
-    const inp = ref(50);
+    const inpt = ref(250);
     // const listtrans = ref([]);
 
     

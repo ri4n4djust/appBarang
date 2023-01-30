@@ -26,7 +26,7 @@ const routes = [
     {
         path: '/bbm',
         name: 'bbm',
-        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexBbm.vue'),
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexNosel.vue'),
         // meta: { requiresAuth: true },
     },
 

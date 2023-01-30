@@ -78,10 +78,15 @@ class laporanController extends Controller
                 ->select('tbltransaksi_nosel.*', 'tblbbm.nama_bbm', 'tblnosel_detail.nama_nosel')
                 ->where('tbltransaksi_nosel.tgl_transaksi', [$startDate])
                 ->get();
+        $kupon = DB::table('tblkupon')
+                ->join('tblpelanggan', 'tblpelanggan.kdPelanggan', 'tblkupon.r_kdPelanggan' )
+                ->select('tblkupon.*', 'tblpelanggan.nmPelanggan')
+                ->where('tblkupon.tgl_trans', [$startDate])
+                ->get();
         return response()->json([
             'success' => true,
             'message' => 'Laporan Penjualan BBM',
-            'data' => $lap
+            'data' => [$lap, $kupon]
         ], 200);
 
     }
