@@ -8,7 +8,8 @@ const state = {
     editpenjualan: [],
     stokopnum: [],
     kupon: [],
-    biaya: []
+    biaya: [],
+    link: []
   };
   
 const getters = {
@@ -18,7 +19,8 @@ const getters = {
     SeditPenjualan: state => state.editpenjualan,
     SstokOpnum: state => state.stokopnum,
     Skupon: state => state.kupon,
-    Sbiaya: state => state.biaya
+    Sbiaya: state => state.biaya,
+    Slink: state => state.link
 };
 
 const actions = {
@@ -177,8 +179,11 @@ const actions = {
     async NewKupon({ commit }, data){
             commit('setKupon', data)
     },
-    async NewBiaya({ commit }, data){
-        commit('setBiaya', data)
+    async NewBiaya({ commit }, b){
+        commit('setBiaya', b)
+    },
+    async NewLink({ commit }, b){
+        commit('setLink', b)
     },
 
     async GetPembelian({ commit }){
@@ -251,8 +256,11 @@ const mutations = {
     setKupon(state, data){
         state.kupon = data
     },
-    setBiaya(state, data){
-        state.biaya = data
+    setBiaya(state, b){
+        state.biaya = b
+    },
+    setLink(state, l){
+        state.link = l
     }
     // DeleteBarang({dispatch}, id) {
     //     axios.delete(`hapus/barang/${id}`)

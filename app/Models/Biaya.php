@@ -10,6 +10,6 @@ class Biaya extends Model
     use HasFactory;
     protected $table = 'tblbiaya';
     protected $fillable = [
-        'kd_trans', 'tglBiaya','keterangan_biaya', 'jumlah'
+        'kd_trans', 'tglBiaya','keterangan_biaya', 'jumlah', 'r_regu'
     ];
 }

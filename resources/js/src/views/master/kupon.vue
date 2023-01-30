@@ -36,7 +36,6 @@
                                 </multiselect> -->
                                 <select class="form-select form-select-sm" v-model="inputk.kdp" >
                                     <option :value="ls.kdPelanggan" v-for="ls in kupon.pelanggans" :key="ls.id">{{ ls.nmPelanggan }}</option>
-                                    
                                 </select>
                             </div>
                             <div class="col-sm">
@@ -144,24 +143,26 @@ onMounted(() =>{
     // console.log( cartKupon.value)
     getPelanggan();
     getlist();
+    localStorage.setItem('kupon', '[]')
 
 
 })
 
-const simpnKupon = () =>{
-    console.log(inputk.value)
-    if (localStorage.getItem('kupon')===null){
-            // cartKupon.value = [];
-            // console.log(cartItems.value)
-            localStorage.setItem('kupon', JSON.stringify([inputk.value]))
-            store.dispatch('NewKupon', inputk.value)
+const simpnKupon = async () =>{
+    // console.log(inputk.value)
+    if (localStorage.getItem('kupon')=== '[]' ){
+            
+            // cartKupon.value = [inputk.value];
+            cartKupon.value.push(inputk.value);
+            localStorage.setItem('kupon', JSON.stringify(cartKupon.value))
+            await store.dispatch('NewKupon', cartKupon.value)
             getlist();
     }else{
             // cartKupon.value = JSON.parse(localStorage.getItem('kupon'))
             
             cartKupon.value.push(inputk.value);
             localStorage.setItem('kupon',JSON.stringify(cartKupon.value));
-            store.dispatch('NewKupon', cartKupon.value)
+            await store.dispatch('NewKupon', cartKupon.value)
             // console.log(inputk.value)
             getlist();
     }

@@ -70,13 +70,13 @@
                                         <table class="table table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th colspan="2">Kupon</th>
+                                                    <th colspan="2">Kupon </th>
                                                 </tr>
                                             </thead>
                                             <tbody role="rowgroup">
                                                 <tr v-for="k in nosels.kupon" :key="k.kdp" >
                                                     <td aria-colindex="1" role="cell">{{ k.kdp }}</td>
-                                                    <td aria-colindex="2" role="cell">{{ k.nilaiKupon }}</td>
+                                                    <td aria-colindex="2" role="cell">{{ Number(k.nilaiKupon).toLocaleString() }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -95,9 +95,9 @@
                                                 </tr>
                                             </thead>
                                             <tbody role="rowgroup">
-                                                <tr v-for="b in nosels.biaya" :key="b.ket" >
-                                                    <td aria-colindex="1" role="cell">{{ k.kdp }}</td>
-                                                    <td aria-colindex="2" role="cell">{{ k.nilaiKupon }}</td>
+                                                <tr v-for="b in nosels.biaya" :key="b.ketBiaya" >
+                                                    <td aria-colindex="1" role="cell">{{ b.ketBiaya }}</td>
+                                                    <td aria-colindex="2" role="cell">{{ Number(b.nilaiBiaya).toLocaleString() }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -116,9 +116,9 @@
                                         </tr>
                                     </thead>
                                     <tbody role="rowgroup">
-                                        <tr v-for="k in nosels.kupon" :key="k.kdp" >
-                                            <td aria-colindex="1" role="cell">{{ k.kdp }}</td>
-                                            <td aria-colindex="2" role="cell">{{ k.nilaiKupon }}</td>
+                                        <tr v-for="k in nosels.link" :key="k.kdp" >
+                                            <td aria-colindex="1" role="cell">{{ k.kdbm }}</td>
+                                            <td aria-colindex="2" role="cell">{{ Number(k.nilaiLink).toLocaleString() }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -214,6 +214,7 @@
 
             <Kupon/>
             <Biaya/>
+            <LinkAja/>
 
         </div>
 
@@ -240,7 +241,7 @@
                         </td>
                         <td>{{ Math.abs(meter_now[index] - list.meter_akhir) }}</td>
                         <td>{{ Number(list.harga).toLocaleString() }}</td>
-                        <td>{{ Number(Math.abs((meter_now[index] - list.meter_akhir) * list.harga)).toLocaleString() }}</td>
+                        <td>{{ Number((meter_now[index] - list.meter_akhir) * list.harga).toLocaleString() }}</td>
                     </tr>
                 </tbody>
             </table>
@@ -263,6 +264,7 @@
     import feather from 'feather-icons';
     import Kupon from './kupon.vue';
     import Biaya from './biaya.vue';
+    import LinkAja from './linkaja.vue';
 
     import moment from "moment";
 
@@ -298,7 +300,9 @@
         const trs = store.getters.STransNosel;
         const regu = store.getters.STransNoselRegu;
         const kupon = store.getters.Skupon;
-        return { nosel, trs, regu, kupon }
+        const biaya = store.getters.Sbiaya;
+        const link = store.getters.Slink;
+        return { nosel, trs, regu, kupon, biaya, link }
     });
     
     const simpan_all = () =>{
@@ -354,7 +358,35 @@
                 // 'tgl_transaksi': tgl, 
             })
         }
-        store.dispatch('CreateTransNosel', [arr,arr_k ])
+        // console.log(arr)
+        const arr_b = [];
+        const arr_biaya = store.getters.Sbiaya;
+        let totab = 0;
+        for (let a = 0; a < arr_biaya.length; a++) {
+            arr_b.push ({
+                'ketBiaya': arr_biaya[a].ketBiaya,
+                'tglBiaya': arr_biaya[a].tglBiaya,
+                'r_regu': regu.value,
+                'nilai': arr_biaya[a].nilaiBiaya,
+                // 'tgl_transaksi': tgl, 
+            })
+        }
+
+        // console.log(arr)
+        const arr_l = [];
+        const arr_link = store.getters.Slink;
+        let totall = 0;
+        for (let a = 0; a < arr_link.length; a++) {
+            arr_l.push ({
+                'nm_bbm': arr_link[a].kdbm,
+                'tgl_link': arr_link[a].tglLink,
+                'r_regu': regu.value,
+                'jumlahLink': arr_link[a].nilaiLink,
+                // 'tgl_transaksi': tgl, 
+            })
+        }
+
+        store.dispatch('CreateTransNosel', [arr,arr_k,arr_b,arr_l ])
 
     }
 

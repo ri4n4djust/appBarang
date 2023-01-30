@@ -83,10 +83,16 @@ class laporanController extends Controller
                 ->select('tblkupon.*', 'tblpelanggan.nmPelanggan')
                 ->where('tblkupon.tgl_trans', [$startDate])
                 ->get();
+        $biaya = DB::table('tblbiaya')
+                ->where('tglBiaya', [$startDate])
+                ->get();
+        $link = DB::table('tbllinkaja')
+                ->where('tgl_link', [$startDate])
+                ->get();
         return response()->json([
             'success' => true,
-            'message' => 'Laporan Penjualan BBM',
-            'data' => [$lap, $kupon]
+            'message' => 'Laporan Aplusan BBM',
+            'data' => [$lap, $kupon, $biaya, $link]
         ], 200);
 
     }

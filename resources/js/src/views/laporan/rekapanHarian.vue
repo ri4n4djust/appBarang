@@ -55,122 +55,134 @@
                                                             </div>
                                                         </div>
                                                     </div>
+
+                                                    <div class="inv--product-table-section">
+                                                        <!-- <div class="table-responsive"> -->
+                                                            <table class="table table-responsive table-sm">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Nozzel</th>
+                                                                        <th>Meter Awal</th>
+                                                                        <th>Meter Akhir</th>
+                                                                        <th>Volume/Liter</th>
+                                                                        <th>Harga</th>
+                                                                        <th>Total</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr v-for="item in items" :key="item.id">
+                                                                        <td>{{ item.nama_nosel }}</td>
+                                                                        <td>{{ item.awal_meter }}</td>
+                                                                        <td>{{ item.last_meter }}</td>
+                                                                        <td>{{ item.cost_ltr }}</td>
+                                                                        <td>{{ Number(item.last_price).toLocaleString() }}</td>
+                                                                        <td>{{ Number(item.total).toLocaleString() }}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                                <tfoot>
+                                                                    <tr>
+                                                                        <th colspan="2" class="align-top mx-auto">
+                                                                            <table>
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th colspan="2">Langganan Kupon</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr v-for="pon in kupon" :key="pon.r_kdPelanggan">
+                                                                                        <td aria-colindex="1" role="cell">{{ pon.nmPelanggan }}</td>
+                                                                                        <td aria-colindex="2" role="cell">{{ pon.total }}</td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </th>
+                                                                        <th colspan="2" class="align-top mx-auto">
+                                                                            <table>
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th colspan="2">Total Penjualan Regu A</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody role="rowgroup">
+                                                                                    <tr >
+                                                                                        <td aria-colindex="1" role="cell">PERTAMAX</td>
+                                                                                        <td aria-colindex="2" role="cell">{{Number(totalPertamax).toLocaleString()}}</td>
+                                                                                    </tr>
+                                                                                    <tr >
+                                                                                        <td aria-colindex="1" role="cell">PERTALITE</td>
+                                                                                        <td aria-colindex="2" role="cell">{{Number(totalPertalite).toLocaleString()}}</td>
+                                                                                    </tr>
+                                                                                    <tr >
+                                                                                        <td aria-colindex="1" role="cell">DEXLITE</td>
+                                                                                        <td aria-colindex="2" role="cell">{{Number(totalDexlite).toLocaleString()}}</td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </th>
+                                                                        <th class="align-top">
+                                                                            <!-- <table>
+                                                                                <thead role="rowgroup">
+                                                                                    <tr >
+                                                                                        <th aria-colindex="1" role="cell">Total</th>
+                                                                                        <th aria-colindex="2" role="cell">{{ Number(totaljual).toLocaleString() }}</th>
+                                                                                    </tr>
+                                                                                    <tr >
+                                                                                        <th aria-colindex="1" role="cell">Kupon</th>
+                                                                                        <th aria-colindex="2" role="cell">{{ Number(totalkupon).toLocaleString() }}</th>
+                                                                                    </tr>
+                                                                                    <tr >
+                                                                                        <th aria-colindex="1" role="cell">Link Aja</th>
+                                                                                        <th aria-colindex="2" role="cell">6757</th>
+                                                                                    </tr>
+                                                                                    <tr >
+                                                                                        <th aria-colindex="1" role="cell">Biaya</th>
+                                                                                        <th aria-colindex="2" role="cell">6757</th>
+                                                                                    </tr>
+                                                                                    <tr >
+                                                                                        <th aria-colindex="1" role="cell">Total Cash</th>
+                                                                                        <th aria-colindex="2" role="cell">6757</th>
+                                                                                    </tr>
+                                                                                    <tr >
+                                                                                        <th aria-colindex="1" role="cell">Saldo Plus</th>
+                                                                                        <th aria-colindex="2" role="cell">6757</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                            </table> -->
+                                                                                <tr >
+                                                                                    <th >Total</th>
+                                                                                    <th >{{ Number(totaljual).toLocaleString() }}</th>
+                                                                                </tr>
+                                                                                <tr >
+                                                                                    <th >Kupon</th>
+                                                                                    <th >{{ Number(totalkupon).toLocaleString() }}</th>
+                                                                                </tr>
+                                                                                <tr >
+                                                                                    <th >Biaya</th>
+                                                                                    <th >{{ Number(totalbiaya).toLocaleString() }}</th>
+                                                                                </tr>
+                                                                                <tr >
+                                                                                    <th >Link Aja</th>
+                                                                                    <th >{{ Number(totallink).toLocaleString() }}</th>
+                                                                                </tr>
+                                                                                <tr >
+                                                                                    <th >Total Cash</th>
+                                                                                    <th >{{ Number(totaljual -totalkupon -totalbiaya - totallink).toLocaleString() }}</th>
+                                                                                </tr>
+                                                                                <tr >
+                                                                                    <th >Saldo Plus</th>
+                                                                                    <th >6757</th>
+                                                                                </tr>
+                                                                        </th>
+                                                                    </tr>
+                                                                </tfoot>
+                                                            </table>
+                                                        <!-- </div> -->
+                                                    </div>
+
+
                                                 </div>
 
-                                                <div class="inv--product-table-section">
-                                                    <div class="table-responsive">
-                                                        <table class="table table-hover">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th>Nozzel</th>
-                                                                    <th>Meter Awal</th>
-                                                                    <th>Meter Akhir</th>
-                                                                    <th>Volume/Liter</th>
-                                                                    <th>Harga</th>
-                                                                    <th>Total</th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                                <tr v-for="(item, i) in items" :key="item.id">
-                                                                    <td>{{ item.nama_nosel }}</td>
-                                                                    <td>{{ item.awal_meter }}</td>
-                                                                    <td>{{ item.last_meter }}</td>
-                                                                    <td>{{ item.cost_ltr }}</td>
-                                                                    <td>{{ Number(item.last_price).toLocaleString() }}</td>
-                                                                    <td>{{ Number(item.total).toLocaleString() }}</td>
-                                                                </tr>
-                                                            </tbody>
-                                                            <tfoot>
-                                                                <tr>
-                                                                    <th colspan="2">
-                                                                        <table class="table table-hover">
-                                                                            <thead>
-                                                                                <tr>
-                                                                                    <th colspan="2">Langganan Kupon</th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody role="rowgroup">
-                                                                                <tr >
-                                                                                    <td aria-colindex="1" role="cell">Total</td>
-                                                                                    <td aria-colindex="2" role="cell">6757</td>
-                                                                                </tr>
-                                                                                <tr >
-                                                                                    <td aria-colindex="1" role="cell">Total</td>
-                                                                                    <td aria-colindex="2" role="cell">6757</td>
-                                                                                </tr>
-                                                                                <tr >
-                                                                                    <td aria-colindex="1" role="cell">Total</td>
-                                                                                    <td aria-colindex="2" role="cell">6757</td>
-                                                                                </tr>
-                                                                                <tr >
-                                                                                    <td aria-colindex="1" role="cell">Total</td>
-                                                                                    <td aria-colindex="2" role="cell">6757</td>
-                                                                                </tr>
-                                                                                <tr >
-                                                                                    <td aria-colindex="1" role="cell">Total</td>
-                                                                                    <td aria-colindex="2" role="cell">6757</td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </th>
-                                                                    <th colspan="2">
-                                                                        <table class="table table-hover">
-                                                                            <thead>
-                                                                                <tr>
-                                                                                    <th colspan="2">Total Penjualan Regu A</th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody role="rowgroup">
-                                                                                <tr >
-                                                                                    <td aria-colindex="1" role="cell">PERTAMAX</td>
-                                                                                    <td aria-colindex="2" role="cell">6757</td>
-                                                                                </tr>
-                                                                                <tr >
-                                                                                    <td aria-colindex="1" role="cell">PERTALITE</td>
-                                                                                    <td aria-colindex="2" role="cell">6757</td>
-                                                                                </tr>
-                                                                                <tr >
-                                                                                    <td aria-colindex="1" role="cell">DEXLITE</td>
-                                                                                    <td aria-colindex="2" role="cell">6757</td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </th>
-                                                                    <th colspan="2">
-                                                                        <table class="table table-hover">
-                                                                            <thead role="rowgroup">
-                                                                                <tr >
-                                                                                    <th aria-colindex="1" role="cell">Total</th>
-                                                                                    <th aria-colindex="2" role="cell">{{ Number(totaljual).toLocaleString() }}</th>
-                                                                                </tr>
-                                                                                <tr >
-                                                                                    <th aria-colindex="1" role="cell">Kupon</th>
-                                                                                    <th aria-colindex="2" role="cell">{{ Number(totalkupon).toLocaleString() }}</th>
-                                                                                </tr>
-                                                                                <tr >
-                                                                                    <th aria-colindex="1" role="cell">Link Aja</th>
-                                                                                    <th aria-colindex="2" role="cell">6757</th>
-                                                                                </tr>
-                                                                                <tr >
-                                                                                    <th aria-colindex="1" role="cell">Biaya</th>
-                                                                                    <th aria-colindex="2" role="cell">6757</th>
-                                                                                </tr>
-                                                                                <tr >
-                                                                                    <th aria-colindex="1" role="cell">Total Cash</th>
-                                                                                    <th aria-colindex="2" role="cell">6757</th>
-                                                                                </tr>
-                                                                                <tr >
-                                                                                    <th aria-colindex="1" role="cell">Saldo Plus</th>
-                                                                                    <th aria-colindex="2" role="cell">6757</th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                        </table>
-                                                                    </th>
-                                                                </tr>
-                                                            </tfoot>
-                                                        </table>
-                                                    </div>
-                                                </div>
+                                                
 
                                                 <div class="inv--detail-section inv--customer-detail-section">
                                                     <div class="row">
@@ -305,9 +317,16 @@ import { async } from 'q';
 
     const totaljual = ref();
     const totalkupon = ref();
+    const totalbiaya = ref();
+    const totallink = ref();
+    const totalPertamax = ref();
+    const totalPertalite = ref();
+    const totalDexlite = ref();
 
     const items = ref([]);
     const kupon = ref([]);
+    const biaya = ref([]);
+    const link = ref([]);
     const sorting = ref({
         startDate: moment().format("D-M-YYYY"),
         // endDate: moment().format("D-M-YYYY")
@@ -325,6 +344,7 @@ import { async } from 'q';
         await store.dispatch('GetAplusan', sorting.value);
         items.value = store.getters.Saplusan[0];
         kupon.value = store.getters.Saplusan[1];
+        biaya.value = store.getters.Saplusan[2];
         // let ar = items.value ;
         let sum = 0;
         items.value.forEach(element => {
@@ -339,14 +359,43 @@ import { async } from 'q';
             // alert(sum);
         });
         totalkupon.value = sumk
+
+        let sumb = 0;
+        biaya.value.forEach(ele => {
+            sumb +=  parseInt(Number(ele.jumlah));
+            // alert(sum);
+        });
+        totalbiaya.value = sumb
+
+        let suml = 0;
+        link.value.forEach(ele => {
+            suml +=  parseInt(Number(ele.jumlah_link));
+            // alert(sum);
+        });
+        totallink.value = suml
         
-        let totalPrice = items.value.filter(
-            (item) => item.r_bbm === "1"
+        let totalPX = items.value.filter(
+            (item) => item.r_bbm === 1
         ).reduce((accumulator, item) => {
             return accumulator += Number(item.total);
         }, 0);
+        totalPertamax.value = totalPX
 
-        console.log(totalPrice)
+        let totalPL = items.value.filter(
+            (item) => item.r_bbm === 2
+        ).reduce((accumulator, item) => {
+            return accumulator += Number(item.total);
+        }, 0);
+        totalPertalite.value = totalPL
+
+        let totalDX = items.value.filter(
+            (item) => item.r_bbm === 3
+        ).reduce((accumulator, item) => {
+            return accumulator += Number(item.total);
+        }, 0);
+        totalDexlite.value = totalDX
+
+        console.log(totalPX)
     }
 
     const barangs = computed(() => {
