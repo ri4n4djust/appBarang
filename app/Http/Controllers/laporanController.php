@@ -96,5 +96,25 @@ class laporanController extends Controller
         ], 200);
 
     }
+
+    public function daftarAplusan(Request $request){
+        // $list = DB::select("SELECT a.id,a.kd_trans,a.tgl_transaksi,src.total,srckupon.total_kupon,srcbiaya.total_biaya,srclink.total_link 
+        // FROM (SELECT COALESCE(sum(total),0) total FROM tbltransaksi_nosel GROUP BY kd_trans) src, 
+        // (SELECT COALESCE(sum(total),0) total_kupon FROM tblkupon WHERE kd_trans='20230130A') srckupon,
+        // (SELECT COALESCE(sum(jumlah),0) total_biaya FROM tblbiaya WHERE kd_trans='20230130A') srcbiaya,
+        // (SELECT COALESCE(sum(jumlah_link),0) total_link FROM tbllinkaja WHERE kd_trans='20230130A') srclink, 
+        // tbltransaksi_nosel a GROUP BY kd_trans;")->get()
+        $startDate = date("Y-m-d", strtotime($request->input('startDate')));
+        $endDate = date("Y-m-d", strtotime($request->input('endDate')));
+        $list = DB::table('tblheader_aplusan')
+                ->whereBetween('tgl_trans', [$startDate, $endDate])
+                ->get();
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'List Aplusan Aplusan',
+            'data' => $list
+        ], 200);
+    }
     
 }

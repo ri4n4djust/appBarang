@@ -58,7 +58,7 @@
 
                                                     <div class="inv--product-table-section">
                                                         <!-- <div class="table-responsive"> -->
-                                                            <table class="table table-responsive table-sm">
+                                                            <table class="table table-striped table-bordered">
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Nozzel</th>
@@ -218,49 +218,8 @@
                                                     </div>
                                                 </div>
 
-                                                <!-- <div class="inv--total-amounts">
-                                                    <div class="row mt-4">
-                                                        <div class="col-sm-5 col-12 order-sm-0 order-1"></div>
-                                                        <div class="col-sm-7 col-12 order-sm-1 order-0">
-                                                            <div class="text-sm-end">
-                                                                <div class="row">
-                                                                    <div class="col-sm-8 col-7">
-                                                                        <p class="">Sub Total:</p>
-                                                                    </div>
-                                                                    <div class="col-sm-4 col-5">
-                                                                        <p class="">$3155</p>
-                                                                    </div>
-                                                                    <div class="col-sm-8 col-7">
-                                                                        <p class="">Tax Amount:</p>
-                                                                    </div>
-                                                                    <div class="col-sm-4 col-5">
-                                                                        <p class="">$700</p>
-                                                                    </div>
-                                                                    <div class="col-sm-8 col-7">
-                                                                        <p class="discount-rate">Discount : <span class="discount-percentage">5%</span></p>
-                                                                    </div>
-                                                                    <div class="col-sm-4 col-5">
-                                                                        <p class="">$10</p>
-                                                                    </div>
-                                                                    <div class="col-sm-8 col-7 grand-total-title">
-                                                                        <h4 class="">Grand Total :</h4>
-                                                                    </div>
-                                                                    <div class="col-sm-4 col-5 grand-total-amount">
-                                                                        <h4 class="">$3845</h4>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div> -->
 
-                                                <div class="inv--note">
-                                                    <div class="row mt-4">
-                                                        <div class="col-sm-12 col-12 order-sm-0 order-1">
-                                                            <p>Note: Thank you for doing Business with us.</p>
-                                                        </div>
-                                                    </div>
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>

@@ -85,10 +85,13 @@ class transaksiNoselController extends Controller
         try{
             $exception = DB::transaction(function() use ($request){ 
 
-                // TransaksiNosel::where('r_opnum', $kdOpnum)->delete();
                 $last_m = null ;
                 $detop = $request[0];
                 $kdtrans = $request[0][0]['kd_trans'];
+                $regu = $request[0][0]['r_regu'];
+                $tgl = $detop[0]['tgl_transaksi'];
+                $total_j = 0;
+                TransaksiNosel::where('kd_trans', $kdtrans)->delete();
                 for ($i = 0; $i < count($detop); $i++) {
 
                         $kdBarang = $detop[$i]['kodeBrg'];
@@ -133,10 +136,12 @@ class transaksiNoselController extends Controller
                             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                         ];
-                }
+                    $total_j += $detop[$i]['total'];
+                };
                 TransaksiNosel::insert($detail);
 
-                // TransaksiNosel::where('r_opnum', $kdOpnum)->delete();
+                $total_k = 0;
+                Kupon::where('kd_trans', $kdtrans)->delete();
                 $det_kupon = $request[1];
                 if(!empty($det_kupon)){
                     for ($i = 0; $i < count($det_kupon); $i++) {
@@ -157,12 +162,14 @@ class transaksiNoselController extends Controller
                             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                         ];
-
+                        $total_k += $nilai ;
                     }
                     Kupon::insert($detkup);
                 }
 
-                // TransaksiNosel::where('r_opnum', $kdOpnum)->delete();
+
+                $tot_b = 0;
+                Biaya::where('kd_trans', $kdtrans)->delete();
                 $det_biaya = $request[2];
                 if(!empty($det_biaya)){
                     for ($i = 0; $i < count($det_biaya); $i++) {
@@ -184,11 +191,13 @@ class transaksiNoselController extends Controller
                             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                         ];
 
+                        $tot_b += $nilai;
                     }
                     Biaya::insert($detbi);
                 }
 
-                // TransaksiNosel::where('r_opnum', $kdOpnum)->delete();
+                $total_l = 0;
+                Linkaja::where('kd_trans', $kdtrans)->delete();
                 $det_link = $request[3];
                 if(!empty($det_link)){
                     for ($i = 0; $i < count($det_link); $i++) {
@@ -210,10 +219,36 @@ class transaksiNoselController extends Controller
                             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                         ];
-
+                        $total_l += $nilai;
                     }
                     Linkaja::insert($detli);
                 }
+
+                $cost = $total_k + $tot_b + $total_l;
+                DB::table('tblheader_aplusan')->upsert([
+                    'kd_trans'  => $kdtrans,
+                    'r_regu'    => $regu,
+                    'tgl_trans' => $tgl,
+                    'total_jual'    => $total_j,
+                    'total_kupon'   => $total_k,
+                    'total_biaya'   => $tot_b,
+                    'total_link'    => $total_l,
+                    'total_cash'    => $total_j - $cost,
+                    'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                ],
+                [
+                    'r_regu'    => $regu,
+                    'tgl_trans' => $tgl,
+                    'total_jual'    => $total_j,
+                    'total_kupon'   => $total_k,
+                    'total_biaya'   => $tot_b,
+                    'total_link'    => $total_l,
+                    'total_cash'    => $total_j - $cost,
+                    'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                ]
+            );
 
             DB::commit();
             });

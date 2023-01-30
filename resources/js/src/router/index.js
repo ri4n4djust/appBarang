@@ -89,6 +89,12 @@ const routes = [
         props: true,
     },
     {
+        path: '/laporan/aplusan-bbm',
+        name: 'aplusan-bbm',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/aplusanBbm.vue'),
+        props: true,
+    },
+    {
         path: '/laporan/penjualan-bbm',
         name: 'penjualan-bbm',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/penjualanBbm.vue'),
