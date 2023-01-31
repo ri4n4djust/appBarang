@@ -200,7 +200,7 @@
                             <router-link to="/opnum-bbm" @click="toggleMobileMenu">Opnum BBM</router-link>
                         </li>
                         <li>
-                            <router-link to="/opnum" @click="toggleMobileMenu">Opnum Barang</router-link>
+                            <router-link to="/opnum-barang" @click="toggleMobileMenu">Opnum Barang</router-link>
                         </li>
                     </ul>
                 </li>

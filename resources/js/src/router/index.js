@@ -78,6 +78,20 @@ const routes = [
         // props: true,
         // meta: { requiresAuth: true },
     },
+    {
+        path: '/opnum-barang',
+        name: 'opnum-barang',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/opnumBarang.vue'),
+        // props: true,
+        // meta: { requiresAuth: true },
+    },
+    {
+        path: '/opnum-bbm',
+        name: 'opnum-bbm',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/opnumBbm.vue'),
+        // props: true,
+        // meta: { requiresAuth: true },
+    },
     
 
 

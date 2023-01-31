@@ -101,7 +101,7 @@
                                             <td aria-colindex="4" role="cell">{{ item.satuanPersediaan }}</td>
                                             <td aria-colindex="5" role="cell">
                                                 <div :style="{ 'width': inp + 'px' }">
-                                                <input type="text" class="form-control form-control-sm col-sm-2" v-model="item_now[index]" >
+                                                <input type="text" class="form-control form-control-sm col-sm-2" v-model="item_now[index]" @keypress="onlyNumber" >
                                                 </div>
                                             </td>
                                             <td aria-colindex="5" role="cell">
@@ -228,6 +228,9 @@
                 total.value = tota
                 // alert(subto)
             }
+            
+            item_now.value[i] = NaN
+            keterangan.value[i] = NaN
         
         }
         // console.log(tota)
@@ -235,8 +238,8 @@
         store.dispatch('CreateOpnum', [headopnum.value,arr])
         getNoOpnum();
         bind_data();
-        item_now.value = ''
-        keterangan.value = ''
+        // item_now.value = ''
+        // keterangan.value = ''
     }
 
 
@@ -260,4 +263,13 @@
         }
         return 'dark';
     };
+
+    function onlyNumber ($event) {
+        //console.log($event.keyCode); //keyCodes value
+        let keyCode = ($event.keyCode ? $event.keyCode : $event.which);
+        if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) { // 46 is dot
+            $event.preventDefault();
+        }   
+    }
+
 </script>

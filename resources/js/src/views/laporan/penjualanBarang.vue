@@ -126,7 +126,7 @@
     const store = useStore();
     const router = useRouter()
 
-    const columns = ref(['noPenjualan', 'tglPenjualan', 'nmPelanggan', 'subTotalPenjualan', 'discPenjualan', 'taxPenjualan', 'totalPenjualan', 'action']);
+    const columns = ref(['noPenjualan', 'tglPenjualan', 'nmPelanggan', 'subTotalPenjualan', 'discPenjualan', 'totalPenjualan', 'action']);
     const items = ref([]);
     const table_option = ref({
         perPage: 10,
@@ -238,7 +238,6 @@
                 rowhtml += '<td>'+item.nmPelanggan+'</td>';
                 rowhtml += '<td>'+Number(item.subTotalPenjualan).toLocaleString()+'</td>';
                 rowhtml += '<td>'+Number(item.discPenjualan).toLocaleString()+'</td>';
-                rowhtml += '<td>'+Number(item.taxPenjualan).toLocaleString()+'</td>';
                 rowhtml += '<td>'+Number(item.totalPenjualan).toLocaleString()+'</td>';
                 rowhtml += '</tr>';
                 // cols.map((d) => {
@@ -262,8 +261,8 @@
             rowhtml += '</tbody>';
             rowhtml += '<tfoot><tr>'
 
-            rowhtml += '<th></th><th></th><th></th><th></th><th>Total</th><th>'+Number(sumtax).toLocaleString()+'</th><th>'+Number(sum).toLocaleString()+'</th></tr>'
-            rowhtml += '<tr><th></th><th></th><th></th><th></th><th>Total Net</th><th></th><th>'+Number(sum - sumtax).toLocaleString()+'</th>'
+            rowhtml += '<th></th><th></th><th></th><th></th><th>Total</th><th></th><th>'+Number(sum).toLocaleString()+'</th></tr>'
+            // rowhtml += '<tr><th></th><th></th><th></th><th></th><th>Total Net</th><th></th><th>'+Number(sum - sumtax).toLocaleString()+'</th>'
             rowhtml += '</tr></tfoot></table>'
             var winPrint = window.open('', '', 'left=0,top=0,width=1000,height=600,toolbar=0,scrollbars=0,status=0');
             winPrint.document.write('<title>Print</title>' + rowhtml);
