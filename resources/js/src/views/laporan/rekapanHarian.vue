@@ -58,7 +58,7 @@
 
                                                     <div class="inv--product-table-section">
                                                         <!-- <div class="table-responsive"> -->
-                                                            <table class="table table-striped table-bordered">
+                                                            <table >
                                                                 <thead>
                                                                     <tr>
                                                                         <th>Nozzel</th>
@@ -287,11 +287,17 @@ import { async } from 'q';
     const biaya = ref([]);
     const link = ref([]);
     const sorting = ref({
-        startDate: moment().format("D-M-YYYY"),
+        startDate: moment(props.startDate).format("D-M-YYYY"),
+        kd_trans: props.kd_trans,
         // endDate: moment().format("D-M-YYYY")
     });
 
-    
+    const props = defineProps({
+        id: String,
+        startDate: String,
+        kd_trans: String,
+        last_price: String,
+    });
 
     onMounted(() => {
         bind_data();

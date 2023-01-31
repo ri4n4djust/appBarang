@@ -32,7 +32,8 @@
                                     <button class="btn btn-primary mb-2 me-1" data-bs-toggle="modal" data-bs-target="#modalBiaya">BIAYA</button>
                                     <button class="btn btn-primary mb-2 me-1" data-bs-toggle="modal" data-bs-target="#modalLinkAja">LINK AJA</button>
                                     <button class="btn btn-primary mb-2 me-1" @click="simpan_all">SIMPAN</button>
-                                    <router-link :to="{ name: 'bbm'}" class="btn btn-secondary btn-danger mb-2 me-1">Kembali</router-link>
+                                    <button class="btn btn-secondary btn-danger mb-2 me-1" @click="router.go(-1)">Kembali</button>
+                                    <!-- <router-link :to="{ name: 'bbm'}" class="btn btn-secondary btn-danger mb-2 me-1">Kembali</router-link> -->
                                 </div>
                             </div>
                             <div class="col-2">
@@ -281,10 +282,10 @@
     const route = useRoute();
 
     const props = defineProps({
-    id: String,
-    nama_bbm: String,
-    last_meter: String,
-    last_price: String,
+        id: String,
+        nama_bbm: String,
+        last_meter: String,
+        last_price: String,
     });
     const date1 = ref(moment().format("YYYY-MM-DD"));
     const meter_now = ref({});

@@ -26,6 +26,13 @@ const routes = [
     {
         path: '/bbm',
         name: 'bbm',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexBbm.vue'),
+        // meta: { requiresAuth: true },
+    },
+
+    {
+        path: '/transaksi-aplusan',
+        name: 'transaksi-aplusan',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexNosel.vue'),
         // meta: { requiresAuth: true },
     },

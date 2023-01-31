@@ -6,8 +6,8 @@
                     <div class="page-header">
                         <nav class="breadcrumb-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="javascript:;">DataTables</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"><span>HTML5 Export</span></li>
+                                <li class="breadcrumb-item"><a href="javascript:;">Daftar</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span>Aplusan</span></li>
                             </ol>
                         </nav>
                     </div>
@@ -25,7 +25,7 @@
                         <div class="d-flex flex-wrap justify-content-center justify-content-sm-start px-3 pt-3 pb-0">
                             <!-- <button variant="primary" class="btn m-1 btn-primary" @click="export_table('print')">Print</button> -->
                             <!-- <button variant="primary" class="btn m-1 btn-primary" @click="export_table('pdf')">PDF</button> -->
-                            <h5>Daftar Penjualan</h5>
+                            <h5>Daftar Aplusan</h5>
 <!-- <span>{{ bbm }}</span> -->
                         </div>
                         <div class="panel-body">
@@ -81,7 +81,8 @@
                                     </div>
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li>
-                                            <a href="javascript:void(0);" class="dropdown-item" @click="edit_row(props.row)"> Edit </a>
+                                            <!-- <a href="javascript:void(0);" class="dropdown-item" @click="edit_row(props.row)"> Edit </a> -->
+                                            <router-link :to="{name: 'rekapan', params: {startDate: props.row.tgl_trans, kd_trans:props.row.kd_trans }}" class="dropdown-item">Ubah</router-link>
                                         </li>
                                         <li>
                                             <a href="javascript:void(0);" class="dropdown-item" @click="view_row(props.row)"> Delete </a>
@@ -118,6 +119,7 @@
     import '@/assets/sass/forms/custom-flatpickr.css';
 
     import { useStore } from 'vuex';
+    import { useRouter, useRoute } from 'vue-router'
 
     import moment from "moment";
 
@@ -125,6 +127,8 @@
     useMeta({ title: 'Data Laporan Penjualan BBM' });
 
     const store = useStore();
+    const router = useRouter();
+    const route = useRoute();
 
     const columns = ref(['kd_trans', 'tgl_trans', 'r_regu' ,'total_jual', 'total_kupon', 'total_biaya', 'total_link', 'total_cash', 'action']);
     const items = ref([]);
@@ -305,7 +309,8 @@
             .join(' ');
     };
     const edit_row = (item) => {
-        // router.push({ name: 'user', params: { username: 'eduardo' } })
-        alert('ID: '+ item);
+        console.log(item)
+        router.push({ name: 'rekapan', params: { data: item.id }, props: true })
+        // alert('ID: '+ item);
     };
 </script>

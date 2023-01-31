@@ -71,23 +71,28 @@ class laporanController extends Controller
 
     public function aplusan(Request $request){
         $startDate = date("Y-m-d", strtotime($request->input('startDate')));
+        $kd_trans = $request->input('kd_trans');
         // $endDate = date("Y-m-d", strtotime($request->input('endDate')));
         $lap = DB::table('tbltransaksi_nosel')
                 ->join('tblbbm', 'tblbbm.id', 'tbltransaksi_nosel.r_bbm')
                 ->join('tblnosel_detail', 'tblnosel_detail.id_nosel', 'tbltransaksi_nosel.r_nosel')
                 ->select('tbltransaksi_nosel.*', 'tblbbm.nama_bbm', 'tblnosel_detail.nama_nosel')
                 ->where('tbltransaksi_nosel.tgl_transaksi', [$startDate])
+                ->where('tbltransaksi_nosel.kd_trans', $kd_trans)
                 ->get();
         $kupon = DB::table('tblkupon')
                 ->join('tblpelanggan', 'tblpelanggan.kdPelanggan', 'tblkupon.r_kdPelanggan' )
                 ->select('tblkupon.*', 'tblpelanggan.nmPelanggan')
                 ->where('tblkupon.tgl_trans', [$startDate])
+                ->where('tblkupon.kd_trans', $kd_trans)
                 ->get();
         $biaya = DB::table('tblbiaya')
                 ->where('tglBiaya', [$startDate])
+                ->where('tblbiaya.kd_trans', $kd_trans)
                 ->get();
         $link = DB::table('tbllinkaja')
                 ->where('tgl_link', [$startDate])
+                ->where('tbllinkaja.kd_trans', $kd_trans)
                 ->get();
         return response()->json([
             'success' => true,
