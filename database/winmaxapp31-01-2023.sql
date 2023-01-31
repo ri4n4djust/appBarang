@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jan 31, 2023 at 01:14 AM
--- Server version: 8.0.31
--- PHP Version: 8.0.25
+-- Host: 127.0.0.1
+-- Generation Time: Jan 31, 2023 at 08:56 AM
+-- Server version: 8.0.30
+-- PHP Version: 8.0.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -853,6 +853,21 @@ CREATE TABLE `tblpersediaan_detail` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tblperubahanharga_bbm`
+--
+
+CREATE TABLE `tblperubahanharga_bbm` (
+  `id_perubahan` int NOT NULL,
+  `harga_lama` decimal(13,2) NOT NULL,
+  `harga baru` decimal(13,2) NOT NULL,
+  `edit_by` varchar(45) DEFAULT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tblrates`
 --
 
@@ -1180,6 +1195,12 @@ ALTER TABLE `tblpersediaan_detail`
   ADD PRIMARY KEY (`idPersediaanDetail`);
 
 --
+-- Indexes for table `tblperubahanharga_bbm`
+--
+ALTER TABLE `tblperubahanharga_bbm`
+  ADD PRIMARY KEY (`id_perubahan`);
+
+--
 -- Indexes for table `tblrates`
 --
 ALTER TABLE `tblrates`
@@ -1363,6 +1384,12 @@ ALTER TABLE `tblpersediaan`
 --
 ALTER TABLE `tblpersediaan_detail`
   MODIFY `idPersediaanDetail` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblperubahanharga_bbm`
+--
+ALTER TABLE `tblperubahanharga_bbm`
+  MODIFY `id_perubahan` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tblrates`
