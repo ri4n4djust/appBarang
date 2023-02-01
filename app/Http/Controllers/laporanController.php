@@ -113,6 +113,7 @@ class laporanController extends Controller
         $endDate = date("Y-m-d", strtotime($request->input('endDate')));
         $list = DB::table('tblheader_aplusan')
                 ->whereBetween('tgl_trans', [$startDate, $endDate])
+                ->orderBy("id_aplusan", "desc")
                 ->get();
         
         return response()->json([

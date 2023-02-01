@@ -82,10 +82,11 @@
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li>
                                             <!-- <a href="javascript:void(0);" class="dropdown-item" @click="edit_row(props.row)"> Edit </a> -->
-                                            <router-link :to="{name: 'rekapan', params: {startDate: props.row.tgl_trans, kd_trans:props.row.kd_trans }}" class="dropdown-item">Ubah</router-link>
+                                            <router-link :to="{name: 'rekapan', params: {startDate: props.row.tgl_trans, kd_trans:props.row.kd_trans }}" class="dropdown-item">Print</router-link>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0);" class="dropdown-item" @click="view_row(props.row)"> Delete </a>
+                                            <!-- <a href="javascript:void(0);" class="dropdown-item" @click="view_row(props.row)">Edit </a> -->
+                                            <router-link :to="{name: 'edit-aplusan', params: {startDate: props.row.tgl_trans, kd_trans:props.row.kd_trans }}" class="dropdown-item">Edit</router-link>
                                         </li>
                                     </ul>
                                 </div>

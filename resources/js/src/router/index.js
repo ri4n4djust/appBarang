@@ -36,6 +36,13 @@ const routes = [
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexNosel.vue'),
         // meta: { requiresAuth: true },
     },
+    {
+        path: '/edit-aplusan',
+        name: 'edit-aplusan',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/editAplusan.vue'),
+        // meta: { requiresAuth: true },
+        props: true,
+    },
 
     {
         path: '/barang',

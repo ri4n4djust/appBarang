@@ -7,6 +7,7 @@ const state = {
     linkacc: [],
     editpenjualan: [],
     stokopnum: [],
+    editaplusan:[],
     kupon: [],
     biaya: [],
     link: []
@@ -18,6 +19,7 @@ const getters = {
     StateAcc: state => state.linkacc,
     SeditPenjualan: state => state.editpenjualan,
     SstokOpnum: state => state.stokopnum,
+    SeditAplusan: state => state.editaplusan,
     Skupon: state => state.kupon,
     Sbiaya: state => state.biaya,
     Slink: state => state.link
@@ -186,6 +188,20 @@ const actions = {
         commit('setLink', b)
     },
 
+    async GetEditAplusan({ commit }, sort){
+        let response
+        try {
+            response = await axios.post('api/getedit-aplusam', sort)
+            commit('setEditAplusan', response.data.data)
+            commit('setKupon', data)
+            commit('setBiaya', b)
+            commit('setLink', b)
+        } catch (ex) {
+            // Handle error
+            return
+        }
+    
+    },
     async GetPembelian({ commit }){
         let response
         try {
@@ -252,6 +268,9 @@ const mutations = {
     },
     setEditPenjualan(state, editjual){
         state.editpenjualan = editjual
+    },
+    setEditAplusan(state, edita){
+        state.editaplusan = edita
     },
     setKupon(state, data){
         state.kupon = data
