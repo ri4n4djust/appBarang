@@ -86,7 +86,7 @@
                                         </li>
                                         <li>
                                             <!-- <a href="javascript:void(0);" class="dropdown-item" @click="view_row(props.row)">Edit </a> -->
-                                            <router-link :to="{name: 'edit-aplusan', params: {startDate: props.row.tgl_trans, kd_trans:props.row.kd_trans }}" class="dropdown-item">Edit</router-link>
+                                            <router-link :to="{name: 'edit-aplusan', params: {startDate: props.row.tgl_trans, kd_trans:props.row.kd_trans, regu:props.row.r_regu }}" class="dropdown-item">Edit</router-link>
                                         </li>
                                     </ul>
                                 </div>

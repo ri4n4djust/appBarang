@@ -101,6 +101,10 @@ const actions = {
         await dispatch('GetBarang')
         // await commit('setUser', detUser.data.user)
     },
+    // async editAplus({commit}, da) {
+    //     commit('setAplusan', da)
+    //     // await commit('setUser', detUser.data.user)
+    // },
     
 
 };

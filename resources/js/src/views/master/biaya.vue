@@ -124,8 +124,10 @@ const inputb = ref({
 
 onMounted(() =>{
     // getPelanggan();
-    getlistb();
-    localStorage.setItem('biaya', '[]')
+    setTimeout(() => {
+        getlistb();
+    }, 1000)
+    // localStorage.setItem('biaya', '[]')
 })
 
 const simpnBiaya = async () =>{

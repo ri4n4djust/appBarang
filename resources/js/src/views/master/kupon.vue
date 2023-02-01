@@ -104,7 +104,7 @@ import '@/assets/sass/forms/custom-flatpickr.css';
 import Multiselect from '@suadelabs/vue3-multiselect';
 import '@suadelabs/vue3-multiselect/dist/vue3-multiselect.css';
 
-import { computed, ref, onMounted } from 'vue';
+import { computed, ref, onMounted, onBeforeMount } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter, useRoute } from 'vue-router'
 import { async } from "q";
@@ -142,10 +142,17 @@ const kupon = computed(() => {
 onMounted(() =>{
     // console.log( cartKupon.value)
     getPelanggan();
-    getlist();
-    localStorage.setItem('kupon', '[]')
+    
+    setTimeout(() => {
+        getlist();
+    }, 1000)
+    // localStorage.setItem('kupon', '[]')
 
 
+})
+
+onBeforeMount(() =>{
+    // getlist();
 })
 
 const simpnKupon = async () =>{
@@ -180,7 +187,7 @@ const removeItem = (id) =>{
 
 const getlist = async () => {
     // await store.dispatch('GetPelanggan')
-    cartKupon.value = JSON.parse(localStorage.getItem('kupon')) || [];
+    cartKupon.value = JSON.parse(localStorage.getItem('kupon'));
     let sum = 0;
     cartKupon.value.forEach(element => {
         sum +=  parseInt(Number(element.nilaiKupon));

@@ -158,13 +158,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="item in items" :key="item.id">
+                    <tr v-for="item, index in items" :key="item.id">
                         <td>{{ item.nama_nosel }}</td>
                         <td>{{ item.awal_meter }}</td>
-                        <td>{{ item.last_meter }}</td>
-                        <td>{{ item.cost_ltr }}</td>
+                        <td>
+                            <!-- {{ item.last_meter }} -->
+                            <div :style="{ 'width': inpt + 'px' }">
+                                <input type="text" class="form-control form-control-sm col-sm-4" v-model="meter_now[index]" >
+                            </div>
+                        </td>
+                        <td>{{ Math.abs(meter_now[index] - item.awal_meter) }}</td>
                         <td>{{ Number(item.last_price).toLocaleString() }}</td>
-                        <td>{{ Number(item.total).toLocaleString() }}</td>
+                        <td>{{ Number((meter_now[index] - item.awal_meter) * item.last_price).toLocaleString() }}</td>
                     </tr>
                 </tbody>
                 <!-- <tfoot>
@@ -305,7 +310,7 @@
 </template>
 
 <script setup>
-    import { computed, onMounted, ref } from 'vue';
+    import { computed, onMounted, ref, onUnmounted } from 'vue';
 
     //pdf export
     import jsPDF from 'jspdf';
@@ -347,6 +352,9 @@
     const totalDexlite = ref();
     const totalLiterDexlite = ref();
 
+    const meter_now = ref({});
+    const regu = ref(null);
+
     const items = ref([]);
     const kupon = ref([]);
     const biaya = ref([]);
@@ -354,6 +362,7 @@
     const sorting = ref({
         startDate: moment(props.startDate).format("D-M-YYYY"),
         kd_trans: props.kd_trans,
+        regu: props.regu
         // endDate: moment().format("D-M-YYYY")
     });
 
@@ -361,40 +370,55 @@
         id: String,
         startDate: String,
         kd_trans: String,
-        last_price: String,
+        regu: String,
     });
     const date1 = ref(moment(props.startDate).format("YYYY-MM-DD"));
 
     onMounted(() => {
         bind_data();
+        getRegu();
         // total_aplusan();
     });
 
+    onUnmounted(() => {
+        // window.onbeforeunload = null
+        // alert('kal tutup')
+        localStorage.setItem('kupon', '[]')
+        store.dispatch('NewKupon')
+        localStorage.setItem('biaya', '[]')
+        store.dispatch('NewBiaya')
+        localStorage.setItem('link', '[]')
+        store.dispatch('NewLink')
+    })
+
     const nosels = computed(() => {
-        const nosel = store.getters.StateNosel;
+        const nosel = store.getters.Saplusan;
         const trs = store.getters.STransNosel;
         const regu = store.getters.STransNoselRegu;
+
         const kupon = store.getters.Skupon;
+        
         const biaya = store.getters.Sbiaya;
         const link = store.getters.Slink;
         return { nosel, trs, regu, kupon, biaya, link }
     });
     
     const simpan_all = () =>{
-        const nosel = store.getters.StateNosel;
+        const nosel = store.getters.Saplusan[0];
         // console.log(nosel)
 
         const tgl = moment(date1.value).format("YYYY-MM-DD")
         const tglc = moment(date1.value).format("YYYYMMDD")
         
         var dataArr = nosel
+        console.log(dataArr)
         const arr = [];
         let tota = 0;
         for (let i = 0; i < dataArr.length; i++) {
             // console.log({kdBarang : dataArr[i].r_kdBarang, nmBarang : dataArr[i].r_nmBarang,});
             let id_nosel = dataArr[i].id_nosel
             let cost = parseInt(meter_now.value[i]) - parseInt(dataArr[i].meter_akhir);
-            let subto = dataArr[i].harga * cost;
+            let subto = dataArr[i].last_price * cost;
             let last_meter =  meter_now.value[i];
             // let ket = keterangan.value[i]
             // if (!isNaN(subto)){
@@ -404,14 +428,15 @@
             // }
             arr.push ({
                 'kd_bbm': dataArr[i].r_bbm,
-                'kodeBrg': dataArr[i].r_code_bbm,
-                'kd_trans': tglc+regu.value,
-                'r_nosel': id_nosel,
-                'r_regu': regu.value,
-                'tgl_transaksi': tgl, 
-                'cost_ltr': cost, 
-                'last_price': dataArr[i].harga,
-                'awal_meter': dataArr[i].meter_akhir,
+                'kodeBrg': dataArr[i].code_bbm,
+                'nm_bbm': dataArr[i].nama_bbm,
+                'kd_trans': dataArr[i].kd_trans,
+                'r_nosel': dataArr[i].r_nosel,
+                'r_regu': dataArr[i].r_regu,
+                'tgl_transaksi': dataArr[i].tgl_transaksi,
+                'cost_ltr': dataArr[i].cost_ltr,
+                'last_price': dataArr[i].last_price,
+                'awal_meter': dataArr[i].awal_meter,
                 'last_meter':   meter_now.value[i],
                 'total': subto
             })
@@ -422,41 +447,41 @@
         }
         // console.log(arr)
         const arr_k = [];
-        const arr_kupon = store.getters.Skupon;
+        const arr_kupon = store.getters.Saplusan[1];
         let totak = 0;
         for (let i = 0; i < arr_kupon.length; i++) {
             arr_k.push ({
-                'kdPelanggan': arr_kupon[i].kdp,
-                'tglKupon': arr_kupon[i].tglKupon,
+                'kdPelanggan': arr_kupon[i].r_kdPelanggan,
+                'tglKupon': arr_kupon[i].tgl_trans,
                 'r_regu': regu.value,
-                'nilai': arr_kupon[i].nilaiKupon,
+                'nilai': arr_kupon[i].total,
                 // 'tgl_transaksi': tgl, 
             })
         }
         // console.log(arr)
         const arr_b = [];
-        const arr_biaya = store.getters.Sbiaya;
+        const arr_biaya = store.getters.Saplusan[2];
         let totab = 0;
         for (let a = 0; a < arr_biaya.length; a++) {
             arr_b.push ({
-                'ketBiaya': arr_biaya[a].ketBiaya,
+                'ketBiaya': arr_biaya[a].keterangan_biaya,
                 'tglBiaya': arr_biaya[a].tglBiaya,
                 'r_regu': regu.value,
-                'nilai': arr_biaya[a].nilaiBiaya,
+                'nilai': arr_biaya[a].jumlah,
                 // 'tgl_transaksi': tgl, 
             })
         }
 
         // console.log(arr)
         const arr_l = [];
-        const arr_link = store.getters.Slink;
+        const arr_link = store.getters.Saplusan[3];
         let totall = 0;
         for (let a = 0; a < arr_link.length; a++) {
             arr_l.push ({
-                'nm_bbm': arr_link[a].kdbm,
-                'tgl_link': arr_link[a].tglLink,
+                'nm_bbm': arr_link[a].nm_bbm,
+                'tgl_link': arr_link[a].tgl_link,
                 'r_regu': regu.value,
-                'jumlahLink': arr_link[a].nilaiLink,
+                'jumlahLink': arr_link[a].jumlah_link,
                 // 'tgl_transaksi': tgl, 
             })
         }
@@ -469,10 +494,82 @@
     const bind_data = async () => {
         await store.dispatch('GetAplusan', sorting.value);
         items.value = store.getters.Saplusan[0];
+        var dataArr = items.value
+        const arr = [];
+        let tota = 0;
+        for (let i = 0; i < dataArr.length; i++) {
+            // console.log({kdBarang : dataArr[i].r_kdBarang, nmBarang : dataArr[i].r_nmBarang,});
+            let id_nosel = dataArr[i].id_nosel
+            let cost = parseInt(meter_now.value[i]) - parseInt(dataArr[i].awal_meter);
+            let subto = dataArr[i].last_price * cost;
+            // let last_meter =  awal_meter.value[i];
+            // let ket = keterangan.value[i]
+            // if (!isNaN(subto)){
+            //     last_meter = '0';
+            // } else{
+            //     last_meter =  meter_now.value[i];
+            // }
+            arr.push ({
+                'kd_bbm': dataArr[i].r_bbm,
+                'kodeBrg': dataArr[i].code_bbm,
+                'kd_trans': dataArr[i].kd_trans,
+                'r_nosel': dataArr[i].id_nosel,
+                'r_regu': dataArr[i].r_regu,
+                'tgl_transaksi': moment(dataArr[i].tgl_transaksi).format('DD-MM-YYYY'), 
+                'cost_ltr': dataArr[i].cost_ltr,
+                'last_price': dataArr[i].last_price,
+                'awal_meter': dataArr[i].awal_meter,
+                'last_meter':   dataArr[i].last_meter,
+                'total': subto
+            })
+            tota += parseInt(subto)
+            // total.value = tota
+                console.log(tota)
+        
+        }
+        // await store.dispatch('editAplus', arr)
+
         kupon.value = store.getters.Saplusan[1];
-        localStorage.setItem('kupon', JSON.stringify(kupon.value))
+        var kupona = [];
+        let kuponArr = kupon.value
+        for (let i = 0; i < kuponArr.length; i++) {
+            kupona.push ({
+                'kdp': kuponArr[i].r_kdPelanggan,
+                'tglKupon': moment(kuponArr[i].tgl_trans).format('DD-MM-YYYY'),
+                'nilaiKupon': kuponArr[i].total,
+
+            })
+        }
+        localStorage.setItem('kupon', JSON.stringify(kupona))
+        await store.dispatch('NewKupon', kupona)
+
         biaya.value = store.getters.Saplusan[2];
+        var biayab = [];
+        let biayaArr = biaya.value
+        for (let i = 0; i < biayaArr.length; i++) {
+            biayab.push ({
+                'ketBiaya': biayaArr[i].keterangan_biaya,
+                'tglBiaya': moment(biayaArr[i].tglBiaya).format('DD-MM-YYYY'),
+                'nilaiBiaya': biayaArr[i].jumlah,
+
+            })
+        }
+        localStorage.setItem('biaya', JSON.stringify(biayab))
+        await store.dispatch('NewBiaya', biayab)
+
         link.value = store.getters.Saplusan[3];
+        var linkc = [];
+        let linkArr = link.value
+        for (let i = 0; i < biayaArr.length; i++) {
+            linkc.push ({
+                'kdbm': linkArr[i].nama_bbm,
+                'tglLink': moment(linkArr[i].tgl_link).format('DD-MM-YYYY'),
+                'nilaiLink': linkArr[i].jumlah_link,
+
+            })
+        }
+        localStorage.setItem('link', JSON.stringify(linkc))
+        await store.dispatch('NewLink', linkc)
         // let ar = items.value ;
         let sum = 0;
         items.value.forEach(element => {
@@ -529,7 +626,7 @@
         totalDexlite.value = totalDX
         totalLiterDexlite.value = totalLiterDX
 
-        console.log(totalPX)
+        // console.log(totalPX)
     }
 
     const barangs = computed(() => {
@@ -549,6 +646,9 @@
     //     // totaljual.value = sum;
     //     console.log(sum)
     // }
+    const getRegu=() => {
+        store.dispatch('GetTransNoselRegu')
+    }
 
     const export_table = (type) => {
         let cols = columns.value.filter((d) => d != 'profile' && d != 'action');

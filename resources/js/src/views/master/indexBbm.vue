@@ -156,7 +156,7 @@
                         <div class="wallet-balance">
                             <p>{{ list.nama_bbm }}</p>
                             <!-- <h5><span class="w-currency">$</span>2953</h5> -->
-                            <button class="btn btn-primary mb-2 me-1" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">PERUBAHAN HARGA</button>
+                            <button class="btn btn-primary mb-2 me-1" @click="openModal">PERUBAHAN HARGA</button>
                         </div>
                     </div>
 
@@ -174,53 +174,54 @@
                         </div>
                     </div>
                 </div>
+                <div ref="openModal"> dfsaf</div>
 
-                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Input Kupon</h5>
-                                <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <!-- <h4 class="modal-heading mb-4 mt-2">Aligned Center</h4> -->
-                                <form>
-                                    <div class="row mb-4">
-                                        <div class="col-sm-4">
-                                            <label for="inputState">Tgl</label>
-                                            <flat-pickr v-model="input_perubahan.tglPerubahan" 
-                                            :config="{dateFormat: 'd-m-Y', static: true}" 
-                                            class="form-control form-control-sm flatpickr active" placeholder="Due Date">
-                                            </flat-pickr>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-4">
-                                        <div class="col-sm">
-                                            <label for="inputState">Harga Terbaru</label>
-                                            <input v-model="input_perubahan.harga_baru" class="form-control form-control-sm" placeholder="Nilai" @keypress="onlyNumber" />
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <label for="inputState">Simpan</label><br>
-                                            <a class="btn btn-primary" @click="simpnPerubahan">Simpan</a>
-                                            <input v-model="list.code_bbm" class="form-control" placeholder="Kode"  />
-                                        </div>
-                                    </div>
-                                    
-                                </form>
-
-                                
-
-                            </div>
-                            <div class="modal-footer">
-                                <!-- <button type="button" class="btn" data-dismiss="modal" data-bs-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button> -->
-                                <!-- <button type="button" class="btn btn-primary">Save</button> -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
             
         </div>
+        <div class="modal fade" id="modal_demo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Input Kupon</h5>
+                        <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- <h4 class="modal-heading mb-4 mt-2">Aligned Center</h4> -->
+                        <form>
+                            <div class="row mb-4">
+                                <div class="col-sm-4">
+                                    <label for="inputState">Tgl</label>
+                                    <flat-pickr v-model="input_perubahan.tglPerubahan" 
+                                    :config="{dateFormat: 'd-m-Y', static: true}" 
+                                    class="form-control form-control-sm flatpickr active" placeholder="Due Date">
+                                    </flat-pickr>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-sm">
+                                    <label for="inputState">Harga Terbaru</label>
+                                    <input v-model="input_perubahan.harga_baru" class="form-control form-control-sm" placeholder="Nilai" @keypress="onlyNumber" />
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="inputState">Simpan</label><br>
+                                    <a class="btn btn-primary" @click="simpnPerubahan">Simpan</a>
+                                    <!-- <input v-model="list.code_bbm" class="form-control" placeholder="Kode"  /> -->
+                                </div>
+                            </div>
+                            
+                        </form>
 
+                        
+
+                    </div>
+                    <div class="modal-footer">
+                        <!-- <button type="button" class="btn" data-dismiss="modal" data-bs-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button> -->
+                        <!-- <button type="button" class="btn btn-primary">Save</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
 
           <!-- {{ users.bbm }}   -->
             
@@ -230,9 +231,11 @@
 </template>
 <script setup>
     import '@/assets/sass/widgets/widgets.scss';
-    import { computed, ref, onMounted } from 'vue';
+    import { computed, ref, onMounted, reactive } from 'vue';
     import { useStore } from 'vuex';
     import { useRouter, useRoute } from 'vue-router'
+
+    import { Modal } from 'bootstrap';
 
     import flatPickr from 'vue-flatpickr-component';
     import 'flatpickr/dist/flatpickr.css';
@@ -257,12 +260,15 @@
         return { users, bbm }
     });
 
-    
+    const modalRef = ref(null);
+    const openModal = () => Modal.getInstance(modalRef.value)?.show();
+
     onMounted(() => {
         function getData(){
             store.dispatch('GetBbm')
         }
         getData();
+       
     })
     
 </script>

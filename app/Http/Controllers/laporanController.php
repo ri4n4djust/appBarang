@@ -76,7 +76,7 @@ class laporanController extends Controller
         $lap = DB::table('tbltransaksi_nosel')
                 ->join('tblbbm', 'tblbbm.id', 'tbltransaksi_nosel.r_bbm')
                 ->join('tblnosel_detail', 'tblnosel_detail.id_nosel', 'tbltransaksi_nosel.r_nosel')
-                ->select('tbltransaksi_nosel.*', 'tblbbm.nama_bbm', 'tblnosel_detail.nama_nosel')
+                ->select('tbltransaksi_nosel.*', 'tblbbm.nama_bbm','tblbbm.code_bbm', 'tblnosel_detail.nama_nosel')
                 ->where('tbltransaksi_nosel.tgl_transaksi', [$startDate])
                 ->where('tbltransaksi_nosel.kd_trans', $kd_trans)
                 ->get();
