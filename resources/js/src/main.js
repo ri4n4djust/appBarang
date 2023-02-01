@@ -52,10 +52,13 @@ import appSetting from './app-setting';
 window.$appSetting = appSetting;
 window.$appSetting.init();
 
+
+import { vfmPlugin } from 'vue-final-modal'
+
 // Axio
 // import axios from 'axios';
 // axios.defaults.baseURL = 'http://localhost:8000/';
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
-app.use(store).use(router).use(i18n).use(PerfectScrollbar).use(VueNouislider).use(Maska).use(ClientTable).use(vue3JsonExcel).use(VueFormWizard).use(head).mount('#app');
+app.use(vfmPlugin).use(store).use(router).use(i18n).use(PerfectScrollbar).use(VueNouislider).use(Maska).use(ClientTable).use(vue3JsonExcel).use(VueFormWizard).use(head).mount('#app');

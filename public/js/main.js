@@ -27391,6 +27391,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue3_form_wizard__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! vue3-form-wizard */ "./node_modules/vue3-form-wizard/dist/vue3-form-wizard.es.js");
 /* harmony import */ var vue3_form_wizard_dist_style_css__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! vue3-form-wizard/dist/style.css */ "./node_modules/vue3-form-wizard/dist/style.css");
 /* harmony import */ var _app_setting__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./app-setting */ "./resources/js/src/app-setting.js");
+/* harmony import */ var vue_final_modal__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! vue-final-modal */ "./node_modules/vue-final-modal/dist/VueFinalModal.esm.js");
 
 
 
@@ -27432,13 +27433,14 @@ window.Swal = (sweetalert2__WEBPACK_IMPORTED_MODULE_9___default()); // nouislide
 
 
 window.$appSetting = _app_setting__WEBPACK_IMPORTED_MODULE_19__["default"];
-window.$appSetting.init(); // Axio
+window.$appSetting.init();
+ // Axio
 // import axios from 'axios';
 // axios.defaults.baseURL = 'http://localhost:8000/';
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
-app.use(_store__WEBPACK_IMPORTED_MODULE_3__["default"]).use(_router__WEBPACK_IMPORTED_MODULE_2__["default"]).use(_i18n__WEBPACK_IMPORTED_MODULE_14__["default"]).use(vue3_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_6__["default"]).use(vue3_nouislider__WEBPACK_IMPORTED_MODULE_10__["default"]).use(maska__WEBPACK_IMPORTED_MODULE_12__["default"]).use(v_tables_3__WEBPACK_IMPORTED_MODULE_15__.ClientTable).use((vue3_json_excel__WEBPACK_IMPORTED_MODULE_16___default())).use(vue3_form_wizard__WEBPACK_IMPORTED_MODULE_17__["default"]).use(head).mount('#app');
+app.use(vue_final_modal__WEBPACK_IMPORTED_MODULE_20__.vfmPlugin).use(_store__WEBPACK_IMPORTED_MODULE_3__["default"]).use(_router__WEBPACK_IMPORTED_MODULE_2__["default"]).use(_i18n__WEBPACK_IMPORTED_MODULE_14__["default"]).use(vue3_perfect_scrollbar__WEBPACK_IMPORTED_MODULE_6__["default"]).use(vue3_nouislider__WEBPACK_IMPORTED_MODULE_10__["default"]).use(maska__WEBPACK_IMPORTED_MODULE_12__["default"]).use(v_tables_3__WEBPACK_IMPORTED_MODULE_15__.ClientTable).use((vue3_json_excel__WEBPACK_IMPORTED_MODULE_16___default())).use(vue3_form_wizard__WEBPACK_IMPORTED_MODULE_17__["default"]).use(head).mount('#app');
 
 /***/ }),
 
@@ -28840,6 +28842,66 @@ var actions = {
           }
         }
       }, _callee4);
+    }))();
+  },
+  UpdateHargaBbm: function UpdateHargaBbm(_ref5, newhrg) {
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+      var dispatch, toast, _toast;
+
+      return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+        while (1) {
+          switch (_context5.prev = _context5.next) {
+            case 0:
+              dispatch = _ref5.dispatch;
+              _context5.prev = 1;
+              _context5.next = 4;
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('api/update/harga-bbm', newhrg);
+
+            case 4:
+              _context5.next = 6;
+              return dispatch('GetBbm');
+
+            case 6:
+              toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+              });
+              toast.fire({
+                icon: 'success',
+                title: 'Berhasil Simpan Barang',
+                padding: '2em'
+              });
+              _context5.next = 14;
+              break;
+
+            case 10:
+              _context5.prev = 10;
+              _context5.t0 = _context5["catch"](1);
+              _toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+              });
+
+              _toast.fire({
+                title: 'Error!',
+                text: 'gagal disimpan',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+              });
+
+            case 14:
+            case "end":
+              return _context5.stop();
+          }
+        }
+      }, _callee5, null, [[1, 10]]);
     }))();
   }
 };
@@ -56598,6 +56660,1713 @@ function install(app, globalOptions) {
 
 /***/ }),
 
+/***/ "./node_modules/vue-final-modal/dist/VueFinalModal.esm.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/vue-final-modal/dist/VueFinalModal.esm.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "$vfm": () => (/* binding */ $vfm),
+/* harmony export */   "ModalsContainer": () => (/* binding */ ModalsContainer),
+/* harmony export */   "VueFinalModal": () => (/* binding */ VueFinalModal),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   "defineVfm": () => (/* binding */ defineVfm),
+/* harmony export */   "vfmPlugin": () => (/* binding */ vfmPlugin)
+/* harmony export */ });
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function (obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function (obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+}
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+}
+
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+  return arr2;
+}
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+var FOCUSABLE_ELEMENTS_QUERY = 'button:not([disabled]), ' + 'select:not([disabled]), ' + 'a[href]:not([disabled]), ' + 'area[href]:not([disabled]), ' + '[contentEditable=""]:not([disabled]), ' + '[contentEditable="true"]:not([disabled]), ' + '[contentEditable="TRUE"]:not([disabled]), ' + 'textarea:not([disabled]), ' + 'iframe:not([disabled]), ' + 'input:not([disabled]), ' + 'summary:not([disabled]), ' + '[tabindex]:not([tabindex="-1"])';
+
+var isTabPressed = function isTabPressed(event) {
+  return event.key === 'Tab' || event.keyCode === 9;
+};
+
+var querySelectorAll = function querySelectorAll(element, selector) {
+  return _toConsumableArray(element.querySelectorAll(selector) || []);
+};
+
+var queryFocusableElements = function queryFocusableElements(element) {
+  return querySelectorAll(element, FOCUSABLE_ELEMENTS_QUERY);
+};
+
+var isFocused = function isFocused(element) {
+  return element == document.activeElement;
+};
+
+var isNothingFocused = function isNothingFocused() {
+  return !document.activeElement;
+};
+
+var FocusTrap = /*#__PURE__*/function () {
+  function FocusTrap() {
+    _classCallCheck(this, FocusTrap);
+
+    this.root = null;
+    this.elements = [];
+    this.onKeyDown = this.onKeyDown.bind(this);
+    this.enable = this.enable.bind(this);
+    this.disable = this.disable.bind(this);
+    this.firstElement = this.firstElement.bind(this);
+    this.lastElement = this.lastElement.bind(this);
+  }
+
+  _createClass(FocusTrap, [{
+    key: "lastElement",
+    value: function lastElement() {
+      return this.elements[this.elements.length - 1] || null;
+    }
+  }, {
+    key: "firstElement",
+    value: function firstElement() {
+      return this.elements[0] || null;
+    }
+  }, {
+    key: "onKeyDown",
+    value: function onKeyDown(event) {
+      if (!isTabPressed(event)) {
+        return;
+      }
+
+      if (event.shiftKey) {
+        if (isFocused(this.firstElement())) {
+          this.lastElement().focus();
+          event.preventDefault();
+        }
+
+        return;
+      }
+
+      if (isNothingFocused() || isFocused(this.lastElement())) {
+        this.firstElement().focus();
+        event.preventDefault();
+        return;
+      }
+    }
+  }, {
+    key: "enabled",
+    value: function enabled() {
+      return !!this.root;
+    }
+  }, {
+    key: "enable",
+    value: function enable(root) {
+      if (!root) {
+        return;
+      }
+
+      this.root = root;
+      this.elements = queryFocusableElements(this.root);
+      this.root.addEventListener('keydown', this.onKeyDown);
+    }
+  }, {
+    key: "disable",
+    value: function disable() {
+      this.root.removeEventListener('keydown', this.onKeyDown);
+      this.root = null;
+    }
+  }]);
+
+  return FocusTrap;
+}();
+
+var setStyle = function setStyle(el, key, value) {
+  var cacheStyle = el.style[key];
+  el.style[key] = value;
+  return function () {
+    el.style[key] = cacheStyle;
+  };
+};
+var getPosition = function getPosition(e) {
+  var _ref = e.targetTouches ? e.targetTouches[0] : e,
+      x = _ref.clientX,
+      y = _ref.clientY;
+
+  return {
+    x: x,
+    y: y
+  };
+};
+var capitalize = function capitalize(s) {
+  return s.charAt(0).toUpperCase() + s.slice(1);
+};
+var clamp = function clamp(min, num, max) {
+  if (typeof min !== 'number') {
+    min = Math.min(num, max) || num;
+  }
+
+  if (typeof max !== 'number') {
+    max = Math.max(num, min);
+  }
+
+  return Math.min(Math.max(num, min), max);
+};
+var trimPx = function trimPx(distance) {
+  return distance && Number(distance.replace(/px$/, '')) || 0;
+};
+var validDragElement = function validDragElement(e, el, dragSelector) {
+  if (dragSelector === '') return true;
+
+  var list = _toConsumableArray(el.querySelectorAll(dragSelector));
+
+  return list.includes(e.target);
+};
+var pointerType = {
+  down: {
+    pc: 'mousedown',
+    m: 'touchstart'
+  },
+  move: {
+    pc: 'mousemove',
+    m: 'touchmove'
+  },
+  up: {
+    pc: 'mouseup',
+    m: 'touchend'
+  }
+};
+var addListener = function addListener(type, el, callback) {
+  el && el.addEventListener(pointerType[type].pc, callback);
+  el && el.addEventListener(pointerType[type].m, callback, {
+    passive: false
+  });
+};
+var removeListener = function removeListener(type, el, callback) {
+  el && el.removeEventListener(pointerType[type].pc, callback);
+  el && el.removeEventListener(pointerType[type].m, callback);
+};
+
+var hasPassiveEvents = false;
+
+if (typeof window !== 'undefined') {
+  var passiveTestOptions = {
+    get passive() {
+      hasPassiveEvents = true;
+      return undefined;
+    }
+
+  };
+  window.addEventListener('testPassive', null, passiveTestOptions);
+  window.removeEventListener('testPassive', null, passiveTestOptions);
+}
+
+var isIosDevice = typeof window !== 'undefined' && window.navigator && window.navigator.platform && (/iP(ad|hone|od)/.test(window.navigator.platform) || window.navigator.platform === 'MacIntel' && window.navigator.maxTouchPoints > 1);
+var locks = [];
+var documentListenerAdded = false;
+var clientY = 0;
+var initialClientY = -1;
+var previousBodyOverflowSetting;
+var previousBodyPaddingRight;
+
+var hasScrollbar = function hasScrollbar(el) {
+  if (!el || el.nodeType !== Node.ELEMENT_NODE) return false;
+  var style = window.getComputedStyle(el);
+  return ['auto', 'scroll'].includes(style.overflowY) && el.scrollHeight > el.clientHeight;
+};
+
+var shouldScroll = function shouldScroll(el, delta) {
+  if (el.scrollTop === 0 && delta < 0) return false;
+  if (el.scrollTop + el.clientHeight + delta >= el.scrollHeight && delta > 0) return false;
+  return true;
+};
+
+var composedPath = function composedPath(el) {
+  var path = [];
+
+  while (el) {
+    path.push(el);
+    if (el.classList.contains('vfm')) return path;
+    el = el.parentElement;
+  }
+
+  return path;
+};
+
+var hasAnyScrollableEl = function hasAnyScrollableEl(el, delta) {
+  var hasAnyScrollableEl = false;
+  var path = composedPath(el);
+  path.forEach(function (el) {
+    if (hasScrollbar(el) && shouldScroll(el, delta)) {
+      hasAnyScrollableEl = true;
+    }
+  });
+  return hasAnyScrollableEl;
+};
+
+var allowTouchMove = function allowTouchMove(el) {
+  return locks.some(function () {
+    return hasAnyScrollableEl(el, -clientY);
+  });
+};
+
+var preventDefault = function preventDefault(rawEvent) {
+  var e = rawEvent || window.event;
+
+  if (allowTouchMove(e.target)) {
+    return true;
+  }
+
+  if (e.touches.length > 1) return true;
+  if (e.preventDefault) e.preventDefault();
+  return false;
+};
+
+var setOverflowHidden = function setOverflowHidden(options) {
+  if (previousBodyPaddingRight === undefined) {
+    var reserveScrollBarGap = !!options && options.reserveScrollBarGap === true;
+    var scrollBarGap = window.innerWidth - document.documentElement.clientWidth;
+
+    if (reserveScrollBarGap && scrollBarGap > 0) {
+      var computedBodyPaddingRight = parseInt(getComputedStyle(document.body).getPropertyValue('padding-right'), 10);
+      previousBodyPaddingRight = document.body.style.paddingRight;
+      document.body.style.paddingRight = "".concat(computedBodyPaddingRight + scrollBarGap, "px");
+    }
+  }
+
+  if (previousBodyOverflowSetting === undefined) {
+    previousBodyOverflowSetting = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+  }
+};
+
+var restoreOverflowSetting = function restoreOverflowSetting() {
+  if (previousBodyPaddingRight !== undefined) {
+    document.body.style.paddingRight = previousBodyPaddingRight;
+    previousBodyPaddingRight = undefined;
+  }
+
+  if (previousBodyOverflowSetting !== undefined) {
+    document.body.style.overflow = previousBodyOverflowSetting;
+    previousBodyOverflowSetting = undefined;
+  }
+};
+
+var isTargetElementTotallyScrolled = function isTargetElementTotallyScrolled(targetElement) {
+  return targetElement ? targetElement.scrollHeight - targetElement.scrollTop <= targetElement.clientHeight : false;
+};
+
+var handleScroll = function handleScroll(event, targetElement) {
+  clientY = event.targetTouches[0].clientY - initialClientY;
+
+  if (allowTouchMove(event.target)) {
+    return false;
+  }
+
+  if (targetElement && targetElement.scrollTop === 0 && clientY > 0) {
+    return preventDefault(event);
+  }
+
+  if (isTargetElementTotallyScrolled(targetElement) && clientY < 0) {
+    return preventDefault(event);
+  }
+
+  event.stopPropagation();
+  return true;
+};
+
+var disableBodyScroll = function disableBodyScroll(targetElement, options) {
+  if (!targetElement) {
+    console.error('disableBodyScroll unsuccessful - targetElement must be provided when calling disableBodyScroll on IOS devices.');
+    return;
+  }
+
+  if (locks.some(function (lock) {
+    return lock.targetElement === targetElement;
+  })) {
+    return;
+  }
+
+  var lock = {
+    targetElement: targetElement,
+    options: options || {}
+  };
+  locks = [].concat(_toConsumableArray(locks), [lock]);
+
+  if (isIosDevice) {
+    targetElement.ontouchstart = function (event) {
+      if (event.targetTouches.length === 1) {
+        initialClientY = event.targetTouches[0].clientY;
+      }
+    };
+
+    targetElement.ontouchmove = function (event) {
+      if (event.targetTouches.length === 1) {
+        handleScroll(event, targetElement);
+      }
+    };
+
+    if (!documentListenerAdded) {
+      document.addEventListener('touchmove', preventDefault, hasPassiveEvents ? {
+        passive: false
+      } : undefined);
+      documentListenerAdded = true;
+    }
+  } else {
+    setOverflowHidden(options);
+  }
+};
+var enableBodyScroll = function enableBodyScroll(targetElement) {
+  if (!targetElement) {
+    console.error('enableBodyScroll unsuccessful - targetElement must be provided when calling enableBodyScroll on IOS devices.');
+    return;
+  }
+
+  locks = locks.filter(function (lock) {
+    return lock.targetElement !== targetElement;
+  });
+
+  if (isIosDevice) {
+    targetElement.ontouchstart = null;
+    targetElement.ontouchmove = null;
+
+    if (documentListenerAdded && locks.length === 0) {
+      document.removeEventListener('touchmove', preventDefault, hasPassiveEvents ? {
+        passive: false
+      } : undefined);
+      documentListenerAdded = false;
+    }
+  } else if (!locks.length) {
+    restoreOverflowSetting();
+  }
+};
+
+var noop = function noop() {};
+
+var TransitionState = {
+  Enter: 'enter',
+  Entering: 'entering',
+  Leave: 'leave',
+  Leaving: 'leavng'
+};
+var resizeCursor = {
+  t: 'ns-resize',
+  tr: 'nesw-resize',
+  r: 'ew-resize',
+  br: 'nwse-resize',
+  b: 'ns-resize',
+  bl: 'nesw-resize',
+  l: 'ew-resize',
+  tl: 'nwse-resize'
+};
+var script$1 = {
+  props: {
+    name: {
+      type: String,
+      "default": null
+    },
+    modelValue: {
+      type: Boolean,
+      "default": false
+    },
+    ssr: {
+      type: Boolean,
+      "default": true
+    },
+    classes: {
+      type: [String, Object, Array],
+      "default": ''
+    },
+    overlayClass: {
+      type: [String, Object, Array],
+      "default": ''
+    },
+    contentClass: {
+      type: [String, Object, Array],
+      "default": ''
+    },
+    styles: {
+      type: [Object, Array],
+      "default": function _default() {
+        return {};
+      }
+    },
+    overlayStyle: {
+      type: [Object, Array],
+      "default": function _default() {
+        return {};
+      }
+    },
+    contentStyle: {
+      type: [Object, Array],
+      "default": function _default() {
+        return {};
+      }
+    },
+    lockScroll: {
+      type: Boolean,
+      "default": true
+    },
+    hideOverlay: {
+      type: Boolean,
+      "default": false
+    },
+    clickToClose: {
+      type: Boolean,
+      "default": true
+    },
+    escToClose: {
+      type: Boolean,
+      "default": false
+    },
+    preventClick: {
+      type: Boolean,
+      "default": false
+    },
+    attach: {
+      type: null,
+      "default": false,
+      validator: function validator(val) {
+        var type = _typeof(val);
+
+        if (type === 'boolean' || type === 'string') return true;
+        return val.nodeType === Node.ELEMENT_NODE;
+      }
+    },
+    transition: {
+      type: [String, Object],
+      "default": 'vfm'
+    },
+    overlayTransition: {
+      type: [String, Object],
+      "default": 'vfm'
+    },
+    keepOverlay: {
+      type: Boolean,
+      "default": false
+    },
+    zIndexAuto: {
+      type: Boolean,
+      "default": true
+    },
+    zIndexBase: {
+      type: [String, Number],
+      "default": 1000
+    },
+    zIndex: {
+      type: [Boolean, String, Number],
+      "default": false
+    },
+    focusRetain: {
+      type: Boolean,
+      "default": true
+    },
+    focusTrap: {
+      type: Boolean,
+      "default": false
+    },
+    fitParent: {
+      type: Boolean,
+      "default": true
+    },
+    drag: {
+      type: Boolean,
+      "default": false
+    },
+    dragSelector: {
+      type: String,
+      "default": ''
+    },
+    keepChangedStyle: {
+      type: Boolean,
+      "default": false
+    },
+    resize: {
+      type: Boolean,
+      "default": false
+    },
+    resizeDirections: {
+      type: Array,
+      "default": function _default() {
+        return ['t', 'tr', 'r', 'br', 'b', 'bl', 'l', 'tl'];
+      },
+      validator: function validator(val) {
+        return ['t', 'tr', 'r', 'br', 'b', 'bl', 'l', 'tl'].filter(function (value) {
+          return val.indexOf(value) !== -1;
+        }).length === val.length;
+      }
+    },
+    minWidth: {
+      type: Number,
+      "default": 0
+    },
+    minHeight: {
+      type: Number,
+      "default": 0
+    },
+    maxWidth: {
+      type: Number,
+      "default": Infinity
+    },
+    maxHeight: {
+      type: Number,
+      "default": Infinity
+    }
+  },
+  emits: ['update:modelValue', 'click-outside', 'before-open', 'opened', 'before-close', 'closed', '_before-open', '_opened', '_closed', 'drag:start', 'drag:move', 'drag:end', 'resize:start', 'resize:move', 'resize:end'],
+  setup: function setup(props, _ref) {
+    var emit = _ref.emit;
+    var uid = Symbol('vfm');
+    var root = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
+    var vfmContainer = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
+    var vfmContent = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
+    var vfmResize = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
+    var vfmOverlayTransition = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
+    var vfmTransition = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
+    var modalStackIndex = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
+    var $focusTrap = new FocusTrap();
+    var visible = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
+    var visibility = (0,vue__WEBPACK_IMPORTED_MODULE_0__.reactive)({
+      modal: false,
+      overlay: false,
+      resize: false
+    });
+    var overlayTransitionState = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
+    var modalTransitionState = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
+
+    var _stopEvent = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
+
+    var params = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({});
+    var dragResizeStyle = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)({});
+
+    var _state = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
+
+    var lastMousedownEl = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(null);
+    var _resolveToggle = noop;
+    var _rejectToggle = noop;
+    var computedOverlayTransition = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      if (typeof props.overlayTransition === 'string') return {
+        name: props.overlayTransition
+      };
+      return _objectSpread2({}, props.overlayTransition);
+    });
+    var computedTransition = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      if (typeof props.transition === 'string') return {
+        name: props.transition
+      };
+      return _objectSpread2({}, props.transition);
+    });
+    var isComponentReadyToBeDestroyed = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return (props.hideOverlay || overlayTransitionState.value === TransitionState.Leave) && modalTransitionState.value === TransitionState.Leave;
+    });
+    var calculateZIndex = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      if (props.zIndex === false) {
+        if (props.zIndexAuto) {
+          return +props.zIndexBase + 2 * (modalStackIndex.value || 0);
+        } else {
+          return false;
+        }
+      } else {
+        return props.zIndex;
+      }
+    });
+    var bindStyle = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      return _objectSpread2({}, calculateZIndex.value !== false && {
+        zIndex: calculateZIndex.value
+      });
+    });
+    var bindContentStyle = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+      var style = [dragResizeStyle.value];
+      Array.isArray(props.contentStyle) ? style.push.apply(style, _toConsumableArray(props.contentStyle)) : style.push(props.contentStyle);
+      return style;
+    });
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(function () {
+      return props.modelValue;
+    }, function (value) {
+      if (_stopEvent.value) {
+        _stopEvent.value = false;
+        return;
+      }
+
+      mounted();
+
+      if (!value) {
+        if (emitEvent('before-close', true)) {
+          _rejectToggle('hide');
+
+          return;
+        }
+
+        close();
+      }
+    });
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(function () {
+      return props.lockScroll;
+    }, handleLockScroll);
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(function () {
+      return props.hideOverlay;
+    }, function (value) {
+      if (props.modelValue && !value) {
+        visibility.overlay = true;
+      }
+    });
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(function () {
+      return props.attach;
+    }, mounted);
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(isComponentReadyToBeDestroyed, function (val) {
+      if (val) {
+        visible.value = false;
+        vfmContainer.value.style.display = 'none';
+      }
+    }, {
+      flush: 'post'
+    });
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(function () {
+      return props.drag;
+    }, function (val) {
+      if (visible.value) {
+        val ? addDragDown() : removeDragDown();
+      }
+    });
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(function () {
+      return props.resize;
+    }, function (val) {
+      if (visible.value) {
+        val ? addResizeDown() : removeResizeDown();
+      }
+    });
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.watch)(function () {
+      return props.keepChangedStyle;
+    }, function (val) {
+      if (!val) {
+        dragResizeStyle.value = {};
+      }
+    });
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onMounted)(function () {
+      props.api.modals.push(getModalInfo());
+      mounted();
+    });
+    (0,vue__WEBPACK_IMPORTED_MODULE_0__.onBeforeUnmount)(function () {
+      var _root$value;
+
+      close();
+      props.lockScroll && vfmContainer.value && enableBodyScroll(vfmContainer.value);
+      root === null || root === void 0 ? void 0 : (_root$value = root.value) === null || _root$value === void 0 ? void 0 : _root$value.remove();
+      var index = props.api.modals.findIndex(function (vm) {
+        return vm.uid === uid;
+      });
+      props.api.modals.splice(index, 1);
+    });
+
+    function getModalInfo() {
+      return {
+        uid: uid,
+        props: props,
+        emit: emit,
+        vfmContainer: vfmContainer,
+        vfmContent: vfmContent,
+        vfmResize: vfmResize,
+        vfmOverlayTransition: vfmOverlayTransition,
+        vfmTransition: vfmTransition,
+        getAttachElement: getAttachElement,
+        modalStackIndex: modalStackIndex,
+        visibility: visibility,
+        handleLockScroll: handleLockScroll,
+        $focusTrap: $focusTrap,
+        toggle: toggle,
+        params: params
+      };
+    }
+
+    function mounted() {
+      if (props.modelValue) {
+        emit('_before-open', createModalEvent({
+          type: '_before-open'
+        }));
+
+        if (emitEvent('before-open', false)) {
+          _rejectToggle('show');
+
+          return;
+        }
+
+        var target = getAttachElement();
+
+        if (target || props.attach === false) {
+          if (props.attach !== false) {
+            if (root.value) {
+              target.appendChild(root.value);
+            } else {
+              visible.value = true;
+              (0,vue__WEBPACK_IMPORTED_MODULE_0__.nextTick)(function () {
+                mounted();
+              });
+              return;
+            }
+          }
+
+          var index = props.api.openedModals.findIndex(function (vm) {
+            return vm.uid === uid;
+          });
+
+          if (index !== -1) {
+            props.api.openedModals.splice(index, 1);
+          }
+
+          props.api.openedModals.push(getModalInfo());
+          modalStackIndex.value = props.api.openedModals.length - 1;
+          handleLockScroll();
+          props.api.openedModals.filter(function (vm) {
+            return vm.uid !== uid;
+          }).forEach(function (vm, index) {
+            if (vm.getAttachElement() === target) {
+              vm.modalStackIndex.value = index;
+              !vm.props.keepOverlay && (vm.visibility.overlay = false);
+            }
+          });
+          visible.value = true;
+          startTransitionEnter();
+        } else if (target !== false) {
+          console.warn('Unable to locate target '.concat(props.attach));
+        }
+      }
+    }
+
+    function close() {
+      var index = props.api.openedModals.findIndex(function (vm) {
+        return vm.uid === uid;
+      });
+
+      if (index !== -1) {
+        props.api.openedModals.splice(index, 1);
+      }
+
+      if (props.api.openedModals.length > 0) {
+        var $_vm = props.api.openedModals[props.api.openedModals.length - 1];
+        $_vm.props.focusTrap && $_vm.$focusTrap.firstElement().focus();
+
+        if ($_vm.props.focusRetain || $_vm.props.focusTrap) {
+          $_vm.vfmContainer.value.focus();
+        }
+
+        !$_vm.props.hideOverlay && ($_vm.visibility.overlay = true);
+      }
+
+      props.drag && removeDragDown();
+      props.resize && removeResizeDown();
+      _state.value = null;
+      startTransitionLeave();
+    }
+
+    function handleLockScroll() {
+      if (props.modelValue) {
+        (0,vue__WEBPACK_IMPORTED_MODULE_0__.nextTick)(function () {
+          if (props.lockScroll) {
+            disableBodyScroll(vfmContainer.value, {
+              reserveScrollBarGap: true
+            });
+          } else {
+            enableBodyScroll(vfmContainer.value);
+          }
+        });
+      }
+    }
+
+    function getAttachElement() {
+      var target;
+
+      if (props.attach === false) {
+        target = false;
+      } else if (typeof props.attach === 'string') {
+        if (window) {
+          target = window.document.querySelector(props.attach);
+        } else {
+          target = false;
+        }
+      } else {
+        target = props.attach;
+      }
+
+      return target;
+    }
+
+    function startTransitionEnter() {
+      visibility.overlay = true;
+      visibility.modal = true;
+    }
+
+    function startTransitionLeave() {
+      visibility.overlay = false;
+      visibility.modal = false;
+    }
+
+    function beforeOverlayEnter() {
+      overlayTransitionState.value = TransitionState.Entering;
+    }
+
+    function afterOverlayEnter() {
+      overlayTransitionState.value = TransitionState.Enter;
+    }
+
+    function beforeOverlayLeave() {
+      overlayTransitionState.value = TransitionState.Leaving;
+    }
+
+    function afterOverlayLeave() {
+      overlayTransitionState.value = TransitionState.Leave;
+    }
+
+    function beforeModalEnter() {
+      modalTransitionState.value = TransitionState.Entering;
+    }
+
+    function afterModalEnter() {
+      modalTransitionState.value = TransitionState.Enter;
+
+      if (props.focusRetain || props.focusTrap) {
+        vfmContainer.value.focus();
+      }
+
+      props.focusTrap && $focusTrap.enable(vfmContainer.value);
+      props.drag && addDragDown();
+      props.resize && addResizeDown();
+      emit('_opened');
+      emit('opened', createModalEvent({
+        type: 'opened'
+      }));
+
+      _resolveToggle('show');
+    }
+
+    function beforeModalLeave() {
+      modalTransitionState.value = TransitionState.Leaving;
+
+      if ($focusTrap.enabled()) {
+        $focusTrap.disable();
+      }
+    }
+
+    function afterModalLeave() {
+      modalTransitionState.value = TransitionState.Leave;
+      modalStackIndex.value = null;
+      props.lockScroll && enableBodyScroll(vfmContainer.value);
+
+      if (!props.keepChangedStyle) {
+        dragResizeStyle.value = {};
+      }
+
+      var stopEvent = false;
+      var event = createModalEvent({
+        type: 'closed',
+        stop: function stop() {
+          stopEvent = true;
+        }
+      });
+      emit('_closed');
+      emit('closed', event);
+
+      _resolveToggle('hide');
+
+      if (stopEvent) return;
+      params.value = {};
+    }
+
+    function onMousedown(e) {
+      lastMousedownEl.value = e === null || e === void 0 ? void 0 : e.target;
+    }
+
+    function onMouseupContainer() {
+      if (lastMousedownEl.value !== vfmContainer.value) return;
+      if (_state.value === 'resize:move') return;
+      emit('click-outside', createModalEvent({
+        type: 'click-outside'
+      }));
+      props.clickToClose && emit('update:modelValue', false);
+    }
+
+    function onEsc() {
+      if (visible.value && props.escToClose) {
+        emit('update:modelValue', false);
+      }
+    }
+
+    function createModalEvent() {
+      var eventProps = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      return _objectSpread2({
+        ref: getModalInfo()
+      }, eventProps);
+    }
+
+    function emitEvent(eventType, value) {
+      var stopEvent = false;
+      var event = createModalEvent({
+        type: eventType,
+        stop: function stop() {
+          stopEvent = true;
+        }
+      });
+      emit(eventType, event);
+
+      if (stopEvent) {
+        _stopEvent.value = true;
+        (0,vue__WEBPACK_IMPORTED_MODULE_0__.nextTick)(function () {
+          emit('update:modelValue', value);
+        });
+        return true;
+      }
+
+      return false;
+    }
+
+    function emitState(e, state, action) {
+      _state.value = "".concat(state, ":").concat(action);
+      emit(_state.value, e);
+    }
+
+    function toggle(show, _params) {
+      var _arguments = arguments;
+      return new Promise(function (resolve, reject) {
+        _resolveToggle = function resolveToggle(res) {
+          resolve(res);
+          _resolveToggle = noop;
+        };
+
+        _rejectToggle = function rejectToggle(err) {
+          reject(err);
+          _rejectToggle = noop;
+        };
+
+        var value = typeof show === 'boolean' ? show : !props.modelValue;
+
+        if (value && _arguments.length === 2) {
+          params.value = _params;
+        }
+
+        emit('update:modelValue', value);
+      });
+    }
+
+    function pointerDown(e) {
+      e.stopPropagation();
+      var STATE_RESIZE = 'resize';
+      var STATE_DRAG = 'drag';
+      var direction = e.target.getAttribute('direction');
+      var state;
+
+      if (direction) {
+        state = STATE_RESIZE;
+      } else if (validDragElement(e, vfmContent.value, props.dragSelector)) {
+        state = STATE_DRAG;
+      } else {
+        return;
+      }
+
+      emitState(e, state, 'start');
+      var down = getPosition(e);
+      var rectContainer = vfmContainer.value.getBoundingClientRect();
+      var rectContent = vfmContent.value.getBoundingClientRect();
+      var isAbsolute = window.getComputedStyle(vfmContent.value).position === 'absolute';
+      var position = {
+        top: trimPx(dragResizeStyle.value.top),
+        left: trimPx(dragResizeStyle.value.left)
+      };
+
+      var limit = function () {
+        if (props.fitParent) {
+          var _limit = {
+            absolute: function absolute() {
+              return {
+                minTop: 0,
+                minLeft: 0,
+                maxTop: rectContainer.height - rectContent.height,
+                maxLeft: rectContainer.width - rectContent.width
+              };
+            },
+            relative: function relative() {
+              return {
+                minTop: position.top + rectContainer.top - rectContent.top,
+                minLeft: position.left + rectContainer.left - rectContent.left,
+                maxTop: position.top + rectContainer.bottom - rectContent.bottom,
+                maxLeft: position.left + rectContainer.right - rectContent.right
+              };
+            }
+          };
+          return isAbsolute ? _limit.absolute() : _limit.relative();
+        } else {
+          return {};
+        }
+      }();
+
+      var resetBodyCursor = state === STATE_RESIZE && setStyle(document.body, 'cursor', resizeCursor[direction]);
+
+      var moving = function moving(e) {
+        e.stopPropagation();
+        emitState(e, state, 'move');
+        var move = getPosition(e);
+        var offset = {
+          x: move.x - down.x,
+          y: move.y - down.y
+        };
+
+        if (state === STATE_RESIZE) {
+          offset = getResizeOffset(direction, offset, rectContainer, rectContent, isAbsolute);
+        }
+
+        var top;
+        var left;
+
+        if (isAbsolute) {
+          top = rectContent.top - rectContainer.top + offset.y;
+          left = rectContent.left - rectContainer.left + offset.x;
+        } else {
+          top = position.top + offset.y;
+          left = position.left + offset.x;
+        }
+
+        if (state === STATE_DRAG && props.fitParent) {
+          top = clamp(limit.minTop, top, limit.maxTop);
+          left = clamp(limit.minLeft, left, limit.maxLeft);
+        }
+
+        var style = _objectSpread2(_objectSpread2(_objectSpread2({
+          position: 'relative',
+          top: top + 'px',
+          left: left + 'px',
+          margin: 'unset',
+          touchAction: 'none'
+        }, isAbsolute && {
+          position: 'absolute',
+          transform: 'unset',
+          width: rectContent.width + 'px',
+          height: rectContent.height + 'px'
+        }), offset.width && {
+          width: offset.width + 'px'
+        }), offset.height && {
+          height: offset.height + 'px'
+        });
+
+        dragResizeStyle.value = _objectSpread2(_objectSpread2({}, dragResizeStyle.value), style);
+      };
+
+      var end = function end(e) {
+        e.stopPropagation();
+
+        if (state === STATE_RESIZE) {
+          resetBodyCursor && resetBodyCursor();
+        }
+
+        setTimeout(function () {
+          emitState(e, state, 'end');
+        });
+        removeListener('move', document, moving);
+        removeListener('up', document, end);
+      };
+
+      addListener('move', document, moving);
+      addListener('up', document, end);
+    }
+
+    function addDragDown() {
+      addListener('down', vfmContent.value, pointerDown);
+      dragResizeStyle.value.touchAction = 'none';
+    }
+
+    function removeDragDown() {
+      removeListener('down', vfmContent.value, pointerDown);
+    }
+
+    function addResizeDown() {
+      visibility.resize = true;
+      (0,vue__WEBPACK_IMPORTED_MODULE_0__.nextTick)(function () {
+        addListener('down', vfmResize.value, pointerDown);
+      });
+    }
+
+    function removeResizeDown() {
+      removeListener('down', vfmResize.value, pointerDown);
+      visibility.resize = false;
+    }
+
+    function getResizeOffset(direction, offset, rectContainer, rectContent, isAbsolute) {
+      var setOffset = function setOffset(dir) {
+        var _ref2;
+
+        var offsetAxis = offset[dir.axis];
+        offsetAxis = props.fitParent ? clamp(dir.min, offsetAxis, dir.max) : offsetAxis;
+        var edge = clamp(dir.minEdge, dir.getEdge(offsetAxis), dir.maxEdge);
+        offsetAxis = dir.getOffsetAxis(edge, isAbsolute);
+        return _ref2 = {}, _defineProperty(_ref2, dir.edgeName, edge), _defineProperty(_ref2, dir.axis, offsetAxis), _ref2;
+      };
+
+      var getDirectionInfo = function getDirectionInfo(position, edgeName, axis, isPositive) {
+        var rectContentEdge = rectContent[edgeName];
+        var positionOffset = rectContainer[position] - rectContent[position];
+        var EdgeName = capitalize(edgeName);
+        return {
+          axis: axis,
+          edgeName: edgeName,
+          min: isPositive ? positionOffset : -rectContentEdge,
+          max: isPositive ? rectContentEdge : positionOffset,
+          minEdge: props["min".concat(EdgeName)],
+          maxEdge: props["max".concat(EdgeName)],
+          getEdge: function getEdge(offsetAxis) {
+            return rectContent[edgeName] - offsetAxis * (isPositive ? 1 : -1);
+          },
+          getOffsetAxis: function getOffsetAxis(edge, isAbsolute) {
+            var offsetAxis = rectContent[edgeName] - edge;
+
+            if (isAbsolute) {
+              return isPositive ? offsetAxis : 0;
+            } else {
+              return (isPositive ? 1 : -1) * offsetAxis / 2;
+            }
+          }
+        };
+      };
+
+      var directions = {
+        t: ['top', 'height', 'y', true],
+        b: ['bottom', 'height', 'y', false],
+        l: ['left', 'width', 'x', true],
+        r: ['right', 'width', 'x', false]
+      };
+      var _offset = {
+        x: 0,
+        y: 0
+      };
+      direction.split('').forEach(function (dir) {
+        var directionInfo = getDirectionInfo.apply(void 0, _toConsumableArray(directions[dir]));
+        _offset = _objectSpread2(_objectSpread2({}, _offset), setOffset(directionInfo));
+      });
+      return _offset;
+    }
+
+    return {
+      root: root,
+      vfmContainer: vfmContainer,
+      vfmContent: vfmContent,
+      vfmResize: vfmResize,
+      vfmOverlayTransition: vfmOverlayTransition,
+      vfmTransition: vfmTransition,
+      computedOverlayTransition: computedOverlayTransition,
+      computedTransition: computedTransition,
+      visible: visible,
+      visibility: visibility,
+      params: params,
+      calculateZIndex: calculateZIndex,
+      bindStyle: bindStyle,
+      bindContentStyle: bindContentStyle,
+      beforeOverlayEnter: beforeOverlayEnter,
+      afterOverlayEnter: afterOverlayEnter,
+      beforeOverlayLeave: beforeOverlayLeave,
+      afterOverlayLeave: afterOverlayLeave,
+      beforeModalEnter: beforeModalEnter,
+      afterModalEnter: afterModalEnter,
+      beforeModalLeave: beforeModalLeave,
+      afterModalLeave: afterModalLeave,
+      onMousedown: onMousedown,
+      onMouseupContainer: onMouseupContainer,
+      onEsc: onEsc
+    };
+  }
+};
+
+var _withId = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withScopeId)("data-v-2836fdb5");
+
+(0,vue__WEBPACK_IMPORTED_MODULE_0__.pushScopeId)("data-v-2836fdb5");
+
+var _hoisted_1$1 = {
+  key: 0,
+  ref: "vfmResize",
+  "class": "vfm__resize vfm--absolute vfm--inset vfm--prevent-none vfm--select-none vfm--touch-none"
+};
+
+(0,vue__WEBPACK_IMPORTED_MODULE_0__.popScopeId)();
+
+var render$1 = _withId(function (_ctx, _cache, $props, $setup, $data, $options) {
+  return $props.ssr || $setup.visible ? (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)(((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+    key: 0,
+    ref: "root",
+    style: $setup.bindStyle,
+    "class": ["vfm vfm--inset", [$props.attach === false ? 'vfm--fixed' : 'vfm--absolute', {
+      'vfm--prevent-none': $props.preventClick
+    }]],
+    onKeydown: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withKeys)(function () {
+      return $setup.onEsc && $setup.onEsc.apply($setup, arguments);
+    }, ["esc"]))
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, (0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)($setup.computedOverlayTransition, {
+    onBeforeEnter: $setup.beforeOverlayEnter,
+    onAfterEnter: $setup.afterOverlayEnter,
+    onBeforeLeave: $setup.beforeOverlayLeave,
+    onAfterLeave: $setup.afterOverlayLeave
+  }), {
+    "default": _withId(function () {
+      return [!$props.hideOverlay && $setup.visibility.overlay ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+        key: 0,
+        "class": ["vfm__overlay vfm--overlay vfm--absolute vfm--inset", $props.overlayClass],
+        style: $props.overlayStyle
+      }, null, 6)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)];
+    }),
+    _: 1
+  }, 16, ["onBeforeEnter", "onAfterEnter", "onBeforeLeave", "onAfterLeave"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(vue__WEBPACK_IMPORTED_MODULE_0__.Transition, (0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)($setup.computedTransition, {
+    onBeforeEnter: $setup.beforeModalEnter,
+    onAfterEnter: $setup.afterModalEnter,
+    onBeforeLeave: $setup.beforeModalLeave,
+    onAfterLeave: $setup.afterModalLeave
+  }), {
+    "default": _withId(function () {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+        ref: "vfmContainer",
+        "class": ["vfm__container vfm--absolute vfm--inset vfm--outline-none", $props.classes],
+        style: $props.styles,
+        "aria-expanded": $setup.visibility.modal.toString(),
+        role: "dialog",
+        "aria-modal": "true",
+        tabindex: "-1",
+        onMouseup: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+          return $setup.onMouseupContainer && $setup.onMouseupContainer.apply($setup, arguments);
+        }, ["self"])),
+        onMousedown: _cache[3] || (_cache[3] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+          return $setup.onMousedown && $setup.onMousedown.apply($setup, arguments);
+        }, ["self"]))
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+        ref: "vfmContent",
+        "class": ["vfm__content", [$props.contentClass, {
+          'vfm--prevent-auto': $props.preventClick
+        }]],
+        style: $setup.bindContentStyle,
+        onMousedown: _cache[1] || (_cache[1] = function ($event) {
+          return $setup.onMousedown(null);
+        })
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default", {
+        params: $setup.params,
+        close: function close() {
+          return _ctx.$emit('update:modelValue', false);
+        }
+      }), $setup.visibility.resize && $setup.visibility.modal ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1$1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.resizeDirections, function (direction) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+          key: direction,
+          direction: direction,
+          "class": ["vfm--resize-".concat(direction), "vfm--absolute vfm--prevent-auto"]
+        }, null, 10, ["direction"]);
+      }), 128))], 512)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 38)], 46, ["aria-expanded"]), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, $setup.visibility.modal]])];
+    }),
+    _: 3
+  }, 16, ["onBeforeEnter", "onAfterEnter", "onBeforeLeave", "onAfterLeave"])], 38)), [[vue__WEBPACK_IMPORTED_MODULE_0__.vShow, !$props.ssr || $setup.visible]]) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
+});
+
+function styleInject(css, ref) {
+  if (ref === void 0) ref = {};
+  var insertAt = ref.insertAt;
+
+  if (!css || typeof document === 'undefined') {
+    return;
+  }
+
+  var head = document.head || document.getElementsByTagName('head')[0];
+  var style = document.createElement('style');
+  style.type = 'text/css';
+
+  if (insertAt === 'top') {
+    if (head.firstChild) {
+      head.insertBefore(style, head.firstChild);
+    } else {
+      head.appendChild(style);
+    }
+  } else {
+    head.appendChild(style);
+  }
+
+  if (style.styleSheet) {
+    style.styleSheet.cssText = css;
+  } else {
+    style.appendChild(document.createTextNode(css));
+  }
+}
+
+var css_248z = "\n.vfm--fixed[data-v-2836fdb5] {\n  position: fixed;\n}\n.vfm--absolute[data-v-2836fdb5] {\n  position: absolute;\n}\n.vfm--inset[data-v-2836fdb5] {\n  top: 0;\n  right: 0;\n  bottom: 0;\n  left: 0;\n}\n.vfm--overlay[data-v-2836fdb5] {\n  background-color: rgba(0, 0, 0, 0.5);\n}\n.vfm--prevent-none[data-v-2836fdb5] {\n  pointer-events: none;\n}\n.vfm--prevent-auto[data-v-2836fdb5] {\n  pointer-events: auto;\n}\n.vfm--outline-none[data-v-2836fdb5]:focus {\n  outline: none;\n}\n.vfm-enter-active[data-v-2836fdb5],\n.vfm-leave-active[data-v-2836fdb5] {\n  transition: opacity 0.2s;\n}\n.vfm-enter-from[data-v-2836fdb5],\n.vfm-leave-to[data-v-2836fdb5] {\n  opacity: 0;\n}\n.vfm--touch-none[data-v-2836fdb5] {\n  touch-action: none;\n}\n.vfm--select-none[data-v-2836fdb5] {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none;\n}\n.vfm--resize-tr[data-v-2836fdb5],\n.vfm--resize-br[data-v-2836fdb5],\n.vfm--resize-bl[data-v-2836fdb5],\n.vfm--resize-tl[data-v-2836fdb5] {\n  width: 12px;\n  height: 12px;\n  z-index: 10;\n}\n.vfm--resize-t[data-v-2836fdb5] {\n  top: -6px;\n  left: 0;\n  width: 100%;\n  height: 12px;\n  cursor: ns-resize;\n}\n.vfm--resize-tr[data-v-2836fdb5] {\n  top: -6px;\n  right: -6px;\n  cursor: nesw-resize;\n}\n.vfm--resize-r[data-v-2836fdb5] {\n  top: 0;\n  right: -6px;\n  width: 12px;\n  height: 100%;\n  cursor: ew-resize;\n}\n.vfm--resize-br[data-v-2836fdb5] {\n  bottom: -6px;\n  right: -6px;\n  cursor: nwse-resize;\n}\n.vfm--resize-b[data-v-2836fdb5] {\n  bottom: -6px;\n  left: 0;\n  width: 100%;\n  height: 12px;\n  cursor: ns-resize;\n}\n.vfm--resize-bl[data-v-2836fdb5] {\n  bottom: -6px;\n  left: -6px;\n  cursor: nesw-resize;\n}\n.vfm--resize-l[data-v-2836fdb5] {\n  top: 0;\n  left: -6px;\n  width: 12px;\n  height: 100%;\n  cursor: ew-resize;\n}\n.vfm--resize-tl[data-v-2836fdb5] {\n  top: -6px;\n  left: -6px;\n  cursor: nwse-resize;\n}\n";
+styleInject(css_248z);
+
+script$1.render = render$1;
+script$1.__scopeId = "data-v-2836fdb5";
+script$1.__file = "lib/VueFinalModal.vue";
+
+var script = {
+  props: {},
+  methods: {
+    slice: function slice(index) {
+      this.api.dynamicModals.splice(index, 1);
+    },
+    beforeOpen: function beforeOpen(e, modal, index) {
+      var _this = this;
+
+      return _asyncToGenerator(function* () {
+        e.ref.params.value = modal.params;
+        yield _this.$nextTick();
+        yield _this.$nextTick();
+
+        if (!modal.value) {
+          _this.slice(index);
+
+          modal.reject('show');
+        }
+      })();
+    },
+    isString: function isString(val) {
+      return typeof val === 'string';
+    }
+  }
+};
+
+var _hoisted_1 = {
+  "class": "modals-container"
+};
+function render(_ctx, _cache, $props, $setup, $data, $options) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.api.dynamicModals, function (modal, index) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)(modal.component), (0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)({
+      key: modal.id
+    }, modal.bind, {
+      modelValue: modal.value,
+      "onUpdate:modelValue": function onUpdateModelValue($event) {
+        return modal.value = $event;
+      }
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toHandlers)(modal.on), {
+      on_closed: function on_closed($event) {
+        return $options.slice(index);
+      },
+      on_beforeOpen: function on_beforeOpen(e) {
+        return $options.beforeOpen(e, modal);
+      },
+      on_opened: modal.opened
+    }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createSlots)({
+      _: 2
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(modal.slots, function (slot, key) {
+      return {
+        name: key,
+        fn: (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" eslint-disable vue/no-v-html "), $options.isString(slot) ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+            key: 0,
+            innerHTML: slot
+          }, null, 8, ["innerHTML"])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)((0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveDynamicComponent)(slot.component), (0,vue__WEBPACK_IMPORTED_MODULE_0__.mergeProps)({
+            key: 1
+          }, slot.bind, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toHandlers)(slot.on || {})), null, 16))];
+        })
+      };
+    })]), 1040, ["modelValue", "onUpdate:modelValue", "on_closed", "on_beforeOpen", "on_opened"]);
+  }), 128))]);
+}
+
+script.render = render;
+script.__file = "lib/ModalsContainer.vue";
+
+function defineApi() {
+  var _modalComponent = null;
+  return {
+    show: function show(modal) {
+      var _this = this;
+
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+
+      switch (_typeof(modal)) {
+        case 'string':
+          return this.toggle.apply(this, [modal, true].concat(args));
+
+        case 'object':
+          {
+            return Promise.allSettled([new Promise(function (resolve, reject) {
+              var defaultModal = {
+                value: true,
+                id: Symbol('dynamicModal'),
+                component: _modalComponent,
+                bind: {},
+                slots: {},
+                on: {},
+                params: args[0],
+                reject: reject,
+                opened: function opened() {
+                  resolve('show');
+                }
+              };
+
+              _this.dynamicModals.push((0,vue__WEBPACK_IMPORTED_MODULE_0__.shallowReactive)(Object.assign(defaultModal, modal)));
+            })]);
+          }
+      }
+    },
+    hide: function hide() {
+      for (var _len2 = arguments.length, names = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        names[_key2] = arguments[_key2];
+      }
+
+      return this.toggle(names, false);
+    },
+    hideAll: function hideAll() {
+      return this.hide.apply(this, _toConsumableArray(this.openedModals.map(function (modal) {
+        return modal.props.name;
+      })));
+    },
+    toggle: function toggle(name) {
+      for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
+        args[_key3 - 1] = arguments[_key3];
+      }
+
+      var modals = Array.isArray(name) ? this.get.apply(this, _toConsumableArray(name)) : this.get(name);
+      return Promise.allSettled(modals.map(function (modal) {
+        return modal.toggle.apply(modal, args);
+      }));
+    },
+    get: function get() {
+      for (var _len4 = arguments.length, names = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+        names[_key4] = arguments[_key4];
+      }
+
+      return this.modals.filter(function (modal) {
+        return names.includes(modal.props.name);
+      });
+    },
+    dynamicModals: (0,vue__WEBPACK_IMPORTED_MODULE_0__.shallowReactive)([]),
+    openedModals: [],
+    modals: [],
+    _setDefaultModal: function _setDefaultModal(modalComponent) {
+      _modalComponent = modalComponent;
+    }
+  };
+}
+
+function bindApi(component, api) {
+  var _component = _objectSpread2(_objectSpread2({}, component), {}, {
+    props: _objectSpread2({}, component.props)
+  });
+
+  Object.assign(_component.props, {
+    api: {
+      type: Object,
+      "default": function _default() {
+        return api;
+      }
+    }
+  });
+  return _component;
+}
+
+function defineModal(api) {
+  var modalComponent = bindApi(script$1, api);
+
+  api._setDefaultModal(modalComponent);
+
+  return modalComponent;
+}
+function defineContainer(api) {
+  return bindApi(script, api);
+}
+
+var _count = 0;
+var _key = '$vfm';
+var _componentName = 'VueFinalModal';
+var _dynamicContainerName = 'ModalsContainer';
+var defineVfm = function defineVfm() {
+  var _ref;
+
+  var api = defineApi();
+  return _ref = {}, _defineProperty(_ref, _key, api), _defineProperty(_ref, _componentName, defineModal(api)), _defineProperty(_ref, _dynamicContainerName, defineContainer(api)), _ref;
+};
+
+var _vfm = defineVfm();
+
+var $vfm = _vfm.$vfm,
+    VueFinalModal = _vfm.VueFinalModal,
+    ModalsContainer = _vfm.ModalsContainer;
+
+var installVfm = function installVfm(App) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+  var _ref2 = _count === 0 ? _vfm : defineVfm(),
+      $vfm = _ref2.$vfm,
+      VueFinalModal = _ref2.VueFinalModal,
+      ModalsContainer = _ref2.ModalsContainer;
+
+  _count += 1;
+  var key = options.key || _key;
+  var componentName = options.componentName || _componentName;
+  var dynamicContainerName = options.dynamicContainerName || _dynamicContainerName;
+  Object.defineProperty(App.config.globalProperties, key, {
+    get: function get() {
+      return $vfm;
+    }
+  });
+  App.provide(key, $vfm);
+  App.component(componentName, VueFinalModal);
+  App.component(dynamicContainerName, ModalsContainer);
+};
+
+var vfmPlugin = function vfmPlugin(pluginOptions) {
+  return {
+    install: function install(App, options) {
+      var _options = Object.assign({}, pluginOptions, options);
+
+      installVfm(App, _options);
+    }
+  };
+};
+vfmPlugin.install = installVfm;
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (vfmPlugin);
+
+//# sourceMappingURL=VueFinalModal.esm.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-i18n/dist/vue-i18n.esm-bundler.js":
 /*!************************************************************!*\
   !*** ./node_modules/vue-i18n/dist/vue-i18n.esm-bundler.js ***!
@@ -71513,7 +73282,7 @@ module.exports = JSON.parse('{"dashboard":"仪表盘","sales":"销售量","analy
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/chunks/" + chunkId + "." + {"index2":"3f2f5b1faba69db1","components-tabs":"a95b33cebde71704","components-accordions":"958ef92098fb530f","components-modals":"e6514e571555b5c0","components-cards":"e7583a4cf5564f04","components-carousel":"8563fc4e88cba5e0","components-timeline":"7ae9d528985dc414","components-media-object":"d265e1f0556c5b23","components-list-group":"20680dcbffabc997","components-pricing-table":"b87be2673dcf64d6","components-notifications":"9206fc33e5c150fe","components-lightbox":"b9458fb55cd5c6f3","components-countdown":"e221fbc8b2816ca0","components-counter":"f7283742d443ef25","components-sweetalert":"5594131df6de8802","font-icons":"a2506faf3ba6a9f7","pages-helpdesk":"dcb617b851894fab","pages-contact-us":"2b82aa6a11b77c2e","pages-faq":"08ea3b394d276c8f","pages-faq2":"b3656798f889ae16","pages-privacy-policy":"5b1dba6f010460d1","pages-coming-soon":"3625eb8d5e9f9c18","pages-error404":"b6b7b2f9a83218ee","pages-error500":"3339dbd448847368","pages-error503":"a95ec8c784080110","pages-maintenence":"3d08473adb247530","pages-blank-page":"0c1ac99ccc41961d","pages-sample":"9994ba18d7cb12e8","auth-login-boxed":"035dc3c8eeee6d3e","auth-register-boxed":"d614be638b7cb772","auth-lockscreen-boxed":"32b2d256b6dca6d3","auth-pass-recovery-boxed":"57ba933f69001944","auth-login":"11978aa9265265c9","auth-register":"a5f635bb185472b7","auth-lockscreen":"f692ce3fe9e2f169","auth-pass-recovery":"4cc4878d9baefab2","elements-alerts":"cce791b51da55ebf","elements-avatar":"808a6756ade77be7","elements-badges":"ceecf745922b9465","elements-breadcrumbs":"1722a5e9bc7f1a7d","elements-buttons":"fdac3a00bec52991","elements-buttons-group":"df319f66de56889a","elements-color-library":"b9c63e419c8c300b","elements-dropdown":"72e3ecb8205bc421","elements-infobox":"399934d0b9db2526","elements-jumbotron":"67620b84089a4b94","elements-loader":"3b649aacbbfa08fc","elements-pagination":"21204cc9b1c64185","elements-popovers":"130b77ef0926b915","elements-progress-bar":"30e876cd9de41f5b","elements-search":"b464253c225723d6","elements-tooltips":"3a4ec3115056b6b3","elements-treeview":"bca134389bae1a9b","elements-typography":"ac9cf4c49da4113a","tables":"6c7b752437b29866","users-profile":"49b36e78cefd7a4d","users-account-setting":"8a78452ac615966d","dragndrop":"45472aaa1012adce","charts-apex-chart":"d2f00a623aa3eb04","widgets":"b7fa9c006c6aebb0","forms-basic":"e774256dd6bf57bd","forms-input-group":"b0a3fce5817ce26b","forms-layouts":"e821a21bb2a879bf","forms-validation":"defac56a58186d1e","forms-checkbox-radio":"8c34dd2d66375144","forms-switches":"d60eef87f12531fd","forms-wizards":"77004ec359284e8d","forms-file-upload":"bd9f24848a2ef3ab","forms-clipboard":"0121ffa0f1ea0fc2","forms-date-picker":"52e788a5ab0cfd5b","forms-input-mask":"07ba756f40e98ad2","forms-quill-editor":"9e844664b525b753","forms-touchspin":"51e9b225799b1f12","forms-markdown-editor":"b8621b45c5b9f34b","forms-select2":"3275ea104c3e4206","apps-chat":"bd22a683e25f8d2e","apps-mailbox":"7e1c8a42f1809bd2","apps-todo-list":"9a40985eb471a29c","apps-contacts":"384a513eb6c8af7b","apps-notes":"36ecb7aab3e00af0","apps-scrumboard":"84af3a190bfda676","apps-calendar":"bcd6e575d633f439","apps-invoice-list":"0feaedf5952fdfff","apps-invoice-preview":"d9edd83168389f6b","apps-invoice-add":"087bfcc722043974","apps-invoice-edit":"5918fd58d1493481","tables-basic":"accd1005371fe815","tables-striped":"c14f35060df00cfc","tables-order-sorting":"58cc150f515bdba7","tables-multi-column":"cbd5693c21f08e50","tables-multiple-tables":"3cd0712f58b2a919","tables-alt-pagination":"83a6a0f7048933e6","tables-custom":"5f92dc2605fc71d8","tables-range-search":"10af2f97198a32b7","tables-export":"ca03023830dd14e6","tables-live-dom-ordering":"f380465fda483f23","tables-miscellaneous":"3f826e4b9e0d2831","node_modules_html2canvas_dist_html2canvas_js":"5475dc17eb928a5a","node_modules_dompurify_dist_purify_js":"9dabfec756329575","node_modules_canvg_lib_index_es_js":"84de45b397df7f27"}[chunkId] + ".js";
+/******/ 			return "js/chunks/" + chunkId + "." + {"index2":"3f2f5b1faba69db1","components-tabs":"cb0f16afadc830b2","components-accordions":"958ef92098fb530f","components-modals":"e6514e571555b5c0","components-cards":"e7583a4cf5564f04","components-carousel":"8563fc4e88cba5e0","components-timeline":"7ae9d528985dc414","components-media-object":"d265e1f0556c5b23","components-list-group":"20680dcbffabc997","components-pricing-table":"b87be2673dcf64d6","components-notifications":"9206fc33e5c150fe","components-lightbox":"b9458fb55cd5c6f3","components-countdown":"e221fbc8b2816ca0","components-counter":"f7283742d443ef25","components-sweetalert":"5594131df6de8802","font-icons":"a2506faf3ba6a9f7","pages-helpdesk":"dcb617b851894fab","pages-contact-us":"2b82aa6a11b77c2e","pages-faq":"08ea3b394d276c8f","pages-faq2":"b3656798f889ae16","pages-privacy-policy":"5b1dba6f010460d1","pages-coming-soon":"3625eb8d5e9f9c18","pages-error404":"b6b7b2f9a83218ee","pages-error500":"3339dbd448847368","pages-error503":"a95ec8c784080110","pages-maintenence":"3d08473adb247530","pages-blank-page":"0c1ac99ccc41961d","pages-sample":"9994ba18d7cb12e8","auth-login-boxed":"035dc3c8eeee6d3e","auth-register-boxed":"d614be638b7cb772","auth-lockscreen-boxed":"32b2d256b6dca6d3","auth-pass-recovery-boxed":"57ba933f69001944","auth-login":"11978aa9265265c9","auth-register":"a5f635bb185472b7","auth-lockscreen":"f692ce3fe9e2f169","auth-pass-recovery":"4cc4878d9baefab2","elements-alerts":"cce791b51da55ebf","elements-avatar":"808a6756ade77be7","elements-badges":"ceecf745922b9465","elements-breadcrumbs":"1722a5e9bc7f1a7d","elements-buttons":"fdac3a00bec52991","elements-buttons-group":"df319f66de56889a","elements-color-library":"b9c63e419c8c300b","elements-dropdown":"72e3ecb8205bc421","elements-infobox":"399934d0b9db2526","elements-jumbotron":"67620b84089a4b94","elements-loader":"3b649aacbbfa08fc","elements-pagination":"21204cc9b1c64185","elements-popovers":"130b77ef0926b915","elements-progress-bar":"30e876cd9de41f5b","elements-search":"b464253c225723d6","elements-tooltips":"3a4ec3115056b6b3","elements-treeview":"bca134389bae1a9b","elements-typography":"ac9cf4c49da4113a","tables":"6c7b752437b29866","users-profile":"49b36e78cefd7a4d","users-account-setting":"8a78452ac615966d","dragndrop":"45472aaa1012adce","charts-apex-chart":"d2f00a623aa3eb04","widgets":"b7fa9c006c6aebb0","forms-basic":"e774256dd6bf57bd","forms-input-group":"b0a3fce5817ce26b","forms-layouts":"e821a21bb2a879bf","forms-validation":"defac56a58186d1e","forms-checkbox-radio":"8c34dd2d66375144","forms-switches":"d60eef87f12531fd","forms-wizards":"77004ec359284e8d","forms-file-upload":"bd9f24848a2ef3ab","forms-clipboard":"0121ffa0f1ea0fc2","forms-date-picker":"52e788a5ab0cfd5b","forms-input-mask":"07ba756f40e98ad2","forms-quill-editor":"9e844664b525b753","forms-touchspin":"51e9b225799b1f12","forms-markdown-editor":"b8621b45c5b9f34b","forms-select2":"3275ea104c3e4206","apps-chat":"bd22a683e25f8d2e","apps-mailbox":"7e1c8a42f1809bd2","apps-todo-list":"9a40985eb471a29c","apps-contacts":"384a513eb6c8af7b","apps-notes":"36ecb7aab3e00af0","apps-scrumboard":"84af3a190bfda676","apps-calendar":"bcd6e575d633f439","apps-invoice-list":"0feaedf5952fdfff","apps-invoice-preview":"d9edd83168389f6b","apps-invoice-add":"087bfcc722043974","apps-invoice-edit":"5918fd58d1493481","tables-basic":"accd1005371fe815","tables-striped":"c14f35060df00cfc","tables-order-sorting":"58cc150f515bdba7","tables-multi-column":"cbd5693c21f08e50","tables-multiple-tables":"3cd0712f58b2a919","tables-alt-pagination":"83a6a0f7048933e6","tables-custom":"5f92dc2605fc71d8","tables-range-search":"10af2f97198a32b7","tables-export":"ca03023830dd14e6","tables-live-dom-ordering":"f380465fda483f23","tables-miscellaneous":"3f826e4b9e0d2831","node_modules_html2canvas_dist_html2canvas_js":"5475dc17eb928a5a","node_modules_dompurify_dist_purify_js":"9dabfec756329575","node_modules_canvg_lib_index_es_js":"84de45b397df7f27"}[chunkId] + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	

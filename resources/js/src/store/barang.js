@@ -81,6 +81,7 @@ const actions = {
         }
     
     },
+    
     async EditBarang({dispatch}, Brg) {
         await axios.post('api/update/barang', Brg)
         await dispatch('GetBarang')
@@ -91,6 +92,7 @@ const actions = {
         await dispatch('GetBarang')
         // await commit('setUser', detUser.data.user)
     },
+
     
 
 };

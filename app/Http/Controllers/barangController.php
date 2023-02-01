@@ -276,7 +276,6 @@ class barangController extends Controller
                         'qtyMin'       => $qtymin,
                         'qtyMax'   => $qtymax,
                         'deskripsi'     => 'des',
-                        'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                         'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                     ]
                 );
@@ -306,5 +305,47 @@ class barangController extends Controller
          ], 400);
         }
 
+    }
+
+    public function updateHrgBbm(Request $request){
+        try{
+            $exception = DB::transaction(function() use ($request){ 
+                $kdBarang = $request->input('code_bbm');
+                Bbm::where('code_bbm', $kdBarang)->update([
+                    'sale_price' => $request->input('harga_baru'),
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                ]);
+                DB::table('tblnosel_detail')->where('r_code_bbm', $kdBarang)->update([
+                    'harga' => $request->input('harga_baru'),
+                ]);
+                DB::table('tblperubahan_hargabbm')->insert([
+                    'harga_lama'   => $request->input('harga_lama'),
+                    'harga_baru' => $request->input('harga_baru'),
+                    'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                ]);
+                DB::commit();
+            });
+            if(is_null($exception)) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Barang Berhasil di insert!',
+                    // 'data' => $detail
+                ], 200);
+            } else {
+                DB::rollback();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Post Gagal Diupdate!',
+                ], 500);
+            }
+        } catch (\Exception $e) {
+            //DB::rollback();
+            // something went wrong
+            return response()->json([
+             'success' => false,
+             'message' => 'exception'.$e,
+         ], 400);
+        }
     }
 }

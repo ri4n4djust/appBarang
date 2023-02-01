@@ -71,6 +71,8 @@ Route::get('/kdpelanggan', [App\Http\Controllers\nomorController::class, 'kodePe
 // });
 Route::get('/bbm', [App\Http\Controllers\barangController::class, 'indexBbm']);
 Route::post('/nosel', [App\Http\Controllers\barangController::class, 'indexNosel']);
+Route::post('/update/harga-bbm', [App\Http\Controllers\barangController::class, 'updateHrgBbm']);
+
 
 // Route::post('/store/transnosel', [App\Http\Controllers\transaksiNoselController::class, 'simpantrx']);
 Route::post('/store/transnosel', [App\Http\Controllers\transaksiNoselController::class, 'saveNoselArray']);

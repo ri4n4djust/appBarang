@@ -28,7 +28,40 @@ const actions = {
         await dispatch('GetBbm')
         // await commit('setUser', detUser.data.user)
     },
-    
+    async UpdateHargaBbm({dispatch}, newhrg){
+        try{
+            await axios.post('api/update/harga-bbm', newhrg)
+            await dispatch('GetBbm')
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Berhasil Simpan Barang',
+                padding: '2em',
+            });
+        } catch (err){
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'gagal disimpan',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+
+        }
+    },
 
 };
 const mutations = {
