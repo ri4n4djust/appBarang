@@ -67,6 +67,12 @@ const routes = [
 
     // transaksi
     {
+        path: '/po-bbm',
+        name: 'po-bbm',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/poBbm.vue'),
+        props: true,
+    },
+    {
         path: '/pembelian',
         name: 'pembelian',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/pembelian.vue'),

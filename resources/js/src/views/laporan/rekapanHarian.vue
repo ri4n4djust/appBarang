@@ -72,9 +72,9 @@
                                                                 <tbody>
                                                                     <tr v-for="item in items" :key="item.id">
                                                                         <td>{{ item.nama_nosel }}</td>
-                                                                        <td>{{ item.awal_meter }}</td>
-                                                                        <td>{{ item.last_meter }}</td>
-                                                                        <td>{{ item.cost_ltr }}</td>
+                                                                        <td>{{ Number(item.awal_meter).toLocaleString() }}</td>
+                                                                        <td>{{ Number(item.last_meter).toLocaleString() }}</td>
+                                                                        <td>{{ Number(item.cost_ltr).toLocaleString() }}</td>
                                                                         <td>{{ Number(item.last_price).toLocaleString() }}</td>
                                                                         <td>{{ Number(item.total).toLocaleString() }}</td>
                                                                     </tr>
@@ -215,15 +215,8 @@
 
                                                 
 
-                                                <div class="inv--detail-section inv--customer-detail-section">
+                                                <!-- <div class="inv--detail-section inv--customer-detail-section">
                                                     <div class="row">
-                                                        <!-- <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4 align-self-center">
-                                                            <p class="inv-to">Invoice To</p>
-                                                        </div>
-
-                                                        <div class="col-xl-4 col-lg-5 col-md-6 col-sm-8 align-self-center order-sm-0 order-1 inv--payment-info">
-                                                            <h6 class="inv-title">Payment Info:</h6>
-                                                        </div> -->
 
                                                         <div class="col-sm-4">
                                                             <p class="inv-customer-name">Jesse Cory</p>
@@ -247,7 +240,7 @@
                                                         </div>
 
                                                     </div>
-                                                </div>
+                                                </div> -->
 
 
 
