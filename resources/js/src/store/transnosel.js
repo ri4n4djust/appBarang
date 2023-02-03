@@ -64,8 +64,8 @@ const actions = {
         await dispatch('GetTransNosel')
         // await commit('setUser', detUser.data.user)
     },
-    async DeleteTransNosel({dispatch}, id) {
-        await axios.delete(`api/hapus/transnosel/${id}`)
+    async DeleteAplusan({dispatch}, id) {
+        await axios.delete(`/api/hapus/aplusan/${id}`)
         await dispatch('GetTransNosel')
         // await commit('setUser', detUser.data.user)
     },

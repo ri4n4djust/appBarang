@@ -20,7 +20,7 @@
         <div class="row layout-top-spacing">
             <div class="col-12 layout-spacing">
                 <div class="panel br-6">
-                    <div class="custom-table panel-body p-0">
+                    <div class="custom-table panel-body p-2">
 
                         <div class="d-flex flex-wrap justify-content-center justify-content-sm-start px-3 pt-3 pb-0">
                             <!-- <button variant="primary" class="btn m-1 btn-primary" @click="export_table('print')">Print</button> -->
@@ -88,6 +88,9 @@
                                             <!-- <a href="javascript:void(0);" class="dropdown-item" @click="view_row(props.row)">Edit </a> -->
                                             <router-link :to="{name: 'edit-aplusan', params: {startDate: props.row.tgl_trans, kd_trans:props.row.kd_trans, regu:props.row.r_regu }}" class="dropdown-item">Edit</router-link>
                                         </li>
+                                        <li>
+                                            <a href="javascript:void(0);" class="dropdown-item" @click="delete_row(props.row)"> Delete </a>
+                                        </li>
                                     </ul>
                                 </div>
                             </template>
@@ -97,10 +100,11 @@
                         
                     </div>
                 </div>
+                
             </div>
         </div>
 
-
+        
         <!--  -->
 
 
@@ -152,6 +156,7 @@
             down: 'sort-icon-desc',
         },
         resizableColumns: true,
+        resizableRows: true,
     });
     const sorting = ref({
         startDate: moment().subtract(30,'d').format("D-M-YYYY"),
@@ -313,5 +318,24 @@
         console.log(item)
         router.push({ name: 'rekapan', params: { data: item.id }, props: true })
         // alert('ID: '+ item);
+    };
+    const delete_row = (item) => {
+        // modalinput.value = true
+        // alert('ID: ' + item.kdBarang + ', Name: ' + item.nmBarang);
+        new window.Swal({
+            title: 'Anda Yahin?',
+            text: "Hapus Aplusan !" +item.kd_trans,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Delete',
+            padding: '2em'
+        }).then(result => {
+            if (result.value) {
+                store.dispatch('DeleteAplusan', item.kd_trans);
+                bind_data();
+                new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
+
+            }
+        });
     };
 </script>

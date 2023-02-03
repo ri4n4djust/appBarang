@@ -138,7 +138,7 @@ class transaksiNoselController extends Controller
                         $detail[] = [
                             'r_bbm'     =>  $detop[$i]['kd_bbm'],
                             'r_nosel'     => $detop[$i]['r_nosel'],
-                            'kd_trans'     => $detop[$i]['kd_trans'],
+                            'kd_trans'     => $kdtrans,
                             'r_regu'     => $detop[$i]['r_regu'],
                             'tgl_transaksi'   => $detop[$i]['tgl_transaksi'],
                             'cost_ltr'    => $detop[$i]['cost_ltr'],
@@ -150,7 +150,7 @@ class transaksiNoselController extends Controller
                             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                         ];
 
-                        // $total_jual += $detop[$i]['total'];
+                        $total_j += $detop[$i]['total'];
                         // $total_qty += $detop[$i]['cost_ltr'];
                         // $total_beli = $oldStokBbm->lastPrice * $total_jual;
                         // DB::table('tblprofit')->insert([
@@ -279,9 +279,10 @@ class transaksiNoselController extends Controller
                     $total_hpp = $detpro[$i]['total_hpp'];
                     $total_harga = $detpro[$i]['total_harga'];
                     $total_liter = $detpro[$i]['total_liter'];
-
-                    DB::table('tblprofit')->insert([
+                    
+                    $detpr[] = [
                         'tgl_profit' => $tgl,
+                        'kd_trans'  => $kdtrans,
                         'kdBarang'  => $detpro[$i]['kdBbm'],
                         'hpp_beli'  => $total_hpp,
                         'qty_laku'  =>$total_liter,
@@ -289,10 +290,10 @@ class transaksiNoselController extends Controller
                         'margin_laku'   => $total_harga - $total_hpp,
                         'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                         'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-                    ]);
-
+                    ];
+                    
                 };
-            
+                DB::table('tblprofit')->insert($detpr);
 
             DB::commit();
             });
@@ -356,5 +357,11 @@ class transaksiNoselController extends Controller
             'data' => $regu
         ], 200);
 
+    }
+
+    public function deleteAplusan($id){
+        DB::table('tblheader_aplusan')->where('kd_trans', $id)->delete();
+        DB::table('tblprofit')->where('kd_trans', $id)->delete();
+        DB::table('tbltransaksi_nosel')->where('kd_trans', $id)->delete();
     }
 }

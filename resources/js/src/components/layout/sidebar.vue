@@ -285,7 +285,7 @@
                             <router-link to="/laporan/opnum" @click="toggleMobileMenu">Laporan Opnum</router-link>
                         </li>
                         <li>
-                            <router-link to="/forms/select2" @click="toggleMobileMenu">Select2</router-link>
+                            <router-link to="/laporan/labarugi" @click="toggleMobileMenu">Laba Rugi</router-link>
                         </li>
                         <li>
                             <router-link to="/forms/touchspin" @click="toggleMobileMenu">TouchSpin</router-link>

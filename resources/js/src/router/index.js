@@ -152,6 +152,12 @@ const routes = [
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/laporanOpnum.vue'),
         props: true,
     },
+    {
+        path: '/laporan/labarugi',
+        name: 'laporan-labarugi',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/laporanLabarugi.vue'),
+        // props: true,
+    },
 
     //components
     {

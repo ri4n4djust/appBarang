@@ -88,7 +88,7 @@
                                             <th role="columnheader" scope="col" aria-colindex="2"><div>nama</div></th>
                                             <th role="columnheader" scope="col" aria-colindex="3"><div>stok</div></th>
                                             <th role="columnheader" scope="col" aria-colindex="4"><div>satuan</div></th>
-                                            <th role="columnheader" scope="col" aria-colindex="5"><div>Qty</div></th>
+                                            <th role="columnheader" scope="col" aria-colindex="5"><div>REAL </div></th>
                                             <th role="columnheader" scope="col" aria-colindex="5"><div>Keterangan</div></th>
                                             <th role="columnheader" scope="col" aria-colindex="5"><div>Selisih</div></th>
                                         </tr>

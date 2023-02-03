@@ -315,13 +315,12 @@
         
         var dataArr = nosel
         const arr = [];
-        // var tota = 0;
-        let totalpx = 0;
         for (let i = 0; i < dataArr.length; i++) {
             // console.log({kdBarang : dataArr[i].r_kdBarang, nmBarang : dataArr[i].r_nmBarang,});
             let id_nosel = dataArr[i].id_nosel
             let cost = meter_now.value[i] - dataArr[i].meter_akhir  || 0;
             let subto = dataArr[i].harga * cost || 0;
+            let subtohpp = dataArr[i].last_price * cost || 0;
             // subto = subto ?? 0 ;
             let last_meter =  meter_now.value[i];
             // let ket = keterangan.value[i]
@@ -342,7 +341,8 @@
                 'last_price': dataArr[i].harga,
                 'awal_meter': dataArr[i].meter_akhir,
                 'last_meter':   meter_now.value[i],
-                'total': subto
+                'total': subto,
+                'totalhpp': subtohpp,
             })
             // tota += parseInt(subto)
             // total.value = tota
@@ -354,9 +354,11 @@
         
         }
 
-        const totalPXHpp = arr.filter(i => i.kd_bbm === 1).reduce((a, b) => Number(a) + Number(b.old_price), 0);
-        const totalPLHpp = arr.filter(i => i.kd_bbm === 2).reduce((a, b) => Number(a) + Number(b.old_price), 0);
-        const totalDXHpp = arr.filter(i => i.kd_bbm === 3).reduce((a, b) => Number(a) + Number(b.old_price), 0);
+        const bbmNow = store.getters.StateBbm;
+
+        const totalPXHpp = arr.filter(i => i.kd_bbm === 1).reduce((a, b) => Number(a) + Number(b.totalhpp), 0);
+        const totalPLHpp = arr.filter(i => i.kd_bbm === 2).reduce((a, b) => Number(a) + Number(b.totalhpp), 0);
+        const totalDXHpp = arr.filter(i => i.kd_bbm === 3).reduce((a, b) => Number(a) + Number(b.totalhpp), 0);
         const totalPX = arr.filter(i => i.kd_bbm === 1).reduce((a, b) => Number(a) + Number(b.total), 0);
         const totalPL = arr.filter(i => i.kd_bbm === 2).reduce((a, b) => Number(a) + Number(b.total), 0);
         const totalDX = arr.filter(i => i.kd_bbm === 3).reduce((a, b) => Number(a) + Number(b.total), 0);
@@ -367,7 +369,7 @@
         prArr.push(
             {'kdBbm':'BRG0001','total_hpp':totalPXHpp,'total_harga': totalPX,'total_liter': totalPXL},
             {'kdBbm':'BRG0002','total_hpp':totalPLHpp,'total_harga': totalPL,'total_liter': totalPLL},
-            {'kdBbm':'BRG0002','total_hpp':totalDXHpp,'total_harga': totalDX, 'total_liter': totalDXL}
+            {'kdBbm':'BRG0003','total_hpp':totalDXHpp,'total_harga': totalDX, 'total_liter': totalDXL}
         )
         console.log(prArr)
 
