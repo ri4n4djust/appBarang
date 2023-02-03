@@ -57,12 +57,12 @@ class barangController extends Controller
         $where = '';
         $filter = $request->input('key1');
         if(!empty($filter)){
-            $where = "where r_bbm='$filter' ";
+            $where = "and a.r_bbm='$filter' ";
         };
         
         // $bbm = Bbm::get();
         //$posts = Barang::latest()->get();
-        $nosel = DB::select("Select * from tblnosel_detail $where ");
+        $nosel = DB::select("Select a.*,b.last_price from tblnosel_detail a inner join tblbbm b where a.r_bbm=b.id $where ");
         $count = Barang::count();
         return response([
             'success' => true,
@@ -317,6 +317,9 @@ class barangController extends Controller
                 ]);
                 DB::table('tblnosel_detail')->where('r_code_bbm', $kdBarang)->update([
                     'harga' => $request->input('harga_baru'),
+                ]);
+                DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->update([
+                    'salePrice' => $request->input('harga_baru'),
                 ]);
                 DB::table('tblperubahan_hargabbm')->insert([
                     'harga_lama'   => $request->input('harga_lama'),

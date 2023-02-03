@@ -84,13 +84,20 @@ class transaksiNoselController extends Controller
     public function saveNoselArray(Request $request){
         try{
             $exception = DB::transaction(function() use ($request){ 
-
+                
+                $kdtr = $request[0][0]['kd_trans'];
+                $count = DB::table('tbltransaksi_nosel')
+                        ->where('kd_trans', 'like', $kdtr . '%')
+                        ->count();
+                $n = 1 + $count;
                 $last_m = null ;
                 $detop = $request[0];
-                $kdtrans = $request[0][0]['kd_trans'];
+                $kdtrans = $kdtr.$n;
                 $regu = $request[0][0]['r_regu'];
                 $tgl = $detop[0]['tgl_transaksi'];
                 $total_j = 0;
+                // $total_qty = 0;
+                // $total_beli = 0;
                 TransaksiNosel::where('kd_trans', $kdtrans)->delete();
                 for ($i = 0; $i < count($detop); $i++) {
 
@@ -100,18 +107,21 @@ class transaksiNoselController extends Controller
                         $costLiter = $detop[$i]['cost_ltr'];
                         // $total = $detop[$i]['total'];
                         // $hrg = $detop[$i]['hrgJual'];
+                        $oldStokPer = DB::table('tblpersediaan')->select('stokPersediaan')->where('kdPersediaan', $kdBarang)->first();
+                        $oldStokBbm = DB::table('tblbbm')->select('stokBbm')->where('code_bbm', $kdBarang)->first();
+                        $mtr_awal = DB::table('tblnosel_detail')->select('meter_akhir')->where('id_nosel', $id_nosel)->first();
+
 
                         if(array_key_exists("last_meter",$detop[$i])){
                             $last_m = $detop[$i]['last_meter'] ;
 
-                            $mtr_awal = DB::table('tblnosel_detail')->select('meter_akhir')->where('id_nosel', $id_nosel)->first();
+                            
                             $update = NoselDetail::where('id_nosel', $id_nosel)->update([
                                 'meter_awal'   => $mtr_awal->meter_akhir,
                                 'meter_akhir'   => $detop[$i]['last_meter'],
                                 'harga'   => $hrg,
                             ]);
-                            $oldStokPer = DB::table('tblpersediaan')->select('stokPersediaan')->where('kdPersediaan', $kdBarang)->first();
-                            $oldStokBbm = DB::table('tblbbm')->select('stokBbm')->where('code_bbm', $kdBarang)->first();
+                            
                             DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->update([
                                 'stokPersediaan' => $oldStokPer->stokPersediaan - $costLiter,
                                 'salePrice' => $hrg,
@@ -120,6 +130,9 @@ class transaksiNoselController extends Controller
                                 'stokBbm' => $oldStokBbm->stokBbm - $costLiter,
                                 'sale_price' => $hrg,
                             ]);
+
+                            
+
                         }
 
                         $detail[] = [
@@ -136,7 +149,19 @@ class transaksiNoselController extends Controller
                             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                         ];
-                    $total_j += $detop[$i]['total'];
+
+                        // $total_jual += $detop[$i]['total'];
+                        // $total_qty += $detop[$i]['cost_ltr'];
+                        // $total_beli = $oldStokBbm->lastPrice * $total_jual;
+                        // DB::table('tblprofit')->insert([
+                        //     'tgl_profit' => $detop[$i]['tgl_transaksi'],
+                        //     'kdBrrang'  => $detop[$i]['kd_bbm'],
+                        //     'hpp_beli'  => $total_qty * $total_beli,
+                        //     'qty_laku'  => $total_qty,
+                        //     'total_laku'    => $total_qty * $total_jual,
+                        //     'margin_laku'   => ( $total_qty * $total_jual) - ($total_qty * $total_beli)
+                        // ]);
+                    
                 };
                 TransaksiNosel::insert($detail);
 
@@ -247,8 +272,27 @@ class transaksiNoselController extends Controller
                     'total_cash'    => $total_j - $cost,
                     'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                     'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-                ]
-            );
+                ]);
+
+                $detpro = $request[4];
+                for ($i = 0; $i < count($detpro); $i++) {
+                    $total_hpp = $detpro[$i]['total_hpp'];
+                    $total_harga = $detpro[$i]['total_harga'];
+                    $total_liter = $detpro[$i]['total_liter'];
+
+                    DB::table('tblprofit')->insert([
+                        'tgl_profit' => $tgl,
+                        'kdBarang'  => $detpro[$i]['kdBbm'],
+                        'hpp_beli'  => $total_hpp,
+                        'qty_laku'  =>$total_liter,
+                        'total_laku'    => $total_harga,
+                        'margin_laku'   => $total_harga - $total_hpp,
+                        'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                    ]);
+
+                };
+            
 
             DB::commit();
             });

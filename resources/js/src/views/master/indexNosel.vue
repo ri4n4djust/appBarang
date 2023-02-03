@@ -315,12 +315,14 @@
         
         var dataArr = nosel
         const arr = [];
-        let tota = 0;
+        // var tota = 0;
+        let totalpx = 0;
         for (let i = 0; i < dataArr.length; i++) {
             // console.log({kdBarang : dataArr[i].r_kdBarang, nmBarang : dataArr[i].r_nmBarang,});
             let id_nosel = dataArr[i].id_nosel
-            let cost = parseInt(meter_now.value[i]) - parseInt(dataArr[i].meter_akhir);
-            let subto = dataArr[i].harga * cost;
+            let cost = meter_now.value[i] - dataArr[i].meter_akhir  || 0;
+            let subto = dataArr[i].harga * cost || 0;
+            // subto = subto ?? 0 ;
             let last_meter =  meter_now.value[i];
             // let ket = keterangan.value[i]
             // if (!isNaN(subto)){
@@ -336,17 +338,39 @@
                 'r_regu': regu.value,
                 'tgl_transaksi': tgl, 
                 'cost_ltr': cost, 
+                'old_price': dataArr[i].last_price,
                 'last_price': dataArr[i].harga,
                 'awal_meter': dataArr[i].meter_akhir,
                 'last_meter':   meter_now.value[i],
                 'total': subto
             })
-            tota += parseInt(subto)
+            // tota += parseInt(subto)
             // total.value = tota
-                console.log(tota)
+                // console.log(subto)
+            // if (dataArr[i].r_bbm === 1) {
+            //     totalpx += parseInt(subto);
+            // }
+                
         
         }
-        // console.log(arr)
+
+        const totalPXHpp = arr.filter(i => i.kd_bbm === 1).reduce((a, b) => Number(a) + Number(b.old_price), 0);
+        const totalPLHpp = arr.filter(i => i.kd_bbm === 2).reduce((a, b) => Number(a) + Number(b.old_price), 0);
+        const totalDXHpp = arr.filter(i => i.kd_bbm === 3).reduce((a, b) => Number(a) + Number(b.old_price), 0);
+        const totalPX = arr.filter(i => i.kd_bbm === 1).reduce((a, b) => Number(a) + Number(b.total), 0);
+        const totalPL = arr.filter(i => i.kd_bbm === 2).reduce((a, b) => Number(a) + Number(b.total), 0);
+        const totalDX = arr.filter(i => i.kd_bbm === 3).reduce((a, b) => Number(a) + Number(b.total), 0);
+        const totalPXL = arr.filter(i => i.kd_bbm === 1).reduce((a, b) => Number(a) + Number(b.cost_ltr), 0);
+        const totalPLL = arr.filter(i => i.kd_bbm === 2).reduce((a, b) => Number(a) + Number(b.cost_ltr), 0);
+        const totalDXL = arr.filter(i => i.kd_bbm === 3).reduce((a, b) => Number(a) + Number(b.cost_ltr), 0)
+        const prArr = []
+        prArr.push(
+            {'kdBbm':'BRG0001','total_hpp':totalPXHpp,'total_harga': totalPX,'total_liter': totalPXL},
+            {'kdBbm':'BRG0002','total_hpp':totalPLHpp,'total_harga': totalPL,'total_liter': totalPLL},
+            {'kdBbm':'BRG0002','total_hpp':totalDXHpp,'total_harga': totalDX, 'total_liter': totalDXL}
+        )
+        console.log(prArr)
+
         const arr_k = [];
         const arr_kupon = store.getters.Skupon;
         let totak = 0;
@@ -387,7 +411,7 @@
             })
         }
 
-        store.dispatch('CreateTransNosel', [arr,arr_k,arr_b,arr_l ])
+        store.dispatch('CreateTransNosel', [arr,arr_k,arr_b,arr_l,prArr ])
 
     }
 
