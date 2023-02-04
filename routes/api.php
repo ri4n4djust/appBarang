@@ -88,6 +88,11 @@ Route::get('/linkacc', [App\Http\Controllers\pembelianController::class, 'linkAc
 Route::post('/store/penjualan', [App\Http\Controllers\penjualanController::class, 'simpanPenjualan']);
 Route::post('/getdetail-penjualan', [App\Http\Controllers\penjualanController::class, 'getDetailPenjualan']);
 
+
+// LabaRugi
+Route::post('/labarugi/pendapatan', [App\Http\Controllers\labarugiController::class, 'getPendapatan']);
+Route::post('/labarugi/beban-hpp', [App\Http\Controllers\labarugiController::class, 'getHppPenjualan']);
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile', function(Request $request) {
         return auth()->user();

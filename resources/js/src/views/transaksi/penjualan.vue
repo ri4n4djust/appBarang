@@ -494,16 +494,19 @@
                 const oldName = cartItemsPen.value[objIndex].nmBarang;
                 const oldQty = cartItemsPen.value[objIndex].qty;
                 const oldTotal = cartItemsPen.value[objIndex].total;
+                const oldTotalHpp = cartItemsPen.value[objIndex].totalhpp;
                 const newQty = parseInt(oldQty) + parseInt(qty.value) ;
                 const newTotal = parseInt(oldTotal) + parseInt(qty.value * brg.hrgJual) ;
+                const newTotalHpp = parseInt(oldTotalHpp) + parseInt(qty.value * brg.hrgPokok) ;
                 cartItemsPen.value[objIndex].qty = parseInt(newQty);
                 cartItemsPen.value[objIndex].total = parseInt(newTotal);
+                cartItemsPen.value[objIndex].totalhpp = parseInt(newTotalHpp);
                 localStorage.setItem('cartItemsPen',JSON.stringify(cartItemsPen.value));
                 alert(oldName+' Quantity Update')
                 getCart();
                 // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
             }else{
-            cartItemsPen.value.push({kdBarang:brg.kdBarang, nmBarang:brg.nmBarang,hrgJual:brg.hrgJual,qty:qty.value,satuan:brg.satuanBarang,total:qty.value * brg.hrgJual});	
+            cartItemsPen.value.push({kdBarang:brg.kdBarang, nmBarang:brg.nmBarang,hrgJual:brg.hrgJual,qty:qty.value,satuan:brg.satuanBarang,total:qty.value * brg.hrgJual,totalhpp:qty.value * brg.hrgPokok});	
             localStorage.setItem('cartItemsPen',JSON.stringify(cartItemsPen.value));
             getCart();
             // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;

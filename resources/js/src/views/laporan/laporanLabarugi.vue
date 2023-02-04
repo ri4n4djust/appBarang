@@ -93,22 +93,14 @@
 
                                                     <div class="table-responsive">
                                                         <!-- <div class="table-responsive"> -->
-                                                            <table class="table table-hover table-bordered">
+                                                            <table cellspacing="0" style="border:1px;" >
                                                                 <thead>
                                                                     <tr><th colspan="6">Pendapatan</th></tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td></td>
-                                                                        <td>Penjualan BBM</td>
-                                                                        <td></td>
-                                                                        <td></td>
-                                                                        <td></td>
-                                                                        <td></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td></td>
-                                                                        <td>Penjualan Non BBM</td>
+                                                                        <td width="50"></td>
+                                                                        <td colspan="5">Penjualan BBM</td>
                                                                         <td></td>
                                                                         <td></td>
                                                                         <td></td>
@@ -116,7 +108,31 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td></td>
-                                                                        <td>Biaya Sewa</td>
+                                                                        <td width="50"></td>
+                                                                        <td colspan="2" width="300">PERTMAX</td>
+                                                                       
+                                                                        <td width="80">{{ Number(bbmPertamax.total).toLocaleString() }}</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td colspan="2">PERTALITE</td>
+                                                                        
+                                                                        <td>{{ Number(bbmPertalite.total).toLocaleString() }}</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td colspan="2">DEX LITE</td>
+                                                                        
+                                                                        <td >{{ Number(bbmDexlite.total).toLocaleString() }}</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td colspan="5">Penjualan Non BBM</td>
                                                                         <td></td>
                                                                         <td></td>
                                                                         <td></td>
@@ -124,7 +140,68 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td></td>
-                                                                        <td>Lainnya</td>
+                                                                        <td width="50"></td>
+                                                                        <td colspan="2">GAS 3Kg</td>
+                                                                       
+                                                                        <td  >{{ Number(gas3kg.total).toLocaleString() }}</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td width="50"></td>
+                                                                        <td colspan="2">GAS 12Kg</td>
+                                                                       
+                                                                        <td  >{{ Number(gas12kg.total).toLocaleString() }}</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td colspan="2">OLI</td>
+                                                                        
+                                                                        <td>{{ Number(oli.total).toLocaleString() }}</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td colspan="2">Biaya Sewa</td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td width="80">75,650,000</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td colspan="2">Lainnya</td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td>5345345</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td colspan="2">Total</td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td>2,560,000,000</td>
+                                                                    </tr>
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                        <!-- </div> -->
+                                                    </div>
+
+                                                    <div class="table-responsive">
+                                                        <!-- <div class="table-responsive"> -->
+                                                            <table cellspacing="0">
+                                                                <thead>
+                                                                    <tr><th colspan="6">Beban</th></tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td width="50"></td>
+                                                                        <td colspan="5">Harga Pokok Penjualan BBM</td>
                                                                         <td></td>
                                                                         <td></td>
                                                                         <td></td>
@@ -132,7 +209,79 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td></td>
-                                                                        <td>Total</td>
+                                                                        <td width="50"></td>
+                                                                        <td colspan="2" width="300">PERTMAX</td>
+                                                                       
+                                                                        <td>335435</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td colspan="2">PERTALITE</td>
+                                                                        
+                                                                        <td>54565</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td colspan="2">DEX LITE</td>
+                                                                        
+                                                                        <td>45345</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td colspan="5">Harga Pokok Penjualan Non BBM</td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td width="50"></td>
+                                                                        <td colspan="2">GAS</td>
+                                                                       
+                                                                        <td>656456</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td colspan="2">OLI</td>
+                                                                        
+                                                                        <td>345345</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td colspan="2">Biaya Listrik</td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td colspan="2">Biaya Gaji</td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td colspan="2">Lainnya</td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td colspan="2">Total</td>
                                                                         <td></td>
                                                                         <td></td>
                                                                         <td></td>
@@ -140,60 +289,6 @@
                                                                     </tr>
                                                                     
                                                                 </tbody>
-                                                                <tfoot>
-                                                                    <tr>
-                                                                        <th colspan="2" class="align-top mx-auto">
-
-                                                                        </th>
-                                                                        <th colspan="2" class="align-top mx-auto">
-                                                                            
-                                                                        </th>
-                                                                        <th colspan="2" class="align-top mx-auto" >
-                                                                            
-                                                                        </th>
-                                                                    </tr>
-                                                                </tfoot>
-                                                            </table>
-                                                        <!-- </div> -->
-                                                    </div>
-
-                                                    <div class="table-responsive">
-                                                        <!-- <div class="table-responsive"> -->
-                                                            <table class="table table-hover table-bordered">
-                                                                <thead>
-                                                                    <tr><th colspan="6">Beban</th></tr>
-                                                                    <tr>
-                                                                        <th>Nozzel</th>
-                                                                        <th>Meter Awal</th>
-                                                                        <th>Meter Akhir</th>
-                                                                        <th>Volume/Liter</th>
-                                                                        <th>Harga</th>
-                                                                        <th>Total</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td></td>
-                                                                        <td></td>
-                                                                        <td></td>
-                                                                        <td></td>
-                                                                        <td></td>
-                                                                        <td></td>
-                                                                    </tr>
-                                                                </tbody>
-                                                                <tfoot>
-                                                                    <tr>
-                                                                        <th colspan="2" class="align-top mx-auto">
-
-                                                                        </th>
-                                                                        <th colspan="2" class="align-top mx-auto">
-                                                                            
-                                                                        </th>
-                                                                        <th colspan="2" class="align-top mx-auto" >
-                                                                            
-                                                                        </th>
-                                                                    </tr>
-                                                                </tfoot>
                                                             </table>
                                                         <!-- </div> -->
                                                     </div>
@@ -333,16 +428,15 @@
 
     const store = useStore();
 
-    const totaljual = ref();
-    const totalkupon = ref();
-    const totalbiaya = ref();
-    const totallink = ref();
-    const totalPertamax = ref();
-    const totalLiterPertamax = ref();
-    const totalPertalite = ref();
-    const totalLiterPertalite = ref();
-    const totalDexlite = ref();
-    const totalLiterDexlite = ref();
+    const pendapatan = ref({});
+    const bbmPertamax = ref([]);
+    const bbmPertalite = ref([]);
+    const bbmDexlite = ref([]);
+    const gas3kg = ref([]);
+    const gas12kg = ref([]);
+    const oli = ref([]);
+
+    const bebanhpp = ref({});
 
     const items = ref([]);
     const kupon = ref([]);
@@ -367,68 +461,24 @@
 
     
     const bind_data = async () => {
-        await store.dispatch('GetAplusan', sorting.value);
-        items.value = store.getters.Saplusan[0];
-        kupon.value = store.getters.Saplusan[1];
-        biaya.value = store.getters.Saplusan[2];
-        link.value = store.getters.Saplusan[3];
-        // let ar = items.value ;
-        let sum = 0;
-        items.value.forEach(element => {
-            sum +=  parseInt(Number(element.total));
-            // alert(sum);
-        });
-        totaljual.value = sum
+        await store.dispatch('GetPendapatan', sorting.value);
+        pendapatan.value = store.getters.StatePendapatan;
+        bbmPertamax.value = store.getters.StatePendapatan[0][0];
+        bbmPertalite.value = store.getters.StatePendapatan[0][1];
+        bbmDexlite.value = store.getters.StatePendapatan[0][2];
 
-        let sumk = 0;
-        kupon.value.forEach(elem => {
-            sumk +=  parseInt(Number(elem.total));
-            // alert(sum);
-        });
-        totalkupon.value = sumk
+        const arr_nonbbm = store.getters.StatePendapatan[1];
+        gas3kg.value = arr_nonbbm.find(o => o.r_kdBarang === 'BRG0004');
+        gas12kg.value =  arr_nonbbm.find(o => o.r_kdBarang === 'BRG0005');
+        oli.value =  arr_nonbbm.find(o => o.r_kdBarang === 'BRG0006');
+        if(oli.value === undefined){
+            oli.value = {}
+        }
+        // bbmPertamax.value = pendapatan.value[0][0].total;
+        // console.log(gas3kg.value);
+        await store.dispatch('GetBebanHpp', sorting.value);
+        bebanhpp.value = store.getters.StateBebanHpp;
 
-        let sumb = 0;
-        biaya.value.forEach(ele => {
-            sumb +=  parseInt(Number(ele.jumlah));
-            // alert(sum);
-        });
-        totalbiaya.value = sumb
-
-        let suml = 0;
-        link.value.forEach(ele => {
-            suml +=  parseInt(Number(ele.jumlah_link));
-            // alert(sum);
-        });
-        totallink.value = suml
-        
-        let totalPX = items.value.filter( (item) => item.r_bbm === 1).reduce((accumulator, item) => {
-            return accumulator += Number(item.total);
-        }, 0);
-        let totalLiterPX = items.value.filter( (item) => item.r_bbm === 1).reduce((accumulator, item) => {
-            return accumulator += Number(item.cost_ltr);
-        }, 0);
-        totalPertamax.value = totalPX
-        totalLiterPertamax.value = totalLiterPX
-
-        let totalPL = items.value.filter((item) => item.r_bbm === 2).reduce((accumulator, item) => {
-            return accumulator += Number(item.total);
-        }, 0);
-        let totalLiterPL = items.value.filter((item) => item.r_bbm === 2).reduce((accumulator, item) => {
-            return accumulator += Number(item.cost_ltr);
-        }, 0);
-        totalPertalite.value = totalPL
-        totalLiterPertalite.value = totalLiterPL
-
-        let totalDX = items.value.filter((item) => item.r_bbm === 3).reduce((accumulator, item) => {
-            return accumulator += Number(item.total);
-        }, 0);
-        let totalLiterDX = items.value.filter((item) => item.r_bbm === 3).reduce((accumulator, item) => {
-            return accumulator += Number(item.cost_ltr);
-        }, 0);
-        totalDexlite.value = totalDX
-        totalLiterDexlite.value = totalLiterDX
-
-        console.log(totalPX)
     }
 
     const barangs = computed(() => {

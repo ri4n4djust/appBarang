@@ -13,6 +13,7 @@ import transaksi from './transaksi';
 import supplier from './supplier';
 import nomor from './nomor';
 import laporan from './laporan';
+import labarugi from './labarugi';
 
 
 export default new createStore({
@@ -122,7 +123,8 @@ export default new createStore({
         transaksi,
         supplier,
         nomor,
-        laporan
+        laporan,
+        labarugi
     },
     // plugins: [createPersistedState()]
 });

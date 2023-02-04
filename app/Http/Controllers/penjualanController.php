@@ -79,10 +79,12 @@ class penjualanController extends Controller
                         $detail[] = [
                             'r_noPenjualan' => $noNota,
                             'r_kdBarang' => $kdBarang,
+                            'tgl_trans' => $tglNota,
                             'r_nmBarang' => $detpem[$i]['nmBarang'],
                             'hrgJual' => $detpem[$i]['hrgJual'],
                             'satuanJual' => $detpem[$i]['satuan'],
                             'qty' => $qty,
+                            'totalHpp' => $detpem[$i]['totalhpp'],
                             'totalJual' => $detpem[$i]['total'],
                             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
