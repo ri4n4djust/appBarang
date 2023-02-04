@@ -65,7 +65,7 @@
                                                 
 
                                                 <div class="inv--detail-section inv--customer-detail-section">
-                                                    <div class="row">
+                                                    <!-- <div class="row"> -->
                                                         <!-- <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4 align-self-center">
                                                             <p class="inv-to">Invoice To</p>
                                                         </div>
@@ -74,7 +74,7 @@
                                                             <h6 class="inv-title">Payment Info:</h6>
                                                         </div> -->
 
-                                                        <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4">
+                                                        <!-- <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4">
                                                             <p class="inv-customer-name">Jesse Cory</p>
                                                             <p class="inv-street-addr">405 Mulberry Rd. Mc Grady, NC, 28649</p>
                                                             <p class="inv-email-address">redq@company.com</p>
@@ -89,10 +89,19 @@
                                                                 <p><span class="inv-subtitle">Country: </span> <span>United States</span></p>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> -->
 
                                                     <div class="table-responsive">
                                                         <!-- <div class="table-responsive"> -->
+                                                            <table class="table table-hover table-bordered">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th colspan="2">SPBU 54.903.06</th>
+                                                                        <th colspan="2">Laporan Laba Rugi</th>
+                                                                        <th colspan="2">Periode Tgl {{sorting.startDate }} sd {{sorting.endDate }}</th>
+                                                                    </tr>
+                                                                </thead>
+                                                            </table>
                                                             <table cellspacing="0" style="border:1px;" >
                                                                 <thead>
                                                                     <tr><th colspan="6">Pendapatan</th></tr>
@@ -111,7 +120,7 @@
                                                                         <td width="50"></td>
                                                                         <td colspan="2" width="300">PERTMAX</td>
                                                                        
-                                                                        <td width="80">{{ Number(bbmPertamax.total).toLocaleString() }}</td>
+                                                                        <td width="80">{{ Number(bbmPertamax.total || 0).toLocaleString() }}</td>
                                                                         <td></td>
                                                                     </tr>
                                                                     <tr>
@@ -119,7 +128,7 @@
                                                                         <td></td>
                                                                         <td colspan="2">PERTALITE</td>
                                                                         
-                                                                        <td>{{ Number(bbmPertalite.total).toLocaleString() }}</td>
+                                                                        <td>{{ Number(bbmPertalite.total || 0).toLocaleString() }}</td>
                                                                         <td></td>
                                                                     </tr>
                                                                     <tr>
@@ -127,7 +136,7 @@
                                                                         <td></td>
                                                                         <td colspan="2">DEX LITE</td>
                                                                         
-                                                                        <td >{{ Number(bbmDexlite.total).toLocaleString() }}</td>
+                                                                        <td >{{ Number(bbmDexlite.total || 0).toLocaleString() }}</td>
                                                                         <td></td>
                                                                     </tr>
                                                                     <tr>
@@ -143,7 +152,7 @@
                                                                         <td width="50"></td>
                                                                         <td colspan="2">GAS 3Kg</td>
                                                                        
-                                                                        <td  >{{ Number(gas3kg.total).toLocaleString() }}</td>
+                                                                        <td  >{{ Number(gas3kg.total || 0).toLocaleString() }}</td>
                                                                         <td></td>
                                                                     </tr>
                                                                     <tr>
@@ -151,7 +160,7 @@
                                                                         <td width="50"></td>
                                                                         <td colspan="2">GAS 12Kg</td>
                                                                        
-                                                                        <td  >{{ Number(gas12kg.total).toLocaleString() }}</td>
+                                                                        <td  >{{ Number(gas12kg.total || 0).toLocaleString() }}</td>
                                                                         <td></td>
                                                                     </tr>
                                                                     <tr>
@@ -159,7 +168,7 @@
                                                                         <td></td>
                                                                         <td colspan="2">OLI</td>
                                                                         
-                                                                        <td>{{ Number(oli.total).toLocaleString() }}</td>
+                                                                        <td>{{ Number(oli || 0).toLocaleString()  }}</td>
                                                                         <td></td>
                                                                     </tr>
                                                                     <tr>
@@ -184,7 +193,7 @@
                                                                         <td></td>
                                                                         <td></td>
                                                                         <td></td>
-                                                                        <td>2,560,000,000</td>
+                                                                        <td>{{ Number(totalPendapatan).toLocaleString() }}</td>
                                                                     </tr>
                                                                     
                                                                 </tbody>
@@ -212,7 +221,7 @@
                                                                         <td width="50"></td>
                                                                         <td colspan="2" width="300">PERTMAX</td>
                                                                        
-                                                                        <td>335435</td>
+                                                                        <td>{{ Number(bbmPertamaxHpp.total || 0).toLocaleString() }}</td>
                                                                         <td></td>
                                                                     </tr>
                                                                     <tr>
@@ -220,7 +229,7 @@
                                                                         <td></td>
                                                                         <td colspan="2">PERTALITE</td>
                                                                         
-                                                                        <td>54565</td>
+                                                                        <td>{{ Number(bbmPertaliteHpp.total || 0).toLocaleString() }}</td>
                                                                         <td></td>
                                                                     </tr>
                                                                     <tr>
@@ -228,7 +237,7 @@
                                                                         <td></td>
                                                                         <td colspan="2">DEX LITE</td>
                                                                         
-                                                                        <td>45345</td>
+                                                                        <td>{{ Number(bbmDexliteHpp.total || 0).toLocaleString() }}</td>
                                                                         <td></td>
                                                                     </tr>
                                                                     <tr>
@@ -242,9 +251,17 @@
                                                                     <tr>
                                                                         <td></td>
                                                                         <td width="50"></td>
-                                                                        <td colspan="2">GAS</td>
+                                                                        <td colspan="2">GAS 3Kg</td>
                                                                        
-                                                                        <td>656456</td>
+                                                                        <td>{{ Number(gas3kgHpp.totalHp || 0).toLocaleString() }}</td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td></td>
+                                                                        <td width="50"></td>
+                                                                        <td colspan="2">GAS 12Kg</td>
+                                                                       
+                                                                        <td>{{ Number(gas12kgHpp.totalHp || 0).toLocaleString() }}</td>
                                                                         <td></td>
                                                                     </tr>
                                                                     <tr>
@@ -252,7 +269,7 @@
                                                                         <td></td>
                                                                         <td colspan="2">OLI</td>
                                                                         
-                                                                        <td>345345</td>
+                                                                        <td>{{ Number(oliHpp || 0).toLocaleString() || 0 }}</td>
                                                                         <td></td>
                                                                     </tr>
                                                                     <tr>
@@ -260,7 +277,7 @@
                                                                         <td colspan="2">Biaya Listrik</td>
                                                                         <td></td>
                                                                         <td></td>
-                                                                        <td></td>
+                                                                        <td>32135</td>
                                                                         <td></td>
                                                                     </tr>
                                                                     <tr>
@@ -268,7 +285,7 @@
                                                                         <td colspan="2">Biaya Gaji</td>
                                                                         <td></td>
                                                                         <td></td>
-                                                                        <td></td>
+                                                                        <td>51436516</td>
                                                                         <td></td>
                                                                     </tr>
                                                                     <tr>
@@ -276,7 +293,7 @@
                                                                         <td colspan="2">Lainnya</td>
                                                                         <td></td>
                                                                         <td></td>
-                                                                        <td></td>
+                                                                        <td>2154</td>
                                                                         <td></td>
                                                                     </tr>
                                                                     <tr>
@@ -285,7 +302,7 @@
                                                                         <td></td>
                                                                         <td></td>
                                                                         <td></td>
-                                                                        <td></td>
+                                                                        <td>546546</td>
                                                                     </tr>
                                                                     
                                                                 </tbody>
@@ -435,8 +452,16 @@
     const gas3kg = ref([]);
     const gas12kg = ref([]);
     const oli = ref([]);
+    const totalPendapatan = ref([]);
 
     const bebanhpp = ref({});
+    const bbmPertamaxHpp = ref([]);
+    const bbmPertaliteHpp = ref([]);
+    const bbmDexliteHpp = ref([]);
+    const gas3kgHpp = ref([]);
+    const gas12kgHpp = ref([]);
+    const oliHpp = ref([]);
+    const totalHpp = ref([]);
 
     const items = ref([]);
     const kupon = ref([]);
@@ -461,23 +486,52 @@
 
     
     const bind_data = async () => {
+        // oli.value = 0;
         await store.dispatch('GetPendapatan', sorting.value);
         pendapatan.value = store.getters.StatePendapatan;
         bbmPertamax.value = store.getters.StatePendapatan[0][0];
         bbmPertalite.value = store.getters.StatePendapatan[0][1];
         bbmDexlite.value = store.getters.StatePendapatan[0][2];
+        if(bbmPertamax.value === undefined){bbmPertamax.value = 0}
+        if(bbmPertalite.value === undefined){bbmPertalite.value = 0}
+        if(bbmDexlite.value === undefined){bbmDexlite.value = 0}
+        
 
         const arr_nonbbm = store.getters.StatePendapatan[1];
         gas3kg.value = arr_nonbbm.find(o => o.r_kdBarang === 'BRG0004');
         gas12kg.value =  arr_nonbbm.find(o => o.r_kdBarang === 'BRG0005');
-        oli.value =  arr_nonbbm.find(o => o.r_kdBarang === 'BRG0006');
-        if(oli.value === undefined){
-            oli.value = {}
-        }
+
+        const arr_oli = store.getters.StatePendapatan[2];
+        oli.value = arr_oli.reduce((n, {total}) => n + Number(total), 0)  // arr_oli.reduce((a, b) => {a += b.total }); 
+        // console.log(oli.value)
+
+        if(gas3kg.value === undefined){gas3kg.value = 0}
+        if(gas12kg.value === undefined){gas12kg.value = 0}
+        // if(oli.value === undefined || oli.value == isNaN){oli.value = '0'}
+
+        totalPendapatan.value = Number(bbmPertamax.value.total || 0) + Number(bbmPertalite.value.total || 0) + Number(bbmDexlite.value.total || 0) + Number(gas3kg.value.total || 0) + Number(gas12kg.value.total || 0) + Number(oli.value|| 0);
+        // console.log(totalPendapatan.value)
         // bbmPertamax.value = pendapatan.value[0][0].total;
         // console.log(gas3kg.value);
         await store.dispatch('GetBebanHpp', sorting.value);
         bebanhpp.value = store.getters.StateBebanHpp;
+
+        bbmPertamaxHpp.value = store.getters.StateBebanHpp[0][0];
+        bbmPertaliteHpp.value = store.getters.StateBebanHpp[0][1];
+        bbmDexliteHpp.value = store.getters.StateBebanHpp[0][2];
+        if(bbmPertamaxHpp.value === undefined){bbmPertamaxHpp.value = 0}
+        if(bbmPertaliteHpp.value === undefined){bbmPertaliteHpp.value = 0}
+        if(bbmDexliteHpp.value === undefined){bbmDexliteHpp.value = 0}
+
+        const arr_nonbbmhpp = store.getters.StateBebanHpp[1];
+        gas3kgHpp.value = arr_nonbbmhpp.find(o => o.r_kdBarang === 'BRG0004');
+        gas12kgHpp.value =  arr_nonbbmhpp.find(o => o.r_kdBarang === 'BRG0005');
+        // oliHpp.value =  arr_nonbbmhpp.find(o => o.r_kdBarang === 'BRG0006');
+        if(gas3kgHpp.value === undefined){gas3kgHpp.value = 0}
+        if(gas12kgHpp.value === undefined){gas12kgHpp.value = 0}
+        // if(oliHpp.value === undefined){oliHpp.value = 0}
+        oliHpp.value = arr_oli.reduce((n, {totalHpp}) => n + Number(totalHpp), 0) 
+
 
     }
 

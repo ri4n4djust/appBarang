@@ -216,6 +216,9 @@
                             <router-link to="/pembelian" @click="toggleMobileMenu">Kedatangan BBM</router-link>
                         </li>
                         <li>
+                            <router-link to="/pembelian" @click="toggleMobileMenu">Pembelian</router-link>
+                        </li>
+                        <li>
                             <router-link to="/penjualan" @click="toggleMobileMenu">Penjualan</router-link>
                         </li>
                         <li>

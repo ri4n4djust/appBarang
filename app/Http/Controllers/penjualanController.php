@@ -81,6 +81,7 @@ class penjualanController extends Controller
                             'r_kdBarang' => $kdBarang,
                             'tgl_trans' => $tglNota,
                             'r_nmBarang' => $detpem[$i]['nmBarang'],
+                            'kategori_jual' => $detpem[$i]['kategori'],
                             'hrgJual' => $detpem[$i]['hrgJual'],
                             'satuanJual' => $detpem[$i]['satuan'],
                             'qty' => $qty,

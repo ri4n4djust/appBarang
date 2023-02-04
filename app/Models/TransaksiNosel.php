@@ -11,6 +11,6 @@ class TransaksiNosel extends Model
     protected $table = 'tbltransaksi_nosel';
 
     protected $fillable = [
-        'r_bbm', 'r_nosel', 'r_regu', 'kd_trans' ,'tgl_transaksi', 'cost_ltr', 'last_price', 'awal_meter', 'last_meter', 'total'
+        'r_bbm', 'r_nosel', 'r_regu', 'kd_trans' ,'tgl_transaksi', 'cost_ltr', 'last_price', 'awal_meter', 'last_meter', 'total', 'total_hpp'
     ];
 }

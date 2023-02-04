@@ -30,7 +30,7 @@
                                                 
 
                                                 <div class="inv--detail-section inv--customer-detail-section">
-                                                    <div class="row">
+                                                    <!-- <div class="row"> -->
                                                         <!-- <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4 align-self-center">
                                                             <p class="inv-to">Invoice To</p>
                                                         </div>
@@ -39,7 +39,7 @@
                                                             <h6 class="inv-title">Payment Info:</h6>
                                                         </div> -->
 
-                                                        <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4">
+                                                        <!-- <div class="col-xl-8 col-lg-7 col-md-6 col-sm-4">
                                                             <p class="inv-customer-name">Jesse Cory</p>
                                                             <p class="inv-street-addr">405 Mulberry Rd. Mc Grady, NC, 28649</p>
                                                             <p class="inv-email-address">redq@company.com</p>
@@ -53,13 +53,18 @@
                                                                 <p><span class="inv-subtitle">SWIFT code:</span> <span>VS70134</span></p>
                                                                 <p><span class="inv-subtitle">Country: </span> <span>United States</span></p>
                                                             </div>
-                                                        </div>
-                                                    </div>
+                                                        </div> -->
+                                                    <!-- </div> -->
 
                                                     <div class="table-responsive">
                                                         <!-- <div class="table-responsive"> -->
                                                             <table class="table table-hover table-bordered">
                                                                 <thead>
+                                                                    <tr>
+                                                                        <th colspan="2">SPBU 54.903.06</th>
+                                                                        <th colspan="2">Nozzel</th>
+                                                                        <th colspan="2">Regu {{props.regu}}</th>
+                                                                    </tr>
                                                                     <tr>
                                                                         <th>Nozzel</th>
                                                                         <th>Meter Awal</th>
@@ -323,7 +328,7 @@
         id: String,
         startDate: String,
         kd_trans: String,
-        last_price: String,
+        regu: String,
     });
 
     onMounted(() => {
@@ -394,7 +399,7 @@
         totalDexlite.value = totalDX
         totalLiterDexlite.value = totalLiterDX
 
-        console.log(totalPX)
+        console.log(props.regu)
     }
 
     const barangs = computed(() => {

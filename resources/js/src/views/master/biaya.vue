@@ -13,7 +13,7 @@
                             <div class="col-xl-12 col-lg-12 col-sm-12 layout-spacing">
 
                                 <div class="panel br-6 p-0">    
-                                    <form>
+                                    <!-- <form> -->
                                         <div class="row mb-4">
                                             <div class="col-sm">
                                                 <label for="inputState">Biaya</label>
@@ -24,7 +24,7 @@
                                                 <a class="btn btn-primary" @click="simpnBiaya">Simpan</a>
                                             </div>
                                         </div>
-                                    </form>
+                                    <!-- </form> -->
                                     <div class="row mb-4">
                                         <div class="col-sm">
                                             <label for="inputState">Keterangan</label>

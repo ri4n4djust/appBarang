@@ -146,6 +146,7 @@ class transaksiNoselController extends Controller
                             'awal_meter'   => $detop[$i]['awal_meter'],
                             'last_meter'   => $last_m,
                             'total'    => $detop[$i]['total'],
+                            'total_hpp'    => $detop[$i]['totalhpp'],
                             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                         ];

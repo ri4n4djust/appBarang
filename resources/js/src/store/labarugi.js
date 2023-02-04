@@ -68,7 +68,7 @@ const mutations = {
         state.pendapatan = pendapatan
     },
     setBebanHpp(state, beban){
-        state.beban = beban
+        state.bebanhpp = beban
     },
     // DeleteBarang({dispatch}, id) {
     //     axios.delete(`hapus/barang/${id}`)

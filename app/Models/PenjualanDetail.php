@@ -10,6 +10,6 @@ class PenjualanDetail extends Model
     use HasFactory;
     protected $table = 'tblpenjualan_detail';
     protected $fillable = [
-        'r_noPenjualan', 'r_kdBarang', 'r_nmBarang', 'hrgJual', 'qty', 'satuanJual','totalHpp' ,'totalJual'
+        'r_noPenjualan', 'r_kdBarang', 'r_nmBarang', 'kategori_jual' ,'hrgJual', 'qty', 'satuanJual','totalHpp' ,'totalJual'
     ];
 }
