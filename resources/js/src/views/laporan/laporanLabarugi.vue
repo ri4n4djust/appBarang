@@ -102,7 +102,7 @@
                                                                     </tr>
                                                                 </thead>
                                                             </table>
-                                                            <table cellspacing="0" style="border:1px;" >
+                                                            <table cellspacing="0" style="border:1px solid;" >
                                                                 <thead>
                                                                     <tr><th colspan="6">Pendapatan</th></tr>
                                                                 </thead>
@@ -302,7 +302,7 @@
                                                                         <td></td>
                                                                         <td></td>
                                                                         <td></td>
-                                                                        <td>546546</td>
+                                                                        <td>{{ Number(totalHpp).toLocaleString() }}</td>
                                                                     </tr>
                                                                     
                                                                 </tbody>
@@ -532,6 +532,7 @@
         // if(oliHpp.value === undefined){oliHpp.value = 0}
         oliHpp.value = arr_oli.reduce((n, {totalHpp}) => n + Number(totalHpp), 0) 
 
+        totalHpp.value = Number(bbmPertamaxHpp.value.total || 0) + Number(bbmPertaliteHpp.value.total || 0) + Number(bbmDexliteHpp.value.total || 0) + Number(gas3kgHpp.value.total || 0) + Number(gas12kgHpp.value.total || 0) + Number(oliHpp.value|| 0);
 
     }
 
