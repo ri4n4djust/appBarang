@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Feb 04, 2023 at 05:33 AM
--- Server version: 8.0.30
--- PHP Version: 8.0.19
+-- Host: localhost
+-- Generation Time: Feb 05, 2023 at 02:26 PM
+-- Server version: 8.0.31
+-- PHP Version: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -807,7 +807,7 @@ CREATE TABLE `tblpenjualan_detail` (
   `tgl_trans` datetime NOT NULL,
   `r_kdBarang` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `r_nmBarang` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `kategori_jual` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `kategori_jual` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `hrgJual` decimal(13,2) NOT NULL,
   `qty` int NOT NULL,
   `satuanJual` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
@@ -905,10 +905,10 @@ INSERT INTO `tblperubahan_hargabbm` (`id_perubahan`, `harga_lama`, `harga_baru`,
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblpo_bbm`
+-- Table structure for table `tblpobbm`
 --
 
-CREATE TABLE `tblpo_bbm` (
+CREATE TABLE `tblpobbm` (
   `idPembelian` bigint UNSIGNED NOT NULL,
   `no_po` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `tgl_po` datetime NOT NULL,
@@ -928,10 +928,10 @@ CREATE TABLE `tblpo_bbm` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tblpo_detail`
+-- Table structure for table `tblpobbm_detail`
 --
 
-CREATE TABLE `tblpo_detail` (
+CREATE TABLE `tblpobbm_detail` (
   `idPembelianDetail` bigint UNSIGNED NOT NULL,
   `r_noPo` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `kdBarang` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
@@ -1051,6 +1051,39 @@ INSERT INTO `tblsupplier` (`id`, `kdSupplier`, `nmSupplier`, `almtSupplier`, `tl
 (1, 'SP0001', 'CASH', 'DENPASAR', '08187654', 'MAS', '2023-01-20 13:30:05', '2023-01-20 13:30:05'),
 (2, 'SP0002', 'PT BBM NUSANTARA', 'KARANGASEM', '987654', 'OM', '2023-01-20 13:30:48', '2023-01-20 13:30:48'),
 (3, 'SP0003', 'PT MIGAS', 'DENPASAR', '787686', 'ANDI', '2023-01-20 13:44:37', '2023-01-20 13:44:37');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblterimabbm`
+--
+
+CREATE TABLE `tblterimabbm` (
+  `id` bigint NOT NULL,
+  `kd_terima` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `no_po` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `tgl_terima` datetime NOT NULL,
+  `kd_supplier` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblterimabbm_detail`
+--
+
+CREATE TABLE `tblterimabbm_detail` (
+  `id_detail` bigint NOT NULL,
+  `r_kdterima` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `r_nopo` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `tgl_terima` datetime NOT NULL,
+  `kd_barang` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `qty_terima` decimal(13,2) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -1321,15 +1354,15 @@ ALTER TABLE `tblperubahan_hargabbm`
   ADD PRIMARY KEY (`id_perubahan`);
 
 --
--- Indexes for table `tblpo_bbm`
+-- Indexes for table `tblpobbm`
 --
-ALTER TABLE `tblpo_bbm`
+ALTER TABLE `tblpobbm`
   ADD PRIMARY KEY (`idPembelian`);
 
 --
--- Indexes for table `tblpo_detail`
+-- Indexes for table `tblpobbm_detail`
 --
-ALTER TABLE `tblpo_detail`
+ALTER TABLE `tblpobbm_detail`
   ADD PRIMARY KEY (`idPembelianDetail`);
 
 --
@@ -1355,6 +1388,18 @@ ALTER TABLE `tblrooms`
 --
 ALTER TABLE `tblsupplier`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tblterimabbm`
+--
+ALTER TABLE `tblterimabbm`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tblterimabbm_detail`
+--
+ALTER TABLE `tblterimabbm_detail`
+  ADD PRIMARY KEY (`id_detail`);
 
 --
 -- Indexes for table `tbltransaksi_nosel`
@@ -1530,15 +1575,15 @@ ALTER TABLE `tblperubahan_hargabbm`
   MODIFY `id_perubahan` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `tblpo_bbm`
+-- AUTO_INCREMENT for table `tblpobbm`
 --
-ALTER TABLE `tblpo_bbm`
+ALTER TABLE `tblpobbm`
   MODIFY `idPembelian` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tblpo_detail`
+-- AUTO_INCREMENT for table `tblpobbm_detail`
 --
-ALTER TABLE `tblpo_detail`
+ALTER TABLE `tblpobbm_detail`
   MODIFY `idPembelianDetail` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -1564,6 +1609,18 @@ ALTER TABLE `tblrooms`
 --
 ALTER TABLE `tblsupplier`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tblterimabbm`
+--
+ALTER TABLE `tblterimabbm`
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `tblterimabbm_detail`
+--
+ALTER TABLE `tblterimabbm_detail`
+  MODIFY `id_detail` bigint NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbltransaksi_nosel`
