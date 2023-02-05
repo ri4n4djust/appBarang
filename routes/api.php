@@ -64,6 +64,7 @@ Route::get('/kdpenjualan', [App\Http\Controllers\nomorController::class, 'kodePe
 // Route::get('/kdpelanggan', [App\Http\Controllers\nomorController::class, 'kodePelanggan']);
 Route::get('/kdkategori', [App\Http\Controllers\nomorController::class, 'kodeKategori']);
 Route::get('/kdopnum', [App\Http\Controllers\nomorController::class, 'kodeStokOpname']);
+Route::get('/kdpobbm', [App\Http\Controllers\nomorController::class, 'kodePoBbm']);
 Route::get('/kdpelanggan', [App\Http\Controllers\nomorController::class, 'kodePelanggan']);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

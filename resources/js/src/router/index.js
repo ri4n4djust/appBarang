@@ -73,6 +73,12 @@ const routes = [
         props: true,
     },
     {
+        path: '/bbm-datang',
+        name: 'bbm-datang',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/bbmDatang.vue'),
+        props: true,
+    },
+    {
         path: '/pembelian',
         name: 'pembelian',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/pembelian.vue'),
@@ -109,6 +115,14 @@ const routes = [
         path: '/opnum-bbm',
         name: 'opnum-bbm',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/opnumBbm.vue'),
+        // props: true,
+        // meta: { requiresAuth: true },
+    },
+
+    {
+        path: '/jurnal-umum',
+        name: 'jurnal-umum',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/jurnalUmum.vue'),
         // props: true,
         // meta: { requiresAuth: true },
     },

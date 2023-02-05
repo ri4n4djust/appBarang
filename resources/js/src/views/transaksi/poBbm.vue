@@ -25,7 +25,7 @@
                                     <div class="invoice-detail-title">
                                        
                                         <div class="invoice-title">
-                                            Invoice Pembelian
+                                           PO BBM
                                         </div>
                                     </div>
 
@@ -107,7 +107,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="invoice-detail-items">
+                                    <!-- <div class="invoice-detail-items">
                                         <div class="row">
                                             <div class="form-group col-md-3">
                                                 <label for="inputCity">NAMA BARANG</label>
@@ -137,7 +137,6 @@
                                             </div>
                                             <div class="form-group col-md-2">
                                                 <label for="inputZip">TOTAL</label><br>
-                                                <!-- {{ new Intl.NumberFormat().format(brg.lastPrice * qty) }} -->
                                                 <input type="text" v-model="tot" class="form-control form-control-sm" placeholder="Quantity" @keypress="onlyNumber" />
                                             </div>
                                             <div class="form-group col-md-1">
@@ -147,6 +146,84 @@
                                                 </button>
                                             </div>
                                         </div>
+                                    </div> -->
+
+                                    <div class="invoice-detail-items">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered item-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th class=""></th>
+                                                        <th>Description</th>
+                                                        <th class="">Rate</th>
+                                                        <th class="">Qty</th>
+                                                        <th class="text-end">Amount</th>
+                                                        <th class="text-center">Tax</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr v-for="(item, index) in items" :key="index">
+                                                        <td class="delete-item-row">
+                                                            <ul class="table-controls">
+                                                                <li>
+                                                                    <a href="javascript:void(0);" class="delete-item" @click="remove_item(item)">
+                                                                        <svg
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            width="24"
+                                                                            height="24"
+                                                                            viewBox="0 0 24 24"
+                                                                            fill="none"
+                                                                            stroke="currentColor"
+                                                                            stroke-width="2"
+                                                                            stroke-linecap="round"
+                                                                            stroke-linejoin="round"
+                                                                            class="feather feather-x-circle"
+                                                                        >
+                                                                            <circle cx="12" cy="12" r="10"></circle>
+                                                                            <line x1="15" y1="9" x2="9" y2="15"></line>
+                                                                            <line x1="9" y1="9" x2="15" y2="15"></line>
+                                                                        </svg>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </td>
+                                                        <td class="description">
+                                                            <multiselect 
+                                                                v-model="item.title" 
+                                                                :options="pembelian.barangs" 
+                                                                :searchable="true"
+                                                                track-by="nmPersediaan"
+                                                                label="nmPersediaan"
+                                                                open-direction="top"
+                                                                placeholder="Choose..." 
+                                                                selected-label="" 
+                                                                select-label="" >
+                                                            </multiselect>
+                                                            <!-- <input type="text" v-model="item.title" :id="'nama'+index" class="form-control form-control-sm" placeholder="Item Description" /> -->
+                                                        </td>
+                                                        <td class="rate">
+                                                            <input type="text" v-model="item.rate" :id="'rate'+index" class="form-control form-control-sm" placeholder="Price" />
+                                                        </td>
+                                                        <td class="text-end qty">
+                                                            <input type="text" v-model="item.quantity" :id="'quantity'+index" class="form-control form-control-sm" placeholder="Quantity" />
+                                                        </td>
+                                                        <td class="text-end amount">
+                                                            <span class="editable-amount mt-2">
+                                                                <span class="currency">$</span> <span class="amount">{{ item.rate * item.quantity }}</span>
+                                                            </span>
+                                                        </td>
+                                                        <td class="text-center tax">
+                                                            <div class="checkbox-primary custom-control custom-checkbox">
+                                                                <input type="checkbox" :id="`chktax-${index}`" v-model="item.is_tax" class="custom-control-input" />
+                                                                <label class="custom-control-label" :for="`chktax-${index}`"></label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <button type="button" class="btn btn-secondary additem btn-sm" @click="add_item()">Add Item</button>
                                     </div>
 
                                     <div class="invoice-detail-items">
@@ -184,13 +261,6 @@
 
                                         <!-- <button type="button" class="btn btn-secondary additem btn-sm" @click="add_item()">Add Item</button> -->
                                     </div>
-
-                                    <b-editable-table bordered class="editable-table" v-model="itemsc" :fields="fields" @input-change="handleInput">
-                                    <template #cell(isActive)="data">
-                                        <span v-if="data.value">Yes</span>
-                                        <span v-else>No</span>
-                                    </template>
-                                    </b-editable-table>
 
                                     
 
@@ -340,7 +410,7 @@
     import { useRouter, useRoute } from 'vue-router'
 
     import { useMeta } from '@/composables/use-meta';
-    useMeta({ title: 'Pembelian' });
+    useMeta({ title: 'PO BBM' });
 
     const store = useStore();
     const router = useRouter();
@@ -348,7 +418,7 @@
 
     const items = ref([]);
     const brg = ref([]);
-    const nopembelian = ref([]);
+    const nopobbm = ref([]);
     const qty = ref(1);
     const tot = ref();
     const subtotal = ref();
@@ -358,7 +428,7 @@
     const selected_file = ref(null);
     const payment = ref([]);
     const params = ref({
-        noNota: nopembelian,
+        noNota: nopobbm,
         tglNota: moment().format("YYYY-MM-DD"),
         term: 0,
         jthTempo: moment().format("YYYY-MM-DD"),
@@ -382,43 +452,29 @@
         // tlpSupplier: '',
 
     });
+
+    const item = ref({
+        title: [],
+        rate: [],
+        quantity: [],
+        // tlpSupplier: '',
+
+    });
+
     const cartItems = ref([])
     const divpajak = ref(false)
     // const currency_list = ref([]);
-    const fields = ref([
-        { key: "name", label: "Name", type: "text", editable: true, placeholder: "Enter Name...", class: "name-col"},
-        { key: "department", label: "Department", type: "select", editable: true, class: "department-col" , options: [
-          { value: 1, text: 'HR' },
-          { value: 2, text: 'Engineer' },
-          { value: 3, text: 'VP' },
-          { value: 4, text: 'CEO'}
-        ]},
-        { key: "age", label: "Age", type:"range", min:"0", max:"100", editable: true, placeholder: "Enter Age...", class: "age-col" },
-        { key: "dateOfBirth", label: "Date Of Birth", type: "date", editable: true, class: "date-col", locale: "en",
-          "date-format-options": {
-            year: "numeric",
-            month: "numeric",
-            day: "numeric",
-          }, },
-        { key: "isActive", label: "Is Active", type: "checkbox", editable: true, class: "is-active-col" }
-      ]);
-      const itemsc= ref([
-          { id: 1, age: 40, name: 'Dickerson', department: 1, dateOfBirth: '1984-05-20', isActive: true },
-          { id: 2, age: 21, name: 'Larsen', department: 2, dateOfBirth: '1972-07-25', isActive: false },
-          { id: 3, age: 89, name: 'Geneva', department: 3, dateOfBirth: '1981-02-02', isActive: false },
-          { id: 4, age: 38, name: 'Jami', department: 4, dateOfBirth: '1964-10-19', isActive: true },
-        ]);
-    const handleInput = (data) => {}
+    
 
     const pembelian = computed(() => {
         const barangs = store.getters.StatePersediaan;
         const suppliers = store.getters.StateSupplier;
         const accs = store.getters.StateAcc;
-        nopembelian.value = store.getters.NoPembelian;
+        nopobbm.value = store.getters.NoPobbm;
         const pajak = store.state.pajak;
         tot.value = brg.value.lastPrice * qty.value;
         // console.log(suppliers)
-        return { barangs, pajak, suppliers, nopembelian, accs, tot }
+        return { barangs, pajak, suppliers, nopobbm, accs, tot }
     });
 
     const getBarang=() => {
@@ -427,8 +483,8 @@
     const getSupplier=() => {
         store.dispatch('GetSupplier')
     }
-    const getNoPembelian=() => {
-        store.dispatch('GetNoPembelian')
+    const getNoPobbm=() => {
+        store.dispatch('GetNoPobbm')
     }
     const getAcc=() => {
         store.dispatch('GetAcc')
@@ -484,13 +540,14 @@
     }
 
     const simpanPembelian=() => {
+        console.log(items.value)
         const header =params.value
         const headers =paramssupplier.value
-            const headerfull = Object.assign(header, headers)
-            const detail =cartItems.value
-            store.dispatch('CreatePembelian', [headerfull,detail] )
-            setTimeout(function() { getCart(); }, 5000);
-            getNoPembelian();
+        const headerfull = Object.assign(header, headers)
+        const detail =cartItems.value
+        store.dispatch('CreatePembelian', [headerfull,detail] )
+        setTimeout(function() { getCart(); }, 5000);
+        getNoPobbm();
     }
 
     onMounted(() => {
@@ -508,7 +565,7 @@
         getAcc();
         getSupplier();
         getCart();
-        getNoPembelian();
+        getNoPobbm();
     });
 
     const change_file = (event) => {
@@ -612,6 +669,15 @@
         // console.log(subtotal.value)
         // return sum;
     }
+
+    const add_item = () => {
+        let max_id = 0;
+        if (items.value && items.value.length) {
+            max_id = items.value.reduce((max, character) => (character.id > max ? character.id : max), items.value[0].id);
+        }
+        items.value.push({ id: max_id + 1, title: '', description: '', rate: 0, quantity: 0, amount: 0, is_tax: false });
+    };
+    
     function onlyNumber ($event) {
         //console.log($event.keyCode); //keyCodes value
         let keyCode = ($event.keyCode ? $event.keyCode : $event.which);
@@ -620,41 +686,3 @@
         }   
     }
 </script>
-<style>
-table.editable-table {
-  margin: auto;
-}
-
-table.editable-table td {
-  vertical-align: middle;
-}
-
-.editable-table .data-cell {
-  padding: 8px;
-  vertical-align: middle;
-}
-
-.editable-table .custom-checkbox {
-  width: 50px;
-}
-
-.name-col {
-  width: 120px;
-}
-
-.department-col {
-  width: 150px;
-}
-
-.age-col {
-  width: 100px;
-}
-
-.date-col {
-  width: 200px;
-}
-
-.is-active-col {
-  width: 100px
-}
-</style>

@@ -213,7 +213,7 @@
                             <router-link to="/po-bbm" @click="toggleMobileMenu">PO BBM</router-link>
                         </li>
                         <li>
-                            <router-link to="/pembelian" @click="toggleMobileMenu">Kedatangan BBM</router-link>
+                            <router-link to="/bbm-datang" @click="toggleMobileMenu">Kedatangan BBM</router-link>
                         </li>
                         <li>
                             <router-link to="/pembelian" @click="toggleMobileMenu">Pembelian</router-link>
@@ -229,6 +229,9 @@
                         </li>
                         <li>
                             <router-link to="/opnum-barang" @click="toggleMobileMenu">Opnum Barang</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/jurnal-umum" @click="toggleMobileMenu">Jurnal Umum</router-link>
                         </li>
                     </ul>
                 </li>

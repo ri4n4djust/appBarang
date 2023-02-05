@@ -10,6 +10,8 @@ use App\Models\Pembelian;
 use App\Models\Penjualan;
 use App\Models\Supplier;
 use App\Models\Opnum;
+use App\Models\Pobbm;
+use Illuminate\Support\Facades\DB;
 
 class nomorController extends Controller
 {
@@ -293,6 +295,49 @@ class nomorController extends Controller
                     'success' => true,
                     'message' => 'Detail Post!',
                     'kdOpnum'    => $post
+                ], 200);
+            }
+        }
+    }
+
+    public function kodePoBbm()
+    {
+        $count = Pobbm::all();
+        if($count->isEmpty()){
+            $tahun = date('mY');
+            $post = 'PO'.$tahun.'1';
+            return response()->json([
+                'success' => true,
+                'message' => 'Detail Post!',
+                'kdPobbm'    => $post
+            ], 200);
+        }else{
+
+            $no = 0 ;
+            $count = Pobbm::all()->last();
+            $terakhir = substr($count->no_po, 8,  20);
+            $kodeBaru = $terakhir + 1  ;
+
+            $tahun = date('mY');
+            $post = 'PO'.$tahun.''.$kodeBaru;
+
+            if (Pobbm::where('no_po', $post)->exists()) {
+                $count = Pobbm::all()->last();
+                $terakhir = substr($count->no_po, 8,  20);
+                $kodeBarulagi = $kodeBaru + 1 ;
+                $post = 'PO'.$tahun.$kodeBarulagi;
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Detail Post!',
+                    'kdPobbm'    => $post
+                ], 200);
+            } else {
+                $tahun = date('mY');
+                //$post = 'OP-'.$tahun.'-'.'1';
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Detail Post!',
+                    'kdPobbm'    => $post
                 ], 200);
             }
         }

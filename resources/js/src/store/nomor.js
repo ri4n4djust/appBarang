@@ -5,6 +5,7 @@ const state = {
     nopembelian: [],
     nobarang: [],
     noopnum: [],
+    nopobbm: []
     // nokupon: [],
   };
   
@@ -13,6 +14,7 @@ const getters = {
     NoPembelian: state => state.nopembelian,
     NoPenjualan: state => state.nopenjualan,
     NoOpnum: state => state.noopnum,
+    NoPobbm: state => state.nopobbm
     // NoKupon: state => state.nokupon
 };
 
@@ -77,6 +79,18 @@ const actions = {
         }
     
     },
+    async GetNoPobbm({ commit }){
+        let response
+        try {
+            response = await axios.get('/api/kdpobbm')
+            commit('setNoPobbm', response.data.kdPobbm)
+        } catch (ex) {
+            // Handle error
+            alert('error no po bbm')
+            return
+        }
+    
+    },
 
 };
 const mutations = {
@@ -91,6 +105,9 @@ const mutations = {
     },
     setNoOpnum(state, op){
         state.noopnum = op
+    },
+    setNoPobbm(state, po){
+        state.nopobbm = po
     },
 
 };
