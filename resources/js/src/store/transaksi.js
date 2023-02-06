@@ -10,7 +10,8 @@ const state = {
     editaplusan:[],
     kupon: [],
     biaya: [],
-    link: []
+    link: [],
+    listpobbm: []
   };
   
 const getters = {
@@ -22,7 +23,8 @@ const getters = {
     SeditAplusan: state => state.editaplusan,
     Skupon: state => state.kupon,
     Sbiaya: state => state.biaya,
-    Slink: state => state.link
+    Slink: state => state.link,
+    SlistPobbm: state => state.listpobbm,
 };
 
 const actions = {
@@ -30,7 +32,7 @@ const actions = {
     async CreatePembelian({dispatch}, detail) {
         let response
         try {
-            response = await axios.post('api/store/pembelian', detail)
+            response = await axios.post('/api/store/pembelian', detail)
             localStorage.setItem('cartItemsP', '[]')
             const toast = window.Swal.mixin({
                 toast: true,
@@ -64,10 +66,84 @@ const actions = {
         }
         // await dispatch('GetPembelian')
     },
+    async CreatePo({dispatch}, detail) {
+        let response
+        try {
+            response = await axios.post('/api/store/po-bbm', detail)
+            // localStorage.setItem('cartItemsP', '[]')
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Pembelian berhasil tersimpan',
+                padding: '2em',
+            });
+        } catch (ex) {
+            // Handle error
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'Mohon Lengkapi Data',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            return
+        }
+        // await dispatch('GetPembelian')
+    },
+    async ListPo({dispatch}, detail) {
+        let response
+        try {
+            response = await axios.post('/api/list/po-bbm', detail)
+            // localStorage.setItem('cartItemsP', '[]')
+            // const toast = window.Swal.mixin({
+            //     toast: true,
+            //     position: 'top-center',
+            //     showConfirmButton: false,
+            //     timer: 3000,
+            //     padding: '2em',
+            // });
+            // toast.fire({
+            //     icon: 'success',
+            //     title: 'Daftar PO BBM',
+            //     padding: '2em',
+            // });
+        } catch (ex) {
+            // Handle error
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'Gagal Load PO',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            return
+        }
+        // await dispatch('GetPembelian')
+    },
     async CreatePenjualan({dispatch}, detail) {
         let response
         try {
-            response = await axios.post('api/store/penjualan', detail)
+            response = await axios.post('/api/store/penjualan', detail)
             const toast = window.Swal.mixin({
                 toast: true,
                 position: 'top-center',
@@ -105,7 +181,7 @@ const actions = {
     async CreateOpnum({dispatch}, detail) {
         let response
         try {
-            response = await axios.post('api/store/opnum', detail)
+            response = await axios.post('/api/store/opnum', detail)
             const toast = window.Swal.mixin({
                 toast: true,
                 position: 'top-center',
@@ -191,7 +267,7 @@ const actions = {
     async GetEditAplusan({ commit }, sort){
         let response
         try {
-            response = await axios.post('api/getedit-aplusam', sort)
+            response = await axios.post('/api/getedit-aplusam', sort)
             commit('setEditAplusan', response.data.data)
             commit('setKupon', data)
             commit('setBiaya', b)
@@ -205,7 +281,7 @@ const actions = {
     async GetPembelian({ commit }){
         let response
         try {
-            response = await axios.get('api/getpembelian')
+            response = await axios.get('/api/getpembelian')
             commit('setPembelian', response.data.data)
         } catch (ex) {
             // Handle error
@@ -216,7 +292,7 @@ const actions = {
     async GetAcc({ commit }){
         let response
         try {
-            response = await axios.get('api/linkacc')
+            response = await axios.get('/api/linkacc')
             commit('setAcc', response.data.data)
         } catch (ex) {
             // Handle error

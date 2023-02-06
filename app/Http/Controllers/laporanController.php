@@ -53,6 +53,7 @@ class laporanController extends Controller
             'data' => $lap
         ], 200);
     }
+    
 
     public function laporanOpnum(Request $request){
         $startDate = date("Y-m-d", strtotime($request->input('startDate')));

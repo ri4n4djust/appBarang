@@ -37,14 +37,14 @@
                                                     <div class="form-group row">
                                                         <label for="company-name" class="col-sm-3 col-form-label col-form-label-sm">No PO</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" v-model="params.noNota" id="number" class="form-control form-control-sm" placeholder="#0001" />
+                                                            <input type="text" v-model="params.no_po" id="number" class="form-control form-control-sm" placeholder="#0001" />
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="company-email" class="col-sm-3 col-form-label col-form-label-sm">Tgl</label>
                                                         <div class="col-sm-9">
-                                                            <flat-pickr v-model="params.tglNota" class="form-control form-control-sm flatpickr active" placeholder="Invoice Date"></flat-pickr>
+                                                            <flat-pickr v-model="params.tgl_so" class="form-control form-control-sm flatpickr active" placeholder="Invoice Date"></flat-pickr>
                                                         </div>
                                                     </div>
 
@@ -71,6 +71,13 @@
                                                                 select-label="" 
                                                                 deselect-label="">
                                                             </multiselect>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="company-name" class="col-sm-3 col-form-label col-form-label-sm">No SO</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" v-model="params.no_so" id="number" class="form-control form-control-sm" placeholder="#0001" />
                                                         </div>
                                                     </div>
 
@@ -130,7 +137,6 @@
                                                         <th class="">Rate</th>
                                                         <th class="">Qty</th>
                                                         <th class="text-end">Amount</th>
-                                                        <th class="text-center">Tax</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -160,8 +166,14 @@
                                                             </ul>
                                                         </td>
                                                         <td class="description">
-                                                            <multiselect 
-                                                                v-model="item.kdBarang" 
+                                                            <select id="inputState" v-model="item.title" class="form-select">
+                                                                <option value="BRG0001" selected>PERTAMAX</option>
+                                                                <option value="BRG0002">PERTALITE</option>
+                                                                <option value="BRG0003">DEXLITE</option>
+                                                            </select>
+
+                                                            <!-- <multiselect 
+                                                                v-model="item.kdPersediaan" 
                                                                 :options="pembelian.barangs" 
                                                                 :searchable="true"
                                                                 track-by="nmPersediaan"
@@ -170,11 +182,12 @@
                                                                 placeholder="Choose..." 
                                                                 selected-label="" 
                                                                 select-label="" >
-                                                            </multiselect>
+                                                            </multiselect> -->
                                                             <!-- <input type="text" v-model="item.title" :id="'nama'+index" class="form-control form-control-sm" placeholder="Item Description" /> -->
                                                         </td>
                                                         <td class="rate">
                                                             <input type="text" v-model="item.rate" :id="'rate'+index" class="form-control form-control-sm" placeholder="Price" />
+                                                            <!-- <input type="text" v-model="item.kdPersediaan.kdPersediaan" :id="'rate'+index" class="form-control form-control-sm" placeholder="Price" /> -->
                                                         </td>
                                                         <td class="text-end qty">
                                                             <input type="text" v-model="item.quantity" :id="'quantity'+index" class="form-control form-control-sm" placeholder="Quantity" />
@@ -184,14 +197,14 @@
                                                                 <span class="currency"></span> <span class="amount">{{ item.rate * item.quantity || 0 }}</span>
                                                             </span>
                                                         </td>
-                                                        <td class="text-center tax">
-                                                            <input type="text" v-model="item.amount" :id="'amount'+index" class="form-control form-control-sm" placeholder="Price" />
+                                                        <!-- <td class="text-center tax">
+                                                            <input type="text" v-model="item.mount" class="form-control form-control-sm" placeholder="Price" /> -->
                                                             <!-- <input type="text" :id="item.amount" :value="item.rate * item.quantity" class="form-control form-control-sm" placeholder="Quantity" @keypress="onlyNumber" /> -->
                                                             <!-- <div class="checkbox-primary custom-control custom-checkbox">
                                                                 <input type="checkbox" :id="`chktax-${index}`" v-model="item.is_tax" class="custom-control-input" />
                                                                 <label class="custom-control-label" :for="`chktax-${index}`"></label>
                                                             </div> -->
-                                                        </td>
+                                                        <!-- </td> -->
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -200,42 +213,7 @@
                                         <button type="button" class="btn btn-secondary additem btn-sm" @click="add_item()">Add Item</button>
                                     </div>
 
-                                    <div class="invoice-detail-items">
-                                        <div class="inv--product-table-section">
-                                            <div class="table-responsive">
-                                                <table class="table table-hover table-bordered item-table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>Nama Barang</th>
-                                                            <th>Harga</th>
-                                                            <th>Qty</th>
-                                                            <th>Satuan</th>
-                                                            <th>Total</th>
-                                                            <th>Aksi</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr v-for="item in cartItems" :key="item.kdBarang">
-                                                            <td class="description">{{ item.nmBarang }}</td>
-                                                            <td class="rate">{{ new Intl.NumberFormat().format(item.hrgPokok) }}</td>
-                                                            <td class="qty">{{ item.qty }}</td>
-                                                            <td class="qty">{{ item.satuan }}</td>
-                                                            <td class="amount">{{ new Intl.NumberFormat().format(item.total) }}</td>
-                                                            <td class="tax">
-                                                                <button type="button" class="btn btn-secondary additem btn-sm" @click="removeItem(id=item.kdBarang)">Hapus</button>
-                                                                <!-- <div class="icon-container">
-                                                                    <i data-feather="trash"></i><span class="icon-name"> trash</span>
-                                                                </div> -->
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-
-                                        <!-- <button type="button" class="btn btn-secondary additem btn-sm" @click="add_item()">Add Item</button> -->
-                                    </div>
-
+                                    
                                     
 
                                     <div class="invoice-detail-total">
@@ -402,8 +380,8 @@
     const selected_file = ref(null);
     const payment = ref([]);
     const params = ref({
-        noNota: nopobbm,
-        tglNota: moment().format("YYYY-MM-DD"),
+        no_po: nopobbm,
+        tgl_so: moment().format("YYYY-MM-DD"),
         term: 0,
         jthTempo: moment().format("YYYY-MM-DD"),
         notes: '',
@@ -446,9 +424,15 @@
         const accs = store.getters.StateAcc;
         nopobbm.value = store.getters.NoPobbm;
         const pajak = store.state.pajak;
-        tot.value = brg.value.lastPrice * qty.value;
-        // console.log(suppliers)
-        return { barangs, pajak, suppliers, nopobbm, accs, tot }
+        subtotal.value = 0;
+        let tot = 0;
+        for(let i = 0; i < items.value.length; i++){
+            subtotal.value += (parseFloat(items.value[i].rate) * parseFloat(items.value[i].quantity));
+            items.value[i].amount = parseFloat(items.value[i].rate) * parseFloat(items.value[i].quantity)
+        }
+        getTotal()
+        // console.log(tot)
+        return { barangs, pajak, suppliers, nopobbm, accs, subtotal, tot }
     });
 
     const getBarang=() => {
@@ -471,7 +455,7 @@
         total.value = (subtotal.value - (subtotal.value * disc.value / 100))
         tax.value = temptotal * pajak /100
         
-        console.log('total tanpa pajak :'+tax.value)
+        // console.log('total tanpa pajak :'+tax.value)
         // return { tot }
     }
     const getTotalWtax=() =>{
@@ -481,7 +465,7 @@
         total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + tax.value
         
         
-        console.log('total dengan pajak:'+tax.value)
+        // console.log('total dengan pajak:'+tax.value)
         // return { tot }
     }
 
@@ -519,13 +503,14 @@
         const headers =paramssupplier.value
         const headerfull = Object.assign(header, headers)
         const detail =items.value
-        store.dispatch('CreatePembelian', [headerfull,detail] )
+        store.dispatch('CreatePo', [headerfull,detail] )
         setTimeout(function() { getCart(); }, 5000);
         getNoPobbm();
     }
 
     onMounted(() => {
         //set default data
+
         items.value.push({ 
             id: 1, title: '', 
             description: '', 
@@ -534,6 +519,7 @@
             amount: 0, 
             is_tax: false 
         });
+        
 
         let dt = new Date();
         params.value.invoice_date = JSON.parse(JSON.stringify(dt));
@@ -653,6 +639,10 @@
 
     const add_item = () => {
         let max_id = 0;
+        // let sub = 0
+        // for(let i = 0; i < items.value.length; i++){
+        //     sub = items.value[i].rate * items.value[i].quantity;
+        // }
         if (items.value && items.value.length) {
             max_id = items.value.reduce((max, character) => (character.id > max ? character.id : max), items.value[0].id);
         }

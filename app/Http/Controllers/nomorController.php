@@ -11,6 +11,7 @@ use App\Models\Penjualan;
 use App\Models\Supplier;
 use App\Models\Opnum;
 use App\Models\Pobbm;
+use App\Models\BbmDatang;
 use Illuminate\Support\Facades\DB;
 
 class nomorController extends Controller
@@ -342,6 +343,51 @@ class nomorController extends Controller
             }
         }
     }
+
+
+    public function kodeBbmdatang()
+    {
+        $count = BbmDatang::all();
+        if($count->isEmpty()){
+            $tahun = date('mY');
+            $post = 'BR'.$tahun.'1';
+            return response()->json([
+                'success' => true,
+                'message' => 'Detail Post!',
+                'kdBbmdatang'    => $post
+            ], 200);
+        }else{
+
+            $no = 0 ;
+            $count = BbmDatang::all()->last();
+            $terakhir = substr($count->kd_terima, 8,  20);
+            $kodeBaru = $terakhir + 1  ;
+
+            $tahun = date('mY');
+            $post = 'BR'.$tahun.''.$kodeBaru;
+
+            if (BbmDatang::where('kd_terima', $post)->exists()) {
+                $count = BbmDatang::all()->last();
+                $terakhir = substr($count->kd_terima, 8,  20);
+                $kodeBarulagi = $kodeBaru + 1 ;
+                $post = 'BR'.$tahun.$kodeBarulagi;
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Detail Post!',
+                    'kdBbmdatang'    => $post
+                ], 200);
+            } else {
+                $tahun = date('mY');
+                //$post = 'OP-'.$tahun.'-'.'1';
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Detail Post!',
+                    'kdBbmdatang'    => $post
+                ], 200);
+            }
+        }
+    }
+
 
     public function kodeUsername()
     {

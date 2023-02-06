@@ -65,6 +65,7 @@ Route::get('/kdpenjualan', [App\Http\Controllers\nomorController::class, 'kodePe
 Route::get('/kdkategori', [App\Http\Controllers\nomorController::class, 'kodeKategori']);
 Route::get('/kdopnum', [App\Http\Controllers\nomorController::class, 'kodeStokOpname']);
 Route::get('/kdpobbm', [App\Http\Controllers\nomorController::class, 'kodePoBbm']);
+Route::get('/kdbbmdatang', [App\Http\Controllers\nomorController::class, 'kodeBbmdatang']);
 Route::get('/kdpelanggan', [App\Http\Controllers\nomorController::class, 'kodePelanggan']);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -83,6 +84,8 @@ Route::post('/transnoselregu', [App\Http\Controllers\transaksiNoselController::c
 
 // Pembelian
 Route::post('/store/pembelian', [App\Http\Controllers\pembelianController::class, 'simpanPembelian']);
+Route::post('/store/po-bbm', [App\Http\Controllers\pembelianController::class, 'simpanPobbm']);
+Route::post('/list/po-bbm', [App\Http\Controllers\pembelianController::class, 'listPobbm']);
 Route::get('/linkacc', [App\Http\Controllers\pembelianController::class, 'linkAccount']);
 
 // Penjualan

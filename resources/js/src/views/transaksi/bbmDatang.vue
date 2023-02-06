@@ -37,7 +37,7 @@
                                                     <div class="form-group row">
                                                         <label for="company-name" class="col-sm-3 col-form-label col-form-label-sm">No Nota</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" v-model="params.noNota" id="number" class="form-control form-control-sm" placeholder="#0001" />
+                                                            <input type="text" v-model="params.no_br" id="number" class="form-control form-control-sm" placeholder="#0001" />
                                                         </div>
                                                     </div>
 
@@ -48,22 +48,6 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group row">
-                                                        <label for="company-address" class="col-sm-3 col-form-label col-form-label-sm">Term</label>
-                                                        <div class="col-sm-9">
-                                                            <select id="inputState" v-model="params.term" class="form-select">
-                                                                <option value="0" selected>Cash</option>
-                                                                <option value="1">Kredit</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label for="company-phone" class="col-sm-3 col-form-label col-form-label-sm">Jatuh Tempo</label>
-                                                        <div class="col-sm-9">
-                                                            <flat-pickr v-model="params.jthTempo" class="form-control form-control-sm flatpickr active" placeholder="Due Date"></flat-pickr>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
 
@@ -96,18 +80,67 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group row">
-                                                        <label for="client-phone" class="col-sm-3 col-form-label col-form-label-sm">Phone</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" v-model="paramssupplier.tlpSupplier" id="client-phone" class="form-control form-control-sm" placeholder="(123) 456 789" />
-                                                        </div>
+                                                    <div class="input-group mb-4">
+                                                        <input type="text" class="form-control" placeholder="Cari SO" aria-label="Cari SO" />
+                                                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalSo">Button</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="invoice-detail-items">
+                                    <div class="modal fade" id="modalSo" tabindex="-1" role="dialog" aria-labelledby="modalSo" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Daftar PO</h5>
+                                                    <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <!-- <h4 class="modal-heading mb-4 mt-2">Aligned Center</h4> -->
+
+                                                    <!-- <div class="table-responsive">
+                                                        <table role="table" aria-busy="false" aria-colcount="5" class="table table-bordered" id="__BVID__415">
+                                                            <thead role="rowgroup">
+                                                                <tr role="row">
+                                                                    <th role="columnheader" scope="col" aria-colindex="1"><div>Name</div></th>
+                                                                    <th role="columnheader" scope="col" aria-colindex="2"><div>Date</div></th>
+                                                                    <th role="columnheader" scope="col" aria-colindex="3"><div>Total</div></th>
+                                                                    <th role="columnheader" scope="col" aria-colindex="4" class="text-center"><div>Hapus</div></th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody role="rowgroup">
+                                                                <tr v-for="kp in cartKupon" :key="kp.kdp">
+                                                                    <td aria-colindex="1" role="cell">{{ kp.kdp }}</td>
+                                                                    <td aria-colindex="2" role="cell">{{ kp.tglKupon }}</td>
+                                                                    <td aria-colindex="3" role="cell">{{ kp.nilaiKupon }}</td>
+                                                                    <td aria-colindex="4" role="cell">
+                                                                        <button type="button" class="btn btn-secondary additem btn-sm" @click="removeItem(id=kp.kdp)">Hapus</button>
+                                                                    </td>
+                                                                    
+                                                                </tr>
+                                                            </tbody>
+                                                            <tfoot role="rowgroup">
+                                                                <tr role="row">
+                                                                    <th role="columnheader" scope="col" aria-colindex="1"><div>Name</div></th>
+                                                                    <th role="columnheader" scope="col" aria-colindex="2"><div>Total</div></th>
+                                                                    <th role="columnheader" scope="col" aria-colindex="3"><div>{{ Number(total).toLocaleString() }}</div></th>
+                                                                    <th role="columnheader" scope="col" aria-colindex="4" class="text-center"></th>
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+                                                    </div> -->
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <!-- <button type="button" class="btn" data-dismiss="modal" data-bs-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button> -->
+                                                    <!-- <button type="button" class="btn btn-primary">Save</button> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="invoice-detail-items">
                                         <div class="row">
                                             <div class="form-group col-md-3">
                                                 <label for="inputCity">NAMA BARANG</label>
@@ -137,7 +170,6 @@
                                             </div>
                                             <div class="form-group col-md-2">
                                                 <label for="inputZip">TOTAL</label><br>
-                                                <!-- {{ new Intl.NumberFormat().format(brg.lastPrice * qty) }} -->
                                                 <input type="text" v-model="tot" class="form-control form-control-sm" placeholder="Quantity" @keypress="onlyNumber" />
                                             </div>
                                             <div class="form-group col-md-1">
@@ -147,7 +179,7 @@
                                                 </button>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <div class="invoice-detail-items">
                                         <div class="inv--product-table-section">
@@ -341,7 +373,7 @@
 
     const items = ref([]);
     const brg = ref([]);
-    const nopembelian = ref([]);
+    const noterima = ref([]);
     const qty = ref(1);
     const tot = ref();
     const subtotal = ref();
@@ -351,7 +383,7 @@
     const selected_file = ref(null);
     const payment = ref([]);
     const params = ref({
-        noNota: nopembelian,
+        no_br: noterima,
         tglNota: moment().format("YYYY-MM-DD"),
         term: 0,
         jthTempo: moment().format("YYYY-MM-DD"),
@@ -375,6 +407,10 @@
         // tlpSupplier: '',
 
     });
+    const sorting = ref({
+        startDate: moment().subtract(30,'d').format("D-M-YYYY"),
+        endDate: moment().format("D-M-YYYY")
+    });
     const cartItems = ref([])
     const divpajak = ref(false)
     // const currency_list = ref([]);
@@ -383,11 +419,11 @@
         const barangs = store.getters.StatePersediaan;
         const suppliers = store.getters.StateSupplier;
         const accs = store.getters.StateAcc;
-        nopembelian.value = store.getters.NoPembelian;
+        noterima.value = store.getters.NoTerimaBbm;
         const pajak = store.state.pajak;
         tot.value = brg.value.lastPrice * qty.value;
         // console.log(suppliers)
-        return { barangs, pajak, suppliers, nopembelian, accs, tot }
+        return { barangs, pajak, suppliers, noterima, accs, tot }
     });
 
     const getBarang=() => {
@@ -396,8 +432,11 @@
     const getSupplier=() => {
         store.dispatch('GetSupplier')
     }
-    const getNoPembelian=() => {
-        store.dispatch('GetNoPembelian')
+    const getNoTerima=() => {
+        store.dispatch('GetTerimabbm')
+    }
+    const getListPo=() => {
+        store.dispatch('ListPo', sorting.value)
     }
     const getAcc=() => {
         store.dispatch('GetAcc')
@@ -459,7 +498,7 @@
             const detail =cartItems.value
             store.dispatch('CreatePembelian', [headerfull,detail] )
             setTimeout(function() { getCart(); }, 5000);
-            getNoPembelian();
+            getNoTerima();
     }
 
     onMounted(() => {
@@ -477,7 +516,8 @@
         getAcc();
         getSupplier();
         getCart();
-        getNoPembelian();
+        getNoTerima();
+        getListPo();
     });
 
     const change_file = (event) => {
