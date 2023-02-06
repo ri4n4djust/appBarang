@@ -54,42 +54,18 @@
                                             <div class="col-xl-5 invoice-address-client">
 
                                                 <div class="invoice-address-client-fields">
-                                                    <div class="form-group row">
-                                                        <label for="client-name" class="col-sm-3 col-form-label col-form-label-sm">Name</label>
-                                                        <div class="col-sm-9">
-                                                            <multiselect 
-                                                                v-model="paramssupplier" 
-                                                                :options="pembelian.suppliers" 
-                                                                :searchable="true"
-                                                                :allow-empty="false"
-                                                                track-by="nmSupplier"
-                                                                label="nmSupplier"
-                                                                open-direction="top"
-                                                                placeholder="Choose..." 
-                                                                selected-label="" 
-                                                                select-label="" 
-                                                                deselect-label="">
-                                                            </multiselect>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label for="client-address" class="col-sm-3 col-form-label col-form-label-sm">Address</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" v-model="paramssupplier.almtSupplier" id="client-address" class="form-control form-control-sm" placeholder="XYZ Street" />
-                                                        </div>
-                                                    </div>
 
                                                     <div class="input-group mb-4">
-                                                        <input type="text" class="form-control" placeholder="Cari SO" aria-label="Cari SO" />
-                                                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalSo">Button</button>
+                                                        <input type="text" class="form-control" v-model="no_so" placeholder="Cari SO" aria-label="Cari SO" />
+                                                        <button class="btn btn-primary" @click="openModal()">Button</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="modal fade" id="modalSo" tabindex="-1" role="dialog" aria-labelledby="modalSo" aria-hidden="true">
+                                    <vue-final-modal v-model="isOpen">
+                                    <!-- <div class="modal fade" id="modalSo" tabindex="-1" role="dialog" aria-labelledby="modalSo" aria-hidden="true"> -->
                                         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -97,39 +73,32 @@
                                                     <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
                                                 </div>
                                                 <div class="modal-body">
+                                                    <!-- {{ listpo }} -->
                                                     <!-- <h4 class="modal-heading mb-4 mt-2">Aligned Center</h4> -->
 
-                                                    <!-- <div class="table-responsive">
-                                                        <table role="table" aria-busy="false" aria-colcount="5" class="table table-bordered" id="__BVID__415">
+                                                    <div class="table-responsive">
+                                                        <table role="table" aria-busy="false" aria-colcount="5" class="table table-bordered" >
                                                             <thead role="rowgroup">
                                                                 <tr role="row">
-                                                                    <th role="columnheader" scope="col" aria-colindex="1"><div>Name</div></th>
-                                                                    <th role="columnheader" scope="col" aria-colindex="2"><div>Date</div></th>
-                                                                    <th role="columnheader" scope="col" aria-colindex="3"><div>Total</div></th>
-                                                                    <th role="columnheader" scope="col" aria-colindex="4" class="text-center"><div>Hapus</div></th>
+                                                                    <th role="columnheader" scope="col" aria-colindex="1"><div>No Po</div></th>
+                                                                    <th role="columnheader" scope="col" aria-colindex="2"><div>No SO</div></th>
+                                                                    <th role="columnheader" scope="col" aria-colindex="3"><div>Tgl</div></th>
+                                                                    <th role="columnheader" scope="col" aria-colindex="4" class="text-center"><div>Pilih</div></th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody role="rowgroup">
-                                                                <tr v-for="kp in cartKupon" :key="kp.kdp">
-                                                                    <td aria-colindex="1" role="cell">{{ kp.kdp }}</td>
-                                                                    <td aria-colindex="2" role="cell">{{ kp.tglKupon }}</td>
-                                                                    <td aria-colindex="3" role="cell">{{ kp.nilaiKupon }}</td>
-                                                                    <td aria-colindex="4" role="cell">
-                                                                        <button type="button" class="btn btn-secondary additem btn-sm" @click="removeItem(id=kp.kdp)">Hapus</button>
+                                                                <tr v-for="ls in listpo" :key="ls.idPo">
+                                                                    <td role="cell">{{ ls.no_po }}</td>
+                                                                    <td role="cell">{{ ls.no_so }}</td>
+                                                                    <td role="cell">{{ moment(ls.tgl_po).format('D-M-YYYY') }}</td>
+                                                                    <td role="cell">
+                                                                        <button type="button" class="btn btn-secondary additem btn-sm" @click="get(ls)">Pilih</button>
                                                                     </td>
                                                                     
                                                                 </tr>
                                                             </tbody>
-                                                            <tfoot role="rowgroup">
-                                                                <tr role="row">
-                                                                    <th role="columnheader" scope="col" aria-colindex="1"><div>Name</div></th>
-                                                                    <th role="columnheader" scope="col" aria-colindex="2"><div>Total</div></th>
-                                                                    <th role="columnheader" scope="col" aria-colindex="3"><div>{{ Number(total).toLocaleString() }}</div></th>
-                                                                    <th role="columnheader" scope="col" aria-colindex="4" class="text-center"></th>
-                                                                </tr>
-                                                            </tfoot>
                                                         </table>
-                                                    </div> -->
+                                                    </div>
 
                                                 </div>
                                                 <div class="modal-footer">
@@ -138,7 +107,8 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    <!-- </div> -->
+                                    </vue-final-modal>
 
                                     <!-- <div class="invoice-detail-items">
                                         <div class="row">
@@ -189,25 +159,18 @@
                                                         <tr>
                                                             <th>Nama Barang</th>
                                                             <th>Harga</th>
-                                                            <th>Qty</th>
-                                                            <th>Satuan</th>
+                                                            <th>Qty Order</th>
+                                                            <th>Qty Datang</th>
                                                             <th>Total</th>
-                                                            <th>Aksi</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr v-for="item in cartItems" :key="item.kdBarang">
+                                                        <tr v-for="item in brg" :key="item.kdBarang">
                                                             <td class="description">{{ item.nmBarang }}</td>
-                                                            <td class="rate">{{ new Intl.NumberFormat().format(item.hrgPokok) }}</td>
+                                                            <td class="rate">{{ new Intl.NumberFormat().format(item.hrgBeli) }}</td>
                                                             <td class="qty">{{ item.qty }}</td>
                                                             <td class="qty">{{ item.satuan }}</td>
                                                             <td class="amount">{{ new Intl.NumberFormat().format(item.total) }}</td>
-                                                            <td class="tax">
-                                                                <button type="button" class="btn btn-secondary additem btn-sm" @click="removeItem(id=item.kdBarang)">Hapus</button>
-                                                                <!-- <div class="icon-container">
-                                                                    <i data-feather="trash"></i><span class="icon-name"> trash</span>
-                                                                </div> -->
-                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -365,7 +328,7 @@
     import { useRouter, useRoute } from 'vue-router'
 
     import { useMeta } from '@/composables/use-meta';
-    useMeta({ title: 'Pembelian' });
+    useMeta({ title: 'Barang Datang' });
 
     const store = useStore();
     const router = useRouter();
@@ -382,6 +345,9 @@
     const tax = ref();
     const selected_file = ref(null);
     const payment = ref([]);
+    const listpo = ref([]);
+    const no_so = ref();
+    const isOpen = ref(false);
     const params = ref({
         no_br: noterima,
         tglNota: moment().format("YYYY-MM-DD"),
@@ -393,20 +359,6 @@
         disc: disc,
         total: total,
     });
-    const paramssupplier = ref({
-        kdSupplier: '',
-        nmSupplier: '',
-        almtSupplier: '',
-        tlpSupplier: '',
-
-    });
-    const paramsacc = ref({
-        noAcc: '',
-        nmAcc: '',
-        nilai: '',
-        // tlpSupplier: '',
-
-    });
     const sorting = ref({
         startDate: moment().subtract(30,'d').format("D-M-YYYY"),
         endDate: moment().format("D-M-YYYY")
@@ -416,27 +368,24 @@
     // const currency_list = ref([]);
 
     const pembelian = computed(() => {
-        const barangs = store.getters.StatePersediaan;
-        const suppliers = store.getters.StateSupplier;
         const accs = store.getters.StateAcc;
         noterima.value = store.getters.NoTerimaBbm;
         const pajak = store.state.pajak;
         tot.value = brg.value.lastPrice * qty.value;
+        listpo.value = store.getters.SlistPobbm;
         // console.log(suppliers)
-        return { barangs, pajak, suppliers, noterima, accs, tot }
+        return { pajak, noterima, accs, tot, listpo}
     });
 
     const getBarang=() => {
         store.dispatch('GetPersediaan')
-    }
-    const getSupplier=() => {
-        store.dispatch('GetSupplier')
     }
     const getNoTerima=() => {
         store.dispatch('GetTerimabbm')
     }
     const getListPo=() => {
         store.dispatch('ListPo', sorting.value)
+       
     }
     const getAcc=() => {
         store.dispatch('GetAcc')
@@ -449,7 +398,7 @@
         total.value = (subtotal.value - (subtotal.value * disc.value / 100))
         tax.value = temptotal * pajak /100
         
-        console.log('total tanpa pajak :'+tax.value)
+        // console.log('total tanpa pajak :'+tax.value)
         // return { tot }
     }
     const getTotalWtax=() =>{
@@ -459,7 +408,7 @@
         total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + tax.value
         
         
-        console.log('total dengan pajak:'+tax.value)
+        // console.log('total dengan pajak:'+tax.value)
         // return { tot }
     }
 
@@ -491,17 +440,17 @@
         // console.log('total : '+ temptotal + 'pajak :'+temppajak)
     }
 
-    const simpanPembelian=() => {
-        const header =params.value
-        const headers =paramssupplier.value
-            const headerfull = Object.assign(header, headers)
-            const detail =cartItems.value
-            store.dispatch('CreatePembelian', [headerfull,detail] )
-            setTimeout(function() { getCart(); }, 5000);
-            getNoTerima();
-    }
+    // const simpanPembelian=() => {
+    //     const header =params.value
+    //     const headers =paramssupplier.value
+    //         const headerfull = Object.assign(header, headers)
+    //         const detail =cartItems.value
+    //         store.dispatch('CreatePembelian', [headerfull,detail] )
+    //         setTimeout(function() { getCart(); }, 5000);
+    //         getNoTerima();
+    // }
 
-    onMounted(() => {
+    onMounted( async () => {
         //set default data
         items.value.push({ id: 1, title: '', description: '', rate: 0, quantity: 0, amount: 100, is_tax: false });
 
@@ -514,10 +463,10 @@
        
         getBarang();
         getAcc();
-        getSupplier();
-        getCart();
+        // getSupplier();
         getNoTerima();
-        getListPo();
+        // getListPo();
+        
     });
 
     const change_file = (event) => {
@@ -532,95 +481,31 @@
     //     items.value.push({ id: max_id + 1, title: '', description: '', rate: 0, quantity: 0, amount: 0, is_tax: false });
     // };
 
-    const remove_item = (item) => {
-        items.value = items.value.filter((d) => d.id != item.id);
+
+    const get = async (item) => {
+        // items.value = items.value.filter((d) => d.id != item.id);
+        // console.log(item)
+        await store.dispatch('GetdetailPo', {no_po: item.no_po})
+        no_so.value = item.no_so
+        isOpen.value = false;
+        brg.value = JSON.parse(localStorage.getItem('terimabarang'));
     };
 
-    function addToCart(brg) {
-        // console.log(brg)
-        if (localStorage.getItem('cartItemsP')===null){
-            cartItems.value = [];
-            // console.log(cartItems.value)
-        }else{
-            cartItems.value = JSON.parse(localStorage.getItem('cartItemsP'));
-        }
-            const oldItems = JSON.parse(localStorage.getItem('cartItemsP')) || [];
-            // console.log(oldItems)
-            const existingItem = oldItems.find(({ kdBarang }) => kdBarang === brg.kdPersediaan);
-            if (existingItem) {
-                const objIndex = cartItems.value.findIndex((e => e.kdBarang === brg.kdPersediaan));
-                const oldName = cartItems.value[objIndex].nmBarang;
-                const oldQty = cartItems.value[objIndex].qty;
-                const oldTotal = cartItems.value[objIndex].total;
-                const newQty = parseInt(oldQty) + parseInt(qty.value) ;
-                const newTotal = parseInt(oldTotal) + parseInt(qty.value * brg.lastPrice) ;
-                cartItems.value[objIndex].qty = parseInt(newQty);
-                cartItems.value[objIndex].total = parseInt(newTotal);
-                localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
-                alert(oldName+' Quantity Update')
-                getCart();
-                // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
-            }else{
-            cartItems.value.push({kdBarang:brg.kdPersediaan, nmBarang:brg.nmPersediaan,hrgPokok:brg.lastPrice,qty:qty.value,satuan:brg.satuanPersediaan,total:qty.value * brg.lastPrice});	
-            localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
-            getCart();
-            // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
-            alert(brg.nmPersediaan+ " berhasil disimpan")
-            }
-    }
-    function removeItem(id) {
-        // alert(id)
-        const arrayFromStroage = JSON.parse(localStorage.getItem('cartItemsP'));
-        const filtered = arrayFromStroage.filter(arrayFromStroage => arrayFromStroage.kdBarang !== id);
-        localStorage.setItem('cartItemsP', JSON.stringify(filtered));
-        // cartItems.value.splice(index, 1)
-        // this.isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
-        getCart();
-        // console.log(filtered)
-        // alert(filtered.nmBarang)
-    }
-    // function updateItem(barcode, index) {
-    //     const cartItems = JSON.parse(localStorage.getItem('cartItemsP'));
-    //     const objIndex = cartItems.findIndex((e => e.barcode === barcode));
-    //     const newQty = parseInt(this.crt[index].qty) ;
-    //     cartItems[objIndex].qty = parseInt(newQty);
-    //     localStorage.setItem('cartItemsP',JSON.stringify(cartItems));
-    //     //alert('Quantity Update')
-    //     this.getCart();
-    //     this.isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
-    // }
-
-    function getCart() {
-        // subtotal.value = []
-        if (localStorage.getItem('cartItemsP')===null){
-            cartItems.value = localStorage.setItem('cartItemsP', '[]');
-            subtotal.value = 0
-        }else{
-            cartItems.value = JSON.parse(localStorage.getItem('cartItemsP'));
-            getSubtotal();
-            getTotal();
-            
-    // this.isicart = JSON.parse(localStorage.getItem('cartItemsP')).length;
-        }
-
+    const openModal = () => {
+        getListPo();
+        // code.value = list.code_bbm;
+        // harga_old.value = list.last_price;
+        isOpen.value = true;
     }
 
-    const addPayment = () => {
-        payment.value = localStorage.setItem('payment', '[]');
-        // alert('add payment')
-    };
+    
 
-    function getSubtotal(){
-        const allItems = JSON.parse(localStorage.getItem('cartItemsP')) || [];
-        let sum = 0;
-        subtotal.value = 0
-        for(let i = 0; i < allItems.length; i++){
-        sum += (parseFloat(allItems[i].total));
-        }
-        subtotal.value = sum
-        // console.log(subtotal.value)
-        // return sum;
-    }
+
+    // const addPayment = () => {
+    //     payment.value = localStorage.setItem('payment', '[]');
+    //     // alert('add payment')
+    // };
+
     function onlyNumber ($event) {
         //console.log($event.keyCode); //keyCodes value
         let keyCode = ($event.keyCode ? $event.keyCode : $event.which);

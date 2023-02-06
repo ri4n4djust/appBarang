@@ -173,19 +173,33 @@ class pembelianController extends Controller
     public function listPobbm(Request $request){
         $startDate = date("Y-m-d", strtotime($request->input('startDate')));
         $endDate = date("Y-m-d", strtotime($request->input('endDate')));
-        $listpo = DB::table('tblpobbm_detail')
-                ->join('tblpobbm', 'tblpobbm_detail.r_noPo', 'tblpobbm.no_po')
+        $listpo = DB::table('tblpobbm')
                 ->join('tblsupplier', 'tblpobbm.r_supplier', 'tblsupplier.kdSupplier')
                 ->select('tblpobbm.*', 'tblsupplier.nmSupplier')
-                ->where('tblpobbm_detail.qty', '!=', 'tblpobbm_detail.qty_recieve')
                 ->whereBetween('tblpobbm.tgl_po', [$startDate, $endDate])
                 ->get();
-        // $list = DB::select("SELECT b.*,c.nmSupplier,(a.qty - a.qty_recieve) kurang from tblpobbm_detail a, tblpobbm b, tblsupplier c WHERE a.r_noPo = b.no_po and a.qty != a.qty_recieve AND b.r_supplier = c.kdSupplier GROUP BY a.r_noPo;");
+        // $list = DB::select("SELECT b.*,c.nmSupplier,(a.qty - a.qty_recieve) kurang from tblpobbm_detail a, tblpobbm b, tblsupplier c WHERE a.r_noPo = b.no_po and a.qty != a.qty_recieve AND b.r_supplier = c.kdSupplier ;");
         
         return response()->json([
             'success' => true,
             'message' => 'Laporan PO BBM',
             'data' => $listpo
+        ], 200);
+    }
+
+    public function detailPobbm(Request $request){
+        // $startDate = date("Y-m-d", strtotime($request->input('startDate')));
+        // $endDate = date("Y-m-d", strtotime($request->input('endDate')));
+        $no_po = $request->input('no_po');
+        $detailpo = DB::table('tblpobbm_detail')
+                ->where('tblpobbm_detail.r_noPo', $no_po)
+                ->get();
+        // $list = DB::select("SELECT b.*,c.nmSupplier,(a.qty - a.qty_recieve) kurang from tblpobbm_detail a, tblpobbm b, tblsupplier c WHERE a.r_noPo = b.no_po and a.qty != a.qty_recieve AND b.r_supplier = c.kdSupplier ;");
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'Detail PO BBM',
+            'data' => $detailpo
         ], 200);
     }
 

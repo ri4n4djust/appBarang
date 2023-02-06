@@ -103,10 +103,11 @@ const actions = {
         }
         // await dispatch('GetPembelian')
     },
-    async ListPo({dispatch}, detail) {
+    async ListPo({commit}, detail) {
         let response
         try {
             response = await axios.post('/api/list/po-bbm', detail)
+            commit('setListpobbm', response.data.data)
             // localStorage.setItem('cartItemsP', '[]')
             // const toast = window.Swal.mixin({
             //     toast: true,
@@ -216,43 +217,44 @@ const actions = {
         // await dispatch('GetPembelian')
     },
 
-    // async CreateTransKupon({dispatch}, detail) {
-    //     let response
-    //     try {
-    //         response = await axios.post('api/trans/kupon', detail)
-    //         const toast = window.Swal.mixin({
-    //             toast: true,
-    //             position: 'top-center',
-    //             showConfirmButton: false,
-    //             timer: 3000,
-    //             padding: '2em',
-    //         });
-    //         toast.fire({
-    //             icon: 'success',
-    //             title: 'Penjualan berhasil tersimpan',
-    //             padding: '2em',
-    //         });
-    //         // localStorage.setItem('cartItemsPen', '[]')
-    //     } catch (ex) {
-    //         // Handle error
-    //         const toast =  window.Swal.mixin({
-    //             toast: true,
-    //             position: 'top-center',
-    //             showConfirmButton: false,
-    //             timer: 3000,
-    //             padding: '2em'
-    //         });
-    //         toast.fire({
-    //             title: 'Error!',
-    //             text: 'Mohon Lengkapi Data',
-    //             icon: 'error',
-    //             // confirmButtonText: 'Cool',
-    //             padding: '2em'
-    //         });
-    //         return
-    //     }
-    //     // await dispatch('GetPembelian')
-    // },
+    async GetdetailPo({dispatch}, detail) {
+        let response
+        try {
+            response = await axios.post('/api/detail/po-bbm', detail)
+            // const toast = window.Swal.mixin({
+            //     toast: true,
+            //     position: 'top-center',
+            //     showConfirmButton: false,
+            //     timer: 3000,
+            //     padding: '2em',
+            // });
+            // toast.fire({
+            //     icon: 'success',
+            //     title: 'Penjualan berhasil tersimpan',
+            //     padding: '2em',
+            // });
+            localStorage.setItem('terimabarang', JSON.stringify(response.data.data))
+            console.log(response.data.data)
+        } catch (ex) {
+            // Handle error
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'Mohon Lengkapi Data',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            return
+        }
+        // await dispatch('GetPembelian')
+    },
 
     async NewKupon({ commit }, data){
             commit('setKupon', data)
@@ -356,6 +358,9 @@ const mutations = {
     },
     setLink(state, l){
         state.link = l
+    },
+    setListpobbm(state, po){
+        state.listpobbm = po
     }
     // DeleteBarang({dispatch}, id) {
     //     axios.delete(`hapus/barang/${id}`)
