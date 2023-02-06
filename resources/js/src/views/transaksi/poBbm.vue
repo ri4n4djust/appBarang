@@ -35,7 +35,7 @@
 
                                                 <div class="invoice-address-company-fields">
                                                     <div class="form-group row">
-                                                        <label for="company-name" class="col-sm-3 col-form-label col-form-label-sm">No Nota</label>
+                                                        <label for="company-name" class="col-sm-3 col-form-label col-form-label-sm">No PO</label>
                                                         <div class="col-sm-9">
                                                             <input type="text" v-model="params.noNota" id="number" class="form-control form-control-sm" placeholder="#0001" />
                                                         </div>
@@ -48,22 +48,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group row">
-                                                        <label for="company-address" class="col-sm-3 col-form-label col-form-label-sm">Term</label>
-                                                        <div class="col-sm-9">
-                                                            <select id="inputState" v-model="params.term" class="form-select">
-                                                                <option value="0" selected>Cash</option>
-                                                                <option value="1">Kredit</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
 
-                                                    <div class="form-group row">
-                                                        <label for="company-phone" class="col-sm-3 col-form-label col-form-label-sm">Jatuh Tempo</label>
-                                                        <div class="col-sm-9">
-                                                            <flat-pickr v-model="params.jthTempo" class="form-control form-control-sm flatpickr active" placeholder="Due Date"></flat-pickr>
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
 
@@ -89,26 +74,13 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="form-group row">
-                                                        <label for="client-address" class="col-sm-3 col-form-label col-form-label-sm">Address</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" v-model="paramssupplier.almtSupplier" id="client-address" class="form-control form-control-sm" placeholder="XYZ Street" />
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label for="client-phone" class="col-sm-3 col-form-label col-form-label-sm">Phone</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" v-model="paramssupplier.tlpSupplier" id="client-phone" class="form-control form-control-sm" placeholder="(123) 456 789" />
-                                                        </div>
-                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
                                     <!-- <div class="invoice-detail-items">
-                                        <div class="row">
+                                        <div class="row" v-for="(item, index) in items" :key="index">
                                             <div class="form-group col-md-3">
                                                 <label for="inputCity">NAMA BARANG</label>
                                                 <multiselect 
@@ -125,7 +97,7 @@
                                             </div>
                                             <div class="form-group col-md-2">
                                                 <label for="inputState">HARGA</label>
-                                                <input type="text" v-model="brg.lastPrice" class="form-control form-control-sm" placeholder="Price" @keypress="onlyNumber" />
+                                                <input type="text" v-model="item.lastPrice" class="form-control form-control-sm" placeholder="Price" @keypress="onlyNumber" />
                                             </div>
                                             <div class="form-group col-sm-2">
                                                 <label for="inputZip">QTY</label>
@@ -133,7 +105,7 @@
                                             </div>
                                             <div class="form-group col-md-2">
                                                 <label for="satuan">SATUAN</label>
-                                                <input type="text" v-model="brg.satuanPersediaan" class="form-control form-control-sm" id="satuan" />
+                                                <input type="text" v-model="item.satuanPersediaan" class="form-control form-control-sm" id="satuan" />
                                             </div>
                                             <div class="form-group col-md-2">
                                                 <label for="inputZip">TOTAL</label><br>
@@ -189,7 +161,7 @@
                                                         </td>
                                                         <td class="description">
                                                             <multiselect 
-                                                                v-model="item.title" 
+                                                                v-model="item.kdBarang" 
                                                                 :options="pembelian.barangs" 
                                                                 :searchable="true"
                                                                 track-by="nmPersediaan"
@@ -209,14 +181,16 @@
                                                         </td>
                                                         <td class="text-end amount">
                                                             <span class="editable-amount mt-2">
-                                                                <span class="currency">$</span> <span class="amount">{{ item.rate * item.quantity }}</span>
+                                                                <span class="currency"></span> <span class="amount">{{ item.rate * item.quantity || 0 }}</span>
                                                             </span>
                                                         </td>
                                                         <td class="text-center tax">
-                                                            <div class="checkbox-primary custom-control custom-checkbox">
+                                                            <input type="text" v-model="item.amount" :id="'amount'+index" class="form-control form-control-sm" placeholder="Price" />
+                                                            <!-- <input type="text" :id="item.amount" :value="item.rate * item.quantity" class="form-control form-control-sm" placeholder="Quantity" @keypress="onlyNumber" /> -->
+                                                            <!-- <div class="checkbox-primary custom-control custom-checkbox">
                                                                 <input type="checkbox" :id="`chktax-${index}`" v-model="item.is_tax" class="custom-control-input" />
                                                                 <label class="custom-control-label" :for="`chktax-${index}`"></label>
-                                                            </div>
+                                                            </div> -->
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -453,13 +427,13 @@
 
     });
 
-    const item = ref({
-        title: [],
-        rate: [],
-        quantity: [],
-        // tlpSupplier: '',
+    // const item = ref({
+    //     title: [],
+    //     rate: [],
+    //     quantity: [],
+    //     // tlpSupplier: '',
 
-    });
+    // });
 
     const cartItems = ref([])
     const divpajak = ref(false)
@@ -544,7 +518,7 @@
         const header =params.value
         const headers =paramssupplier.value
         const headerfull = Object.assign(header, headers)
-        const detail =cartItems.value
+        const detail =items.value
         store.dispatch('CreatePembelian', [headerfull,detail] )
         setTimeout(function() { getCart(); }, 5000);
         getNoPobbm();
@@ -552,7 +526,14 @@
 
     onMounted(() => {
         //set default data
-        items.value.push({ id: 1, title: '', description: '', rate: 0, quantity: 0, amount: 100, is_tax: false });
+        items.value.push({ 
+            id: 1, title: '', 
+            description: '', 
+            rate: 0, 
+            quantity: 0, 
+            amount: 0, 
+            is_tax: false 
+        });
 
         let dt = new Date();
         params.value.invoice_date = JSON.parse(JSON.stringify(dt));
