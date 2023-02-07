@@ -98,11 +98,12 @@ class pembelianController extends Controller
                 // array kkey 1 = Detail
                 $tgl_terima = $request[0]['tgl_terima'];
                 $no_gr = $request[0]['no_br'];
+                $no_po = $request[0]['no_po'];
                 $no_so = $request[0]['no_so'];
                 $post = DB::table('tblterimabbm')->insert([
-                    'kd_terima'     => $request[0]['noNota'],
+                    'kd_terima'     => $request[0]['no_br'],
                     'no_po'     => $request[0]['kdSupplier'],
-                    'tgl_terima'   => $tglNota,
+                    'tgl_terima'   => $tgl_terima,
                     'kd_supplier'     => $request[0]['disc'],
                     'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                     'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
@@ -110,25 +111,41 @@ class pembelianController extends Controller
                 $detgr = $request[1];
                 for ($i = 0; $i < count($detgr); $i++) {
 
-                        $kdBarang = $detgr[$i]['kdBarang'];
-                        $qty = $detgr[$i]['qty'];
+                        // $no_po = $request[$i]['no_po'];
+                        $kdBarang = $detgr[$i]['kdbbm'];
+                        $qty = $detgr[$i]['qty_order'];
+                        $qty_datang = $detgr[$i]['qty_datang'];
                         $brg = DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->first();
                         $oldStok = $brg->stokPersediaan;
                         DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->update([
-                            'stokPersediaan' => $oldStok + $qty,
-                            'lastPrice' => $detgr[$i]['hrgPokok'],
+                            'stokPersediaan' => $oldStok + $qty_datang,
+                            // 'lastPrice' => $detgr[$i]['hrgPokok'],
                         ]);
                         DB::table('tblbarang')->where('kdBarang', $kdBarang)->update([
-                            'stkBarang' => $oldStok + $qty,
-                            'hrgPokok' => $detgr[$i]['hrgPokok'],
+                            'stkBarang' => $oldStok + $qty_datang,
+                            // 'hrgPokok' => $detgr[$i]['hrgPokok'],
+                        ]);
+
+                        $pom = DB::table('tblpobbm_detail')
+                        ->where('r_noPo', $no_po)
+                        ->where('kdBarang', $kdBarang)
+                        ->first();
+                        $oldRecieve = $pom->qty_recieve;
+
+                        DB::table('tblpobbm_detail')
+                        ->where('r_noPo', $no_po)
+                        ->where('kdBarang', $kdBarang)
+                        ->update([
+                            'qty_recieve' => $oldRecieve + $qty_datang,
+                            // 'hrgPokok' => $detgr[$i]['hrgPokok'],
                         ]);
 
                         $detail[] = [
-                            'r_kdterima' => $noNota,
-                            'r_nopo' => $kdBarang,
-                            'tgl_terima' => $detgr[$i]['nmBarang'],
-                            'kd_barang' => $detgr[$i]['hrgPokok'],
-                            'qty_terima' => $qty,
+                            'r_kdterima' => $no_gr,
+                            'r_nopo' => $no_po,
+                            'tgl_terima' => $tgl_terima,
+                            'kd_barang' => $kdBarang,
+                            'qty_terima' => $qty_datang,
                             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                         ];
@@ -189,23 +206,28 @@ class pembelianController extends Controller
                 $detpo = $request[1];
                 for ($i = 0; $i < count($detpo); $i++) {
 
-                        $kdBarang = $detpo[$i]['title'];
+                        $kdBarang = $detpo[$i]['kdBarang'];
                         $qty = $detpo[$i]['quantity'];
-                        // $brg = DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->first();
-                        // $oldStok = $brg->stokPersediaan;
-                        // DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->update([
-                        //     'stokPersediaan' => $oldStok + $qty,
-                        //     'lastPrice' => $detpem[$i]['hrgPokok'],
-                        // ]);
-                        // DB::table('tblbarang')->where('kdBarang', $kdBarang)->update([
-                        //     'stkBarang' => $oldStok + $qty,
-                        //     'hrgPokok' => $detpem[$i]['hrgPokok'],
-                        // ]);
+                        $brg = DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->first();
+                        $oldStok = $brg->stokPersediaan;
+                        DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->update([
+                            // 'stokPersediaan' => $oldStok + $qty,
+                            'lastPrice' => $detpo[$i]['rate'],
+                        ]);
+                        DB::table('tblbarang')->where('kdBarang', $kdBarang)->update([
+                            // 'stkBarang' => $oldStok + $qty,
+                            'hrgPokok' => $detpo[$i]['rate'],
+                        ]);
+
+                        DB::table('tblbbm')->where('code_bbm', $kdBarang)->update([
+                            // 'stkBarang' => $oldStok + $qty,
+                            'last_price' => $detpo[$i]['rate'],
+                        ]);
 
                         $detail[] = [
                             'r_noPo' => $noNota,
                             'kdBarang' => $kdBarang,
-                            'nmBarang' => $detpo[$i]['title'],
+                            'nmBarang' => $detpo[$i]['nmBarang'],
                             'hrgBeli' => $detpo[$i]['rate'],
                             'qty' => $qty,
                             'qty_recieve' => 0,

@@ -229,7 +229,7 @@ const actions = {
             });
             toast.fire({
                 icon: 'success',
-                title: 'Penjualan berhasil tersimpan',
+                title: 'Opnum berhasil tersimpan',
                 padding: '2em',
             });
             // localStorage.setItem('cartItemsPen', '[]')

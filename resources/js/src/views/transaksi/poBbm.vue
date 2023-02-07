@@ -167,11 +167,11 @@
                                                         </td>
                                                         <td class="description">
                                                             <select id="inputState" v-model="item.title" class="form-select">
-                                                                <option value="BRG0001" selected>PERTAMAX</option>
+                                                                <option :value="br" v-for="br in barangs" selected>{{ br.nama_bbm }}</option>
+                                                                <!-- <option value="BRG0001" selected>PERTAMAX</option>
                                                                 <option value="BRG0002">PERTALITE</option>
-                                                                <option value="BRG0003">DEXLITE</option>
+                                                                <option value="BRG0003">DEXLITE</option> -->
                                                             </select>
-
                                                             <!-- <multiselect 
                                                                 v-model="item.kdPersediaan" 
                                                                 :options="pembelian.barangs" 
@@ -368,8 +368,10 @@
     const router = useRouter();
     const route = useRoute();
 
-    const items = ref([]);
-    const brg = ref([]);
+    const kdBarang = ref();
+    const nmBarang = ref()
+    const items = ref({});
+    const barangs = ref([]);
     const nopobbm = ref([]);
     const qty = ref(1);
     const tot = ref();
@@ -419,7 +421,7 @@
     
 
     const pembelian = computed(() => {
-        const barangs = store.getters.StatePersediaan;
+        barangs.value = store.getters.StateBbm;
         const suppliers = store.getters.StateSupplier;
         const accs = store.getters.StateAcc;
         nopobbm.value = store.getters.NoPobbm;
@@ -435,8 +437,8 @@
         return { barangs, pajak, suppliers, nopobbm, accs, subtotal, tot }
     });
 
-    const getBarang=() => {
-        store.dispatch('GetPersediaan')
+    const getBbm=() => {
+        store.dispatch('GetBbm')
     }
     const getSupplier=() => {
         store.dispatch('GetSupplier')
@@ -498,11 +500,24 @@
     }
 
     const simpanPembelian=() => {
-        console.log(items.value)
+        // console.log(items.value)
         const header =params.value
         const headers =paramssupplier.value
         const headerfull = Object.assign(header, headers)
-        const detail =items.value
+        const data =items.value
+        let detail = []
+        for(let i = 0; i < data.length; i++){
+
+            detail.push({
+                // qty_order: data[i].quantity,
+                kdBarang : data[i].title.code_bbm,
+                nmBarang: data[i].title.nama_bbm,
+                amount: data[i].amount,
+                quantity: data[i].quantity,
+                rate: data[i].rate,
+            })
+        }
+        console.log(detail)
         store.dispatch('CreatePo', [headerfull,detail] )
         setTimeout(function() { getCart(); }, 5000);
         getNoPobbm();
@@ -510,9 +525,11 @@
 
     onMounted(() => {
         //set default data
-
+        items.value = []
         items.value.push({ 
-            id: 1, title: '', 
+            id: 1, 
+            title: '',
+            nmBarang: '', 
             description: '', 
             rate: 0, 
             quantity: 0, 
@@ -528,7 +545,7 @@
 
         // console.log(paramssupplier.value)
        
-        getBarang();
+        getBbm();
         getAcc();
         getSupplier();
         getCart();
@@ -551,38 +568,38 @@
         items.value = items.value.filter((d) => d.id != item.id);
     };
 
-    function addToCart(brg) {
-        // console.log(brg)
-        if (localStorage.getItem('cartItemsP')===null){
-            cartItems.value = [];
-            // console.log(cartItems.value)
-        }else{
-            cartItems.value = JSON.parse(localStorage.getItem('cartItemsP'));
-        }
-            const oldItems = JSON.parse(localStorage.getItem('cartItemsP')) || [];
-            // console.log(oldItems)
-            const existingItem = oldItems.find(({ kdBarang }) => kdBarang === brg.kdPersediaan);
-            if (existingItem) {
-                const objIndex = cartItems.value.findIndex((e => e.kdBarang === brg.kdPersediaan));
-                const oldName = cartItems.value[objIndex].nmBarang;
-                const oldQty = cartItems.value[objIndex].qty;
-                const oldTotal = cartItems.value[objIndex].total;
-                const newQty = parseInt(oldQty) + parseInt(qty.value) ;
-                const newTotal = parseInt(oldTotal) + parseInt(qty.value * brg.lastPrice) ;
-                cartItems.value[objIndex].qty = parseInt(newQty);
-                cartItems.value[objIndex].total = parseInt(newTotal);
-                localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
-                alert(oldName+' Quantity Update')
-                getCart();
-                // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
-            }else{
-            cartItems.value.push({kdBarang:brg.kdPersediaan, nmBarang:brg.nmPersediaan,hrgPokok:brg.lastPrice,qty:qty.value,satuan:brg.satuanPersediaan,total:qty.value * brg.lastPrice});	
-            localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
-            getCart();
-            // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
-            alert(brg.nmPersediaan+ " berhasil disimpan")
-            }
-    }
+    // function addToCart(brg) {
+    //     // console.log(brg)
+    //     if (localStorage.getItem('cartItemsP')===null){
+    //         cartItems.value = [];
+    //         // console.log(cartItems.value)
+    //     }else{
+    //         cartItems.value = JSON.parse(localStorage.getItem('cartItemsP'));
+    //     }
+    //         const oldItems = JSON.parse(localStorage.getItem('cartItemsP')) || [];
+    //         // console.log(oldItems)
+    //         const existingItem = oldItems.find(({ kdBarang }) => kdBarang === brg.kdPersediaan);
+    //         if (existingItem) {
+    //             const objIndex = cartItems.value.findIndex((e => e.kdBarang === brg.kdPersediaan));
+    //             const oldName = cartItems.value[objIndex].nmBarang;
+    //             const oldQty = cartItems.value[objIndex].qty;
+    //             const oldTotal = cartItems.value[objIndex].total;
+    //             const newQty = parseInt(oldQty) + parseInt(qty.value) ;
+    //             const newTotal = parseInt(oldTotal) + parseInt(qty.value * brg.lastPrice) ;
+    //             cartItems.value[objIndex].qty = parseInt(newQty);
+    //             cartItems.value[objIndex].total = parseInt(newTotal);
+    //             localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
+    //             alert(oldName+' Quantity Update')
+    //             getCart();
+    //             // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
+    //         }else{
+    //         cartItems.value.push({kdBarang:brg.kdPersediaan, nmBarang:brg.nmPersediaan,hrgPokok:brg.lastPrice,qty:qty.value,satuan:brg.satuanPersediaan,total:qty.value * brg.lastPrice});	
+    //         localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
+    //         getCart();
+    //         // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
+    //         alert(brg.nmPersediaan+ " berhasil disimpan")
+    //         }
+    // }
     function removeItem(id) {
         // alert(id)
         const arrayFromStroage = JSON.parse(localStorage.getItem('cartItemsP'));
@@ -646,7 +663,7 @@
         if (items.value && items.value.length) {
             max_id = items.value.reduce((max, character) => (character.id > max ? character.id : max), items.value[0].id);
         }
-        items.value.push({ id: max_id + 1, title: '', description: '', rate: 0, quantity: 0, amount: 0, is_tax: false });
+        items.value.push({ id: max_id + 1, title: '', kdBarang:'', description: '', rate: 0, quantity: 0, amount: 0, is_tax: false });
     };
     
     function onlyNumber ($event) {

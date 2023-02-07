@@ -44,7 +44,7 @@
                                                     <div class="form-group row">
                                                         <label for="company-email" class="col-sm-3 col-form-label col-form-label-sm">Tgl</label>
                                                         <div class="col-sm-9">
-                                                            <flat-pickr v-model="params.tglNota" class="form-control form-control-sm flatpickr active" placeholder="Invoice Date"></flat-pickr>
+                                                            <flat-pickr v-model="params.tgl_terima" class="form-control form-control-sm flatpickr active" placeholder="Invoice Date"></flat-pickr>
                                                         </div>
                                                     </div>
 
@@ -57,6 +57,7 @@
 
                                                     <div class="input-group mb-4">
                                                         <input type="text" class="form-control" v-model="params.no_so" placeholder="Cari SO" aria-label="Cari SO" />
+                                                        <!-- <input type="text" class="form-control" v-model="params.no_po" placeholder="Cari SO" aria-label="Cari SO" /> -->
                                                         <button class="btn btn-primary" @click="openModal()">Button</button>
                                                     </div>
                                                 </div>
@@ -160,6 +161,7 @@
                                                             <th>Nama Barang</th>
                                                             <th>Harga</th>
                                                             <th>Qty Order</th>
+                                                            <th>Qty Terima</th>
                                                             <th>Qty Datang</th>
                                                             <th>Sisa</th>
                                                         </tr>
@@ -169,8 +171,9 @@
                                                             <td class="description">{{ item.nmBarang }}</td>
                                                             <td class="rate">{{ new Intl.NumberFormat().format(item.hrgBeli) }}</td>
                                                             <td class="qty">{{ item.qty }}</td>
+                                                            <td class="qty">{{ item.qty_recieve }}</td>
                                                             <td class="qty"><input type="text" v-model="qty_datang[index]" class="form-control" /></td>
-                                                            <td class="amount">{{ new Intl.NumberFormat().format(item.qty - qty_datang[index]) }}</td>
+                                                            <td class="amount">{{ new Intl.NumberFormat().format((item.qty -item.qty_recieve) - qty_datang[index]) }}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -346,17 +349,21 @@
     const payment = ref([]);
     const listpo = ref([]);
     const no_so = ref();
+    const no_po = ref();
+    const r_supplier = ref();
     const isOpen = ref(false);
     const params = ref({
         no_br: noterima,
-        tglNota: moment().format("YYYY-MM-DD"),
+        tgl_terima: moment().format("YYYY-MM-DD"),
         term: 0,
         jthTempo: moment().format("YYYY-MM-DD"),
         no_so: no_so,
+        no_po: no_po,
         subtotal: subtotal,
         tax: 11,
         disc: disc,
         total: total,
+        kdSupplier: r_supplier
     });
     const sorting = ref({
         startDate: moment().subtract(30,'d').format("D-M-YYYY"),
@@ -446,16 +453,17 @@
             const detail =brg.value
             const arrdetail = []
             for (let i = 0; i < detail.length; i++) {
-                arrdetail.push({
-                    'kdbbm': detail[i].kdBarang,
-                    'nmBarang': detail[i].nmBarang,
-                    'hrgPokok': detail[i].hrgBeli,
-                    'qty_order': detail[i].qty,
-                    'qty_datang': qty_datang.value[i],
-                    'qty_sisa': detail[i].qty - qty_datang.value[i],
-                    'no_po': detail[i].r_noPo
-                })
-
+                if(qty_datang.value[i] != null && qty_datang.value[i] != ''){
+                    arrdetail.push({
+                        'kdbbm': detail[i].kdBarang,
+                        'nmBarang': detail[i].nmBarang,
+                        'hrgPokok': detail[i].hrgBeli,
+                        'qty_order': detail[i].qty,
+                        'qty_datang': qty_datang.value[i],
+                        'qty_sisa': detail[i].qty - qty_datang.value[i],
+                        'no_po': detail[i].r_noPo
+                    })
+                }
             }
             store.dispatch('CreateBarangDatang', [header,arrdetail] )
             setTimeout(function() { 
@@ -501,6 +509,8 @@
         // console.log(item)
         await store.dispatch('GetdetailPo', {no_po: item.no_po})
         no_so.value = item.no_so
+        no_po.value = item.no_po
+        r_supplier.value = item.r_supplier
         isOpen.value = false;
         brg.value = JSON.parse(localStorage.getItem('terimabarang'));
     };
