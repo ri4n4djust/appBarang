@@ -240,7 +240,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6">
+                                            <!-- <div class="col-md-6">
                                                 <div class="totals-row">
                                                     <div class="invoice-totals-row invoice-summary-subtotal">
                                                         <div class="invoice-summary-label">Sub Total</div>
@@ -271,17 +271,15 @@
                                                         <div class="invoice-summary-label">Total</div>
                                                          <div class="invoice-summary-label"></div>
                                                         <div class="invoice-summary-value">
-                                                            <!-- <div class="balance-due-amount"> -->
                                                                 <span>{{ new Intl.NumberFormat().format(Math.floor(total)) }}</span>
-                                                            <!-- </div> -->
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
 
-                                    <div class="invoice-detail-note">
+                                    <!-- <div class="invoice-detail-note">
                                         <div class="row">
                                             <div class="col-md-12 align-self-center">
                                                 <div class="form-group row invoice-note">
@@ -298,7 +296,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -383,9 +381,9 @@
         return { pajak, noterima, accs, tot, listpo}
     });
 
-    const getBarang=() => {
-        store.dispatch('GetPersediaan')
-    }
+    // const getBarang=() => {
+    //     store.dispatch('GetPersediaan')
+    // }
     const getNoTerima=() => {
         store.dispatch('GetTerimabbm')
     }
@@ -398,53 +396,53 @@
     }
 
 
-    const getTotal=() =>{
-        const pajak = store.state.pajak;
-        const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
-        total.value = (subtotal.value - (subtotal.value * disc.value / 100))
-        tax.value = temptotal * pajak /100
+    // const getTotal=() =>{
+    //     const pajak = store.state.pajak;
+    //     const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
+    //     total.value = (subtotal.value - (subtotal.value * disc.value / 100))
+    //     tax.value = temptotal * pajak /100
         
-        // console.log('total tanpa pajak :'+tax.value)
-        // return { tot }
-    }
-    const getTotalWtax=() =>{
-        const pajak = store.state.pajak;
-        const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
-        tax.value = temptotal * pajak /100
-        total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + tax.value
+    //     // console.log('total tanpa pajak :'+tax.value)
+    //     // return { tot }
+    // }
+    // const getTotalWtax=() =>{
+    //     const pajak = store.state.pajak;
+    //     const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
+    //     tax.value = temptotal * pajak /100
+    //     total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + tax.value
         
         
-        // console.log('total dengan pajak:'+tax.value)
-        // return { tot }
-    }
+    //     // console.log('total dengan pajak:'+tax.value)
+    //     // return { tot }
+    // }
 
-    function taxSelected() {
-        const pajak = store.state.pajak;
-        const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
-        // const temppajak = temptotal * pajak /100
+    // function taxSelected() {
+    //     const pajak = store.state.pajak;
+    //     const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
+    //     // const temppajak = temptotal * pajak /100
         
-        tax.value = temptotal * pajak /100
-        total.value = total.value + tax.value
-        // total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + tax.value
-        divpajak.value = true
-        // console.log(tax.value)
-        getTotalWtax()
-        // console.log('total : '+ temptotal + 'pajak :'+temppajak)
-    }
+    //     tax.value = temptotal * pajak /100
+    //     total.value = total.value + tax.value
+    //     // total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + tax.value
+    //     divpajak.value = true
+    //     // console.log(tax.value)
+    //     getTotalWtax()
+    //     // console.log('total : '+ temptotal + 'pajak :'+temppajak)
+    // }
 
-    function taxRemove() {
-        const pajak = store.state.pajak;
-        const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
-        // const temppajak = total.value * pajak /100
+    // function taxRemove() {
+    //     const pajak = store.state.pajak;
+    //     const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
+    //     // const temppajak = total.value * pajak /100
         
-        tax.value = temptotal * pajak /100
-        total.value = total.value - tax.value
-        // total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + tax.value
-        divpajak.value = false
-        // console.log(tax.value)
-        getTotal()
-        // console.log('total : '+ temptotal + 'pajak :'+temppajak)
-    }
+    //     tax.value = temptotal * pajak /100
+    //     total.value = total.value - tax.value
+    //     // total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + tax.value
+    //     divpajak.value = false
+    //     // console.log(tax.value)
+    //     getTotal()
+    //     // console.log('total : '+ temptotal + 'pajak :'+temppajak)
+    // }
 
     const simpanKedatangan=() => {
         const header =params.value
@@ -483,7 +481,7 @@
 
         // console.log(paramssupplier.value)
        
-        getBarang();
+        // getBarang();
         getAcc();
         // getSupplier();
         getNoTerima();

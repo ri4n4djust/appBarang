@@ -341,11 +341,11 @@
             // subto = subto ?? 0 ;
             let last_meter =  meter_now.value[i];
             // let ket = keterangan.value[i]
-            // if (!isNaN(subto)){
-            //     last_meter = '0';
-            // } else{
-            //     last_meter =  meter_now.value[i];
-            // }
+            if (subto === 0){
+                last_meter = dataArr[i].meter_akhir;
+            } else{
+                last_meter =  meter_now.value[i];
+            }
             arr.push ({
                 'kd_bbm': dataArr[i].r_bbm,
                 'kodeBrg': dataArr[i].r_code_bbm,
@@ -357,7 +357,7 @@
                 'old_price': dataArr[i].last_price,
                 'last_price': dataArr[i].harga,
                 'awal_meter': dataArr[i].meter_akhir,
-                'last_meter':   meter_now.value[i],
+                'last_meter':  last_meter, // meter_now.value[i],
                 'total': subto,
                 'totalhpp': subtohpp,
             })

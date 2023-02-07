@@ -55,6 +55,7 @@ window.$appSetting.init();
 
 import { vfmPlugin } from 'vue-final-modal'
 
+
 // Axio
 // import axios from 'axios';
 // axios.defaults.baseURL = 'http://localhost:8000/';

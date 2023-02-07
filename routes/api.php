@@ -78,7 +78,7 @@ Route::post('/update/harga-bbm', [App\Http\Controllers\barangController::class, 
 
 // Route::post('/store/transnosel', [App\Http\Controllers\transaksiNoselController::class, 'simpantrx']);
 Route::post('/store/transnosel', [App\Http\Controllers\transaksiNoselController::class, 'saveNoselArray']);
-Route::delete('/hapus/aplusan/{id}', [App\Http\Controllers\transaksiNoselController::class, 'deleteAplusan']);
+Route::post('/hapus/aplusan/', [App\Http\Controllers\transaksiNoselController::class, 'deleteAplusan']);
 Route::post('/transnosel', [App\Http\Controllers\transaksiNoselController::class, 'indexTransNosel']);
 Route::post('/transnoselregu', [App\Http\Controllers\transaksiNoselController::class, 'indexTransNoselRegu']);
 
