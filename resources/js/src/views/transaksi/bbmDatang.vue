@@ -56,7 +56,7 @@
                                                 <div class="invoice-address-client-fields">
 
                                                     <div class="input-group mb-4">
-                                                        <input type="text" class="form-control" v-model="no_so" placeholder="Cari SO" aria-label="Cari SO" />
+                                                        <input type="text" class="form-control" v-model="params.no_so" placeholder="Cari SO" aria-label="Cari SO" />
                                                         <button class="btn btn-primary" @click="openModal()">Button</button>
                                                     </div>
                                                 </div>
@@ -161,16 +161,16 @@
                                                             <th>Harga</th>
                                                             <th>Qty Order</th>
                                                             <th>Qty Datang</th>
-                                                            <th>Total</th>
+                                                            <th>Sisa</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr v-for="item in brg" :key="item.kdBarang">
+                                                        <tr v-for="item, index in brg" :key="item.kdBarang">
                                                             <td class="description">{{ item.nmBarang }}</td>
                                                             <td class="rate">{{ new Intl.NumberFormat().format(item.hrgBeli) }}</td>
                                                             <td class="qty">{{ item.qty }}</td>
-                                                            <td class="qty">{{ item.satuan }}</td>
-                                                            <td class="amount">{{ new Intl.NumberFormat().format(item.total) }}</td>
+                                                            <td class="qty"><input type="text" v-model="qty_datang[index]" class="form-control" /></td>
+                                                            <td class="amount">{{ new Intl.NumberFormat().format(item.qty - qty_datang[index]) }}</td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -189,7 +189,7 @@
                                                 <div class="invoice-actions-btn">
                                                     <div class="invoice-action-btn">
                                                         <div class="row">
-                                                            <div class="col-sm-4">
+                                                            <!-- <div class="col-sm-4">
                                                                 <div v-if="divpajak">
                                                                     <a href="javascript:;" class="btn btn-primary btn-send" @click="taxRemove" >- pajak</a>
                                                                 </div>
@@ -198,11 +198,10 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-4">
-                                                                <!-- <router-link to="/apps/invoice/preview" class="btn btn-dark btn-preview">Preview</router-link> -->
                                                                 <a href="javascript:;" @click="addPayment" class="btn btn-dark btn-preview" data-bs-toggle="modal" data-bs-target="#modalPayment">Pembayaran</a>
-                                                            </div>
+                                                            </div> -->
                                                             <div class="col-sm-4">
-                                                                <a href="javascript:;" @click="simpanPembelian" class="btn btn-success btn-download">Save</a>
+                                                                <a href="javascript:;" @click="simpanKedatangan" class="btn btn-success btn-download">Save</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -353,7 +352,7 @@
         tglNota: moment().format("YYYY-MM-DD"),
         term: 0,
         jthTempo: moment().format("YYYY-MM-DD"),
-        notes: '',
+        no_so: no_so,
         subtotal: subtotal,
         tax: 11,
         disc: disc,
@@ -365,7 +364,7 @@
     });
     const cartItems = ref([])
     const divpajak = ref(false)
-    // const currency_list = ref([]);
+    const qty_datang = ref([]);
 
     const pembelian = computed(() => {
         const accs = store.getters.StateAcc;
@@ -440,15 +439,30 @@
         // console.log('total : '+ temptotal + 'pajak :'+temppajak)
     }
 
-    // const simpanPembelian=() => {
-    //     const header =params.value
-    //     const headers =paramssupplier.value
-    //         const headerfull = Object.assign(header, headers)
-    //         const detail =cartItems.value
-    //         store.dispatch('CreatePembelian', [headerfull,detail] )
-    //         setTimeout(function() { getCart(); }, 5000);
-    //         getNoTerima();
-    // }
+    const simpanKedatangan=() => {
+        const header =params.value
+        // const headers =paramssupplier.value
+            // const headerfull = Object.assign(header, headers)
+            const detail =brg.value
+            const arrdetail = []
+            for (let i = 0; i < detail.length; i++) {
+                arrdetail.push({
+                    'kdbbm': detail[i].kdBarang,
+                    'nmBarang': detail[i].nmBarang,
+                    'hrgPokok': detail[i].hrgBeli,
+                    'qty_order': detail[i].qty,
+                    'qty_datang': qty_datang.value[i],
+                    'qty_sisa': detail[i].qty - qty_datang.value[i],
+                    'no_po': detail[i].r_noPo
+                })
+
+            }
+            store.dispatch('CreateBarangDatang', [header,arrdetail] )
+            setTimeout(function() { 
+                // getCart(); 
+            }, 5000);
+            getNoTerima();
+    }
 
     onMounted( async () => {
         //set default data

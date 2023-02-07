@@ -89,6 +89,78 @@ class pembelianController extends Controller
 
     }
 
+    public function simpanBarangDatang(Request $request){
+
+        try{
+            $exception = DB::transaction(function() use ($request){ 
+                $editid = $request->input('editid');
+                // array key 0 = Header
+                // array kkey 1 = Detail
+                $tgl_terima = $request[0]['tgl_terima'];
+                $no_gr = $request[0]['no_br'];
+                $no_so = $request[0]['no_so'];
+                $post = DB::table('tblterimabbm')->insert([
+                    'kd_terima'     => $request[0]['noNota'],
+                    'no_po'     => $request[0]['kdSupplier'],
+                    'tgl_terima'   => $tglNota,
+                    'kd_supplier'     => $request[0]['disc'],
+                    'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                ]);
+                $detgr = $request[1];
+                for ($i = 0; $i < count($detgr); $i++) {
+
+                        $kdBarang = $detgr[$i]['kdBarang'];
+                        $qty = $detgr[$i]['qty'];
+                        $brg = DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->first();
+                        $oldStok = $brg->stokPersediaan;
+                        DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->update([
+                            'stokPersediaan' => $oldStok + $qty,
+                            'lastPrice' => $detgr[$i]['hrgPokok'],
+                        ]);
+                        DB::table('tblbarang')->where('kdBarang', $kdBarang)->update([
+                            'stkBarang' => $oldStok + $qty,
+                            'hrgPokok' => $detgr[$i]['hrgPokok'],
+                        ]);
+
+                        $detail[] = [
+                            'r_kdterima' => $noNota,
+                            'r_nopo' => $kdBarang,
+                            'tgl_terima' => $detgr[$i]['nmBarang'],
+                            'kd_barang' => $detgr[$i]['hrgPokok'],
+                            'qty_terima' => $qty,
+                            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                        ];
+                    }
+                DB::table('tblterimabbm_detail')->insert($detail);
+
+                DB::commit();
+            });
+            if(is_null($exception)) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Post Berhasil di insert!',
+                    // 'data' => $detail
+                ], 200);
+            } else {
+                DB::rollback();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Post Gagal Diupdate!',
+                ], 500);
+            }
+        } catch (\Exception $e) {
+            //DB::rollback();
+            // something went wrong
+            return response()->json([
+             'success' => false,
+             'message' => 'exception'.$e,
+         ], 400);
+        }
+
+    }
+
     public function simpanPobbm(Request $request){
 
         try{

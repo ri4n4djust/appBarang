@@ -66,6 +66,43 @@ const actions = {
         }
         // await dispatch('GetPembelian')
     },
+    async CreateBarangDatang({dispatch}, detail) {
+        let response
+        try {
+            response = await axios.post('/api/store/barang-datang', detail)
+            localStorage.setItem('cartItemsP', '[]')
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Barang berhasil tersimpan',
+                padding: '2em',
+            });
+        } catch (ex) {
+            // Handle error
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'Gagal simpan barang',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            return
+        }
+        // await dispatch('GetPembelian')
+    },
     async CreatePo({dispatch}, detail) {
         let response
         try {

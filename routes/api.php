@@ -85,6 +85,7 @@ Route::post('/transnoselregu', [App\Http\Controllers\transaksiNoselController::c
 // Pembelian
 Route::post('/store/pembelian', [App\Http\Controllers\pembelianController::class, 'simpanPembelian']);
 Route::post('/store/po-bbm', [App\Http\Controllers\pembelianController::class, 'simpanPobbm']);
+Route::post('/store/barang-datang', [App\Http\Controllers\pembelianController::class, 'simpanBarangDatang']);
 Route::post('/list/po-bbm', [App\Http\Controllers\pembelianController::class, 'listPobbm']);
 Route::post('/detail/po-bbm', [App\Http\Controllers\pembelianController::class, 'detailPobbm']);
 Route::get('/linkacc', [App\Http\Controllers\pembelianController::class, 'linkAccount']);
