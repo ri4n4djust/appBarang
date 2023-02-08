@@ -190,7 +190,7 @@
                                                             <!-- <input type="text" v-model="item.kdPersediaan.kdPersediaan" :id="'rate'+index" class="form-control form-control-sm" placeholder="Price" /> -->
                                                         </td>
                                                         <td class="text-end qty">
-                                                            <input type="text" v-model="item.quantity" :id="'quantity'+index" class="form-control form-control-sm" placeholder="Quantity" />
+                                                            <input type="text" v-model="item.quantity" :id="'quantity'+index" class="form-control form-control-sm" @keyup.enter="add_item()" placeholder="Quantity" />
                                                         </td>
                                                         <td class="text-end amount">
                                                             <span class="editable-amount mt-2">
@@ -362,6 +362,7 @@
     import { useRouter, useRoute } from 'vue-router'
 
     import { useMeta } from '@/composables/use-meta';
+import { title } from 'process';
     useMeta({ title: 'PO BBM' });
 
     const store = useStore();
@@ -655,6 +656,7 @@
     }
 
     const add_item = () => {
+        // items.title.value.focus();
         let max_id = 0;
         // let sub = 0
         // for(let i = 0; i < items.value.length; i++){

@@ -362,15 +362,15 @@ class transaksiNoselController extends Controller
 
     public function deleteAplusan(Request $request){
         $id = $request->input('id');
-        // DB::table('tblheader_aplusan')->where('kd_trans', $id)->delete();
-        // DB::table('tblprofit')->where('kd_trans', $id)->delete();
+        DB::table('tblheader_aplusan')->where('kd_trans', $id)->delete();
+        DB::table('tblprofit')->where('kd_trans', $id)->delete();
         $old = DB::table('tbltransaksi_nosel')->where('kd_trans', $id)->get();
-        
+
         return response([
             'success' => true,
             'message' => 'List data yg akan di hapus',
             'data' => $old
         ], 200);
-        // DB::table('tbltransaksi_nosel')->where('kd_trans', $id)->delete();
+        DB::table('tbltransaksi_nosel')->where('kd_trans', $id)->delete();
     }
 }
