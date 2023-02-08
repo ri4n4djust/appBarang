@@ -504,11 +504,13 @@
                 localStorage.setItem('cartItemsPen',JSON.stringify(cartItemsPen.value));
                 alert(oldName+' Quantity Update')
                 getCart();
+                getTotal()
                 // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
             }else{
             cartItemsPen.value.push({kdBarang:brg.kdBarang, nmBarang:brg.nmBarang,hrgJual:brg.hrgJual,qty:qty.value,satuan:brg.satuanBarang,total:qty.value * brg.hrgJual,totalhpp:qty.value * brg.hrgPokok, kategori:brg.ktgBarang});	
             localStorage.setItem('cartItemsPen',JSON.stringify(cartItemsPen.value));
             getCart();
+            getTotal()
             // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
             alert(brg.nmBarang+ " berhasil disimpan")
             }

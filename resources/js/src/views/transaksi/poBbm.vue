@@ -131,18 +131,19 @@
                                         <div class="table-responsive">
                                             <table class="table table-bordered item-table">
                                                 <thead>
-                                                    <tr>
+                                                    <tr style="padding:0;margin:0;">
                                                         <th class=""></th>
                                                         <th>Description</th>
                                                         <th class="">Rate</th>
                                                         <th class="">Qty</th>
-                                                        <th class="text-end">Amount</th>
+                                                        <th class="text-end">pph</th>
+                                                        <th class="text-end">Total</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     <tr v-for="(item, index) in items" :key="index">
-                                                        <td class="delete-item-row">
-                                                            <ul class="table-controls">
+                                                        <td style="padding:0;margin:0;">
+                                                            <ul >
                                                                 <li>
                                                                     <a href="javascript:void(0);" class="delete-item" @click="remove_item(item)">
                                                                         <svg
@@ -165,9 +166,9 @@
                                                                 </li>
                                                             </ul>
                                                         </td>
-                                                        <td class="description">
+                                                        <td style="padding:0;margin:0;" >
                                                             <select id="inputState" v-model="item.title" class="form-select">
-                                                                <option :value="br" v-for="br in barangs" selected>{{ br.nama_bbm }}</option>
+                                                                <option :value="br" v-for="br in barangs" :key="br.id" selected>{{ br.nama_bbm }}</option>
                                                                 <!-- <option value="BRG0001" selected>PERTAMAX</option>
                                                                 <option value="BRG0002">PERTALITE</option>
                                                                 <option value="BRG0003">DEXLITE</option> -->
@@ -185,17 +186,18 @@
                                                             </multiselect> -->
                                                             <!-- <input type="text" v-model="item.title" :id="'nama'+index" class="form-control form-control-sm" placeholder="Item Description" /> -->
                                                         </td>
-                                                        <td class="rate">
-                                                            <input type="text" v-model="item.rate" :id="'rate'+index" class="form-control form-control-sm" placeholder="Price" />
+                                                        <td style="padding:0;margin:0;">
+                                                            <input type="text" v-model="item.rate" :id="'rate'+index" class="form-control" placeholder="Price" />
                                                             <!-- <input type="text" v-model="item.kdPersediaan.kdPersediaan" :id="'rate'+index" class="form-control form-control-sm" placeholder="Price" /> -->
                                                         </td>
-                                                        <td class="text-end qty">
-                                                            <input type="text" v-model="item.quantity" :id="'quantity'+index" class="form-control form-control-sm" @keyup.enter="add_item()" placeholder="Quantity" />
+                                                        <td style="padding:0;margin:0;">
+                                                            <input type="text" v-model="item.quantity" :id="'quantity'+index" class="form-control"  @keyup="getRate(total=item.total, pph=item.pph, qty=item.quantity, index)" placeholder="Quantity" />
                                                         </td>
-                                                        <td class="text-end amount">
-                                                            <span class="editable-amount mt-2">
-                                                                <span class="currency"></span> <span class="amount">{{ item.rate * item.quantity || 0 }}</span>
-                                                            </span>
+                                                        <td style="padding:0;margin:0;">
+                                                            <input type="text" v-model="item.pph" :id="'pph'+index" class="form-control" placeholder="Quantity" />
+                                                        </td>
+                                                        <td style="padding:0;margin:0;">
+                                                            <input type="text" v-model="item.total" :id="'total'+index" class="form-control" placeholder="Quantity" />
                                                         </td>
                                                         <!-- <td class="text-center tax">
                                                             <input type="text" v-model="item.mount" class="form-control form-control-sm" placeholder="Price" /> -->
@@ -313,7 +315,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="invoice-detail-note">
+                                    <!-- <div class="invoice-detail-note">
                                         <div class="row">
                                             <div class="col-md-12 align-self-center">
                                                 <div class="form-group row invoice-note">
@@ -330,7 +332,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -471,6 +473,11 @@ import { title } from 'process';
         // console.log('total dengan pajak:'+tax.value)
         // return { tot }
     }
+    const getRate = (total, pph, qty, index) =>{
+        let hppRate = (total - pph) / qty
+        console.log(Math.floor(hppRate))
+
+    }
 
     function taxSelected() {
         const pajak = store.state.pajak;
@@ -516,6 +523,8 @@ import { title } from 'process';
                 amount: data[i].amount,
                 quantity: data[i].quantity,
                 rate: data[i].rate,
+                total: data[i].total,
+                pph: data[i].pph
             })
         }
         console.log(detail)
@@ -535,7 +544,8 @@ import { title } from 'process';
             rate: 0, 
             quantity: 0, 
             amount: 0, 
-            is_tax: false 
+            total: 0,
+            pph: 0 
         });
         
 
@@ -656,7 +666,7 @@ import { title } from 'process';
     }
 
     const add_item = () => {
-        // items.title.value.focus();
+        
         let max_id = 0;
         // let sub = 0
         // for(let i = 0; i < items.value.length; i++){
@@ -664,8 +674,10 @@ import { title } from 'process';
         // }
         if (items.value && items.value.length) {
             max_id = items.value.reduce((max, character) => (character.id > max ? character.id : max), items.value[0].id);
+            // items.title.value.focus();
         }
-        items.value.push({ id: max_id + 1, title: '', kdBarang:'', description: '', rate: 0, quantity: 0, amount: 0, is_tax: false });
+        items.value.push({ id: max_id + 1, title: '', kdBarang:'', description: '', rate: 0, quantity: 0, amount: 0, total: 0, pph: 0 });
+        // items.value[1].title.focus();
     };
     
     function onlyNumber ($event) {
