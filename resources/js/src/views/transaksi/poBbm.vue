@@ -479,7 +479,7 @@ import { title } from 'process';
         // console.log(items.value)
         let arr = {}
         arr = items.value
-        arr['rate'] = "red"
+        arr[index]['rate'] = hppRate
         // for(let i = 0; i < arr.length; i++){
         //     arr.fill({
         //         title: arr[i].arr,
