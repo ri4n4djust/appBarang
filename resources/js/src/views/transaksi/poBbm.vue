@@ -475,7 +475,26 @@ import { title } from 'process';
     }
     const getRate = (total, pph, qty, index) =>{
         let hppRate = (total - pph) / qty
-        console.log(Math.floor(hppRate))
+        console.log('hpp '+Math.floor(hppRate)+'index'+index)
+        // console.log(items.value)
+        let arr = {}
+        arr = items.value
+        arr['rate'] = "red"
+        // for(let i = 0; i < arr.length; i++){
+        //     arr.fill({
+        //         title: arr[i].arr,
+        //         nmBarang: arr[i].nmBarang, 
+        //         description: arr[i].description, 
+        //         rate: arr[i].rate, 
+        //         quantity: arr[i].quantity, 
+        //         amount: arr[i].amount, 
+        //         total: arr[i].total,
+        //         pph: arr[i].pph 
+        //     })
+        // }
+        // item.rate.value[index] = hppRate
+        // return item.rate.value[index]
+         console.log(arr)
 
     }
 
