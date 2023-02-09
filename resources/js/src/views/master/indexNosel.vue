@@ -217,6 +217,51 @@
             <Biaya/>
             <LinkAja/>
 
+            <vue-final-modal v-model="isOpen">
+            <!-- <div class="modal fade" id="modal_demo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Update meter Nosel</h5>
+                            <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h4 class="modal-heading mb-4 mt-2">Update meter</h4>
+                            <!-- <form> -->
+                                <div class="row mb-4">
+                                    <div class="col-sm-4">
+                                        <label for="inputState">Tgl</label>
+                                        <flat-pickr v-model="input_perubahan.tglPerubahan" 
+                                        :config="{dateFormat: 'd-m-Y', static: true}" 
+                                        class="form-control form-control-sm flatpickr active" placeholder="Due Date">
+                                        </flat-pickr>
+                                    </div>
+                                </div>
+                                <div class="row mb-4">
+                                    <div class="col-sm">
+                                        <label for="inputState">Harga Terbaru</label>
+                                        <input v-model="input_perubahan.meter_baru" class="form-control form-control-sm" placeholder="Nilai" @keypress="onlyNumber" />
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label for="inputState">Simpan</label><br>
+                                        <a class="btn btn-primary" @click="Simpan_meter">Simpan</a>
+                                    </div>
+                                </div>
+                                
+                            <!-- </form> -->
+
+                            
+
+                        </div>
+                        <div class="modal-footer">
+                            <!-- <button type="button" class="btn" data-dismiss="modal" data-bs-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button> -->
+                            <!-- <button type="button" class="btn btn-primary" @click="Simpan">Save</button> -->
+                        </div>
+                    </div>
+                </div>
+            <!-- </div> -->
+        </vue-final-modal>
+
         </div>
 
         <div class="table-responsive">
@@ -234,7 +279,7 @@
                 <tbody role="rowgroup">
                     <tr role="row" v-for="list, index in nosels.nosel" :key="list.id_nosel">
                         <td> {{ list.nama_nosel }} 
-                            <a href="javascript:void(0);" data-bs-toggle="tooltip" title="Edit">
+                            <a href="javascript:void(0);" data-bs-toggle="tooltip" title="Edit" @click="openModal(list)">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     width="24"
@@ -310,7 +355,26 @@
     const inpt = ref(250);
     // const listtrans = ref([]);
 
-    
+    const nosel_id = ref();
+    const meter_old = ref();
+    const input_perubahan = ref({
+        tglPerubahan: moment().format('D-M-YYYY'),
+        nosel_id: nosel_id,
+        meter_lama: meter_old
+    })
+    const isOpen = ref(false);
+    const openModal = (list) => {
+        console.log(list)
+        nosel_id.value = list.id_nosel;
+        meter_old.value = list.meter_akhir;
+        isOpen.value = true;
+    }
+
+    function Simpan_meter() {
+        console.log(input_perubahan.value)
+        store.dispatch('UpdateMeterNosel', input_perubahan.value)
+        isOpen.value = false;
+    }
     
     
     const nosels = computed(() => {

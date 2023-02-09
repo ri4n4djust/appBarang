@@ -360,6 +360,19 @@ class transaksiNoselController extends Controller
 
     }
 
+    public function updateMeter(Request $request){
+        $id = $request->input('nosel_id');
+        $meter_baru = $request->input('meter_baru');
+        DB::table('tblnosel_detail')->where('id_nosel', $id)->update([
+            'meter_akhir' => $meter_baru
+        ]);
+        return response([
+            'success' => true,
+            'message' => 'berhasil',
+            // 'data' => $regu
+        ], 200);
+    }
+
     public function deleteAplusan(Request $request){
         $id = $request->input('id');
         DB::table('tblheader_aplusan')->where('kd_trans', $id)->delete();
