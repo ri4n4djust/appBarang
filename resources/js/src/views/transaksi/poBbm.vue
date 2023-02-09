@@ -132,12 +132,12 @@
                                             <table class="table table-bordered item-table">
                                                 <thead>
                                                     <tr style="padding:0;margin:0;">
-                                                        <th class=""></th>
+                                                        <th></th>
                                                         <th>Description</th>
-                                                        <th class="">Rate</th>
-                                                        <th class="">Qty</th>
-                                                        <th class="text-end">pph</th>
-                                                        <th class="text-end">Total</th>
+                                                        <th>Rate</th>
+                                                        <th>Qty</th>
+                                                        <th>pph</th>
+                                                        <th>Total</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -169,44 +169,20 @@
                                                         <td style="padding:0;margin:0;" >
                                                             <select id="inputState" v-model="item.title" class="form-select">
                                                                 <option :value="br" v-for="br in barangs" :key="br.id" selected>{{ br.nama_bbm }}</option>
-                                                                <!-- <option value="BRG0001" selected>PERTAMAX</option>
-                                                                <option value="BRG0002">PERTALITE</option>
-                                                                <option value="BRG0003">DEXLITE</option> -->
                                                             </select>
-                                                            <!-- <multiselect 
-                                                                v-model="item.kdPersediaan" 
-                                                                :options="pembelian.barangs" 
-                                                                :searchable="true"
-                                                                track-by="nmPersediaan"
-                                                                label="nmPersediaan"
-                                                                open-direction="top"
-                                                                placeholder="Choose..." 
-                                                                selected-label="" 
-                                                                select-label="" >
-                                                            </multiselect> -->
-                                                            <!-- <input type="text" v-model="item.title" :id="'nama'+index" class="form-control form-control-sm" placeholder="Item Description" /> -->
                                                         </td>
                                                         <td style="padding:0;margin:0;">
                                                             <input type="text" v-model="item.rate" :id="'rate'+index" class="form-control" placeholder="Price" />
-                                                            <!-- <input type="text" v-model="item.kdPersediaan.kdPersediaan" :id="'rate'+index" class="form-control form-control-sm" placeholder="Price" /> -->
                                                         </td>
                                                         <td style="padding:0;margin:0;">
                                                             <input type="text" v-model="item.quantity" :id="'quantity'+index" class="form-control"  @keyup="getRate(total=item.total, pph=item.pph, qty=item.quantity, index)" placeholder="Quantity" />
                                                         </td>
                                                         <td style="padding:0;margin:0;">
-                                                            <input type="text" v-model="item.pph" :id="'pph'+index" class="form-control" placeholder="Quantity" />
+                                                            <input type="text" v-model="item.pph" :id="'pph'+index" class="form-control" placeholder="pph" />
                                                         </td>
                                                         <td style="padding:0;margin:0;">
-                                                            <input type="text" v-model="item.total" :id="'total'+index" class="form-control" placeholder="Quantity" />
+                                                            <input type="text" v-model="item.total" :id="'total'+index" class="form-control" placeholder="total" />
                                                         </td>
-                                                        <!-- <td class="text-center tax">
-                                                            <input type="text" v-model="item.mount" class="form-control form-control-sm" placeholder="Price" /> -->
-                                                            <!-- <input type="text" :id="item.amount" :value="item.rate * item.quantity" class="form-control form-control-sm" placeholder="Quantity" @keypress="onlyNumber" /> -->
-                                                            <!-- <div class="checkbox-primary custom-control custom-checkbox">
-                                                                <input type="checkbox" :id="`chktax-${index}`" v-model="item.is_tax" class="custom-control-input" />
-                                                                <label class="custom-control-label" :for="`chktax-${index}`"></label>
-                                                            </div> -->
-                                                        <!-- </td> -->
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -475,26 +451,12 @@ import { title } from 'process';
     }
     const getRate = (total, pph, qty, index) =>{
         let hppRate = (total - pph) / qty
-        console.log('hpp '+Math.floor(hppRate)+'index'+index)
+        // console.log('hpp '+Math.floor(hppRate)+'index'+index)
         // console.log(items.value)
         let arr = {}
         arr = items.value
-        arr[index]['rate'] = hppRate
-        // for(let i = 0; i < arr.length; i++){
-        //     arr.fill({
-        //         title: arr[i].arr,
-        //         nmBarang: arr[i].nmBarang, 
-        //         description: arr[i].description, 
-        //         rate: arr[i].rate, 
-        //         quantity: arr[i].quantity, 
-        //         amount: arr[i].amount, 
-        //         total: arr[i].total,
-        //         pph: arr[i].pph 
-        //     })
-        // }
-        // item.rate.value[index] = hppRate
-        // return item.rate.value[index]
-         console.log(arr)
+        arr[index]['rate'] = Math.floor(hppRate)
+        //  console.log(arr)
 
     }
 
@@ -560,11 +522,11 @@ import { title } from 'process';
             title: '',
             nmBarang: '', 
             description: '', 
-            rate: 0, 
-            quantity: 0, 
-            amount: 0, 
-            total: 0,
-            pph: 0 
+            rate: '', 
+            quantity: '', 
+            amount: '', 
+            total: '',
+            pph: '' 
         });
         
 
@@ -695,7 +657,7 @@ import { title } from 'process';
             max_id = items.value.reduce((max, character) => (character.id > max ? character.id : max), items.value[0].id);
             // items.title.value.focus();
         }
-        items.value.push({ id: max_id + 1, title: '', kdBarang:'', description: '', rate: 0, quantity: 0, amount: 0, total: 0, pph: 0 });
+        items.value.push({ id: max_id + 1, title: '', kdBarang:'', description: '', rate: '', quantity: '', amount: '', total: '', pph: '' });
         // items.value[1].title.focus();
     };
     

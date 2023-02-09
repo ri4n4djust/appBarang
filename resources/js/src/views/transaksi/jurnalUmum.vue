@@ -80,45 +80,102 @@
                                     </div>
 
                                     <div class="invoice-detail-items">
-                                        <div class="row">
-                                            <div class="form-group col-md-3">
-                                                <label for="inputCity">NAMA BARANG</label>
-                                                <multiselect 
-                                                    v-model="brg" 
-                                                    :options="pembelian.barangs" 
-                                                    :searchable="true"
-                                                    track-by="nmPersediaan"
-                                                    label="nmPersediaan"
-                                                    open-direction="top"
-                                                    placeholder="Choose..." 
-                                                    selected-label="" 
-                                                    select-label="" >
-                                                </multiselect>
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                <label for="inputState">HARGA</label>
-                                                <input type="text" v-model="brg.lastPrice" class="form-control form-control-sm" placeholder="Price" @keypress="onlyNumber" />
-                                            </div>
-                                            <div class="form-group col-sm-2">
-                                                <label for="inputZip">QTY</label>
-                                                <input type="text" v-model="qty" class="form-control form-control-sm" placeholder="Quantity" @keypress="onlyNumber" />
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                <label for="satuan">SATUAN</label>
-                                                <input type="text" v-model="brg.satuanPersediaan" class="form-control form-control-sm" id="satuan" />
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                <label for="inputZip">TOTAL</label><br>
-                                                <!-- {{ new Intl.NumberFormat().format(brg.lastPrice * qty) }} -->
-                                                <input type="text" v-model="tot" class="form-control form-control-sm" placeholder="Quantity" @keypress="onlyNumber" />
-                                            </div>
-                                            <div class="form-group col-md-1">
-                                                <label for="aksi">Aksi</label>
-                                                <button @click="addToCart(brg)" class="btn btn-xs btn-primary">
-                                                    + 
-                                                </button>
-                                            </div>
+                                        <div class="table-responsive">
+                                            <table>
+                                                <thead>
+                                                    <tr style="padding:0;margin:0;">
+                                                        <th class=""></th>
+                                                        <th>Description</th>
+                                                        <th class="">Rate</th>
+                                                        <th class="">Qty</th>
+                                                        <th class="text-end">pph</th>
+                                                        <th class="text-end">Total</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr v-for="(item, index) in items" :key="index">
+                                                        <td style="padding:0;margin:0;">
+                                                            <ul >
+                                                                <li>
+                                                                    <a href="javascript:void(0);" class="delete-item" @click="remove_item(item)">
+                                                                        <svg
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            width="24"
+                                                                            height="24"
+                                                                            viewBox="0 0 24 24"
+                                                                            fill="none"
+                                                                            stroke="currentColor"
+                                                                            stroke-width="2"
+                                                                            stroke-linecap="round"
+                                                                            stroke-linejoin="round"
+                                                                            class="feather feather-x-circle"
+                                                                        >
+                                                                            <circle cx="12" cy="12" r="10"></circle>
+                                                                            <line x1="15" y1="9" x2="9" y2="15"></line>
+                                                                            <line x1="9" y1="9" x2="15" y2="15"></line>
+                                                                        </svg>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </td>
+                                                        <td style="padding:0;margin:0;" >
+                                                            <input
+                                                            type="text"
+                                                            id="search"
+                                                            placeholder="Type here..."
+                                                            v-model="searchTerm"
+                                                            @keyup.down="kiap"
+                                                            >
+                                                            <ul v-if="searchCountries.length">
+                                                                <li v-for="country in searchCountries" 
+                                                                :key="country.name"
+                                                                @click="selectCountry(country.name)" >
+                                                                    {{ country.name }}
+                                                                </li>
+                                                            </ul>
+                                                            <!-- <select id="inputState" v-model="item.title" style="width: 100%;height: 25px;">
+                                                                <option :value="br" v-for="br in barangs" :key="br.id" selected>{{ br.nama_bbm }}</option>
+                                                            </select> -->
+                                                            <!-- <multiselect 
+                                                                v-model="item.kdPersediaan" 
+                                                                :options="pembelian.barangs" 
+                                                                :searchable="true"
+                                                                track-by="nmPersediaan"
+                                                                label="nmPersediaan"
+                                                                open-direction="top"
+                                                                placeholder="Choose..." 
+                                                                selected-label="" 
+                                                                select-label="" >
+                                                            </multiselect> -->
+                                                            <!-- <input type="text" v-model="item.title" :id="'nama'+index" class="form-control form-control-sm" placeholder="Item Description" /> -->
+                                                        </td>
+                                                        <td style="padding:0;margin:0;">
+                                                            <input type="text" v-model="item.code_akun" :id="'rate'+index" width="100%" placeholder="Price" />
+                                                            <!-- <input type="text" v-model="item.kdPersediaan.kdPersediaan" :id="'rate'+index" class="form-control form-control-sm" placeholder="Price" /> -->
+                                                        </td>
+                                                        <td style="padding:0;margin:0;">
+                                                            <input type="text" v-model="item.nama_akun" :id="'quantity'+index" width="100%"  @keyup="getRate(total=item.total, pph=item.pph, qty=item.quantity, index)" placeholder="Quantity" />
+                                                        </td>
+                                                        <td style="padding:0;margin:0;">
+                                                            <input type="text" v-model="item.debet" :id="'pph'+index" width="100%" placeholder="Quantity" />
+                                                        </td>
+                                                        <td style="padding:0;margin:0;">
+                                                            <input type="text" v-model="item.kredit" :id="'total'+index" width="100%" placeholder="Quantity" />
+                                                        </td>
+                                                        <!-- <td class="text-center tax">
+                                                            <input type="text" v-model="item.mount" class="form-control form-control-sm" placeholder="Price" /> -->
+                                                            <!-- <input type="text" :id="item.amount" :value="item.rate * item.quantity" class="form-control form-control-sm" placeholder="Quantity" @keypress="onlyNumber" /> -->
+                                                            <!-- <div class="checkbox-primary custom-control custom-checkbox">
+                                                                <input type="checkbox" :id="`chktax-${index}`" v-model="item.is_tax" class="custom-control-input" />
+                                                                <label class="custom-control-label" :for="`chktax-${index}`"></label>
+                                                            </div> -->
+                                                        <!-- </td> -->
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
+
+                                        <button type="button" class="btn btn-secondary additem btn-sm" @click="add_item()">Add Item</button>
                                     </div>
 
                                     <div class="invoice-detail-items">
@@ -311,6 +368,9 @@
     const router = useRouter();
     const route = useRoute();
 
+    const searchTerm = ref('')
+    const countries = ref({});
+
     const items = ref([]);
     const brg = ref([]);
     const nopembelian = ref([]);
@@ -360,6 +420,25 @@
         tot.value = brg.value.lastPrice * qty.value;
         // console.log(suppliers)
         return { barangs, pajak, suppliers, nopembelian, accs, tot }
+    });
+
+    // const selectedCountry = ref('')
+    const selectCountry = (country) => {
+        searchTerm.value = country
+        searchCountries.length = 0
+    }
+
+    const searchCountries = computed(() => {
+        if (searchTerm.value === '') {
+            return []
+        }
+        let matches = 0
+        return countries.value.filter(country => {
+            if (country.name.toLowerCase().includes(searchTerm.value.toLowerCase()) && matches < 10) {
+            matches++
+            return country
+            }
+        })
     });
 
     const getBarang=() => {
@@ -434,9 +513,16 @@
             getNoPembelian();
     }
 
-    onMounted(() => {
+    onMounted( async () => {
         //set default data
-        items.value.push({ id: 1, title: '', description: '', rate: 0, quantity: 0, amount: 100, is_tax: false });
+        items.value = []
+        items.value.push({ 
+            id: 1, 
+            code_akun: '',
+            nama_akun: '', 
+            debet: '', 
+            kredit: '', 
+        });
 
         let dt = new Date();
         params.value.invoice_date = JSON.parse(JSON.stringify(dt));
@@ -450,19 +536,106 @@
         getSupplier();
         getCart();
         getNoPembelian();
+        countries.value  = [
+            {
+                thumb: 'boy.png',
+                name: 'Shaun Park',
+                'first name': 'John',
+                'last name': 'Doe jhgjhg',
+                email: 'johndoe@yahoo.com',
+                date: '10/08/2020',
+                sale: '320',
+                sales: '29.56',
+                status: 'Complete',
+                status_class: 'success',
+                register: '5 min ago',
+                position: 'Developer',
+                office: 'London',
+            },
+            {
+                thumb: 'girl-1.png',
+                name: 'Alma Clarke',
+                'first name': 'Andy',
+                'last name': 'King',
+                email: 'andyking@gmail.com',
+                date: '11/08/2020',
+                sale: '420',
+                sales: '19.15',
+                status: 'Pending',
+                status_class: 'secondary',
+                register: '10 min ago',
+                position: 'Designer',
+                office: 'New York',
+            },
+            {
+                thumb: 'girl-2.png',
+                name: 'Xavier',
+                'first name': 'Lisa',
+                'last name': 'Doe',
+                email: 'lisadoe@yahoo.com',
+                date: '12/08/2020',
+                sale: '130',
+                sales: '39.00',
+                status: 'In progress',
+                status_class: 'info',
+                register: '1 hour ago',
+                position: 'Accountant',
+                office: 'Amazon',
+            },
+            {
+                thumb: 'boy-2.png',
+                name: 'Vincent Carpenter',
+                'first name': 'Vincent',
+                'last name': 'Carpenter',
+                email: 'vinnyc@yahoo.com',
+                date: '13/08/2020',
+                sale: '260',
+                sales: '88.03',
+                status: 'Canceled',
+                status_class: 'danger',
+                register: '1 day ago',
+                position: 'Data Scientist',
+                office: 'Canada',
+            },
+            {
+                thumb: 'boy-2.png',
+                name: 'Vincent Carpenter',
+                'first name': 'Vincent XXXXXX',
+                'last name': 'Carpenter',
+                email: 'vinnyc@yahoo.com',
+                date: '13/08/2020',
+                sale: '260',
+                sales: '88.03',
+                status: 'Canceled',
+                status_class: 'danger',
+                register: '1 day ago',
+                position: 'Data Scientist',
+                office: 'Canada',
+            },
+        ];
+
+        
+        console.log(countries.value)
     });
 
     const change_file = (event) => {
         selected_file.value = URL.createObjectURL(event.target.files[0]);
     };
 
-    // const add_item = () => {
-    //     let max_id = 0;
-    //     if (items.value && items.value.length) {
-    //         max_id = items.value.reduce((max, character) => (character.id > max ? character.id : max), items.value[0].id);
-    //     }
-    //     items.value.push({ id: max_id + 1, title: '', description: '', rate: 0, quantity: 0, amount: 0, is_tax: false });
-    // };
+    const add_item = () => {
+        
+        let max_id = 0;
+        // let sub = 0
+        // for(let i = 0; i < items.value.length; i++){
+        //     sub = items.value[i].rate * items.value[i].quantity;
+        // }
+        if (items.value && items.value.length) {
+            max_id = items.value.reduce((max, character) => (character.id > max ? character.id : max), items.value[0].id);
+            // items.title.value.focus();
+        }
+        items.value.push({ id: max_id + 1, code_akun: '', nama_akun:'', debet: '', kredit: '' });
+        // items.value[1].title.focus();
+    };
 
     const remove_item = (item) => {
         items.value = items.value.filter((d) => d.id != item.id);
