@@ -308,12 +308,13 @@
     })
 
     function Simpan() {
+        // console.log(input_perubahan.value)
         store.dispatch('UpdateHargaBbm', input_perubahan.value)
         isOpen.value = false;
     }
     const openModal = (list) => {
         code.value = list.code_bbm;
-        harga_old.value = list.last_price;
+        harga_old.value = list.sale_price;
         isOpen.value = true;
     }
 

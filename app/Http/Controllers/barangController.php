@@ -114,7 +114,7 @@ class barangController extends Controller
                 ], 500);
             }
         } catch (\Exception $e) {
-            //DB::rollback();
+            DB::rollback();
             // something went wrong
             return response()->json([
              'success' => false,
@@ -226,7 +226,7 @@ class barangController extends Controller
                 ], 500);
             }
         } catch (\Exception $e) {
-            //DB::rollback();
+            DB::rollback();
             // something went wrong
             return response()->json([
              'success' => false,
@@ -297,7 +297,7 @@ class barangController extends Controller
                 ], 500);
             }
         } catch (\Exception $e) {
-            //DB::rollback();
+            DB::rollback();
             // something went wrong
             return response()->json([
              'success' => false,
@@ -322,6 +322,7 @@ class barangController extends Controller
                     'salePrice' => $request->input('harga_baru'),
                 ]);
                 DB::table('tblperubahan_hargabbm')->insert([
+                    'code_bbm'   => $request->input('code_bbm'),
                     'harga_lama'   => $request->input('harga_lama'),
                     'harga_baru' => $request->input('harga_baru'),
                     'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
@@ -343,7 +344,53 @@ class barangController extends Controller
                 ], 500);
             }
         } catch (\Exception $e) {
-            //DB::rollback();
+            DB::rollback();
+            // something went wrong
+            return response()->json([
+             'success' => false,
+             'message' => 'exception'.$e,
+         ], 400);
+        }
+    }
+
+    public function resetdb(Request $request){
+        try{
+            $exception = DB::transaction(function() use ($request){
+                DB::table('tblprofit')->truncate();
+                DB::table('tbltransaksi_nosel')->truncate();
+                DB::table('tblheader_aplusan')->truncate();
+                DB::table('tblbiaya')->truncate();
+                DB::table('tblkupon')->truncate();
+                DB::table('tbllinkaja')->truncate();
+                DB::table('tblopnum_detail')->truncate();
+                DB::table('tblopnum')->truncate();
+                DB::table('tblpembelian')->truncate();
+                DB::table('tblpembelian_detail')->truncate();
+                DB::table('tblpenjualan')->truncate();
+                DB::table('tblpenjualan_detail')->truncate();
+                DB::table('tblperubahan_hargabbm')->truncate();
+                DB::table('tblpobbm')->truncate();
+                DB::table('tblpobbm_detail')->truncate();
+                DB::table('tblterimabbm_detail')->truncate();
+                DB::table('tblterimabbm')->truncate();
+
+                DB::commit();
+            });
+            if(is_null($exception)) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Barang Berhasil di insert!',
+                    // 'data' => $detail
+                ], 200);
+            } else {
+                DB::rollback();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Post Gagal Diupdate!',
+                ], 500);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
             // something went wrong
             return response()->json([
              'success' => false,

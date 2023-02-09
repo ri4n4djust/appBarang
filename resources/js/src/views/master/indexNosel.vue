@@ -432,6 +432,13 @@
 
         store.dispatch('CreateTransNosel', [arr,arr_k,arr_b,arr_l,prArr ])
 
+        setTimeout(() => {
+            // getlist();
+            store.dispatch('NewKupon', [])
+            store.dispatch('NewBiaya', [])
+            store.dispatch('NewLink', [])
+        }, 1000)
+
     }
 
 
@@ -476,6 +483,10 @@
         getTrans();
         getRegu();
         console.log('onmount index nosel')
+        
+        localStorage.setItem('kupon', '[]');
+        localStorage.setItem('biaya', '[]');
+        localStorage.setItem('link', '[]');
 
         // function getTransBbm(){
         //     // const bbmnosel = 

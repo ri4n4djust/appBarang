@@ -441,7 +441,7 @@
 
     import { useMeta } from '@/composables/use-meta';
 
-    useMeta({ title: 'Aplusan' });
+    useMeta({ title: 'Laba Rugi' });
 
     const store = useStore();
 

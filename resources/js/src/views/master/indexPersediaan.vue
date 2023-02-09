@@ -28,7 +28,7 @@
                         </div>
 
                         <v-client-table :data="items" :columns="columns" :options="table_option">
-                            <template #lastprice="props"> {{ Number(props.row.lastPrice).toLocaleString() }} </template>
+                            <template #lastPrice="props"> {{ Number(props.row.lastPrice).toLocaleString() }} </template>
                             <template #salePrice="props"> {{ Number(props.row.salePrice).toLocaleString() }} </template>
                             <template #action="props">
                                 <div class="custom-dropdown dropdown btn-group ">

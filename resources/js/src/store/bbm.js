@@ -31,6 +31,7 @@ const actions = {
     async UpdateHargaBbm({dispatch}, newhrg){
         try{
             await axios.post('api/update/harga-bbm', newhrg)
+            console.log(newhrg)
             await dispatch('GetBbm')
             const toast = window.Swal.mixin({
                 toast: true,

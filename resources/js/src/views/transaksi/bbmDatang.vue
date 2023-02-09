@@ -508,7 +508,7 @@
         await store.dispatch('GetdetailPo', {no_po: item.no_po})
         no_so.value = item.no_so
         no_po.value = item.no_po
-        r_supplier.value = item.r_supplier
+        r_supplier.value = item.kdSupplier
         isOpen.value = false;
         brg.value = JSON.parse(localStorage.getItem('terimabarang'));
     };

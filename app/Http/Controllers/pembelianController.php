@@ -102,9 +102,9 @@ class pembelianController extends Controller
                 $no_so = $request[0]['no_so'];
                 $post = DB::table('tblterimabbm')->insert([
                     'kd_terima'     => $request[0]['no_br'],
-                    'no_po'     => $request[0]['kdSupplier'],
+                    'no_po'     => $request[0]['no_po'],
                     'tgl_terima'   => $tgl_terima,
-                    'kd_supplier'     => $request[0]['disc'],
+                    'kd_supplier'     => $request[0]['kdSupplier'],
                     'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                     'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                 ]);
@@ -267,17 +267,20 @@ class pembelianController extends Controller
     public function listPobbm(Request $request){
         $startDate = date("Y-m-d", strtotime($request->input('startDate')));
         $endDate = date("Y-m-d", strtotime($request->input('endDate')));
-        $listpo = DB::table('tblpobbm')
-                ->join('tblsupplier', 'tblpobbm.r_supplier', 'tblsupplier.kdSupplier')
-                ->select('tblpobbm.*', 'tblsupplier.nmSupplier')
-                ->whereBetween('tblpobbm.tgl_po', [$startDate, $endDate])
-                ->get();
-        // $list = DB::select("SELECT b.*,c.nmSupplier,(a.qty - a.qty_recieve) kurang from tblpobbm_detail a, tblpobbm b, tblsupplier c WHERE a.r_noPo = b.no_po and a.qty != a.qty_recieve AND b.r_supplier = c.kdSupplier ;");
+        // $listpo = DB::table('tblpobbm')
+        //         ->join('tblsupplier', 'tblpobbm.r_supplier', 'tblsupplier.kdSupplier')
+        //         ->select('tblpobbm.*', 'tblsupplier.nmSupplier')
+        //         ->whereBetween('tblpobbm.tgl_po', [$startDate, $endDate])
+        //         ->get();
+        $list = DB::select("SELECT src.no_po,src.no_so no_so,rtrim(b.nmSupplier) supplier_name,b.kdSupplier,src.podate,src.qty_grpo,src.qty_recieve 
+from (SELECT a.no_po,a.no_so,a.r_supplier,cast(a.tgl_po as date) podate,sum(b.qty) qty_grpo,sum(qty_recieve) qty_recieve 
+FROM tblpobbm a left join tblpobbm_detail b on a.no_po = b.r_noPo where cast(a.tgl_po as date) between '2023-01-01' and '$endDate' group by a.r_supplier,a.no_po,a.no_so,a.tgl_po) src
+left join tblsupplier b on src.r_supplier = b.kdSupplier  where src.qty_recieve < src.qty_grpo order by no_po asc;");
         
         return response()->json([
             'success' => true,
             'message' => 'Laporan PO BBM',
-            'data' => $listpo
+            'data' => $list
         ], 200);
     }
 

@@ -13,12 +13,18 @@ const getters = {
 };
 
 const actions = {  
-    async CreateTransNosel({commit}, transnosel) {
+    async CreateTransNosel({commit, dispatch}, transnosel) {
         let response
         try {
             response = await axios.post('api/store/transnosel', transnosel)
         // commit('setTransNosel', response.data.data)
         // await dispatch('GetTransNosel', payload)
+            localStorage.setItem('kupon', '[]');
+            localStorage.setItem('biaya', '[]');
+            localStorage.setItem('link', '[]');
+            // dispatch('transaksi/NewKupon', null, { root: true })
+            // dispatch('transaksi/NewBiaya', null, { root: true })
+            // dispatch('transaksi/NewLink', null, { root: true })
             const toast = window.Swal.mixin({
                 toast: true,
                 position: 'top-center',
