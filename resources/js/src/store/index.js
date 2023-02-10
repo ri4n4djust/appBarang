@@ -14,6 +14,7 @@ import supplier from './supplier';
 import nomor from './nomor';
 import laporan from './laporan';
 import labarugi from './labarugi';
+import coa from './coa';
 
 
 export default new createStore({
@@ -124,7 +125,8 @@ export default new createStore({
         supplier,
         nomor,
         laporan,
-        labarugi
+        labarugi,
+        coa
     },
     // plugins: [createPersistedState()]
 });

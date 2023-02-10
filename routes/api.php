@@ -104,6 +104,10 @@ Route::post('/getdetail-penjualan', [App\Http\Controllers\penjualanController::c
 Route::post('/labarugi/pendapatan', [App\Http\Controllers\labarugiController::class, 'getPendapatan']);
 Route::post('/labarugi/beban-hpp', [App\Http\Controllers\labarugiController::class, 'getHppPenjualan']);
 
+//============HELPERS
+Route::post('/get/acc-list', [App\Http\Controllers\coaController::class, 'get_acc_list']);
+//========================
+
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/profile', function(Request $request) {
         return auth()->user();
