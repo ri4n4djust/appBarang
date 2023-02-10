@@ -104,6 +104,7 @@ Route::post('/getdetail-penjualan', [App\Http\Controllers\penjualanController::c
 Route::post('/labarugi/pendapatan', [App\Http\Controllers\labarugiController::class, 'getPendapatan']);
 Route::post('/labarugi/beban-hpp', [App\Http\Controllers\labarugiController::class, 'getHppPenjualan']);
 
+Route::post('/get/acc-data', [App\Http\Controllers\coaController::class, 'get_acc_data']);
 //============HELPERS
 Route::post('/get/acc-list', [App\Http\Controllers\coaController::class, 'get_acc_list']);
 //========================

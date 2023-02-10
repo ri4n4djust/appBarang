@@ -15,7 +15,8 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    // 'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => 'local', 'mysql',
 
     /*
     |--------------------------------------------------------------------------
@@ -33,7 +34,20 @@ return [
     |
     */
 
+    
+
     'connections' => [
+
+        'local' => [
+            'driver'    => 'mysql',
+            'host'      => 'localhost',
+            'database'  => 'winmaxapp',
+            'username'  => 'root',
+            'password'  => 'admin',
+            'charset'   => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix'    => '',
+        ],
 
         'sqlite' => [
             'driver' => 'sqlite',
