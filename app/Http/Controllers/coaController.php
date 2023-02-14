@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
 
 class coaController extends Controller
 {
@@ -24,14 +26,48 @@ class coaController extends Controller
 		$acc = $request->input('accid');
 		$whr = "and a.location_id = '$lokasi'";
 			$filter = "'$acc'";
-			DB::statement("CREATE TEMPORARY TABLE GL (".
-				"acc_id nchar(18) NOT NULL ".
-				",amount decimal(13,2) NOT NULL DEFAULT 0);");
+			Schema::create('GL', function (Blueprint $table) {
+				$table->increments('id');
+				$table->string('acc_id', 18)->nullable(false)->default('0');
+				$table->decimal('amount', 13,2)->nullable(false)->default('0');
+				// Table only lasts as long as the connection persists.
+				$table->temporary();
+				// The lookup column, with an index.
+				// $table->string('lookup')->index();
+				// The Property ID we're looking for.
+				// $table->string('pid');
+			});
+			Schema::create('GL_LR', function (Blueprint $table) {
+				$table->increments('id');
+				$table->string('acc_id', 18)->nullable(false)->default('0');
+				$table->decimal('amount', 13,2)->nullable(false)->default('0');
+				$table->temporary();
+			});
+			Schema::create('coa', function (Blueprint $table) {
+				$table->increments('id');
+				$table->string('idparent1', 11);
+				$table->string('parent1', 50);
+				$table->string('parent1level', 1);
+				$table->string('parent1type', 1);
+				$table->string('idparent2', 11);
+				$table->string('parent2', 50);
+				$table->string('parent2level', 1);
+				$table->string('parent2type', 1);
+				$table->string('idparent3', 11);
+				$table->string('parent3', 50);
+				$table->string('parent3level', 1);
+				$table->string('parent3type', 1);
+				$table->string('acc_id', 11);
+				$table->string('name', 50);
+				$table->string('atype', 1);
+				$table->temporary();
+			});
 
-				DB::statement("CREATE TEMPORARY TABLE GL_LR (".
-				"acc_id nchar(18) NOT NULL ".
-				",amount decimal(13,2) NOT NULL DEFAULT 0);");
-				DB::statement("CREATE TEMPORARY TABLE coa (idparent1 int(11),parent1 varchar(50), parent1level int(1), parent1type char(1),idparent2 int(11),parent2 varchar(50),parent2level  int(1),parent2type char(1),idparent3 int(11),parent3 varchar(50),parent3level  int(1),parent3type char(1),acc_id int(11),name varchar(50),atype char(1));");
+			// DB::statement("CREATE TEMPORARY TABLE GL ("."acc_id nchar(18) NOT NULL ".",amount decimal(13,2) NOT NULL DEFAULT 0);");
+
+			// DB::statement("CREATE TEMPORARY TABLE GL_LR ("."acc_id nchar(18) NOT NULL ".",amount decimal(13,2) NOT NULL DEFAULT 0);");
+			
+			// DB::statement("CREATE TEMPORARY TABLE coa (idparent1 int(11),parent1 varchar(50), parent1level int(1), parent1type char(1),idparent2 int(11),parent2 varchar(50),parent2level  int(1),parent2type char(1),idparent3 int(11),parent3 varchar(50),parent3level  int(1),parent3type char(1),acc_id int(11),name varchar(50),atype char(1));");
 
 			$date_lr = '2022-01-01';
 			$timezone = time() + (60*60*+8); 
@@ -44,7 +80,8 @@ class coaController extends Controller
 			DB::statement("SET @unbalance = 0;");
 			DB::statement("SET @income = 0;");
 			DB::statement("SET @expense = 0;");
-			DB::table("INSERT into GL SELECT acc_id,SUM(debet)-SUM(kredit) as balance from general_ledger a left join gl_detail b on a.notrans = b.rgl where rlocation = '$dealer_ref' and date(tgl) between '$date_lr' and '$cur_tgl' group by acc_id;");
+			
+			DB::table("INSERT into GL SELECT acc_id,SUM(debet)-SUM(kredit) as balance from general_ledger a left join gl_detail b on a.notrans = b.rgl where rlocation = '$dealer_ref' and date(tgl) between '2022-01-01' and '$cur_tgl' group by acc_id;");
 			DB::table("INSERT into GL values('38100','0'),('38999','0')");
 			DB::table("INSERT into GL_LR SELECT acc_id,SUM(debet)-SUM(kredit) as balance from general_ledger a left join gl_detail b on a.notrans = b.rgl where rlocation = '$dealer_ref' and date(tgl) between '2022-01-01' and '$cur_tgl' group by acc_id;");
 			DB::table("INSERT into GL_LR values('38100','0'),('38999','0')");
