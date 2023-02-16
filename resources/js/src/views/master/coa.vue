@@ -59,10 +59,11 @@
                                             </svg>
                                             {{lv1.acc_id}}
                                         </td>
+                                        <td></td>
                                         <td aria-colindex="3" role="cell">{{lv1.name}}
                                             <table>
                                                 <tr role="row" v-for="lv2 in users.lv2" :key="lv2.id" >
-                                                    <td v-if="lv1.acc_id === lv2.parent">{{ lv2.name }}</td>
+                                                    <td v-if="lv1.acc_id === lv2.parent">{{ lv2.acc_id }}{{ lv2.name }}</td>
                                                 </tr>
                                             </table>
                                         </td>
