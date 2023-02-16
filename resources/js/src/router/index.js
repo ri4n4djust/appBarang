@@ -31,6 +31,14 @@ const routes = [
     },
 
     {
+        path: '/coa',
+        name: 'coa',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/coa.vue'),
+        // meta: { requiresAuth: true },
+    },
+
+
+    {
         path: '/transaksi-aplusan',
         name: 'transaksi-aplusan',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexNosel.vue'),

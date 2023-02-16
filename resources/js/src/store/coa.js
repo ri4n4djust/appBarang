@@ -2,11 +2,13 @@
 
 import axios from 'axios';
 const state = {
+    coalist: [],
     harta: [],
   };
   
 const getters = {
     StateHarta: state => state.harta,
+    StateCoaList: state => state.coalist,
 };
 
 const actions = {  
@@ -18,12 +20,19 @@ const actions = {
         let response = await axios.get('/api/coa/harta')
         commit('setHarta', response.data.data)
     },
+    async GetCoaList({ commit }){
+        let response = await axios.post('/api/get/coa')
+        commit('setCoa', response.data.data)
+    },
     
 
 };
 const mutations = {
     setHarta(state, harta){
         state.harta = harta
+    },
+    setCoa(state, coa){
+        state.coalist = coa
     },
     // DeleteBarang({dispatch}, id) {
     //     axios.delete(`hapus/barang/${id}`)

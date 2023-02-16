@@ -20,6 +20,24 @@ class coaController extends Controller
 		echo json_encode($data);
 	}
 
+	public function get_coa(Request $request){
+		$lvl1 = get_level1(1);
+		$lvl2 = get_level2(2);
+		$lvl3 = get_level3(3);
+		$lvl4 = get_level4(4);
+		$data['level1'] = $lvl1;
+		$data['level2'] = $lvl2;
+		$data['level3'] = $lvl3;
+		$data['level4'] = $lvl4;
+
+		// echo json_encode($data);
+		return response()->json([
+            'success' => true,
+            'message' => 'List COA',
+            'data' => $data
+        ], 200);
+	}
+
 	public function get_acc_data(Request $request){
 		$dealer_ref = '01020';
 		$lokasi = $request->input('lokasi');
@@ -107,7 +125,14 @@ class coaController extends Controller
 			// $action_btn = "concat('<button class=''btn btn-success btn-xs'' href=''#'' accid=''',a.acc_id,'''><span class=''fa fa-pencil''></span></button>') as aksi,concat('<button class=''btn btn-success btn-xs'' href=''#'' accid=''',idparent1,''' disabled><span class=''fa fa-pencil''></span></button>') as aksi1,concat('<button class=''btn btn-success btn-xs'' href=''#'' accid=''',idparent2,'''><span class=''fa fa-pencil''></span></button>') as aksi2,concat('<button class=''btn btn-success btn-xs'' href=''#'' accid=''',idparent3,'''><span class=''fa fa-pencil''></span></button>') as aksi3";
 			$myquery = DB::select("SELECT idparent1,parent1,parent1level,parent1type,idparent2,parent2,parent2level,parent2type,idparent3,parent3,parent3level,parent3type,a.acc_id,a.name,coalesce(b.amount,0) as amount,a.atype from coa a left join GL b on a.acc_id = b.acc_id where left(a.acc_id,1) in ($filter) order by a.acc_id;");
 
+			$tes = "";
+			if (Schema::hasTable('GL_LR'))
+			{
+				// Do something if exists
+				$tes = "tesssss";
+
+			}
 			// return $myquery;
-			echo json_encode($myquery);
+			echo json_encode($tes);
 	}
 }

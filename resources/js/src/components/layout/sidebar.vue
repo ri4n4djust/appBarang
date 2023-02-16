@@ -158,7 +158,7 @@
                             <router-link to="/kas" @click="toggleMobileMenu">Buku Kas</router-link>
                         </li>
                         <li>
-                            <router-link to="/tables/multiple-tables" @click="toggleMobileMenu">Multiple Tables</router-link>
+                            <router-link to="/coa" @click="toggleMobileMenu">COA</router-link>
                         </li>
                     </ul>
                 </li>
