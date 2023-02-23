@@ -171,8 +171,8 @@ class coaController extends Controller
 			// $data = $this->db->query("select * from GL where acc_id = '38100'")->result_array();
 			// print_r($data);
 			// $inser1 = DB::raw("INSERT into coa select b.acc_id as idparent1,b.name as parent1,b.alevel as parent1level,b.atype as parent1type,a.acc_id as idparent2,a.name as parent2,a.alevel as parent2level,a.atype as parent2type,a.acc_id as idparent3,a.name as parent3,a.alevel as parent3level,a.atype as parent3type,a.acc_id,a.name,a.atype from level2 a inner join level1 b on a.Parent = b.acc_id where a.atype = 'D'; ");
-			DB::raw("INSERT into coa select c.acc_id as idparent1,c.name as parent1,c.alevel as parent1level,c.atype as parent1type,b.acc_id as idparent2,b.name as parent2,b.alevel as parent2level,b.atype as parent2type,a.acc_id as idparent3,a.name as parent3,a.alevel as parent3level,a.atype as parent3type,a.acc_id,a.name,a.atype from level3 a inner join level2 b on a.parent = b.acc_id inner join level1 c on b.parent = c.acc_id where a.atype = 'D'; ");			
-			DB::raw("INSERT into coa select d.acc_id as idparent1,d.name as parent1,d.alevel as parent1level,d.atype as parent1type,c.acc_id as idparent2,c.name as parent2,c.alevel as parent2level,c.atype as parent2type,b.acc_id as idparent3,b.name as parent3,b.alevel as parent3level,b.atype as parent3type,a.acc_id,a.name,a.atype from level4 a inner join level3 b on a.parent = b.acc_id inner join level2 c on b.parent = c.acc_id inner join level1 d on c.parent = d.acc_id where a.atype = 'D';");
+			// DB::raw("INSERT into coa select c.acc_id as idparent1,c.name as parent1,c.alevel as parent1level,c.atype as parent1type,b.acc_id as idparent2,b.name as parent2,b.alevel as parent2level,b.atype as parent2type,a.acc_id as idparent3,a.name as parent3,a.alevel as parent3level,a.atype as parent3type,a.acc_id,a.name,a.atype from level3 a inner join level2 b on a.parent = b.acc_id inner join level1 c on b.parent = c.acc_id where a.atype = 'D'; ");			
+			// DB::raw("INSERT into coa select d.acc_id as idparent1,d.name as parent1,d.alevel as parent1level,d.atype as parent1type,c.acc_id as idparent2,c.name as parent2,c.alevel as parent2level,c.atype as parent2type,b.acc_id as idparent3,b.name as parent3,b.alevel as parent3level,b.atype as parent3type,a.acc_id,a.name,a.atype from level4 a inner join level3 b on a.parent = b.acc_id inner join level2 c on b.parent = c.acc_id inner join level1 d on c.parent = d.acc_id where a.atype = 'D';");
 
 			$coa1 = DB::table('level2 as a')
 						->select('b.acc_id as idparent1', 'b.name as parent1', 'b.alevel as parent1level', 'b.atype as parent1type', 'a.acc_id as idparent2', 'a.name as parent2', 'a.alevel as parent2level', 'a.atype as parent2type', 'a.acc_id as idparent3', 'a.name as parent3', 'a.alevel as parent3level', 'a.atype as parent3type', 'a.acc_id', 'a.name', 'a.atype')
@@ -198,10 +198,72 @@ class coaController extends Controller
                     ];
                 }
             DB::table('coa')->insert($dataC);
+
+			$coa2 = DB::table('level3 as a')
+						->select('c.acc_id as idparent1', 'c.name as parent1', 'c.alevel as parent1level', 'c.atype as parent1type', 'b.acc_id as idparent2', 'b.name as parent2', 'b.alevel as parent2level', 'b.atype as parent2type', 'a.acc_id as idparent3', 'a.name as parent3', 'a.alevel as parent3level', 'a.atype as parent3type', 'a.acc_id', 'a.name', 'a.atype')
+						->join('level2 as b', 'a.parent', '=', 'b.acc_id')
+						->join('level1 as c', 'b.parent', '=', 'c.acc_id')
+						->where('a.atype', 'D')
+						->get();
+                $dataCC = [];
+                foreach ($coa2 as $cc) {
+                    $dataCC[] = [
+                        'idparent1'  => $cc->idparent1,
+                        'parent1'    => $cc->parent1,
+						'parent1level'  => $cc->parent1level,
+                        'parent1type'    => $cc->parent1type,
+                        'parent2'    => $cc->parent2,
+						'parent2level'  => $cc->parent2level,
+                        'parent2type'    => $cc->parent2type,
+						'idparent2'  => $cc->idparent2,
+                        'parent3'    => $cc->parent3,
+						'parent3level'  => $cc->parent3level,
+                        'parent3type'    => $cc->parent3type,
+						'idparent3'  => $cc->idparent3,
+						'acc_id'  => $cc->acc_id,
+                        'name'    => $cc->name,
+						'atype'    => $cc->atype,
+                    ];
+                }
+            DB::table('coa')->insert($dataCC);
+
+			$coa3 = DB::table('level4 as a')
+						->select('d.acc_id as idparent1', 'd.name as parent1', 'd.alevel as parent1level', 'd.atype as parent1type', 'c.acc_id as idparent2', 'c.name as parent2', 'c.alevel as parent2level', 'c.atype as parent2type', 'b.acc_id as idparent3', 'b.name as parent3', 'b.alevel as parent3level', 'b.atype as parent3type', 'a.acc_id', 'a.name', 'a.atype')
+						->join('level3 as b', 'a.parent', '=', 'b.acc_id')
+						->join('level2 as c', 'b.parent', '=', 'c.acc_id')
+						->join('level1 as d', 'c.parent', '=', 'd.acc_id')
+						->where('a.atype', 'D')
+						->get();
+                $dataCCC = [];
+                foreach ($coa3 as $ccc) {
+                    $dataCCC[] = [
+                        'idparent1'  => $ccc->idparent1,
+                        'parent1'    => $ccc->parent1,
+						'parent1level'  => $ccc->parent1level,
+                        'parent1type'    => $ccc->parent1type,
+                        'parent2'    => $ccc->parent2,
+						'parent2level'  => $ccc->parent2level,
+                        'parent2type'    => $ccc->parent2type,
+						'idparent2'  => $ccc->idparent2,
+                        'parent3'    => $ccc->parent3,
+						'parent3level'  => $ccc->parent3level,
+                        'parent3type'    => $ccc->parent3type,
+						'idparent3'  => $ccc->idparent3,
+						'acc_id'  => $ccc->acc_id,
+                        'name'    => $ccc->name,
+						'atype'    => $ccc->atype,
+                    ];
+                }
+            DB::table('coa')->insert($dataCCC);
 			// $action_btn = "concat('<button class=''btn btn-success btn-xs'' href=''#'' accid=''',a.acc_id,'''><span class=''fa fa-pencil''></span></button>') as aksi,concat('<button class=''btn btn-success btn-xs'' href=''#'' accid=''',idparent1,''' disabled><span class=''fa fa-pencil''></span></button>') as aksi1,concat('<button class=''btn btn-success btn-xs'' href=''#'' accid=''',idparent2,'''><span class=''fa fa-pencil''></span></button>') as aksi2,concat('<button class=''btn btn-success btn-xs'' href=''#'' accid=''',idparent3,'''><span class=''fa fa-pencil''></span></button>') as aksi3";
-			$myquery = DB::select("SELECT idparent1,parent1,parent1level,parent1type,idparent2,parent2,parent2level,parent2type,idparent3,parent3,parent3level,parent3type,a.acc_id,a.name,coalesce(b.amount,0) as amount,a.atype from coa a left join GL b on a.acc_id = b.acc_id where left(a.acc_id,1) in ($filter) order by a.acc_id;");
-			
-			print_r($coa1);
+			// $myquery = DB::statement("SELECT idparent1,parent1,parent1level,parent1type,idparent2,parent2,parent2level,parent2type,idparent3,parent3,parent3level,parent3type,a.acc_id,a.name,coalesce(b.amount,0) as amount,a.atype from coa a left join GL b on a.acc_id = b.acc_id where left(a.acc_id,1) in ($filter) order by a.acc_id;");
+			$myquery = DB::table('coa as a')
+						->join('GL as b', 'a.acc_id', 'b.acc_id')
+						->select('a.idparent1','a.parent1','a.parent1level','a.parent1type','a.idparent2','a.parent2','a.parent2level','a.parent2type','a.idparent3','a.parent3','a.parent3level','a.parent3type','a.acc_id','a.name',DB::raw('coalesce(b.amount,0) as amount'),'a.atype')
+						->whereIn(DB::raw('LEFT(a.acc_id, 1)'), array($filter))
+						->orderBy('a.acc_id')
+						->get();
+			print_r($myquery);
 			// $tes = "";
 			// if (Schema::hasTable('GL_LR'))
 			// {
