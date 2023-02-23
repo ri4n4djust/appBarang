@@ -45,8 +45,9 @@ class coaController extends Controller
 		$dealer_ref = '01020';
 		$lokasi = $request->input('lokasi');
 		$accid = $request->input('accid');
+		$group = $request->input('group');
 		$whr = "and a.location_id = '$lokasi'";
-			$filter = "'$accid'";
+			$filter = $group;
 			Schema::create('gl', function (Blueprint $table) {
 				$table->increments('id');
 				$table->string('acc_id', 18)->nullable()->default('0');
@@ -256,22 +257,14 @@ class coaController extends Controller
                 }
             DB::table('coa')->insert($dataCCC);
 			// $action_btn = "concat('<button class=''btn btn-success btn-xs'' href=''#'' accid=''',a.acc_id,'''><span class=''fa fa-pencil''></span></button>') as aksi,concat('<button class=''btn btn-success btn-xs'' href=''#'' accid=''',idparent1,''' disabled><span class=''fa fa-pencil''></span></button>') as aksi1,concat('<button class=''btn btn-success btn-xs'' href=''#'' accid=''',idparent2,'''><span class=''fa fa-pencil''></span></button>') as aksi2,concat('<button class=''btn btn-success btn-xs'' href=''#'' accid=''',idparent3,'''><span class=''fa fa-pencil''></span></button>') as aksi3";
-			// $myquery = DB::statement("SELECT idparent1,parent1,parent1level,parent1type,idparent2,parent2,parent2level,parent2type,idparent3,parent3,parent3level,parent3type,a.acc_id,a.name,coalesce(b.amount,0) as amount,a.atype from coa a left join GL b on a.acc_id = b.acc_id where left(a.acc_id,1) in ($filter) order by a.acc_id;");
-			$myquery = DB::table('coa as a')
-						->join('GL as b', 'a.acc_id', 'b.acc_id')
-						->select('a.idparent1','a.parent1','a.parent1level','a.parent1type','a.idparent2','a.parent2','a.parent2level','a.parent2type','a.idparent3','a.parent3','a.parent3level','a.parent3type','a.acc_id','a.name',DB::raw('coalesce(b.amount,0) as amount'),'a.atype')
-						->whereIn(DB::raw('LEFT(a.acc_id, 1)'), array($filter))
-						->orderBy('a.acc_id')
-						->get();
-			print_r($myquery);
-			// $tes = "";
-			// if (Schema::hasTable('GL_LR'))
-			// {
-			// 	// Do something if exists
-			// 	$tes = "tesssss";
-
-			// }
-			// return $myquery;
-			// echo json_encode($harta);
+			$myquery = DB::select("SELECT idparent1,parent1,parent1level,parent1type,idparent2,parent2,parent2level,parent2type,idparent3,parent3,parent3level,parent3type,a.acc_id,a.name,coalesce(b.amount,0) as amount,a.atype from coa a left join GL b on a.acc_id = b.acc_id where left(a.acc_id,1) in ($filter) order by a.acc_id;");
+			// $myquery = DB::table('coa as a')
+			// 			->join('GL as b', 'a.acc_id', 'b.acc_id')
+			// 			->select('a.idparent1','a.parent1','a.parent1level','a.parent1type','a.idparent2','a.parent2','a.parent2level','a.parent2type','a.idparent3','a.parent3','a.parent3level','a.parent3type','a.acc_id','a.name',DB::raw('coalesce(b.amount,0) as amount'),'a.atype')
+			// 			->whereIn(DB::raw('LEFT(a.acc_id, 1)'), array($filter))
+			// 			->orderBy('a.acc_id')
+			// 			->get();
+			// print_r($myquery);
+			return response($myquery);
 	}
 }
