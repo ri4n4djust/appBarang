@@ -16,8 +16,8 @@ const actions = {
         await axios.post('/api/store/coa-harta', post)
         await dispatch('GetHarta')
     }, 
-    async GetHarta({ commit }){
-        let response = await axios.get('/api/coa/harta')
+    async GetHarta({ commit }, group){
+        let response = await axios.post('/api/get/acc-data', group)
         commit('setHarta', response.data.data)
     },
     async GetCoaList({ commit }){

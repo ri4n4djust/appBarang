@@ -238,6 +238,7 @@ class coaController extends Controller
 			// 			->get();
 			// print_r($myquery);
 
+
 			$groups = array();
 			foreach ($data as $item) {
 			    $key = $item->idparent1;
@@ -250,7 +251,9 @@ class coaController extends Controller
 			            'tipe' => $item->parent1type.substr($item->idparent1, 0,1),
 			        );
 			    } else {
-			      $groups[$key]->amount = $groups[$key]->amount + $item->amount;      
+					// print_r( $item->amount);
+			      $groups[$key]['amount'] = $groups[$key]['amount'] + $item->amount;   
+				//   print_r($groups[$key]['amount']);   
 			    }
 
 			    $key = $item->idparent2;
@@ -264,7 +267,7 @@ class coaController extends Controller
 			        );
 			    } else {
 			      // if((double)$groups[$key]['amount'] == 0){
-			        $groups[$key]['amount'] = $groups[$key]['amount'] + $item['amount'];     
+			        $groups[$key]['amount'] = $groups[$key]['amount'] + $item->amount;     
 			      // }  
 			    }
 
@@ -278,8 +281,9 @@ class coaController extends Controller
 			            'tipe' => $item->parent3type.substr($item->idparent3, 0,3),
 			        );
 			    } else {
+					// print_r($groups[$key]['amount']);
 			      if((double)$groups[$key]['amount'] == 0){
-			          $groups[$key]->amount = $groups[$key]['amount'] + $item->amount;     
+			           $groups[$key]['amount'] = $groups[$key]['amount'] + $item->amount;     
 			        }  
 			    }
 
@@ -295,7 +299,7 @@ class coaController extends Controller
 			    } else {
 			      // $str .= $key.' '.$nrw.'=>'.$nrow."<br>";
 			        if((double)$groups[$key]['amount'] == 0){
-			          $groups[$key]->amount = $groups[$key]->amount + $item->amount;     
+			          $groups[$key]['amount'] = $groups[$key]['amount'] + $item->amount;     
 			        }  
 			    }
 			    // $nrw += 1;
@@ -514,6 +518,11 @@ class coaController extends Controller
 		    array_multisort($keys, SORT_ASC, $acc);
 
 		    // $gl['acc'] = $acc;
-			return response($acc);
+			// return response($acc);
+			return response([
+				'success' => true,
+				'message' => 'Data Acc',
+				'data' => $acc
+			], 200);
 	}
 }

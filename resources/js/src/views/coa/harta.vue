@@ -30,6 +30,52 @@
                     <div class="panel-body">
                         <div class="table-responsive">
                             
+                            <table border="1px">
+                                <tbody  v-for="hrt in hartalist" :key="hrt.acc_id">
+
+                                    <tr v-if="hrt.level === '1'">
+                                        <td v-if="hrt.jenis != 'Total'">{{ hrt.acc_id }}</td>
+                                        <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'"><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
+                                        <td v-else>&nbsp;&nbsp;{{ hrt.name }}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td v-if="hrt.jenis === 'Total'"></td>
+                                        <td  v-else></td>
+                                        <td v-if="hrt.jenis === 'Detail'">{{ hrt.amount }}</td>
+                                        <td v-else-if="hrt.jenis === 'Total'">{{ hrt.amount }}</td>
+                                        <td v-else></td>
+                                    </tr>
+                                    <tr v-if="hrt.level === '2'">
+                                        <td v-if="hrt.jenis != 'Total'">{{ hrt.acc_id }}</td>
+                                        <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'"><b>&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</b></td>
+                                        <td v-else>&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
+                                        <td></td>
+                                        <td v-if="hrt.jenis === 'Total'"></td>
+                                        <td v-else></td>
+                                        <td v-if="hrt.jenis === 'Detail'">{{ hrt.amount }}</td>
+                                        <td v-else-if="hrt.jenis === 'Total'">{{ hrt.amount }}</td>
+                                        <td v-else></td>
+                                    </tr>
+                                    <tr v-if="hrt.level === '3'">
+                                        <td v-if="hrt.jenis != 'Total'">{{ hrt.acc_id }}</td>
+                                        <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</b></td>
+                                        <td v-else>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
+                                        <td v-if="hrt.jenis === 'Total'"></td>
+                                        <td  v-else></td>
+                                        <td>{{ hrt.amount }}</td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr v-if="hrt.level === '4'">
+                                        <td>{{ hrt.acc_id }}</td>
+                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
+                                        <td>{{ hrt.amount }}</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
 
                         
@@ -57,29 +103,19 @@
     const router = useRouter();
     const route = useRoute();
 
-    function Simpan() {
-        // console.log(input_perubahan.value)
-        store.dispatch('UpdateHargaBbm', input_perubahan.value)
-        isOpen.value = false;
-    }
-    // BBM
-    const users = computed(() => {
-        const bbm = store.getters.StateBbm;
-        const lv1 = coalist.value.level1;
-        const lv2 = coalist.value.level2;
-        return { users, bbm, lv1, lv2 }
-    });
 
     // const modalRef = ref(null);
     // const openModal = () => Modal.getInstance(modalRef.value)?.show();
-    const coalist = ref({});
+    const hartalist = ref();
     onMounted(() => {
-        
-        store.dispatch('GetCoaList')
-        // coalist.value = store.getters.StateCoaList;
+        const harta = ref({
+            group: '1'
+        });
+        store.dispatch('GetHarta', harta.value);
+        // hartalist.value = store.getters.StateHarta;
         setTimeout(function() { 
             // store.dispatch('GetCoaList')
-            coalist.value = store.getters.StateCoaList;
+            hartalist.value = store.getters.StateHarta;
         }, 5000);
        
     })
