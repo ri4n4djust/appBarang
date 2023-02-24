@@ -100,7 +100,7 @@ Route::post('/store/penjualan', [App\Http\Controllers\penjualanController::class
 Route::post('/getdetail-penjualan', [App\Http\Controllers\penjualanController::class, 'getDetailPenjualan']);
 
 
-// LabaRugi
+//============ COA
 Route::post('/labarugi/pendapatan', [App\Http\Controllers\labarugiController::class, 'getPendapatan']);
 Route::post('/labarugi/beban-hpp', [App\Http\Controllers\labarugiController::class, 'getHppPenjualan']);
 

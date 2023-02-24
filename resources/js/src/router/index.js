@@ -29,15 +29,32 @@ const routes = [
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexBbm.vue'),
         // meta: { requiresAuth: true },
     },
-
+    //======================COA
     {
         path: '/coa',
         name: 'coa',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/coa.vue'),
         // meta: { requiresAuth: true },
     },
-
-
+    {
+        path: '/coa/harta',
+        name: 'harta',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/coa/harta.vue'),
+        // meta: { requiresAuth: true },
+    },
+    {
+        path: '/coa/hutang',
+        name: 'hutang',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/coa/hutang.vue'),
+        // meta: { requiresAuth: true },
+    },
+    {
+        path: '/coa/modal',
+        name: 'modal',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/coa/modal.vue'),
+        // meta: { requiresAuth: true },
+    },
+    //============end oof coa
     {
         path: '/transaksi-aplusan',
         name: 'transaksi-aplusan',

@@ -157,8 +157,34 @@
                         <li>
                             <router-link to="/kas" @click="toggleMobileMenu">Buku Kas</router-link>
                         </li>
-                        <li>
-                            <router-link to="/coa" @click="toggleMobileMenu">COA</router-link>
+                        <li class="menu">
+                            <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#coa" aria-controls="coa" aria-expanded="false">
+                                <div class="">
+                                <span>COA</span> 
+                                    <!-- {{ $t('Master') }}</span> -->
+                                </div>
+                                <div>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="feather feather-chevron-right"
+                                    >
+                                        <polyline points="9 18 15 12 9 6"></polyline>
+                                    </svg>
+                                </div>
+                            </a>
+                            <ul id="coa" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
+                                <li><router-link to="/coa/harta" @click="toggleMobileMenu">Harta</router-link></li>
+                                <li><router-link to="/coa/hutang" @click="toggleMobileMenu">Hutang</router-link></li>
+                                <li><router-link to="/coa/modal" @click="toggleMobileMenu">Modal</router-link></li>
+                            </ul>
                         </li>
                     </ul>
                 </li>
