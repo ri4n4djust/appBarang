@@ -34,7 +34,7 @@
                                 <tbody  v-for="hrt in hartalist" :key="hrt.acc_id">
 
                                     <tr v-if="hrt.level === '1'">
-                                        <td v-if="hrt.jenis != 'Total'">{{ hrt.acc_id }}</td>
+                                        <td v-if="hrt.jenis != 'Total'" width="20%">{{ hrt.acc_id }}</td>
                                         <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'"><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
                                         <td v-else>&nbsp;&nbsp;{{ hrt.name }}</td>
                                         <td></td>
@@ -109,7 +109,7 @@
     const hartalist = ref();
     onMounted(() => {
         const harta = ref({
-            group: '1'
+            group: '2'
         });
         store.dispatch('GetHarta', harta.value);
         // hartalist.value = store.getters.StateHarta;
