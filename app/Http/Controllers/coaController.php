@@ -53,7 +53,7 @@ class coaController extends Controller
 				$table->string('acc_id', 18)->nullable()->default('0');
 				$table->decimal('amount', 15,2)->nullable()->default('0');
 				// Table only lasts as long as the connection persists.
-				// $table->temporary();
+				$table->temporary();
 				// The lookup column, with an index.
 				// $table->string('lookup')->index();
 				// The Property ID we're looking for.
@@ -63,7 +63,7 @@ class coaController extends Controller
 				$table->increments('id');
 				$table->string('acc_id', 18)->nullable()->default('0');
 				$table->decimal('amount', 15,2)->nullable()->default('0');
-				// $table->temporary();
+				$table->temporary();
 			});
 			Schema::create('coa', function (Blueprint $table) {
 				$table->increments('id');
@@ -82,7 +82,7 @@ class coaController extends Controller
 				$table->string('acc_id', 11);
 				$table->string('name', 50);
 				$table->string('atype', 1);
-				// $table->temporary();
+				$table->temporary();
 			});
 
 			$date_lr = '2022-01-01';
