@@ -109,14 +109,14 @@
     const hartalist = ref();
     onMounted(() => {
         const harta = ref({
-            group: '2'
+            group: '1'
         });
         store.dispatch('GetHarta', harta.value);
         // hartalist.value = store.getters.StateHarta;
         setTimeout(function() { 
             // store.dispatch('GetCoaList')
             hartalist.value = store.getters.StateHarta;
-        }, 5000);
+        }, 1000);
        
     })
     

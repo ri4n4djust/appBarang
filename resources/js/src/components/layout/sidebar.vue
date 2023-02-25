@@ -320,7 +320,7 @@
                             <router-link to="/laporan/labarugi" @click="toggleMobileMenu">Laba Rugi</router-link>
                         </li>
                         <li>
-                            <router-link to="/forms/touchspin" @click="toggleMobileMenu">TouchSpin</router-link>
+                            <router-link to="/laporan/neraca" @click="toggleMobileMenu">Neraca Keuangan</router-link>
                         </li>
                         <li>
                             <router-link to="/forms/checkbox-radio" @click="toggleMobileMenu">Checkbox &amp; Radio</router-link>

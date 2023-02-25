@@ -197,6 +197,13 @@ const routes = [
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/laporanLabarugi.vue'),
         // props: true,
     },
+    {
+        path: '/laporan/neraca',
+        name: 'neraca-keuangan',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/neracaKeuangan.vue'),
+        // props: true,
+    },
+
 
     //components
     {
