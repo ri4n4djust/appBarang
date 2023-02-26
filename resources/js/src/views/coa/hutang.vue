@@ -18,25 +18,93 @@
         
 
         <div class="row layout-top-spacing">
-            <div id="tableSimple" class="col-lg-12 col-12 layout-spacing">
-                <div class="statbox panel box box-shadow">
-                    <div class="panel-heading">
-                        <div class="row">
-                            <div class="col-xl-12 col-md-12 col-sm-12 col-12">
-                                <h4>Simple Table</h4>
+
+            <div class="doc-container">
+                <div class="row">
+                    <div class="col-xl-9">
+                        <div id="tableSimple" class="col-lg-12 col-12 layout-spacing">
+                            <div class="statbox panel box box-shadow">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                            <h4>Hutang</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="table-responsive">
+                                        
+                                        <table :border="1">
+                                            <tbody  v-for="hrt in hartalist" :key="hrt.acc_id">
+
+                                                <tr v-if="hrt.level === '1'" :border="1">
+                                                    <td v-if="hrt.jenis != 'Total'" width="20%">{{ hrt.acc_id }}</td>
+                                                    <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'"><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
+                                                    <td v-else>&nbsp;&nbsp;{{ hrt.name }}</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td v-if="hrt.jenis === 'Total'"></td>
+                                                    <td v-else></td>
+                                                    <td v-if="hrt.jenis === 'Detail'">{{ Number(hrt.amount).toLocaleString() }} || {{ hrt.jenis }}</td>
+                                                    <td v-else-if="hrt.jenis === 'Total'">{{ Number(hrt.amount).toLocaleString() }} || {{ hrt.jenis }}</td>
+                                                    
+                                                </tr>
+                                                <tr v-if="hrt.level === '2'">
+                                                    <td v-if="hrt.jenis != 'Total'">{{ hrt.acc_id }}</td>
+                                                    <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'"><b>&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</b></td>
+                                                    <td v-else>&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
+                                                    <td></td>
+                                                    <td v-if="hrt.jenis === 'Total'"></td>
+                                                    <td v-else></td>
+                                                    <td v-if="hrt.jenis === 'Detail'">{{ Number(hrt.amount).toLocaleString() }}</td>
+                                                    <td v-else-if="hrt.jenis === 'Total'">{{ Number(hrt.amount).toLocaleString() }}</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr v-if="hrt.level === '3'">
+                                                    <td v-if="hrt.jenis != 'Total'">{{ hrt.acc_id }}</td>
+                                                    <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</b></td>
+                                                    <td v-else>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
+                                                    <td v-if="hrt.jenis === 'Total'"></td>
+                                                    <td  v-else></td>
+                                                    <td>{{ Number(hrt.amount).toLocaleString() }}</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr v-if="hrt.level === '4'">
+                                                    <td>{{ hrt.acc_id }}</td>
+                                                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
+                                                    <td>{{ Number(hrt.amount).toLocaleString() }}</td>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            
-                        </div>
+                    <div class="col-xl-3">
+                        <div class="invoice-actions-btn">
+                            <div class="invoice-action-btn">
+                                <div class="row">
+                                    
+                                    <div class="col-xl-12 col-md-3 col-sm-6">
+                                        <a href="javascript:;" class="btn btn-secondary btn-print action-print" @click="print()">Print</a>
+                                    </div>
 
-                        
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    
                 </div>
+
             </div>
-            
+
         </div>
     </div>
 </template>
@@ -57,30 +125,20 @@
     const router = useRouter();
     const route = useRoute();
 
-    function Simpan() {
-        // console.log(input_perubahan.value)
-        store.dispatch('UpdateHargaBbm', input_perubahan.value)
-        isOpen.value = false;
-    }
-    // BBM
-    const users = computed(() => {
-        const bbm = store.getters.StateBbm;
-        const lv1 = coalist.value.level1;
-        const lv2 = coalist.value.level2;
-        return { users, bbm, lv1, lv2 }
-    });
 
     // const modalRef = ref(null);
     // const openModal = () => Modal.getInstance(modalRef.value)?.show();
-    const coalist = ref({});
+    const hartalist = ref();
     onMounted(() => {
-        
-        store.dispatch('GetCoaList')
-        // coalist.value = store.getters.StateCoaList;
+        const harta = ref({
+            group: '2'
+        });
+        store.dispatch('GetHarta', harta.value);
+        // hartalist.value = store.getters.StateHarta;
         setTimeout(function() { 
             // store.dispatch('GetCoaList')
-            coalist.value = store.getters.StateCoaList;
-        }, 5000);
+            hartalist.value = store.getters.StateHarta;
+        }, 3000);
        
     })
     

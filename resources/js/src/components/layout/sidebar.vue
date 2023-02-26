@@ -158,9 +158,9 @@
                             <router-link to="/kas" @click="toggleMobileMenu">Buku Kas</router-link>
                         </li>
                         <li class="menu">
-                            <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#coa" aria-controls="coa" aria-expanded="false">
+                            <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#neraca" aria-controls="neraca" aria-expanded="false">
                                 <div class="">
-                                <span>COA</span> 
+                                <span>Neraca</span> 
                                     <!-- {{ $t('Master') }}</span> -->
                                 </div>
                                 <div>
@@ -180,10 +180,40 @@
                                     </svg>
                                 </div>
                             </a>
-                            <ul id="coa" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
+                            <ul id="neraca" class="collapse submenu list-unstyled" data-bs-parent="#datatables">
                                 <li><router-link to="/coa/harta" @click="toggleMobileMenu">Harta</router-link></li>
                                 <li><router-link to="/coa/hutang" @click="toggleMobileMenu">Hutang</router-link></li>
                                 <li><router-link to="/coa/modal" @click="toggleMobileMenu">Modal</router-link></li>
+                            </ul>
+                        </li>
+                        <li class="menu">
+                            <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#labarugi" aria-controls="labarugi" aria-expanded="false">
+                                <div class="">
+                                <span>Laba Rugi</span> 
+                                    <!-- {{ $t('Master') }}</span> -->
+                                </div>
+                                <div>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="feather feather-chevron-right"
+                                    >
+                                        <polyline points="9 18 15 12 9 6"></polyline>
+                                    </svg>
+                                </div>
+                            </a>
+                            <ul id="labarugi" class="collapse submenu list-unstyled" data-bs-parent="#datatables">
+                                <li><router-link to="/coa/harta" @click="toggleMobileMenu">Pendapatan</router-link></li>
+                                <li><router-link to="/coa/hutang" @click="toggleMobileMenu">Biaya Penjualan</router-link></li>
+                                <li><router-link to="/coa/modal" @click="toggleMobileMenu">Biaya</router-link></li>
+                                <li><router-link to="/coa/modal" @click="toggleMobileMenu">Penhasilan Lain</router-link></li>
                             </ul>
                         </li>
                     </ul>

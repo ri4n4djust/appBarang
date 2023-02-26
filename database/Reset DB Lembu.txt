@@ -1,0 +1,21 @@
+reset db lembu
+
+delete from general_ledger;
+delete from gl_detail;
+delete from rekening_anggaran;
+delete from rekening_anggaran_detail;
+delete from purchase_order;
+delete from po_detail;
+delete from opnum_stock;
+delete from opnum_detail;
+delete from production;
+delete from production_detail;
+delete from program_aktivitas;
+delete from program_aktivitas_detail;
+delete from soinvoice;
+delete from soinvoice_detail;
+delete from salesorder;
+delete from salesorder_detail;
+delete from docno;
+delete from good_receive;
+delete from go_detail;

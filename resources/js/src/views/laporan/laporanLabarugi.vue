@@ -34,7 +34,7 @@
 
                                                     <div class="table-responsive">
                                                         <div class="table-responsive">
-                                                            <table border="1px">
+                                                            <table border="1">
                                                                 <tbody  v-for="hrt in hartalist" :key="hrt.acc_id">
 
                                                                     <tr v-if="hrt.level === '1'">
@@ -52,7 +52,7 @@
                                                                     <tr v-if="hrt.level === '2'">
                                                                         <td v-if="hrt.jenis != 'Total'">{{ hrt.acc_id }}</td>
                                                                         <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'"><b>&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</b></td>
-                                                                        <td v-else>&nbsp;&nbsp;&nbsp;&nbsp;{{ Number(hrt.amount).toLocaleString() }}</td>
+                                                                        <td v-else>&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
                                                                         <td></td>
                                                                         <td v-if="hrt.jenis === 'Total'"></td>
                                                                         <td v-else></td>
