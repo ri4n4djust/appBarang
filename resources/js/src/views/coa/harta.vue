@@ -32,36 +32,38 @@
                                     </div>
                                 </div>
                                 <div class="panel-body">
-                                    <div class="table-responsive">
-                                        
-                                        <table role="table" aria-busy="false" aria-colcount="5" class="table table-striped table-bordered">
-                                            <tbody  v-for="hrt in hartalist" :key="hrt.acc_id" :set="amount = hrt.amount">
+                                    <!-- <div class="table-responsive"> -->
 
+                                        
+                                        <table>
+                                            <tbody  v-for="hrt, index in hartalist" :key="hrt.acc_id" :set="amount = hrt.amount">
+                                                
                                                     <tr v-if="hrt.level === '1'" >
-                                                        <td v-if="hrt.jenis != 'Total'">{{ hrt.acc_id }}</td>
-                                                        <td v-if="hrt.jenis === 'Total' || hrt.tipe.substring(0,1) === 'H'" colspan="2"><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
-                                                        <td v-else>&nbsp;&nbsp;{{ hrt.name }}</td>
+                                                        <td v-if="hrt.jenis != 'Total'" style="min-width:70px">{{ hrt.acc_id }}</td>
+                                                        <td v-else></td>
+                                                        <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'" style="min-width: 400px;" ><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
+                                                        <td v-else style="min-width: 400px;">&nbsp;&nbsp;{{ hrt.name }}</td>
                                                         <td></td>
                                                         <td></td>
-                                                        <td></td>
-                                                        <td v-if="hrt.jenis === 'Total'"></td>
+                                                        <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
                                                         <td v-else></td>
                                                         <td v-if="hrt.jenis === 'Detail'">
                                                             <div v-if="hrt.acc_id.substring(0,1) === '2'|| hrt.acc_id.substring(0,1) === '2'"> 
                                                                 {{ Number(amount).toLocaleString() }}
                                                             </div>
+                                                            <div>{{ Number(amount += hrt.amount[index]).toLocaleString() }}</div>
                                                             
                                                         </td>
-                                                        <td v-else-if="hrt.jenis === 'Total'">{{ Number(amount).toLocaleString() }} </td>
+                                                        <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
                                                         <td v-else></td>
                                                     </tr>
                                                     <tr v-if="hrt.level === '2'">
                                                         <td v-if="hrt.jenis != 'Total'" >{{ hrt.acc_id }}</td>
-                                                        <td v-if="hrt.jenis === 'Total' || hrt.tipe.substring(0,1) === 'H'" colspan="2"><b>&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }} level 2</b></td>
-                                                        <td v-else>&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }} Level2</td>
+                                                        <td v-else></td>
+                                                        <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'" style="min-width: 300px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</b></td>
+                                                        <td v-else style="min-width: 300px;">&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
                                                         <td></td>
-                                                        <td></td>
-                                                        <td v-if="hrt.jenis === 'Total'"></td>
+                                                        <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
                                                         <td v-else></td>
                                                         <td v-if="hrt.jenis === 'Detail'">{{ Number(amount).toLocaleString() }}</td>
                                                         <td v-else-if="hrt.jenis === 'Total'">{{ Number(amount).toLocaleString() }}</td>
@@ -70,20 +72,20 @@
                                                     </tr>
                                                     <tr v-if="hrt.level === '3'">
                                                         <td v-if="hrt.jenis != 'Total'">{{ hrt.acc_id }}</td>
-                                                        <td v-if="hrt.jenis === 'Total' || hrt.tipe.substring(0,1) === 'H'" colspan="2"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }} level 3</b></td>
-                                                        <td v-else>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }} level 3</td>
-                                                        <td v-if="hrt.jenis === 'Total'"></td>
-                                                        <td  v-else></td>
-                                                        
-                                                        <td>{{ Number(amount).toLocaleString() }}</td>
+                                                        <td v-else></td>
+                                                        <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'" style="min-width: 300px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</b></td>
+                                                        <td v-else style="min-width: 300px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
+                                                        <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
+                                                        <td v-else></td>
+                                                        <td v-if="hrt.jenis === 'Detail'">{{ Number(amount).toLocaleString() }}</td>
+                                                        <td v-else-if="hrt.jenis === 'Total'">{{ Number(amount).toLocaleString() }}</td>
                                                         <td></td>
-                                                        <td></td><td></td>
+                                                        <td></td>
                                                     </tr>
                                                     <tr v-if="hrt.level === '4'">
                                                         <td>{{ hrt.acc_id }}</td>
-                                                        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }} level 4</td>
+                                                        <td style="min-width: 300px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
                                                         <td>{{ Number(amount).toLocaleString() }}</td>
-                                                        <td></td>
                                                         <td></td>
                                                         <td></td>
                                                         <td></td>
@@ -91,7 +93,7 @@
 
                                             </tbody>
                                         </table>
-                                    </div>
+                                    <!-- </div> -->
 
                                     
                                 </div>
