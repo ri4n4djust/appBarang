@@ -25,7 +25,7 @@
                                     <div class="invoice-detail-title">
                                        
                                         <div class="invoice-title">
-                                           PO BBM
+                                            Invoice Pembelian
                                         </div>
                                     </div>
 
@@ -35,20 +35,35 @@
 
                                                 <div class="invoice-address-company-fields">
                                                     <div class="form-group row">
-                                                        <label for="company-name" class="col-sm-3 col-form-label col-form-label-sm">No PO</label>
+                                                        <label for="company-name" class="col-sm-3 col-form-label col-form-label-sm">No Nota</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" v-model="params.no_po" id="number" class="form-control form-control-sm" placeholder="#0001" />
+                                                            <input type="text" v-model="params.noNota" id="number" class="form-control form-control-sm" placeholder="#0001" />
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="company-email" class="col-sm-3 col-form-label col-form-label-sm">Tgl</label>
                                                         <div class="col-sm-9">
-                                                            <flat-pickr v-model="params.tgl_so" class="form-control form-control-sm flatpickr active" placeholder="Invoice Date"></flat-pickr>
+                                                            <flat-pickr v-model="params.tglNota" class="form-control form-control-sm flatpickr active" placeholder="Invoice Date"></flat-pickr>
                                                         </div>
                                                     </div>
 
+                                                    <div class="form-group row">
+                                                        <label for="company-address" class="col-sm-3 col-form-label col-form-label-sm">Term</label>
+                                                        <div class="col-sm-9">
+                                                            <select id="inputState" v-model="params.term" class="form-select">
+                                                                <option value="0" selected>Cash</option>
+                                                                <option value="1">Kredit</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
 
+                                                    <div class="form-group row">
+                                                        <label for="company-phone" class="col-sm-3 col-form-label col-form-label-sm">Jatuh Tempo</label>
+                                                        <div class="col-sm-9">
+                                                            <flat-pickr v-model="params.jthTempo" class="form-control form-control-sm flatpickr active" placeholder="Due Date"></flat-pickr>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -72,22 +87,28 @@
                                                                 deselect-label="">
                                                             </multiselect>
                                                         </div>
-
                                                     </div>
+
                                                     <div class="form-group row">
-                                                        <label for="company-name" class="col-sm-3 col-form-label col-form-label-sm">No SO</label>
+                                                        <label for="client-address" class="col-sm-3 col-form-label col-form-label-sm">Address</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" v-model="params.no_so" id="number" class="form-control form-control-sm" placeholder="#0001" />
+                                                            <input type="text" v-model="paramssupplier.almtSupplier" id="client-address" class="form-control form-control-sm" placeholder="XYZ Street" />
                                                         </div>
                                                     </div>
 
+                                                    <div class="form-group row">
+                                                        <label for="client-phone" class="col-sm-3 col-form-label col-form-label-sm">Phone</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" v-model="paramssupplier.tlpSupplier" id="client-phone" class="form-control form-control-sm" placeholder="(123) 456 789" />
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <!-- <div class="invoice-detail-items">
-                                        <div class="row" v-for="(item, index) in items" :key="index">
+                                    <div class="invoice-detail-items">
+                                        <div class="row">
                                             <div class="form-group col-md-3">
                                                 <label for="inputCity">NAMA BARANG</label>
                                                 <multiselect 
@@ -104,7 +125,7 @@
                                             </div>
                                             <div class="form-group col-md-2">
                                                 <label for="inputState">HARGA</label>
-                                                <input type="text" v-model="item.lastPrice" class="form-control form-control-sm" placeholder="Price" @keypress="onlyNumber" />
+                                                <input type="text" v-model="brg.lastPrice" class="form-control form-control-sm" placeholder="Price" @keypress="onlyNumber" />
                                             </div>
                                             <div class="form-group col-sm-2">
                                                 <label for="inputZip">QTY</label>
@@ -112,10 +133,11 @@
                                             </div>
                                             <div class="form-group col-md-2">
                                                 <label for="satuan">SATUAN</label>
-                                                <input type="text" v-model="item.satuanPersediaan" class="form-control form-control-sm" id="satuan" />
+                                                <input type="text" v-model="brg.satuanPersediaan" class="form-control form-control-sm" id="satuan" />
                                             </div>
                                             <div class="form-group col-md-2">
                                                 <label for="inputZip">TOTAL</label><br>
+                                                <!-- {{ new Intl.NumberFormat().format(brg.lastPrice * qty) }} -->
                                                 <input type="text" v-model="tot" class="form-control form-control-sm" placeholder="Quantity" @keypress="onlyNumber" />
                                             </div>
                                             <div class="form-group col-md-1">
@@ -125,73 +147,44 @@
                                                 </button>
                                             </div>
                                         </div>
-                                    </div> -->
-
-                                    <div class="invoice-detail-items">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered item-table">
-                                                <thead>
-                                                    <tr style="padding:0;margin:0;">
-                                                        <th></th>
-                                                        <th>Description</th>
-                                                        <th>Rate</th>
-                                                        <th>Qty</th>
-                                                        <th>pph</th>
-                                                        <th>Total</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr v-for="(item, index) in items" :key="index">
-                                                        <td style="padding:0;margin:0;">
-                                                            <ul >
-                                                                <li>
-                                                                    <a href="javascript:void(0);" class="delete-item" @click="remove_item(item)">
-                                                                        <svg
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            width="24"
-                                                                            height="24"
-                                                                            viewBox="0 0 24 24"
-                                                                            fill="none"
-                                                                            stroke="currentColor"
-                                                                            stroke-width="2"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round"
-                                                                            class="feather feather-x-circle"
-                                                                        >
-                                                                            <circle cx="12" cy="12" r="10"></circle>
-                                                                            <line x1="15" y1="9" x2="9" y2="15"></line>
-                                                                            <line x1="9" y1="9" x2="15" y2="15"></line>
-                                                                        </svg>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                        <td style="padding:0;margin:0;" >
-                                                            <select id="inputState" v-model="item.title" class="form-select">
-                                                                <option :value="br" v-for="br in barangs" :key="br.id" selected>{{ br.nama_bbm }}</option>
-                                                            </select>
-                                                        </td>
-                                                        <td style="padding:0;margin:0;">
-                                                            <input type="text" v-model="item.rate" :id="'rate'+index" class="form-control" placeholder="Price" />
-                                                        </td>
-                                                        <td style="padding:0;margin:0;">
-                                                            <input type="text" v-model="item.quantity" :id="'quantity'+index" class="form-control"  @keyup="getRate(total=item.total, pph=item.pph, qty=item.quantity, index)" placeholder="Quantity" />
-                                                        </td>
-                                                        <td style="padding:0;margin:0;">
-                                                            <input type="text" v-model="item.pph" :id="'pph'+index" class="form-control" placeholder="pph" />
-                                                        </td>
-                                                        <td style="padding:0;margin:0;">
-                                                            <input type="text" v-model="item.total" :id="'total'+index" class="form-control" placeholder="total" />
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-
-                                        <button type="button" class="btn btn-secondary additem btn-sm" @click="add_item()">Add Item</button>
                                     </div>
 
-                                    
+                                    <div class="invoice-detail-items">
+                                        <div class="inv--product-table-section">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover table-bordered item-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Nama Barang</th>
+                                                            <th>Harga</th>
+                                                            <th>Qty</th>
+                                                            <th>Satuan</th>
+                                                            <th>Total</th>
+                                                            <th>Aksi</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr v-for="item in cartItems" :key="item.kdBarang">
+                                                            <td class="description">{{ item.nmBarang }}</td>
+                                                            <td class="rate">{{ new Intl.NumberFormat().format(item.hrgPokok) }}</td>
+                                                            <td class="qty">{{ item.qty }}</td>
+                                                            <td class="qty">{{ item.satuan }}</td>
+                                                            <td class="amount">{{ new Intl.NumberFormat().format(item.total) }}</td>
+                                                            <td class="tax">
+                                                                <button type="button" class="btn btn-secondary additem btn-sm" @click="removeItem(id=item.kdBarang)">Hapus</button>
+                                                                <!-- <div class="icon-container">
+                                                                    <i data-feather="trash"></i><span class="icon-name"> trash</span>
+                                                                </div> -->
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <!-- <button type="button" class="btn btn-secondary additem btn-sm" @click="add_item()">Add Item</button> -->
+                                    </div>
+
                                     
 
                                     <div class="invoice-detail-total">
@@ -259,12 +252,22 @@
                                                             <div class="subtotal-amount"><span class="currency"></span><span class="amount">{{new Intl.NumberFormat().format(subtotal)}}</span></div>
                                                         </div>
                                                     </div>
-                                                    <div class="invoice-totals-row invoice-summary-total">
+                                                    <!-- <div class="invoice-totals-row invoice-summary-total">
                                                          <div class="invoice-summary-label">Disc</div>
                                                         <input type="text" v-model="params.disc" class="form-control form-control-sm" >%
                                                         <div class="invoice-summary-label"></div>
                                                         <div class="invoice-summary-value">
                                                             <div class="total-amount"><span class="currency"></span><span>{{ new Intl.NumberFormat().format(Math.floor(subtotal * disc / 100)) }}</span></div>
+                                                        </div>
+                                                    </div> -->
+                                                    <div class="invoice-totals-row invoice-summary-total">
+                                                         <div class="invoice-summary-label">PPH</div>
+                                                        <div class="invoice-summary-label"></div>
+                                                        <div class="invoice-summary-value">
+                                                            <div class="subtotal-amount"><span class="currency"></span>
+                                                                <input type="hidden" v-model="params.disc" class="form-control form-control-sm" >
+                                                                <input type="text" v-model="params.pph" class="form-control form-control-sm" @keyup="getTotal" >
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div v-show="divpajak">
@@ -291,7 +294,7 @@
                                         </div>
                                     </div>
 
-                                    <!-- <div class="invoice-detail-note">
+                                    <div class="invoice-detail-note">
                                         <div class="row">
                                             <div class="col-md-12 align-self-center">
                                                 <div class="form-group row invoice-note">
@@ -308,7 +311,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -340,29 +343,27 @@
     import { useRouter, useRoute } from 'vue-router'
 
     import { useMeta } from '@/composables/use-meta';
-import { title } from 'process';
-    useMeta({ title: 'PO BBM' });
+    useMeta({ title: 'Pembelian' });
 
     const store = useStore();
     const router = useRouter();
     const route = useRoute();
 
-    const kdBarang = ref();
-    const nmBarang = ref()
-    const items = ref({});
-    const barangs = ref([]);
-    const nopobbm = ref([]);
+    const items = ref([]);
+    const brg = ref([]);
+    const nopembelian = ref([]);
     const qty = ref(1);
     const tot = ref();
     const subtotal = ref();
     const total = ref();
     const disc = ref(0);
+    const pph = ref();
     const tax = ref();
     const selected_file = ref(null);
     const payment = ref([]);
     const params = ref({
-        no_po: nopobbm,
-        tgl_so: moment().format("YYYY-MM-DD"),
+        noNota: nopembelian,
+        tglNota: moment().format("YYYY-MM-DD"),
         term: 0,
         jthTempo: moment().format("YYYY-MM-DD"),
         notes: '',
@@ -370,6 +371,7 @@ import { title } from 'process';
         tax: 11,
         disc: disc,
         total: total,
+        pph:pph
     });
     const paramssupplier = ref({
         kdSupplier: '',
@@ -385,45 +387,29 @@ import { title } from 'process';
         // tlpSupplier: '',
 
     });
-
-    // const item = ref({
-    //     title: [],
-    //     rate: [],
-    //     quantity: [],
-    //     // tlpSupplier: '',
-
-    // });
-
     const cartItems = ref([])
     const divpajak = ref(false)
     // const currency_list = ref([]);
-    
 
     const pembelian = computed(() => {
-        barangs.value = store.getters.StateBbm;
+        const barangs = store.getters.StatePersediaan;
         const suppliers = store.getters.StateSupplier;
         const accs = store.getters.StateAcc;
-        nopobbm.value = store.getters.NoPobbm;
+        nopembelian.value = store.getters.NoPembelian;
         const pajak = store.state.pajak;
-        subtotal.value = 0;
-        let tot = 0;
-        for(let i = 0; i < items.value.length; i++){
-            subtotal.value += (parseFloat(items.value[i].rate) * parseFloat(items.value[i].quantity));
-            items.value[i].amount = parseFloat(items.value[i].rate) * parseFloat(items.value[i].quantity)
-        }
-        getTotal()
-        // console.log(tot)
-        return { barangs, pajak, suppliers, nopobbm, accs, subtotal, tot }
+        tot.value = brg.value.lastPrice * qty.value;
+        // console.log(suppliers)
+        return { barangs, pajak, suppliers, nopembelian, accs, tot }
     });
 
-    const getBbm=() => {
-        store.dispatch('GetBbm')
+    const getBarang=() => {
+        store.dispatch('GetPersediaan')
     }
     const getSupplier=() => {
         store.dispatch('GetSupplier')
     }
-    const getNoPobbm=() => {
-        store.dispatch('GetNoPobbm')
+    const getNoPembelian=() => {
+        store.dispatch('GetNoPembelian')
     }
     const getAcc=() => {
         store.dispatch('GetAcc')
@@ -433,10 +419,10 @@ import { title } from 'process';
     const getTotal=() =>{
         const pajak = store.state.pajak;
         const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
-        total.value = (subtotal.value - (subtotal.value * disc.value / 100))
+        total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + parseInt(pph.value)
         tax.value = temptotal * pajak /100
         
-        // console.log('total tanpa pajak :'+tax.value)
+        console.log('total tanpa pajak :'+tax.value)
         // return { tot }
     }
     const getTotalWtax=() =>{
@@ -446,18 +432,8 @@ import { title } from 'process';
         total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + tax.value
         
         
-        // console.log('total dengan pajak:'+tax.value)
+        console.log('total dengan pajak:'+tax.value)
         // return { tot }
-    }
-    const getRate = (total, pph, qty, index) =>{
-        let hppRate = (total - pph) / qty
-        // console.log('hpp '+Math.floor(hppRate)+'index'+index)
-        // console.log(items.value)
-        let arr = {}
-        arr = items.value
-        arr[index]['rate'] = Math.floor(hppRate)
-        //  console.log(arr)
-
     }
 
     function taxSelected() {
@@ -489,46 +465,18 @@ import { title } from 'process';
     }
 
     const simpanPembelian=() => {
-        // console.log(items.value)
         const header =params.value
         const headers =paramssupplier.value
-        const headerfull = Object.assign(header, headers)
-        const data =items.value
-        let detail = []
-        for(let i = 0; i < data.length; i++){
-
-            detail.push({
-                // qty_order: data[i].quantity,
-                kdBarang : data[i].title.code_bbm,
-                nmBarang: data[i].title.nama_bbm,
-                amount: data[i].amount,
-                quantity: data[i].quantity,
-                rate: data[i].rate,
-                total: data[i].total,
-                pph: data[i].pph
-            })
-        }
-        console.log(detail)
-        store.dispatch('CreatePo', [headerfull,detail] )
-        setTimeout(function() { getCart(); }, 5000);
-        getNoPobbm();
+            const headerfull = Object.assign(header, headers)
+            const detail =cartItems.value
+            store.dispatch('CreatePembelian', [headerfull,detail] )
+            setTimeout(function() { getCart(); }, 5000);
+            getNoPembelian();
     }
 
     onMounted(() => {
         //set default data
-        items.value = []
-        items.value.push({ 
-            id: 1, 
-            title: '',
-            nmBarang: '', 
-            description: '', 
-            rate: '', 
-            quantity: '', 
-            amount: '', 
-            total: '',
-            pph: '' 
-        });
-        
+        items.value.push({ id: 1, title: '', description: '', rate: 0, quantity: 0, amount: 100, is_tax: false });
 
         let dt = new Date();
         params.value.invoice_date = JSON.parse(JSON.stringify(dt));
@@ -537,11 +485,11 @@ import { title } from 'process';
 
         // console.log(paramssupplier.value)
        
-        getBbm();
+        getBarang();
         getAcc();
         getSupplier();
         getCart();
-        getNoPobbm();
+        getNoPembelian();
     });
 
     const change_file = (event) => {
@@ -560,38 +508,38 @@ import { title } from 'process';
         items.value = items.value.filter((d) => d.id != item.id);
     };
 
-    // function addToCart(brg) {
-    //     // console.log(brg)
-    //     if (localStorage.getItem('cartItemsP')===null){
-    //         cartItems.value = [];
-    //         // console.log(cartItems.value)
-    //     }else{
-    //         cartItems.value = JSON.parse(localStorage.getItem('cartItemsP'));
-    //     }
-    //         const oldItems = JSON.parse(localStorage.getItem('cartItemsP')) || [];
-    //         // console.log(oldItems)
-    //         const existingItem = oldItems.find(({ kdBarang }) => kdBarang === brg.kdPersediaan);
-    //         if (existingItem) {
-    //             const objIndex = cartItems.value.findIndex((e => e.kdBarang === brg.kdPersediaan));
-    //             const oldName = cartItems.value[objIndex].nmBarang;
-    //             const oldQty = cartItems.value[objIndex].qty;
-    //             const oldTotal = cartItems.value[objIndex].total;
-    //             const newQty = parseInt(oldQty) + parseInt(qty.value) ;
-    //             const newTotal = parseInt(oldTotal) + parseInt(qty.value * brg.lastPrice) ;
-    //             cartItems.value[objIndex].qty = parseInt(newQty);
-    //             cartItems.value[objIndex].total = parseInt(newTotal);
-    //             localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
-    //             alert(oldName+' Quantity Update')
-    //             getCart();
-    //             // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
-    //         }else{
-    //         cartItems.value.push({kdBarang:brg.kdPersediaan, nmBarang:brg.nmPersediaan,hrgPokok:brg.lastPrice,qty:qty.value,satuan:brg.satuanPersediaan,total:qty.value * brg.lastPrice});	
-    //         localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
-    //         getCart();
-    //         // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
-    //         alert(brg.nmPersediaan+ " berhasil disimpan")
-    //         }
-    // }
+    function addToCart(brg) {
+        // console.log(brg)
+        if (localStorage.getItem('cartItemsP')===null){
+            cartItems.value = [];
+            // console.log(cartItems.value)
+        }else{
+            cartItems.value = JSON.parse(localStorage.getItem('cartItemsP'));
+        }
+            const oldItems = JSON.parse(localStorage.getItem('cartItemsP')) || [];
+            // console.log(oldItems)
+            const existingItem = oldItems.find(({ kdBarang }) => kdBarang === brg.kdPersediaan);
+            if (existingItem) {
+                const objIndex = cartItems.value.findIndex((e => e.kdBarang === brg.kdPersediaan));
+                const oldName = cartItems.value[objIndex].nmBarang;
+                const oldQty = cartItems.value[objIndex].qty;
+                const oldTotal = cartItems.value[objIndex].total;
+                const newQty = parseInt(oldQty) + parseInt(qty.value) ;
+                const newTotal = parseInt(oldTotal) + parseInt(qty.value * brg.lastPrice) ;
+                cartItems.value[objIndex].qty = parseInt(newQty);
+                cartItems.value[objIndex].total = parseInt(newTotal);
+                localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
+                alert(oldName+' Quantity Update')
+                getCart();
+                // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
+            }else{
+            cartItems.value.push({kdBarang:brg.kdPersediaan, nmBarang:brg.nmPersediaan,hrgPokok:brg.lastPrice,qty:qty.value,satuan:brg.satuanPersediaan,total:qty.value * brg.lastPrice});	
+            localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
+            getCart();
+            // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
+            alert(brg.nmPersediaan+ " berhasil disimpan")
+            }
+    }
     function removeItem(id) {
         // alert(id)
         const arrayFromStroage = JSON.parse(localStorage.getItem('cartItemsP'));
@@ -645,22 +593,6 @@ import { title } from 'process';
         // console.log(subtotal.value)
         // return sum;
     }
-
-    const add_item = () => {
-        
-        let max_id = 0;
-        // let sub = 0
-        // for(let i = 0; i < items.value.length; i++){
-        //     sub = items.value[i].rate * items.value[i].quantity;
-        // }
-        if (items.value && items.value.length) {
-            max_id = items.value.reduce((max, character) => (character.id > max ? character.id : max), items.value[0].id);
-            // items.title.value.focus();
-        }
-        items.value.push({ id: max_id + 1, title: '', kdBarang:'', description: '', rate: '', quantity: '', amount: '', total: '', pph: '' });
-        // items.value[1].title.focus();
-    };
-    
     function onlyNumber ($event) {
         //console.log($event.keyCode); //keyCodes value
         let keyCode = ($event.keyCode ? $event.keyCode : $event.which);

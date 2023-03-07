@@ -27,6 +27,7 @@ class pembelianController extends Controller
                     'disc'     => $request[0]['disc'],
                     'discPercent'     => $request[0]['disc'],
                     'tax'     => $request[0]['tax'],
+                    'pph'     => $request[0]['pph'],
                     'total'     => $request[0]['total'],
                     'note'     => $request[0]['notes'],
                     'term'     => $request[0]['term'],

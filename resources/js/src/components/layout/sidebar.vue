@@ -280,15 +280,36 @@
                         <li>
                             <router-link to="/tera" @click="toggleMobileMenu">Tera</router-link>
                         </li>
-                        <li>
-                            <router-link to="/opnum-bbm" @click="toggleMobileMenu">Opnum BBM</router-link>
+                        <li class="menu">
+                            <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#opnum" aria-controls="opnum" aria-expanded="false">
+                                <div class="">
+                                <span>Opnum</span> 
+                                    <!-- {{ $t('Master') }}</span> -->
+                                </div>
+                                <div>
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="feather feather-chevron-right"
+                                    >
+                                        <polyline points="9 18 15 12 9 6"></polyline>
+                                    </svg>
+                                </div>
+                            </a>
+                            <ul id="opnum" class="collapse submenu list-unstyled" data-bs-parent="#apps">
+                                <li><router-link to="/opnum-bbm" @click="toggleMobileMenu">Opnum BBM</router-link></li>
+                                <li><router-link to="/opnum-barang" @click="toggleMobileMenu">Opnum Barang</router-link></li>
+                            </ul>
                         </li>
-                        <li>
-                            <router-link to="/opnum-barang" @click="toggleMobileMenu">Opnum Barang</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/jurnal-umum" @click="toggleMobileMenu">Jurnal Umum</router-link>
-                        </li>
+                        <li><router-link to="/biaya" @click="toggleMobileMenu">Biaya</router-link></li>
+                        <li><router-link to="/jurnal-umum" @click="toggleMobileMenu">Jurnal Umum</router-link></li>
                     </ul>
                 </li>
 

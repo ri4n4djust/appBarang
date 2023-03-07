@@ -143,7 +143,13 @@ const routes = [
         // props: true,
         // meta: { requiresAuth: true },
     },
-
+    {
+        path: '/biaya',
+        name: 'biaya',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/biaya.vue'),
+        // props: true,
+        // meta: { requiresAuth: true },
+    },
     {
         path: '/jurnal-umum',
         name: 'jurnal-umum',

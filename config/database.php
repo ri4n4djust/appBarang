@@ -43,7 +43,7 @@ return [
             'host'      => 'localhost',
             'database'  => 'winmaxapp',
             'username'  => 'root',
-            'password'  => 'Adjust140886',
+            'password'  => 'admin',
             'charset'   => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix'    => '',
