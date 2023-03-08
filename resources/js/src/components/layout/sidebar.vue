@@ -210,10 +210,11 @@
                                 </div>
                             </a>
                             <ul id="labarugi" class="collapse submenu list-unstyled" data-bs-parent="#datatables">
-                                <li><router-link to="/coa/harta" @click="toggleMobileMenu">Pendapatan</router-link></li>
-                                <li><router-link to="/coa/hutang" @click="toggleMobileMenu">Biaya Penjualan</router-link></li>
-                                <li><router-link to="/coa/modal" @click="toggleMobileMenu">Biaya</router-link></li>
-                                <li><router-link to="/coa/modal" @click="toggleMobileMenu">Penhasilan Lain</router-link></li>
+                                <li><router-link to="/coa/pendapatan" @click="toggleMobileMenu">Pendapatan</router-link></li>
+                                <li><router-link to="/coa/biayaPenjualan" @click="toggleMobileMenu">Biaya Penjualan</router-link></li>
+                                <li><router-link to="/coa/biaya" @click="toggleMobileMenu">Biaya</router-link></li>
+                                <li><router-link to="/coa/penghasilanLain" @click="toggleMobileMenu">Penhasilan Lain</router-link></li>
+                                <li><router-link to="/coa/biayaLain" @click="toggleMobileMenu">Biaya Lain</router-link></li>
                             </ul>
                         </li>
                     </ul>

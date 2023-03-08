@@ -54,6 +54,36 @@ const routes = [
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/coa/modal.vue'),
         // meta: { requiresAuth: true },
     },
+    {
+        path: '/coa/pendapatan',
+        name: 'pendapatan',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/coa/pendapatan.vue'),
+        // meta: { requiresAuth: true },
+    },
+    {
+        path: '/coa/biaya',
+        name: 'biaya',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/coa/biaya.vue'),
+        // meta: { requiresAuth: true },
+    },
+    {
+        path: '/coa/biayaPenjualan',
+        name: 'biayaPenjualan',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/coa/biayaPenjualan.vue'),
+        // meta: { requiresAuth: true },
+    },
+    {
+        path: '/coa/penghasilanLain',
+        name: 'penghasilanLain',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/coa/penghasilanLain.vue'),
+        // meta: { requiresAuth: true },
+    },
+    {
+        path: '/coa/biayaLain',
+        name: 'biayaLain',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/coa/biayaLain.vue'),
+        // meta: { requiresAuth: true },
+    },
     //============end oof coa
     {
         path: '/transaksi-aplusan',
