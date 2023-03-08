@@ -188,11 +188,14 @@ class pembelianController extends Controller
                 // array kkey 1 = Detail
                 $tglNota = $request[0]['tgl_so'];
                 $noNota = $request[0]['no_po'];
+                $subtotal = $request[0]['subtotal'];
+                $acc_id_d = '11611'; // $request[0]['subtotal']; // acc id yg di debet
+                $acc_id_k = '11130'; // $request[0]['subtotal']; // acc id yg di kredit
                 $post = DB::table('tblpobbm')->insert([
                     'no_po'     => $request[0]['no_po'],
                     'no_so'     => $request[0]['no_so'],
                     'r_supplier'     => $request[0]['kdSupplier'],
-                    'subTotal'     => $request[0]['subtotal'],
+                    'subTotal'     => $subtotal,
                     'tgl_po'   => $tglNota,
                     'disc'     => $request[0]['disc'],
                     'discPercent'     => $request[0]['disc'],
@@ -207,38 +210,63 @@ class pembelianController extends Controller
                 $detpo = $request[1];
                 for ($i = 0; $i < count($detpo); $i++) {
 
-                        $kdBarang = $detpo[$i]['kdBarang'];
-                        $qty = $detpo[$i]['quantity'];
-                        $brg = DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->first();
-                        $oldStok = $brg->stokPersediaan;
-                        DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->update([
-                            // 'stokPersediaan' => $oldStok + $qty,
-                            'lastPrice' => $detpo[$i]['rate'],
-                        ]);
-                        DB::table('tblbarang')->where('kdBarang', $kdBarang)->update([
-                            // 'stkBarang' => $oldStok + $qty,
-                            'hrgPokok' => $detpo[$i]['rate'],
-                        ]);
+                    $kdBarang = $detpo[$i]['kdBarang'];
+                    $qty = $detpo[$i]['quantity'];
+                    $brg = DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->first();
+                    $oldStok = $brg->stokPersediaan;
+                    DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->update([
+                        // 'stokPersediaan' => $oldStok + $qty,
+                        'lastPrice' => $detpo[$i]['rate'],
+                    ]);
+                    DB::table('tblbarang')->where('kdBarang', $kdBarang)->update([
+                        // 'stkBarang' => $oldStok + $qty,
+                        'hrgPokok' => $detpo[$i]['rate'],
+                    ]);
 
-                        DB::table('tblbbm')->where('code_bbm', $kdBarang)->update([
-                            // 'stkBarang' => $oldStok + $qty,
-                            'last_price' => $detpo[$i]['rate'],
-                        ]);
+                    DB::table('tblbbm')->where('code_bbm', $kdBarang)->update([
+                        // 'stkBarang' => $oldStok + $qty,
+                        'last_price' => $detpo[$i]['rate'],
+                    ]);
 
-                        $detail[] = [
-                            'r_noPo' => $noNota,
-                            'kdBarang' => $kdBarang,
-                            'nmBarang' => $detpo[$i]['nmBarang'],
-                            'hrgBeli' => $detpo[$i]['rate'],
-                            'qty' => $qty,
-                            'qty_recieve' => 0,
-                            'total' => $detpo[$i]['amount'],
-                            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-                            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-                        ];
-                    }
+                    $detail[] = [
+                        'r_noPo' => $noNota,
+                        'kdBarang' => $kdBarang,
+                        'nmBarang' => $detpo[$i]['nmBarang'],
+                        'hrgBeli' => $detpo[$i]['rate'],
+                        'qty' => $qty,
+                        'qty_recieve' => 0,
+                        'total' => $detpo[$i]['amount'],
+                        'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                    ];
+                }
                 DB::table('tblpobbm_detail')->insert($detail);
-
+                //===========jurnal
+                $memo = 'PO-BBM';
+                $jurnal = 'JK';
+                insert_gl($noNota,$tglNota,$subtotal,$memo,$jurnal);
+                $rgl = DB::table('general_ledger')->get()->last()->notrans;
+                $ac = [
+                    [
+                        'rgl' => $rgl,
+                        'acc_id' => $acc_id_d,
+                        'debet' => $subtotal,
+                        'kredit' => 0,
+                        'trans_detail' => 'PO',
+                        'void_flag' => 0,
+                    ], 
+                    [
+                        'rgl' => $rgl,
+                        'acc_id' => $acc_id_k,
+                        'debet' => 0,
+                        'kredit' => $subtotal,
+                        'trans_detail' => 'PO',
+                        'void_flag' => 0,
+                    ]
+                ];
+                
+                insert_gl_detail($ac);
+                //===========end jurnal
                 DB::commit();
             });
             if(is_null($exception)) {
@@ -274,9 +302,9 @@ class pembelianController extends Controller
         //         ->whereBetween('tblpobbm.tgl_po', [$startDate, $endDate])
         //         ->get();
         $list = DB::select("SELECT src.no_po,src.no_so no_so,rtrim(b.nmSupplier) supplier_name,b.kdSupplier,src.podate,src.qty_grpo,src.qty_recieve 
-from (SELECT a.no_po,a.no_so,a.r_supplier,cast(a.tgl_po as date) podate,sum(b.qty) qty_grpo,sum(qty_recieve) qty_recieve 
-FROM tblpobbm a left join tblpobbm_detail b on a.no_po = b.r_noPo where cast(a.tgl_po as date) between '2023-01-01' and '$endDate' group by a.r_supplier,a.no_po,a.no_so,a.tgl_po) src
-left join tblsupplier b on src.r_supplier = b.kdSupplier  where src.qty_recieve < src.qty_grpo order by no_po asc;");
+                            from (SELECT a.no_po,a.no_so,a.r_supplier,cast(a.tgl_po as date) podate,sum(b.qty) qty_grpo,sum(qty_recieve) qty_recieve 
+                            FROM tblpobbm a left join tblpobbm_detail b on a.no_po = b.r_noPo where cast(a.tgl_po as date) between '2023-01-01' and '$endDate' group by a.r_supplier,a.no_po,a.no_so,a.tgl_po) src
+                            left join tblsupplier b on src.r_supplier = b.kdSupplier  where src.qty_recieve < src.qty_grpo order by no_po asc;");
         
         return response()->json([
             'success' => true,
