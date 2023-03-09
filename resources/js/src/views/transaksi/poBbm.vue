@@ -15,326 +15,390 @@
             </ul>
         </teleport>
 
-        <div class="row invoice layout-top-spacing layout-spacing">
-            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="doc-container">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="invoice-content">
-                                <div class="invoice-detail-body">
-                                    <div class="invoice-detail-title">
-                                       
-                                        <div class="invoice-title">
-                                           PO BBM
-                                        </div>
-                                    </div>
+        <!-- <div class="row invoice layout-top-spacing layout-spacing"> -->
+            <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="doc-container"> -->
 
-                                    <div class="invoice-detail-header">
-                                        <div class="row justify-content-between">
-                                            <div class="col-xl-5 invoice-address-company">
+                    <div class="underline-content tabs">
+                        <ul class="nav nav-tabs mb-3" id="lineTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="underline-home-tab" data-bs-toggle="tab" href="#underline-home" role="tab" aria-controls="underline-home" aria-selected="true">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="feather feather-home"
+                                    >
+                                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                                    </svg>
+                                    Transaksi
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="underline-profile-tab" data-bs-toggle="tab" href="#underline-profile" role="tab" aria-controls="underline-profile" aria-selected="false"
+                                    ><svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="feather feather-user"
+                                    >
+                                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="12" cy="7" r="4"></circle>
+                                    </svg>
+                                    Daftar
+                                </a>
+                            </li>
+                        </ul>
 
-                                                <div class="invoice-address-company-fields">
-                                                    <div class="form-group row">
-                                                        <label for="company-name" class="col-sm-3 col-form-label col-form-label-sm">No PO</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" v-model="params.no_po" id="number" class="form-control form-control-sm" placeholder="#0001" />
-                                                        </div>
+                        <div class="tab-content" id="lineTabContent-3">
+                            <div class="tab-pane fade show active" id="underline-home" role="tabpanel" aria-labelledby="underline-home-tab">
+                               
+                                <!-- <div class="row"> -->
+                                    <div class="col-xl-12">
+                                        <div class="invoice-content">
+                                            <div class="invoice-detail-body">
+                                                <div class="invoice-detail-title">
+                                                
+                                                    <div class="invoice-title">
+                                                    PO BBM
                                                     </div>
-
-                                                    <div class="form-group row">
-                                                        <label for="company-email" class="col-sm-3 col-form-label col-form-label-sm">Tgl</label>
-                                                        <div class="col-sm-9">
-                                                            <flat-pickr v-model="params.tgl_so" class="form-control form-control-sm flatpickr active" placeholder="Invoice Date"></flat-pickr>
-                                                        </div>
-                                                    </div>
-
-
                                                 </div>
-                                            </div>
 
-                                            <div class="col-xl-5 invoice-address-client">
+                                                <div class="invoice-detail-header">
+                                                    <div class="row justify-content-between">
+                                                        <div class="col-xl-5 invoice-address-company">
 
-                                                <div class="invoice-address-client-fields">
-                                                    <div class="form-group row">
-                                                        <label for="client-name" class="col-sm-3 col-form-label col-form-label-sm">Name</label>
-                                                        <div class="col-sm-9">
-                                                            <multiselect 
-                                                                v-model="paramssupplier" 
-                                                                :options="pembelian.suppliers" 
-                                                                :searchable="true"
-                                                                :allow-empty="false"
-                                                                track-by="nmSupplier"
-                                                                label="nmSupplier"
-                                                                open-direction="top"
-                                                                placeholder="Choose..." 
-                                                                selected-label="" 
-                                                                select-label="" 
-                                                                deselect-label="">
-                                                            </multiselect>
+                                                            <div class="invoice-address-company-fields">
+                                                                <div class="form-group row">
+                                                                    <label for="company-name" class="col-sm-3 col-form-label col-form-label-sm">No PO</label>
+                                                                    <div class="col-sm-9">
+                                                                        <input type="text" v-model="params.no_po" id="number" class="form-control form-control-sm" placeholder="#0001" />
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group row">
+                                                                    <label for="company-email" class="col-sm-3 col-form-label col-form-label-sm">Tgl</label>
+                                                                    <div class="col-sm-9">
+                                                                        <flat-pickr v-model="params.tgl_so" class="form-control form-control-sm flatpickr active" placeholder="Invoice Date"></flat-pickr>
+                                                                    </div>
+                                                                </div>
+
+
+                                                            </div>
                                                         </div>
 
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label for="company-name" class="col-sm-3 col-form-label col-form-label-sm">No SO</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" v-model="params.no_so" id="number" class="form-control form-control-sm" placeholder="#0001" />
+                                                        <div class="col-xl-5 invoice-address-client">
+
+                                                            <div class="invoice-address-client-fields">
+                                                                <div class="form-group row">
+                                                                    <label for="client-name" class="col-sm-3 col-form-label col-form-label-sm">Name</label>
+                                                                    <div class="col-sm-9">
+                                                                        <multiselect 
+                                                                            v-model="paramssupplier" 
+                                                                            :options="pembelian.suppliers" 
+                                                                            :searchable="true"
+                                                                            :allow-empty="false"
+                                                                            track-by="nmSupplier"
+                                                                            label="nmSupplier"
+                                                                            open-direction="top"
+                                                                            placeholder="Choose..." 
+                                                                            selected-label="" 
+                                                                            select-label="" 
+                                                                            deselect-label="">
+                                                                        </multiselect>
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label for="company-name" class="col-sm-3 col-form-label col-form-label-sm">No SO</label>
+                                                                    <div class="col-sm-9">
+                                                                        <input type="text" v-model="params.no_so" id="number" class="form-control form-control-sm" placeholder="#0001" />
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
+
+                                                
+
+                                                <div class="invoice-detail-items">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered item-table">
+                                                            <thead>
+                                                                <tr style="padding:0;margin:0;">
+                                                                    <th></th>
+                                                                    <th>Description</th>
+                                                                    <th>Rate</th>
+                                                                    <th>Qty</th>
+                                                                    <!-- <th>pph</th> -->
+                                                                    <th>Total</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr v-for="(item, index) in items" :key="index">
+                                                                    <td style="padding:0;margin:0;">
+                                                                        <ul >
+                                                                            <li>
+                                                                                <a href="javascript:void(0);" class="delete-item" @click="remove_item(item)">
+                                                                                    <svg
+                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                        width="24"
+                                                                                        height="24"
+                                                                                        viewBox="0 0 24 24"
+                                                                                        fill="none"
+                                                                                        stroke="currentColor"
+                                                                                        stroke-width="2"
+                                                                                        stroke-linecap="round"
+                                                                                        stroke-linejoin="round"
+                                                                                        class="feather feather-x-circle"
+                                                                                    >
+                                                                                        <circle cx="12" cy="12" r="10"></circle>
+                                                                                        <line x1="15" y1="9" x2="9" y2="15"></line>
+                                                                                        <line x1="9" y1="9" x2="15" y2="15"></line>
+                                                                                    </svg>
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </td>
+                                                                    <td style="padding:0;margin:0;" >
+                                                                        <select id="inputState" v-model="item.title" class="form-select">
+                                                                            <option :value="br" v-for="br in barangs" :key="br.id" selected>{{ br.nama_bbm }}</option>
+                                                                        </select>
+                                                                    </td>
+                                                                    <td style="padding:0;margin:0;">
+                                                                        <input type="text" v-model="item.rate" :id="'rate'+index" class="form-control" placeholder="Price" />
+                                                                    </td>
+                                                                    <td style="padding:0;margin:0;">
+                                                                        <input type="text" v-model="item.quantity" :id="'quantity'+index" class="form-control"  placeholder="Quantity" />
+                                                                    </td>
+                                                                    <!-- <td style="padding:0;margin:0;">
+                                                                        <input type="text" v-model="item.pph" :id="'pph'+index" class="form-control" placeholder="pph" />
+                                                                    </td> -->
+                                                                    <td style="padding:0;margin:0;">
+                                                                        <input type="text" v-model="item.total" :id="'total'+index" class="form-control" placeholder="total" />
+                                                                        
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                    <button type="button" class="btn btn-secondary additem btn-sm" @click="add_item()">Add Item</button>
+                                                </div>
+
+                                                
+                                                
+
+                                                <div class="invoice-detail-total">
+                                                    <div class="row">
+
+                                                        <div class="col-md-6">
+                                                            <div class="invoice-actions-btn">
+                                                                <div class="invoice-action-btn">
+                                                                    <div class="row">
+                                                                        <div class="col-sm-4">
+                                                                            <div v-if="divpajak">
+                                                                                <a href="javascript:;" class="btn btn-primary btn-send" @click="taxRemove" >- pajak</a>
+                                                                            </div>
+                                                                            <div v-if="!divpajak">
+                                                                                <a href="javascript:;" class="btn btn-primary btn-send" @click="taxSelected" >+ pajak</a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-4">
+                                                                            <!-- <router-link to="/apps/invoice/preview" class="btn btn-dark btn-preview">Preview</router-link> -->
+                                                                            <a href="javascript:;" @click="addPayment" class="btn btn-dark btn-preview" data-bs-toggle="modal" data-bs-target="#modalPayment">Pembayaran</a>
+                                                                        </div>
+                                                                        <div class="col-sm-4">
+                                                                            <a href="javascript:;" @click="simpanPembelian" class="btn btn-success btn-download">Save</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="modal fade" id="modalPayment" tabindex="-1" role="dialog" aria-labelledby="modalPayment" aria-hidden="true">
+                                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="modalPayment">Vertically Aligned</h5>
+                                                                        <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <h4 class="modal-heading mb-4 mt-2">Aligned Center</h4>
+                                                                        <multiselect 
+                                                                            v-model="paramsacc" 
+                                                                            :options="pembelian.accs" 
+                                                                            :searchable="true"
+                                                                            track-by="name"
+                                                                            label="name"
+                                                                            open-direction="top"
+                                                                            placeholder="Choose..." 
+                                                                            selected-label="" 
+                                                                            select-label="" >
+                                                                        </multiselect>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn" data-dismiss="modal" data-bs-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
+                                                                        <button type="button" class="btn btn-primary">Save</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="totals-row">
+                                                                <div class="invoice-totals-row invoice-summary-subtotal">
+                                                                    <div class="invoice-summary-label">Sub Total</div>
+                                                                    <div class="invoice-summary-label"></div>
+                                                                    <div class="invoice-summary-value">
+                                                                        <div class="subtotal-amount"><span class="currency"></span><span class="amount">{{new Intl.NumberFormat().format(subtotal)}}</span></div>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- <div class="invoice-totals-row invoice-summary-total">
+                                                                    <div class="invoice-summary-label">Disc</div>
+                                                                    <input type="text" v-model="params.disc" class="form-control form-control-sm" >%
+                                                                    <div class="invoice-summary-label"></div>
+                                                                    <div class="invoice-summary-value">
+                                                                        <div class="total-amount"><span class="currency"></span><span>{{ new Intl.NumberFormat().format(Math.floor(subtotal * disc / 100)) }}</span></div>
+                                                                    </div>
+                                                                </div> -->
+                                                                <div class="invoice-totals-row invoice-summary-total">
+                                                                    <div class="invoice-summary-label">PPH</div>
+                                                                    <div class="invoice-summary-label"></div>
+                                                                    <div class="invoice-summary-value">
+                                                                        <div class="subtotal-amount"><span class="currency"></span>
+                                                                            <input type="hidden" v-model="params.disc" class="form-control form-control-sm" >
+                                                                            <input type="text" v-model="params.pph" class="form-control form-control-sm" @keyup="getTotal" >
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div v-show="divpajak">
+                                                                    <div class="invoice-totals-row invoice-summary-tax">
+                                                                        <div class="invoice-summary-label">Pajak</div>
+                                                                        <div class="invoice-summary-value">
+                                                                            <div class="tax-amount"><span class="currency"></span>
+                                                                                <span>{{ new Intl.NumberFormat().format(Math.floor((subtotal - (subtotal * disc / 100)) * pembelian.pajak/100)) }}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="invoice-totals-row invoice-summary-balance-due">
+                                                                    <div class="invoice-summary-label">Total</div>
+                                                                    <div class="invoice-summary-label"></div>
+                                                                    <div class="invoice-summary-value">
+                                                                        <!-- <div class="balance-due-amount"> -->
+                                                                            <span>{{ new Intl.NumberFormat().format(Math.floor(total)) }}</span>
+                                                                        <!-- </div> -->
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <!-- <div class="invoice-detail-items">
-                                        <div class="row" v-for="(item, index) in items" :key="index">
-                                            <div class="form-group col-md-3">
-                                                <label for="inputCity">NAMA BARANG</label>
-                                                <multiselect 
-                                                    v-model="brg" 
-                                                    :options="pembelian.barangs" 
-                                                    :searchable="true"
-                                                    track-by="nmPersediaan"
-                                                    label="nmPersediaan"
-                                                    open-direction="top"
-                                                    placeholder="Choose..." 
-                                                    selected-label="" 
-                                                    select-label="" >
-                                                </multiselect>
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                <label for="inputState">HARGA</label>
-                                                <input type="text" v-model="item.lastPrice" class="form-control form-control-sm" placeholder="Price" @keypress="onlyNumber" />
-                                            </div>
-                                            <div class="form-group col-sm-2">
-                                                <label for="inputZip">QTY</label>
-                                                <input type="text" v-model="qty" class="form-control form-control-sm" placeholder="Quantity" @keypress="onlyNumber" />
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                <label for="satuan">SATUAN</label>
-                                                <input type="text" v-model="item.satuanPersediaan" class="form-control form-control-sm" id="satuan" />
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                <label for="inputZip">TOTAL</label><br>
-                                                <input type="text" v-model="tot" class="form-control form-control-sm" placeholder="Quantity" @keypress="onlyNumber" />
-                                            </div>
-                                            <div class="form-group col-md-1">
-                                                <label for="aksi">Aksi</label>
-                                                <button @click="addToCart(brg)" class="btn btn-xs btn-primary">
-                                                    + 
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div> -->
-
-                                    <div class="invoice-detail-items">
-                                        <div class="table-responsive">
-                                            <table class="table table-bordered item-table">
-                                                <thead>
-                                                    <tr style="padding:0;margin:0;">
-                                                        <th></th>
-                                                        <th>Description</th>
-                                                        <th>Rate</th>
-                                                        <th>Qty</th>
-                                                        <!-- <th>pph</th> -->
-                                                        <th>Total</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr v-for="(item, index) in items" :key="index">
-                                                        <td style="padding:0;margin:0;">
-                                                            <ul >
-                                                                <li>
-                                                                    <a href="javascript:void(0);" class="delete-item" @click="remove_item(item)">
-                                                                        <svg
-                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                            width="24"
-                                                                            height="24"
-                                                                            viewBox="0 0 24 24"
-                                                                            fill="none"
-                                                                            stroke="currentColor"
-                                                                            stroke-width="2"
-                                                                            stroke-linecap="round"
-                                                                            stroke-linejoin="round"
-                                                                            class="feather feather-x-circle"
-                                                                        >
-                                                                            <circle cx="12" cy="12" r="10"></circle>
-                                                                            <line x1="15" y1="9" x2="9" y2="15"></line>
-                                                                            <line x1="9" y1="9" x2="15" y2="15"></line>
-                                                                        </svg>
-                                                                    </a>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
-                                                        <td style="padding:0;margin:0;" >
-                                                            <select id="inputState" v-model="item.title" class="form-select">
-                                                                <option :value="br" v-for="br in barangs" :key="br.id" selected>{{ br.nama_bbm }}</option>
-                                                            </select>
-                                                        </td>
-                                                        <td style="padding:0;margin:0;">
-                                                            <input type="text" v-model="item.rate" :id="'rate'+index" class="form-control" placeholder="Price" />
-                                                        </td>
-                                                        <td style="padding:0;margin:0;">
-                                                            <input type="text" v-model="item.quantity" :id="'quantity'+index" class="form-control"  placeholder="Quantity" />
-                                                        </td>
-                                                        <!-- <td style="padding:0;margin:0;">
-                                                            <input type="text" v-model="item.pph" :id="'pph'+index" class="form-control" placeholder="pph" />
-                                                        </td> -->
-                                                        <td style="padding:0;margin:0;">
-                                                            <input type="text" v-model="item.total" :id="'total'+index" class="form-control" placeholder="total" />
-                                                            
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-
-                                        <button type="button" class="btn btn-secondary additem btn-sm" @click="add_item()">Add Item</button>
                                     </div>
 
                                     
-                                    
+                                <!-- </div> -->
 
-                                    <div class="invoice-detail-total">
-                                        <div class="row">
 
-                                            <div class="col-md-6">
-                                                <div class="invoice-actions-btn">
-                                                    <div class="invoice-action-btn">
-                                                        <div class="row">
-                                                            <div class="col-sm-4">
-                                                                <div v-if="divpajak">
-                                                                    <a href="javascript:;" class="btn btn-primary btn-send" @click="taxRemove" >- pajak</a>
-                                                                </div>
-                                                                <div v-if="!divpajak">
-                                                                    <a href="javascript:;" class="btn btn-primary btn-send" @click="taxSelected" >+ pajak</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-4">
-                                                                <!-- <router-link to="/apps/invoice/preview" class="btn btn-dark btn-preview">Preview</router-link> -->
-                                                                <a href="javascript:;" @click="addPayment" class="btn btn-dark btn-preview" data-bs-toggle="modal" data-bs-target="#modalPayment">Pembayaran</a>
-                                                            </div>
-                                                            <div class="col-sm-4">
-                                                                <a href="javascript:;" @click="simpanPembelian" class="btn btn-success btn-download">Save</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                            </div>
+                            <div class="tab-pane fade" id="underline-profile" role="tabpanel" aria-labelledby="underline-profile-tab">
+
+                                <div class="col-xl-12">
+                                    <div class="invoice-content">
+                                        <div class="invoice-detail-body">
+                                            <div class="invoice-detail-title">
+                                                
+                                                <div class="invoice-title">
+                                                PO BBM
                                                 </div>
                                             </div>
 
-                                            <div class="modal fade" id="modalPayment" tabindex="-1" role="dialog" aria-labelledby="modalPayment" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="modalPayment">Vertically Aligned</h5>
-                                                            <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <h4 class="modal-heading mb-4 mt-2">Aligned Center</h4>
-                                                            <multiselect 
-                                                                v-model="paramsacc" 
-                                                                :options="pembelian.accs" 
-                                                                :searchable="true"
-                                                                track-by="name"
-                                                                label="name"
-                                                                open-direction="top"
-                                                                placeholder="Choose..." 
-                                                                selected-label="" 
-                                                                select-label="" >
-                                                            </multiselect>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn" data-dismiss="modal" data-bs-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
-                                                            <button type="button" class="btn btn-primary">Save</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-md-6">
-                                                <div class="totals-row">
-                                                    <div class="invoice-totals-row invoice-summary-subtotal">
-                                                        <div class="invoice-summary-label">Sub Total</div>
-                                                         <div class="invoice-summary-label"></div>
-                                                        <div class="invoice-summary-value">
-                                                            <div class="subtotal-amount"><span class="currency"></span><span class="amount">{{new Intl.NumberFormat().format(subtotal)}}</span></div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- <div class="invoice-totals-row invoice-summary-total">
-                                                         <div class="invoice-summary-label">Disc</div>
-                                                        <input type="text" v-model="params.disc" class="form-control form-control-sm" >%
-                                                        <div class="invoice-summary-label"></div>
-                                                        <div class="invoice-summary-value">
-                                                            <div class="total-amount"><span class="currency"></span><span>{{ new Intl.NumberFormat().format(Math.floor(subtotal * disc / 100)) }}</span></div>
-                                                        </div>
-                                                    </div> -->
-                                                    <div class="invoice-totals-row invoice-summary-total">
-                                                         <div class="invoice-summary-label">PPH</div>
-                                                        <div class="invoice-summary-label"></div>
-                                                        <div class="invoice-summary-value">
-                                                            <div class="subtotal-amount"><span class="currency"></span>
-                                                                <input type="hidden" v-model="params.disc" class="form-control form-control-sm" >
-                                                                <input type="text" v-model="params.pph" class="form-control form-control-sm" @keyup="getTotal" >
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div v-show="divpajak">
-                                                        <div class="invoice-totals-row invoice-summary-tax">
-                                                            <div class="invoice-summary-label">Pajak</div>
-                                                            <div class="invoice-summary-value">
-                                                                <div class="tax-amount"><span class="currency"></span>
-                                                                    <span>{{ new Intl.NumberFormat().format(Math.floor((subtotal - (subtotal * disc / 100)) * pembelian.pajak/100)) }}</span>
+                                            <div class="invoice-detail-header">
+                                                <div class="row justify-content-between"> 
+                                                    <v-client-table :data="items" :columns="columns" :options="table_option">
+                                                        <template #podate="props"> {{ moment(props.row.podate).format("DD-MM-YYYY") }} </template>
+                                                        <template #no_so="props"> {{ props.row.no_so }} </template>
+                                                        <template #no_po="props"> {{ props.row.no_po }} </template>
+                                                        <template #qty_grpo="props"> {{ Number(props.row.qty_grpo).toLocaleString() }} </template>
+                                                        <template #qty_recieve="props"> {{ Number(props.row.qty_recieve).toLocaleString() }} </template>
+                                                        <template #action="props">
+                                                            <div class="custom-dropdown dropdown btn-group ">
+                                                                <div class="btn-group" href="#" role="button" id="pendingTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <!-- <button type="button" class="btn btn-blue">Open</button> -->
+                                                                    <div role="group" class="btn-group">
+                                                                        <div class="dropdown b-dropdown custom-dropdown show btn-group">
+                                                                            <a class="btn dropdown-toggle btn-dark"
+                                                                                ><svg
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    width="24"
+                                                                                    height="24"
+                                                                                    viewBox="0 0 24 24"
+                                                                                    fill="none"
+                                                                                    stroke="currentColor"
+                                                                                    stroke-width="2"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    class="feather feather-chevron-down"
+                                                                                >
+                                                                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                                                                </svg>
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
+                                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                                    <li>
+                                                                        <!-- <a href="javascript:void(0);" class="btn m-1 btn-light" @click="edit_row(props.row)"> Edit </a> -->
+                                                                        <router-link to="/editpenjualan" class="dropdown-item" @click="edit_row(props.row)">Edit</router-link>
+                                                                    </li>
+                                                                    <li>
+                                                                        <router-link :to="{ name: 'nosel', params: { id: 'hgjhg'} }" class="dropdown-item">coba</router-link>
+                                                                        <!-- <a href="javascript:void(0);" class="btn m-1 btn-light" @click="view_row(props.row)"> Delete </a> -->
+                                                                    </li>
+                                                                </ul>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="invoice-totals-row invoice-summary-balance-due">
-                                                        <div class="invoice-summary-label">Total</div>
-                                                         <div class="invoice-summary-label"></div>
-                                                        <div class="invoice-summary-value">
-                                                            <!-- <div class="balance-due-amount"> -->
-                                                                <span>{{ new Intl.NumberFormat().format(Math.floor(total)) }}</span>
-                                                            <!-- </div> -->
-                                                        </div>
-                                                    </div>
+                                                        </template>
+                                                    </v-client-table>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <!-- <div class="invoice-detail-note">
-                                        <div class="row">
-                                            <div class="col-md-12 align-self-center">
-                                                <div class="form-group row invoice-note">
-                                                    <label for="invoice-detail-notes" class="col-sm-12 col-form-label col-form-label-sm">Notes:</label>
-                                                    <div class="col-sm-12">
-                                                        <textarea
-                                                            v-model="params.notes"
-                                                            rows="3"
-                                                            id="invoice-detail-notes"
-                                                            class="form-control"
-                                                            placeholder='Notes - For example, "Thank you for doing business with us"'
-                                                        ></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
                                 </div>
+
                             </div>
                         </div>
-
-                        
                     </div>
-                </div>
-            </div>
-        </div>
+
+                    
+                <!-- </div>
+            </div> -->
+        <!-- </div> -->
     </div>
 </template>
 
 <script setup>
     // import { onMounted, ref } from 'vue';
     import '@/assets/sass/apps/invoice-add.scss';
+    import '@/assets/sass/components/tabs-accordian/custom-tabs.scss';
 
     //flatpickr
     import flatPickr from 'vue-flatpickr-component';
@@ -351,7 +415,6 @@
     import { useRouter, useRoute } from 'vue-router'
 
     import { useMeta } from '@/composables/use-meta';
-import { title } from 'process';
     useMeta({ title: 'PO BBM' });
 
     const store = useStore();
@@ -360,7 +423,7 @@ import { title } from 'process';
 
     const kdBarang = ref();
     const nmBarang = ref()
-    const items = ref({});
+    const items = ref([]);
     const barangs = ref([]);
     const nopobbm = ref([]);
     const qty = ref(1);
@@ -399,13 +462,33 @@ import { title } from 'process';
 
     });
 
-    // const item = ref({
-    //     title: [],
-    //     rate: [],
-    //     quantity: [],
-    //     // tlpSupplier: '',
+    const columns = ref(['no_po', 'no_so', 'supplier_name', 'podate', 'qty_grpo', 'qty_recieve', 'action']);
+    const table_option = ref({
+        perPage: 10,
+        perPageValues: [5, 10, 20, 50],
+        skin: 'table table-hover',
+        columnsClasses: { action: 'actions text-center' },
+        pagination: { nav: 'scroll', chunk: 5 },
+        texts: {
+            count: 'Showing {from} to {to} of {count}',
+            filter: '',
+            filterPlaceholder: 'Search...',
+            limit: 'Results:',
+        },
+        sortable: ['no_po', 'no_so', 'supplier_name', 'podate', 'qty_grpo', 'qty_recieve',],
+        sortIcon: {
+            base: 'sort-icon-none',
+            up: 'sort-icon-asc',
+            down: 'sort-icon-desc',
+        },
+        resizableColumns: true,
+    });
 
-    // });
+    const sorting = ref({
+        startDate: moment().subtract(30,'d').format("D-M-YYYY"),
+        endDate: moment().format("D-M-YYYY"),
+        cari: 'all'
+    });
 
     const cartItems = ref([])
     const divpajak = ref(false)
@@ -427,6 +510,15 @@ import { title } from 'process';
         getTotal()
         // console.log(tot)
         return { barangs, pajak, suppliers, nopobbm, accs, subtotal, tot }
+    });
+
+    const bbm = computed(() => {
+        items.value = store.getters.SlistPobbm;
+
+        let sum = 0;
+        items.value.forEach(element => {
+        sum +=  parseInt(element.total);
+        });
     });
 
     const getBbm=() => {
@@ -462,17 +554,6 @@ import { title } from 'process';
         // console.log('total dengan pajak:'+tax.value)
         // return { tot }
     }
-    const getRate = (total, pph, qty, index) =>{
-        let hppRate = (total - pph) / qty
-        // console.log('hpp '+Math.floor(hppRate)+'index'+index)
-        // console.log(items.value)
-        let arr = {}
-        arr = items.value
-        arr[index]['rate'] = Math.floor(hppRate)
-        //  console.log(arr)
-
-    }
-
     function taxSelected() {
         const pajak = store.state.pajak;
         const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
@@ -556,6 +637,7 @@ import { title } from 'process';
         getSupplier();
         getCart();
         getNoPobbm();
+        getListPo();
     });
 
     const change_file = (event) => {
@@ -574,38 +656,11 @@ import { title } from 'process';
         items.value = items.value.filter((d) => d.id != item.id);
     };
 
-    // function addToCart(brg) {
-    //     // console.log(brg)
-    //     if (localStorage.getItem('cartItemsP')===null){
-    //         cartItems.value = [];
-    //         // console.log(cartItems.value)
-    //     }else{
-    //         cartItems.value = JSON.parse(localStorage.getItem('cartItemsP'));
-    //     }
-    //         const oldItems = JSON.parse(localStorage.getItem('cartItemsP')) || [];
-    //         // console.log(oldItems)
-    //         const existingItem = oldItems.find(({ kdBarang }) => kdBarang === brg.kdPersediaan);
-    //         if (existingItem) {
-    //             const objIndex = cartItems.value.findIndex((e => e.kdBarang === brg.kdPersediaan));
-    //             const oldName = cartItems.value[objIndex].nmBarang;
-    //             const oldQty = cartItems.value[objIndex].qty;
-    //             const oldTotal = cartItems.value[objIndex].total;
-    //             const newQty = parseInt(oldQty) + parseInt(qty.value) ;
-    //             const newTotal = parseInt(oldTotal) + parseInt(qty.value * brg.lastPrice) ;
-    //             cartItems.value[objIndex].qty = parseInt(newQty);
-    //             cartItems.value[objIndex].total = parseInt(newTotal);
-    //             localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
-    //             alert(oldName+' Quantity Update')
-    //             getCart();
-    //             // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
-    //         }else{
-    //         cartItems.value.push({kdBarang:brg.kdPersediaan, nmBarang:brg.nmPersediaan,hrgPokok:brg.lastPrice,qty:qty.value,satuan:brg.satuanPersediaan,total:qty.value * brg.lastPrice});	
-    //         localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
-    //         getCart();
-    //         // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
-    //         alert(brg.nmPersediaan+ " berhasil disimpan")
-    //         }
-    // }
+    const getListPo=() => {
+        store.dispatch('ListPo', sorting.value)
+       
+    };
+
     function removeItem(id) {
         // alert(id)
         const arrayFromStroage = JSON.parse(localStorage.getItem('cartItemsP'));

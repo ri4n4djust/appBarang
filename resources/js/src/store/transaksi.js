@@ -145,19 +145,6 @@ const actions = {
         try {
             response = await axios.post('/api/list/po-bbm', detail)
             commit('setListpobbm', response.data.data)
-            // localStorage.setItem('cartItemsP', '[]')
-            // const toast = window.Swal.mixin({
-            //     toast: true,
-            //     position: 'top-center',
-            //     showConfirmButton: false,
-            //     timer: 3000,
-            //     padding: '2em',
-            // });
-            // toast.fire({
-            //     icon: 'success',
-            //     title: 'Daftar PO BBM',
-            //     padding: '2em',
-            // });
         } catch (ex) {
             // Handle error
             const toast =  window.Swal.mixin({
