@@ -189,8 +189,7 @@ class pembelianController extends Controller
                 $tglNota = $request[0]['tgl_so'];
                 $noNota = $request[0]['no_po'];
                 $subtotal = $request[0]['subtotal'];
-                $acc_id_d = '11611'; // $request[0]['subtotal']; // acc id yg di debet
-                $acc_id_k = '11130'; // $request[0]['subtotal']; // acc id yg di kredit
+                
                 $post = DB::table('tblpobbm')->insert([
                     'no_po'     => $request[0]['no_po'],
                     'no_so'     => $request[0]['no_so'],
@@ -239,34 +238,39 @@ class pembelianController extends Controller
                         'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                         'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                     ];
+
+                    //===========jurnal
+                    $acc_id_d = $detpo[$i]['accid_persediaan']; // acc id yg di debet
+                    $acc_id_k = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
+                    $memo = 'PO-BBM';
+                    $jurnal = 'JK';
+                    $subtotal = $detpo[$i]['amount'];
+                    insert_gl($noNota,$tglNota,$subtotal,$memo,$jurnal);
+                    $rgl = DB::table('general_ledger')->get()->last()->notrans;
+                    $ac = [
+                        [
+                            'rgl' => $rgl,
+                            'acc_id' => $acc_id_d,
+                            'debet' => $subtotal,
+                            'kredit' => 0,
+                            'trans_detail' => 'PO',
+                            'void_flag' => 0,
+                        ], 
+                        [
+                            'rgl' => $rgl,
+                            'acc_id' => $acc_id_k,
+                            'debet' => 0,
+                            'kredit' => $subtotal,
+                            'trans_detail' => 'PO',
+                            'void_flag' => 0,
+                        ]
+                    ];
+                    
+                    insert_gl_detail($ac);
+                    //===========end jurnal
                 }
                 DB::table('tblpobbm_detail')->insert($detail);
-                //===========jurnal
-                $memo = 'PO-BBM';
-                $jurnal = 'JK';
-                insert_gl($noNota,$tglNota,$subtotal,$memo,$jurnal);
-                $rgl = DB::table('general_ledger')->get()->last()->notrans;
-                $ac = [
-                    [
-                        'rgl' => $rgl,
-                        'acc_id' => $acc_id_d,
-                        'debet' => $subtotal,
-                        'kredit' => 0,
-                        'trans_detail' => 'PO',
-                        'void_flag' => 0,
-                    ], 
-                    [
-                        'rgl' => $rgl,
-                        'acc_id' => $acc_id_k,
-                        'debet' => 0,
-                        'kredit' => $subtotal,
-                        'trans_detail' => 'PO',
-                        'void_flag' => 0,
-                    ]
-                ];
                 
-                insert_gl_detail($ac);
-                //===========end jurnal
                 DB::commit();
             });
             if(is_null($exception)) {

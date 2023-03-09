@@ -136,7 +136,7 @@
                                                         <th>Description</th>
                                                         <th>Rate</th>
                                                         <th>Qty</th>
-                                                        <th>pph</th>
+                                                        <!-- <th>pph</th> -->
                                                         <th>Total</th>
                                                     </tr>
                                                 </thead>
@@ -175,13 +175,14 @@
                                                             <input type="text" v-model="item.rate" :id="'rate'+index" class="form-control" placeholder="Price" />
                                                         </td>
                                                         <td style="padding:0;margin:0;">
-                                                            <input type="text" v-model="item.quantity" :id="'quantity'+index" class="form-control"  @keyup="getRate(total=item.total, pph=item.pph, qty=item.quantity, index)" placeholder="Quantity" />
+                                                            <input type="text" v-model="item.quantity" :id="'quantity'+index" class="form-control"  placeholder="Quantity" />
                                                         </td>
-                                                        <td style="padding:0;margin:0;">
+                                                        <!-- <td style="padding:0;margin:0;">
                                                             <input type="text" v-model="item.pph" :id="'pph'+index" class="form-control" placeholder="pph" />
-                                                        </td>
+                                                        </td> -->
                                                         <td style="padding:0;margin:0;">
                                                             <input type="text" v-model="item.total" :id="'total'+index" class="form-control" placeholder="total" />
+                                                            
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -259,12 +260,22 @@
                                                             <div class="subtotal-amount"><span class="currency"></span><span class="amount">{{new Intl.NumberFormat().format(subtotal)}}</span></div>
                                                         </div>
                                                     </div>
-                                                    <div class="invoice-totals-row invoice-summary-total">
+                                                    <!-- <div class="invoice-totals-row invoice-summary-total">
                                                          <div class="invoice-summary-label">Disc</div>
                                                         <input type="text" v-model="params.disc" class="form-control form-control-sm" >%
                                                         <div class="invoice-summary-label"></div>
                                                         <div class="invoice-summary-value">
                                                             <div class="total-amount"><span class="currency"></span><span>{{ new Intl.NumberFormat().format(Math.floor(subtotal * disc / 100)) }}</span></div>
+                                                        </div>
+                                                    </div> -->
+                                                    <div class="invoice-totals-row invoice-summary-total">
+                                                         <div class="invoice-summary-label">PPH</div>
+                                                        <div class="invoice-summary-label"></div>
+                                                        <div class="invoice-summary-value">
+                                                            <div class="subtotal-amount"><span class="currency"></span>
+                                                                <input type="hidden" v-model="params.disc" class="form-control form-control-sm" >
+                                                                <input type="text" v-model="params.pph" class="form-control form-control-sm" @keyup="getTotal" >
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div v-show="divpajak">
@@ -358,6 +369,7 @@ import { title } from 'process';
     const total = ref();
     const disc = ref(0);
     const tax = ref();
+    const pph = ref();
     const selected_file = ref(null);
     const payment = ref([]);
     const params = ref({
@@ -370,6 +382,7 @@ import { title } from 'process';
         tax: 11,
         disc: disc,
         total: total,
+        pph:pph
     });
     const paramssupplier = ref({
         kdSupplier: '',
@@ -433,7 +446,7 @@ import { title } from 'process';
     const getTotal=() =>{
         const pajak = store.state.pajak;
         const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
-        total.value = (subtotal.value - (subtotal.value * disc.value / 100))
+        total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + parseInt(pph.value)
         tax.value = temptotal * pajak /100
         
         // console.log('total tanpa pajak :'+tax.value)
@@ -505,7 +518,8 @@ import { title } from 'process';
                 quantity: data[i].quantity,
                 rate: data[i].rate,
                 total: data[i].total,
-                pph: data[i].pph
+                pph: data[i].pph,
+                accid_persediaan: data[i].title.accid_persediaan
             })
         }
         console.log(detail)
