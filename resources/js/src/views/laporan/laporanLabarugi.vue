@@ -113,6 +113,15 @@
                                         <div class="col-xl-12 col-md-3 col-sm-6">
                                             <a href="javascript:;" class="btn btn-secondary btn-print action-print" @click="print()">Print</a>
                                         </div>
+                                        <div class="col-xl-12 col-md-3 col-sm-6">
+                                            <a href="javascript:;" class="btn btn-primary btn-send">Send Invoice</a>
+                                        </div>
+                                        <div class="col-xl-12 col-md-3 col-sm-6">
+                                            <a href="javascript:;" class="btn btn-success btn-download">Download</a>
+                                        </div>
+                                        <div class="col-xl-12 col-md-3 col-sm-6">
+                                            <router-link to="/apps/invoice/edit" class="btn btn-dark btn-edit">Edit</router-link>
+                                        </div>
 
                                     </div>
                                 </div>

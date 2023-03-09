@@ -253,7 +253,7 @@ class coaController extends Controller
 			    } else {
 					// print_r( $item->amount);
 			      $groups[$key]['amount'] = $groups[$key]['amount'] + $item->amount;   
-				//   print_r($groups[$key]['amount']);   
+				//   print_r($groups[$key]['amount'].'break');   
 			    }
 
 			    $key = $item->idparent2;
@@ -282,9 +282,9 @@ class coaController extends Controller
 			        );
 			    } else {
 					// print_r($groups[$key]['amount']);
-			      if((double)$groups[$key]['amount'] == 0){
+			    //   if((double)$groups[$key]['amount'] == 0){
 			           $groups[$key]['amount'] = $groups[$key]['amount'] + $item->amount;     
-			        }  
+			        // }  
 			    }
 
 			    $key = $item->acc_id;
@@ -298,9 +298,9 @@ class coaController extends Controller
 			        );
 			    } else {
 			      // $str .= $key.' '.$nrw.'=>'.$nrow."<br>";
-			        if((double)$groups[$key]['amount'] == 0){
+			        // if((double)$groups[$key]['amount'] == 0){
 			          $groups[$key]['amount'] = $groups[$key]['amount'] + $item->amount;     
-			        }  
+			        // }  
 			    }
 			    // $nrw += 1;
 			}
@@ -516,7 +516,7 @@ class coaController extends Controller
 		  	$keys = array_column($acc, 'acc_id');
 
 		    array_multisort($keys, SORT_ASC, $acc);
-
+			// print_r($acc);
 		    // $gl['acc'] = $acc;
 			// return response($acc);
 			return response([

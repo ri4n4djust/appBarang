@@ -37,7 +37,7 @@
 
                                             
                                             <table>
-                                                <tbody  v-for="hrt in hartalist" :key="hrt.acc_id" :set="amount = hrt.amount">
+                                                <tbody  v-for="hrt, index in hartalist" :key="hrt.acc_id" :set="amount = hrt.amount">
                                                     
                                                         <tr v-if="hrt.level === '1'" >
                                                             <td v-if="hrt.jenis != 'Total'" style="min-width:70px">{{ hrt.acc_id }}</td>
@@ -49,17 +49,13 @@
                                                             <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
                                                             <td v-else></td>
                                                             <td v-if="hrt.jenis === 'Detail'">
-                                                                <div v-if="hrt.acc_id.substring(0,1) === '2'|| hrt.acc_id.substring(0,1) === '2'"> 
-                                                                    {{ Number(amount = -1*hrt.amount).toLocaleString() }}
-                                                                </div>
-                                                                <div>{{ Number(amount).toLocaleString() }}</div>
+                                                                <!-- <div v-if="hrt.acc_id.substring(0,1) === '2'|| hrt.acc_id.substring(0,1) === '2'">  -->
+                                                                    {{ Number(amount).toLocaleString() }}
+                                                                <!-- </div>
+                                                                <div>{{ Number(amount += hrt.amount[index]).toLocaleString() }}</div> -->
+                                                                
                                                             </td>
-                                                            <td v-else-if="hrt.jenis === 'Total'"><b>
-                                                                <div v-if="hrt.acc_id.substring(0,1) === '2'|| hrt.acc_id.substring(0,1) === '2'"> 
-                                                                    {{ Number(amount = -1*hrt.amount).toLocaleString() }}
-                                                                </div>
-                                                                <div>{{ Number(amount).toLocaleString() }}</div>
-                                                            </b></td>
+                                                            <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
                                                             <td v-else></td>
                                                         </tr>
                                                         <tr v-if="hrt.level === '2'">
