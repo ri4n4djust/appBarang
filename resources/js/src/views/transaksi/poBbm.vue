@@ -325,21 +325,22 @@
                                 <div class="col-xl-12">
                                     <div class="invoice-content">
                                         <div class="invoice-detail-body">
-                                            <div class="invoice-detail-title">
+                                            <!-- <div class="invoice-detail-title">
                                                 
                                                 <div class="invoice-title">
                                                 PO BBM
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <div class="invoice-detail-header">
                                                 <div class="row justify-content-between"> 
-                                                    <v-client-table :data="items" :columns="columns" :options="table_option">
+                                                    <v-client-table :data="listpobbm" :columns="columns" :options="table_option">
                                                         <template #podate="props"> {{ moment(props.row.podate).format("DD-MM-YYYY") }} </template>
                                                         <template #no_so="props"> {{ props.row.no_so }} </template>
-                                                        <template #no_po="props"> {{ props.row.no_po }} </template>
                                                         <template #qty_grpo="props"> {{ Number(props.row.qty_grpo).toLocaleString() }} </template>
                                                         <template #qty_recieve="props"> {{ Number(props.row.qty_recieve).toLocaleString() }} </template>
+                                                        <template #pph="props"> {{ Number(props.row.pph).toLocaleString() }} </template>
+                                                        <template #total="props"> {{ Number(props.row.total).toLocaleString() }} </template>
                                                         <template #action="props">
                                                             <div class="custom-dropdown dropdown btn-group ">
                                                                 <div class="btn-group" href="#" role="button" id="pendingTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -423,7 +424,7 @@
 
     const kdBarang = ref();
     const nmBarang = ref()
-    const items = ref([]);
+    const items = ref({});
     const barangs = ref([]);
     const nopobbm = ref([]);
     const qty = ref(1);
@@ -462,7 +463,8 @@
 
     });
 
-    const columns = ref(['no_po', 'no_so', 'supplier_name', 'podate', 'qty_grpo', 'qty_recieve', 'action']);
+    const columns = ref(['no_so', 'supplier_name', 'podate', 'qty_grpo', 'qty_recieve','pph','total' ,'action']);
+    const listpobbm = ref([]);
     const table_option = ref({
         perPage: 10,
         perPageValues: [5, 10, 20, 50],
@@ -475,7 +477,7 @@
             filterPlaceholder: 'Search...',
             limit: 'Results:',
         },
-        sortable: ['no_po', 'no_so', 'supplier_name', 'podate', 'qty_grpo', 'qty_recieve',],
+        sortable: ['no_so', 'supplier_name', 'podate', 'qty_grpo', 'qty_recieve',],
         sortIcon: {
             base: 'sort-icon-none',
             up: 'sort-icon-asc',
@@ -509,17 +511,19 @@
         }
         getTotal()
         // console.log(tot)
-        return { barangs, pajak, suppliers, nopobbm, accs, subtotal, tot }
+        listpobbm.value = store.getters.SlistPobbm;
+
+        return { barangs, pajak, suppliers, nopobbm, accs, subtotal, tot, listpobbm }
     });
 
-    const bbm = computed(() => {
-        items.value = store.getters.SlistPobbm;
+    // const bbm = computed(() => {
+    //     listpobbm.value = store.getters.SlistPobbm;
 
-        let sum = 0;
-        items.value.forEach(element => {
-        sum +=  parseInt(element.total);
-        });
-    });
+    //     let sum = 0;
+    //     listpobbm.value.forEach(element => {
+    //     sum +=  parseInt(element.total);
+    //     });
+    // });
 
     const getBbm=() => {
         store.dispatch('GetBbm')
@@ -672,16 +676,6 @@
         // console.log(filtered)
         // alert(filtered.nmBarang)
     }
-    // function updateItem(barcode, index) {
-    //     const cartItems = JSON.parse(localStorage.getItem('cartItemsP'));
-    //     const objIndex = cartItems.findIndex((e => e.barcode === barcode));
-    //     const newQty = parseInt(this.crt[index].qty) ;
-    //     cartItems[objIndex].qty = parseInt(newQty);
-    //     localStorage.setItem('cartItemsP',JSON.stringify(cartItems));
-    //     //alert('Quantity Update')
-    //     this.getCart();
-    //     this.isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
-    // }
 
     function getCart() {
         // subtotal.value = []
@@ -693,7 +687,6 @@
             getSubtotal();
             getTotal();
             
-    // this.isicart = JSON.parse(localStorage.getItem('cartItemsP')).length;
         }
 
     }

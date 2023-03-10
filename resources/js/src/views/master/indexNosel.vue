@@ -445,14 +445,32 @@
         const totalDX = arr.filter(i => i.kd_bbm === 3).reduce((a, b) => Number(a) + Number(b.total), 0);
         const totalPXL = arr.filter(i => i.kd_bbm === 1).reduce((a, b) => Number(a) + Number(b.cost_ltr), 0);
         const totalPLL = arr.filter(i => i.kd_bbm === 2).reduce((a, b) => Number(a) + Number(b.cost_ltr), 0);
-        const totalDXL = arr.filter(i => i.kd_bbm === 3).reduce((a, b) => Number(a) + Number(b.cost_ltr), 0)
+        const totalDXL = arr.filter(i => i.kd_bbm === 3).reduce((a, b) => Number(a) + Number(b.cost_ltr), 0);
+
+        const accPersediaanPX = bbmNow.filter(k => k.code_bbm === 'BRG0001');
+
         const prArr = []
         prArr.push(
-            {'kdBbm':'BRG0001','total_hpp':totalPXHpp,'total_harga': totalPX,'total_liter': totalPXL},
-            {'kdBbm':'BRG0002','total_hpp':totalPLHpp,'total_harga': totalPL,'total_liter': totalPLL},
-            {'kdBbm':'BRG0003','total_hpp':totalDXHpp,'total_harga': totalDX, 'total_liter': totalDXL}
+            {'kdBbm':'BRG0001',
+            'total_hpp':totalPXHpp,
+            'total_harga': totalPX,
+            'total_liter': totalPXL,
+            'accid_persediaan': '',
+            'accid_hpp': ''},
+            {'kdBbm':'BRG0002',
+            'total_hpp':totalPLHpp,
+            'total_harga': totalPL,
+            'total_liter': totalPLL,
+            'accid_persediaan': '',
+            'accid_hpp': ''},
+            {'kdBbm':'BRG0003',
+            'total_hpp':totalDXHpp,
+            'total_harga': totalDX,
+            'total_liter': totalDXL,
+            'accid_persediaan': '',
+            'accid_hpp': ''}
         )
-        console.log(prArr)
+        console.log(accPersediaanPX[0].accid_persediaan)
 
         const arr_k = [];
         const arr_kupon = store.getters.Skupon;
