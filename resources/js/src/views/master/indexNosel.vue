@@ -448,6 +448,14 @@
         const totalDXL = arr.filter(i => i.kd_bbm === 3).reduce((a, b) => Number(a) + Number(b.cost_ltr), 0);
 
         const accPersediaanPX = bbmNow.filter(k => k.code_bbm === 'BRG0001');
+        const acchppPX = bbmNow.filter(k => k.code_bbm === 'BRG0001');
+        const accidPX = bbmNow.filter(k => k.code_bbm === 'BRG0001');
+        const accPersediaanPL = bbmNow.filter(k => k.code_bbm === 'BRG0002');
+        const acchppPL = bbmNow.filter(k => k.code_bbm === 'BRG0002');
+        const accidPL = bbmNow.filter(k => k.code_bbm === 'BRG0002');
+        const accPersediaanDX = bbmNow.filter(k => k.code_bbm === 'BRG0003');
+        const acchppDX = bbmNow.filter(k => k.code_bbm === 'BRG0003');
+        const accidDX = bbmNow.filter(k => k.code_bbm === 'BRG0003');
 
         const prArr = []
         prArr.push(
@@ -455,22 +463,25 @@
             'total_hpp':totalPXHpp,
             'total_harga': totalPX,
             'total_liter': totalPXL,
-            'accid_persediaan': '',
-            'accid_hpp': ''},
+            'accid_persediaan': accPersediaanPX[0].accid_persediaan,
+            'accid_hpp': acchppPX[0].accid_hpp,
+            'accid': accidPX[0].accid},
             {'kdBbm':'BRG0002',
             'total_hpp':totalPLHpp,
             'total_harga': totalPL,
             'total_liter': totalPLL,
-            'accid_persediaan': '',
-            'accid_hpp': ''},
+            'accid_persediaan': accPersediaanPL[0].accid_persediaan,
+            'accid_hpp': acchppPL[0].accid_hpp,
+            'accid': accidPL[0].accid},
             {'kdBbm':'BRG0003',
             'total_hpp':totalDXHpp,
             'total_harga': totalDX,
             'total_liter': totalDXL,
-            'accid_persediaan': '',
-            'accid_hpp': ''}
+            'accid_persediaan': accPersediaanDX[0].accid_persediaan,
+            'accid_hpp': acchppDX[0].accid_hpp,
+            'accid': accidDX[0].accid}
         )
-        console.log(accPersediaanPX[0].accid_persediaan)
+        // console.log(accPersediaanPX[0].accid_persediaan)
 
         const arr_k = [];
         const arr_kupon = store.getters.Skupon;

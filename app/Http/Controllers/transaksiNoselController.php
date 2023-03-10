@@ -152,16 +152,6 @@ class transaksiNoselController extends Controller
                         ];
 
                         $total_j += $detop[$i]['total'];
-                        // $total_qty += $detop[$i]['cost_ltr'];
-                        // $total_beli = $oldStokBbm->lastPrice * $total_jual;
-                        // DB::table('tblprofit')->insert([
-                        //     'tgl_profit' => $detop[$i]['tgl_transaksi'],
-                        //     'kdBrrang'  => $detop[$i]['kd_bbm'],
-                        //     'hpp_beli'  => $total_qty * $total_beli,
-                        //     'qty_laku'  => $total_qty,
-                        //     'total_laku'    => $total_qty * $total_jual,
-                        //     'margin_laku'   => ( $total_qty * $total_jual) - ($total_qty * $total_beli)
-                        // ]);
                     
                 };
                 TransaksiNosel::insert($detail);
@@ -200,12 +190,7 @@ class transaksiNoselController extends Controller
                 if(!empty($det_biaya)){
                     for ($i = 0; $i < count($det_biaya); $i++) {
 
-                        // $kdpel = $det_biaya[$i]['kdPelanggan'];
                         $nilai = $det_biaya[$i]['nilai'];
-                        // $oldDp = DB::table('tblpelanggan')->select('deposit')->where('kdPelanggan', $kdpel)->first();
-                        // DB::table('tblpelanggan')->where('kdPelanggan', $kdpel)->update([
-                        //     'deposit' => $oldDp->deposit - $nilai,
-                        // ]);
 
                         $detbi[] = [
                             'kd_trans'     =>  $kdtrans,
@@ -228,12 +213,7 @@ class transaksiNoselController extends Controller
                 if(!empty($det_link)){
                     for ($i = 0; $i < count($det_link); $i++) {
 
-                        // $kdpel = $det_biaya[$i]['kdPelanggan'];
                         $nilai = $det_link[$i]['jumlahLink'];
-                        // $oldDp = DB::table('tblpelanggan')->select('deposit')->where('kdPelanggan', $kdpel)->first();
-                        // DB::table('tblpelanggan')->where('kdPelanggan', $kdpel)->update([
-                        //     'deposit' => $oldDp->deposit - $nilai,
-                        // ]);
 
                         $detli[] = [
                             'kd_trans'     =>  $kdtrans,
@@ -292,6 +272,53 @@ class transaksiNoselController extends Controller
                         'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                         'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                     ];
+
+                    //===========jurnal
+                    $acc_id_k = $detpro[$i]['accid_persediaan']; // acc id yg di debet
+                    $acc_id_dd = $detpro[$i]['accid_hpp']; // acc id yg di debet
+                    $accid = $detpro[$i]['accid']; // acc id yg di debet
+                    $acc_id_d = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
+                    $memo = 'Aplusan';
+                    $jurnal = 'JK';
+                    insert_gl($kdtrans,$tgl,$total_harga,$memo,$jurnal);
+                    $rgl = DB::table('general_ledger')->get()->last()->notrans;
+                    $ac = [
+                        [
+                            'rgl' => $rgl,
+                            'acc_id' => $acc_id_d,
+                            'debet' => $total_harga,
+                            'kredit' => 0,
+                            'trans_detail' => 'Aplusan',
+                            'void_flag' => 0,
+                        ],
+                        [
+                            'rgl' => $rgl,
+                            'acc_id' => $acc_id_dd,
+                            'debet' => $total_hpp,
+                            'kredit' => 0,
+                            'trans_detail' => 'Aplusan',
+                            'void_flag' => 0,
+                        ],
+                        [
+                            'rgl' => $rgl,
+                            'acc_id' => $accid,
+                            'debet' => $total_harga,
+                            'kredit' => 0,
+                            'trans_detail' => 'Aplusan',
+                            'void_flag' => 0,
+                        ],
+                        [
+                            'rgl' => $rgl,
+                            'acc_id' => $acc_id_k,
+                            'debet' => 0,
+                            'kredit' => $total_hpp,
+                            'trans_detail' => 'Aplusan',
+                            'void_flag' => 0,
+                        ]
+                    ];
+                    
+                    insert_gl_detail($ac);
+                    //===========end jurnal
                     
                 };
                 DB::table('tblprofit')->insert($detpr);
