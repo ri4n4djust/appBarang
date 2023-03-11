@@ -25,7 +25,7 @@
                                     <div class="invoice-detail-title">
                                        
                                         <div class="invoice-title">
-                                            Invoice Pembelian
+                                            Form Biaya
                                         </div>
                                     </div>
 

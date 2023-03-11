@@ -282,9 +282,9 @@ class coaController extends Controller
 			        );
 			    } else {
 					// print_r($groups[$key]['amount']);
-			    //   if((double)$groups[$key]['amount'] == 0){
+			      if((double)$groups[$key]['amount'] == 0){
 			           $groups[$key]['amount'] = $groups[$key]['amount'] + $item->amount;     
-			        // }  
+			        }  
 			    }
 
 			    $key = $item->acc_id;
@@ -298,9 +298,9 @@ class coaController extends Controller
 			        );
 			    } else {
 			      // $str .= $key.' '.$nrw.'=>'.$nrow."<br>";
-			        // if((double)$groups[$key]['amount'] == 0){
+			        if((double)$groups[$key]['amount'] == 0){
 			          $groups[$key]['amount'] = $groups[$key]['amount'] + $item->amount;     
-			        // }  
+			        }  
 			    }
 			    // $nrw += 1;
 			}
