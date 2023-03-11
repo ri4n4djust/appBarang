@@ -40,7 +40,11 @@
                                                 <tbody  v-for="hrt in hartalist" :key="hrt.acc_id" :set="amount = hrt.amount">
                                                     
                                                         <tr v-if="hrt.level === '1'" >
-                                                            <td v-if="hrt.jenis != 'Total'" style="min-width:70px">{{ hrt.acc_id }}</td>
+                                                            <td v-if="hrt.jenis != 'Total'" style="min-width:100px">{{ hrt.acc_id }} 
+                                                                <a href="javascript:void(0);" title="Edit"  @click="edit_acc(accid=hrt.acc_id, level=hrt.level, parent=hrt.parent)">
+                                                                    <i class="far fa-address-book"></i>
+                                                                </a>
+                                                            </td>
                                                             <td v-else></td>
                                                             <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'" style="min-width: 400px;" ><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
                                                             <td v-else style="min-width: 400px;">&nbsp;&nbsp;{{ hrt.name }}</td>
@@ -59,7 +63,9 @@
                                                             <td v-else></td>
                                                         </tr>
                                                         <tr v-if="hrt.level === '2'">
-                                                            <td v-if="hrt.jenis != 'Total'" >{{ hrt.acc_id }}</td>
+                                                            <td v-if="hrt.jenis != 'Total'" >{{ hrt.acc_id }}
+                                                                <a href="javascript:void(0);" title="Edit" @click="edit_acc(accid=hrt.acc_id, level=hrt.level, parent=hrt.parent)">edit</a>
+                                                            </td>
                                                             <td v-else></td>
                                                             <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'" style="min-width: 300px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</b></td>
                                                             <td v-else style="min-width: 300px;">&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
@@ -72,7 +78,9 @@
                                                             <td></td>
                                                         </tr>
                                                         <tr v-if="hrt.level === '3'">
-                                                            <td v-if="hrt.jenis != 'Total'">{{ hrt.acc_id }}</td>
+                                                            <td v-if="hrt.jenis != 'Total'">{{ hrt.acc_id }}
+                                                                <a href="javascript:void(0);" title="Edit" @click="edit_acc(accid=hrt.acc_id, level=hrt.level, parent=hrt.parent)">edit</a>
+                                                            </td>
                                                             <td v-else></td>
                                                             <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'" style="min-width: 300px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</b></td>
                                                             <td v-else style="min-width: 300px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
@@ -84,7 +92,9 @@
                                                             <td></td>
                                                         </tr>
                                                         <tr v-if="hrt.level === '4'">
-                                                            <td>{{ hrt.acc_id }}</td>
+                                                            <td>{{ hrt.acc_id }}
+                                                                <a href="javascript:void(0);" title="Edit" @click="edit_acc(accid=hrt.acc_id, level=hrt.level, parent=hrt.parent)">edit</a>
+                                                            </td>
                                                             <td style="min-width: 300px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
                                                             <td>{{ Number(amount).toLocaleString() }}</td>
                                                             <td></td>
@@ -101,6 +111,21 @@
                                 </div>
                             </div>
                         </div>
+                        <Modal v-model:visible="isVisible" :draggable="true">
+                            <div class="input-group input-group-sm mb-4">
+                                <multiselect v-model="level1['input1']" :options="options1" :searchable="true" :preselect-first="true" selected-label="" select-label="" deselect-label=""></multiselect>
+                            </div>
+                            <div class="input-group input-group-sm mb-4">
+                                <multiselect v-model="level2['input1']" :options="options1" :searchable="true" :preselect-first="true" selected-label="" select-label="" deselect-label=""></multiselect>
+                            </div>
+                            <div class="input-group input-group-sm mb-4">
+                                <multiselect v-model="level3['input1']" :options="options1" :searchable="true" :preselect-first="true" selected-label="" select-label="" deselect-label=""></multiselect>
+                            </div>
+                            <div class="input-group input-group-sm mb-4">
+                                <multiselect v-model="level4['input1']" :options="options1" :searchable="true" :preselect-first="true" selected-label="" select-label="" deselect-label=""></multiselect>
+                            </div>
+                        </Modal>
+                        
                         <div class="col-xl-3">
                             <div class="invoice-actions-btn">
                                 <div class="invoice-action-btn">
@@ -139,21 +164,37 @@
     import { useStore } from 'vuex';
     import { useRouter, useRoute } from 'vue-router';
 
+    import feather from 'feather-icons';
+    import Multiselect from '@suadelabs/vue3-multiselect';
+    import '@suadelabs/vue3-multiselect/dist/vue3-multiselect.css';
+
+    import { Modal } from 'usemodal-vue3';
     import moment from "moment";
 
     import { useMeta } from '@/composables/use-meta';
-    useMeta({ title: 'BBM' });
+    useMeta({ title: 'Harta' });
 
     
     const store = useStore();
     const router = useRouter();
     const route = useRoute();
 
+    // const showModal = ref(false);
+    const isVisible = ref(false);
+    const options1 = ref(['orange', 'white', 'purple']);
+    const inputs = ref({
+        input1: [],
+        input2: [],
+        input3: [],
+        input4: [],
+        input5: [],
+    });
 
     // const modalRef = ref(null);
     // const openModal = () => Modal.getInstance(modalRef.value)?.show();
     const hartalist = ref();
     onMounted(() => {
+        feather.replace();
         const harta = ref({
             group: '1'
         });
@@ -164,6 +205,14 @@
             hartalist.value = store.getters.StateHarta;
         }, 3000);
        
-    })
+    });
+
+    const edit_acc = (accid, level, parent) =>{
+        // alert('yg di edit : '+ accid + ' level : '+ level + 'parent : '+ parent);
+        
+        isVisible.value = true;
+        console.log(isVisible.value)
+
+    }
     
 </script>

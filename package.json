@@ -32,6 +32,7 @@
         "jspdf-autotable": "^3.5.23",
         "maska": "^1.5.0",
         "sweetalert2": "^11.4.17",
+        "usemodal-vue3": "^0.3.7",
         "v-mask": "^2.3.0",
         "v-tables-3": "^0.4.7",
         "vue": "^3.2.13",

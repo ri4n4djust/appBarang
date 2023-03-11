@@ -53,7 +53,7 @@ class coaController extends Controller
 				$table->string('acc_id', 18)->nullable()->default('0');
 				$table->decimal('amount', 15,2)->nullable()->default('0');
 				// Table only lasts as long as the connection persists.
-				$table->temporary();
+				// $table->temporary();
 				// The lookup column, with an index.
 				// $table->string('lookup')->index();
 				// The Property ID we're looking for.
@@ -63,7 +63,7 @@ class coaController extends Controller
 				$table->increments('id');
 				$table->string('acc_id', 18)->nullable()->default('0');
 				$table->decimal('amount', 15,2)->nullable()->default('0');
-				$table->temporary();
+				// $table->temporary();
 			});
 			Schema::create('coa', function (Blueprint $table) {
 				$table->increments('id');
@@ -82,7 +82,7 @@ class coaController extends Controller
 				$table->string('acc_id', 11);
 				$table->string('name', 50);
 				$table->string('atype', 1);
-				$table->temporary();
+				// $table->temporary();
 			});
 
 			$date_lr = '2022-01-01';
@@ -241,65 +241,69 @@ class coaController extends Controller
 
 			$groups = array();
 			foreach ($data as $item) {
-			    $key = $item->idparent1;
-			    if (!array_key_exists($key, $groups)) {
-			        $groups[$key] = array(
+			    $key1 = $item->idparent1;
+			    if (!array_key_exists($key1, $groups)) {
+			        $groups[$key1] = array(
 			            'acc_id' => $item->idparent1,
 			            'name' => $item->parent1,
 			            'amount' => $item->amount,
 			            'level' => '1',
 			            'tipe' => $item->parent1type.substr($item->idparent1, 0,1),
+						'parent1' => '0',
 			        );
 			    } else {
 					// print_r( $item->amount);
-			      $groups[$key]['amount'] = $groups[$key]['amount'] + $item->amount;   
+			      $groups[$key1]['amount'] = $groups[$key1]['amount'] + $item->amount;   
 				//   print_r($groups[$key]['amount'].'break');   
 			    }
 
-			    $key = $item->idparent2;
-			    if (!array_key_exists($key, $groups)) {
-			        $groups[$key] = array(
+			    $key2 = $item->idparent2;
+			    if (!array_key_exists($key2, $groups)) {
+			        $groups[$key2] = array(
 			            'acc_id' => $item->idparent2,
 			            'name' => $item->parent2,
 			            'amount' => $item->amount,
 			            'level' => '2',
 			            'tipe' => $item->parent2type.substr($item->idparent2, 0,2),
+						'parent2' => $item->idparent1
 			        );
 			    } else {
 			      // if((double)$groups[$key]['amount'] == 0){
-			        $groups[$key]['amount'] = $groups[$key]['amount'] + $item->amount;     
+			        $groups[$key2]['amount'] = $groups[$key2]['amount'] + $item->amount;     
 			      // }  
 			    }
 
-			    $key = $item->idparent3;
-			    if (!array_key_exists($key, $groups)) {
-			        $groups[$key] = array(
+			    $key3 = $item->idparent3;
+			    if (!array_key_exists($key3, $groups)) {
+			        $groups[$key3] = array(
 			            'acc_id' => $item->idparent3,
 			            'name' => $item->parent3,
 			            'amount' => $item->amount,
 			            'level' => '3',
 			            'tipe' => $item->parent3type.substr($item->idparent3, 0,3),
+						'parent3' => $item->idparent2
 			        );
 			    } else {
 					// print_r($groups[$key]['amount']);
-			      if((double)$groups[$key]['amount'] == 0){
-			           $groups[$key]['amount'] = $groups[$key]['amount'] + $item->amount;     
+			      if((double)$groups[$key3]['amount'] == 0){
+			           $groups[$key3]['amount'] = $groups[$key3]['amount'] + $item->amount;     
 			        }  
 			    }
 
-			    $key = $item->acc_id;
-			    if (!array_key_exists($key, $groups)) {
-			        $groups[$key] = array(
+			    $key4 = $item->acc_id;
+			    if (!array_key_exists($key4, $groups)) {
+			        $groups[$key4] = array(
 			            'acc_id' => $item->acc_id,
 			            'name' => $item->name,
 			            'amount' => $item->amount,
 			            'level' => '4',
 			            'tipe' => $item->atype.substr($item->acc_id, 0,4),
+						'parent4' => $item->idparent3
 			        );
 			    } else {
 			      // $str .= $key.' '.$nrw.'=>'.$nrow."<br>";
-			        if((double)$groups[$key]['amount'] == 0){
-			          $groups[$key]['amount'] = $groups[$key]['amount'] + $item->amount;     
+			        if((double)$groups[$key4]['amount'] == 0){
+			          $groups[$key4]['amount'] = $groups[$key4]['amount'] + $item->amount;     
 			        }  
 			    }
 			    // $nrw += 1;
@@ -323,6 +327,7 @@ class coaController extends Controller
 			$acc = array();
 			$i = 0;
 			// echo "<div style='overflow:auto'>";
+			// print_r($groups);
 
 			foreach($groups as $value){
 			  $h_tipe = substr($value['tipe'], 0,1);
@@ -341,6 +346,7 @@ class coaController extends Controller
 			            'level' => '1',
 			            'tipe' => $value['tipe'],
 			            'jenis'=> 'Total',
+						'parent' => $value['parent1'],
 			          );        
 			        }else{
 			          if($head_level1 != $value['tipe']){
@@ -355,6 +361,7 @@ class coaController extends Controller
 			              'level' => '1',
 			              'tipe' => $value['tipe'],
 			              'jenis'=> 'Total',
+						  'parent' => $value['parent1'],
 			            );
 			          }
 			        }
@@ -366,6 +373,7 @@ class coaController extends Controller
 			          'level' => $value['level'],
 			          'tipe' => $value['tipe'],
 			          'jenis'=> 'Header',
+					  'parent' => $value['parent1'],
 			        );
 			      }else{ //--------- tipe bukan header
 			        $acc[$i] = array(
@@ -375,6 +383,7 @@ class coaController extends Controller
 			          'level' => $value['level'],
 			          'tipe' => $value['tipe'],
 			          'jenis'=> 'Detail',
+					  'parent' => $value['parent1']
 			        );
 			      }
 
@@ -390,6 +399,7 @@ class coaController extends Controller
 			          $name_level2 = "T.".$value['name'];
 			          $amount_Level2 = $value['amount'];
 			          $head_idlevel2 = substr($value['acc_id'], 0,2).'999';
+					  $parent2 = $value['parent2'];
 			          $acc[$i] = array(
 			            'acc_id' => $head_idlevel2,
 			            'name' => $name_level2,
@@ -397,6 +407,7 @@ class coaController extends Controller
 			            'level' => '2',
 			            'tipe' => $value['tipe'],
 			            'jenis'=> 'Total',
+						'parent' => $parent2,
 			          );        
 			        }else{
 			          if($head_level2 != $value['tipe']){
@@ -404,6 +415,7 @@ class coaController extends Controller
 			            $name_level2 = "T.".$value['name'];
 			            $amount_Level2 = $value['amount'];
 			            $head_idlevel2 = substr($value['acc_id'], 0,2).'999';
+						$parent2 = $value['parent2'];
 			            $acc[$i] = array(
 			              'acc_id' => $head_idlevel2,
 			              'name' => $name_level2,
@@ -411,6 +423,7 @@ class coaController extends Controller
 			              'level' => '2',
 			              'tipe' => $value['tipe'],
 			              'jenis'=> 'Total',
+						  'parent' => $parent2,
 			            );
 			          }
 			        }
@@ -422,6 +435,7 @@ class coaController extends Controller
 			          'level' => $value['level'],
 			          'tipe' => $value['tipe'],
 			          'jenis'=> 'Header',
+					  'parent' => $parent2
 			        );
 			      }else{
 			        $acc[$i] = array(
@@ -431,6 +445,7 @@ class coaController extends Controller
 			          'level' => $value['level'],
 			          'tipe' => $value['tipe'],
 			          'jenis'=> 'Detail',
+					  'parent' => $parent2
 			        );
 			      }     
 			      
@@ -446,6 +461,7 @@ class coaController extends Controller
 			          $name_level3 = "T.".$value['name'];
 			          $amount_Level3 = $value['amount'];
 			          $head_idlevel3 = substr($value['acc_id'], 0,3).'99';
+					  $parent3 = $value['parent3'];
 			          $acc[$i] = array(
 			            'acc_id' => $head_idlevel3,
 			            'name' => $name_level3,
@@ -453,6 +469,7 @@ class coaController extends Controller
 			            'level' => '3',
 			            'tipe' => $value['tipe'],
 			            'jenis'=> 'Total',
+						'parent' => $parent3
 			          );        
 			        }else{
 			          if($head_level3 != $value['tipe']){
@@ -460,6 +477,7 @@ class coaController extends Controller
 			            $name_level3 = "T.".$value['name'];
 			            $amount_Level3 = $value['amount'];
 			            $head_idlevel3 = substr($value['acc_id'], 0,3).'99';
+						$parent3 = $value['parent3'];
 			            $acc[$i] = array(
 			              'acc_id' => $head_idlevel3,
 			              'name' => $name_level3,
@@ -467,6 +485,7 @@ class coaController extends Controller
 			              'level' => '3',
 			              'tipe' => $value['tipe'],
 			              'jenis'=> 'Total',
+						  'parent' => $parent3
 			            );
 			          }
 			        }
@@ -478,6 +497,7 @@ class coaController extends Controller
 			          'level' => $value['level'],
 			          'tipe' => $value['tipe'],
 			          'jenis'=> 'Header',
+					  'parent' => $parent3
 			        );
 			      }else{
 			        $acc[$i] = array(
@@ -487,6 +507,7 @@ class coaController extends Controller
 			          'level' => $value['level'],
 			          'tipe' => $value['tipe'],
 			          'jenis'=> 'Detail',
+					  'parent' => $value['parent3']
 			        );
 			      }      
 			      
@@ -504,6 +525,7 @@ class coaController extends Controller
 			        'level' => $value['level'],
 			        'tipe' => $value['tipe'],
 			        'jenis'=> 'Detail',
+					'parent' => $value['parent4']
 			        );
 			      break;
 
