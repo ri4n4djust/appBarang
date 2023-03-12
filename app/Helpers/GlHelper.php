@@ -4,12 +4,15 @@ use Illuminate\Support\Facades\DB;
 if(!function_exists('insert_gl')){
     function insert_gl($notrans,$tgl,$total_trans,$memo,$jurnal){
 
-        $rgl = DB::table('general_ledger')->get()->last()->notrans;
-        // $ssql = "SELECT RIGHT(max(notrans),6) maxno FROM general_ledger where notrans like 'GJ%';"; 
-		// $nomor = DB::select(DB::RAW($ssql))->maxno;
-        $nomor = substr($rgl, 6);
-		$newno = (int)$nomor + 1;
-		$newno = substr("000000".$newno, -6);
+        if(DB::table('general_ledger')->where('id', 1)->exists()){
+            $rgl = DB::table('general_ledger')->get()->last()->notrans;
+            $nomor = substr($rgl, 6);
+            $newno = (int)$nomor + 1;
+            $newno = substr("000000".$newno, -6);
+        }else{
+            $newno = '000001';
+        }
+        
 
         $sql = DB::table('general_ledger')->upsert([
                 'notrans' => 'GJ'.$newno,

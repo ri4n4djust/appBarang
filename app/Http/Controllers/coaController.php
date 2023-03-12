@@ -10,6 +10,96 @@ use Illuminate\Database\Schema\Blueprint;
 class coaController extends Controller
 {
     //
+	public function create_acc(Request $request){
+		try{
+            $exception = DB::transaction(function() use ($request){
+				$level = $request->input('level');
+				$table = 'level'.$level;
+				$old_id = $request->input('oldid');
+
+				$accid = $request->input('accid');
+				$det = DB::table($table)->where('acc_id', $accid)->first();
+				if($old_id == ''){					
+					$id = $det->id;
+					$accid = $request->input('accid');
+					$alevel = $det->alevel;
+					$parent = $request->input('parent');
+					$name = $request->input('name');
+					$jurnal = 'JK';
+					$amount = $request->input('amount');
+					$jtype = $det->jtype;
+					$atype = $det->atype;
+					$trigered = '0';
+					$active = '1';
+					$date_create = \Carbon\Carbon::now()->toDateTimeString();
+				}else{
+					$id = strtotime("now");
+					$accid = $request->input('accid');
+					$alevel = $det->alevel;
+					$parent = $request->input('parent');
+					$name = $request->input('name');
+					$jurnal = 'JK';
+					$amount = $request->input('amount');
+					$jtype = $det->jtype;
+					$atype = $det->atype;
+					$trigered = '0';
+					$active = '1';
+					$date_create = \Carbon\Carbon::now()->toDateTimeString();
+				}
+
+				
+
+				DB::table($table)->upsert([
+					'id' => $id,
+					'acc_id' => $accid,
+					'alevel' => $alevel,
+					'atype' => $atype,
+					'parent' => $parent,
+					'name' => $name,
+					'jurnal' => $jurnal,
+					'amount' => $amount,
+					'jtype' => $jtype,
+					'trigered' => $trigered,
+					'active' => $active,
+					'date_create' => $date_create
+				],
+				[
+					'acc_id' => $accid,
+					'alevel' => $alevel,
+					'atype' => $atype,
+					'parent' => $parent,
+					'name' => $name,
+					'jurnal' => $jurnal,
+					'amount' => $amount,
+					'jtype' => $jtype,
+					'trigered' => $trigered,
+					'active' => $active,
+					'date_create' => $date_create
+				]);
+			DB::commit();
+		});
+			if(is_null($exception)) {
+				return response()->json([
+					'success' => true,
+					'message' => 'Berhasil update Akun',
+					// 'data' => $data
+				], 200);
+			} else {
+				DB::rollback();
+				return response()->json([
+					'success' => false,
+					'message' => 'Post Gagal Diupdate!',
+				], 500);
+			}
+		} catch (\Exception $e) {
+			DB::rollback();
+			// something went wrong
+			return response()->json([
+				'success' => false,
+				'message' => 'exception'.$e,
+			], 400);
+		}
+	}
     public function get_acc_list(Request $request){
 		$level = $request->input('level');
 		$group = $request->input('group');
@@ -241,9 +331,9 @@ class coaController extends Controller
 
 			$groups = array();
 			foreach ($data as $item) {
-			    $key1 = $item->idparent1;
-			    if (!array_key_exists($key1, $groups)) {
-			        $groups[$key1] = array(
+			    $key = $item->idparent1;
+			    if (!array_key_exists($key, $groups)) {
+			        $groups[$key] = array(
 			            'acc_id' => $item->idparent1,
 			            'name' => $item->parent1,
 			            'amount' => $item->amount,
@@ -253,13 +343,13 @@ class coaController extends Controller
 			        );
 			    } else {
 					// print_r( $item->amount);
-			      $groups[$key1]['amount'] = $groups[$key1]['amount'] + $item->amount;   
+			      $groups[$key]['amount'] = $groups[$key]['amount'] + $item->amount;   
 				//   print_r($groups[$key]['amount'].'break');   
 			    }
 
-			    $key2 = $item->idparent2;
-			    if (!array_key_exists($key2, $groups)) {
-			        $groups[$key2] = array(
+			    $key = $item->idparent2;
+			    if (!array_key_exists($key, $groups)) {
+			        $groups[$key] = array(
 			            'acc_id' => $item->idparent2,
 			            'name' => $item->parent2,
 			            'amount' => $item->amount,
@@ -269,13 +359,13 @@ class coaController extends Controller
 			        );
 			    } else {
 			      // if((double)$groups[$key]['amount'] == 0){
-			        $groups[$key2]['amount'] = $groups[$key2]['amount'] + $item->amount;     
+			        $groups[$key]['amount'] = $groups[$key]['amount'] + $item->amount;     
 			      // }  
 			    }
 
-			    $key3 = $item->idparent3;
-			    if (!array_key_exists($key3, $groups)) {
-			        $groups[$key3] = array(
+			    $key = $item->idparent3;
+			    if (!array_key_exists($key, $groups)) {
+			        $groups[$key] = array(
 			            'acc_id' => $item->idparent3,
 			            'name' => $item->parent3,
 			            'amount' => $item->amount,
@@ -285,14 +375,14 @@ class coaController extends Controller
 			        );
 			    } else {
 					// print_r($groups[$key]['amount']);
-			      if((double)$groups[$key3]['amount'] == 0){
-			           $groups[$key3]['amount'] = $groups[$key3]['amount'] + $item->amount;     
+			      if((double)$groups[$key]['amount'] == 0){
+			           $groups[$key]['amount'] = $groups[$key]['amount'] + $item->amount;     
 			        }  
 			    }
 
-			    $key4 = $item->acc_id;
-			    if (!array_key_exists($key4, $groups)) {
-			        $groups[$key4] = array(
+			    $key = $item->acc_id;
+			    if (!array_key_exists($key, $groups)) {
+			        $groups[$key] = array(
 			            'acc_id' => $item->acc_id,
 			            'name' => $item->name,
 			            'amount' => $item->amount,
@@ -302,8 +392,8 @@ class coaController extends Controller
 			        );
 			    } else {
 			      // $str .= $key.' '.$nrw.'=>'.$nrow."<br>";
-			        if((double)$groups[$key4]['amount'] == 0){
-			          $groups[$key4]['amount'] = $groups[$key4]['amount'] + $item->amount;     
+			        if((double)$groups[$key]['amount'] == 0){
+			          $groups[$key]['amount'] = $groups[$key]['amount'] + $item->amount;     
 			        }  
 			    }
 			    // $nrw += 1;

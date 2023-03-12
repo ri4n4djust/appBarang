@@ -16,20 +16,6 @@
         </teleport>
 
         <div class="row layout-top-spacing">
-            <!-- <div class="nav sidenav">
-                <div class="sidenav-content" v-scroll-spy-active v-scroll-spy-link>
-                    <a href="#tableSimple" class="nav-link">Simple</a>
-                    <a href="#tableHover" class="nav-link">Hover</a>
-                    <a href="#tableStriped" class="nav-link">Striped</a>
-                    <a href="#tableLight" class="nav-link">Light</a>
-                    <a href="#tableCaption" class="nav-link">Caption</a>
-                    <a href="#tableProgress" class="nav-link">Progress</a>
-                    <a href="#tableContextual" class="nav-link">Contextual</a>
-                    <a href="#tableDropdown" class="nav-link">Dropdown</a>
-                    <a href="#tableFooter" class="nav-link">Footer</a>
-                    <a href="#tableCheckbox" class="nav-link">Checkbox</a>
-                </div>
-            </div> -->
             <div class="row layout-top-spacing">
                 <div class="col-lg-12">
                     <div class="alert alert-arrow-left alert-icon-left alert-light-info mb-0 text-break">
@@ -114,25 +100,6 @@
                                                 <!-- <span :class="`text-${item.status_class}`"> {{ item.status }} </span> -->
 
                                             
-                                            <!-- <td aria-colindex="5" role="cell" class="text-center">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    width="24"
-                                                    height="24"
-                                                    viewBox="0 0 24 24"
-                                                    fill="none"
-                                                    stroke="currentColor"
-                                                    stroke-width="2"
-                                                    stroke-linecap="round"
-                                                    stroke-linejoin="round"
-                                                    class="feather feather-trash-2 icon"
-                                                >
-                                                    <polyline points="3 6 5 6 21 6"></polyline>
-                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                                    <line x1="10" y1="11" x2="10" y2="17"></line>
-                                                    <line x1="14" y1="11" x2="14" y2="17"></line>
-                                                </svg>
-                                            </td> -->
                                         </tr>
                                     </tbody>
                                 </table>
@@ -219,6 +186,8 @@
                 arr.push ({
                     'kdBarang' : dataArr[i].code_bbm,
                     'nmBarang' : dataArr[i].nama_bbm,
+                    'accid_persediaan' : dataArr[i].accid_persediaan,
+                    'accid_biaya' : dataArr[i].accid_biaya,
                     'keterangan' : ket,
                     'qty' : item_now.value[i],
                     'selisih' : dataArr[i].stokBbm - item_now.value[i],

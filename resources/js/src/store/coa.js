@@ -12,9 +12,16 @@ const getters = {
 };
 
 const actions = {  
-    async CreateHarta({dispatch}, post) {
-        await axios.post('/api/store/coa-harta', post)
-        await dispatch('GetHarta')
+    async CreateAcc({dispatch}, post) {
+        let res
+        try {
+            res = await axios.post('/api/store/coa-acc', post)
+            // await dispatch('GetHarta')
+            return res ;
+        } catch (ex) {
+            // Handle error
+            return res ;
+        }
     }, 
     async GetHarta({ commit }, group){
         let response = await axios.post('/api/get/acc-data', group)

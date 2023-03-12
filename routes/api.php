@@ -106,6 +106,7 @@ Route::post('/labarugi/beban-hpp', [App\Http\Controllers\labarugiController::cla
 
 Route::post('/get/acc-data', [App\Http\Controllers\coaController::class, 'get_acc_data']);
 Route::post('/get/coa', [App\Http\Controllers\coaController::class, 'get_coa']);
+Route::post('/store/coa-acc', [App\Http\Controllers\coaController::class, 'create_acc']);
 //============HELPERS
 Route::post('/get/acc-list', [App\Http\Controllers\coaController::class, 'get_acc_list']);
 //========================
