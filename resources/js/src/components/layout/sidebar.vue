@@ -279,6 +279,9 @@
                             <router-link to="/penjualan" @click="toggleMobileMenu">Penjualan</router-link>
                         </li>
                         <li>
+                            <router-link to="/penjualan-kupon" @click="toggleMobileMenu">Penjualan Kupon</router-link>
+                        </li>
+                        <li>
                             <router-link to="/tera" @click="toggleMobileMenu">Tera</router-link>
                         </li>
                         <li class="menu">

@@ -219,6 +219,8 @@
                 arr.push ({
                     'kdBarang' : dataArr[i].kdBarang,
                     'nmBarang' : dataArr[i].nmBarang,
+                    'accid_persediaan' : dataArr[i].accid_persediaan,
+                    'accid_biaya' : dataArr[i].accid_biaya,
                     'keterangan' : ket,
                     'qty' : item_now.value[i],
                     'selisih' : dataArr[i].stkBarang - item_now.value[i],

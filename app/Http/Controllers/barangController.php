@@ -178,17 +178,18 @@ class barangController extends Controller
                         // $hrg = $detop[$i]['hrgJual'];
 
                         // $bbm = DB::table('tblbbm')->where('code_bbm', $kdBarang)->first();
-                        if(Bbm::where('code_bbm', $kdBarang )->exists()){
-                            DB::table('tblbbm')->where('code_bbm', $kdBarang)->update([
-                                'stokBbm' => $qty,
-                            ]);
-                        }else{
-                            DB::table('tblbarang')->where('kdBarang', $kdBarang)->update([
-                                'stkBarang' => $qty,
-                                // 'hrgJual' => $hrg,
-                            ]);
+                        if($qty != ''){
+                            if(Bbm::where('code_bbm', $kdBarang )->exists()){
+                                DB::table('tblbbm')->where('code_bbm', $kdBarang)->update([
+                                    'stokBbm' => $qty,
+                                ]);
+                            }else{
+                                DB::table('tblbarang')->where('kdBarang', $kdBarang)->update([
+                                    'stkBarang' => $qty,
+                                    // 'hrgJual' => $hrg,
+                                ]);
+                            }
                         }
-                        
                         // $oldStok = $brg->stokPersediaan;
                         DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->update([
                             'stokPersediaan' => $qty,
