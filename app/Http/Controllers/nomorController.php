@@ -10,6 +10,8 @@ use App\Models\Pembelian;
 use App\Models\Penjualan;
 use App\Models\Supplier;
 use App\Models\Opnum;
+use App\Models\Kupon;
+use App\Models\KuponPenjualan;
 use App\Models\Pobbm;
 use App\Models\BbmDatang;
 use Illuminate\Support\Facades\DB;
@@ -296,6 +298,49 @@ class nomorController extends Controller
                     'success' => true,
                     'message' => 'Detail Post!',
                     'kdOpnum'    => $post
+                ], 200);
+            }
+        }
+    }
+
+    public function kodeKupon()
+    {
+        $count = KuponPenjualan::all();
+        if($count->isEmpty()){
+            $tahun = date('mY');
+            $post = 'KP'.$tahun.'1';
+            return response()->json([
+                'success' => true,
+                'message' => 'Detail Post!',
+                'kdKupon'    => $post
+            ], 200);
+        }else{
+
+            $no = 0 ;
+            $count = KuponPenjualan::all()->last();
+            $terakhir = substr($count->noPenjualanKupon, 8,  20);
+            $kodeBaru = $terakhir + 1  ;
+
+            $tahun = date('mY');
+            $post = 'KP'.$tahun.''.$kodeBaru;
+
+            if (KuponPenjualan::where('noPenjualanKupon', $post)->exists()) {
+                $count = KuponPenjualan::all()->last();
+                $terakhir = substr($count->noPenjualanKupon, 8,  20);
+                $kodeBarulagi = $kodeBaru + 1 ;
+                $post = 'KP'.$tahun.$kodeBarulagi;
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Detail Post!',
+                    'kdKupon'    => $post
+                ], 200);
+            } else {
+                $tahun = date('mY');
+                //$post = 'OP-'.$tahun.'-'.'1';
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Detail Post!',
+                    'kdKupon'    => $post
                 ], 200);
             }
         }

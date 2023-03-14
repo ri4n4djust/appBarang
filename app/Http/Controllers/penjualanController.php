@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\PenjualanDetail;
 use App\Models\GeneralLedger;
+use App\Models\KuponPenjualan;
 class penjualanController extends Controller
 {
     //
@@ -92,6 +93,81 @@ class penjualanController extends Controller
                         ];
                     }
                 PenjualanDetail::insert($detail);
+
+                DB::commit();
+            });
+            if(is_null($exception)) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Post Berhasil di insert!',
+                    // 'data' => $detail
+                ], 200);
+            } else {
+                DB::rollback();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Post Gagal Diupdate!',
+                ], 500);
+            }
+        } catch (\Exception $e) {
+            //DB::rollback();
+            // something went wrong
+            return response()->json([
+             'success' => false,
+             'message' => 'exception'.$e,
+         ], 400);
+        }
+
+    }
+
+    public function simpanPenjualanKupon(Request $request){
+
+        try{
+            $exception = DB::transaction(function() use ($request){ 
+                $editid = $request->input('editid');
+                // array key 0 = Header
+                // array kkey 1 = Detail
+                $tglNota = $request[0]['tglNota'];
+                $noNota = $request[0]['noNota'];
+                $total =  $request[0]['subtotal'];
+                
+                // $post = DB::table('tblpenjualan')->upsert([
+                //     'noPenjualan'     => $request[0]['noNota'],
+                //     'r_pelanggan'     => $request[0]['kdPelanggan'],
+                //     'subTotalPenjualan'     => $request[0]['subtotal'],
+                //     'tglPenjualan'   => $tglNota,
+                //     'discPenjualan'     => $diskon,
+                //     'discPercentP'     => $request[0]['disc'],
+                //     'taxPenjualan'     => $request[0]['tax'],
+                //     'totalPenjualan'     => $request[0]['total'],
+                //     'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                //     'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                // ],
+                // [ 
+                //     'r_pelanggan'     => $request[0]['kdPelanggan'],
+                //     'subTotalPenjualan'     => $request[0]['subtotal'],
+                //     'tglPenjualan'   => $tglNota,
+                //     'discPenjualan'     => $diskon,
+                //     'discPercentP'     => $request[0]['disc'],
+                //     'taxPenjualan'     => $request[0]['tax'],
+
+                //     'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                //     'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                // ]);
+
+                KuponPenjualan::where('noPenjualanKupon', $noNota)->delete();
+                $detpem = $request[1];
+                for ($i = 0; $i < count($detpem); $i++) {
+                    $detail[] = [
+                        'noPenjualanKupon' => $noNota,
+                        'tglPenjualanKupon' => $tglNota,
+                        'r_pelanggan' => $detpem[$i]['kdPelanggan'],
+                        'totalPenjualanKupon' => $detpem[$i]['total'],
+                        'created_at' => $tglNota,
+                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                    ];
+                }
+                KuponPenjualan::insert($detail);
 
                 DB::commit();
             });

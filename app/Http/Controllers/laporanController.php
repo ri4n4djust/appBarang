@@ -70,6 +70,20 @@ class laporanController extends Controller
         ], 200);
     }
 
+    public function listKupon(Request $request){
+        $startDate = date("Y-m-d", strtotime($request->input('startDate')));
+        $endDate = date("Y-m-d", strtotime($request->input('endDate')));
+        // $lap = DB::table('tblopnum')
+        //         ->whereBetween('tblopnum.tglOpnum', [$startDate, $endDate])
+        //         ->get();
+        $lap = DB::select('SELECT *,COALESCE(SUM(totalPenjualanKupon),0) total FROM `tblpenjualankupon` GROUP BY noPenjualanKupon;');
+        return response()->json([
+            'success' => true,
+            'message' => 'Laporan opnum Barang',
+            'data' => $lap
+        ], 200);
+    }
+
     public function aplusan(Request $request){
         $startDate = date("Y-m-d", strtotime($request->input('startDate')));
         $kd_trans = $request->input('kd_trans');

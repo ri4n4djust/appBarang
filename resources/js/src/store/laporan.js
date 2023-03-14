@@ -8,6 +8,7 @@ const state = {
     laporanopnum: [],
     aplusan: [],
     listaplusan: [],
+    listpenjualankupon: []
   };
   
 const getters = {
@@ -17,6 +18,7 @@ const getters = {
     SlaporanOpnum: state => state.laporanopnum,
     Saplusan: state => state.aplusan,
     SlistAplusan: state => state.listaplusan,
+    SlistPenjualanKupon: state => state.listpenjualankupon,
 };
 
 const actions = {  
@@ -66,6 +68,17 @@ const actions = {
         } catch (ex) {
             // Handle error
             alert('error load laporan opnum barang')
+            return
+        }
+    },
+    async GetListPenjualanKupon({ commit }, opnum){
+        let response
+        try {
+            response = await axios.post('/api/listpejualan-kupon', opnum)
+            commit('setListPenjualanKupon', response.data.data)
+        } catch (ex) {
+            // Handle error
+            alert('error load laporan list Kupon')
             return
         }
     },
@@ -120,6 +133,9 @@ const mutations = {
     },
     setLaporanOpnum(state, op){
         state.laporanopnum = op
+    },
+    setListPenjualanKupon(state, kp){
+        state.listpenjualankupon = kp
     },
     setAplusan(state, ap){
         state.aplusan = ap

@@ -146,6 +146,12 @@ const routes = [
         props: true,
     },
     {
+        path: '/penjualan-kupon',
+        name: 'penjualan-kupon',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/penjualanKupon.vue'),
+        props: true,
+    },
+    {
         path: '/editpenjualan',
         name: 'editpenjualan',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/editpenjualan.vue'),

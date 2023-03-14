@@ -1,0 +1,414 @@
+<template>
+    <div class="layout-px-spacing apps-invoice-add">
+        <teleport to="#breadcrumb">
+            <ul class="navbar-nav flex-row">
+                <li>
+                    <div class="page-header">
+                        <nav class="breadcrumb-one" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="javascript:;">Apps</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span>Penjualan</span></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </li>
+            </ul>
+        </teleport>
+
+        <div class="row invoice layout-top-spacing layout-spacing">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="doc-container">
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="invoice-content">
+                                <div class="invoice-detail-body">
+                                    <div class="invoice-detail-title">
+                                       
+                                        <div class="invoice-title">
+                                            Penjualan Kupon
+                                        </div>
+                                    </div>
+
+                                    <div class="invoice-detail-header">
+                                        <div class="row justify-content-between">
+                                            <div class="col-xl-5 invoice-address-company">
+
+                                                <div class="invoice-address-company-fields">
+                                                    <div class="form-group row">
+                                                        <label for="company-name" class="col-sm-3 col-form-label col-form-label-sm">No Nota</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" v-model="params.noNota" id="number" class="form-control form-control-sm" placeholder="#0001" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label for="company-email" class="col-sm-3 col-form-label col-form-label-sm">Tgl</label>
+                                                        <div class="col-sm-9">
+                                                            <flat-pickr v-model="params.tglNota" class="form-control form-control-sm flatpickr active" placeholder="Invoice Date"></flat-pickr>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <!-- <div class="col-xl-5 invoice-address-client">
+
+                                                <div class="invoice-address-client-fields">
+                                                    <div class="form-group row">
+                                                        <label for="client-name" class="col-sm-3 col-form-label col-form-label-sm">Pelanggan</label>
+                                                        <div class="col-sm-9">
+                                                            <multiselect 
+                                                                v-model="paramspelanggan" 
+                                                                :options="penjualan.pelanggans" 
+                                                                :searchable="true"
+                                                                :allow-empty="false"
+                                                                track-by="nmPelanggan"
+                                                                label="nmPelanggan"
+                                                                open-direction="top"
+                                                                placeholder="Choose..." 
+                                                                selected-label="" 
+                                                                select-label="" 
+                                                                deselect-label="">
+                                                            </multiselect>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label for="client-address" class="col-sm-3 col-form-label col-form-label-sm">Address</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" v-model="paramspelanggan.almtPelanggan" id="client-address" class="form-control form-control-sm" placeholder="XYZ Street" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label for="client-phone" class="col-sm-3 col-form-label col-form-label-sm">Phone</label>
+                                                        <div class="col-sm-9">
+                                                            <input type="text" v-model="paramspelanggan.noHpPelanggan" id="client-phone" class="form-control form-control-sm" placeholder="(123) 456 789" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                        </div>
+                                    </div>
+
+                                    <div class="invoice-detail-items">
+                                        <div class="row">
+                                            <div class="form-group col-md-3">
+                                                <label for="inputCity">NAMA PELANGGAN</label>
+                                                <multiselect 
+                                                    v-model="paramspelanggan" 
+                                                    :options="penjualan.pelanggans" 
+                                                    :searchable="true"
+                                                    :allow-empty="false"
+                                                    track-by="nmPelanggan"
+                                                    label="nmPelanggan"
+                                                    open-direction="top"
+                                                    placeholder="Choose..." 
+                                                    selected-label="" 
+                                                    select-label="" 
+                                                    deselect-label="">
+                                                </multiselect>
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label for="inputState">Alamat</label>
+                                                <input type="text" v-model="paramspelanggan.almtPelanggan" class="form-control form-control-sm" placeholder="Price" />
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <label for="inputZip">TOTAL</label><br>
+                                                <!-- {{ new Intl.NumberFormat().format(paramspelanggan.hrgJual * qty) }} -->
+                                                <input type="text" v-model="paramspelanggan.total" class="form-control form-control-sm" placeholder="Quantity" @keypress="onlyNumber" />
+                                            </div>
+                                            <div class="form-group col-md-1">
+                                                <label for="aksi">Aksi</label>
+                                                <button @click="addToCart(paramspelanggan)" class="btn btn-xs btn-primary">
+                                                    + 
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="invoice-detail-items">
+                                        <div class="inv--product-table-section">
+                                            <div class="table-responsive">
+                                                <table class="table table-hover table-bordered item-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Nama Pelanggan</th>
+                                                            <th>Alamat</th>
+                                                            <th>Total</th>
+                                                            <th>Aksi</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr v-for="item in cartKupon" :key="item.kdPelanggan">
+                                                            <td class="description">{{ item.nmPelanggan }}</td>
+                                                            <td class="qty">{{ item.almtPelanggan }}</td>
+                                                            <td class="amount">{{ new Intl.NumberFormat().format(item.total) }}</td>
+                                                            <td class="tax">
+                                                                <button type="button" class="btn btn-secondary additem btn-sm" @click="removeItem(id=item.kdPelanggan)">Hapus</button>
+                                                                <!-- <div class="icon-container">
+                                                                    <i data-feather="trash"></i><span class="icon-name"> trash</span>
+                                                                </div> -->
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <!-- <button type="button" class="btn btn-secondary additem btn-sm" @click="add_item()">Add Item</button> -->
+                                    </div>
+
+                                    
+
+                                    <div class="invoice-detail-total">
+                                        <div class="row">
+
+                                            <div class="col-md-6">
+                                                <div class="invoice-actions-btn">
+                                                    <div class="invoice-action-btn">
+                                                        <div class="row">
+                                                            <div class="col-sm-4">
+                                                                <a href="javascript:;" @click="simpanPenjualan" class="btn btn-success btn-download">Save</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            
+
+                                            <div class="col-md-6">
+                                                <div class="totals-row">
+                                                    <div class="invoice-totals-row invoice-summary-balance-due">
+                                                        <div class="invoice-summary-label">Total</div>
+                                                         <!-- <div class="invoice-summary-label"></div> -->
+                                                        <div class="invoice-summary-value">
+                                                            <div class="balance-due-amount"><span class="currency"></span>
+                                                                <span>{{ new Intl.NumberFormat().format(Math.floor(total)) }}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="invoice-detail-note">
+                                        <div class="row">
+                                            <div class="col-md-12 align-self-center">
+                                                <div class="form-group row invoice-note">
+                                                    <label for="invoice-detail-notes" class="col-sm-12 col-form-label col-form-label-sm">Notes:</label>
+                                                    <div class="col-sm-12">
+                                                        <textarea
+                                                            v-model="params.notes"
+                                                            rows="3"
+                                                            id="invoice-detail-notes"
+                                                            class="form-control"
+                                                            placeholder='Notes - For example, "Thank you for doing business with us"'
+                                                        ></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script setup>
+    import { computed, onMounted, ref, onBeforeMount } from 'vue';
+    import '@/assets/sass/apps/invoice-add.scss';
+
+    //flatpickr
+    import flatPickr from 'vue-flatpickr-component';
+    import 'flatpickr/dist/flatpickr.css';
+    import '@/assets/sass/forms/custom-flatpickr.css';
+
+    import Multiselect from '@suadelabs/vue3-multiselect';
+    import '@suadelabs/vue3-multiselect/dist/vue3-multiselect.css';
+
+    import moment from "moment";
+
+    import { useStore } from 'vuex';
+    import { useRouter, useRoute } from 'vue-router'
+
+    import { useMeta } from '@/composables/use-meta';
+    useMeta({ title: 'Penjualan' });
+
+    const store = useStore();
+    const router = useRouter();
+    const route = useRoute();
+
+    const items = ref([]);
+    const nopenjualan = ref([]);
+    const qty = ref(1);
+    const subtotal = ref();
+    const total = ref();
+    const selected_file = ref(null);
+    const tot = ref();
+    const payment = ref([]);
+    const params = ref({
+        noNota: nopenjualan,
+        tglNota: moment().format("YYYY-MM-DD"),
+        term: 0,
+        jthTempo: moment().format("YYYY-MM-DD"),
+        notes: '',
+        subtotal: subtotal,
+        total: total,
+    });
+    const paramspelanggan = ref({
+        kdPelanggan: '',
+        nmPelanggan: '',
+        almtPelanggan: '',
+        noHpPelanggan: '',
+
+    });
+    const cartKupon = ref([])
+    // const newValue = ref()
+    // const currency_list = ref([]);
+
+    const penjualan = computed(() => {
+        const pelanggans = store.getters.StatePelanggan;
+        nopenjualan.value = store.getters.NoKupon;
+        tot.value = paramspelanggan.value.hrgJual * qty.value;
+        // const pajak = ref(store.state.pajak);
+        // console.log(suppliers)
+        return { pelanggans, nopenjualan, tot }
+    });
+
+    const getPelanggan=() => {
+        store.dispatch('GetPelanggan')
+    }
+    const getNoPenjualan=() => {
+        store.dispatch('GetNoKupon')
+    }
+
+
+    const getTotal=() =>{
+        const pajak = store.state.pajak;
+        total.value = subtotal.value ;
+        
+        // return { tot }
+    }
+   
+
+
+    const simpanPenjualan=() => {
+        const header =params.value
+        // const headers =paramspelanggan.value
+        // const headerfull = Object.assign(header, headers)
+        const detail =cartKupon.value
+        store.dispatch('CreatePenjualanKupon', [header,detail] )
+        total.value = 0
+        subtotal.value = 0
+        setTimeout(function() { 
+            getCart(); 
+        }, 5000);
+        getNoPenjualan();
+        total.value = 0
+    }
+
+    onMounted(() => {
+       
+        getPelanggan();
+        getCart();
+        getNoPenjualan();
+    });
+
+
+    function addToCart(paramspelanggan) {
+        // console.log(paramspelanggan)
+        if (localStorage.getItem('cartKupon')===null){
+            cartKupon.value = [];
+            // console.log(cartItems.value)
+        }else{
+            cartKupon.value = JSON.parse(localStorage.getItem('cartKupon'));
+        }
+            const oldItems = JSON.parse(localStorage.getItem('cartKupon')) || [];
+            // console.log(oldItems)
+            const existingItem = oldItems.find(({ kdPelanggan }) => kdPelanggan === paramspelanggan.kdPelanggan);
+            if (existingItem) {
+                const objIndex = cartKupon.value.findIndex((e => e.kdPelanggan === paramspelanggan.kdPelanggan));
+                const oldName = cartKupon.value[objIndex].nmPelanggan;
+                const oldTotal = cartKupon.value[objIndex].total;
+                const newTotal = parseInt(oldTotal) + parseInt(paramspelanggan.total) ;
+                cartKupon.value[objIndex].total = parseInt(newTotal);
+                localStorage.setItem('cartKupon',JSON.stringify(cartKupon.value));
+                alert(oldName+' Quantity Update')
+                getCart();
+                getTotal()
+                // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
+            }else{
+            cartKupon.value.push({kdPelanggan:paramspelanggan.kdPelanggan, nmPelanggan:paramspelanggan.nmPelanggan,almtPelanggan:paramspelanggan.almtPelanggan,total:paramspelanggan.total});	
+            localStorage.setItem('cartKupon',JSON.stringify(cartKupon.value));
+            getCart();
+            getTotal()
+            // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
+            alert(paramspelanggan.nmPelanggan+ " berhasil disimpan")
+            }
+    }
+    function removeItem(id) {
+        // alert(id)
+        const arrayFromStroage = JSON.parse(localStorage.getItem('cartKupon'));
+        const filtered = arrayFromStroage.filter(arrayFromStroage => arrayFromStroage.kdPelanggan !== id);
+        localStorage.setItem('cartKupon', JSON.stringify(filtered));
+        // cartItems.value.splice(index, 1)
+        // this.isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
+        getCart();
+        // subtotal.value = 0
+        // total.value = 0
+        // console.log(filtered)
+        // alert(filtered.nmPelanggan)
+    }
+
+    function getCart() {
+        // subtotal.value = []
+        if (localStorage.getItem('cartKupon')===null){
+            cartKupon.value = localStorage.setItem('cartKupon', '[]');
+            // subtotal.value = 0
+            // total.value = 0
+        }else if(localStorage.getItem('cartKupon')==='[]'){
+            // alert('masi kosong')
+            cartKupon.value = localStorage.setItem('cartKupon', '[]')
+            getTotal();
+            subtotal.value = 0
+            total.value = 0
+        }else{
+            cartKupon.value = JSON.parse(localStorage.getItem('cartKupon'));
+            getSubtotal();
+            getTotal();
+            
+    // this.isicart = JSON.parse(localStorage.getItem('cartItemsP')).length;
+        }
+
+    }
+
+
+    function getSubtotal(){
+        const allItems = JSON.parse(localStorage.getItem('cartKupon')) || [];
+        let sum = 0;
+        subtotal.value = 0
+        for(let i = 0; i < allItems.length; i++){
+        sum += (parseFloat(allItems[i].total));
+        }
+        subtotal.value = sum
+        // console.log(subtotal.value)
+        // return sum;
+    }
+    function onlyNumber ($event) {
+        //console.log($event.keyCode); //keyCodes value
+        let keyCode = ($event.keyCode ? $event.keyCode : $event.which);
+        if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) { // 46 is dot
+            $event.preventDefault();
+        }   
+    }
+</script>

@@ -55,7 +55,7 @@ Route::post('/aplusan', [App\Http\Controllers\laporanController::class, 'aplusan
 Route::post('/list-aplusan', [App\Http\Controllers\laporanController::class, 'daftarAplusan']);
 Route::post('/laporan-barang', [App\Http\Controllers\laporanController::class, 'laporanBrg']);
 Route::post('/laporan-opnum', [App\Http\Controllers\laporanController::class, 'laporanOpnum']);
-
+Route::post('/listpenjualan-kupon', [App\Http\Controllers\laporanController::class, 'listKupon']);
 Route::post('/pembelian-barang', [App\Http\Controllers\laporanController::class, 'pembelianBrg']);
 // Route::post('/update/room', [App\Http\Controllers\roomController::class, 'update']);
 // Route::delete('/hapus/room/{id}', [App\Http\Controllers\roomController::class, 'destroy']);
@@ -65,7 +65,7 @@ Route::get('/kdbarang', [App\Http\Controllers\nomorController::class, 'kodeBaran
 Route::get('/kdsupplier', [App\Http\Controllers\nomorController::class, 'kodeSupplier']);
 Route::get('/kdpembelian', [App\Http\Controllers\nomorController::class, 'kodePembelian']);
 Route::get('/kdpenjualan', [App\Http\Controllers\nomorController::class, 'kodePenjualan']);
-// Route::get('/kdpelanggan', [App\Http\Controllers\nomorController::class, 'kodePelanggan']);
+Route::get('/kdkupon', [App\Http\Controllers\nomorController::class, 'kodeKupon']);
 Route::get('/kdkategori', [App\Http\Controllers\nomorController::class, 'kodeKategori']);
 Route::get('/kdopnum', [App\Http\Controllers\nomorController::class, 'kodeStokOpname']);
 Route::get('/kdpobbm', [App\Http\Controllers\nomorController::class, 'kodePoBbm']);
@@ -97,6 +97,7 @@ Route::get('/linkacc', [App\Http\Controllers\pembelianController::class, 'linkAc
 
 // Penjualan
 Route::post('/store/penjualan', [App\Http\Controllers\penjualanController::class, 'simpanPenjualan']);
+Route::post('/store/penjualan-kupon', [App\Http\Controllers\penjualanController::class, 'simpanPenjualanKupon']);
 Route::post('/getdetail-penjualan', [App\Http\Controllers\penjualanController::class, 'getDetailPenjualan']);
 
 

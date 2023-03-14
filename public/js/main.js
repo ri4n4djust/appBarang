@@ -27853,6 +27853,13 @@ var routes = [//dashboard
   },
   props: true
 }, {
+  path: '/penjualan-kupon',
+  name: 'penjualan-kupon',
+  component: function component() {
+    return __webpack_require__.e(/*! import() | components-tabs */ "components-tabs").then(__webpack_require__.bind(__webpack_require__, /*! ../views/transaksi/penjualanKupon.vue */ "./resources/js/src/views/transaksi/penjualanKupon.vue"));
+  },
+  props: true
+}, {
   path: '/editpenjualan',
   name: 'editpenjualan',
   component: function component() {
@@ -29866,7 +29873,8 @@ var state = {
   pembelianpersediaan: [],
   laporanopnum: [],
   aplusan: [],
-  listaplusan: []
+  listaplusan: [],
+  listpenjualankupon: []
 };
 var getters = {
   SlaporanBbm: function SlaporanBbm(state) {
@@ -29886,6 +29894,9 @@ var getters = {
   },
   SlistAplusan: function SlistAplusan(state) {
     return state.listaplusan;
+  },
+  SlistPenjualanKupon: function SlistPenjualanKupon(state) {
+    return state.listpenjualankupon;
   }
 };
 var actions = {
@@ -30044,7 +30055,7 @@ var actions = {
       }, _callee5, null, [[1, 8]]);
     }))();
   },
-  GetAplusan: function GetAplusan(_ref6, aplus) {
+  GetListPenjualanKupon: function GetListPenjualanKupon(_ref6, opnum) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
       var commit, response;
       return _regeneratorRuntime().wrap(function _callee6$(_context6) {
@@ -30054,11 +30065,11 @@ var actions = {
               commit = _ref6.commit;
               _context6.prev = 1;
               _context6.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/aplusan', aplus);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/listpejualan-kupon', opnum);
 
             case 4:
               response = _context6.sent;
-              commit('setAplusan', response.data.data);
+              commit('setListPenjualanKupon', response.data.data);
               _context6.next = 12;
               break;
 
@@ -30066,7 +30077,7 @@ var actions = {
               _context6.prev = 8;
               _context6.t0 = _context6["catch"](1);
               // Handle error
-              alert('error load Aplusan bbm');
+              alert('error load laporan list Kupon');
               return _context6.abrupt("return");
 
             case 12:
@@ -30077,7 +30088,7 @@ var actions = {
       }, _callee6, null, [[1, 8]]);
     }))();
   },
-  GetListAplusan: function GetListAplusan(_ref7, laplus) {
+  GetAplusan: function GetAplusan(_ref7, aplus) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
       var commit, response;
       return _regeneratorRuntime().wrap(function _callee7$(_context7) {
@@ -30087,11 +30098,11 @@ var actions = {
               commit = _ref7.commit;
               _context7.prev = 1;
               _context7.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/list-aplusan', laplus);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/aplusan', aplus);
 
             case 4:
               response = _context7.sent;
-              commit('setListAplusan', response.data.data);
+              commit('setAplusan', response.data.data);
               _context7.next = 12;
               break;
 
@@ -30099,7 +30110,7 @@ var actions = {
               _context7.prev = 8;
               _context7.t0 = _context7["catch"](1);
               // Handle error
-              alert('error load list Aplusan bbm');
+              alert('error load Aplusan bbm');
               return _context7.abrupt("return");
 
             case 12:
@@ -30110,30 +30121,40 @@ var actions = {
       }, _callee7, null, [[1, 8]]);
     }))();
   },
-  EditBarang: function EditBarang(_ref8, Brg) {
+  GetListAplusan: function GetListAplusan(_ref8, laplus) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
-      var dispatch;
+      var commit, response;
       return _regeneratorRuntime().wrap(function _callee8$(_context8) {
         while (1) {
           switch (_context8.prev = _context8.next) {
             case 0:
-              dispatch = _ref8.dispatch;
-              _context8.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('api/update/barang', Brg);
+              commit = _ref8.commit;
+              _context8.prev = 1;
+              _context8.next = 4;
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/list-aplusan', laplus);
 
-            case 3:
-              _context8.next = 5;
-              return dispatch('GetBarang');
+            case 4:
+              response = _context8.sent;
+              commit('setListAplusan', response.data.data);
+              _context8.next = 12;
+              break;
 
-            case 5:
+            case 8:
+              _context8.prev = 8;
+              _context8.t0 = _context8["catch"](1);
+              // Handle error
+              alert('error load list Aplusan bbm');
+              return _context8.abrupt("return");
+
+            case 12:
             case "end":
               return _context8.stop();
           }
         }
-      }, _callee8);
+      }, _callee8, null, [[1, 8]]);
     }))();
   },
-  DeleteBarang: function DeleteBarang(_ref9, id) {
+  EditBarang: function EditBarang(_ref9, Brg) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9() {
       var dispatch;
       return _regeneratorRuntime().wrap(function _callee9$(_context9) {
@@ -30142,7 +30163,7 @@ var actions = {
             case 0:
               dispatch = _ref9.dispatch;
               _context9.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("api/hapus/barang/".concat(id));
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('api/update/barang', Brg);
 
             case 3:
               _context9.next = 5;
@@ -30154,6 +30175,29 @@ var actions = {
           }
         }
       }, _callee9);
+    }))();
+  },
+  DeleteBarang: function DeleteBarang(_ref10, id) {
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee10() {
+      var dispatch;
+      return _regeneratorRuntime().wrap(function _callee10$(_context10) {
+        while (1) {
+          switch (_context10.prev = _context10.next) {
+            case 0:
+              dispatch = _ref10.dispatch;
+              _context10.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("api/hapus/barang/".concat(id));
+
+            case 3:
+              _context10.next = 5;
+              return dispatch('GetBarang');
+
+            case 5:
+            case "end":
+              return _context10.stop();
+          }
+        }
+      }, _callee10);
     }))();
   } // async editAplus({commit}, da) {
   //     commit('setAplusan', da)
@@ -30173,6 +30217,9 @@ var mutations = {
   },
   setLaporanOpnum: function setLaporanOpnum(state, op) {
     state.laporanopnum = op;
+  },
+  setListPenjualanKupon: function setListPenjualanKupon(state, kp) {
+    state.listpenjualankupon = kp;
   },
   setAplusan: function setAplusan(state, ap) {
     state.aplusan = ap;
@@ -30221,8 +30268,8 @@ var state = {
   nobarang: [],
   noopnum: [],
   nopobbm: [],
-  noterimabbm: [] // nokupon: [],
-
+  noterimabbm: [],
+  nokupon: []
 };
 var getters = {
   NoBarang: function NoBarang(state) {
@@ -30242,8 +30289,10 @@ var getters = {
   },
   NoTerimaBbm: function NoTerimaBbm(state) {
     return state.noterimabbm;
-  } // NoKupon: state => state.nokupon
-
+  },
+  NoKupon: function NoKupon(state) {
+    return state.nokupon;
+  }
 };
 var actions = (_actions = {
   GetNoPembelian: function GetNoPembelian(_ref) {
@@ -30410,7 +30459,7 @@ var actions = (_actions = {
       }
     }, _callee5, null, [[1, 8]]);
   }))();
-}), _defineProperty(_actions, "GetNoPobbm", function GetNoPobbm(_ref6) {
+}), _defineProperty(_actions, "GetNoKupon", function GetNoKupon(_ref6) {
   return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
     var commit, response;
     return _regeneratorRuntime().wrap(function _callee6$(_context6) {
@@ -30420,11 +30469,11 @@ var actions = (_actions = {
             commit = _ref6.commit;
             _context6.prev = 1;
             _context6.next = 4;
-            return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/kdpobbm');
+            return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/kdkupon');
 
           case 4:
             response = _context6.sent;
-            commit('setNoPobbm', response.data.kdPobbm);
+            commit('setNoKupon', response.data.kdKupon);
             _context6.next = 12;
             break;
 
@@ -30432,7 +30481,7 @@ var actions = (_actions = {
             _context6.prev = 8;
             _context6.t0 = _context6["catch"](1);
             // Handle error
-            alert('error no po bbm');
+            alert('error no Kupon');
             return _context6.abrupt("return");
 
           case 12:
@@ -30442,7 +30491,7 @@ var actions = (_actions = {
       }
     }, _callee6, null, [[1, 8]]);
   }))();
-}), _defineProperty(_actions, "GetTerimabbm", function GetTerimabbm(_ref7) {
+}), _defineProperty(_actions, "GetNoPobbm", function GetNoPobbm(_ref7) {
   return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
     var commit, response;
     return _regeneratorRuntime().wrap(function _callee7$(_context7) {
@@ -30452,11 +30501,11 @@ var actions = (_actions = {
             commit = _ref7.commit;
             _context7.prev = 1;
             _context7.next = 4;
-            return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/kdbbmdatang');
+            return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/kdpobbm');
 
           case 4:
             response = _context7.sent;
-            commit('setTerimabbm', response.data.kdBbmdatang);
+            commit('setNoPobbm', response.data.kdPobbm);
             _context7.next = 12;
             break;
 
@@ -30474,6 +30523,38 @@ var actions = (_actions = {
       }
     }, _callee7, null, [[1, 8]]);
   }))();
+}), _defineProperty(_actions, "GetTerimabbm", function GetTerimabbm(_ref8) {
+  return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
+    var commit, response;
+    return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+      while (1) {
+        switch (_context8.prev = _context8.next) {
+          case 0:
+            commit = _ref8.commit;
+            _context8.prev = 1;
+            _context8.next = 4;
+            return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/kdbbmdatang');
+
+          case 4:
+            response = _context8.sent;
+            commit('setTerimabbm', response.data.kdBbmdatang);
+            _context8.next = 12;
+            break;
+
+          case 8:
+            _context8.prev = 8;
+            _context8.t0 = _context8["catch"](1);
+            // Handle error
+            alert('error no po bbm');
+            return _context8.abrupt("return");
+
+          case 12:
+          case "end":
+            return _context8.stop();
+        }
+      }
+    }, _callee8, null, [[1, 8]]);
+  }))();
 }), _actions);
 var mutations = {
   setNoPembelian: function setNoPembelian(state, pembelian) {
@@ -30487,6 +30568,9 @@ var mutations = {
   },
   setNoOpnum: function setNoOpnum(state, op) {
     state.noopnum = op;
+  },
+  setNoKupon: function setNoKupon(state, kp) {
+    state.nokupon = kp;
   },
   setNoPobbm: function setNoPobbm(state, po) {
     state.nopobbm = po;
@@ -31402,7 +31486,7 @@ var actions = {
       }, _callee5, null, [[1, 10]]);
     }))();
   },
-  CreateOpnum: function CreateOpnum(_ref6, detail) {
+  CreatePenjualanKupon: function CreatePenjualanKupon(_ref6, detail) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
       var dispatch, response, toast, _toast5;
 
@@ -31413,7 +31497,7 @@ var actions = {
               dispatch = _ref6.dispatch;
               _context6.prev = 1;
               _context6.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/store/opnum', detail);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/store/penjualan-kupon', detail);
 
             case 4:
               response = _context6.sent;
@@ -31426,15 +31510,15 @@ var actions = {
               });
               toast.fire({
                 icon: 'success',
-                title: 'Opnum berhasil tersimpan',
+                title: 'Penjualan berhasil tersimpan',
                 padding: '2em'
-              }); // localStorage.setItem('cartItemsPen', '[]')
-
-              _context6.next = 14;
+              });
+              localStorage.setItem('cartKupon', '[]');
+              _context6.next = 15;
               break;
 
-            case 9:
-              _context6.prev = 9;
+            case 10:
+              _context6.prev = 10;
               _context6.t0 = _context6["catch"](1);
               // Handle error
               _toast5 = window.Swal.mixin({
@@ -31455,17 +31539,18 @@ var actions = {
 
               return _context6.abrupt("return");
 
-            case 14:
+            case 15:
             case "end":
               return _context6.stop();
           }
         }
-      }, _callee6, null, [[1, 9]]);
+      }, _callee6, null, [[1, 10]]);
     }))();
   },
-  GetdetailPo: function GetdetailPo(_ref7, detail) {
+  CreateOpnum: function CreateOpnum(_ref7, detail) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
-      var dispatch, response, toast;
+      var dispatch, response, toast, _toast6;
+
       return _regeneratorRuntime().wrap(function _callee7$(_context7) {
         while (1) {
           switch (_context7.prev = _context7.next) {
@@ -31473,10 +31558,70 @@ var actions = {
               dispatch = _ref7.dispatch;
               _context7.prev = 1;
               _context7.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/detail/po-bbm', detail);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/store/opnum', detail);
 
             case 4:
               response = _context7.sent;
+              toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+              });
+              toast.fire({
+                icon: 'success',
+                title: 'Opnum berhasil tersimpan',
+                padding: '2em'
+              }); // localStorage.setItem('cartItemsPen', '[]')
+
+              _context7.next = 14;
+              break;
+
+            case 9:
+              _context7.prev = 9;
+              _context7.t0 = _context7["catch"](1);
+              // Handle error
+              _toast6 = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+              });
+
+              _toast6.fire({
+                title: 'Error!',
+                text: 'Mohon Lengkapi Data',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+              });
+
+              return _context7.abrupt("return");
+
+            case 14:
+            case "end":
+              return _context7.stop();
+          }
+        }
+      }, _callee7, null, [[1, 9]]);
+    }))();
+  },
+  GetdetailPo: function GetdetailPo(_ref8, detail) {
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
+      var dispatch, response, toast;
+      return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+        while (1) {
+          switch (_context8.prev = _context8.next) {
+            case 0:
+              dispatch = _ref8.dispatch;
+              _context8.prev = 1;
+              _context8.next = 4;
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/detail/po-bbm', detail);
+
+            case 4:
+              response = _context8.sent;
               // const toast = window.Swal.mixin({
               //     toast: true,
               //     position: 'top-center',
@@ -31491,12 +31636,12 @@ var actions = {
               // });
               localStorage.setItem('terimabarang', JSON.stringify(response.data.data));
               console.log(response.data.data);
-              _context7.next = 14;
+              _context8.next = 14;
               break;
 
             case 9:
-              _context7.prev = 9;
-              _context7.t0 = _context7["catch"](1);
+              _context8.prev = 9;
+              _context8.t0 = _context8["catch"](1);
               // Handle error
               toast = window.Swal.mixin({
                 toast: true,
@@ -31512,35 +31657,17 @@ var actions = {
                 // confirmButtonText: 'Cool',
                 padding: '2em'
               });
-              return _context7.abrupt("return");
+              return _context8.abrupt("return");
 
             case 14:
-            case "end":
-              return _context7.stop();
-          }
-        }
-      }, _callee7, null, [[1, 9]]);
-    }))();
-  },
-  NewKupon: function NewKupon(_ref8, data) {
-    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
-      var commit;
-      return _regeneratorRuntime().wrap(function _callee8$(_context8) {
-        while (1) {
-          switch (_context8.prev = _context8.next) {
-            case 0:
-              commit = _ref8.commit;
-              commit('setKupon', data);
-
-            case 2:
             case "end":
               return _context8.stop();
           }
         }
-      }, _callee8);
+      }, _callee8, null, [[1, 9]]);
     }))();
   },
-  NewBiaya: function NewBiaya(_ref9, b) {
+  NewKupon: function NewKupon(_ref9, data) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9() {
       var commit;
       return _regeneratorRuntime().wrap(function _callee9$(_context9) {
@@ -31548,7 +31675,7 @@ var actions = {
           switch (_context9.prev = _context9.next) {
             case 0:
               commit = _ref9.commit;
-              commit('setBiaya', b);
+              commit('setKupon', data);
 
             case 2:
             case "end":
@@ -31558,7 +31685,7 @@ var actions = {
       }, _callee9);
     }))();
   },
-  NewLink: function NewLink(_ref10, b) {
+  NewBiaya: function NewBiaya(_ref10, b) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee10() {
       var commit;
       return _regeneratorRuntime().wrap(function _callee10$(_context10) {
@@ -31566,7 +31693,7 @@ var actions = {
           switch (_context10.prev = _context10.next) {
             case 0:
               commit = _ref10.commit;
-              commit('setLink', b);
+              commit('setBiaya', b);
 
             case 2:
             case "end":
@@ -31576,41 +31703,25 @@ var actions = {
       }, _callee10);
     }))();
   },
-  GetEditAplusan: function GetEditAplusan(_ref11, sort) {
+  NewLink: function NewLink(_ref11, b) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee11() {
-      var commit, response;
+      var commit;
       return _regeneratorRuntime().wrap(function _callee11$(_context11) {
         while (1) {
           switch (_context11.prev = _context11.next) {
             case 0:
               commit = _ref11.commit;
-              _context11.prev = 1;
-              _context11.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/getedit-aplusam', sort);
-
-            case 4:
-              response = _context11.sent;
-              commit('setEditAplusan', response.data.data);
-              commit('setKupon', data);
-              commit('setBiaya', b);
               commit('setLink', b);
-              _context11.next = 14;
-              break;
 
-            case 11:
-              _context11.prev = 11;
-              _context11.t0 = _context11["catch"](1);
-              return _context11.abrupt("return");
-
-            case 14:
+            case 2:
             case "end":
               return _context11.stop();
           }
         }
-      }, _callee11, null, [[1, 11]]);
+      }, _callee11);
     }))();
   },
-  GetPembelian: function GetPembelian(_ref12) {
+  GetEditAplusan: function GetEditAplusan(_ref12, sort) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee12() {
       var commit, response;
       return _regeneratorRuntime().wrap(function _callee12$(_context12) {
@@ -31620,28 +31731,31 @@ var actions = {
               commit = _ref12.commit;
               _context12.prev = 1;
               _context12.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/getpembelian');
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/getedit-aplusam', sort);
 
             case 4:
               response = _context12.sent;
-              commit('setPembelian', response.data.data);
-              _context12.next = 11;
+              commit('setEditAplusan', response.data.data);
+              commit('setKupon', data);
+              commit('setBiaya', b);
+              commit('setLink', b);
+              _context12.next = 14;
               break;
 
-            case 8:
-              _context12.prev = 8;
+            case 11:
+              _context12.prev = 11;
               _context12.t0 = _context12["catch"](1);
               return _context12.abrupt("return");
 
-            case 11:
+            case 14:
             case "end":
               return _context12.stop();
           }
         }
-      }, _callee12, null, [[1, 8]]);
+      }, _callee12, null, [[1, 11]]);
     }))();
   },
-  GetAcc: function GetAcc(_ref13) {
+  GetPembelian: function GetPembelian(_ref13) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee13() {
       var commit, response;
       return _regeneratorRuntime().wrap(function _callee13$(_context13) {
@@ -31651,11 +31765,11 @@ var actions = {
               commit = _ref13.commit;
               _context13.prev = 1;
               _context13.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/linkacc');
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/getpembelian');
 
             case 4:
               response = _context13.sent;
-              commit('setAcc', response.data.data);
+              commit('setPembelian', response.data.data);
               _context13.next = 11;
               break;
 
@@ -31672,9 +31786,9 @@ var actions = {
       }, _callee13, null, [[1, 8]]);
     }))();
   },
-  GetDetailPenjualan: function GetDetailPenjualan(_ref14, kdPenjualan) {
+  GetAcc: function GetAcc(_ref14) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee14() {
-      var commit, response, dataArr, arr, i;
+      var commit, response;
       return _regeneratorRuntime().wrap(function _callee14$(_context14) {
         while (1) {
           switch (_context14.prev = _context14.next) {
@@ -31682,10 +31796,41 @@ var actions = {
               commit = _ref14.commit;
               _context14.prev = 1;
               _context14.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/getdetail-penjualan', kdPenjualan);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].get('/api/linkacc');
 
             case 4:
               response = _context14.sent;
+              commit('setAcc', response.data.data);
+              _context14.next = 11;
+              break;
+
+            case 8:
+              _context14.prev = 8;
+              _context14.t0 = _context14["catch"](1);
+              return _context14.abrupt("return");
+
+            case 11:
+            case "end":
+              return _context14.stop();
+          }
+        }
+      }, _callee14, null, [[1, 8]]);
+    }))();
+  },
+  GetDetailPenjualan: function GetDetailPenjualan(_ref15, kdPenjualan) {
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee15() {
+      var commit, response, dataArr, arr, i;
+      return _regeneratorRuntime().wrap(function _callee15$(_context15) {
+        while (1) {
+          switch (_context15.prev = _context15.next) {
+            case 0:
+              commit = _ref15.commit;
+              _context15.prev = 1;
+              _context15.next = 4;
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/getdetail-penjualan', kdPenjualan);
+
+            case 4:
+              response = _context15.sent;
               // commit('setAcc', response.data.data)
               dataArr = response.data.data;
               arr = [];
@@ -31704,31 +31849,31 @@ var actions = {
 
 
               localStorage.setItem('cartItemsPen', JSON.stringify(arr));
-              _context14.next = 14;
+              _context15.next = 14;
               break;
 
             case 11:
-              _context14.prev = 11;
-              _context14.t0 = _context14["catch"](1);
-              return _context14.abrupt("return");
+              _context15.prev = 11;
+              _context15.t0 = _context15["catch"](1);
+              return _context15.abrupt("return");
 
             case 14:
             case "end":
-              return _context14.stop();
+              return _context15.stop();
           }
         }
-      }, _callee14, null, [[1, 11]]);
+      }, _callee15, null, [[1, 11]]);
     }))();
   },
-  CreateEditPenjualan: function CreateEditPenjualan(_ref15, item) {
-    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee15() {
+  CreateEditPenjualan: function CreateEditPenjualan(_ref16, item) {
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee16() {
       var commit;
-      return _regeneratorRuntime().wrap(function _callee15$(_context15) {
+      return _regeneratorRuntime().wrap(function _callee16$(_context16) {
         while (1) {
-          switch (_context15.prev = _context15.next) {
+          switch (_context16.prev = _context16.next) {
             case 0:
-              commit = _ref15.commit;
-              _context15.next = 3;
+              commit = _ref16.commit;
+              _context16.next = 3;
               return commit('setEditPenjualan', item);
 
             case 3:
@@ -31736,10 +31881,10 @@ var actions = {
 
             case 4:
             case "end":
-              return _context15.stop();
+              return _context16.stop();
           }
         }
-      }, _callee15);
+      }, _callee16);
     }))();
   }
 };
@@ -74258,7 +74403,7 @@ module.exports = JSON.parse('{"dashboard":"仪表盘","sales":"销售量","analy
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/chunks/" + chunkId + "." + {"index2":"3f2f5b1faba69db1","components-tabs":"2d0cf3acbec1d064","components-accordions":"958ef92098fb530f","components-modals":"e6514e571555b5c0","components-cards":"e7583a4cf5564f04","components-carousel":"8563fc4e88cba5e0","components-timeline":"7ae9d528985dc414","components-media-object":"d265e1f0556c5b23","components-list-group":"20680dcbffabc997","components-pricing-table":"b87be2673dcf64d6","components-notifications":"9206fc33e5c150fe","components-lightbox":"b9458fb55cd5c6f3","components-countdown":"e221fbc8b2816ca0","components-counter":"f7283742d443ef25","components-sweetalert":"650a94cf22bafd9a","font-icons":"34e69c87195a1b77","pages-helpdesk":"dcb617b851894fab","pages-contact-us":"510879cdb75ffda7","pages-faq":"08ea3b394d276c8f","pages-faq2":"b3656798f889ae16","pages-privacy-policy":"5b1dba6f010460d1","pages-coming-soon":"3625eb8d5e9f9c18","pages-error404":"b6b7b2f9a83218ee","pages-error500":"3339dbd448847368","pages-error503":"a95ec8c784080110","pages-maintenence":"3d08473adb247530","pages-blank-page":"0c1ac99ccc41961d","pages-sample":"9994ba18d7cb12e8","auth-login-boxed":"035dc3c8eeee6d3e","auth-register-boxed":"d614be638b7cb772","auth-lockscreen-boxed":"32b2d256b6dca6d3","auth-pass-recovery-boxed":"57ba933f69001944","auth-login":"11978aa9265265c9","auth-register":"a5f635bb185472b7","auth-lockscreen":"f692ce3fe9e2f169","auth-pass-recovery":"4cc4878d9baefab2","elements-alerts":"cce791b51da55ebf","elements-avatar":"808a6756ade77be7","elements-badges":"ceecf745922b9465","elements-breadcrumbs":"1722a5e9bc7f1a7d","elements-buttons":"fdac3a00bec52991","elements-buttons-group":"df319f66de56889a","elements-color-library":"b9c63e419c8c300b","elements-dropdown":"72e3ecb8205bc421","elements-infobox":"399934d0b9db2526","elements-jumbotron":"67620b84089a4b94","elements-loader":"3b649aacbbfa08fc","elements-pagination":"21204cc9b1c64185","elements-popovers":"130b77ef0926b915","elements-progress-bar":"30e876cd9de41f5b","elements-search":"b464253c225723d6","elements-tooltips":"3a4ec3115056b6b3","elements-treeview":"bca134389bae1a9b","elements-typography":"ac9cf4c49da4113a","tables":"6c7b752437b29866","users-profile":"49b36e78cefd7a4d","users-account-setting":"9e19364198133f22","dragndrop":"45472aaa1012adce","charts-apex-chart":"d2f00a623aa3eb04","widgets":"b7fa9c006c6aebb0","forms-basic":"e774256dd6bf57bd","forms-input-group":"b0a3fce5817ce26b","forms-layouts":"e821a21bb2a879bf","forms-validation":"defac56a58186d1e","forms-checkbox-radio":"8c34dd2d66375144","forms-switches":"d60eef87f12531fd","forms-wizards":"c2b79beef794f1ee","forms-file-upload":"bd9f24848a2ef3ab","forms-clipboard":"0121ffa0f1ea0fc2","forms-date-picker":"52e788a5ab0cfd5b","forms-input-mask":"07ba756f40e98ad2","forms-quill-editor":"9e844664b525b753","forms-touchspin":"43fded85f16c30f9","forms-markdown-editor":"2b08efe290b9b501","forms-select2":"dff731b5e7c71bcd","apps-chat":"52a8d44efc21b078","apps-mailbox":"e6b2012d55856740","apps-todo-list":"9a40985eb471a29c","apps-contacts":"384a513eb6c8af7b","apps-notes":"36ecb7aab3e00af0","apps-scrumboard":"071c60efffbf8f79","apps-calendar":"2667beb3567fe611","apps-invoice-list":"0feaedf5952fdfff","apps-invoice-preview":"d9edd83168389f6b","apps-invoice-add":"087bfcc722043974","apps-invoice-edit":"5918fd58d1493481","tables-basic":"accd1005371fe815","tables-striped":"c14f35060df00cfc","tables-order-sorting":"58cc150f515bdba7","tables-multi-column":"cbd5693c21f08e50","tables-multiple-tables":"3cd0712f58b2a919","tables-alt-pagination":"83a6a0f7048933e6","tables-custom":"5f92dc2605fc71d8","tables-range-search":"10af2f97198a32b7","tables-export":"ca03023830dd14e6","tables-live-dom-ordering":"f380465fda483f23","tables-miscellaneous":"3f826e4b9e0d2831","node_modules_html2canvas_dist_html2canvas_js":"5475dc17eb928a5a","node_modules_dompurify_dist_purify_js":"9dabfec756329575","node_modules_canvg_lib_index_es_js":"84de45b397df7f27"}[chunkId] + ".js";
+/******/ 			return "js/chunks/" + chunkId + "." + {"index2":"3f2f5b1faba69db1","components-tabs":"18b0ac6929726496","components-accordions":"958ef92098fb530f","components-modals":"e6514e571555b5c0","components-cards":"e7583a4cf5564f04","components-carousel":"8563fc4e88cba5e0","components-timeline":"7ae9d528985dc414","components-media-object":"d265e1f0556c5b23","components-list-group":"20680dcbffabc997","components-pricing-table":"b87be2673dcf64d6","components-notifications":"9206fc33e5c150fe","components-lightbox":"b9458fb55cd5c6f3","components-countdown":"e221fbc8b2816ca0","components-counter":"f7283742d443ef25","components-sweetalert":"650a94cf22bafd9a","font-icons":"34e69c87195a1b77","pages-helpdesk":"dcb617b851894fab","pages-contact-us":"510879cdb75ffda7","pages-faq":"08ea3b394d276c8f","pages-faq2":"b3656798f889ae16","pages-privacy-policy":"5b1dba6f010460d1","pages-coming-soon":"3625eb8d5e9f9c18","pages-error404":"b6b7b2f9a83218ee","pages-error500":"3339dbd448847368","pages-error503":"a95ec8c784080110","pages-maintenence":"3d08473adb247530","pages-blank-page":"0c1ac99ccc41961d","pages-sample":"9994ba18d7cb12e8","auth-login-boxed":"035dc3c8eeee6d3e","auth-register-boxed":"d614be638b7cb772","auth-lockscreen-boxed":"32b2d256b6dca6d3","auth-pass-recovery-boxed":"57ba933f69001944","auth-login":"11978aa9265265c9","auth-register":"a5f635bb185472b7","auth-lockscreen":"f692ce3fe9e2f169","auth-pass-recovery":"4cc4878d9baefab2","elements-alerts":"cce791b51da55ebf","elements-avatar":"808a6756ade77be7","elements-badges":"ceecf745922b9465","elements-breadcrumbs":"1722a5e9bc7f1a7d","elements-buttons":"fdac3a00bec52991","elements-buttons-group":"df319f66de56889a","elements-color-library":"b9c63e419c8c300b","elements-dropdown":"72e3ecb8205bc421","elements-infobox":"399934d0b9db2526","elements-jumbotron":"67620b84089a4b94","elements-loader":"3b649aacbbfa08fc","elements-pagination":"21204cc9b1c64185","elements-popovers":"130b77ef0926b915","elements-progress-bar":"30e876cd9de41f5b","elements-search":"b464253c225723d6","elements-tooltips":"3a4ec3115056b6b3","elements-treeview":"bca134389bae1a9b","elements-typography":"ac9cf4c49da4113a","tables":"6c7b752437b29866","users-profile":"49b36e78cefd7a4d","users-account-setting":"9e19364198133f22","dragndrop":"45472aaa1012adce","charts-apex-chart":"d2f00a623aa3eb04","widgets":"b7fa9c006c6aebb0","forms-basic":"e774256dd6bf57bd","forms-input-group":"b0a3fce5817ce26b","forms-layouts":"e821a21bb2a879bf","forms-validation":"defac56a58186d1e","forms-checkbox-radio":"8c34dd2d66375144","forms-switches":"d60eef87f12531fd","forms-wizards":"c2b79beef794f1ee","forms-file-upload":"bd9f24848a2ef3ab","forms-clipboard":"0121ffa0f1ea0fc2","forms-date-picker":"52e788a5ab0cfd5b","forms-input-mask":"07ba756f40e98ad2","forms-quill-editor":"9e844664b525b753","forms-touchspin":"43fded85f16c30f9","forms-markdown-editor":"2b08efe290b9b501","forms-select2":"dff731b5e7c71bcd","apps-chat":"52a8d44efc21b078","apps-mailbox":"e6b2012d55856740","apps-todo-list":"9a40985eb471a29c","apps-contacts":"384a513eb6c8af7b","apps-notes":"36ecb7aab3e00af0","apps-scrumboard":"071c60efffbf8f79","apps-calendar":"2667beb3567fe611","apps-invoice-list":"0feaedf5952fdfff","apps-invoice-preview":"d9edd83168389f6b","apps-invoice-add":"087bfcc722043974","apps-invoice-edit":"5918fd58d1493481","tables-basic":"accd1005371fe815","tables-striped":"c14f35060df00cfc","tables-order-sorting":"58cc150f515bdba7","tables-multi-column":"cbd5693c21f08e50","tables-multiple-tables":"3cd0712f58b2a919","tables-alt-pagination":"83a6a0f7048933e6","tables-custom":"5f92dc2605fc71d8","tables-range-search":"10af2f97198a32b7","tables-export":"ca03023830dd14e6","tables-live-dom-ordering":"f380465fda483f23","tables-miscellaneous":"3f826e4b9e0d2831","node_modules_html2canvas_dist_html2canvas_js":"5475dc17eb928a5a","node_modules_dompurify_dist_purify_js":"9dabfec756329575","node_modules_canvg_lib_index_es_js":"84de45b397df7f27"}[chunkId] + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	
