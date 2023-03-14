@@ -151,13 +151,14 @@ class penjualanController extends Controller
                     $acc_id_d = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
                     $memo = 'Penjualan-Kupon';
                     $jurnal = 'JK';
-                    insert_gl($noNota,$tglNota,$total,$memo,$jurnal);
+                    $t = $detpem[$i]['total'] ;
+                    insert_gl($noNota,$tglNota,$t,$memo,$jurnal);
                     $rgl = DB::table('general_ledger')->get()->last()->notrans;
                     $ac = [
                         [
                             'rgl' => $rgl,
                             'acc_id' => $acc_id_d,
-                            'debet' => $total,
+                            'debet' => $t,
                             'kredit' => 0,
                             'trans_detail' => 'Penjualan-Kupon',
                             'void_flag' => 0,
@@ -165,8 +166,8 @@ class penjualanController extends Controller
                         [
                             'rgl' => $rgl,
                             'acc_id' => $accid,
-                            'debet' => $total,
-                            'kredit' => 0,
+                            'debet' => 0,
+                            'kredit' => -1*$t,
                             'trans_detail' => 'Penjualan-Kupon',
                             'void_flag' => 0,
                         ],
