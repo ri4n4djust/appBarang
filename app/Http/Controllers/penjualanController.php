@@ -131,29 +131,6 @@ class penjualanController extends Controller
                 $noNota = $request[0]['noNota'];
                 $total =  $request[0]['subtotal'];
                 
-                // $post = DB::table('tblpenjualan')->upsert([
-                //     'noPenjualan'     => $request[0]['noNota'],
-                //     'r_pelanggan'     => $request[0]['kdPelanggan'],
-                //     'subTotalPenjualan'     => $request[0]['subtotal'],
-                //     'tglPenjualan'   => $tglNota,
-                //     'discPenjualan'     => $diskon,
-                //     'discPercentP'     => $request[0]['disc'],
-                //     'taxPenjualan'     => $request[0]['tax'],
-                //     'totalPenjualan'     => $request[0]['total'],
-                //     'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-                //     'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-                // ],
-                // [ 
-                //     'r_pelanggan'     => $request[0]['kdPelanggan'],
-                //     'subTotalPenjualan'     => $request[0]['subtotal'],
-                //     'tglPenjualan'   => $tglNota,
-                //     'discPenjualan'     => $diskon,
-                //     'discPercentP'     => $request[0]['disc'],
-                //     'taxPenjualan'     => $request[0]['tax'],
-
-                //     'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-                //     'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-                // ]);
 
                 KuponPenjualan::where('noPenjualanKupon', $noNota)->delete();
                 $detpem = $request[1];
@@ -166,6 +143,38 @@ class penjualanController extends Controller
                         'created_at' => $tglNota,
                         'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                     ];
+
+                    //===========jurnal
+                    // $acc_id_k = $detpro[$i]['accid_persediaan']; // acc id yg di debet
+                    // $acc_id_dd = $detpro[$i]['accid_hpp']; // acc id yg di debet
+                    $accid = '21200'; // $detpro[$i]['accid']; // acc id yg di debet
+                    $acc_id_d = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
+                    $memo = 'Penjualan-Kupon';
+                    $jurnal = 'JK';
+                    insert_gl($noNota,$tglNota,$total,$memo,$jurnal);
+                    $rgl = DB::table('general_ledger')->get()->last()->notrans;
+                    $ac = [
+                        [
+                            'rgl' => $rgl,
+                            'acc_id' => $acc_id_d,
+                            'debet' => $total,
+                            'kredit' => 0,
+                            'trans_detail' => 'Penjualan-Kupon',
+                            'void_flag' => 0,
+                        ],
+                        [
+                            'rgl' => $rgl,
+                            'acc_id' => $accid,
+                            'debet' => $total,
+                            'kredit' => 0,
+                            'trans_detail' => 'Penjualan-Kupon',
+                            'void_flag' => 0,
+                        ],
+                        
+                    ];
+                    
+                    insert_gl_detail($ac);
+                    //===========end jurnal
                 }
                 KuponPenjualan::insert($detail);
 

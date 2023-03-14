@@ -179,6 +179,37 @@ class transaksiNoselController extends Controller
                             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                         ];
                         $total_k += $nilai ;
+                        $t = $total_k += $nilai ;
+                        //===========jurnal
+                        $acc_id_k = '11601'; // $detpro[$i]['accid_persediaan']; // acc id yg di debet
+                        // $acc_id_dd = $detpro[$i]['accid_hpp']; // acc id yg di debet
+                        // $accid = $detpro[$i]['accid']; // acc id yg di debet
+                        $acc_id_d = '21200'; // $request[0]['subtotal']; // acc id yg di kredit
+                        $memo = 'Aplusan';
+                        $jurnal = 'JK';
+                        insert_gl($kdtrans,$tgl,$t,$memo,$jurnal);
+                        $rgl = DB::table('general_ledger')->get()->last()->notrans;
+                        $ac = [
+                            [
+                                'rgl' => $rgl,
+                                'acc_id' => $acc_id_d,
+                                'debet' => -1*$t,
+                                'kredit' => 0,
+                                'trans_detail' => 'Aplusan-kupon',
+                                'void_flag' => 0,
+                            ],
+                            [
+                                'rgl' => $rgl,
+                                'acc_id' => $acc_id_k,
+                                'debet' => 0,
+                                'kredit' => -1*$t,
+                                'trans_detail' => 'Aplusan-kupon',
+                                'void_flag' => 0,
+                            ]
+                        ];
+                        
+                        insert_gl_detail($ac);
+                        //===========end jurnal
                     }
                     Kupon::insert($detkup);
                 }

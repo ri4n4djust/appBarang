@@ -37,7 +37,7 @@
                                                             <table>
                                                                 <tbody  v-for="hrt in hartalist" :key="hrt.acc_id" :set="amount = hrt.amount">
                                                                     
-                                                                        <tr v-if="hrt.level === '1'" >
+                                                                        <tr v-if="hrt.level === '1'" style="font-size:10px">
                                                                             <td v-if="hrt.jenis != 'Total'" style="min-width:70px">{{ hrt.acc_id }}</td>
                                                                             <td v-else></td>
                                                                             <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'" style="min-width: 400px;" ><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
@@ -56,7 +56,7 @@
                                                                             <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
                                                                             <td v-else></td>
                                                                         </tr>
-                                                                        <tr v-if="hrt.level === '2'">
+                                                                        <tr v-if="hrt.level === '2'" style="font-size:10px">
                                                                             <td v-if="hrt.jenis != 'Total'" >{{ hrt.acc_id }}</td>
                                                                             <td v-else></td>
                                                                             <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'" style="min-width: 300px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</b></td>
@@ -69,7 +69,7 @@
                                                                             <td v-else></td>
                                                                             <td></td>
                                                                         </tr>
-                                                                        <tr v-if="hrt.level === '3'">
+                                                                        <tr v-if="hrt.level === '3'" style="font-size:10px">
                                                                             <td v-if="hrt.jenis != 'Total'">{{ hrt.acc_id }}</td>
                                                                             <td v-else></td>
                                                                             <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'" style="min-width: 300px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</b></td>
@@ -81,7 +81,7 @@
                                                                             <td></td>
                                                                             <td></td>
                                                                         </tr>
-                                                                        <tr v-if="hrt.level === '4'">
+                                                                        <tr v-if="hrt.level === '4'" style="font-size:10px">
                                                                             <td>{{ hrt.acc_id }}</td>
                                                                             <td style="min-width: 300px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
                                                                             <td>{{ Number(amount).toLocaleString() }}</td>
@@ -226,7 +226,7 @@
         } else if (type == 'print') {
             var rowhtml = '<p>' + filename + '</p>';
             rowhtml +=
-                '<table style="width: 70%; " cellpadding="0" cellcpacing="0" border="1"><thead><tr style="color: #515365; background: #eff5ff; -webkit-print-color-adjust: exact; print-color-adjust: exact; "> ';
+                '<table style="width: 95%; " cellpadding="0" cellcpacing="0" border="1"><thead><tr style="color: #515365; background: #eff5ff; -webkit-print-color-adjust: exact; print-color-adjust: exact; "> ';
             cols.map((d) => {
                 rowhtml += '<th>' + capitalize(d) + '</th>';
             });
@@ -242,7 +242,7 @@
                 rowhtml += '</tr>';
             });
             rowhtml +=
-                '<style>body {font-family:Arial; color:#495057;}p{text-align:center;font-size:10px;font-weight:bold;margin:15px;}table{ border-collapse: collapse; border-spacing: 0; }th,td{font-size:12px;text-align:left;padding: 4px;}th{padding:8px 4px;}tr:nth-child(2n-1){background:#f7f7f7; }</style>';
+                '<style>body {font-family:Arial; color:#495057;}p{text-align:center;font-size:8px;font-weight:bold;margin:15px;}table{ border-collapse: collapse; border-spacing: 0; }th,td{font-size:8px;text-align:left;padding: 4px;}th{padding:8px 4px;}tr:nth-child(2n-1){background:#f7f7f7; }</style>';
             rowhtml += '</tbody></table>';
             var winPrint = window.open('', '', 'left=0,top=0,width=1000,height=600,toolbar=0,scrollbars=0,status=0');
             winPrint.document.write('<title>Print</title>' + rowhtml);
