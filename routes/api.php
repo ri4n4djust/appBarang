@@ -100,6 +100,8 @@ Route::post('/store/penjualan', [App\Http\Controllers\penjualanController::class
 Route::post('/store/penjualan-kupon', [App\Http\Controllers\penjualanController::class, 'simpanPenjualanKupon']);
 Route::post('/getdetail-penjualan', [App\Http\Controllers\penjualanController::class, 'getDetailPenjualan']);
 
+//============biaya
+Route::post('/store/biaya', [App\Http\Controllers\biayaController::class, 'simpanBiaya']);
 
 //============ COA
 Route::post('/labarugi/pendapatan', [App\Http\Controllers\labarugiController::class, 'getPendapatan']);

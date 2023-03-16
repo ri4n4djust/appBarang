@@ -1,7 +1,7 @@
+ALTER TABLE `tblperubahan_hargabbm` ADD `code_bbm` VARCHAR(20) NOT NULL AFTER `id_perubahan`;
 
+// ALTER TABLE `tblbbm` ADD `accid_hpp` VARCHAR(20) NOT NULL AFTER `accid`;
 
-ALTER TABLE `tblbbm` ADD `accid_hpp` VARCHAR(20) NOT NULL AFTER `accid`;
+// ALTER TABLE `tblbbm` CHANGE `accid_hpp` `accid` VARCHAR(10) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL;
 
-ALTER TABLE `tblbbm` CHANGE `accid_hpp` `accid` VARCHAR(10) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL;
-
-ALTER TABLE `tblpobbm` ADD `pph` DECIMAL(13,2) NOT NULL AFTER `tax`;
+// ALTER TABLE `tblpobbm` ADD `pph` DECIMAL(13,2) NOT NULL AFTER `tax`;

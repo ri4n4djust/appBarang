@@ -505,7 +505,7 @@
                 'tglBiaya': arr_biaya[a].tglBiaya,
                 'r_regu': regu.value,
                 'nilai': arr_biaya[a].nilaiBiaya,
-                // 'tgl_transaksi': tgl, 
+                'acc': arr_biaya[a].acc, 
             })
         }
 

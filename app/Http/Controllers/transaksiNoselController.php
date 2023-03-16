@@ -225,6 +225,37 @@ class transaksiNoselController extends Controller
                         ];
 
                         $tot_b += $nilai;
+                        $t = $tot_b += $nilai;
+                        //===========jurnal biaya
+                        // $accid = $detpro[$i]['accid']; // acc id yg di debet
+                        $acc_id_d = $det_biaya[$i]['acc']; // $request[0]['subtotal']; // acc id yg di kredit
+                        $acc_id_k = '11110'; // $det_biaya[$i]['acc'];
+                        $memo = 'Aplusan-biaya';
+                        $jurnal = 'JK';
+                        insert_gl($kdtrans,$tgl,$t,$memo,$jurnal);
+                        $rgl = DB::table('general_ledger')->get()->last()->notrans;
+                        $ac = [
+                            [
+                                'rgl' => $rgl,
+                                'acc_id' => $acc_id_d,
+                                'debet' => $nilai,
+                                'kredit' => 0,
+                                'trans_detail' => 'Aplusan-biaya',
+                                'void_flag' => 0,
+                            ],
+                            [
+                                'rgl' => $rgl,
+                                'acc_id' => $acc_id_k,
+                                'debet' => 0,
+                                'kredit' => $nilai,
+                                'trans_detail' => 'Aplusan-biaya',
+                                'void_flag' => 0,
+                            ],
+                            
+                        ];
+                        
+                        insert_gl_detail($ac);
+                        //===========end jurnal
                     }
                     Biaya::insert($detbi);
                 }
@@ -248,6 +279,36 @@ class transaksiNoselController extends Controller
                             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                         ];
                         $total_l += $nilai;
+                        //===========jurnal link aja
+                        // $accid = $detpro[$i]['accid']; // acc id yg di debet
+                        // $acc_id_d = $det_biaya[$i]['acc']; // $request[0]['subtotal']; // acc id yg di kredit
+                        // $acc_id_k = '11110'; // $det_biaya[$i]['acc'];
+                        // $memo = 'Aplusan-biaya';
+                        // $jurnal = 'JK';
+                        // insert_gl($kdtrans,$tgl,$t,$memo,$jurnal);
+                        // $rgl = DB::table('general_ledger')->get()->last()->notrans;
+                        // $ac = [
+                        //     [
+                        //         'rgl' => $rgl,
+                        //         'acc_id' => $acc_id_d,
+                        //         'debet' => $nilai,
+                        //         'kredit' => 0,
+                        //         'trans_detail' => 'Aplusan-biaya',
+                        //         'void_flag' => 0,
+                        //     ],
+                        //     [
+                        //         'rgl' => $rgl,
+                        //         'acc_id' => $acc_id_k,
+                        //         'debet' => 0,
+                        //         'kredit' => $nilai,
+                        //         'trans_detail' => 'Aplusan-biaya',
+                        //         'void_flag' => 0,
+                        //     ],
+                            
+                        // ];
+                        
+                        // insert_gl_detail($ac);
+                        //===========end jurnal
                     }
                     Linkaja::insert($detli);
                 }

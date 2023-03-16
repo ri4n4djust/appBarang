@@ -27,6 +27,14 @@
                                     <!-- </form> -->
                                     <div class="row mb-4">
                                         <div class="col-sm">
+                                            <label for="inputState">Akun</label>
+                                            <select id="inputState" v-model="inputb.acc" class="form-select">
+                                                <option :value="ac.acc_id" v-for="ac in accs" :key="ac.acc_id" selected>{{ ac.name }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-4">
+                                        <div class="col-sm">
                                             <label for="inputState">Keterangan</label>
                                             <!-- <quill-editor v-model="inputb.ketBiaya" :options="options1"> -->
 
@@ -110,6 +118,7 @@ const route = useRoute();
 const cartBiaya = ref([]);
 const noBiaya = ref([]);
 const totalbiaya = ref();
+const accs = ref();
 
 
 const inputb = ref({
@@ -123,18 +132,21 @@ const inputb = ref({
 
 
 onMounted(() =>{
-    // getPelanggan();
+    GetCoaList();
     setTimeout(() => {
         getlistb();
-    }, 1000)
+    }, 1000);
+    setTimeout(function() { accs.value = store.getters.StateCoaList; }, 2000);
     // localStorage.setItem('biaya', '[]')
-})
+});
+const GetCoaList=() => {
+    store.dispatch('GetCoaList', {acc: '6'})
+}
 
 const simpnBiaya = async () =>{
     console.log(inputb.value)
     if (localStorage.getItem('biaya')==='[]'){
             // cartKupon.value = [];
-        
             // console.log(cartItems.value)
             cartBiaya.value.push(inputb.value);
             localStorage.setItem('biaya', JSON.stringify(cartBiaya.value))

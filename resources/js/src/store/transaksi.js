@@ -279,6 +279,44 @@ const actions = {
         // await dispatch('GetPembelian')
     },
 
+    async CreateBiaya({dispatch}, detail) {
+        let response
+        try {
+            response = await axios.post('/api/store/biaya', detail)
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Biaya berhasil tersimpan',
+                padding: '2em',
+            });
+            // localStorage.setItem('cartItemsPen', '[]')
+        } catch (ex) {
+            // Handle error
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'Mohon Lengkapi Data',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            return
+        }
+        // await dispatch('GetPembelian')
+    },
+
     async GetdetailPo({dispatch}, detail) {
         let response
         try {

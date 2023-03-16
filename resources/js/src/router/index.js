@@ -182,7 +182,7 @@ const routes = [
     {
         path: '/biaya',
         name: 'transaksi-biaya',
-        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/biaya.vue'),
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/transaksiBiaya.vue'),
         // props: true,
         // meta: { requiresAuth: true },
     },
