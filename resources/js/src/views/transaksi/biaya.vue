@@ -53,7 +53,7 @@
 
                                             <div class="col-xl-5 invoice-address-client">
 
-                                                <div class="invoice-address-client-fields">
+                                                <!-- <div class="invoice-address-client-fields">
                                                     <div class="form-group row">
                                                         <label for="client-name" class="col-sm-3 col-form-label col-form-label-sm">Name</label>
                                                         <div class="col-sm-9">
@@ -74,7 +74,7 @@
                                                     </div>
 
                                                     
-                                                </div>
+                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -119,48 +119,23 @@
                                                             </ul>
                                                         </td>
                                                         <td style="padding:0;margin:0;" >
-                                                            <input
-                                                            type="text"
-                                                            id="search"
-                                                            placeholder="Type here..."
-                                                            v-model="searchTerm"
-                                                            @keyup.down="kiap"
-                                                            >
-                                                            <ul v-if="searchCountries.length">
-                                                                <li v-for="country in searchCountries" 
-                                                                :key="country.name"
-                                                                @click="selectCountry(country.name)" >
-                                                                    {{ country.name }}
-                                                                </li>
-                                                            </ul>
+                                                            <input type="text" v-model="item.name">
                                                             <!-- <select id="inputState" v-model="item.title" style="width: 100%;height: 25px;">
                                                                 <option :value="br" v-for="br in barangs" :key="br.id" selected>{{ br.nama_bbm }}</option>
                                                             </select> -->
-                                                            <!-- <multiselect 
-                                                                v-model="item.kdPersediaan" 
-                                                                :options="pembelian.barangs" 
-                                                                :searchable="true"
-                                                                track-by="nmPersediaan"
-                                                                label="nmPersediaan"
-                                                                open-direction="top"
-                                                                placeholder="Choose..." 
-                                                                selected-label="" 
-                                                                select-label="" >
-                                                            </multiselect> -->
-                                                            <!-- <input type="text" v-model="item.title" :id="'nama'+index" class="form-control form-control-sm" placeholder="Item Description" /> -->
                                                         </td>
                                                         <td style="padding:0;margin:0;">
-                                                            <input type="text" v-model="item.code_akun" :id="'rate'+index" width="100%" placeholder="Price" />
+                                                            <input type="text" v-model="item.biaya" :id="'rate'+index" width="100%" @keyup="getTotal(total=item.total, pph=item.pph, qty=item.quantity, index)" placeholder="Price" />
                                                             <!-- <input type="text" v-model="item.kdPersediaan.kdPersediaan" :id="'rate'+index" class="form-control form-control-sm" placeholder="Price" /> -->
                                                         </td>
                                                         <td style="padding:0;margin:0;">
-                                                            <input type="text" v-model="item.nama_akun" :id="'quantity'+index" width="100%"  @keyup="getRate(total=item.total, pph=item.pph, qty=item.quantity, index)" placeholder="Quantity" />
+                                                            <input type="text" v-model="item.satuan" :id="'quantity'+index" width="100%"  placeholder="Quantity" />
                                                         </td>
                                                         <td style="padding:0;margin:0;">
-                                                            <input type="text" v-model="item.debet" :id="'pph'+index" width="100%" placeholder="Quantity" />
-                                                        </td>
-                                                        <td style="padding:0;margin:0;">
-                                                            <input type="text" v-model="item.kredit" :id="'total'+index" width="100%" placeholder="Quantity" />
+                                                            <!-- <input type="text" v-model="item.kredit" :id="'total'+index" width="100%" placeholder="Quantity" /> -->
+                                                            <select id="inputState" v-model="item.acc" class="form-select">
+                                                                <option :value="ac" v-for="ac in accs" :key="ac.acc_id" selected>{{ ac.name }}</option>
+                                                            </select>
                                                         </td>
                                                         <!-- <td class="text-center tax">
                                                             <input type="text" v-model="item.mount" class="form-control form-control-sm" placeholder="Price" /> -->
@@ -193,7 +168,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr v-for="item in cartItems" :key="item.kdBarang">
+                                                        <tr v-for="item in cartBiaya" :key="item.kdBarang">
                                                             <td class="description">{{ item.nmBarang }}</td>
                                                             <td class="rate">{{ new Intl.NumberFormat().format(item.hrgPokok) }}</td>
                                                             <td class="qty">{{ item.qty }}</td>
@@ -223,7 +198,7 @@
                                                 <div class="invoice-actions-btn">
                                                     <div class="invoice-action-btn">
                                                         <div class="row">
-                                                            <div class="col-sm-4">
+                                                            <!-- <div class="col-sm-4">
                                                                 <div v-if="divpajak">
                                                                     <a href="javascript:;" class="btn btn-primary btn-send" @click="taxRemove" >- pajak</a>
                                                                 </div>
@@ -232,9 +207,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-4">
-                                                                <!-- <router-link to="/apps/invoice/preview" class="btn btn-dark btn-preview">Preview</router-link> -->
                                                                 <a href="javascript:;" @click="addPayment" class="btn btn-dark btn-preview" data-bs-toggle="modal" data-bs-target="#modalPayment">Pembayaran</a>
-                                                            </div>
+                                                            </div> -->
                                                             <div class="col-sm-4">
                                                                 <a href="javascript:;" @click="simpanPembelian" class="btn btn-success btn-download">Save</a>
                                                             </div>
@@ -243,34 +217,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="modal fade" id="modalPayment" tabindex="-1" role="dialog" aria-labelledby="modalPayment" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="modalPayment">Vertically Aligned</h5>
-                                                            <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <h4 class="modal-heading mb-4 mt-2">Aligned Center</h4>
-                                                            <multiselect 
-                                                                v-model="paramsacc" 
-                                                                :options="pembelian.accs" 
-                                                                :searchable="true"
-                                                                track-by="name"
-                                                                label="name"
-                                                                open-direction="top"
-                                                                placeholder="Choose..." 
-                                                                selected-label="" 
-                                                                select-label="" >
-                                                            </multiselect>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn" data-dismiss="modal" data-bs-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
-                                                            <button type="button" class="btn btn-primary">Save</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            
 
                                             <div class="col-md-6">
                                                 <div class="totals-row">
@@ -362,7 +309,7 @@
     import { useRouter, useRoute } from 'vue-router'
 
     import { useMeta } from '@/composables/use-meta';
-    useMeta({ title: 'Pembelian' });
+    useMeta({ title: 'Input Biaya' });
 
     const store = useStore();
     const router = useRouter();
@@ -373,6 +320,7 @@
 
     const items = ref([]);
     const brg = ref([]);
+    const accs = ref();
     const nopembelian = ref([]);
     const qty = ref(1);
     const tot = ref();
@@ -386,10 +334,7 @@
         noNota: nopembelian,
         tglNota: moment().format("YYYY-MM-DD"),
         term: 0,
-        jthTempo: moment().format("YYYY-MM-DD"),
-        notes: '',
         subtotal: subtotal,
-        tax: 11,
         disc: disc,
         total: total,
     });
@@ -407,19 +352,17 @@
         // tlpSupplier: '',
 
     });
-    const cartItems = ref([])
+    const cartBiaya = ref([])
     const divpajak = ref(false)
     // const currency_list = ref([]);
 
     const pembelian = computed(() => {
-        const barangs = store.getters.StatePersediaan;
-        const suppliers = store.getters.StateSupplier;
-        const accs = store.getters.StateAcc;
+        // accs.value = store.getters.StateCoaList;
         nopembelian.value = store.getters.NoPembelian;
         const pajak = store.state.pajak;
         tot.value = brg.value.lastPrice * qty.value;
         // console.log(suppliers)
-        return { barangs, pajak, suppliers, nopembelian, accs, tot }
+        return { pajak, nopembelian, accs, tot }
     });
 
     // const selectedCountry = ref('')
@@ -441,17 +384,8 @@
         })
     });
 
-    const getBarang=() => {
-        store.dispatch('GetPersediaan')
-    }
-    const getSupplier=() => {
-        store.dispatch('GetSupplier')
-    }
-    const getNoPembelian=() => {
-        store.dispatch('GetNoPembelian')
-    }
-    const getAcc=() => {
-        store.dispatch('GetAcc')
+    const GetCoaList=() => {
+        store.dispatch('GetCoaList', {acc: '6'})
     }
 
 
@@ -464,50 +398,13 @@
         console.log('total tanpa pajak :'+tax.value)
         // return { tot }
     }
-    const getTotalWtax=() =>{
-        const pajak = store.state.pajak;
-        const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
-        tax.value = temptotal * pajak /100
-        total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + tax.value
-        
-        
-        console.log('total dengan pajak:'+tax.value)
-        // return { tot }
-    }
 
-    function taxSelected() {
-        const pajak = store.state.pajak;
-        const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
-        // const temppajak = temptotal * pajak /100
-        
-        tax.value = temptotal * pajak /100
-        total.value = total.value + tax.value
-        // total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + tax.value
-        divpajak.value = true
-        // console.log(tax.value)
-        getTotalWtax()
-        // console.log('total : '+ temptotal + 'pajak :'+temppajak)
-    }
-
-    function taxRemove() {
-        const pajak = store.state.pajak;
-        const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
-        // const temppajak = total.value * pajak /100
-        
-        tax.value = temptotal * pajak /100
-        total.value = total.value - tax.value
-        // total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + tax.value
-        divpajak.value = false
-        // console.log(tax.value)
-        getTotal()
-        // console.log('total : '+ temptotal + 'pajak :'+temppajak)
-    }
 
     const simpanPembelian=() => {
         const header =params.value
         const headers =paramssupplier.value
             const headerfull = Object.assign(header, headers)
-            const detail =cartItems.value
+            const detail =cartBiaya.value
             store.dispatch('CreatePembelian', [headerfull,detail] )
             setTimeout(function() { getCart(); }, 5000);
             getNoPembelian();
@@ -531,96 +428,13 @@
 
         // console.log(paramssupplier.value)
        
-        getBarang();
-        getAcc();
-        getSupplier();
+        GetCoaList();
         getCart();
-        getNoPembelian();
-        countries.value  = [
-            {
-                thumb: 'boy.png',
-                name: 'Shaun Park',
-                'first name': 'John',
-                'last name': 'Doe jhgjhg',
-                email: 'johndoe@yahoo.com',
-                date: '10/08/2020',
-                sale: '320',
-                sales: '29.56',
-                status: 'Complete',
-                status_class: 'success',
-                register: '5 min ago',
-                position: 'Developer',
-                office: 'London',
-            },
-            {
-                thumb: 'girl-1.png',
-                name: 'Alma Clarke',
-                'first name': 'Andy',
-                'last name': 'King',
-                email: 'andyking@gmail.com',
-                date: '11/08/2020',
-                sale: '420',
-                sales: '19.15',
-                status: 'Pending',
-                status_class: 'secondary',
-                register: '10 min ago',
-                position: 'Designer',
-                office: 'New York',
-            },
-            {
-                thumb: 'girl-2.png',
-                name: 'Xavier',
-                'first name': 'Lisa',
-                'last name': 'Doe',
-                email: 'lisadoe@yahoo.com',
-                date: '12/08/2020',
-                sale: '130',
-                sales: '39.00',
-                status: 'In progress',
-                status_class: 'info',
-                register: '1 hour ago',
-                position: 'Accountant',
-                office: 'Amazon',
-            },
-            {
-                thumb: 'boy-2.png',
-                name: 'Vincent Carpenter',
-                'first name': 'Vincent',
-                'last name': 'Carpenter',
-                email: 'vinnyc@yahoo.com',
-                date: '13/08/2020',
-                sale: '260',
-                sales: '88.03',
-                status: 'Canceled',
-                status_class: 'danger',
-                register: '1 day ago',
-                position: 'Data Scientist',
-                office: 'Canada',
-            },
-            {
-                thumb: 'boy-2.png',
-                name: 'Vincent Carpenter',
-                'first name': 'Vincent XXXXXX',
-                'last name': 'Carpenter',
-                email: 'vinnyc@yahoo.com',
-                date: '13/08/2020',
-                sale: '260',
-                sales: '88.03',
-                status: 'Canceled',
-                status_class: 'danger',
-                register: '1 day ago',
-                position: 'Data Scientist',
-                office: 'Canada',
-            },
-        ];
-
+        setTimeout(function() { accs.value = store.getters.StateCoaList; }, 5000);
         
-        console.log(countries.value)
+        
     });
 
-    const change_file = (event) => {
-        selected_file.value = URL.createObjectURL(event.target.files[0]);
-    };
 
     const add_item = () => {
         
@@ -643,69 +457,59 @@
 
     function addToCart(brg) {
         // console.log(brg)
-        if (localStorage.getItem('cartItemsP')===null){
-            cartItems.value = [];
-            // console.log(cartItems.value)
+        if (localStorage.getItem('cartBiaya')===null){
+            cartBiaya.value = [];
+            // console.log(cartBiaya.value)
         }else{
-            cartItems.value = JSON.parse(localStorage.getItem('cartItemsP'));
+            cartBiaya.value = JSON.parse(localStorage.getItem('cartBiaya'));
         }
-            const oldItems = JSON.parse(localStorage.getItem('cartItemsP')) || [];
+            const oldItems = JSON.parse(localStorage.getItem('cartBiaya')) || [];
             // console.log(oldItems)
             const existingItem = oldItems.find(({ kdBarang }) => kdBarang === brg.kdPersediaan);
             if (existingItem) {
-                const objIndex = cartItems.value.findIndex((e => e.kdBarang === brg.kdPersediaan));
-                const oldName = cartItems.value[objIndex].nmBarang;
-                const oldQty = cartItems.value[objIndex].qty;
-                const oldTotal = cartItems.value[objIndex].total;
+                const objIndex = cartBiaya.value.findIndex((e => e.kdBarang === brg.kdPersediaan));
+                const oldName = cartBiaya.value[objIndex].nmBarang;
+                const oldQty = cartBiaya.value[objIndex].qty;
+                const oldTotal = cartBiaya.value[objIndex].total;
                 const newQty = parseInt(oldQty) + parseInt(qty.value) ;
                 const newTotal = parseInt(oldTotal) + parseInt(qty.value * brg.lastPrice) ;
-                cartItems.value[objIndex].qty = parseInt(newQty);
-                cartItems.value[objIndex].total = parseInt(newTotal);
-                localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
+                cartBiaya.value[objIndex].qty = parseInt(newQty);
+                cartBiaya.value[objIndex].total = parseInt(newTotal);
+                localStorage.setItem('cartBiaya',JSON.stringify(cartBiaya.value));
                 alert(oldName+' Quantity Update')
                 getCart();
-                // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
+                // isicart = Object.keys(JSON.parse(localStorage.getItem('cartBiaya'))).length;
             }else{
-            cartItems.value.push({kdBarang:brg.kdPersediaan, nmBarang:brg.nmPersediaan,hrgPokok:brg.lastPrice,qty:qty.value,satuan:brg.satuanPersediaan,total:qty.value * brg.lastPrice});	
-            localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
+            cartBiaya.value.push({kdBarang:brg.kdPersediaan, nmBarang:brg.nmPersediaan,hrgPokok:brg.lastPrice,qty:qty.value,satuan:brg.satuanPersediaan,total:qty.value * brg.lastPrice});	
+            localStorage.setItem('cartBiaya',JSON.stringify(cartBiaya.value));
             getCart();
-            // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
+            // isicart = Object.keys(JSON.parse(localStorage.getItem('cartBiaya'))).length;
             alert(brg.nmPersediaan+ " berhasil disimpan")
             }
     }
     function removeItem(id) {
         // alert(id)
-        const arrayFromStroage = JSON.parse(localStorage.getItem('cartItemsP'));
+        const arrayFromStroage = JSON.parse(localStorage.getItem('cartBiaya'));
         const filtered = arrayFromStroage.filter(arrayFromStroage => arrayFromStroage.kdBarang !== id);
-        localStorage.setItem('cartItemsP', JSON.stringify(filtered));
-        // cartItems.value.splice(index, 1)
-        // this.isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
+        localStorage.setItem('cartBiaya', JSON.stringify(filtered));
+        // cartBiaya.value.splice(index, 1)
+        // this.isicart = Object.keys(JSON.parse(localStorage.getItem('cartBiaya'))).length;
         getCart();
         // console.log(filtered)
         // alert(filtered.nmBarang)
     }
-    // function updateItem(barcode, index) {
-    //     const cartItems = JSON.parse(localStorage.getItem('cartItemsP'));
-    //     const objIndex = cartItems.findIndex((e => e.barcode === barcode));
-    //     const newQty = parseInt(this.crt[index].qty) ;
-    //     cartItems[objIndex].qty = parseInt(newQty);
-    //     localStorage.setItem('cartItemsP',JSON.stringify(cartItems));
-    //     //alert('Quantity Update')
-    //     this.getCart();
-    //     this.isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
-    // }
 
     function getCart() {
         // subtotal.value = []
-        if (localStorage.getItem('cartItemsP')===null){
-            cartItems.value = localStorage.setItem('cartItemsP', '[]');
+        if (localStorage.getItem('cartBiaya')===null){
+            cartBiaya.value = localStorage.setItem('cartBiaya', '[]');
             subtotal.value = 0
         }else{
-            cartItems.value = JSON.parse(localStorage.getItem('cartItemsP'));
+            cartBiaya.value = JSON.parse(localStorage.getItem('cartBiaya'));
             getSubtotal();
             getTotal();
             
-    // this.isicart = JSON.parse(localStorage.getItem('cartItemsP')).length;
+    // this.isicart = JSON.parse(localStorage.getItem('cartBiaya')).length;
         }
 
     }
@@ -716,7 +520,7 @@
     };
 
     function getSubtotal(){
-        const allItems = JSON.parse(localStorage.getItem('cartItemsP')) || [];
+        const allItems = JSON.parse(localStorage.getItem('cartBiaya')) || [];
         let sum = 0;
         subtotal.value = 0
         for(let i = 0; i < allItems.length; i++){

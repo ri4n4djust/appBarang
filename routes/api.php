@@ -104,7 +104,7 @@ Route::post('/getdetail-penjualan', [App\Http\Controllers\penjualanController::c
 //============ COA
 Route::post('/labarugi/pendapatan', [App\Http\Controllers\labarugiController::class, 'getPendapatan']);
 Route::post('/labarugi/beban-hpp', [App\Http\Controllers\labarugiController::class, 'getHppPenjualan']);
-
+//========
 Route::post('/get/acc-data', [App\Http\Controllers\coaController::class, 'get_acc_data']);
 Route::post('/get/coa', [App\Http\Controllers\coaController::class, 'get_coa']);
 Route::post('/store/coa-acc', [App\Http\Controllers\coaController::class, 'create_acc']);

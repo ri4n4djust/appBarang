@@ -111,14 +111,16 @@ class coaController extends Controller
 	}
 
 	public function get_coa(Request $request){
-		$lvl1 = get_level1(1);
-		$lvl2 = get_level2(2);
-		$lvl3 = get_level3(3);
-		$lvl4 = get_level4(4);
-		$data['level1'] = $lvl1;
-		$data['level2'] = $lvl2;
-		$data['level3'] = $lvl3;
-		$data['level4'] = $lvl4;
+		$ac = $request->input('acc');
+		$data = DB::select("SELECT * FROM (SELECT acc_id,name FROM `level2` where atype = 'D' union SELECT acc_id,name FROM `level3` where atype = 'D' union SELECT acc_id,name FROM `level4` where atype = 'D') acc where acc_id like '$ac%' order by acc_id;");
+		// $lvl1 = get_level1(1); 
+		// $lvl2 = get_level2(2);
+		// $lvl3 = get_level3(3);
+		// $lvl4 = get_level4(4);
+		// $data['level1'] = $lvl1;
+		// $data['level2'] = $lvl2;
+		// $data['level3'] = $lvl3;
+		// $data['level4'] = $lvl4;
 
 		// echo json_encode($data);
 		return response()->json([
