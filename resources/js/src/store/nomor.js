@@ -8,6 +8,7 @@ const state = {
     nopobbm: [],
     noterimabbm: [],
     nokupon: [],
+    nobiaya: [],
   };
   
 const getters = {
@@ -17,7 +18,8 @@ const getters = {
     NoOpnum: state => state.noopnum,
     NoPobbm: state => state.nopobbm,
     NoTerimaBbm: state => state.noterimabbm,
-    NoKupon: state => state.nokupon
+    NoKupon: state => state.nokupon,
+    NoBiaya: state => state.nobiaya
 };
 
 const actions = {  
@@ -69,14 +71,14 @@ const actions = {
         }
     
     },
-    async GetNoOpnum({ commit }){
+    async GetNoBiaya({ commit }){
         let response
         try {
-            response = await axios.get('/api/kdopnum')
-            commit('setNoOpnum', response.data.kdOpnum)
+            response = await axios.get('/api/kdbiaya')
+            commit('setNoBiaya', response.data.kdBiaya)
         } catch (ex) {
             // Handle error
-            alert('error no opnum')
+            alert('error no biaya')
             return
         }
     
@@ -131,6 +133,9 @@ const mutations = {
     },
     setNoOpnum(state, op){
         state.noopnum = op
+    },
+    setNoBiaya(state, bi){
+        state.nobiaya = bi
     },
     setNoKupon(state, kp){
         state.nokupon = kp

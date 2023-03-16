@@ -69,6 +69,7 @@ Route::get('/kdkupon', [App\Http\Controllers\nomorController::class, 'kodeKupon'
 Route::get('/kdkategori', [App\Http\Controllers\nomorController::class, 'kodeKategori']);
 Route::get('/kdopnum', [App\Http\Controllers\nomorController::class, 'kodeStokOpname']);
 Route::get('/kdpobbm', [App\Http\Controllers\nomorController::class, 'kodePoBbm']);
+Route::get('/kdbiaya', [App\Http\Controllers\nomorController::class, 'kodeBiaya']);
 Route::get('/kdbbmdatang', [App\Http\Controllers\nomorController::class, 'kodeBbmdatang']);
 Route::get('/kdpelanggan', [App\Http\Controllers\nomorController::class, 'kodePelanggan']);
 

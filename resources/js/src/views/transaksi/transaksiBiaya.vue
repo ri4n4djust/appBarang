@@ -15,9 +15,56 @@
             </ul>
         </teleport>
 
-        <div class="row invoice layout-top-spacing layout-spacing">
+        <!-- <div class="row invoice layout-top-spacing layout-spacing">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="doc-container">
+                <div class="doc-container"> -->
+        <div class="underline-content tabs">
+            <ul class="nav nav-tabs mb-3" id="lineTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="underline-home-tab" data-bs-toggle="tab" href="#underline-home" role="tab" aria-controls="underline-home" aria-selected="true">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-home"
+                        >
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        Transaksi
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="underline-profile-tab" data-bs-toggle="tab" href="#underline-profile" role="tab" aria-controls="underline-profile" aria-selected="false"
+                        ><svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-user"
+                        >
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        Daftar
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="lineTabContent-3">
+                <div class="tab-pane fade show active" id="underline-home" role="tabpanel" aria-labelledby="underline-home-tab">
+
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="invoice-content">
@@ -53,28 +100,6 @@
 
                                             <div class="col-xl-5 invoice-address-client">
 
-                                                <!-- <div class="invoice-address-client-fields">
-                                                    <div class="form-group row">
-                                                        <label for="client-name" class="col-sm-3 col-form-label col-form-label-sm">Name</label>
-                                                        <div class="col-sm-9">
-                                                            <multiselect 
-                                                                v-model="paramssupplier" 
-                                                                :options="pembelian.suppliers" 
-                                                                :searchable="true"
-                                                                :allow-empty="false"
-                                                                track-by="nmSupplier"
-                                                                label="nmSupplier"
-                                                                open-direction="top"
-                                                                placeholder="Choose..." 
-                                                                selected-label="" 
-                                                                select-label="" 
-                                                                deselect-label="">
-                                                            </multiselect>
-                                                        </div>
-                                                    </div>
-
-                                                    
-                                                </div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -136,14 +161,6 @@
                                                                 <option :value="ac.acc_id" v-for="ac in accs" :key="ac.acc_id" selected>{{ ac.name }}</option>
                                                             </select>
                                                         </td>
-                                                        <!-- <td class="text-center tax">
-                                                            <input type="text" v-model="item.mount" class="form-control form-control-sm" placeholder="Price" /> -->
-                                                            <!-- <input type="text" :id="item.amount" :value="item.rate * item.quantity" class="form-control form-control-sm" placeholder="Quantity" @keypress="onlyNumber" /> -->
-                                                            <!-- <div class="checkbox-primary custom-control custom-checkbox">
-                                                                <input type="checkbox" :id="`chktax-${index}`" v-model="item.is_tax" class="custom-control-input" />
-                                                                <label class="custom-control-label" :for="`chktax-${index}`"></label>
-                                                            </div> -->
-                                                        <!-- </td> -->
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -160,17 +177,6 @@
                                                 <div class="invoice-actions-btn">
                                                     <div class="invoice-action-btn">
                                                         <div class="row">
-                                                            <!-- <div class="col-sm-4">
-                                                                <div v-if="divpajak">
-                                                                    <a href="javascript:;" class="btn btn-primary btn-send" @click="taxRemove" >- pajak</a>
-                                                                </div>
-                                                                <div v-if="!divpajak">
-                                                                    <a href="javascript:;" class="btn btn-primary btn-send" @click="taxSelected" >+ pajak</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-sm-4">
-                                                                <a href="javascript:;" @click="addPayment" class="btn btn-dark btn-preview" data-bs-toggle="modal" data-bs-target="#modalPayment">Pembayaran</a>
-                                                            </div> -->
                                                             <div class="col-sm-4">
                                                                 <a href="javascript:;" @click="simpanBiaya" class="btn btn-success btn-download">Save</a>
                                                             </div>
@@ -183,31 +189,7 @@
 
                                             <div class="col-md-6">
                                                 <div class="totals-row">
-                                                    <!-- <div class="invoice-totals-row invoice-summary-subtotal">
-                                                        <div class="invoice-summary-label">Sub Total</div>
-                                                         <div class="invoice-summary-label"></div>
-                                                        <div class="invoice-summary-value">
-                                                            <div class="subtotal-amount"><span class="currency"></span><span class="amount">{{new Intl.NumberFormat().format(subtotal)}}</span></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="invoice-totals-row invoice-summary-total">
-                                                         <div class="invoice-summary-label">Disc</div>
-                                                        <input type="text" v-model="params.disc" class="form-control form-control-sm" >%
-                                                        <div class="invoice-summary-label"></div>
-                                                        <div class="invoice-summary-value">
-                                                            <div class="total-amount"><span class="currency"></span><span>{{ new Intl.NumberFormat().format(Math.floor(subtotal * disc / 100)) }}</span></div>
-                                                        </div>
-                                                    </div>
-                                                    <div v-show="divpajak">
-                                                        <div class="invoice-totals-row invoice-summary-tax">
-                                                            <div class="invoice-summary-label">Pajak</div>
-                                                            <div class="invoice-summary-value">
-                                                                <div class="tax-amount"><span class="currency"></span>
-                                                                    <span>{{ new Intl.NumberFormat().format(Math.floor((subtotal - (subtotal * disc / 100)) * pembelian.pajak/100)) }}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div> -->
+
                                                     <div class="invoice-totals-row invoice-summary-balance-due">
                                                         <div class="invoice-summary-label">Total</div>
                                                          <div class="invoice-summary-label"></div>
@@ -217,6 +199,7 @@
                                                             <!-- </div> -->
                                                         </div>
                                                     </div>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -246,7 +229,34 @@
 
                         
                     </div>
+
                 </div>
+                <div class="tab-pane fade" id="underline-profile" role="tabpanel" aria-labelledby="underline-profile-tab">
+
+                    <div class="col-xl-12">
+                        <div class="invoice-content">
+                            <div class="invoice-detail-body">
+                                <!-- <div class="invoice-detail-title">
+                                    
+                                    <div class="invoice-title">
+                                    PO BBM
+                                    </div>
+                                </div> -->
+
+                                <div class="invoice-detail-header">
+                                    <div class="row justify-content-between"> 
+
+                                        list
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
         </div>
     </div>
@@ -277,36 +287,22 @@
     const router = useRouter();
     const route = useRoute();
 
-    const searchTerm = ref('')
-    const countries = ref({});
-
     const items = ref([]);
-    const brg = ref([]);
     const accs = ref();
-    const nopembelian = ref([]);
+    const nobiaya = ref([]);
     const total = ref();
-    const payment = ref([]);
     const params = ref({
-        noNota: nopembelian,
+        noNota: nobiaya,
         tglNota: moment().format("YYYY-MM-DD"),
         total: total,
     });
-    // const cartBiaya = ref([])
-    // const divpajak = ref(false)
-    // const currency_list = ref([]);
-
-    // const pembelian = computed(() => {
-        // accs.value = store.getters.StateCoaList;
-        // nopembelian.value = store.getters.NoPembelian;
-        // const pajak = store.state.pajak;
-        // tot.value = brg.value.lastPrice * qty.value;
-        // console.log(suppliers)
-    //     return { nopembelian, accs}
-    // });
 
 
     const GetCoaList=() => {
         store.dispatch('GetCoaList', {acc: '6'})
+    }
+    const getNoBiaya=() => {
+        store.dispatch('GetNoBiaya')
     }
 
 
@@ -322,9 +318,6 @@
             total.value += parseInt(items.value[i].biaya);
         }
         
-        
-        // console.log('total :'+total.value)
-        // return { tot }
     }
 
 
@@ -336,7 +329,7 @@
         console.log(detail);
         store.dispatch('CreateBiaya', [header,detail] )
         // setTimeout(function() { getCart(); }, 5000);
-        getNoPembelian();
+        getNoBiaya();
     }
 
     onMounted( async () => {
@@ -358,9 +351,9 @@
         // console.log(paramssupplier.value)
        
         GetCoaList();
-        // getCart();
-        setTimeout(function() { accs.value = store.getters.StateCoaList; }, 2000);
-        
+        getNoBiaya();
+        setTimeout(function() { accs.value = store.getters.StateCoaList ; }, 2000);
+        setTimeout(function() { nobiaya.value = store.getters.NoBiaya ; }, 2000);
         
     });
 
