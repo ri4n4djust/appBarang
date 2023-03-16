@@ -326,7 +326,7 @@ class coaController extends Controller
 			// 			->whereIn(DB::raw('LEFT(a.acc_id, 1)'), array($filter))
 			// 			->orderBy('a.acc_id')
 			// 			->get();
-			// print_r($myquery);
+			print_r($data);
 
 
 			$groups = array();
@@ -358,9 +358,9 @@ class coaController extends Controller
 						'parent2' => $item->idparent1
 			        );
 			    } else {
-			      // if((double)$groups[$key]['amount'] == 0){
+			    //   if((double)$groups[$key]['amount'] == 0){
 			        $groups[$key]['amount'] = $groups[$key]['amount'] + $item->amount;     
-			      // }  
+			    //   }  
 			    }
 
 			    $key = $item->idparent3;
@@ -426,7 +426,7 @@ class coaController extends Controller
 			      if($h_tipe == 'H'){
 			          if($head_level1 == ''){
 			          $head_level1 = $value['tipe'];
-			          $name_level1 = "T.".$value['name'];
+			          $name_level1 = "Total".$value['name'];
 			          $amount_Level1 = $value['amount'];
 			          $head_idlevel1 = substr($value['acc_id'], 0,1).'9999';
 			          $acc[$i] = array(
@@ -441,7 +441,7 @@ class coaController extends Controller
 			        }else{
 			          if($head_level1 != $value['tipe']){
 			            $head_level1 = $value['tipe'];
-			            $name_level1 = "T.".$value['name'];
+			            $name_level1 = "Total".$value['name'];
 			            $amount_Level1 = $value['amount'];
 			            $head_idlevel1 = substr($value['acc_id'], 0,1).'9999';
 			            $acc[$i] = array(
@@ -486,7 +486,7 @@ class coaController extends Controller
 			      if($h_tipe == 'H'){
 			        if($head_level2 == ''){
 			          $head_level2 = $value['tipe'];
-			          $name_level2 = "T.".$value['name'];
+			          $name_level2 = "Total".$value['name'];
 			          $amount_Level2 = $value['amount'];
 			          $head_idlevel2 = substr($value['acc_id'], 0,2).'999';
 					  $parent2 = $value['parent2'];
@@ -502,7 +502,7 @@ class coaController extends Controller
 			        }else{
 			          if($head_level2 != $value['tipe']){
 			            $head_level2 = $value['tipe'];
-			            $name_level2 = "T.".$value['name'];
+			            $name_level2 = "Total".$value['name'];
 			            $amount_Level2 = $value['amount'];
 			            $head_idlevel2 = substr($value['acc_id'], 0,2).'999';
 						$parent2 = $value['parent2'];
@@ -535,7 +535,7 @@ class coaController extends Controller
 			          'level' => $value['level'],
 			          'tipe' => $value['tipe'],
 			          'jenis'=> 'Detail',
-					  'parent' => $parent2
+					  'parent' => $value['parent2'],
 			        );
 			      }     
 			      
