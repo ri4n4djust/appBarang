@@ -27,7 +27,7 @@ class pembelianController extends Controller
                     'disc'     => $request[0]['disc'],
                     'discPercent'     => $request[0]['disc'],
                     'tax'     => $request[0]['tax'],
-                    'pph'     => $request[0]['pph'],
+                    'pph'     => 0,
                     'total'     => $request[0]['total'],
                     'note'     => $request[0]['notes'],
                     'term'     => $request[0]['term'],
@@ -38,30 +38,60 @@ class pembelianController extends Controller
                 $detpem = $request[1];
                 for ($i = 0; $i < count($detpem); $i++) {
 
-                        $kdBarang = $detpem[$i]['kdBarang'];
-                        $qty = $detpem[$i]['qty'];
-                        $brg = DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->first();
-                        $oldStok = $brg->stokPersediaan;
-                        DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->update([
-                            'stokPersediaan' => $oldStok + $qty,
-                            'lastPrice' => $detpem[$i]['hrgPokok'],
-                        ]);
-                        DB::table('tblbarang')->where('kdBarang', $kdBarang)->update([
-                            'stkBarang' => $oldStok + $qty,
-                            'hrgPokok' => $detpem[$i]['hrgPokok'],
-                        ]);
+                    $kdBarang = $detpem[$i]['kdBarang'];
+                    $qty = $detpem[$i]['qty'];
+                    $brg = DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->first();
+                    $oldStok = $brg->stokPersediaan;
+                    DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->update([
+                        'stokPersediaan' => $oldStok + $qty,
+                        'lastPrice' => $detpem[$i]['hrgPokok'],
+                    ]);
+                    DB::table('tblbarang')->where('kdBarang', $kdBarang)->update([
+                        'stkBarang' => $oldStok + $qty,
+                        'hrgPokok' => $detpem[$i]['hrgPokok'],
+                    ]);
 
-                        $detail[] = [
-                            'r_noNota' => $noNota,
-                            'kdBarang' => $kdBarang,
-                            'nmBarang' => $detpem[$i]['nmBarang'],
-                            'hrgBeli' => $detpem[$i]['hrgPokok'],
-                            'qty' => $qty,
-                            'total' => $detpem[$i]['total'],
-                            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-                            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-                        ];
-                    }
+                    $detail[] = [
+                        'r_noNota' => $noNota,
+                        'kdBarang' => $kdBarang,
+                        'nmBarang' => $detpem[$i]['nmBarang'],
+                        'hrgBeli' => $detpem[$i]['hrgPokok'],
+                        'qty' => $qty,
+                        'total' => $detpem[$i]['total'],
+                        'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                    ];
+
+                    //===========jurnal
+                    $acc_id_d = $detpem[$i]['accid_persediaan']; // acc id yg di debet
+                    $acc_id_k = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
+                    $memo = 'Pembelian-Barang';
+                    $jurnal = 'JK';
+                    $subtotal = $detpem[$i]['total'];
+                    insert_gl($noNota,$tglNota,$subtotal,$memo,$jurnal);
+                    $rgl = DB::table('general_ledger')->get()->last()->notrans;
+                    $ac = [
+                        [
+                            'rgl' => $rgl,
+                            'acc_id' => $acc_id_d,
+                            'debet' => $subtotal,
+                            'kredit' => 0,
+                            'trans_detail' => 'Pembelian-Barang',
+                            'void_flag' => 0,
+                        ], 
+                        [
+                            'rgl' => $rgl,
+                            'acc_id' => $acc_id_k,
+                            'debet' => 0,
+                            'kredit' => $subtotal,
+                            'trans_detail' => 'Pembelian-Barang',
+                            'void_flag' => 0,
+                        ]
+                    ];
+                    
+                    insert_gl_detail($ac);
+                    //===========end jurnal
+                }
                 PembelianDetail::insert($detail);
 
                 DB::commit();

@@ -326,7 +326,7 @@ class coaController extends Controller
 			// 			->whereIn(DB::raw('LEFT(a.acc_id, 1)'), array($filter))
 			// 			->orderBy('a.acc_id')
 			// 			->get();
-			print_r($data);
+			// print_r($data);
 
 
 			$groups = array();
@@ -375,14 +375,14 @@ class coaController extends Controller
 			        );
 			    } else {
 					// print_r($groups[$key]['amount']);
-			      if((double)$groups[$key]['amount'] == 0){
+			    //   if((double)$groups[$key]['amount'] == 0){
 			           $groups[$key]['amount'] = $groups[$key]['amount'] + $item->amount;     
-			        }  
+			        // }  
 			    }
 
-			    $key = $item->acc_id;
-			    if (!array_key_exists($key, $groups)) {
-			        $groups[$key] = array(
+			    $key3 = $item->acc_id;
+			    if (!array_key_exists($key3, $groups)) {
+			        $groups[$key3] = array(
 			            'acc_id' => $item->acc_id,
 			            'name' => $item->name,
 			            'amount' => $item->amount,
@@ -392,8 +392,8 @@ class coaController extends Controller
 			        );
 			    } else {
 			      // $str .= $key.' '.$nrw.'=>'.$nrow."<br>";
-			        if((double)$groups[$key]['amount'] == 0){
-			          $groups[$key]['amount'] = $groups[$key]['amount'] + $item->amount;     
+			        if((double)$groups[$key3]['amount'] == 0){
+			          $groups[$key3]['amount'] = $groups[$key3]['amount'] + $item->amount;     
 			        }  
 			    }
 			    // $nrw += 1;
