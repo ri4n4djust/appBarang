@@ -156,10 +156,13 @@
                         <div class="wallet-balance">
                             <p>{{ list.nama_bbm }}</p>
                             <!-- <h5><span class="w-currency">$</span>2953</h5> -->
-                            <button class="btn btn-primary mb-2 me-1" @click="openModal(list)">PERUBAHAN HARGA</button>
+                            <button class="btn btn-primary mb-2 me-1" @click="openModal(list)">RUBAH HARGA</button>
+                        </div>
+                        <div class="wallet-balance">
+                            <p>Stok</p>
+                            <h5>{{ list.stokPersediaan }} Liter</h5>
                         </div>
                     </div>
-
                     <div class="widget-amount">
                         <div class="w-a-info funds-spent">
                             <span>Harga Terakhir</span>
@@ -167,8 +170,7 @@
                         </div>
                     </div>
                     <div class="widget-content">
-                        <div class="invoice-list">
-                            
+                        <div class="wallet-balance">
                             <span><img :src="require(`@/assets/images/${list.logo_bbm}`)" alt="admin-profile" class="img-fluid"/></span>
                             
                         </div>
@@ -184,11 +186,11 @@
                 <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Input Kupon</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Input Perubahan</h5>
                             <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
                         </div>
                         <div class="modal-body">
-                            <h4 class="modal-heading mb-4 mt-2">Aligned Center</h4>
+                            <h4 class="modal-heading mb-4 mt-2">{{ input_perubahan.nama_bbm}}</h4>
                             <form>
                                 <div class="row mb-4">
                                     <div class="col-sm-4">
@@ -201,8 +203,12 @@
                                 </div>
                                 <div class="row mb-4">
                                     <div class="col-sm">
-                                        <label for="inputState">Harga Terbaru</label>
-                                        <input v-model="input_perubahan.harga_baru" class="form-control form-control-sm" placeholder="Nilai" @keypress="onlyNumber" />
+                                        <label for="inputState">Hrg Pokok Terakhir {{Number(input_perubahan.harga_pokok_lama).toLocaleString()}}</label>
+                                        <input v-model="input_perubahan.harga_pokok_baru" class="form-control form-control-sm" placeholder="Input Hrg Terbaru" @keypress="onlyNumber" />
+                                    </div>
+                                    <div class="col-sm">
+                                        <label for="inputState">Hrg Jual Terakhir {{Number(input_perubahan.harga_lama).toLocaleString()}}</label>
+                                        <input v-model="input_perubahan.harga_baru" class="form-control form-control-sm" placeholder="Input Hrg Terbaru" @keypress="onlyNumber" />
                                     </div>
                                     <div class="col-sm-4">
                                         <label for="inputState">Simpan</label><br>
@@ -295,16 +301,21 @@
 
     const isOpen = ref(false);
     const code = ref();
+    const nama_bbm = ref();
     const harga_old = ref();
-
+    const harga_pokok_old = ref();
     
     const store = useStore();
     const router = useRouter();
     const route = useRoute();
     const input_perubahan = ref({
         tglPerubahan: moment().format('D-M-YYYY'),
+        nama_bbm: nama_bbm,
         code_bbm: code,
-        harga_lama: harga_old
+        harga_lama: harga_old,
+        harga_pokok_lama: harga_pokok_old,
+        harga_baru: '',
+        harga_pokok_baru: ''
     })
 
     function Simpan() {
@@ -313,8 +324,10 @@
         isOpen.value = false;
     }
     const openModal = (list) => {
+        nama_bbm.value = list.nama_bbm;
         code.value = list.code_bbm;
         harga_old.value = list.sale_price;
+        harga_pokok_old.value = list.last_price;
         isOpen.value = true;
     }
 

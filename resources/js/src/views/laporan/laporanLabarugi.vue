@@ -114,7 +114,22 @@
                                             <a href="javascript:;" class="btn btn-secondary btn-print action-print" @click="print()">Print</a>
                                         </div>
                                         <div class="col-xl-12 col-md-3 col-sm-6">
-                                            <a href="javascript:;" class="btn btn-primary btn-send">Send Invoice</a>
+                                            <div class="row mb-4">
+                                                <div class="col-sm">
+                                                    <label for="inputState">Awal</label>
+                                                    <flat-pickr v-model="sorting.startDate" 
+                                                        :config="{dateFormat: 'd-m-Y'}"
+                                                        class="form-control form-control-sm">
+                                                    </flat-pickr>
+                                                </div>
+                                                <div class="col-sm">
+                                                    <label for="inputState">Akhir</label>
+                                                    <flat-pickr v-model="sorting.endDate" 
+                                                        :config="{dateFormat: 'd-m-Y'}"
+                                                        class="form-control form-control-sm">
+                                                    </flat-pickr>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-xl-12 col-md-3 col-sm-6">
                                             <a href="javascript:;" class="btn btn-success btn-download">Download</a>
@@ -151,6 +166,10 @@
     import '@/assets/sass/tables/table-basic.scss';
     import '@/assets/sass/apps/invoice-preview.scss';
 
+    import flatPickr from 'vue-flatpickr-component';
+    import 'flatpickr/dist/flatpickr.css';
+    import '@/assets/sass/forms/custom-flatpickr.css';
+
     import moment from "moment";
 
     import { useStore } from 'vuex';
@@ -164,8 +183,7 @@
 
     const sorting = ref({
         startDate: moment().format("D-M-YYYY"),
-        // kd_trans: props.kd_trans,
-        // endDate: moment().format("D-M-YYYY")
+        endDate: moment().format("D-M-YYYY")
     });
 
     

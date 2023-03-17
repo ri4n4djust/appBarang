@@ -49,7 +49,7 @@ class biayaController extends Controller
                     // $memo = 'Trans-biaya';
                     $jurnal = 'JK';
                     insert_gl($noNota,$tglNota,$biaya,$memo,$jurnal);
-                    $rgl = '1111'; // DB::table('general_ledger')->get()->last()->notrans;
+                    $rgl = DB::table('general_ledger')->get()->last()->notrans;
                     $ac = [
                         [
                             'rgl' => $rgl,

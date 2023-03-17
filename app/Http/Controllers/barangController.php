@@ -42,7 +42,9 @@ class barangController extends Controller
     }
 
     public function indexBbm(){
-        $bbm = Bbm::get();
+        $bbm = Bbm::join('tblpersediaan', 'tblpersediaan.kdPersediaan', 'tblbbm.code_bbm')
+                    ->select('tblbbm.*', 'tblpersediaan.*')
+                    ->get();
         //$posts = Barang::latest()->get();
         $count = Barang::count();
         return response([
@@ -345,6 +347,7 @@ class barangController extends Controller
             $exception = DB::transaction(function() use ($request){ 
                 $kdBarang = $request->input('code_bbm');
                 Bbm::where('code_bbm', $kdBarang)->update([
+                    'last_price' => $request->input('harga_pokok_baru'),
                     'sale_price' => $request->input('harga_baru'),
                     'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                 ]);
@@ -353,9 +356,12 @@ class barangController extends Controller
                 ]);
                 DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->update([
                     'salePrice' => $request->input('harga_baru'),
+                    'lastPrice' => $request->input('harga_pokok_baru'),
                 ]);
                 DB::table('tblperubahan_hargabbm')->insert([
                     'code_bbm'   => $request->input('code_bbm'),
+                    'harga_pokok_lama'   => $request->input('harga_pokok_lama'),
+                    'harga_pokok_baru' => $request->input('harga_pokok_baru'),
                     'harga_lama'   => $request->input('harga_lama'),
                     'harga_baru' => $request->input('harga_baru'),
                     'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
@@ -389,6 +395,7 @@ class barangController extends Controller
     public function resetdb(Request $request){
         try{
             $exception = DB::transaction(function() use ($request){
+                
                 DB::table('tblprofit')->truncate();
                 DB::table('tbltransaksi_nosel')->truncate();
                 DB::table('tblheader_aplusan')->truncate();
@@ -406,6 +413,9 @@ class barangController extends Controller
                 DB::table('tblpobbm_detail')->truncate();
                 DB::table('tblterimabbm_detail')->truncate();
                 DB::table('tblterimabbm')->truncate();
+                DB::table('tblpenjualankupon')->truncate();
+                DB::table('general_ledger')->truncate();
+                DB::table('gl_detail')->truncate();
 
                 DB::commit();
             });

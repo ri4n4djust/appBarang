@@ -1,16 +1,6 @@
 <?php
 use Illuminate\Support\Facades\DB;
 
-if(!function_exists('convertdate')){
-    function insert_gl($notrans,$tgl,$total_trans,$memo,$jurnal){
-
-        date_default_timezone_set('Asia/Jakarta');
-        $date = date('dmy');
-        return $date;
-    }
-    
-}
-
 if(!function_exists('autonumber')){
     function autonumber($barang,$primary,$prefix){
         $q=DB::table($barang)->where('kd_trans', 'like', 'BY%')->select(DB::raw('MAX(RIGHT('.$primary.',6)) as kd_max'));

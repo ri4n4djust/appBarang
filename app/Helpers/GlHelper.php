@@ -4,22 +4,18 @@ use Illuminate\Support\Facades\DB;
 if(!function_exists('insert_gl')){
     function insert_gl($notrans,$tgl,$total_trans,$memo,$jurnal){
 
-        // if(DB::table('general_ledger')->where('id', 1)->exists()){
-        //     $rgl = DB::table('general_ledger')->get()->last()->notrans;
-        //     $nomor = substr($rgl, 6);
-        //     $newno = (int)$nomor + 1;
-        //     $newno = substr("000000".$newno, -6);
-        // }else{
-        //     $newno = '000001';
-        // }
+        if(DB::table('general_ledger')->where('id', 1)->exists()){
+            $rgla = DB::table('general_ledger')->get()->last()->notrans;
+            $nomor = substr($rgla, 2);
+            $newno = (int)$nomor + 1;
+            $newno = substr("000000".$newno, -6);
+        }else{
+            $newno = '000001';
+        }
 
-        $table="tblbiaya";
-        $primary="kd_trans";
-        $prefix="GJ";
-        $kodeGJ = autonumber($table,$primary,$prefix);
 
-        $sql = DB::table('general_ledger')->upsert([
-                'notrans' => $kodeGJ, // 'GJ'.$newno,
+        $sql = DB::table('general_ledger')->insert([
+                'notrans' => 'GJ'.$newno,
                 'order_no' => $notrans,
                 'invoice_no' => '0',
                 'tgl' => $tgl,
