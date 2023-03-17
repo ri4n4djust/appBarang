@@ -1,3 +1,5 @@
+ALTER TABLE `tblbiaya` ADD `accid` VARCHAR(20) NOT NULL AFTER `jumlah`;
+
 ALTER TABLE `tblperubahan_hargabbm` ADD `code_bbm` VARCHAR(20) NOT NULL AFTER `id_perubahan`;
 
 // ALTER TABLE `tblbbm` ADD `accid_hpp` VARCHAR(20) NOT NULL AFTER `accid`;

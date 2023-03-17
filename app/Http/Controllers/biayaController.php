@@ -27,6 +27,7 @@ class biayaController extends Controller
                             'tglBiaya' => $tglNota,
                             'keterangan_biaya' => $memo,
                             'jumlah' => $biaya,
+                            'accid' => $acc,
                             'r_regu' => 'Z',
                             'created_at' => $tglNota,
                             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
@@ -35,6 +36,7 @@ class biayaController extends Controller
                             'tglBiaya' => $tglNota,
                             'keterangan_biaya' => $memo,
                             'jumlah' => $biaya,
+                            'accid' => $acc,
                             'r_regu' => 'Z',
                             'created_at' => $tglNota,
                             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
@@ -47,7 +49,7 @@ class biayaController extends Controller
                     // $memo = 'Trans-biaya';
                     $jurnal = 'JK';
                     insert_gl($noNota,$tglNota,$biaya,$memo,$jurnal);
-                    $rgl = DB::table('general_ledger')->get()->last()->notrans;
+                    $rgl = '1111'; // DB::table('general_ledger')->get()->last()->notrans;
                     $ac = [
                         [
                             'rgl' => $rgl,

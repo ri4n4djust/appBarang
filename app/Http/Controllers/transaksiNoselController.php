@@ -220,6 +220,7 @@ class transaksiNoselController extends Controller
                             'tglBiaya'     => date("Y-m-d", strtotime($det_biaya[$i]['tglBiaya'])),
                             'keterangan_biaya'     => $det_biaya[$i]['ketBiaya'],
                             'jumlah'   => $nilai,
+                            'accid' => $det_biaya[$i]['acc'],
                             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                         ];
