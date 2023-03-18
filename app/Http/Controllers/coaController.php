@@ -112,7 +112,12 @@ class coaController extends Controller
 
 	public function get_coa(Request $request){
 		$ac = $request->input('acc');
-		$data = DB::select("SELECT * FROM (SELECT acc_id,name FROM `level2` where atype = 'D' union SELECT acc_id,name FROM `level3` where atype = 'D' union SELECT acc_id,name FROM `level4` where atype = 'D') acc where acc_id like '$ac%' order by acc_id;");
+		if($ac == ''){
+			$where = '';
+		}else{
+			$where = "where acc_id like '$ac%'";
+		}
+		$data = DB::select("SELECT * FROM (SELECT acc_id,name FROM `level2` where atype = 'D' union SELECT acc_id,name FROM `level3` where atype = 'D' union SELECT acc_id,name FROM `level4` where atype = 'D') acc $where order by acc_id;");
 		// $lvl1 = get_level1(1); 
 		// $lvl2 = get_level2(2);
 		// $lvl3 = get_level3(3);
@@ -416,8 +421,16 @@ class coaController extends Controller
 			$amount_Level3 = 0;
 			$head_idlevel3 = '';
 
+			
+
 			$acc = array();
 			$i = 0;
+
+			$tot_income = 0;
+			$tot_hpp = 0;
+			$tot_byyop = 0;
+			$tot_pendlain = 0;
+			$tot_byylain = 0;
 			// echo "<div style='overflow:auto'>";
 			// print_r($groups);
 
@@ -425,59 +438,135 @@ class coaController extends Controller
 			  $h_tipe = substr($value['tipe'], 0,1);
 			  switch ($value['level']) {
 			    case '1':
-			      if($h_tipe == 'H'){
-			          if($head_level1 == ''){
-			          $head_level1 = $value['tipe'];
-			          $name_level1 = "Total".$value['name'];
-			          $amount_Level1 = $value['amount'];
-			          $head_idlevel1 = substr($value['acc_id'], 0,1).'9999';
-			          $acc[$i] = array(
-			            'acc_id' => $head_idlevel1,
-			            'name' => $name_level1,
-			            'amount' => $amount_Level1,
-			            'level' => '1',
-			            'tipe' => $value['tipe'],
-			            'jenis'=> 'Total',
-						'parent' => $value['parent1'],
-			          );        
-			        }else{
-			          if($head_level1 != $value['tipe']){
-			            $head_level1 = $value['tipe'];
-			            $name_level1 = "Total".$value['name'];
-			            $amount_Level1 = $value['amount'];
-			            $head_idlevel1 = substr($value['acc_id'], 0,1).'9999';
-			            $acc[$i] = array(
-			              'acc_id' => $head_idlevel1,
-			              'name' => $name_level1,
-			              'amount' => $amount_Level1,
-			              'level' => '1',
-			              'tipe' => $value['tipe'],
-			              'jenis'=> 'Total',
-						  'parent' => $value['parent1'],
-			            );
-			          }
-			        }
-			        $i+=1;
-			        $acc[$i] = array(
-			          'acc_id' => $value['acc_id'],
-			          'name' => $value['name'],
-			          'amount' => $value['amount'],
-			          'level' => $value['level'],
-			          'tipe' => $value['tipe'],
-			          'jenis'=> 'Header',
-					  'parent' => $value['parent1'],
-			        );
-			      }else{ //--------- tipe bukan header
-			        $acc[$i] = array(
-			          'acc_id' => $value['acc_id'],
-			          'name' => $value['name'],
-			          'amount' => $value['amount'],
-			          'level' => $value['level'],
-			          'tipe' => $value['tipe'],
-			          'jenis'=> 'Detail',
-					  'parent' => $value['parent1']
-			        );
-			      }
+					if($h_tipe == 'H'){
+						if($head_level1 == ''){
+						$head_level1 = $value['tipe'];
+						$name_level1 = "Jumlah Total ".$value['name'];
+						$amount_Level1 = $value['amount'];
+						$head_idlevel1 = substr($value['acc_id'], 0,1).'9998';
+						switch ($head_level1) {
+						  case 'H4':
+							$tot_income = $value['amount'];
+							break;
+						  case 'H5':
+							$tot_hpp = $value['amount'];
+							break;
+						  case 'H6':
+							$tot_byyop = $value['amount'];
+							break;     
+						  case 'H7':
+							$tot_pendlain = $value['amount'];
+							break;          
+						  default:
+							$tot_byylain = $value['amount'];
+							break;
+						}
+						$acc[$i] = array(
+						  'acc_id' => $head_idlevel1,
+						  'name' => $name_level1,
+						  'amount' => $amount_Level1,
+						  'level' => '1',
+						  'tipe' => $value['tipe'],
+						  'jenis'=> 'Total',
+						);        
+					  }else{
+						if($head_level1 != $value['tipe']){
+						  $head_level1 = $value['tipe'];
+						  $name_level1 = "Jumlah Total ".$value['name'];
+						  $amount_Level1 = $value['amount'];
+						  $head_idlevel1 = substr($value['acc_id'], 0,1).'9998';
+						  switch ($head_level1) {
+							case 'H4':
+							  $tot_income = $value['amount'];
+							  break;
+							case 'H5':
+							  $tot_hpp = $value['amount'];
+							  break;
+							case 'H6':
+							  $tot_byyop = $value['amount'];
+							  break;
+							case 'H7':
+							  $tot_pendlain = $value['amount'];
+							  break;             
+							default:
+							  $tot_byylain = $value['amount'];
+							  break;
+						  }
+						  $acc[$i] = array(
+							'acc_id' => $head_idlevel1,
+							'name' => $name_level1,
+							'amount' => $amount_Level1,
+							'level' => '1',
+							'tipe' => $value['tipe'],
+							'jenis'=> 'Total',
+						  );
+						}
+					  }
+			  
+					  if($head_level1 == 'H6'){
+						$i+=1;        
+						$acc[$i] = array(
+						  'acc_id' => '59999',
+						  'name' => 'Aset Bersih Sebelum Biaya',
+						  'amount' => -1*((double)$tot_income)-(double)$tot_hpp,
+						  'level' => '0',
+						  'tipe' => 'H',
+						  'jenis'=> 'Total',
+						);
+					  }elseif($head_level1 == 'H7'){
+						$i+=1;        
+						$acc[$i] = array(
+						  'acc_id' => '69999',
+						  'name' => 'Asset Bersih Operasional',
+						  'amount' => -1*((double)$tot_income)-(double)$tot_hpp-(double)$tot_byyop,
+						  'level' => '0',
+						  'tipe' => 'H',
+						  'jenis'=> 'Total',
+						);
+					  }elseif($head_level1 == 'H8'){
+						$i+=1;        
+						$acc[$i] = array(
+						  'acc_id' => '79999',
+						  'name' => 'Aset Bersih Setelah Penerimaan Lain',
+						  'amount' => ((double)$tot_income)-(double)$tot_hpp-(double)$tot_byyop+(double)$tot_pendlain,
+						  'level' => '0',
+						  'tipe' => 'H',
+						  'jenis'=> 'Total',
+						);
+					  }else{
+						if ($head_level1 != '') {
+						  $i+=1;        
+						  $acc[$i] = array(
+							'acc_id' => '89999',
+							'name' => 'Asset Bersih Setelah Biaya Lain',
+							'amount' => -1*((double)$tot_income)-(double)$tot_hpp-(double)$tot_byyop+(double)$tot_pendlain-(double)$tot_byylain,
+							'level' => '0',
+							'tipe' => 'H',
+							'jenis'=> 'Total',
+						  );
+						}          
+					  }
+			  
+					  $i+=1;        
+					  $acc[$i] = array(
+						'acc_id' => $value['acc_id'],
+						'name' => $value['name'],
+						'amount' => $value['amount'],
+						'level' => $value['level'],
+						'tipe' => $value['tipe'],
+						'jenis'=> 'Header',
+					  );
+					}else{ //--------- tipe bukan header
+					  $acc[$i] = array(
+						'acc_id' => $value['acc_id'],
+						'name' => $value['name'],
+						'amount' => $value['amount'],
+						'level' => $value['level'],
+						'tipe' => $value['tipe'],
+						'jenis'=> 'Detail',
+					  );
+					}
+			  
 
 			      
 			      break;

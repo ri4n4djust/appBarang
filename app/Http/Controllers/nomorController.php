@@ -488,6 +488,20 @@ class nomorController extends Controller
         // }
     }
 
+    public function kodeJurnal()
+    {
+        $table="general_ledger";
+        $primary="notrans";
+        $prefix="GJ";
+        $kodeBarang = autonumber($table,$primary,$prefix);
+        return response()->json([
+            'success' => true,
+            'message' => 'Detail Post!',
+            'kdJurnal'    => $kodeBarang
+        ], 200);
+        
+    }
+
 
     public function kodeUsername()
     {

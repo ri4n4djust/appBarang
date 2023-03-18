@@ -356,6 +356,44 @@ const actions = {
         // await dispatch('GetPembelian')
     },
 
+    async insertJuurnalUmum({dispatch}, detail) {
+        let response
+        try {
+            response = await axios.post('/api/store/jurnal-umum', detail)
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Jurnal berhasil tersimpan',
+                padding: '2em',
+            });
+            // console.log(response.data.data)
+        } catch (ex) {
+            // Handle error
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'Mohon Lengkapi Data',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            return
+        }
+        // await dispatch('GetPembelian')
+    },
+
     async NewKupon({ commit }, data){
             commit('setKupon', data)
     },

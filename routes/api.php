@@ -72,6 +72,7 @@ Route::get('/kdpobbm', [App\Http\Controllers\nomorController::class, 'kodePoBbm'
 Route::get('/kdbiaya', [App\Http\Controllers\nomorController::class, 'kodeBiaya']);
 Route::get('/kdbbmdatang', [App\Http\Controllers\nomorController::class, 'kodeBbmdatang']);
 Route::get('/kdpelanggan', [App\Http\Controllers\nomorController::class, 'kodePelanggan']);
+Route::get('/kdjurnal-umum', [App\Http\Controllers\nomorController::class, 'kodeJurnal']);
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //     return $request->user();
@@ -103,6 +104,7 @@ Route::post('/getdetail-penjualan', [App\Http\Controllers\penjualanController::c
 
 //============biaya
 Route::post('/store/biaya', [App\Http\Controllers\biayaController::class, 'simpanBiaya']);
+Route::post('/store/jurnal-umum', [App\Http\Controllers\jurnalController::class, 'simpanJurnal']);
 
 //============ COA
 Route::post('/labarugi/pendapatan', [App\Http\Controllers\labarugiController::class, 'getPendapatan']);

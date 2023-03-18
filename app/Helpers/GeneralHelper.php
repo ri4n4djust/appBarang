@@ -3,7 +3,7 @@ use Illuminate\Support\Facades\DB;
 
 if(!function_exists('autonumber')){
     function autonumber($barang,$primary,$prefix){
-        $q=DB::table($barang)->where('kd_trans', 'like', 'BY%')->select(DB::raw('MAX(RIGHT('.$primary.',6)) as kd_max'));
+        $q=DB::table($barang)->where("$primary", 'like', 'BY%')->select(DB::raw('MAX(RIGHT('.$primary.',6)) as kd_max'));
         $tahun = date('ym');
         $prx = $prefix.$tahun;
         // print_r($q->get());

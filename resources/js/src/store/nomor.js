@@ -9,6 +9,7 @@ const state = {
     noterimabbm: [],
     nokupon: [],
     nobiaya: [],
+    nojurnalumum: []
   };
   
 const getters = {
@@ -19,7 +20,8 @@ const getters = {
     NoPobbm: state => state.nopobbm,
     NoTerimaBbm: state => state.noterimabbm,
     NoKupon: state => state.nokupon,
-    NoBiaya: state => state.nobiaya
+    NoBiaya: state => state.nobiaya,
+    NoJurnalUmum: state => state.nojurnalumum
 };
 
 const actions = {  
@@ -83,6 +85,18 @@ const actions = {
         }
     
     },
+    async GetNoJurnalUmum({ commit }){
+        let response
+        try {
+            response = await axios.get('/api/kdjurnal-umum')
+            commit('setNoJurnalUmum', response.data.kdJurnal)
+        } catch (ex) {
+            // Handle error
+            alert('error no biaya')
+            return
+        }
+    
+    },
     async GetNoKupon({ commit }){
         let response
         try {
@@ -136,6 +150,9 @@ const mutations = {
     },
     setNoBiaya(state, bi){
         state.nobiaya = bi
+    },
+    setNoJurnalUmum(state, gj){
+        state.nojurnalumum = gj
     },
     setNoKupon(state, kp){
         state.nokupon = kp
