@@ -459,7 +459,9 @@
                         'qty_order': detail[i].qty,
                         'qty_datang': qty_datang.value[i],
                         'qty_sisa': detail[i].qty - qty_datang.value[i],
-                        'no_po': detail[i].r_noPo
+                        'no_po': detail[i].r_noPo,
+                        'nilai_datang': qty_datang.value[i] * detail[i].hrgBeli,
+                        'accid_persediaan': detail[i].accid_persediaan,
                     })
                 }
             }

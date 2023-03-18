@@ -177,9 +177,39 @@ class pembelianController extends Controller
                             'tgl_terima' => $tgl_terima,
                             'kd_barang' => $kdBarang,
                             'qty_terima' => $qty_datang,
-                            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                            'created_at' => $tgl_terima,
                             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                         ];
+
+                        //===========jurnal
+                        $acc_id_d =  $detgr[$i]['accid_persediaan']; // acc id yg di debet
+                        $acc_id_k = '11300'; // $request[0]['subtotal']; // acc id yg di kredit
+                        $memo = 'BBM-Datang';
+                        $jurnal = 'JK';
+                        $subtotal = $detgr[$i]['nilai_datang'];
+                        insert_gl($no_gr,$tgl_terima,$subtotal,$memo,$jurnal);
+                        $rgl = DB::table('general_ledger')->get()->last()->notrans;
+                        $ac = [
+                            [
+                                'rgl' => $rgl,
+                                'acc_id' => $acc_id_d,
+                                'debet' => $subtotal,
+                                'kredit' => 0,
+                                'trans_detail' => 'BBM-Datang',
+                                'void_flag' => 0,
+                            ], 
+                            [
+                                'rgl' => $rgl,
+                                'acc_id' => $acc_id_k,
+                                'debet' => 0,
+                                'kredit' => $subtotal,
+                                'trans_detail' => 'BBM-Datang',
+                                'void_flag' => 0,
+                            ]
+                        ];
+                        
+                        insert_gl_detail($ac);
+                        //===========end jurnal
                     }
                 DB::table('tblterimabbm_detail')->insert($detail);
 
@@ -271,7 +301,7 @@ class pembelianController extends Controller
                     ];
 
                     //===========jurnal
-                    $acc_id_d = $detpo[$i]['accid_persediaan']; // acc id yg di debet
+                    $acc_id_d = '11300'; // $detpo[$i]['accid_persediaan']; // acc id yg di debet
                     $acc_id_k = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
                     $memo = 'PO-BBM';
                     $jurnal = 'JK';
@@ -353,9 +383,11 @@ class pembelianController extends Controller
         // $startDate = date("Y-m-d", strtotime($request->input('startDate')));
         // $endDate = date("Y-m-d", strtotime($request->input('endDate')));
         $no_po = $request->input('no_po');
-        $detailpo = DB::table('tblpobbm_detail')
-                ->where('tblpobbm_detail.r_noPo', $no_po)
-                ->get();
+        // $detailpo = DB::table('tblpobbm_detail')
+        //         ->join('tblbbm', 'tblbbm.code_bbm', 'tblpobbm_detail.kdBarang')
+        //         ->where('tblpobbm_detail.r_noPo', $no_po)
+        //         ->select('tblpobbm_detail.*', 'tblbbm.accid_persediaan');
+        $detailpo = DB::select("SELECT a.*,b.accid_persediaan FROM `tblpobbm_detail` a LEFT JOIN tblbbm b ON a.kdBarang = b.code_bbm WHERE a.r_noPo='$no_po';");
         // $list = DB::select("SELECT b.*,c.nmSupplier,(a.qty - a.qty_recieve) kurang from tblpobbm_detail a, tblpobbm b, tblsupplier c WHERE a.r_noPo = b.no_po and a.qty != a.qty_recieve AND b.r_supplier = c.kdSupplier ;");
         
         return response()->json([
