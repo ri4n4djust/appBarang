@@ -283,7 +283,7 @@
     import { useRouter, useRoute } from 'vue-router'
 
     import { useMeta } from '@/composables/use-meta';
-    useMeta({ title: 'Input Biaya' });
+    useMeta({ title: 'Jurnal Umum' });
 
     const store = useStore();
     const router = useRouter();

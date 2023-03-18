@@ -83,7 +83,7 @@
                                         <tr v-for="item, index in table_1" :key="item.index" role="row">
                                             <td aria-colindex="1" role="cell">{{ item.code_bbm }}</td>
                                             <td aria-colindex="2" role="cell">{{ item.nama_bbm }}</td>
-                                            <td aria-colindex="3" role="cell">{{ Number(item.stokBbm).toLocaleString() }}</td>
+                                            <td aria-colindex="3" role="cell">{{ Number(item.stokPersediaan).toLocaleString() }}</td>
                                             <td aria-colindex="4" role="cell">Liter</td>
                                             <td aria-colindex="5" role="cell">
                                                 <div :style="{ 'width': inp + 'px' }">
@@ -95,7 +95,7 @@
                                                 <input type="text" class="form-control form-control-sm col-sm-2" v-model="keterangan[index]" >
                                                 </div>    
                                             </td>
-                                            <td aria-colindex="5" role="cell">{{ item.stokBbm - item_now[index] }}</td>
+                                            <td aria-colindex="5" role="cell">{{ item.stokPersediaan - item_now[index] }}</td>
 
                                                 <!-- <span :class="`text-${item.status_class}`"> {{ item.status }} </span> -->
 
@@ -130,7 +130,7 @@
     import moment from "moment";
 
     import { useMeta } from '@/composables/use-meta';
-    useMeta({ title: 'Tables' });
+    useMeta({ title: 'Opnum BBM' });
 
     const store = useStore();
     const table_1 = ref([]);
@@ -177,7 +177,7 @@
         let tota = 0;
         for (let i = 0; i < dataArr.length; i++) {
             // console.log({kdBarang : dataArr[i].r_kdBarang, nmBarang : dataArr[i].r_nmBarang,});
-            let subto = dataArr[i].last_price * (dataArr[i].stokBbm - item_now.value[i])
+            let subto = dataArr[i].last_price * (dataArr[i].stokPersediaan - item_now.value[i])
             let ket = keterangan.value[i]
             if (!isNaN(subto)) {
                 if(!ket){
@@ -190,7 +190,7 @@
                     'accid_biaya' : dataArr[i].accid_biaya,
                     'keterangan' : ket,
                     'qty' : item_now.value[i],
-                    'selisih' : dataArr[i].stokBbm - item_now.value[i],
+                    'selisih' : dataArr[i].stokPersediaan - item_now.value[i],
                     'total' : subto
                 })
                 tota += parseInt(subto)

@@ -502,13 +502,23 @@ class coaController extends Controller
 						  );
 						}
 					  }
-			  
-					  if($head_level1 == 'H6'){
+			   
+					  if($head_level1 == 'H5'){
 						$i+=1;        
 						$acc[$i] = array(
 						  'acc_id' => '59999',
 						  'name' => 'Aset Bersih Sebelum Biaya',
-						  'amount' => -1*((double)$tot_income)-(double)$tot_hpp,
+						  'amount' => (double)$tot_income-(double)$tot_hpp,
+						  'level' => '0',
+						  'tipe' => 'H',
+						  'jenis'=> 'Total',
+						);
+					  }elseif($head_level1 == 'H6'){
+						$i+=1;        
+						$acc[$i] = array(
+						  'acc_id' => '69999',
+						  'name' => 'Asset Bersih Operasional',
+						  'amount' => (double)$tot_byyop,
 						  'level' => '0',
 						  'tipe' => 'H',
 						  'jenis'=> 'Total',
@@ -516,35 +526,26 @@ class coaController extends Controller
 					  }elseif($head_level1 == 'H7'){
 						$i+=1;        
 						$acc[$i] = array(
-						  'acc_id' => '69999',
-						  'name' => 'Asset Bersih Operasional',
-						  'amount' => -1*((double)$tot_income)-(double)$tot_hpp-(double)$tot_byyop,
-						  'level' => '0',
-						  'tipe' => 'H',
-						  'jenis'=> 'Total',
-						);
-					  }elseif($head_level1 == 'H8'){
-						$i+=1;        
-						$acc[$i] = array(
 						  'acc_id' => '79999',
 						  'name' => 'Aset Bersih Setelah Penerimaan Lain',
-						  'amount' => ((double)$tot_income)-(double)$tot_hpp-(double)$tot_byyop+(double)$tot_pendlain,
+						  'amount' => (double)$tot_income-(double)$tot_hpp-(double)$tot_byyop+(double)$tot_pendlain,
 						  'level' => '0',
 						  'tipe' => 'H',
 						  'jenis'=> 'Total',
 						);
 					  }else{
-						if ($head_level1 != '') {
+						$hasil = $tot_hpp; //((double)$tot_income-(double)$tot_hpp)-(double)$tot_byyop ;
+						// if ($head_level1 != '') {
 						  $i+=1;        
 						  $acc[$i] = array(
 							'acc_id' => '89999',
 							'name' => 'Asset Bersih Setelah Biaya Lain',
-							'amount' => -1*((double)$tot_income)-(double)$tot_hpp-(double)$tot_byyop+(double)$tot_pendlain-(double)$tot_byylain,
+							'amount' => $hasil, //(((double)$tot_income-(double)$tot_hpp)-(double)$tot_byyop),
 							'level' => '0',
 							'tipe' => 'H',
 							'jenis'=> 'Total',
 						  );
-						}          
+						// }          
 					  }
 			  
 					  $i+=1;        
