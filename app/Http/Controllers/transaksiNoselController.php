@@ -191,7 +191,7 @@ class transaksiNoselController extends Controller
                             [
                                 'rgl' => $rgl,
                                 'acc_id' => $acc_id_d,
-                                'debet' => -1*$nilai,
+                                'debet' => $nilai,
                                 'kredit' => 0,
                                 'trans_detail' => 'Aplusan-kupon',
                                 'void_flag' => 0,
@@ -370,6 +370,7 @@ class transaksiNoselController extends Controller
                     $acc_id_dd = $detpro[$i]['accid_hpp']; // acc id yg di debet
                     $accid = $detpro[$i]['accid']; // acc id yg di debet
                     $acc_id_d = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
+                    $acc = '32300';
                     $memo = 'Aplusan';
                     $jurnal = 'JK';
                     insert_gl($kdtrans,$tgl,$total_harga,$memo,$jurnal);
@@ -405,6 +406,14 @@ class transaksiNoselController extends Controller
                             'debet' => 0,
                             'kredit' => $total_hpp,
                             'trans_detail' => 'Aplusan',
+                            'void_flag' => 0,
+                        ],
+                        [
+                            'rgl' => $rgl,
+                            'acc_id' => $acc,
+                            'debet' => 0,
+                            'kredit' => $total_harga - $total_hpp,
+                            'trans_detail' => 'Aplusan-Laba',
                             'void_flag' => 0,
                         ]
                     ];

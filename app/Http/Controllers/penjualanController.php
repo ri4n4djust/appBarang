@@ -94,7 +94,9 @@ class penjualanController extends Controller
                     //===========jurnal
                     $accid = $detpem[$i]['accid']; // acc id yg di debet
                     $acc_id_d = $detpem[$i]['accid_persediaan']; // acc id yg di debet
+                    $acc_hpp = $detpem[$i]['accid_hpp'];
                     $acc_id_k = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
+                    $acc = '32300';
                     $memo = 'Penjualan-Barang';
                     $jurnal = 'JK';
                     $subtotal = $detpem[$i]['total'];
@@ -122,7 +124,23 @@ class penjualanController extends Controller
                             'rgl' => $rgl,
                             'acc_id' => $acc_id_d,
                             'debet' => 0,
-                            'kredit' => -1*$subtotal,
+                            'kredit' => $subtotal,
+                            'trans_detail' => 'Penjualan-Barang',
+                            'void_flag' => 0,
+                        ],
+                        [
+                            'rgl' => $rgl,
+                            'acc_id' => $acc_hpp,
+                            'debet' => $subtotal_hpp,
+                            'kredit' => 0,
+                            'trans_detail' => 'Penjualan-Barang',
+                            'void_flag' => 0,
+                        ],
+                        [
+                            'rgl' => $rgl,
+                            'acc_id' => $acc,
+                            'debet' => 0,
+                            'kredit' => $subtotal - $subtotal_hpp,
                             'trans_detail' => 'Penjualan-Barang',
                             'void_flag' => 0,
                         ]
@@ -207,7 +225,7 @@ class penjualanController extends Controller
                             'rgl' => $rgl,
                             'acc_id' => $accid,
                             'debet' => 0,
-                            'kredit' => -1*$t,
+                            'kredit' => $t,
                             'trans_detail' => 'Penjualan-Kupon',
                             'void_flag' => 0,
                         ],

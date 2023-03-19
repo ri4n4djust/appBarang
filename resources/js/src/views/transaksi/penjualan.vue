@@ -507,7 +507,7 @@
                 getTotal()
                 // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
             }else{
-            cartItemsPen.value.push({kdBarang:brg.kdBarang, nmBarang:brg.nmBarang,hrgJual:brg.hrgJual,accid:brg.accid,accid_persediaan:brg.accid_persediaan,qty:qty.value,satuan:brg.satuanBarang,total:qty.value * brg.hrgJual,totalhpp:qty.value * brg.hrgPokok, kategori:brg.ktgBarang});	
+            cartItemsPen.value.push({kdBarang:brg.kdBarang, nmBarang:brg.nmBarang,accid:brg.accid,accid_persediaan:brg.accid_persediaan,accid_hpp:brg.accid_hpp,hrgJual:brg.hrgJual,accid:brg.accid,accid_persediaan:brg.accid_persediaan,qty:qty.value,satuan:brg.satuanBarang,total:qty.value * brg.hrgJual,totalhpp:qty.value * brg.hrgPokok, kategori:brg.ktgBarang});	
             localStorage.setItem('cartItemsPen',JSON.stringify(cartItemsPen.value));
             getCart();
             getTotal()

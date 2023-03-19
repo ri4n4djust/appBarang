@@ -183,7 +183,7 @@ class pembelianController extends Controller
 
                         //===========jurnal
                         $acc_id_d =  $detgr[$i]['accid_persediaan']; // acc id yg di debet
-                        $acc_id_k = '11300'; // $request[0]['subtotal']; // acc id yg di kredit
+                        $acc_id_k = '11401'; // $request[0]['subtotal']; // acc id yg di kredit
                         $memo = 'BBM-Datang';
                         $jurnal = 'JK';
                         $subtotal = $detgr[$i]['nilai_datang'];
@@ -301,7 +301,7 @@ class pembelianController extends Controller
                     ];
 
                     //===========jurnal
-                    $acc_id_d = '11300'; // $detpo[$i]['accid_persediaan']; // acc id yg di debet
+                    $acc_id_d = '11401'; // $detpo[$i]['accid_persediaan']; // acc id yg di debet
                     $acc_id_k = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
                     $memo = 'PO-BBM';
                     $jurnal = 'JK';
@@ -314,7 +314,7 @@ class pembelianController extends Controller
                             'acc_id' => $acc_id_d,
                             'debet' => $subtotal,
                             'kredit' => 0,
-                            'trans_detail' => 'PO',
+                            'trans_detail' => 'PO-BBM',
                             'void_flag' => 0,
                         ], 
                         [
@@ -322,7 +322,7 @@ class pembelianController extends Controller
                             'acc_id' => $acc_id_k,
                             'debet' => 0,
                             'kredit' => $subtotal,
-                            'trans_detail' => 'PO',
+                            'trans_detail' => 'PO-BBM',
                             'void_flag' => 0,
                         ]
                     ];
