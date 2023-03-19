@@ -185,7 +185,7 @@ class transaksiNoselController extends Controller
                         $acc_id_d = '21200'; // $request[0]['subtotal']; // acc id yg di kredit
                         $memo = 'Aplusan-kupon';
                         $jurnal = 'JK';
-                        insert_gl($kdtrans,$tgl,$t,$memo,$jurnal);
+                        insert_gl($kdtrans,$tgl,$nilai,$memo,$jurnal);
                         $rgl = DB::table('general_ledger')->get()->last()->notrans;
                         $ac = [
                             [
@@ -200,7 +200,7 @@ class transaksiNoselController extends Controller
                                 'rgl' => $rgl,
                                 'acc_id' => $accid,
                                 'debet' => 0,
-                                'kredit' => $nilai,
+                                'kredit' => -1*$nilai,
                                 'trans_detail' => 'Aplusan-kupon',
                                 'void_flag' => 0,
                             ]
@@ -241,7 +241,7 @@ class transaksiNoselController extends Controller
                         $acc_id_k = '11110'; // $det_biaya[$i]['acc'];
                         $memo = 'Aplusan-biaya';
                         $jurnal = 'JK';
-                        insert_gl($kdtrans,$tgl,$t,$memo,$jurnal);
+                        insert_gl($kdtrans,$tgl,$nilai,$memo,$jurnal);
                         $rgl = DB::table('general_ledger')->get()->last()->notrans;
                         $ac = [
                             [
