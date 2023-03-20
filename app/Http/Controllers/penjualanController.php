@@ -114,8 +114,8 @@ class penjualanController extends Controller
                         ], 
                         [
                             'rgl' => $rgl,
-                            'acc_id' => $acc_id_k,
-                            'debet' => $subtotal,
+                            'acc_id' => $acc_id_k ,
+                            'debet' => $subtotal + ($subtotal - $subtotal_hpp),
                             'kredit' => 0,
                             'trans_detail' => 'Penjualan-Barang',
                             'void_flag' => 0,
