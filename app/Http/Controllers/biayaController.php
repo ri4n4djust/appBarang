@@ -46,6 +46,7 @@ class biayaController extends Controller
                     // $accid = $detpro[$i]['accid']; // acc id yg di debet
                     $acc_id_d = $det_biaya[$i]['acc']; // $request[0]['subtotal']; // acc id yg di kredit
                     $acc_id_k = '11110'; // $det_biaya[$i]['acc'];
+                    $acc_laba = '32300';
                     // $memo = 'Trans-biaya';
                     $jurnal = 'JK';
                     insert_gl($noNota,$tglNota,$biaya,$memo,$jurnal);
@@ -67,6 +68,14 @@ class biayaController extends Controller
                             'trans_detail' => 'Trans-biaya',
                             'void_flag' => 0,
                         ],
+                        [
+                            'rgl' => $rgl,
+                            'acc_id' => $acc_laba,
+                            'debet' => $biaya,
+                            'kredit' => 0,
+                            'trans_detail' => 'Jurnal-Umum',
+                            'void_flag' => 0,
+                        ]
                         
                     ];
                     
