@@ -293,11 +293,11 @@
                                             </div>
                                         </div>
                                         <div class="col-xl-12 col-md-3 col-sm-6">
-                                            <a href="javascript:;" class="btn btn-success btn-download">Download</a>
+                                            <a href="javascript:;" @click="cari" class="btn btn-success btn-download">Cari</a>
                                         </div>
-                                        <div class="col-xl-12 col-md-3 col-sm-6">
+                                        <!-- <div class="col-xl-12 col-md-3 col-sm-6">
                                             <router-link to="/apps/invoice/edit" class="btn btn-dark btn-edit">Edit</router-link>
-                                        </div>
+                                        </div> -->
 
                                     </div>
                                 </div>
@@ -367,12 +367,34 @@
 
             // const pendapatan = hartalist.value.filter(p => p.acc_id === '60000');
             // console.log(hartalist.value);
-        }, 5000);
+        }, 3000);
 
         
        
     })
 
+    const cari = () => {
+        
+        const pendapatan = ref({group: '4,5'});
+        var c = Object.assign(sorting.value, pendapatan.value);
+        store.dispatch('GetPendapatan', c );
+        
+        const biaya = ref({group: '6'});
+        var d = Object.assign(sorting.value, biaya.value);
+        store.dispatch('GetHarta', d );
+
+        // const biaya = ref({group: '6'});
+        // store.dispatch('GetHarta', biaya.value);
+        // hartalist.value = store.getters.StateHarta;
+        setTimeout(function() { 
+            // store.dispatch('GetCoaList')
+            hartalist.value = store.getters.StateCoaPendapatan;
+            biayalist.value = store.getters.StateHarta;
+
+            // const pendapatan = hartalist.value.filter(p => p.acc_id === '60000');
+            // console.log(hartalist.value);
+        }, 3000);
+    }
 
     const export_table = (type) => {
         let cols = columns.value.filter((d) => d != 'profile' && d != 'action');

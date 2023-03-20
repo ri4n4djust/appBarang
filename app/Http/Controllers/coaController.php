@@ -182,9 +182,17 @@ class coaController extends Controller
 				// $table->temporary();
 			});
 
-			$date_lr = '2022-01-01';
-			$timezone = time() + (60*60*+8); 
-			$cur_tgl = gmdate('Y-m-d', $timezone);			
+			$startDate = date("Y-m-d", strtotime($request->input('startDate')));
+			$endDate = date("Y-m-d", strtotime($request->input('endDate')));
+			if($endDate == ''){
+				$date_lr = '2022-01-01';
+				$timezone = time() + (60*60*+8); 
+				$cur_tgl = gmdate('Y-m-d', $timezone);
+			} else{
+				$date_lr = $startDate;
+				$cur_tgl = $endDate;
+			}
+
 
 			DB::statement( DB::raw("SET @harta = 0;"));
 			DB::statement( DB::raw("SET @hutang = 0;"));
