@@ -33,194 +33,227 @@
                                                     
 
                                                     <div class="table-responsive">
-                                                        <!-- <div class="table-responsive"> -->                                        
-                                                            <table>
-                                                                <tbody  v-for="hrt in hartalist" :key="hrt.acc_id" :set="amount = hrt.amount">
-                                                                    
-                                                                        <tr v-if="hrt.acc_id === '59999'" style="font-size:10px">
-                                                                            <td v-if="hrt.jenis != 'Total'" style="min-width:70px">{{ hrt.acc_id }}</td>
-                                                                            <td v-else></td>
-                                                                            <td v-if="hrt.jenis === 'Total'" style="min-width: 300px;" ><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
-                                                                            <td v-else style="min-width: 300px;">&nbsp;&nbsp;{{ hrt.name }}</td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
-                                                                            <td v-else></td>
-                                                                            <td v-if="hrt.jenis === 'Detail'">
-                                                                                <!-- <div v-if="hrt.acc_id.substring(0,1) === '2'|| hrt.acc_id.substring(0,1) === '2'">  -->
-                                                                                    {{ Number(amount).toLocaleString() }}
-                                                                                <!-- </div> -->
-                                                                                <!-- <div>{{ Number(amount).toLocaleString() }}</div> -->
+                                                        <div class="row invoice layout-top-spacing layout-spacing apps-invoice"></div>
+                                                        <!-- <div class="table-responsive"> -->
+                                                            <table border="1" cellspacing="3">
+                                                                <tr style="vertical-align:top">
+                                                                    <td>
+                                                                        <table border="1" cellspacing="3">
+                                                                            <tbody  v-for="hrt in hartalist" :key="hrt.acc_id" :set="amount = hrt.amount">
                                                                                 
-                                                                            </td>
-                                                                            <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
-                                                                            <td v-else></td>
-                                                                        </tr>
-                                                                        <tr v-if="hrt.acc_id === '69999'" style="font-size:10px">
-                                                                            <td v-if="hrt.jenis != 'Total'" style="min-width:70px">{{ hrt.acc_id }}</td>
-                                                                            <td v-else></td>
-                                                                            <td v-if="hrt.jenis === 'Total'" style="min-width: 300px;" ><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
-                                                                            <td v-else style="min-width: 300px;">&nbsp;&nbsp;{{ hrt.name }}</td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
-                                                                            <td v-else></td>
-                                                                            <td v-if="hrt.jenis === 'Detail'">
-                                                                                <!-- <div v-if="hrt.acc_id.substring(0,1) === '2'|| hrt.acc_id.substring(0,1) === '2'">  -->
-                                                                                    {{ Number(amount).toLocaleString() }}
-                                                                                <!-- </div> -->
-                                                                                <!-- <div>{{ Number(amount).toLocaleString() }}</div> -->
-                                                                                
-                                                                            </td>
-                                                                            <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
-                                                                            <td v-else></td>
-                                                                        </tr>
-                                                                        <tr v-if="hrt.acc_id === '89999'" style="font-size:10px">
-                                                                            <td v-if="hrt.jenis != 'Total'" style="min-width:70px">{{ hrt.acc_id }}</td>
-                                                                            <td v-else></td>
-                                                                            <td v-if="hrt.jenis === 'Total'" style="min-width: 300px;" ><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
-                                                                            <td v-else style="min-width: 300px;">&nbsp;&nbsp;{{ hrt.name }}</td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
-                                                                            <td v-else></td>
-                                                                            <td v-if="hrt.jenis === 'Detail'">
-                                                                                <!-- <div v-if="hrt.acc_id.substring(0,1) === '2'|| hrt.acc_id.substring(0,1) === '2'">  -->
-                                                                                    {{ Number(amount).toLocaleString() }}
-                                                                                <!-- </div> -->
-                                                                                <!-- <div>{{ Number(amount).toLocaleString() }}</div> -->
-                                                                                
-                                                                            </td>
-                                                                            <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
-                                                                            <td v-else></td>
-                                                                        </tr>
-                                                                        <tr v-if="hrt.level === '1'" style="font-size:10px">
-                                                                            <td v-if="hrt.jenis != 'Total'" style="min-width:70px">{{ hrt.acc_id }}</td>
-                                                                            <td v-else></td>
-                                                                            <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'" style="min-width: 300px;" ><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
-                                                                            <td v-else style="min-width: 300px;">&nbsp;&nbsp;{{ hrt.name }}</td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
-                                                                            <td v-else></td>
-                                                                            <td v-if="hrt.jenis === 'Detail'">
-                                                                                <!-- <div v-if="hrt.acc_id.substring(0,1) === '2'|| hrt.acc_id.substring(0,1) === '2'">  -->
-                                                                                    {{ Number(amount).toLocaleString() }}
-                                                                                <!-- </div> -->
-                                                                                <!-- <div>{{ Number(amount).toLocaleString() }}</div> -->
-                                                                                
-                                                                            </td>
-                                                                            <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
-                                                                            <td v-else></td>
-                                                                        </tr>
-                                                                        <tr v-if="hrt.level === '2'" style="font-size:10px">
-                                                                            <td v-if="hrt.jenis != 'Total'" >{{ hrt.acc_id }}</td>
-                                                                            <td v-else></td>
-                                                                            <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'" style="min-width: 300px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</b></td>
-                                                                            <td v-else style="min-width: 300px;">&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
-                                                                            <td></td>
-                                                                            <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
-                                                                            <td v-else></td>
-                                                                            <td v-if="hrt.jenis === 'Detail'">{{ Number(amount).toLocaleString() }}</td>
-                                                                            <td v-else-if="hrt.jenis === 'Total'">{{ Number(amount).toLocaleString() }}</td>
-                                                                            <td v-else></td>
-                                                                            <td></td>
-                                                                        </tr>
-                                                                        <tr v-if="hrt.level === '3'" style="font-size:10px">
-                                                                            <td v-if="hrt.jenis != 'Total'">{{ hrt.acc_id }}</td>
-                                                                            <td v-else></td>
-                                                                            <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'" style="min-width: 300px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</b></td>
-                                                                            <td v-else style="min-width: 300px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
-                                                                            <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
-                                                                            <td v-else></td>
-                                                                            <td v-if="hrt.jenis === 'Detail'">{{ Number(amount).toLocaleString() }}</td>
-                                                                            <td v-else-if="hrt.jenis === 'Total'">{{ Number(amount).toLocaleString() }}</td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                        </tr>
-                                                                        <tr v-if="hrt.level === '4'" style="font-size:10px">
-                                                                            <td>{{ hrt.acc_id }}</td>
-                                                                            <td style="min-width: 300px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
-                                                                            <td>{{ Number(amount).toLocaleString() }}</td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                        </tr>
+                                                                                    <!-- <tr v-if="hrt.acc_id === '59999'" style="font-size:10px">
+                                                                                        <td v-if="hrt.jenis != 'Total'" style="min-width:70px">{{ hrt.acc_id }}</td>
+                                                                                        <td v-else></td>
+                                                                                        <td v-if="hrt.jenis === 'Total'" style="min-width: 200px;" ><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
+                                                                                        <td v-else style="min-width: 200px;">&nbsp;&nbsp;{{ hrt.name }}</td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
+                                                                                        <td v-else></td>
+                                                                                        <td v-if="hrt.jenis === 'Detail'">
+                                                                                                {{ Number(amount).toLocaleString() }}
+                                                                                        </td>
+                                                                                        <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
+                                                                                        <td v-else></td>
+                                                                                    </tr>
+                                                                                    <tr v-if="hrt.acc_id === '69999'" style="font-size:10px">
+                                                                                        <td v-if="hrt.jenis != 'Total'" style="min-width:70px">{{ hrt.acc_id }}</td>
+                                                                                        <td v-else></td>
+                                                                                        <td v-if="hrt.jenis === 'Total'" style="min-width: 200px;" ><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
+                                                                                        <td v-else style="min-width: 200px;">&nbsp;&nbsp;{{ hrt.name }}</td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
+                                                                                        <td v-else></td>
+                                                                                        <td v-if="hrt.jenis === 'Detail'">
+                                                                                                {{ Number(amount).toLocaleString() }}
+                                                                                        </td>
+                                                                                        <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
+                                                                                        <td v-else></td>
+                                                                                    </tr>
+                                                                                    <tr v-if="hrt.acc_id === '89999'" style="font-size:10px">
+                                                                                        <td v-if="hrt.jenis != 'Total'" style="min-width:70px">{{ hrt.acc_id }}</td>
+                                                                                        <td v-else></td>
+                                                                                        <td v-if="hrt.jenis === 'Total'" style="min-width: 200px;" ><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
+                                                                                        <td v-else style="min-width: 200px;">&nbsp;&nbsp;{{ hrt.name }}</td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
+                                                                                        <td v-else></td>
+                                                                                        <td v-if="hrt.jenis === 'Detail'">
+                                                                                                {{ Number(amount).toLocaleString() }}
+                                                                                        </td>
+                                                                                        <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
+                                                                                        <td v-else></td>
+                                                                                    </tr> -->
+                                                                                    <tr v-if="hrt.level === '1'" style="font-size:10px">
+                                                                                        <td v-if="hrt.jenis != 'Total'" style="min-width:70px">{{ hrt.acc_id }}</td>
+                                                                                        <td v-else></td>
+                                                                                        <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'" style="min-width: 100px;" ><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
+                                                                                        <td v-else style="min-width: 100px;">&nbsp;&nbsp;{{ hrt.name }}</td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
+                                                                                        <td v-else></td>
+                                                                                        <td v-if="hrt.jenis === 'Detail'">
+                                                                                                {{ Number(amount).toLocaleString() }}
+                                                                                        </td>
+                                                                                        <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
+                                                                                        <td v-else></td>
+                                                                                    </tr>
+                                                                                    <tr v-if="hrt.level === '2'" style="font-size:10px">
+                                                                                        <td v-if="hrt.jenis != 'Total'" >{{ hrt.acc_id }}</td>
+                                                                                        <td v-else></td>
+                                                                                        <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'" style="min-width: 100px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</b></td>
+                                                                                        <td v-else style="min-width: 100px;">&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
+                                                                                        <td></td>
+                                                                                        <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
+                                                                                        <td v-else></td>
+                                                                                        <td v-if="hrt.jenis === 'Detail'">{{ Number(amount).toLocaleString() }}</td>
+                                                                                        <td v-else-if="hrt.jenis === 'Total'">{{ Number(amount).toLocaleString() }}</td>
+                                                                                        <td v-else></td>
+                                                                                        <td></td>
+                                                                                    </tr>
+                                                                                    <tr v-if="hrt.level === '3'" style="font-size:10px">
+                                                                                        <td v-if="hrt.jenis != 'Total'">{{ hrt.acc_id }}</td>
+                                                                                        <td v-else></td>
+                                                                                        <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'" style="min-width: 100px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</b></td>
+                                                                                        <td v-else style="min-width: 100px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
+                                                                                        <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
+                                                                                        <td v-else></td>
+                                                                                        <td v-if="hrt.jenis === 'Detail'">{{ Number(amount).toLocaleString() }}</td>
+                                                                                        <td v-else-if="hrt.jenis === 'Total'">{{ Number(amount).toLocaleString() }}</td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                    </tr>
+                                                                                    <tr v-if="hrt.level === '4'" style="font-size:10px">
+                                                                                        <td>{{ hrt.acc_id }}</td>
+                                                                                        <td style="min-width: 100px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
+                                                                                        <td>{{ Number(amount).toLocaleString() }}</td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                    </tr>
 
-                                                                </tbody>
-                                                            </table>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                    <td>
+                                                                        <table border="1" cellspacing="3">
+                                                                            <tbody  v-for="hrt in biayalist" :key="hrt.acc_id" :set="amount = hrt.amount">
+                                                                                
+                                                                                    <!-- <tr v-if="hrt.acc_id === '59999'" style="font-size:10px">
+                                                                                        <td v-if="hrt.jenis != 'Total'" style="min-width:70px">{{ hrt.acc_id }}</td>
+                                                                                        <td v-else></td>
+                                                                                        <td v-if="hrt.jenis === 'Total'" style="min-width: 200px;" ><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
+                                                                                        <td v-else style="min-width: 200px;">&nbsp;&nbsp;{{ hrt.name }}</td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
+                                                                                        <td v-else></td>
+                                                                                        <td v-if="hrt.jenis === 'Detail'">
+                                                                                                {{ Number(amount).toLocaleString() }}
+                                                                                        </td>
+                                                                                        <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
+                                                                                        <td v-else></td>
+                                                                                    </tr>
+                                                                                    <tr v-if="hrt.acc_id === '69999'" style="font-size:10px">
+                                                                                        <td v-if="hrt.jenis != 'Total'" style="min-width:70px">{{ hrt.acc_id }}</td>
+                                                                                        <td v-else></td>
+                                                                                        <td v-if="hrt.jenis === 'Total'" style="min-width: 200px;" ><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
+                                                                                        <td v-else style="min-width: 200px;">&nbsp;&nbsp;{{ hrt.name }}</td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
+                                                                                        <td v-else></td>
+                                                                                        <td v-if="hrt.jenis === 'Detail'">
+                                                                                                {{ Number(amount).toLocaleString() }}
+                                                                                        </td>
+                                                                                        <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
+                                                                                        <td v-else></td>
+                                                                                    </tr>
+                                                                                    <tr v-if="hrt.acc_id === '89999'" style="font-size:10px">
+                                                                                        <td v-if="hrt.jenis != 'Total'" style="min-width:70px">{{ hrt.acc_id }}</td>
+                                                                                        <td v-else></td>
+                                                                                        <td v-if="hrt.jenis === 'Total'" style="min-width: 200px;" ><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
+                                                                                        <td v-else style="min-width: 200px;">&nbsp;&nbsp;{{ hrt.name }}</td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
+                                                                                        <td v-else></td>
+                                                                                        <td v-if="hrt.jenis === 'Detail'">
+                                                                                                {{ Number(amount).toLocaleString() }}
+                                                                                        </td>
+                                                                                        <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
+                                                                                        <td v-else></td>
+                                                                                    </tr> -->
+                                                                                    <tr v-if="hrt.level === '1'" style="font-size:10px">
+                                                                                        <td v-if="hrt.jenis != 'Total'" style="min-width:70px">{{ hrt.acc_id }}</td>
+                                                                                        <td v-else></td>
+                                                                                        <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'" style="min-width: 200px;" ><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
+                                                                                        <td v-else style="min-width: 200px;">&nbsp;&nbsp;{{ hrt.name }}</td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
+                                                                                        <td v-else></td>
+                                                                                        <td v-if="hrt.jenis === 'Detail'">
+                                                                                                {{ Number(amount).toLocaleString() }}
+                                                                                        </td>
+                                                                                        <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
+                                                                                        <td v-else></td>
+                                                                                    </tr>
+                                                                                    <tr v-if="hrt.level === '2'" style="font-size:10px">
+                                                                                        <td v-if="hrt.jenis != 'Total'" >{{ hrt.acc_id }}</td>
+                                                                                        <td v-else></td>
+                                                                                        <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'" style="min-width: 200px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</b></td>
+                                                                                        <td v-else style="min-width: 200px;">&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
+                                                                                        <td></td>
+                                                                                        <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
+                                                                                        <td v-else></td>
+                                                                                        <td v-if="hrt.jenis === 'Detail'">{{ Number(amount).toLocaleString() }}</td>
+                                                                                        <td v-else-if="hrt.jenis === 'Total'">{{ Number(amount).toLocaleString() }}</td>
+                                                                                        <td v-else></td>
+                                                                                        <td></td>
+                                                                                    </tr>
+                                                                                    <tr v-if="hrt.level === '3'" style="font-size:10px">
+                                                                                        <td v-if="hrt.jenis != 'Total'">{{ hrt.acc_id }}</td>
+                                                                                        <td v-else></td>
+                                                                                        <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'" style="min-width: 200px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</b></td>
+                                                                                        <td v-else style="min-width: 200px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
+                                                                                        <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
+                                                                                        <td v-else></td>
+                                                                                        <td v-if="hrt.jenis === 'Detail'">{{ Number(amount).toLocaleString() }}</td>
+                                                                                        <td v-else-if="hrt.jenis === 'Total'">{{ Number(amount).toLocaleString() }}</td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                    </tr>
+                                                                                    <tr v-if="hrt.level === '4'" style="font-size:10px">
+                                                                                        <td>{{ hrt.acc_id }}</td>
+                                                                                        <td style="min-width: 200px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
+                                                                                        <td>{{ Number(amount).toLocaleString() }}</td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                        <td></td>
+                                                                                    </tr>
+
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>                                        
+                                                            
+                                                            
                                                         <!-- </div> -->
                                                     </div>
                                                     <div class="table-responsive">
                                                         <!-- <div class="table-responsive"> -->                                        
-                                                            <table>
-                                                                <tbody  v-for="hrt in hartalist" :key="hrt.acc_id" :set="amount = hrt.amount">
-                                                                    
-                                                                        <tr v-if="hrt.acc_id === '59999'" style="font-size:10px">
-                                                                            <td v-if="hrt.jenis != 'Total'" style="min-width:70px">{{ hrt.acc_id }}</td>
-                                                                            <td v-else></td>
-                                                                            <td v-if="hrt.jenis === 'Total'" style="min-width: 300px;" ><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
-                                                                            <td v-else style="min-width: 300px;">&nbsp;&nbsp;{{ hrt.name }}</td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
-                                                                            <td v-else></td>
-                                                                            <td v-if="hrt.jenis === 'Detail'">
-                                                                                <!-- <div v-if="hrt.acc_id.substring(0,1) === '2'|| hrt.acc_id.substring(0,1) === '2'">  -->
-                                                                                    {{ Number(amount).toLocaleString() }}
-                                                                                <!-- </div> -->
-                                                                                <!-- <div>{{ Number(amount).toLocaleString() }}</div> -->
-                                                                                
-                                                                            </td>
-                                                                            <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
-                                                                            <td v-else></td>
-                                                                        </tr>
-                                                                        <tr v-if="hrt.acc_id === '69999'" style="font-size:10px">
-                                                                            <td v-if="hrt.jenis != 'Total'" style="min-width:70px">{{ hrt.acc_id }}</td>
-                                                                            <td v-else></td>
-                                                                            <td v-if="hrt.jenis === 'Total'" style="min-width: 300px;" ><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
-                                                                            <td v-else style="min-width: 300px;">&nbsp;&nbsp;{{ hrt.name }}</td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
-                                                                            <td v-else></td>
-                                                                            <td v-if="hrt.jenis === 'Detail'">
-                                                                                <!-- <div v-if="hrt.acc_id.substring(0,1) === '2'|| hrt.acc_id.substring(0,1) === '2'">  -->
-                                                                                    {{ Number(amount).toLocaleString() }}
-                                                                                <!-- </div> -->
-                                                                                <!-- <div>{{ Number(amount).toLocaleString() }}</div> -->
-                                                                                
-                                                                            </td>
-                                                                            <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
-                                                                            <td v-else></td>
-                                                                        </tr>
-                                                                        <tr v-if="hrt.acc_id === '89999'" style="font-size:10px">
-                                                                            <td v-if="hrt.jenis != 'Total'" style="min-width:70px">{{ hrt.acc_id }}</td>
-                                                                            <td v-else></td>
-                                                                            <td v-if="hrt.jenis === 'Total'" style="min-width: 300px;" ><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
-                                                                            <td v-else style="min-width: 300px;">&nbsp;&nbsp;{{ hrt.name }}</td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td></td>
-                                                                            <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
-                                                                            <td v-else></td>
-                                                                            <td v-if="hrt.jenis === 'Detail'">
-                                                                                <!-- <div v-if="hrt.acc_id.substring(0,1) === '2'|| hrt.acc_id.substring(0,1) === '2'">  -->
-                                                                                    {{ Number(amount).toLocaleString() }}
-                                                                                <!-- </div> -->
-                                                                                <!-- <div>{{ Number(amount).toLocaleString() }}</div> -->
-                                                                                
-                                                                            </td>
-                                                                            <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
-                                                                            <td v-else></td>
-                                                                        </tr>
-                                                                </tbody>
-                                                            </table>
+                                                            
                                                     </div>
 
 
@@ -317,16 +350,26 @@
     
 
     const hartalist = ref();
+    const biayalist = ref();
     onMounted(() => {
-        const harta = ref({
-            group: '4,5,6'
-        });
-        store.dispatch('GetHarta', harta.value);
+        const pendapatan = ref({group: '4,5'});
+        store.dispatch('GetPendapatan', pendapatan.value);
+        const biaya = ref({group: '6'});
+        store.dispatch('GetHarta', biaya.value);
+
+        // const biaya = ref({group: '6'});
+        // store.dispatch('GetHarta', biaya.value);
         // hartalist.value = store.getters.StateHarta;
         setTimeout(function() { 
             // store.dispatch('GetCoaList')
-            hartalist.value = store.getters.StateHarta;
+            hartalist.value = store.getters.StateCoaPendapatan;
+            biayalist.value = store.getters.StateHarta;
+
+            // const pendapatan = hartalist.value.filter(p => p.acc_id === '60000');
+            // console.log(hartalist.value);
         }, 5000);
+
+        
        
     })
 

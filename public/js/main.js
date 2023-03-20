@@ -28860,7 +28860,7 @@ var actions = {
               dispatch = _ref.dispatch;
               _context.prev = 1;
               _context.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('api/store/barang', post);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/store/barang', post);
 
             case 4:
               _context.next = 6;
@@ -29011,7 +29011,7 @@ var actions = {
             case 0:
               dispatch = _ref5.dispatch;
               _context5.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('api/update/barang', Brg);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/update/barang', Brg);
 
             case 3:
               _context5.next = 5;
@@ -29034,7 +29034,7 @@ var actions = {
             case 0:
               dispatch = _ref6.dispatch;
               _context6.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("api/hapus/barang/".concat(id));
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/hapus/barang/".concat(id));
 
             case 3:
               _context6.next = 5;
@@ -29302,7 +29302,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var state = {
   coalist: [],
-  harta: []
+  harta: [],
+  pendapatan: []
 };
 var getters = {
   StateHarta: function StateHarta(state) {
@@ -29310,6 +29311,9 @@ var getters = {
   },
   StateCoaList: function StateCoaList(state) {
     return state.coalist;
+  },
+  StateCoaPendapatan: function StateCoaPendapatan(state) {
+    return state.pendapatan;
   }
 };
 var actions = {
@@ -29365,7 +29369,7 @@ var actions = {
       }, _callee2);
     }))();
   },
-  GetCoaList: function GetCoaList(_ref3, list) {
+  GetPendapatan: function GetPendapatan(_ref3, group) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
       var commit, response;
       return _regeneratorRuntime().wrap(function _callee3$(_context3) {
@@ -29374,11 +29378,11 @@ var actions = {
             case 0:
               commit = _ref3.commit;
               _context3.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/get/coa', list);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/get/acc-data', group);
 
             case 3:
               response = _context3.sent;
-              commit('setCoa', response.data.data);
+              commit('setPendapatan', response.data.data);
 
             case 5:
             case "end":
@@ -29387,11 +29391,37 @@ var actions = {
         }
       }, _callee3);
     }))();
+  },
+  GetCoaList: function GetCoaList(_ref4, list) {
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+      var commit, response;
+      return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              commit = _ref4.commit;
+              _context4.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/get/coa', list);
+
+            case 3:
+              response = _context4.sent;
+              commit('setCoa', response.data.data);
+
+            case 5:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4);
+    }))();
   }
 };
 var mutations = {
   setHarta: function setHarta(state, harta) {
     state.harta = harta;
+  },
+  setPendapatan: function setPendapatan(state, pendapatan) {
+    state.pendapatan = pendapatan;
   },
   setCoa: function setCoa(state, coa) {
     state.coalist = coa;
@@ -29909,7 +29939,7 @@ var actions = {
             case 0:
               dispatch = _ref.dispatch;
               _context.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('api/post', post);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/post', post);
 
             case 3:
               _context.next = 5;
@@ -30163,7 +30193,7 @@ var actions = {
             case 0:
               dispatch = _ref9.dispatch;
               _context9.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('api/update/barang', Brg);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/update/barang', Brg);
 
             case 3:
               _context9.next = 5;
@@ -30186,7 +30216,7 @@ var actions = {
             case 0:
               dispatch = _ref10.dispatch;
               _context10.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("api/hapus/barang/".concat(id));
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/hapus/barang/".concat(id));
 
             case 3:
               _context10.next = 5;
@@ -30675,7 +30705,7 @@ var actions = {
             case 0:
               dispatch = _ref.dispatch;
               _context.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('api/store/nosel', nosel);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/store/nosel', nosel);
 
             case 3:
               _context.next = 5;
@@ -30698,7 +30728,7 @@ var actions = {
             case 0:
               commit = _ref2.commit;
               _context2.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('api/nosel', payload);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/nosel', payload);
 
             case 3:
               response = _context2.sent;
@@ -30721,7 +30751,7 @@ var actions = {
             case 0:
               dispatch = _ref3.dispatch;
               _context3.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('api/update/nosel', nosel);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/update/nosel', nosel);
 
             case 3:
               _context3.next = 5;
@@ -30744,7 +30774,7 @@ var actions = {
             case 0:
               dispatch = _ref4.dispatch;
               _context4.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("api/hapus/nosel/".concat(id));
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/hapus/nosel/".concat(id));
 
             case 3:
               _context4.next = 5;
@@ -30873,7 +30903,7 @@ var actions = {
             case 0:
               dispatch = _ref3.dispatch;
               _context3.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("hapus/pelanggan/".concat(id));
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/hapus/pelanggan/".concat(id));
 
             case 3:
               _context3.next = 5;
@@ -30946,7 +30976,7 @@ var actions = {
             case 0:
               dispatch = _ref.dispatch;
               _context.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('tambah/room', rom);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/tambah/room', rom);
 
             case 3:
               _context.next = 5;
@@ -30992,7 +31022,7 @@ var actions = {
             case 0:
               dispatch = _ref3.dispatch;
               _context3.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('update/room', rom);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/update/room', rom);
 
             case 3:
               _context3.next = 5;
@@ -31015,7 +31045,7 @@ var actions = {
             case 0:
               dispatch = _ref4.dispatch;
               _context4.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("hapus/room/".concat(id));
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/hapus/room/".concat(id));
 
             case 3:
               _context4.next = 5;
@@ -32143,7 +32173,7 @@ var actions = {
               commit = _ref.commit, dispatch = _ref.dispatch;
               _context.prev = 1;
               _context.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('api/store/transnosel', transnosel);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/store/transnosel', transnosel);
 
             case 4:
               response = _context.sent;
@@ -32210,7 +32240,7 @@ var actions = {
               commit = _ref2.commit, dispatch = _ref2.dispatch;
               _context2.prev = 1;
               _context2.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('api/update/nosel-meter', updatemeter);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/update/nosel-meter', updatemeter);
 
             case 4:
               response = _context2.sent;
@@ -32269,7 +32299,7 @@ var actions = {
             case 0:
               commit = _ref3.commit;
               _context3.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('api/transnosel', payload);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/transnosel', payload);
 
             case 3:
               response = _context3.sent;
@@ -32292,7 +32322,7 @@ var actions = {
             case 0:
               commit = _ref4.commit;
               _context4.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('api/transnoselregu');
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/transnoselregu');
 
             case 3:
               response = _context4.sent;
@@ -32315,7 +32345,7 @@ var actions = {
             case 0:
               dispatch = _ref5.dispatch;
               _context5.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('api/update/transnosel', nosel);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/update/transnosel', nosel);
 
             case 3:
               _context5.next = 5;
@@ -74572,7 +74602,7 @@ module.exports = JSON.parse('{"dashboard":"仪表盘","sales":"销售量","analy
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/chunks/" + chunkId + "." + {"index2":"3f2f5b1faba69db1","components-tabs":"6341bc5f7e2b979c","components-accordions":"958ef92098fb530f","components-modals":"e6514e571555b5c0","components-cards":"e7583a4cf5564f04","components-carousel":"8563fc4e88cba5e0","components-timeline":"7ae9d528985dc414","components-media-object":"d265e1f0556c5b23","components-list-group":"20680dcbffabc997","components-pricing-table":"b87be2673dcf64d6","components-notifications":"9206fc33e5c150fe","components-lightbox":"b9458fb55cd5c6f3","components-countdown":"e221fbc8b2816ca0","components-counter":"f7283742d443ef25","components-sweetalert":"650a94cf22bafd9a","font-icons":"34e69c87195a1b77","pages-helpdesk":"dcb617b851894fab","pages-contact-us":"510879cdb75ffda7","pages-faq":"08ea3b394d276c8f","pages-faq2":"b3656798f889ae16","pages-privacy-policy":"5b1dba6f010460d1","pages-coming-soon":"3625eb8d5e9f9c18","pages-error404":"b6b7b2f9a83218ee","pages-error500":"3339dbd448847368","pages-error503":"a95ec8c784080110","pages-maintenence":"3d08473adb247530","pages-blank-page":"0c1ac99ccc41961d","pages-sample":"9994ba18d7cb12e8","auth-login-boxed":"035dc3c8eeee6d3e","auth-register-boxed":"d614be638b7cb772","auth-lockscreen-boxed":"32b2d256b6dca6d3","auth-pass-recovery-boxed":"57ba933f69001944","auth-login":"11978aa9265265c9","auth-register":"a5f635bb185472b7","auth-lockscreen":"f692ce3fe9e2f169","auth-pass-recovery":"4cc4878d9baefab2","elements-alerts":"cce791b51da55ebf","elements-avatar":"808a6756ade77be7","elements-badges":"ceecf745922b9465","elements-breadcrumbs":"1722a5e9bc7f1a7d","elements-buttons":"fdac3a00bec52991","elements-buttons-group":"df319f66de56889a","elements-color-library":"b9c63e419c8c300b","elements-dropdown":"72e3ecb8205bc421","elements-infobox":"399934d0b9db2526","elements-jumbotron":"67620b84089a4b94","elements-loader":"3b649aacbbfa08fc","elements-pagination":"21204cc9b1c64185","elements-popovers":"130b77ef0926b915","elements-progress-bar":"30e876cd9de41f5b","elements-search":"b464253c225723d6","elements-tooltips":"3a4ec3115056b6b3","elements-treeview":"bca134389bae1a9b","elements-typography":"ac9cf4c49da4113a","tables":"6c7b752437b29866","users-profile":"49b36e78cefd7a4d","users-account-setting":"9e19364198133f22","dragndrop":"45472aaa1012adce","charts-apex-chart":"d2f00a623aa3eb04","widgets":"b7fa9c006c6aebb0","forms-basic":"e774256dd6bf57bd","forms-input-group":"b0a3fce5817ce26b","forms-layouts":"e821a21bb2a879bf","forms-validation":"defac56a58186d1e","forms-checkbox-radio":"8c34dd2d66375144","forms-switches":"d60eef87f12531fd","forms-wizards":"c2b79beef794f1ee","forms-file-upload":"bd9f24848a2ef3ab","forms-clipboard":"0121ffa0f1ea0fc2","forms-date-picker":"52e788a5ab0cfd5b","forms-input-mask":"07ba756f40e98ad2","forms-quill-editor":"9e844664b525b753","forms-touchspin":"43fded85f16c30f9","forms-markdown-editor":"2b08efe290b9b501","forms-select2":"dff731b5e7c71bcd","apps-chat":"52a8d44efc21b078","apps-mailbox":"e6b2012d55856740","apps-todo-list":"9a40985eb471a29c","apps-contacts":"384a513eb6c8af7b","apps-notes":"36ecb7aab3e00af0","apps-scrumboard":"071c60efffbf8f79","apps-calendar":"2667beb3567fe611","apps-invoice-list":"0feaedf5952fdfff","apps-invoice-preview":"d9edd83168389f6b","apps-invoice-add":"087bfcc722043974","apps-invoice-edit":"5918fd58d1493481","tables-basic":"accd1005371fe815","tables-striped":"c14f35060df00cfc","tables-order-sorting":"58cc150f515bdba7","tables-multi-column":"cbd5693c21f08e50","tables-multiple-tables":"3cd0712f58b2a919","tables-alt-pagination":"83a6a0f7048933e6","tables-custom":"5f92dc2605fc71d8","tables-range-search":"10af2f97198a32b7","tables-export":"ca03023830dd14e6","tables-live-dom-ordering":"f380465fda483f23","tables-miscellaneous":"3f826e4b9e0d2831","node_modules_html2canvas_dist_html2canvas_js":"5475dc17eb928a5a","node_modules_dompurify_dist_purify_js":"9dabfec756329575","node_modules_canvg_lib_index_es_js":"84de45b397df7f27"}[chunkId] + ".js";
+/******/ 			return "js/chunks/" + chunkId + "." + {"index2":"3f2f5b1faba69db1","components-tabs":"9724276f4de71b55","components-accordions":"958ef92098fb530f","components-modals":"e6514e571555b5c0","components-cards":"e7583a4cf5564f04","components-carousel":"8563fc4e88cba5e0","components-timeline":"7ae9d528985dc414","components-media-object":"d265e1f0556c5b23","components-list-group":"20680dcbffabc997","components-pricing-table":"b87be2673dcf64d6","components-notifications":"9206fc33e5c150fe","components-lightbox":"b9458fb55cd5c6f3","components-countdown":"e221fbc8b2816ca0","components-counter":"f7283742d443ef25","components-sweetalert":"650a94cf22bafd9a","font-icons":"34e69c87195a1b77","pages-helpdesk":"dcb617b851894fab","pages-contact-us":"510879cdb75ffda7","pages-faq":"08ea3b394d276c8f","pages-faq2":"b3656798f889ae16","pages-privacy-policy":"5b1dba6f010460d1","pages-coming-soon":"3625eb8d5e9f9c18","pages-error404":"b6b7b2f9a83218ee","pages-error500":"3339dbd448847368","pages-error503":"a95ec8c784080110","pages-maintenence":"3d08473adb247530","pages-blank-page":"0c1ac99ccc41961d","pages-sample":"9994ba18d7cb12e8","auth-login-boxed":"035dc3c8eeee6d3e","auth-register-boxed":"d614be638b7cb772","auth-lockscreen-boxed":"32b2d256b6dca6d3","auth-pass-recovery-boxed":"57ba933f69001944","auth-login":"11978aa9265265c9","auth-register":"a5f635bb185472b7","auth-lockscreen":"f692ce3fe9e2f169","auth-pass-recovery":"4cc4878d9baefab2","elements-alerts":"cce791b51da55ebf","elements-avatar":"808a6756ade77be7","elements-badges":"ceecf745922b9465","elements-breadcrumbs":"1722a5e9bc7f1a7d","elements-buttons":"fdac3a00bec52991","elements-buttons-group":"df319f66de56889a","elements-color-library":"b9c63e419c8c300b","elements-dropdown":"72e3ecb8205bc421","elements-infobox":"399934d0b9db2526","elements-jumbotron":"67620b84089a4b94","elements-loader":"3b649aacbbfa08fc","elements-pagination":"21204cc9b1c64185","elements-popovers":"130b77ef0926b915","elements-progress-bar":"30e876cd9de41f5b","elements-search":"b464253c225723d6","elements-tooltips":"3a4ec3115056b6b3","elements-treeview":"bca134389bae1a9b","elements-typography":"ac9cf4c49da4113a","tables":"6c7b752437b29866","users-profile":"49b36e78cefd7a4d","users-account-setting":"9e19364198133f22","dragndrop":"45472aaa1012adce","charts-apex-chart":"d2f00a623aa3eb04","widgets":"b7fa9c006c6aebb0","forms-basic":"e774256dd6bf57bd","forms-input-group":"b0a3fce5817ce26b","forms-layouts":"e821a21bb2a879bf","forms-validation":"defac56a58186d1e","forms-checkbox-radio":"8c34dd2d66375144","forms-switches":"d60eef87f12531fd","forms-wizards":"c2b79beef794f1ee","forms-file-upload":"bd9f24848a2ef3ab","forms-clipboard":"0121ffa0f1ea0fc2","forms-date-picker":"52e788a5ab0cfd5b","forms-input-mask":"07ba756f40e98ad2","forms-quill-editor":"9e844664b525b753","forms-touchspin":"43fded85f16c30f9","forms-markdown-editor":"2b08efe290b9b501","forms-select2":"dff731b5e7c71bcd","apps-chat":"52a8d44efc21b078","apps-mailbox":"e6b2012d55856740","apps-todo-list":"9a40985eb471a29c","apps-contacts":"384a513eb6c8af7b","apps-notes":"36ecb7aab3e00af0","apps-scrumboard":"071c60efffbf8f79","apps-calendar":"2667beb3567fe611","apps-invoice-list":"0feaedf5952fdfff","apps-invoice-preview":"d9edd83168389f6b","apps-invoice-add":"087bfcc722043974","apps-invoice-edit":"5918fd58d1493481","tables-basic":"accd1005371fe815","tables-striped":"c14f35060df00cfc","tables-order-sorting":"58cc150f515bdba7","tables-multi-column":"cbd5693c21f08e50","tables-multiple-tables":"3cd0712f58b2a919","tables-alt-pagination":"83a6a0f7048933e6","tables-custom":"5f92dc2605fc71d8","tables-range-search":"10af2f97198a32b7","tables-export":"ca03023830dd14e6","tables-live-dom-ordering":"f380465fda483f23","tables-miscellaneous":"3f826e4b9e0d2831","node_modules_html2canvas_dist_html2canvas_js":"5475dc17eb928a5a","node_modules_dompurify_dist_purify_js":"9dabfec756329575","node_modules_canvg_lib_index_es_js":"84de45b397df7f27"}[chunkId] + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	

@@ -16,7 +16,7 @@ const actions = {
     async CreateTransNosel({commit, dispatch}, transnosel) {
         let response
         try {
-            response = await axios.post('api/store/transnosel', transnosel)
+            response = await axios.post('/api/store/transnosel', transnosel)
         // commit('setTransNosel', response.data.data)
         // await dispatch('GetTransNosel', payload)
             localStorage.setItem('kupon', '[]');
@@ -58,7 +58,7 @@ const actions = {
     async UpdateMeterNosel({commit, dispatch}, updatemeter) {
         let response
         try {
-            response = await axios.post('api/update/nosel-meter', updatemeter)
+            response = await axios.post('/api/update/nosel-meter', updatemeter)
         // commit('setTransNosel', response.data.data)
         // await dispatch('GetTransNosel', payload)
             const toast = window.Swal.mixin({
@@ -92,17 +92,17 @@ const actions = {
         }
     }, 
     async GetTransNosel({ commit }, payload){
-        let response = await axios.post('api/transnosel', payload)
+        let response = await axios.post('/api/transnosel', payload)
         commit('setTransNosel', response.data.data)
         
     },
     async GetTransNoselRegu({ commit }){
-        let response = await axios.post('api/transnoselregu')
+        let response = await axios.post('/api/transnoselregu')
         commit('setTransNoselRegu', response.data.data)
         
     },
     async EditTransNosel({dispatch}, nosel) {
-        await axios.post('api/update/transnosel', nosel)
+        await axios.post('/api/update/transnosel', nosel)
         await dispatch('GetTransNosel')
         // await commit('setUser', detUser.data.user)
     },

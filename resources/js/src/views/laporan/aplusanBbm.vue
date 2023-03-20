@@ -331,7 +331,7 @@
             padding: '2em'
         }).then(result => {
             if (result.value) {
-                store.dispatch('DeleteAplusan', item.kd_trans);
+                store.dispatch('DeleteAplusan', { id:item.kd_trans});
                 bind_data();
                 new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
 

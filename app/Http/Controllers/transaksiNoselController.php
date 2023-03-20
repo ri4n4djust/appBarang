@@ -248,17 +248,26 @@ class transaksiNoselController extends Controller
                         // $accid = $detpro[$i]['accid']; // acc id yg di debet
                         $acc_id_d = $det_biaya[$i]['acc']; // $request[0]['subtotal']; // acc id yg di kredit
                         $acc_id_k = '11110'; // $det_biaya[$i]['acc'];
+                        $acc_laba = '32300';
                         $memo = 'Aplusan-biaya';
                         $jurnal = 'JK';
                         insert_gl($kdtrans,$tgl,$nilai,$memo,$jurnal);
                         $rgl = DB::table('general_ledger')->get()->last()->notrans;
                         $ac = [
+                            // [
+                            //     'rgl' => $rgl,
+                            //     'acc_id' => $acc_id_d,
+                            //     'debet' => $nilai,
+                            //     'kredit' => 0,
+                            //     'trans_detail' => 'Trans-biaya',
+                            //     'void_flag' => 0,
+                            // ],
                             [
                                 'rgl' => $rgl,
                                 'acc_id' => $acc_id_d,
-                                'debet' => $nilai,
-                                'kredit' => 0,
-                                'trans_detail' => 'Aplusan-biaya',
+                                'debet' => 0,
+                                'kredit' => -1*$nilai,
+                                'trans_detail' => 'Trans-biaya',
                                 'void_flag' => 0,
                             ],
                             [
@@ -266,9 +275,17 @@ class transaksiNoselController extends Controller
                                 'acc_id' => $acc_id_k,
                                 'debet' => 0,
                                 'kredit' => $nilai,
-                                'trans_detail' => 'Aplusan-biaya',
+                                'trans_detail' => 'Trans-biaya',
                                 'void_flag' => 0,
                             ],
+                            [
+                                'rgl' => $rgl,
+                                'acc_id' => $acc_laba,
+                                'debet' => $nilai,
+                                'kredit' => 0,
+                                'trans_detail' => 'Jurnal-Umum',
+                                'void_flag' => 0,
+                            ]
                             
                         ];
                         

@@ -26,7 +26,7 @@ const actions = {
         }
     },
     async DeletePelanggan({dispatch}, id) {
-        await axios.delete(`hapus/pelanggan/${id}`)
+        await axios.delete(`/hapus/pelanggan/${id}`)
         await dispatch('GetPelanggan')
         // await commit('setUser', detUser.data.user)
     },

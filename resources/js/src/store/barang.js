@@ -16,7 +16,7 @@ const getters = {
 const actions = {  
     async CreateBarang({dispatch}, post) {
         try{
-            await axios.post('api/store/barang', post)
+            await axios.post('/api/store/barang', post)
             await dispatch('GetBarang')
             const toast = window.Swal.mixin({
                 toast: true,
@@ -83,12 +83,12 @@ const actions = {
     },
     
     async EditBarang({dispatch}, Brg) {
-        await axios.post('api/update/barang', Brg)
+        await axios.post('/api/update/barang', Brg)
         await dispatch('GetBarang')
         // await commit('setUser', detUser.data.user)
     },
     async DeleteBarang({dispatch}, id) {
-        await axios.delete(`api/hapus/barang/${id}`)
+        await axios.delete(`/api/hapus/barang/${id}`)
         await dispatch('GetBarang')
         // await commit('setUser', detUser.data.user)
     },

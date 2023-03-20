@@ -4,11 +4,13 @@ import axios from 'axios';
 const state = {
     coalist: [],
     harta: [],
+    pendapatan: []
   };
   
 const getters = {
     StateHarta: state => state.harta,
     StateCoaList: state => state.coalist,
+    StateCoaPendapatan: state => state.pendapatan,
 };
 
 const actions = {  
@@ -27,6 +29,10 @@ const actions = {
         let response = await axios.post('/api/get/acc-data', group)
         commit('setHarta', response.data.data)
     },
+    async GetPendapatan({ commit }, group){
+        let response = await axios.post('/api/get/acc-data', group)
+        commit('setPendapatan', response.data.data)
+    },
     async GetCoaList({ commit }, list){
         let response = await axios.post('/api/get/coa', list)
         commit('setCoa', response.data.data)
@@ -37,6 +43,9 @@ const actions = {
 const mutations = {
     setHarta(state, harta){
         state.harta = harta
+    },
+    setPendapatan(state, pendapatan){
+        state.pendapatan = pendapatan
     },
     setCoa(state, coa){
         state.coalist = coa

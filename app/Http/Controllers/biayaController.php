@@ -42,7 +42,7 @@ class biayaController extends Controller
                             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                         ]
                     );
-                    //===========jurnal biaya
+                    //===========jurnal biaya 
                     // $accid = $detpro[$i]['accid']; // acc id yg di debet
                     $acc_id_d = $det_biaya[$i]['acc']; // $request[0]['subtotal']; // acc id yg di kredit
                     $acc_id_k = '11110'; // $det_biaya[$i]['acc'];
@@ -55,8 +55,8 @@ class biayaController extends Controller
                         [
                             'rgl' => $rgl,
                             'acc_id' => $acc_id_d,
-                            'debet' => $biaya,
-                            'kredit' => 0,
+                            'debet' => 0,
+                            'kredit' => -1*$biaya,
                             'trans_detail' => 'Trans-biaya',
                             'void_flag' => 0,
                         ],
@@ -73,7 +73,7 @@ class biayaController extends Controller
                             'acc_id' => $acc_laba,
                             'debet' => $biaya,
                             'kredit' => 0,
-                            'trans_detail' => 'Jurnal-Umum',
+                            'trans_detail' => 'Trans-biaya',
                             'void_flag' => 0,
                         ]
                         

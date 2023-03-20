@@ -9,7 +9,7 @@ const getters = {
 
 const actions = {  
     async CreateRoom({dispatch}, rom) {
-        await axios.post('tambah/room', rom)
+        await axios.post('/tambah/room', rom)
         await dispatch('GetRoom')
     }, 
     async GetRoom({ commit }){
@@ -17,12 +17,12 @@ const actions = {
         commit('setRoom', response.data)
     },
     async EditRoom({dispatch}, rom) {
-        await axios.post('update/room', rom)
+        await axios.post('/update/room', rom)
         await dispatch('GetRoom')
         // await commit('setUser', detUser.data.user)
     },
     async DeleteRoom({dispatch}, id) {
-        await axios.delete(`hapus/room/${id}`)
+        await axios.delete(`/hapus/room/${id}`)
         await dispatch('GetRoom')
         // await commit('setUser', detUser.data.user)
     },
