@@ -529,27 +529,53 @@ class transaksiNoselController extends Controller
 
     public function deleteAplusan(Request $request){
         $id = $request->input('id');
-        DB::table('tblheader_aplusan')->where('kd_trans', $id)->delete();
+        
 
-        $del = DB::table('general_ledger')->where('order_no', $id)->get();
+       
+        $old = DB::table('tbltransaksi_nosel')
+                ->join('tblbbm', 'tblbbm.id', 'tbltransaksi_nosel.r_bbm')
+                ->where('tbltransaksi_nosel.kd_trans', $id)
+                ->get();
+        // echo $old ;
+        for($i = 0; $i < count($old); $i++){
+            $code_bbm = $old[$i]->code_bbm;
+            $r_nosel = $old[$i]->r_nosel;
+            $cost = $old[$i]->cost_ltr;
 
-        for($i = 0; $i < count($del); $i++){
-            $rgl = $del[$i]->notrans;
-            echo $rgl ;
-            DB::table('gl_detail')->where('rgl', $rgl)->delete();
+            $meter_akhir = $old[$i]->awal_meter;
+
+            $oldstok = DB::table('tblpersediaan')->where('kdPersediaan', $code_bbm)->first();
+            DB::table('tblpersediaan')->where('kdPersediaan', $code_bbm)
+            ->update([
+                'stokPersediaan' => $oldstok->stokPersediaan + $cost,
+
+            ]);
+
+            $old_nosel = DB::table('tblnosel_detail')->where('id_nosel', $r_nosel)->first();
+            DB::table('tblnosel_detail')->where('id_nosel', $r_nosel)
+            ->update([
+                'meter_awal' => $meter_akhir,
+
+            ]);
         };
 
+         $del = DB::table('general_ledger')->where('order_no', $id)->get();
+        for($i = 0; $i < count($del); $i++){
+            $rgl = $del[$i]->notrans;
+            // echo $rgl ;
+            DB::table('gl_detail')->where('rgl', $rgl)->delete();
+        };
+        DB::table('tblheader_aplusan')->where('kd_trans', $id)->delete();
         DB::table('general_ledger')->where('order_no', $id)->delete();
         DB::table('tblheader_aplusan')->where('kd_trans', $id)->delete();
 
         DB::table('tblprofit')->where('kd_trans', $id)->delete();
-        $old = DB::table('tbltransaksi_nosel')->where('kd_trans', $id)->get();
 
         return response([
             'success' => true,
             'message' => 'List data yg akan di hapus',
             'data' => $old
         ], 200);
-        DB::table('tbltransaksi_nosel')->where('kd_trans', $id)->delete();
+        // DB::table('tbltransaksi_nosel')->where('kd_trans', $id)->delete();
     }
 }

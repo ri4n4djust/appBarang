@@ -41,7 +41,7 @@
                                                                         <table border="1" cellspacing="3">
                                                                             <tbody  v-for="hrt in hartalist" :key="hrt.acc_id" :set="amount = hrt.amount">
                                                                                 
-                                                                                    <!-- <tr v-if="hrt.acc_id === '59999'" style="font-size:10px">
+                                                                                    <tr v-if="hrt.acc_id === '59999'" style="font-size:10px">
                                                                                         <td v-if="hrt.jenis != 'Total'" style="min-width:70px">{{ hrt.acc_id }}</td>
                                                                                         <td v-else></td>
                                                                                         <td v-if="hrt.jenis === 'Total'" style="min-width: 200px;" ><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
@@ -88,7 +88,7 @@
                                                                                         </td>
                                                                                         <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
                                                                                         <td v-else></td>
-                                                                                    </tr> -->
+                                                                                    </tr>
                                                                                     <tr v-if="hrt.level === '1'" style="font-size:10px">
                                                                                         <td v-if="hrt.jenis != 'Total'" style="min-width:70px">{{ hrt.acc_id }}</td>
                                                                                         <td v-else></td>
@@ -145,7 +145,7 @@
                                                                         <table border="1" cellspacing="3">
                                                                             <tbody  v-for="hrt in biayalist" :key="hrt.acc_id" :set="amount = hrt.amount">
                                                                                 
-                                                                                    <!-- <tr v-if="hrt.acc_id === '59999'" style="font-size:10px">
+                                                                                    <tr v-if="hrt.acc_id === '59999'" style="font-size:10px">
                                                                                         <td v-if="hrt.jenis != 'Total'" style="min-width:70px">{{ hrt.acc_id }}</td>
                                                                                         <td v-else></td>
                                                                                         <td v-if="hrt.jenis === 'Total'" style="min-width: 200px;" ><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
@@ -192,7 +192,7 @@
                                                                                         </td>
                                                                                         <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
                                                                                         <td v-else></td>
-                                                                                    </tr> -->
+                                                                                    </tr>
                                                                                     <tr v-if="hrt.level === '1'" style="font-size:10px">
                                                                                         <td v-if="hrt.jenis != 'Total'" style="min-width:70px">{{ hrt.acc_id }}</td>
                                                                                         <td v-else></td>

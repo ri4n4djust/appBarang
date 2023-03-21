@@ -267,7 +267,7 @@
                                                                         <tbody role="rowgroup">
                                                                             <tr v-for="(item, i) in listbiaya" :key="item.id_biaya" role="row" class="">
                                                                                 <td aria-colindex="1" role="cell" class="">{{ i + 1 }}</td>
-                                                                                <td aria-colindex="2" role="cell" class="">{{ item.kd_trans }}</td>
+                                                                                <td aria-colindex="2" role="cell" class="">{{ item['kd_trans'] }}</td>
                                                                                 <td aria-colindex="3" role="cell" class="">{{ item.keterangan_biaya }}</td>
                                                                                 <td aria-colindex="4" role="cell" class="">{{ item.tglBiaya }}</td>
                                                                                 <td aria-colindex="5" role="cell" class="text-center">
@@ -425,7 +425,6 @@
             id: 1, 
             name: '',
             biaya: '', 
-            satuan: '', 
             acc: '', 
         });
 
@@ -439,9 +438,12 @@
         GetCoaList();
         getNoBiaya();
         getListBiaya();
-        setTimeout(function() { accs.value = store.getters.StateCoaList ; }, 2000);
-        setTimeout(function() { nobiaya.value = store.getters.NoBiaya ; }, 2000);
-        setTimeout(function() { listbiaya.value = store.getters.StateListBiaya ; }, 2000);
+        setTimeout(function() { 
+            accs.value = store.getters.StateCoaList ; 
+            nobiaya.value = store.getters.NoBiaya ;
+            listbiaya.value = store.getters.StateListBiaya ;
+            console.log(listbiaya.value);
+        }, 2000);
         
     });
 
@@ -465,7 +467,7 @@
         items.value = items.value.filter((d) => d.id != item.id);
     };
 
-    const getListBiaya = ( ) => {
+    const getListBiaya = () => {
         store.dispatch('GetListBiaya', sorting.value )
     };
 
