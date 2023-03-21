@@ -114,7 +114,6 @@ class transaksiNoselController extends Controller
 
                         if(array_key_exists("last_meter",$detop[$i])){
                             $last_m = $detop[$i]['last_meter'] ;
-
                             
                             $update = NoselDetail::where('id_nosel', $id_nosel)->update([
                                 'meter_awal'   => $mtr_awal->meter_akhir,
@@ -131,7 +130,6 @@ class transaksiNoselController extends Controller
                                 'sale_price' => $hrg,
                             ]);
 
-                            
 
                         }
 
@@ -181,9 +179,9 @@ class transaksiNoselController extends Controller
                         $total_k += $nilai ;
                         $t = $total_k += $nilai ;
                         //===========jurnal
-                        $accid = '41100'; // $detpro[$i]['accid']; // acc id yg di debet
                         $acc_id_d = '21200'; // $request[0]['subtotal']; // acc id yg di kredit
                         $acc_id_k = '11110';
+                        $acc_laba = '32300';
                         $memo = 'Aplusan-kupon';
                         $jurnal = 'JK';
                         insert_gl($kdtrans,$tgl,$nilai,$memo,$jurnal);
@@ -199,20 +197,12 @@ class transaksiNoselController extends Controller
                             ],
                             [
                                 'rgl' => $rgl,
-                                'acc_id' => $accid,
-                                'debet' => 0,
-                                'kredit' => $nilai,
-                                'trans_detail' => 'Aplusan-kupon',
-                                'void_flag' => 0,
-                            ],
-                            [
-                                'rgl' => $rgl,
                                 'acc_id' => $acc_id_k,
                                 'debet' => 0,
                                 'kredit' => $nilai,
                                 'trans_detail' => 'Aplusan-kupon',
                                 'void_flag' => 0,
-                            ]
+                            ],
                             
                         ];
                         
@@ -254,20 +244,12 @@ class transaksiNoselController extends Controller
                         insert_gl($kdtrans,$tgl,$nilai,$memo,$jurnal);
                         $rgl = DB::table('general_ledger')->get()->last()->notrans;
                         $ac = [
-                            // [
-                            //     'rgl' => $rgl,
-                            //     'acc_id' => $acc_id_d,
-                            //     'debet' => $nilai,
-                            //     'kredit' => 0,
-                            //     'trans_detail' => 'Trans-biaya',
-                            //     'void_flag' => 0,
-                            // ],
                             [
                                 'rgl' => $rgl,
                                 'acc_id' => $acc_id_d,
                                 'debet' => 0,
-                                'kredit' => -1*$nilai,
-                                'trans_detail' => 'Trans-biaya',
+                                'kredit' => $nilai,
+                                'trans_detail' => 'Aplusan-Biaya',
                                 'void_flag' => 0,
                             ],
                             [
@@ -275,7 +257,7 @@ class transaksiNoselController extends Controller
                                 'acc_id' => $acc_id_k,
                                 'debet' => 0,
                                 'kredit' => $nilai,
-                                'trans_detail' => 'Trans-biaya',
+                                'trans_detail' => 'Aplusan-Biaya',
                                 'void_flag' => 0,
                             ],
                             [
@@ -283,7 +265,7 @@ class transaksiNoselController extends Controller
                                 'acc_id' => $acc_laba,
                                 'debet' => $nilai,
                                 'kredit' => 0,
-                                'trans_detail' => 'Jurnal-Umum',
+                                'trans_detail' => 'Aplusan-Biaya',
                                 'void_flag' => 0,
                             ]
                             
@@ -529,8 +511,6 @@ class transaksiNoselController extends Controller
 
     public function deleteAplusan(Request $request){
         $id = $request->input('id');
-        
-
        
         $old = DB::table('tbltransaksi_nosel')
                 ->join('tblbbm', 'tblbbm.id', 'tbltransaksi_nosel.r_bbm')
@@ -568,6 +548,24 @@ class transaksiNoselController extends Controller
         DB::table('tblheader_aplusan')->where('kd_trans', $id)->delete();
         DB::table('general_ledger')->where('order_no', $id)->delete();
         DB::table('tblheader_aplusan')->where('kd_trans', $id)->delete();
+
+        DB::table('tblbiaya')->where('kd_trans', $id)->delete();
+
+        $old_kupon = DB::table('tblkupon')->where('kd_trans', $id)->get();
+        for($i = 0;$i < count($old_kupon); $i++){
+            $total = $old_kupon[$i]->total;
+            $pelanggan = $old_kupon[$i]->r_kdPelanggan;
+            $olddepo = DB::table('tblpelanggan')->where('kdPelanggan', $pelanggan)->first();
+            $nilai_old = $olddepo->deposit;
+            DB::table('tblpelanggan')->where('kdPelanggan', $pelanggan)
+            ->update([
+                'deposit' => $nilai_old + $nilai_old,
+
+            ]);
+
+        }
+        DB::table('tblkupon')->where('kd_trans', $id)->delete();
+
 
         DB::table('tblprofit')->where('kd_trans', $id)->delete();
 

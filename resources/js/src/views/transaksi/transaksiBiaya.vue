@@ -204,25 +204,7 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="invoice-detail-note">
-                                        <div class="row">
-                                            <div class="col-md-12 align-self-center">
-                                                <div class="form-group row invoice-note">
-                                                    <label for="invoice-detail-notes" class="col-sm-12 col-form-label col-form-label-sm">Notes:</label>
-                                                    <div class="col-sm-12">
-                                                        <textarea
-                                                            v-model="params.notes"
-                                                            rows="3"
-                                                            id="invoice-detail-notes"
-                                                            class="form-control"
-                                                            placeholder='Notes - For example, "Thank you for doing business with us"'
-                                                        ></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -242,7 +224,7 @@
                                     PO BBM
                                     </div>
                                 </div> -->
-                                {{ listbiaya }}
+                                <!-- {{ listbiaya }} -->
 
                                 <div class="invoice-detail-header">
                                     <div class="row justify-content-between">
@@ -254,39 +236,53 @@
                                                         <div class="col-xl-9">
                                                             <div class="invoice-container">
                                                                 <div class="table-responsive">
-                                                                    <table role="table" aria-busy="false" aria-colcount="5" class="table b-table table-bordered" >
-                                                                        <thead role="rowgroup" class="">
-                                                                            <tr role="row" class="">
-                                                                                <th role="columnheader" scope="col" aria-colindex="1" class=""><div>No</div></th>
-                                                                                <th role="columnheader" scope="col" aria-colindex="2" class=""><div>Kd Transaksi</div></th>
-                                                                                <th role="columnheader" scope="col" aria-colindex="3" class=""><div>Keterangan</div></th>
-                                                                                <th role="columnheader" scope="col" aria-colindex="4" class=""><div>Tanggal</div></th>
-                                                                                <th role="columnheader" scope="col" aria-colindex="5" class="text-center"><div>Action</div></th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody role="rowgroup">
-                                                                            <tr v-for="(item, i) in listbiaya" :key="item.id_biaya" role="row" class="">
-                                                                                <td aria-colindex="1" role="cell" class="">{{ i + 1 }}</td>
-                                                                                <td aria-colindex="2" role="cell" class="">{{ item['kd_trans'] }}</td>
-                                                                                <td aria-colindex="3" role="cell" class="">{{ item.keterangan_biaya }}</td>
-                                                                                <td aria-colindex="4" role="cell" class="">{{ item.tglBiaya }}</td>
-                                                                                <td aria-colindex="5" role="cell" class="text-center">
-                                                                                    <ul class="table-controls">
-                                                                                        <li>
-                                                                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" title="Edit">
-                                                                                                <svg> ... </svg>
-                                                                                            </a>
-                                                                                        </li>
-                                                                                        <li>
-                                                                                            <a href="javascript:void(0);" data-bs-toggle="tooltip" title="Delete">
-                                                                                                <svg> ... </svg>
-                                                                                            </a>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
+
+                                                                    <v-client-table :data="listbiaya" :columns="columns" :options="table_option">
+                                                                        <template #kd_trans="props"> {{ props.row.kd_trans }} </template>
+                                                                        <template #tglBiaya="props"> {{ moment(props.row.tglBiaya).format("DD-MM-YYYY") }} </template>
+                                                                        <template #keterangan_biaya="props"> {{ props.row.keterangan_biaya }} </template>
+                                                                        <template #jumlah="props"> {{ Number(props.row.jumlah).toLocaleString() }} </template>
+                                                                        <template #action="props">
+                                                                            <router-link :to="{name: 'rekapan', params: {startDate: props.row.tgl_trans, kd_trans:props.row.kd_trans, regu:props.row.r_regu }}" >
+                                                                                <svg
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    width="24"
+                                                                                    height="24"
+                                                                                    viewBox="0 0 24 24"
+                                                                                    fill="none"
+                                                                                    stroke="currentColor"
+                                                                                    stroke-width="2"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    class="feather feather-edit-2"
+                                                                                >
+                                                                                    <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                                                                                </svg>
+                                                                            </router-link>
+                                                                            <router-link @click="delete_row(props.row)" >
+                                                                                <svg
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    width="24"
+                                                                                    height="24"
+                                                                                    viewBox="0 0 24 24"
+                                                                                    fill="none"
+                                                                                    stroke="currentColor"
+                                                                                    stroke-width="2"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    class="feather feather-trash-2"
+                                                                                >
+                                                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                                                </svg>
+                                                                            </router-link>
+                                                                            <!-- <a href="javascript:void(0);" @click="delete_row(props.row)"> Delete </a> -->
+                                                                        </template>
+                                                                    </v-client-table>
+
+                                                                    
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -362,6 +358,7 @@
     import { useRouter, useRoute } from 'vue-router'
 
     import { useMeta } from '@/composables/use-meta';
+
     useMeta({ title: 'Input Biaya' });
 
     const store = useStore();
@@ -369,7 +366,7 @@
     const route = useRoute();
 
     const items = ref([]);
-    const listbiaya = ref();
+    const listbiaya = ref([]);
     const accs = ref();
     const nobiaya = ref([]);
     const total = ref();
@@ -377,6 +374,29 @@
         noNota: nobiaya,
         tglNota: moment().format("YYYY-MM-DD"),
         total: total,
+    });
+
+    const columns = ref(['kd_trans', 'tglBiaya', 'keterangan_biaya' ,'jumlah', 'action']);
+    const table_option = ref({
+        perPage: 10,
+        perPageValues: [5, 10, 20, 50],
+        skin: 'table table-hover',
+        columnsClasses: { action: 'actions text-center' },
+        pagination: { nav: 'scroll', chunk: 5 },
+        texts: {
+            count: 'Showing {from} to {to} of {count}',
+            filter: '',
+            filterPlaceholder: 'Search...',
+            limit: 'Results:',
+        },
+        sortable: ['kd_trans', 'tglBiaya', 'keterangan_biaya' ,'jumlah'],
+        sortIcon: {
+            base: 'sort-icon-none',
+            up: 'sort-icon-asc',
+            down: 'sort-icon-desc',
+        },
+        resizableColumns: true,
+        resizableRows: true,
     });
 
     const sorting = ref({
@@ -441,9 +461,9 @@
         setTimeout(function() { 
             accs.value = store.getters.StateCoaList ; 
             nobiaya.value = store.getters.NoBiaya ;
-            listbiaya.value = store.getters.StateListBiaya ;
-            console.log(listbiaya.value);
-        }, 2000);
+            // listbiaya.value = store.getters.StateListBiaya ;
+            // console.log(listbiaya.value);
+        }, 4000);
         
     });
 
@@ -467,8 +487,9 @@
         items.value = items.value.filter((d) => d.id != item.id);
     };
 
-    const getListBiaya = () => {
-        store.dispatch('GetListBiaya', sorting.value )
+    const getListBiaya = async () => {
+        await store.dispatch('GetListBiaya', sorting.value );
+        setTimeout(function() { listbiaya.value = store.getters.StateListBiaya ; }, 4000);
     };
 
     function onlyNumber ($event) {
@@ -563,4 +584,8 @@
             doc.save(filename + '.pdf');
         }
     };
+
+    const delete_row = (data) => {
+        alert(data.kd_trans);
+    }
 </script>

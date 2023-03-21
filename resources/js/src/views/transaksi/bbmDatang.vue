@@ -7,7 +7,7 @@
                         <nav class="breadcrumb-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:;">Apps</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"><span>Invoice Add</span></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span>Kedatangan BBM</span></li>
                             </ol>
                         </nav>
                     </div>
@@ -111,46 +111,7 @@
                                     <!-- </div> -->
                                     </vue-final-modal>
 
-                                    <!-- <div class="invoice-detail-items">
-                                        <div class="row">
-                                            <div class="form-group col-md-3">
-                                                <label for="inputCity">NAMA BARANG</label>
-                                                <multiselect 
-                                                    v-model="brg" 
-                                                    :options="pembelian.barangs" 
-                                                    :searchable="true"
-                                                    track-by="nmPersediaan"
-                                                    label="nmPersediaan"
-                                                    open-direction="top"
-                                                    placeholder="Choose..." 
-                                                    selected-label="" 
-                                                    select-label="" >
-                                                </multiselect>
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                <label for="inputState">HARGA</label>
-                                                <input type="text" v-model="brg.lastPrice" class="form-control form-control-sm" placeholder="Price" @keypress="onlyNumber" />
-                                            </div>
-                                            <div class="form-group col-sm-2">
-                                                <label for="inputZip">QTY</label>
-                                                <input type="text" v-model="qty" class="form-control form-control-sm" placeholder="Quantity" @keypress="onlyNumber" />
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                <label for="satuan">SATUAN</label>
-                                                <input type="text" v-model="brg.satuanPersediaan" class="form-control form-control-sm" id="satuan" />
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                <label for="inputZip">TOTAL</label><br>
-                                                <input type="text" v-model="tot" class="form-control form-control-sm" placeholder="Quantity" @keypress="onlyNumber" />
-                                            </div>
-                                            <div class="form-group col-md-1">
-                                                <label for="aksi">Aksi</label>
-                                                <button @click="addToCart(brg)" class="btn btn-xs btn-primary">
-                                                    + 
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div> -->
+                                    
 
                                     <div class="invoice-detail-items">
                                         <div class="inv--product-table-section">
@@ -240,63 +201,11 @@
                                                 </div>
                                             </div>
 
-                                            <!-- <div class="col-md-6">
-                                                <div class="totals-row">
-                                                    <div class="invoice-totals-row invoice-summary-subtotal">
-                                                        <div class="invoice-summary-label">Sub Total</div>
-                                                         <div class="invoice-summary-label"></div>
-                                                        <div class="invoice-summary-value">
-                                                            <div class="subtotal-amount"><span class="currency"></span><span class="amount">{{new Intl.NumberFormat().format(subtotal)}}</span></div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="invoice-totals-row invoice-summary-total">
-                                                         <div class="invoice-summary-label">Disc</div>
-                                                        <input type="text" v-model="params.disc" class="form-control form-control-sm" >%
-                                                        <div class="invoice-summary-label"></div>
-                                                        <div class="invoice-summary-value">
-                                                            <div class="total-amount"><span class="currency"></span><span>{{ new Intl.NumberFormat().format(Math.floor(subtotal * disc / 100)) }}</span></div>
-                                                        </div>
-                                                    </div>
-                                                    <div v-show="divpajak">
-                                                        <div class="invoice-totals-row invoice-summary-tax">
-                                                            <div class="invoice-summary-label">Pajak</div>
-                                                            <div class="invoice-summary-value">
-                                                                <div class="tax-amount"><span class="currency"></span>
-                                                                    <span>{{ new Intl.NumberFormat().format(Math.floor((subtotal - (subtotal * disc / 100)) * pembelian.pajak/100)) }}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="invoice-totals-row invoice-summary-balance-due">
-                                                        <div class="invoice-summary-label">Total</div>
-                                                         <div class="invoice-summary-label"></div>
-                                                        <div class="invoice-summary-value">
-                                                                <span>{{ new Intl.NumberFormat().format(Math.floor(total)) }}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> -->
+                                            
                                         </div>
                                     </div>
 
-                                    <!-- <div class="invoice-detail-note">
-                                        <div class="row">
-                                            <div class="col-md-12 align-self-center">
-                                                <div class="form-group row invoice-note">
-                                                    <label for="invoice-detail-notes" class="col-sm-12 col-form-label col-form-label-sm">Notes:</label>
-                                                    <div class="col-sm-12">
-                                                        <textarea
-                                                            v-model="params.notes"
-                                                            rows="3"
-                                                            id="invoice-detail-notes"
-                                                            class="form-control"
-                                                            placeholder='Notes - For example, "Thank you for doing business with us"'
-                                                        ></textarea>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
+                                    
                                 </div>
                             </div>
                         </div>
@@ -391,9 +300,9 @@
         store.dispatch('ListPo', sorting.value)
        
     }
-    const getAcc=() => {
-        store.dispatch('GetAcc')
-    }
+    // const getAcc=() => {
+    //     store.dispatch('GetAcc')
+    // }
 
 
     // const getTotal=() =>{
@@ -484,7 +393,7 @@
         // console.log(paramssupplier.value)
        
         // getBarang();
-        getAcc();
+        // getAcc();
         // getSupplier();
         getNoTerima();
         // getListPo();

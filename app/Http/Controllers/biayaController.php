@@ -56,7 +56,7 @@ class biayaController extends Controller
                             'rgl' => $rgl,
                             'acc_id' => $acc_id_d,
                             'debet' => 0,
-                            'kredit' => -1*$biaya,
+                            'kredit' => $biaya,
                             'trans_detail' => 'Trans-biaya',
                             'void_flag' => 0,
                         ],
