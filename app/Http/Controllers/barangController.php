@@ -416,6 +416,20 @@ class barangController extends Controller
                 DB::table('tblpenjualankupon')->truncate();
                 DB::table('general_ledger')->truncate();
                 DB::table('gl_detail')->truncate();
+                DB::table('tblpelanggan')->update([
+                    'deposit' => '0',
+                ]);
+                DB::table('tblpersediaan')->update([
+                    'stokPersediaan' => '0',
+                    'lastPrice' => '0',
+                    'salePrice' => '0'
+                ]);
+                DB::table('tblbbm')->update([
+                    'stokBbm' => '0',
+                    'last_price' => '0',
+                    'sale_price' => '0',
+                    'last_meter' => '0'
+                ]);
 
                 DB::commit();
             });

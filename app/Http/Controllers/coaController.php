@@ -188,7 +188,7 @@ class coaController extends Controller
 				$date_lr = '2022-01-01';
 				$timezone = time() + (60*60*+8); 
 				$cur_tgl = gmdate('Y-m-d', $timezone);
-			} else{
+			}else{
 				$date_lr = $startDate;
 				$cur_tgl = $endDate;
 			}
@@ -202,7 +202,7 @@ class coaController extends Controller
 			DB::statement( DB::raw("SET @income = 0;"));
 			DB::statement( DB::raw("SET @expense = 0;"));
 
-			$tmpTrx = DB::select("SELECT acc_id,SUM(debet)-SUM(kredit) as balance from general_ledger a left join gl_detail b on a.notrans = b.rgl where rlocation = '$dealer_ref' and date(tgl) between '2022-01-01' and '$cur_tgl' group by acc_id;");
+			$tmpTrx = DB::select("SELECT acc_id,SUM(debet)-SUM(kredit) as balance from general_ledger a left join gl_detail b on a.notrans = b.rgl where rlocation = '$dealer_ref' and date(tgl) between '$date_lr' and '$cur_tgl' group by acc_id;");
                 $dataSet = [];
                 foreach ($tmpTrx as $s) {
                     $dataSet[] = [
@@ -213,7 +213,7 @@ class coaController extends Controller
             DB::table('gl')->insert($dataSet);
 			DB::table('gl')->insert([ ['acc_id' => '38100', 'amount' => '0'], ['acc_id' => '38999', 'amount' => '0'] ]);
 
-			$tmpgl = DB::select("SELECT acc_id,SUM(debet)-SUM(kredit) as balance from general_ledger a left join gl_detail b on a.notrans = b.rgl where rlocation = '$dealer_ref' and date(tgl) between '2022-01-01' and '$cur_tgl' group by acc_id;");
+			$tmpgl = DB::select("SELECT acc_id,SUM(debet)-SUM(kredit) as balance from general_ledger a left join gl_detail b on a.notrans = b.rgl where rlocation = '$dealer_ref' and date(tgl) between '$date_lr' and '$cur_tgl' group by acc_id;");
                 $dataSet = [];
                 foreach ($tmpgl as $g) {
                     $dataSet[] = [

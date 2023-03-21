@@ -137,5 +137,20 @@ class laporanController extends Controller
             'data' => $list
         ], 200);
     }
+
+    public function daftarBiaya(Request $request){
+        $startDate = date("Y-m-d", strtotime($request->input('startDate')));
+        $endDate = date("Y-m-d", strtotime($request->input('endDate')));
+        $list = DB::table('tblbiaya')
+                ->whereBetween('tglBiaya', [$startDate, $endDate])
+                ->orderBy("kd_trans", "desc")
+                ->get();
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'List Biaya',
+            'data' => $list
+        ], 200);
+    }
     
 }

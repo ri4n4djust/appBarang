@@ -27,39 +27,39 @@ class jurnalController extends Controller
                     $jml_k = $det_link[$i]['kredit'];;
                     $memo =  $det_link[$i]['name'];;
                     $jurnal = 'GJ';
-                    $acc_laba = '32300';
-                    $acc_id_k = '11110';
+                    // $acc_laba = '32300';
+                    // $acc_id_k = '11110';
                     $rgl = DB::table('general_ledger')->get()->last()->notrans;
                     $ac = [ 
                         [
-                        'rgl' => $rgl,
-                        'acc_id' => $acc,
-                        'debet' => $jml_d,
-                        'kredit' => $jml_k,
-                        'trans_detail' => 'Jurnal-Umum',
-                        'void_flag' => 0,
-                        ],
-                        [
                             'rgl' => $rgl,
-                            'acc_id' => $acc_id_k,
-                            'debet' => 0,
-                            'kredit' => $jml_d,
-                            'trans_detail' => 'Jurnal-Umum',
-                            'void_flag' => 0,
-                            ],
-                        [
-                            'rgl' => $rgl,
-                            'acc_id' => $acc_laba,
+                            'acc_id' => $acc,
                             'debet' => $jml_d,
-                            'kredit' => 0,
+                            'kredit' => $jml_k,
                             'trans_detail' => 'Jurnal-Umum',
                             'void_flag' => 0,
-                        ]
+                        ],
+                        // [
+                        //     'rgl' => $rgl,
+                        //     'acc_id' => $acc,
+                        //     'debet' => $jml_d,
+                        //     'kredit' => $jml_k,
+                        //     'trans_detail' => 'Jurnal-Umum',
+                        //     'void_flag' => 0,
+                        // ],
+                        // [
+                        //     'rgl' => $rgl,
+                        //     'acc_id' => $acc_laba,
+                        //     'debet' => $jml_d,
+                        //     'kredit' => 0,
+                        //     'trans_detail' => 'Jurnal-Umum',
+                        //     'void_flag' => 0,
+                        // ]
                     ];
                     
-                    
+                    insert_gl_detail($ac);
                 }
-                insert_gl_detail($ac);
+                // insert_gl_detail($ac);
                 //===========end jurnal
 
                 

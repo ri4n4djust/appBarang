@@ -530,6 +530,18 @@ class transaksiNoselController extends Controller
     public function deleteAplusan(Request $request){
         $id = $request->input('id');
         DB::table('tblheader_aplusan')->where('kd_trans', $id)->delete();
+
+        $del = DB::table('general_ledger')->where('order_no', $id)->get();
+
+        for($i = 0; $i < count($del); $i++){
+            $rgl = $del[$i]->notrans;
+            echo $rgl ;
+            DB::table('gl_detail')->where('rgl', $rgl)->delete();
+        };
+
+        DB::table('general_ledger')->where('order_no', $id)->delete();
+        DB::table('tblheader_aplusan')->where('kd_trans', $id)->delete();
+
         DB::table('tblprofit')->where('kd_trans', $id)->delete();
         $old = DB::table('tbltransaksi_nosel')->where('kd_trans', $id)->get();
 

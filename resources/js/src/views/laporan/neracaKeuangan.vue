@@ -146,6 +146,30 @@
                                         <div class="col-xl-12 col-md-3 col-sm-6">
                                             <a href="javascript:;" class="btn btn-secondary btn-print action-print" @click="print()">Print</a>
                                         </div>
+                                        <div class="col-xl-12 col-md-3 col-sm-6">
+                                            <div class="row mb-4">
+                                                <div class="col-sm">
+                                                    <label for="inputState">Awal</label>
+                                                    <flat-pickr v-model="sorting.startDate" 
+                                                        :config="{dateFormat: 'd-m-Y'}"
+                                                        class="form-control form-control-sm">
+                                                    </flat-pickr>
+                                                </div>
+                                                <div class="col-sm">
+                                                    <label for="inputState">Akhir</label>
+                                                    <flat-pickr v-model="sorting.endDate" 
+                                                        :config="{dateFormat: 'd-m-Y'}"
+                                                        class="form-control form-control-sm">
+                                                    </flat-pickr>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-12 col-md-3 col-sm-6">
+                                            <a href="javascript:;" @click="cari" class="btn btn-success btn-download">Cari</a>
+                                        </div>
+                                        <!-- <div class="col-xl-12 col-md-3 col-sm-6">
+                                            <router-link to="/apps/invoice/edit" class="btn btn-dark btn-edit">Edit</router-link>
+                                        </div> -->
 
                                     </div>
                                 </div>
@@ -175,6 +199,10 @@
     import '@/assets/sass/tables/table-basic.scss';
     import '@/assets/sass/apps/invoice-preview.scss';
 
+    import flatPickr from 'vue-flatpickr-component';
+    import 'flatpickr/dist/flatpickr.css';
+    import '@/assets/sass/forms/custom-flatpickr.css';
+
     import moment from "moment";
 
     import { useStore } from 'vuex';
@@ -187,9 +215,8 @@
     const store = useStore();
 
     const sorting = ref({
-        startDate: moment().format("D-M-YYYY"),
-        // kd_trans: props.kd_trans,
-        // endDate: moment().format("D-M-YYYY")
+        startDate: moment().subtract(30,'d').format("D-M-YYYY"),
+        endDate: moment().format("D-M-YYYY")
     });
 
     
@@ -208,6 +235,19 @@
        
     })
 
+    const cari = () => {
+        
+        const pendapatan = ref({group: '1,2,3'});
+        var c = Object.assign(sorting.value, pendapatan.value);
+        store.dispatch('GetPendapatan', c );
+        
+        setTimeout(function() { 
+            // store.dispatch('GetCoaList')
+            hartalist.value = store.getters.StateCoaPendapatan;
+            // const pendapatan = hartalist.value.filter(p => p.acc_id === '60000');
+            // console.log(hartalist.value);
+        }, 3000);
+    }
 
     const export_table = (type) => {
         let cols = columns.value.filter((d) => d != 'profile' && d != 'action');

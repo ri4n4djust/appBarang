@@ -55,9 +55,56 @@
                             <template #total_link="props"> {{ Number(props.row.total_link).toLocaleString() }} </template>
                             <template #total_cash="props"> {{ Number(props.row.total_cash).toLocaleString() }} </template>
                             <template #action="props">
-                                <div class="custom-dropdown dropdown btn-group ">
+                                <ul class="table-controls">
+                                    <li>
+                                        <!-- <a href="javascript:void(0);" data-bs-toggle="tooltip" title="Edit"> -->
+                                            <router-link :to="{name: 'rekapan', params: {startDate: props.row.tgl_trans, kd_trans:props.row.kd_trans, regu:props.row.r_regu }}" >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="24"
+                                                height="24"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="feather feather-edit-2"
+                                            >
+                                                <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                                            </svg>
+                                            </router-link>
+                                        <!-- </a> -->
+                                    </li>
+                                    <li>
+                                        <!-- <a href="javascript:void(0);" data-bs-toggle="tooltip" title="Delete"> -->
+                                            <router-link :to="{name: 'edit-aplusan', params: {startDate: props.row.tgl_trans, kd_trans:props.row.kd_trans, regu:props.row.r_regu }}" >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="24"
+                                                height="24"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="feather feather-trash-2"
+                                            >
+                                                <polyline points="3 6 5 6 21 6"></polyline>
+                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                <line x1="14" y1="11" x2="14" y2="17"></line>
+                                            </svg>
+                                            </router-link>
+                                        <!-- </a> -->
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);" @click="delete_row(props.row)"> Delete </a>
+                                    </li>
+                                </ul>
+                                <!-- <div class="custom-dropdown dropdown btn-group ">
                                     <div class="btn-group" href="#" role="button" id="pendingTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <!-- <button type="button" class="btn btn-blue">Open</button> -->
                                         <div role="group" class="btn-group">
                                             <div class="dropdown b-dropdown custom-dropdown show btn-group">
                                                 <a class="btn dropdown-toggle btn-dark"
@@ -81,18 +128,16 @@
                                     </div>
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li>
-                                            <!-- <a href="javascript:void(0);" class="dropdown-item" @click="edit_row(props.row)"> Edit </a> -->
                                             <router-link :to="{name: 'rekapan', params: {startDate: props.row.tgl_trans, kd_trans:props.row.kd_trans, regu:props.row.r_regu }}" class="dropdown-item">Print</router-link>
                                         </li>
                                         <li>
-                                            <!-- <a href="javascript:void(0);" class="dropdown-item" @click="view_row(props.row)">Edit </a> -->
                                             <router-link :to="{name: 'edit-aplusan', params: {startDate: props.row.tgl_trans, kd_trans:props.row.kd_trans, regu:props.row.r_regu }}" class="dropdown-item">Edit</router-link>
                                         </li>
                                         <li>
                                             <a href="javascript:void(0);" class="dropdown-item" @click="delete_row(props.row)"> Delete </a>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> -->
                             </template>
                         </v-client-table>
 

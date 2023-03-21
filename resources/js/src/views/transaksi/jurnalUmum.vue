@@ -340,7 +340,6 @@
         items.value.push({ 
             id: 1, 
             name: '',
-            biaya: '', 
             satuan: '', 
             acc: '', 
         });

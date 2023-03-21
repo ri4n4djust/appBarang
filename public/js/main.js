@@ -29904,7 +29904,8 @@ var state = {
   laporanopnum: [],
   aplusan: [],
   listaplusan: [],
-  listpenjualankupon: []
+  listpenjualankupon: [],
+  listbiaya: []
 };
 var getters = {
   SlaporanBbm: function SlaporanBbm(state) {
@@ -29918,6 +29919,9 @@ var getters = {
   },
   SlaporanOpnum: function SlaporanOpnum(state) {
     return state.laporanopnum;
+  },
+  StateListBiaya: function StateListBiaya(state) {
+    return state.listbiaya;
   },
   Saplusan: function Saplusan(state) {
     return state.aplusan;
@@ -30118,7 +30122,7 @@ var actions = {
       }, _callee6, null, [[1, 8]]);
     }))();
   },
-  GetAplusan: function GetAplusan(_ref7, aplus) {
+  GetListBiaya: function GetListBiaya(_ref7, biaya) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
       var commit, response;
       return _regeneratorRuntime().wrap(function _callee7$(_context7) {
@@ -30128,11 +30132,11 @@ var actions = {
               commit = _ref7.commit;
               _context7.prev = 1;
               _context7.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/aplusan', aplus);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/list-biaya', biaya);
 
             case 4:
               response = _context7.sent;
-              commit('setAplusan', response.data.data);
+              commit('setListBiaya', response.data.data);
               _context7.next = 12;
               break;
 
@@ -30140,7 +30144,7 @@ var actions = {
               _context7.prev = 8;
               _context7.t0 = _context7["catch"](1);
               // Handle error
-              alert('error load Aplusan bbm');
+              alert('error load laporan list Biaya');
               return _context7.abrupt("return");
 
             case 12:
@@ -30151,7 +30155,7 @@ var actions = {
       }, _callee7, null, [[1, 8]]);
     }))();
   },
-  GetListAplusan: function GetListAplusan(_ref8, laplus) {
+  GetAplusan: function GetAplusan(_ref8, aplus) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
       var commit, response;
       return _regeneratorRuntime().wrap(function _callee8$(_context8) {
@@ -30161,11 +30165,11 @@ var actions = {
               commit = _ref8.commit;
               _context8.prev = 1;
               _context8.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/list-aplusan', laplus);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/aplusan', aplus);
 
             case 4:
               response = _context8.sent;
-              commit('setListAplusan', response.data.data);
+              commit('setAplusan', response.data.data);
               _context8.next = 12;
               break;
 
@@ -30173,7 +30177,7 @@ var actions = {
               _context8.prev = 8;
               _context8.t0 = _context8["catch"](1);
               // Handle error
-              alert('error load list Aplusan bbm');
+              alert('error load Aplusan bbm');
               return _context8.abrupt("return");
 
             case 12:
@@ -30184,30 +30188,40 @@ var actions = {
       }, _callee8, null, [[1, 8]]);
     }))();
   },
-  EditBarang: function EditBarang(_ref9, Brg) {
+  GetListAplusan: function GetListAplusan(_ref9, laplus) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9() {
-      var dispatch;
+      var commit, response;
       return _regeneratorRuntime().wrap(function _callee9$(_context9) {
         while (1) {
           switch (_context9.prev = _context9.next) {
             case 0:
-              dispatch = _ref9.dispatch;
-              _context9.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/update/barang', Brg);
+              commit = _ref9.commit;
+              _context9.prev = 1;
+              _context9.next = 4;
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/list-aplusan', laplus);
 
-            case 3:
-              _context9.next = 5;
-              return dispatch('GetBarang');
+            case 4:
+              response = _context9.sent;
+              commit('setListAplusan', response.data.data);
+              _context9.next = 12;
+              break;
 
-            case 5:
+            case 8:
+              _context9.prev = 8;
+              _context9.t0 = _context9["catch"](1);
+              // Handle error
+              alert('error load list Aplusan bbm');
+              return _context9.abrupt("return");
+
+            case 12:
             case "end":
               return _context9.stop();
           }
         }
-      }, _callee9);
+      }, _callee9, null, [[1, 8]]);
     }))();
   },
-  DeleteBarang: function DeleteBarang(_ref10, id) {
+  EditBarang: function EditBarang(_ref10, Brg) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee10() {
       var dispatch;
       return _regeneratorRuntime().wrap(function _callee10$(_context10) {
@@ -30216,7 +30230,7 @@ var actions = {
             case 0:
               dispatch = _ref10.dispatch;
               _context10.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/hapus/barang/".concat(id));
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/update/barang', Brg);
 
             case 3:
               _context10.next = 5;
@@ -30228,6 +30242,29 @@ var actions = {
           }
         }
       }, _callee10);
+    }))();
+  },
+  DeleteBarang: function DeleteBarang(_ref11, id) {
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee11() {
+      var dispatch;
+      return _regeneratorRuntime().wrap(function _callee11$(_context11) {
+        while (1) {
+          switch (_context11.prev = _context11.next) {
+            case 0:
+              dispatch = _ref11.dispatch;
+              _context11.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/hapus/barang/".concat(id));
+
+            case 3:
+              _context11.next = 5;
+              return dispatch('GetBarang');
+
+            case 5:
+            case "end":
+              return _context11.stop();
+          }
+        }
+      }, _callee11);
     }))();
   } // async editAplus({commit}, da) {
   //     commit('setAplusan', da)
@@ -30250,6 +30287,9 @@ var mutations = {
   },
   setListPenjualanKupon: function setListPenjualanKupon(state, kp) {
     state.listpenjualankupon = kp;
+  },
+  setListBiaya: function setListBiaya(state, biaya) {
+    state.listbiaya = biaya;
   },
   setAplusan: function setAplusan(state, ap) {
     state.aplusan = ap;
@@ -74602,7 +74642,7 @@ module.exports = JSON.parse('{"dashboard":"仪表盘","sales":"销售量","analy
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/chunks/" + chunkId + "." + {"index2":"3f2f5b1faba69db1","components-tabs":"868400eb9c3ca852","components-accordions":"958ef92098fb530f","components-modals":"e6514e571555b5c0","components-cards":"e7583a4cf5564f04","components-carousel":"8563fc4e88cba5e0","components-timeline":"7ae9d528985dc414","components-media-object":"d265e1f0556c5b23","components-list-group":"20680dcbffabc997","components-pricing-table":"b87be2673dcf64d6","components-notifications":"9206fc33e5c150fe","components-lightbox":"b9458fb55cd5c6f3","components-countdown":"e221fbc8b2816ca0","components-counter":"f7283742d443ef25","components-sweetalert":"650a94cf22bafd9a","font-icons":"34e69c87195a1b77","pages-helpdesk":"dcb617b851894fab","pages-contact-us":"510879cdb75ffda7","pages-faq":"08ea3b394d276c8f","pages-faq2":"b3656798f889ae16","pages-privacy-policy":"5b1dba6f010460d1","pages-coming-soon":"3625eb8d5e9f9c18","pages-error404":"b6b7b2f9a83218ee","pages-error500":"3339dbd448847368","pages-error503":"a95ec8c784080110","pages-maintenence":"3d08473adb247530","pages-blank-page":"0c1ac99ccc41961d","pages-sample":"9994ba18d7cb12e8","auth-login-boxed":"035dc3c8eeee6d3e","auth-register-boxed":"d614be638b7cb772","auth-lockscreen-boxed":"32b2d256b6dca6d3","auth-pass-recovery-boxed":"57ba933f69001944","auth-login":"11978aa9265265c9","auth-register":"a5f635bb185472b7","auth-lockscreen":"f692ce3fe9e2f169","auth-pass-recovery":"4cc4878d9baefab2","elements-alerts":"cce791b51da55ebf","elements-avatar":"808a6756ade77be7","elements-badges":"ceecf745922b9465","elements-breadcrumbs":"1722a5e9bc7f1a7d","elements-buttons":"fdac3a00bec52991","elements-buttons-group":"df319f66de56889a","elements-color-library":"b9c63e419c8c300b","elements-dropdown":"72e3ecb8205bc421","elements-infobox":"399934d0b9db2526","elements-jumbotron":"67620b84089a4b94","elements-loader":"3b649aacbbfa08fc","elements-pagination":"21204cc9b1c64185","elements-popovers":"130b77ef0926b915","elements-progress-bar":"30e876cd9de41f5b","elements-search":"b464253c225723d6","elements-tooltips":"3a4ec3115056b6b3","elements-treeview":"bca134389bae1a9b","elements-typography":"ac9cf4c49da4113a","tables":"6c7b752437b29866","users-profile":"49b36e78cefd7a4d","users-account-setting":"9e19364198133f22","dragndrop":"45472aaa1012adce","charts-apex-chart":"d2f00a623aa3eb04","widgets":"b7fa9c006c6aebb0","forms-basic":"e774256dd6bf57bd","forms-input-group":"b0a3fce5817ce26b","forms-layouts":"e821a21bb2a879bf","forms-validation":"defac56a58186d1e","forms-checkbox-radio":"8c34dd2d66375144","forms-switches":"d60eef87f12531fd","forms-wizards":"c2b79beef794f1ee","forms-file-upload":"bd9f24848a2ef3ab","forms-clipboard":"0121ffa0f1ea0fc2","forms-date-picker":"52e788a5ab0cfd5b","forms-input-mask":"07ba756f40e98ad2","forms-quill-editor":"9e844664b525b753","forms-touchspin":"43fded85f16c30f9","forms-markdown-editor":"2b08efe290b9b501","forms-select2":"dff731b5e7c71bcd","apps-chat":"52a8d44efc21b078","apps-mailbox":"e6b2012d55856740","apps-todo-list":"9a40985eb471a29c","apps-contacts":"384a513eb6c8af7b","apps-notes":"36ecb7aab3e00af0","apps-scrumboard":"071c60efffbf8f79","apps-calendar":"2667beb3567fe611","apps-invoice-list":"0feaedf5952fdfff","apps-invoice-preview":"d9edd83168389f6b","apps-invoice-add":"087bfcc722043974","apps-invoice-edit":"5918fd58d1493481","tables-basic":"accd1005371fe815","tables-striped":"c14f35060df00cfc","tables-order-sorting":"58cc150f515bdba7","tables-multi-column":"cbd5693c21f08e50","tables-multiple-tables":"3cd0712f58b2a919","tables-alt-pagination":"83a6a0f7048933e6","tables-custom":"5f92dc2605fc71d8","tables-range-search":"10af2f97198a32b7","tables-export":"ca03023830dd14e6","tables-live-dom-ordering":"f380465fda483f23","tables-miscellaneous":"3f826e4b9e0d2831","node_modules_html2canvas_dist_html2canvas_js":"5475dc17eb928a5a","node_modules_dompurify_dist_purify_js":"9dabfec756329575","node_modules_canvg_lib_index_es_js":"84de45b397df7f27"}[chunkId] + ".js";
+/******/ 			return "js/chunks/" + chunkId + "." + {"index2":"3f2f5b1faba69db1","components-tabs":"5d8ed67046f9349e","components-accordions":"958ef92098fb530f","components-modals":"e6514e571555b5c0","components-cards":"e7583a4cf5564f04","components-carousel":"8563fc4e88cba5e0","components-timeline":"7ae9d528985dc414","components-media-object":"d265e1f0556c5b23","components-list-group":"20680dcbffabc997","components-pricing-table":"b87be2673dcf64d6","components-notifications":"9206fc33e5c150fe","components-lightbox":"b9458fb55cd5c6f3","components-countdown":"e221fbc8b2816ca0","components-counter":"f7283742d443ef25","components-sweetalert":"650a94cf22bafd9a","font-icons":"34e69c87195a1b77","pages-helpdesk":"dcb617b851894fab","pages-contact-us":"510879cdb75ffda7","pages-faq":"08ea3b394d276c8f","pages-faq2":"b3656798f889ae16","pages-privacy-policy":"5b1dba6f010460d1","pages-coming-soon":"3625eb8d5e9f9c18","pages-error404":"b6b7b2f9a83218ee","pages-error500":"3339dbd448847368","pages-error503":"a95ec8c784080110","pages-maintenence":"3d08473adb247530","pages-blank-page":"0c1ac99ccc41961d","pages-sample":"9994ba18d7cb12e8","auth-login-boxed":"035dc3c8eeee6d3e","auth-register-boxed":"d614be638b7cb772","auth-lockscreen-boxed":"32b2d256b6dca6d3","auth-pass-recovery-boxed":"57ba933f69001944","auth-login":"11978aa9265265c9","auth-register":"a5f635bb185472b7","auth-lockscreen":"f692ce3fe9e2f169","auth-pass-recovery":"4cc4878d9baefab2","elements-alerts":"cce791b51da55ebf","elements-avatar":"808a6756ade77be7","elements-badges":"ceecf745922b9465","elements-breadcrumbs":"1722a5e9bc7f1a7d","elements-buttons":"fdac3a00bec52991","elements-buttons-group":"df319f66de56889a","elements-color-library":"b9c63e419c8c300b","elements-dropdown":"72e3ecb8205bc421","elements-infobox":"399934d0b9db2526","elements-jumbotron":"67620b84089a4b94","elements-loader":"3b649aacbbfa08fc","elements-pagination":"21204cc9b1c64185","elements-popovers":"130b77ef0926b915","elements-progress-bar":"30e876cd9de41f5b","elements-search":"b464253c225723d6","elements-tooltips":"3a4ec3115056b6b3","elements-treeview":"bca134389bae1a9b","elements-typography":"ac9cf4c49da4113a","tables":"6c7b752437b29866","users-profile":"49b36e78cefd7a4d","users-account-setting":"9e19364198133f22","dragndrop":"45472aaa1012adce","charts-apex-chart":"d2f00a623aa3eb04","widgets":"b7fa9c006c6aebb0","forms-basic":"e774256dd6bf57bd","forms-input-group":"b0a3fce5817ce26b","forms-layouts":"e821a21bb2a879bf","forms-validation":"defac56a58186d1e","forms-checkbox-radio":"8c34dd2d66375144","forms-switches":"d60eef87f12531fd","forms-wizards":"c2b79beef794f1ee","forms-file-upload":"bd9f24848a2ef3ab","forms-clipboard":"0121ffa0f1ea0fc2","forms-date-picker":"52e788a5ab0cfd5b","forms-input-mask":"07ba756f40e98ad2","forms-quill-editor":"9e844664b525b753","forms-touchspin":"43fded85f16c30f9","forms-markdown-editor":"2b08efe290b9b501","forms-select2":"dff731b5e7c71bcd","apps-chat":"52a8d44efc21b078","apps-mailbox":"e6b2012d55856740","apps-todo-list":"9a40985eb471a29c","apps-contacts":"384a513eb6c8af7b","apps-notes":"36ecb7aab3e00af0","apps-scrumboard":"071c60efffbf8f79","apps-calendar":"2667beb3567fe611","apps-invoice-list":"0feaedf5952fdfff","apps-invoice-preview":"d9edd83168389f6b","apps-invoice-add":"087bfcc722043974","apps-invoice-edit":"5918fd58d1493481","tables-basic":"accd1005371fe815","tables-striped":"c14f35060df00cfc","tables-order-sorting":"58cc150f515bdba7","tables-multi-column":"cbd5693c21f08e50","tables-multiple-tables":"3cd0712f58b2a919","tables-alt-pagination":"83a6a0f7048933e6","tables-custom":"5f92dc2605fc71d8","tables-range-search":"10af2f97198a32b7","tables-export":"ca03023830dd14e6","tables-live-dom-ordering":"f380465fda483f23","tables-miscellaneous":"3f826e4b9e0d2831","node_modules_html2canvas_dist_html2canvas_js":"5475dc17eb928a5a","node_modules_dompurify_dist_purify_js":"9dabfec756329575","node_modules_canvg_lib_index_es_js":"84de45b397df7f27"}[chunkId] + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	
