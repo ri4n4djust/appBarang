@@ -259,7 +259,7 @@
                                                                                     <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                                                                                 </svg>
                                                                             </router-link>
-                                                                            <router-link @click="delete_row(props.row)" >
+                                                                            <!-- <router-link @click="delete_row(props.row)" > -->
                                                                                 <svg
                                                                                     xmlns="http://www.w3.org/2000/svg"
                                                                                     width="24"
@@ -277,7 +277,7 @@
                                                                                     <line x1="10" y1="11" x2="10" y2="17"></line>
                                                                                     <line x1="14" y1="11" x2="14" y2="17"></line>
                                                                                 </svg>
-                                                                            </router-link>
+                                                                            <!-- </router-link> -->
                                                                             <!-- <a href="javascript:void(0);" @click="delete_row(props.row)"> Delete </a> -->
                                                                         </template>
                                                                     </v-client-table>
@@ -438,7 +438,7 @@
         getNoBiaya();
     }
 
-    onMounted( async () => {
+    onMounted(  () => {
         //set default data
         items.value = []
         items.value.push({ 
@@ -487,8 +487,8 @@
         items.value = items.value.filter((d) => d.id != item.id);
     };
 
-    const getListBiaya = async () => {
-        await store.dispatch('GetListBiaya', sorting.value );
+    const getListBiaya = () => {
+        store.dispatch('GetListBiaya', sorting.value );
         setTimeout(function() { listbiaya.value = store.getters.StateListBiaya ; }, 4000);
     };
 

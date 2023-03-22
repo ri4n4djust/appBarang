@@ -163,7 +163,7 @@
     import moment from "moment";
 
     import { useMeta } from '@/composables/use-meta';
-    useMeta({ title: 'Tables' });
+    useMeta({ title: 'Opnum Barang' });
 
     const store = useStore();
     const table_1 = ref([]);

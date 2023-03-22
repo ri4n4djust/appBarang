@@ -90,7 +90,7 @@
                                     <line x1="14" y1="11" x2="14" y2="17"></line>
                                 </svg>
                             </router-link>
-                            <a href="javascript:void(0);" @click="delete_row(props.row)"> Delete </a>
+                            <a href="javascript:void(0);" @click="delete_row(props.row)"> Hapus </a>
                                 
                             </template>
                         </v-client-table>

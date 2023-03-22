@@ -181,9 +181,9 @@ class barangController extends Controller
 
                         // $bbm = DB::table('tblbbm')->where('code_bbm', $kdBarang)->first();
                         if($qty != ''){
-                            if(Bbm::where('code_bbm', $kdBarang )->exists()){
-                                DB::table('tblbbm')->where('code_bbm', $kdBarang)->update([
-                                    'stokBbm' => $qty,
+                            if(Persediaan::where('kdPersediaan', $kdBarang )->exists()){
+                                DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->update([
+                                    'stokPersediaan' => $qty,
                                 ]);
                             }else{
                                 DB::table('tblbarang')->where('kdBarang', $kdBarang)->update([
@@ -193,21 +193,23 @@ class barangController extends Controller
                             }
                         }
                         // $oldStok = $brg->stokPersediaan;
-                        DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->update([
-                            'stokPersediaan' => $qty,
-                            // 'salePrice' => $hrg,
-                        ]);
+                        // DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->update([
+                        //     'stokPersediaan' => $qty,
+                        //     // 'salePrice' => $hrg,
+                        // ]);
                         
 
-                        $detail[] = [
-                            'r_opnum' => $kdOpnum,
-                            'r_kdPersediaan' => $kdBarang,
-                            'nmPersediaan' => $nmBarang,
-                            'selisihOpnum' => $selisih,
-                            'nilaiOpnum' => $detop[$i]['total'],
-                            'keteranganOpnum' => $detop[$i]['keterangan'],
-                            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-                            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                        $detail = [
+                            [
+                                'r_opnum' => $kdOpnum,
+                                'r_kdPersediaan' => $kdBarang,
+                                'nmPersediaan' => $nmBarang,
+                                'selisihOpnum' => $selisih,
+                                'nilaiOpnum' => $detop[$i]['total'],
+                                'keteranganOpnum' => $detop[$i]['keterangan'],
+                                'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                                'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                            ]
                         ];
 
                         $total_harga = $detop[$i]['total'];
@@ -215,7 +217,9 @@ class barangController extends Controller
                         $acc_id_k = $detop[$i]['accid_persediaan']; // acc id yg di debet
                         $acc_id_d = $detop[$i]['accid_biaya']; // acc id yg di debet
                         // $accid = $detpro[$i]['accid']; // acc id yg di debet
-                        // $acc_id_d = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
+                        // $accid_kas = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
+                        $acc_laba = '32300';
+
                         $memo = 'Opnum';
                         $jurnal = 'JK';
                         insert_gl($kdOpnum,$tglOpnum,$total_harga,$memo,$jurnal);
@@ -236,13 +240,30 @@ class barangController extends Controller
                                 'kredit' => $total_harga,
                                 'trans_detail' => 'Opnum',
                                 'void_flag' => 0,
+                            ],
+                            // [
+                            //     'rgl' => $rgl,
+                            //     'acc_id' => $accid_kas,
+                            //     'debet' => 0,
+                            //     'kredit' => $total_harga,
+                            //     'trans_detail' => 'Opnum',
+                            //     'void_flag' => 0,
+                            // ],
+                            [
+                                'rgl' => $rgl,
+                                'acc_id' => $acc_laba,
+                                'debet' => $total_harga,
+                                'kredit' => 0,
+                                'trans_detail' => 'Opnum',
+                                'void_flag' => 0,
                             ]
                         ];
                         
                         insert_gl_detail($ac);
                         //===========end jurnal
+                        OpnumDetail::insert($detail);
                     }
-                    OpnumDetail::insert($detail);
+                    
 
 
             DB::commit();

@@ -30,10 +30,11 @@
                                                 
 
                                                 <div class="inv--detail-section inv--customer-detail-section">
-                                                    
+                                                    <div class="row invoice layout-top-spacing layout-spacing apps-invoice"></div>
 
                                                     <div class="table-responsive">
-                                                        <!-- <div class="table-responsive"> -->                                        
+                                                        <!-- <div class="table-responsive"> -->
+                                                            <button type="button" class="btn btn-danger btn-lg mb-3 me-3"><span class="spinner-border text-white me-2 align-self-center loader-sm">Loading...</span> Loading</button>                                        
                                                             <table>
                                                                 <tbody  v-for="hrt in hartalist" :key="hrt.acc_id" :set="amount = hrt.amount" >
                                                                         

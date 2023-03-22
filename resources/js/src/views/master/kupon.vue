@@ -8,8 +8,8 @@
                 </div>
                 <div class="modal-body">
                     <!-- <h4 class="modal-heading mb-4 mt-2">Aligned Center</h4> -->
-                    <form>
-                        <div class="row mb-4">
+                    <!-- <form> -->
+                        <!-- <div class="row mb-4">
                             <div class="col-sm-4">
                                 <label for="inputState">Tgl</label>
                                 <flat-pickr v-model="inputk.tglKupon" 
@@ -17,7 +17,7 @@
                                 class="form-control form-control-sm flatpickr active" placeholder="Due Date">
                                 </flat-pickr>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row mb-4">
                             <div class="col-sm">
                                 <label for="inputState">Nama Pelanggan</label>
@@ -49,7 +49,7 @@
                             </div>
                         </div>
                         
-                    </form>
+                    <!-- </form> -->
 
                     <div class="table-responsive">
                         <table role="table" aria-busy="false" aria-colcount="5" class="table table-bordered" id="__BVID__415">

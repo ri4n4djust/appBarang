@@ -170,7 +170,7 @@ class transaksiNoselController extends Controller
                         $detkup[] = [
                             'kd_trans'     =>  $kdtrans,
                             'r_regu'     => $det_kupon[$i]['r_regu'],
-                            'tgl_trans'     => date("Y-m-d", strtotime($det_kupon[$i]['tglKupon'])),
+                            'tgl_trans'     => $tgl, // date("Y-m-d", strtotime($det_kupon[$i]['tglKupon'])),
                             'r_kdPelanggan'     => $kdpel,
                             'total'   => $nilai,
                             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
@@ -224,7 +224,7 @@ class transaksiNoselController extends Controller
                         $detbi[] = [
                             'kd_trans'     =>  $kdtrans,
                             'r_regu'     => $det_biaya[$i]['r_regu'],
-                            'tglBiaya'     => date("Y-m-d", strtotime($det_biaya[$i]['tglBiaya'])),
+                            'tglBiaya'     => $tgl, //date("Y-m-d", strtotime($det_biaya[$i]['tglBiaya'])),
                             'keterangan_biaya'     => $det_biaya[$i]['ketBiaya'],
                             'jumlah'   => $nilai,
                             'accid' => $det_biaya[$i]['acc'],
@@ -330,30 +330,7 @@ class transaksiNoselController extends Controller
                     Linkaja::insert($detli);
                 }
 
-                $cost = $total_k + $tot_b + $total_l;
-                DB::table('tblheader_aplusan')->upsert([
-                    'kd_trans'  => $kdtrans,
-                    'r_regu'    => $regu,
-                    'tgl_trans' => $tgl,
-                    'total_jual'    => $total_j,
-                    'total_kupon'   => $total_k,
-                    'total_biaya'   => $tot_b,
-                    'total_link'    => $total_l,
-                    'total_cash'    => $total_j - $cost,
-                    'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-                ],
-                [
-                    'r_regu'    => $regu,
-                    'tgl_trans' => $tgl,
-                    'total_jual'    => $total_j,
-                    'total_kupon'   => $total_k,
-                    'total_biaya'   => $tot_b,
-                    'total_link'    => $total_l,
-                    'total_cash'    => $total_j - $cost,
-                    'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-                ]);
+                
 
                 $detpro = $request[4];
                 for ($i = 0; $i < count($detpro); $i++) {
@@ -431,6 +408,31 @@ class transaksiNoselController extends Controller
                     
                 };
                 DB::table('tblprofit')->insert($detpr);
+
+                $cost = $total_k + $tot_b + $total_l;
+                DB::table('tblheader_aplusan')->upsert([
+                    'kd_trans'  => $kdtrans,
+                    'r_regu'    => $regu,
+                    'tgl_trans' => $tgl,
+                    'total_jual'    => $total_j,
+                    'total_kupon'   => $total_k,
+                    'total_biaya'   => $tot_b,
+                    'total_link'    => $total_l,
+                    'total_cash'    => $total_j - $cost,
+                    'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                ],
+                [
+                    'r_regu'    => $regu,
+                    'tgl_trans' => $tgl,
+                    'total_jual'    => $total_j,
+                    'total_kupon'   => $total_k,
+                    'total_biaya'   => $tot_b,
+                    'total_link'    => $total_l,
+                    'total_cash'    => $total_j - $cost,
+                    'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                ]);
 
             DB::commit();
             });
