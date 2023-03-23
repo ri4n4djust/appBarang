@@ -1,13 +1,13 @@
 <template>
-    <div class="layout-px-spacing">
+    <div class="layout-px-spacing apps-invoice-add">
         <teleport to="#breadcrumb">
             <ul class="navbar-nav flex-row">
                 <li>
                     <div class="page-header">
                         <nav class="breadcrumb-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="javascript:;">Opnum</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"><span>BBM</span></li>
+                                <li class="breadcrumb-item"><a href="javascript:;">Apps</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span>Invoice Add</span></li>
                             </ol>
                         </nav>
                     </div>
@@ -15,10 +15,13 @@
             </ul>
         </teleport>
 
-        <div class="row layout-top-spacing">
-            <div class="row layout-top-spacing">
-                <div class="col-lg-12">
-                    <div class="alert alert-arrow-left alert-icon-left alert-light-info mb-0 text-break">
+        <!-- <div class="row invoice layout-top-spacing layout-spacing">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="doc-container"> -->
+        <div class="underline-content tabs">
+            <ul class="nav nav-tabs mb-3" id="lineTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="underline-home-tab" data-bs-toggle="tab" href="#underline-home" role="tab" aria-controls="underline-home" aria-selected="true">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             width="24"
@@ -29,65 +32,49 @@
                             stroke-width="2"
                             stroke-linecap="round"
                             stroke-linejoin="round"
-                            class="feather feather-bell"
+                            class="feather feather-home"
                         >
-                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
                         </svg>
-                        Opnum BBM
-                    </div>
-                </div>
-            </div>
-            
-            <div class="row layout-top-spacing">
+                        Transaksi
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="underline-profile-tab" data-bs-toggle="tab" href="#underline-profile" role="tab" aria-controls="underline-profile" aria-selected="false"
+                        ><svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-user"
+                        >
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        Daftar
+                    </a>
+                </li>
+            </ul>
 
-                <div class="underline-content tabs">
-                    <ul class="nav nav-tabs mb-3" id="lineTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="underline-home-tab" data-bs-toggle="tab" href="#underline-home" role="tab" aria-controls="underline-home" aria-selected="true">
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    class="feather feather-home"
-                                >
-                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                </svg>
-                                Transaksi
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="underline-profile-tab" data-bs-toggle="tab" href="#underline-profile" role="tab" aria-controls="underline-profile" aria-selected="false"
-                                ><svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    class="feather feather-user"
-                                >
-                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                    <circle cx="12" cy="7" r="4"></circle>
-                                </svg>
-                                Daftar
-                            </a>
-                        </li>
-                    </ul>
+            <div class="tab-content" id="lineTabContent-3">
+                <div class="tab-pane fade show active" id="underline-home" role="tabpanel" aria-labelledby="underline-home-tab">
 
-                    <div class="tab-content" id="lineTabContent-3">
-                        <div class="tab-pane fade show active" id="underline-home" role="tabpanel" aria-labelledby="underline-home-tab">
-
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="invoice-content">
+                                <div class="invoice-detail-body">
+                                    <div class="invoice-detail-title">
+                                       
+                                        <div class="invoice-title">
+                                            Opnum BBM
+                                        </div>
+                                    </div>
 
                                     <div class="statbox panel box box-shadow">
                                         <div class="panel-heading">
@@ -154,140 +141,141 @@
 
                                         </div>
                                     </div>
-
-                                
+                                    
+                                </div>
+                            </div>
                         </div>
-                        <div class="tab-pane fade" id="underline-profile" role="tabpanel" aria-labelledby="underline-profile-tab">
 
-                            <div class="col-xl-12">
-                                <div class="invoice-content">
-                                    <div class="invoice-detail-body">
-                                        <!-- <div class="invoice-detail-title">
-                                            
-                                            <div class="invoice-title">
-                                            PO BBM
-                                            </div>
-                                        </div> -->
-                                        <!-- {{ listbiaya }} -->
+                        
+                    </div>
 
-                                        <div class="invoice-detail-header">
-                                            <div class="row justify-content-between">
+                </div>
+                <div class="tab-pane fade" id="underline-profile" role="tabpanel" aria-labelledby="underline-profile-tab">
 
-                                                <!-- <div class="row invoice layout-top-spacing layout-spacing apps-invoice">
-                                                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                                                        <div class="doc-container">
-                                                            <div class="row"> -->
-                                                                <div class="col-xl-9">
-                                                                    <div class="invoice-container">
-                                                                        <div class="table-responsive">
+                    <div class="col-xl-12">
+                        <div class="invoice-content">
+                            <div class="invoice-detail-body">
+                                <!-- <div class="invoice-detail-title">
+                                    
+                                    <div class="invoice-title">
+                                    PO BBM
+                                    </div>
+                                </div> -->
 
-                                                                            <v-client-table :data="items" :columns="columns" :options="table_option">
-                                                                                <template #tglOpnum="props"> {{ moment(props.row.tglOpnum).format("DD-MM-YYYY") }} </template>
-                                                                                <template #totalOpnum="props"> {{ Number(props.row.totalOpnum).toLocaleString() }} </template>
-                                                                                <template #action="props">
-                                                                                    <div class="custom-dropdown dropdown btn-group ">
-                                                                                        <div class="btn-group" href="#" role="button" id="pendingTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                            <!-- <button type="button" class="btn btn-blue">Open</button> -->
-                                                                                            <div role="group" class="btn-group">
-                                                                                                <div class="dropdown b-dropdown custom-dropdown show btn-group">
-                                                                                                    <a class="btn dropdown-toggle btn-dark"
-                                                                                                        ><svg
-                                                                                                            xmlns="http://www.w3.org/2000/svg"
-                                                                                                            width="24"
-                                                                                                            height="24"
-                                                                                                            viewBox="0 0 24 24"
-                                                                                                            fill="none"
-                                                                                                            stroke="currentColor"
-                                                                                                            stroke-width="2"
-                                                                                                            stroke-linecap="round"
-                                                                                                            stroke-linejoin="round"
-                                                                                                            class="feather feather-chevron-down"
-                                                                                                        >
-                                                                                                            <polyline points="6 9 12 15 18 9"></polyline>
-                                                                                                        </svg>
-                                                                                                    </a>
-                                                                                                </div>
-                                                                                            </div>
+                                <div class="invoice-detail-header">
+                                    <div class="row justify-content-between">
+
+                                        <div class="row invoice layout-top-spacing layout-spacing apps-invoice">
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="doc-container">
+                                                    <div class="row">
+                                                        <div class="col-xl-9">
+                                                            <div class="invoice-container">
+                                                                <div class="table-responsive">
+
+                                                                    <v-client-table :data="items" :columns="columns" :options="table_option">
+                                                                        <template #tglOpnum="props"> {{ moment(props.row.tglOpnum).format("DD-MM-YYYY") }} </template>
+                                                                        <template #totalOpnum="props"> {{ Number(props.row.totalOpnum).toLocaleString() }} </template>
+                                                                        <template #action="props">
+                                                                            <div class="custom-dropdown dropdown btn-group ">
+                                                                                <div class="btn-group" href="#" role="button" id="pendingTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                    <!-- <button type="button" class="btn btn-blue">Open</button> -->
+                                                                                    <div role="group" class="btn-group">
+                                                                                        <div class="dropdown b-dropdown custom-dropdown show btn-group">
+                                                                                            <a class="btn dropdown-toggle btn-dark"
+                                                                                                ><svg
+                                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                                    width="24"
+                                                                                                    height="24"
+                                                                                                    viewBox="0 0 24 24"
+                                                                                                    fill="none"
+                                                                                                    stroke="currentColor"
+                                                                                                    stroke-width="2"
+                                                                                                    stroke-linecap="round"
+                                                                                                    stroke-linejoin="round"
+                                                                                                    class="feather feather-chevron-down"
+                                                                                                >
+                                                                                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                                                                                </svg>
+                                                                                            </a>
                                                                                         </div>
-                                                                                        <ul class="dropdown-menu dropdown-menu-end">
-                                                                                            <li>
-                                                                                                <!-- <a href="javascript:void(0);" class="btn m-1 btn-light" @click="edit_row(props.row)"> Edit </a> -->
-                                                                                                <router-link to="/editpenjualan" class="dropdown-item" @click="edit_row(props.row)">Edit</router-link>
-                                                                                            </li>
-                                                                                            <li>
-                                                                                                <router-link :to="{ name: 'nosel', params: { id: props.row } }" class="dropdown-item">coba</router-link>
-                                                                                                <!-- <a href="javascript:void(0);" class="btn m-1 btn-light" @click="view_row(props.row)"> Delete </a> -->
-                                                                                            </li>
-                                                                                        </ul>
                                                                                     </div>
-                                                                                </template>
-                                                                            </v-client-table>
+                                                                                </div>
+                                                                                <ul class="dropdown-menu dropdown-menu-end">
+                                                                                    <li>
+                                                                                        <!-- <a href="javascript:void(0);" class="btn m-1 btn-light" @click="edit_row(props.row)"> Edit </a> -->
+                                                                                        <router-link to="/editpenjualan" class="dropdown-item" @click="edit_row(props.row)">Edit</router-link>
+                                                                                    </li>
+                                                                                    <li>
+                                                                                        <router-link :to="{ name: 'nosel', params: { id: props.row } }" class="dropdown-item">coba</router-link>
+                                                                                        <!-- <a href="javascript:void(0);" class="btn m-1 btn-light" @click="view_row(props.row)"> Delete </a> -->
+                                                                                    </li>
+                                                                                </ul>
+                                                                            </div>
+                                                                        </template>
+                                                                    </v-client-table>
 
-                                                                            
-                                                                        </div>
-                                                                    </div>
+                                                                    
                                                                 </div>
-                                                                <div class="col-xl-3">
-                                                                    <div class="invoice-actions-btn">
-                                                                        <div class="invoice-action-btn">
-                                                                            <div class="row">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-3">
+                                                            <div class="invoice-actions-btn">
+                                                                <div class="invoice-action-btn">
+                                                                    <div class="row">
 
-                                                                                <div class="col-xl-12 col-md-3 col-sm-6">
-                                                                                    <a href="javascript:;" class="btn btn-secondary btn-print action-print" @click="print()">Print</a>
+                                                                        <div class="col-xl-12 col-md-3 col-sm-6">
+                                                                            <a href="javascript:;" class="btn btn-secondary btn-print action-print" @click="print()">Print</a>
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-3 col-sm-6">
+                                                                            <div class="row mb-4">
+                                                                                <div class="col-sm">
+                                                                                    <label for="inputState">Awal</label>
+                                                                                    <flat-pickr v-model="sorting.startDate" 
+                                                                                        :config="{dateFormat: 'd-m-Y'}"
+                                                                                        class="form-control form-control-sm">
+                                                                                    </flat-pickr>
                                                                                 </div>
-                                                                                <div class="col-xl-12 col-md-3 col-sm-6">
-                                                                                    <div class="row mb-4">
-                                                                                        <div class="col-sm">
-                                                                                            <label for="inputState">Awal</label>
-                                                                                            <flat-pickr v-model="sorting.startDate" 
-                                                                                                :config="{dateFormat: 'd-m-Y'}"
-                                                                                                class="form-control form-control-sm">
-                                                                                            </flat-pickr>
-                                                                                        </div>
-                                                                                        <div class="col-sm">
-                                                                                            <label for="inputState">Akhir</label>
-                                                                                            <flat-pickr v-model="sorting.endDate" 
-                                                                                                :config="{dateFormat: 'd-m-Y'}"
-                                                                                                class="form-control form-control-sm">
-                                                                                            </flat-pickr>
-                                                                                        </div>
-                                                                                    </div>
+                                                                                <div class="col-sm">
+                                                                                    <label for="inputState">Akhir</label>
+                                                                                    <flat-pickr v-model="sorting.endDate" 
+                                                                                        :config="{dateFormat: 'd-m-Y'}"
+                                                                                        class="form-control form-control-sm">
+                                                                                    </flat-pickr>
                                                                                 </div>
-                                                                                <div class="col-xl-12 col-md-3 col-sm-6">
-                                                                                    <a href="javascript:;" @click="cari" class="btn btn-success btn-download">Cari</a>
-                                                                                </div>
-
                                                                             </div>
                                                                         </div>
+                                                                        <div class="col-xl-12 col-md-3 col-sm-6">
+                                                                            <a href="javascript:;" @click="cari" class="btn btn-success btn-download">Cari</a>
+                                                                        </div>
+
                                                                     </div>
                                                                 </div>
-                                                            <!-- </div>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div> -->
-
-
+                                                </div>
                                             </div>
                                         </div>
+
 
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-                
+
+                </div>
+
             </div>
         </div>
     </div>
-</div>
 </template>
 
 <script setup>
     import { onMounted, ref, computed } from 'vue';
 
-    import '@/assets/sass/scrollspyNav.scss';
-    import '@/assets/sass/tables/table-basic.scss';
+    import '@/assets/sass/apps/invoice-add.scss';
 
     import flatPickr from 'vue-flatpickr-component';
     import 'flatpickr/dist/flatpickr.css';
@@ -353,9 +341,9 @@
         endDate: moment().format("D-M-YYYY")
     });
 
-    const bind_list_opnum = () => {
-        store.dispatch('GetLaporanOpnum', sorting.value);
-        // items.value = store.getters.SlaporanBbm;
+    const bind_list_opnum = async () => {
+        await store.dispatch('GetLaporanOpnum', sorting.value);
+        setTimeout(function() { items.value = store.getters.SlaporanBbm; }, 4000);
     }
 
     const bbm = computed(() => {
@@ -422,6 +410,10 @@
         bind_data();
         // item_now.value = ''
         // keterangan.value = ''
+    }
+
+    const cari = () =>{
+        bind_list_opnum();
     }
 
 
