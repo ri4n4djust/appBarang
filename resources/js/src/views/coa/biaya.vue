@@ -53,13 +53,17 @@
                                                             <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
                                                             <td v-else></td>
                                                             <td v-if="hrt.jenis === 'Detail'">
-                                                                <!-- <div v-if="hrt.acc_id.substring(0,1) === '2'|| hrt.acc_id.substring(0,1) === '2'">  -->
-                                                                    {{ Number(amount).toLocaleString() }}
-                                                                <!-- </div>
-                                                                <div>{{ Number(amount += hrt.amount[index]).toLocaleString() }}</div> -->
-                                                                
+                                                                <div v-if="hrt.acc_id.substring(0,1) === '6'|| hrt.acc_id.substring(0,1) === '3' || hrt.acc_id.substring(0,1) === '4' || hrt.acc_id.substring(0,1) === '5'"> 
+                                                                    {{ Number(-1*amount).toLocaleString() }}
+                                                                </div>
+                                                                <div v-else>{{ Number(amount).toLocaleString() }}</div>
                                                             </td>
-                                                            <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
+                                                            <td v-else-if="hrt.jenis === 'Total'"><b>
+                                                                <div v-if="hrt.acc_id.substring(0,1) === '6'|| hrt.acc_id.substring(0,1) === '3' || hrt.acc_id.substring(0,1) === '4' || hrt.acc_id.substring(0,1) === '5'"> 
+                                                                    {{ Number(-1*amount).toLocaleString() }}
+                                                                </div>
+                                                                <div v-else>{{ Number(amount).toLocaleString() }}</div>
+                                                            </b></td>
                                                             <td v-else></td>
                                                         </tr>
                                                         <tr v-if="hrt.level === '2'">
@@ -72,8 +76,18 @@
                                                             <td></td>
                                                             <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
                                                             <td v-else></td>
-                                                            <td v-if="hrt.jenis === 'Detail'">{{ Number(amount).toLocaleString() }}</td>
-                                                            <td v-else-if="hrt.jenis === 'Total'">{{ Number(amount).toLocaleString() }}</td>
+                                                            <td v-if="hrt.jenis === 'Detail'">
+                                                                <div v-if="hrt.acc_id.substring(0,1) === '6'|| hrt.acc_id.substring(0,1) === '3' || hrt.acc_id.substring(0,1) === '4' || hrt.acc_id.substring(0,1) === '5'"> 
+                                                                    {{ Number(-1*amount).toLocaleString() }}
+                                                                </div>
+                                                                <div v-else>{{ Number(amount).toLocaleString() }}</div>
+                                                            </td>
+                                                            <td v-else-if="hrt.jenis === 'Total'">
+                                                                <div v-if="hrt.acc_id.substring(0,1) === '6'|| hrt.acc_id.substring(0,1) === '3' || hrt.acc_id.substring(0,1) === '4' || hrt.acc_id.substring(0,1) === '5'"> 
+                                                                    {{ Number(-1*amount).toLocaleString() }}
+                                                                </div>
+                                                                <div v-else>{{ Number(amount).toLocaleString() }}</div>
+                                                            </td>
                                                             <td v-else></td>
                                                             <td></td>
                                                         </tr>
@@ -86,8 +100,18 @@
                                                             <td v-else style="min-width: 300px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
                                                             <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
                                                             <td v-else></td>
-                                                            <td v-if="hrt.jenis === 'Detail'">{{ Number(amount).toLocaleString() }}</td>
-                                                            <td v-else-if="hrt.jenis === 'Total'">{{ Number(amount).toLocaleString() }}</td>
+                                                            <td v-if="hrt.jenis === 'Detail'">
+                                                                <div v-if="hrt.acc_id.substring(0,1) === '6'|| hrt.acc_id.substring(0,1) === '3' || hrt.acc_id.substring(0,1) === '4' || hrt.acc_id.substring(0,1) === '5'"> 
+                                                                    {{ Number(-1*amount).toLocaleString() }}
+                                                                </div>
+                                                                <div v-else>{{ Number(amount).toLocaleString() }}</div>
+                                                            </td>
+                                                            <td v-else-if="hrt.jenis === 'Total'">
+                                                                <div v-if="hrt.acc_id.substring(0,1) === '6'|| hrt.acc_id.substring(0,1) === '3' || hrt.acc_id.substring(0,1) === '4' || hrt.acc_id.substring(0,1) === '5'"> 
+                                                                    {{ Number(-1*amount).toLocaleString() }}
+                                                                </div>
+                                                                <div v-else>{{ Number(amount).toLocaleString() }}</div>
+                                                            </td>
                                                             <td></td>
                                                             <td></td>
                                                         </tr>
@@ -96,7 +120,12 @@
                                                                 <a href="javascript:void(0);" title="Edit" @click="edit_acc(accid=hrt.acc_id, level=hrt.level, parent=hrt.parent, name=hrt.name, jenis=hrt.jenis)">edit</a>
                                                             </td>
                                                             <td style="min-width: 300px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
-                                                            <td>{{ Number(amount).toLocaleString() }}</td>
+                                                            <td>
+                                                                <div v-if="hrt.acc_id.substring(0,1) === '6'|| hrt.acc_id.substring(0,1) === '3' || hrt.acc_id.substring(0,1) === '4' || hrt.acc_id.substring(0,1) === '5'"> 
+                                                                    {{ Number(-1*amount).toLocaleString() }}
+                                                                </div>
+                                                                <div v-else>{{ Number(amount).toLocaleString() }}</div>
+                                                            </td>
                                                             <td></td>
                                                             <td></td>
                                                             <td></td>
@@ -153,13 +182,25 @@
                                             <a href="javascript:;" class="btn btn-secondary btn-print action-print" @click="print()">Print</a>
                                         </div>
                                         <div class="col-xl-12 col-md-3 col-sm-6">
-                                            <a href="javascript:;" class="btn btn-primary btn-send">Send Invoice</a>
+                                            <div class="row mb-4">
+                                                <div class="col-sm">
+                                                    <label for="inputState">Awal</label>
+                                                    <flat-pickr v-model="sorting.startDate" 
+                                                        :config="{dateFormat: 'd-m-Y'}"
+                                                        class="form-control form-control-sm">
+                                                    </flat-pickr>
+                                                </div>
+                                                <div class="col-sm">
+                                                    <label for="inputState">Akhir</label>
+                                                    <flat-pickr v-model="sorting.endDate" 
+                                                        :config="{dateFormat: 'd-m-Y'}"
+                                                        class="form-control form-control-sm">
+                                                    </flat-pickr>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-xl-12 col-md-3 col-sm-6">
-                                            <a href="javascript:;" class="btn btn-success btn-download">Download</a>
-                                        </div>
-                                        <div class="col-xl-12 col-md-3 col-sm-6">
-                                            <router-link to="/apps/invoice/edit" class="btn btn-dark btn-edit">Edit</router-link>
+                                            <a href="javascript:;" @click="cari" class="btn btn-success btn-download">Cari</a>
                                         </div>
 
                                     </div>
@@ -185,6 +226,10 @@
     import { Modal } from 'usemodal-vue3';
     import moment from "moment";
 
+    import flatPickr from 'vue-flatpickr-component';
+    import 'flatpickr/dist/flatpickr.css';
+    import '@/assets/sass/forms/custom-flatpickr.css';
+
     import { useMeta } from '@/composables/use-meta';
     useMeta({ title: 'BBM' });
     
@@ -204,6 +249,11 @@
         amount: 0
     });
     // const selectedLevel = ref({});
+    const sorting = ref({
+        startDate: moment().subtract(30,'d').format("D-M-YYYY"),
+        endDate: moment().format("D-M-YYYY"),
+        group: '6',
+    });
 
     // const modalRef = ref(null);
     // const openModal = () => Modal.getInstance(modalRef.value)?.show();
@@ -219,7 +269,16 @@
             hartalist.value = store.getters.StateHarta;
         }, 3000);
        
-    })
+    });
+
+    const cari = () => {
+        store.dispatch('GetHarta', sorting.value);
+        // hartalist.value = store.getters.StateHarta;
+        setTimeout(function() { 
+            // store.dispatch('GetCoaList')
+            hartalist.value = store.getters.StateHarta;
+        }, 3000);
+    }
 
     const newacc = computed(() => {
         const accs = store.getters.StateAcc;
