@@ -588,4 +588,8 @@
     const delete_row = (data) => {
         alert(data.kd_trans);
     }
+
+    const cari = () => {
+        getListBiaya();
+    }
 </script>

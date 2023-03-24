@@ -55,8 +55,8 @@ window.$appSetting.init();
 
 import { vfmPlugin } from 'vue-final-modal';
 
-import Vue3EasyDataTable from 'vue3-easy-data-table';
-import 'vue3-easy-data-table/dist/style.css';
+// import Vue3EasyDataTable from 'vue3-easy-data-table';
+// import 'vue3-easy-data-table/dist/style.css';
 
 
 // Axio
@@ -65,4 +65,4 @@ import 'vue3-easy-data-table/dist/style.css';
 // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
-app.use(vfmPlugin).use(store).use(Vue3EasyDataTable).use(router).use(i18n).use(PerfectScrollbar).use(VueNouislider).use(Maska).use(ClientTable).use(vue3JsonExcel).use(VueFormWizard).use(head).mount('#app');
+app.use(vfmPlugin).use(store).use(router).use(i18n).use(PerfectScrollbar).use(VueNouislider).use(Maska).use(ClientTable).use(vue3JsonExcel).use(VueFormWizard).use(head).mount('#app');
