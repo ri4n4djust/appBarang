@@ -153,4 +153,21 @@ class laporanController extends Controller
         ], 200);
     }
     
+
+    public function daftarBbmDatang(Request $request){
+        $startDate = date("Y-m-d", strtotime($request->input('startDate')));
+        $endDate = date("Y-m-d", strtotime($request->input('endDate')));
+
+        $list = DB::table('tblterimabbm_detail')
+                ->join('tblbbm', 'tblbbm.code_bbm', 'tblterimabbm_detail.kd_barang')
+                ->whereBetween('tblterimabbm_detail.tgl_terima', [$startDate, $endDate])
+                ->orderBy("tblterimabbm_detail.r_kdterima", "desc")
+                ->get();
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'List Terima',
+            'data' => $list
+        ], 200);
+    }
 }

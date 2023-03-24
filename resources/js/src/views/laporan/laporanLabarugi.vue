@@ -32,7 +32,7 @@
                                                 <div class="inv--detail-section inv--customer-detail-section">
                                                     
 
-                                                    <div class="table-responsive">
+                                                    <div class="custom-table panel-body p-0">
                                                         <div class="row invoice layout-top-spacing layout-spacing apps-invoice"></div>
                                                         <!-- <div class="table-responsive"> -->
                                                             <table border="1" cellspacing="3">

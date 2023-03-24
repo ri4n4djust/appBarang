@@ -171,7 +171,7 @@
                                                     <div class="row">
                                                         <div class="col-xl-9">
                                                             <div class="invoice-container">
-                                                                <div class="table-responsive">
+                                                                <div class="custom-table panel-body p-0">
 
                                                                     <v-client-table :data="items" :columns="columns" :options="table_option">
                                                                         <template #tglOpnum="props"> {{ moment(props.row.tglOpnum).format("DD-MM-YYYY") }} </template>

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 24, 2023 at 01:11 AM
--- Server version: 8.0.32
--- PHP Version: 8.0.25
+-- Generation Time: Mar 24, 2023 at 06:51 AM
+-- Server version: 8.0.30
+-- PHP Version: 8.0.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -62,61 +62,61 @@ INSERT INTO `coa` (`id`, `idparent1`, `parent1`, `parent1level`, `parent1type`, 
 (9, '40000', 'PENDAPATAN', '1', 'H', '42000', 'SEWA', '2', 'H', '42000', 'SEWA', '2', 'H', '42000', 'SEWA', 'H'),
 (10, '50000', 'BIAYA PENJUALAN', '1', 'H', '51000', 'HPP PENJUALAN', '2', 'H', '51000', 'HPP PENJUALAN', '2', 'H', '51000', 'HPP PENJUALAN', 'H'),
 (11, '50000', 'BIAYA PENJUALAN', '1', 'H', '52000', 'TEKOR', '2', 'H', '52000', 'TEKOR', '2', 'H', '52000', 'TEKOR', 'H'),
-(12, '10000', 'HARTA', '1', 'H', '12000', 'ASET TETAP', '2', 'H', '12400', 'KENDARAAN', '3', 'D', '12400', 'KENDARAAN', 'D'),
-(13, '10000', 'HARTA', '1', 'H', '12000', 'ASET TETAP', '2', 'H', '12300', 'PERALATAN DAN MESIN', '3', 'D', '12300', 'PERALATAN DAN MESIN', 'D'),
-(14, '10000', 'HARTA', '1', 'H', '12000', 'ASET TETAP', '2', 'H', '12200', 'GEDUNG DAN BANGUNAN', '3', 'D', '12200', 'GEDUNG DAN BANGUNAN', 'D'),
+(12, '20000', 'KEWAJIBAN', '1', 'H', '23000', 'HUTANG PAJAK', '2', 'H', '23100', 'HUTANG PAJAK PPH FINAL', '3', 'D', '23100', 'HUTANG PAJAK PPH FINAL', 'D'),
+(13, '20000', 'KEWAJIBAN', '1', 'H', '21000', 'KEWAJIBAN JANGKA PENDEK', '2', 'H', '21300', 'BIAYA YANG MASIH HARUS DIBAYAR', '3', 'D', '21300', 'BIAYA YANG MASIH HARUS DIBAYAR', 'D'),
+(14, '30000', 'EKUITAS', '1', 'H', '32000', 'MODAL', '2', 'H', '32200', 'MODAL YANG DI SETOR', '3', 'D', '32200', 'MODAL YANG DI SETOR', 'D'),
 (15, '10000', 'HARTA', '1', 'H', '12000', 'ASET TETAP', '2', 'H', '12100', 'TANAH', '3', 'D', '12100', 'TANAH', 'D'),
-(16, '20000', 'KEWAJIBAN', '1', 'H', '21000', 'KEWAJIBAN JANGKA PENDEK', '2', 'H', '21600', 'HUTANG LAINNYA', '3', 'D', '21600', 'HUTANG LAINNYA', 'D'),
-(17, '20000', 'KEWAJIBAN', '1', 'H', '21000', 'KEWAJIBAN JANGKA PENDEK', '2', 'H', '21500', 'HUTANG BEBAN', '3', 'D', '21500', 'HUTANG BEBAN', 'D'),
-(18, '20000', 'KEWAJIBAN', '1', 'H', '21000', 'KEWAJIBAN JANGKA PENDEK', '2', 'H', '21400', 'HUTANG LAINNYA', '3', 'D', '21400', 'HUTANG LAINNYA', 'D'),
-(19, '20000', 'KEWAJIBAN', '1', 'H', '21000', 'KEWAJIBAN JANGKA PENDEK', '2', 'H', '21200', 'PENDAPATAN DITERIMA DIMUKA', '3', 'D', '21200', 'PENDAPATAN DITERIMA DIMUKA', 'D'),
-(20, '20000', 'KEWAJIBAN', '1', 'H', '21000', 'KEWAJIBAN JANGKA PENDEK', '2', 'H', '21100', 'HUTANG USAHA', '3', 'D', '21100', 'HUTANG USAHA', 'D'),
-(21, '20000', 'KEWAJIBAN', '1', 'H', '21000', 'KEWAJIBAN JANGKA PENDEK', '2', 'H', '21300', 'BIAYA YANG MASIH HARUS DIBAYAR', '3', 'D', '21300', 'BIAYA YANG MASIH HARUS DIBAYAR', 'D'),
-(22, '20000', 'KEWAJIBAN', '1', 'H', '23000', 'HUTANG PAJAK', '2', 'H', '23100', 'HUTANG PAJAK PPH FINAL', '3', 'D', '23100', 'HUTANG PAJAK PPH FINAL', 'D'),
-(23, '30000', 'EKUITAS', '1', 'H', '32000', 'MODAL', '2', 'H', '32300', 'LABA DI TAHAN', '3', 'D', '32300', 'LABA DI TAHAN', 'D'),
-(24, '30000', 'EKUITAS', '1', 'H', '32000', 'MODAL', '2', 'H', '32200', 'MODAL YANG DI SETOR', '3', 'D', '32200', 'MODAL YANG DI SETOR', 'D'),
-(25, '40000', 'PENDAPATAN', '1', 'H', '41000', 'PENJUALAN', '2', 'H', '41500', 'PENJUALAN OLI', '3', 'D', '41500', 'PENJUALAN OLI', 'D'),
-(26, '40000', 'PENDAPATAN', '1', 'H', '41000', 'PENJUALAN', '2', 'H', '41400', 'PENJUALAN GAS', '3', 'D', '41400', 'PENJUALAN GAS', 'D'),
-(27, '40000', 'PENDAPATAN', '1', 'H', '41000', 'PENJUALAN', '2', 'H', '41100', 'PENJUALAN PERTAMAX', '3', 'D', '41100', 'PENJUALAN PERTAMAX', 'D'),
-(28, '40000', 'PENDAPATAN', '1', 'H', '42000', 'SEWA', '2', 'H', '42805', 'DISKON PEMBELIAN', '3', 'D', '42805', 'DISKON PEMBELIAN', 'D'),
-(29, '40000', 'PENDAPATAN', '1', 'H', '42000', 'SEWA', '2', 'H', '42801', 'SEWA ATM', '3', 'D', '42801', 'SEWA ATM', 'D'),
-(30, '40000', 'PENDAPATAN', '1', 'H', '41000', 'PENJUALAN', '2', 'H', '41300', 'PENJUALAN DEXLITE', '3', 'D', '41300', 'PENJUALAN DEXLITE', 'D'),
-(31, '40000', 'PENDAPATAN', '1', 'H', '41000', 'PENJUALAN', '2', 'H', '41200', 'PENJUALAN PERTALITE', '3', 'D', '41200', 'PENJUALAN PERTALITE', 'D'),
-(32, '50000', 'BIAYA PENJUALAN', '1', 'H', '52000', 'TEKOR', '2', 'H', '52500', 'TEKOR OLI', '3', 'D', '52500', 'TEKOR OLI', 'D'),
-(33, '50000', 'BIAYA PENJUALAN', '1', 'H', '52000', 'TEKOR', '2', 'H', '52400', 'TEKOR GAS', '3', 'D', '52400', 'TEKOR GAS', 'D'),
-(34, '50000', 'BIAYA PENJUALAN', '1', 'H', '52000', 'TEKOR', '2', 'H', '52300', 'TEKOR DEX LITE', '3', 'D', '52300', 'TEKOR DEX LITE', 'D'),
-(35, '50000', 'BIAYA PENJUALAN', '1', 'H', '52000', 'TEKOR', '2', 'H', '52200', 'TEKOR PERTALITE', '3', 'D', '52200', 'TEKOR PERTALITE', 'D'),
+(16, '10000', 'HARTA', '1', 'H', '12000', 'ASET TETAP', '2', 'H', '12200', 'GEDUNG DAN BANGUNAN', '3', 'D', '12200', 'GEDUNG DAN BANGUNAN', 'D'),
+(17, '10000', 'HARTA', '1', 'H', '12000', 'ASET TETAP', '2', 'H', '12300', 'PERALATAN DAN MESIN', '3', 'D', '12300', 'PERALATAN DAN MESIN', 'D'),
+(18, '10000', 'HARTA', '1', 'H', '12000', 'ASET TETAP', '2', 'H', '12400', 'KENDARAAN', '3', 'D', '12400', 'KENDARAAN', 'D'),
+(19, '20000', 'KEWAJIBAN', '1', 'H', '21000', 'KEWAJIBAN JANGKA PENDEK', '2', 'H', '21100', 'HUTANG USAHA', '3', 'D', '21100', 'HUTANG USAHA', 'D'),
+(20, '20000', 'KEWAJIBAN', '1', 'H', '21000', 'KEWAJIBAN JANGKA PENDEK', '2', 'H', '21200', 'PENDAPATAN DITERIMA DIMUKA', '3', 'D', '21200', 'PENDAPATAN DITERIMA DIMUKA', 'D'),
+(21, '20000', 'KEWAJIBAN', '1', 'H', '21000', 'KEWAJIBAN JANGKA PENDEK', '2', 'H', '21400', 'HUTANG LAINNYA', '3', 'D', '21400', 'HUTANG LAINNYA', 'D'),
+(22, '20000', 'KEWAJIBAN', '1', 'H', '21000', 'KEWAJIBAN JANGKA PENDEK', '2', 'H', '21500', 'HUTANG BEBAN', '3', 'D', '21500', 'HUTANG BEBAN', 'D'),
+(23, '20000', 'KEWAJIBAN', '1', 'H', '21000', 'KEWAJIBAN JANGKA PENDEK', '2', 'H', '21600', 'HUTANG LAINNYA', '3', 'D', '21600', 'HUTANG LAINNYA', 'D'),
+(24, '40000', 'PENDAPATAN', '1', 'H', '41000', 'PENJUALAN', '2', 'H', '41200', 'PENJUALAN PERTALITE', '3', 'D', '41200', 'PENJUALAN PERTALITE', 'D'),
+(25, '40000', 'PENDAPATAN', '1', 'H', '41000', 'PENJUALAN', '2', 'H', '41300', 'PENJUALAN DEXLITE', '3', 'D', '41300', 'PENJUALAN DEXLITE', 'D'),
+(26, '40000', 'PENDAPATAN', '1', 'H', '42000', 'SEWA', '2', 'H', '42801', 'SEWA ATM', '3', 'D', '42801', 'SEWA ATM', 'D'),
+(27, '40000', 'PENDAPATAN', '1', 'H', '42000', 'SEWA', '2', 'H', '42805', 'DISKON PEMBELIAN', '3', 'D', '42805', 'DISKON PEMBELIAN', 'D'),
+(28, '40000', 'PENDAPATAN', '1', 'H', '41000', 'PENJUALAN', '2', 'H', '41100', 'PENJUALAN PERTAMAX', '3', 'D', '41100', 'PENJUALAN PERTAMAX', 'D'),
+(29, '40000', 'PENDAPATAN', '1', 'H', '41000', 'PENJUALAN', '2', 'H', '41400', 'PENJUALAN GAS', '3', 'D', '41400', 'PENJUALAN GAS', 'D'),
+(30, '40000', 'PENDAPATAN', '1', 'H', '41000', 'PENJUALAN', '2', 'H', '41500', 'PENJUALAN OLI', '3', 'D', '41500', 'PENJUALAN OLI', 'D'),
+(31, '50000', 'BIAYA PENJUALAN', '1', 'H', '51000', 'HPP PENJUALAN', '2', 'H', '51100', 'HPP PERTAMAX', '3', 'D', '51100', 'HPP PERTAMAX', 'D'),
+(32, '50000', 'BIAYA PENJUALAN', '1', 'H', '52000', 'TEKOR', '2', 'H', '52100', 'TEKOR PERTAMAX', '3', 'D', '52100', 'TEKOR PERTAMAX', 'D'),
+(33, '50000', 'BIAYA PENJUALAN', '1', 'H', '51000', 'HPP PENJUALAN', '2', 'H', '51200', 'HPP PERTALITE', '3', 'D', '51200', 'HPP PERTALITE', 'D'),
+(34, '50000', 'BIAYA PENJUALAN', '1', 'H', '51000', 'HPP PENJUALAN', '2', 'H', '51300', 'HPP DEX LITE', '3', 'D', '51300', 'HPP DEX LITE', 'D'),
+(35, '50000', 'BIAYA PENJUALAN', '1', 'H', '51000', 'HPP PENJUALAN', '2', 'H', '51400', 'HPP GAS', '3', 'D', '51400', 'HPP GAS', 'D'),
 (36, '50000', 'BIAYA PENJUALAN', '1', 'H', '51000', 'HPP PENJUALAN', '2', 'H', '51500', 'HPP OLI', '3', 'D', '51500', 'HPP OLI', 'D'),
-(37, '50000', 'BIAYA PENJUALAN', '1', 'H', '51000', 'HPP PENJUALAN', '2', 'H', '51400', 'HPP GAS', '3', 'D', '51400', 'HPP GAS', 'D'),
-(38, '50000', 'BIAYA PENJUALAN', '1', 'H', '51000', 'HPP PENJUALAN', '2', 'H', '51300', 'HPP DEX LITE', '3', 'D', '51300', 'HPP DEX LITE', 'D'),
-(39, '50000', 'BIAYA PENJUALAN', '1', 'H', '51000', 'HPP PENJUALAN', '2', 'H', '51200', 'HPP PERTALITE', '3', 'D', '51200', 'HPP PERTALITE', 'D'),
-(40, '50000', 'BIAYA PENJUALAN', '1', 'H', '52000', 'TEKOR', '2', 'H', '52100', 'TEKOR PERTAMAX', '3', 'D', '52100', 'TEKOR PERTAMAX', 'D'),
-(41, '50000', 'BIAYA PENJUALAN', '1', 'H', '51000', 'HPP PENJUALAN', '2', 'H', '51100', 'HPP PERTAMAX', '3', 'D', '51100', 'HPP PERTAMAX', 'D'),
-(42, '10000', 'HARTA', '1', 'H', '11000', 'ASET LANCAR', '2', 'H', '11400', 'PERSEDIAAN LAINNYA', '3', 'H', '11403', 'PERSEDIAAN MATERAI', 'D'),
-(43, '10000', 'HARTA', '1', 'H', '11000', 'ASET LANCAR', '2', 'H', '11400', 'PERSEDIAAN LAINNYA', '3', 'H', '11402', 'PERSEDIAAN ATK', 'D'),
-(44, '10000', 'HARTA', '1', 'H', '11000', 'ASET LANCAR', '2', 'H', '11400', 'PERSEDIAAN LAINNYA', '3', 'H', '11401', 'PERSEDIAAN DI BAYAR DIMUKA', 'D'),
-(45, '10000', 'HARTA', '1', 'H', '11000', 'ASET LANCAR', '2', 'H', '11200', 'KAS BANK', '3', 'H', '11210', 'BANK BNI', 'D'),
-(46, '10000', 'HARTA', '1', 'H', '11000', 'ASET LANCAR', '2', 'H', '11100', 'KAS DAN SETARA KAS', '3', 'H', '11110', 'KAS', 'D'),
-(47, '10000', 'HARTA', '1', 'H', '11000', 'ASET LANCAR', '2', 'H', '11600', 'PERSEDIAAN', '3', 'H', '11605', 'PERSEDIAAN OLI', 'D'),
-(48, '10000', 'HARTA', '1', 'H', '11000', 'ASET LANCAR', '2', 'H', '11600', 'PERSEDIAAN', '3', 'H', '11604', 'PERSEDIAAN GAS', 'D'),
-(49, '10000', 'HARTA', '1', 'H', '12000', 'ASET TETAP', '2', 'H', '12500', 'AKUMULASI PENYUSUTAN', '3', 'H', '12503', 'AKP. KENDARAAN', 'D'),
-(50, '10000', 'HARTA', '1', 'H', '12000', 'ASET TETAP', '2', 'H', '12500', 'AKUMULASI PENYUSUTAN', '3', 'H', '12501', 'AKP. PERALATAN DAN MESIN', 'D'),
-(51, '10000', 'HARTA', '1', 'H', '12000', 'ASET TETAP', '2', 'H', '12500', 'AKUMULASI PENYUSUTAN', '3', 'H', '12502', 'AKP. BANGUNAN DAN GEDUNG', 'D'),
-(52, '10000', 'HARTA', '1', 'H', '11000', 'ASET LANCAR', '2', 'H', '11600', 'PERSEDIAAN', '3', 'H', '11603', 'PERSEDIAAN DEX LITE', 'D'),
-(53, '10000', 'HARTA', '1', 'H', '11000', 'ASET LANCAR', '2', 'H', '11600', 'PERSEDIAAN', '3', 'H', '11602', 'PERSEDIAAN PERTALITE', 'D'),
-(54, '10000', 'HARTA', '1', 'H', '11000', 'ASET LANCAR', '2', 'H', '11600', 'PERSEDIAAN', '3', 'H', '11601', 'PERSEDIAAN PERTAMAX', 'D'),
-(55, '20000', 'KEWAJIBAN', '1', 'H', '23000', 'HUTANG PAJAK', '2', 'H', '23200', 'HUTANG PPN', '3', 'H', '23220', 'PPN KELUARAN', 'D'),
-(56, '20000', 'KEWAJIBAN', '1', 'H', '23000', 'HUTANG PAJAK', '2', 'H', '23200', 'HUTANG PPN', '3', 'H', '23210', 'PPN MASUKAN', 'D'),
-(57, '60000', 'PENGELUARAN', '1', 'H', '61000', 'BELANJA OPERASIONAL', '2', 'H', '61100', 'BELANJA BEDAN', '3', 'H', '61103', 'BEBAN PENYUSUTAN ASET', 'D'),
-(58, '60000', 'PENGELUARAN', '1', 'H', '61000', 'BELANJA OPERASIONAL', '2', 'H', '61100', 'BELANJA BEDAN', '3', 'H', '61102', 'BEBAN LISTRIK DAN AIR', 'D'),
-(59, '60000', 'PENGELUARAN', '1', 'H', '61000', 'BELANJA OPERASIONAL', '2', 'H', '61100', 'BELANJA BEDAN', '3', 'H', '61101', 'BEBAN GAJI', 'D'),
+(37, '50000', 'BIAYA PENJUALAN', '1', 'H', '52000', 'TEKOR', '2', 'H', '52200', 'TEKOR PERTALITE', '3', 'D', '52200', 'TEKOR PERTALITE', 'D'),
+(38, '50000', 'BIAYA PENJUALAN', '1', 'H', '52000', 'TEKOR', '2', 'H', '52300', 'TEKOR DEX LITE', '3', 'D', '52300', 'TEKOR DEX LITE', 'D'),
+(39, '50000', 'BIAYA PENJUALAN', '1', 'H', '52000', 'TEKOR', '2', 'H', '52400', 'TEKOR GAS', '3', 'D', '52400', 'TEKOR GAS', 'D'),
+(40, '50000', 'BIAYA PENJUALAN', '1', 'H', '52000', 'TEKOR', '2', 'H', '52500', 'TEKOR OLI', '3', 'D', '52500', 'TEKOR OLI', 'D'),
+(41, '30000', 'EKUITAS', '1', 'H', '32000', 'MODAL', '2', 'H', '32300', 'LABA DI TAHAN', '3', 'D', '32300', 'LABA DI TAHAN', 'D'),
+(42, '20000', 'KEWAJIBAN', '1', 'H', '23000', 'HUTANG PAJAK', '2', 'H', '23200', 'HUTANG PPN', '3', 'H', '23210', 'PPN MASUKAN', 'D'),
+(43, '20000', 'KEWAJIBAN', '1', 'H', '23000', 'HUTANG PAJAK', '2', 'H', '23200', 'HUTANG PPN', '3', 'H', '23220', 'PPN KELUARAN', 'D'),
+(44, '60000', 'PENGELUARAN', '1', 'H', '62000', 'BIAYA LAINNYA', '2', 'H', '62200', 'BIAYA LAIN-LAIN', '3', 'H', '62203', 'BIAYA MATERAI', 'D'),
+(45, '60000', 'PENGELUARAN', '1', 'H', '62000', 'BIAYA LAINNYA', '2', 'H', '62200', 'BIAYA LAIN-LAIN', '3', 'H', '62201', 'BIAYA BANTEN', 'D'),
+(46, '60000', 'PENGELUARAN', '1', 'H', '62000', 'BIAYA LAINNYA', '2', 'H', '62200', 'BIAYA LAIN-LAIN', '3', 'H', '62204', 'BIAYA LAIN-LAIN', 'D'),
+(47, '10000', 'HARTA', '1', 'H', '11000', 'ASET LANCAR', '2', 'H', '11600', 'PERSEDIAAN', '3', 'H', '11601', 'PERSEDIAAN PERTAMAX', 'D'),
+(48, '10000', 'HARTA', '1', 'H', '11000', 'ASET LANCAR', '2', 'H', '11600', 'PERSEDIAAN', '3', 'H', '11602', 'PERSEDIAAN PERTALITE', 'D'),
+(49, '10000', 'HARTA', '1', 'H', '11000', 'ASET LANCAR', '2', 'H', '11600', 'PERSEDIAAN', '3', 'H', '11603', 'PERSEDIAAN DEX LITE', 'D'),
+(50, '10000', 'HARTA', '1', 'H', '12000', 'ASET TETAP', '2', 'H', '12500', 'AKUMULASI PENYUSUTAN', '3', 'H', '12502', 'AKP. BANGUNAN DAN GEDUNG', 'D'),
+(51, '10000', 'HARTA', '1', 'H', '12000', 'ASET TETAP', '2', 'H', '12500', 'AKUMULASI PENYUSUTAN', '3', 'H', '12501', 'AKP. PERALATAN DAN MESIN', 'D'),
+(52, '60000', 'PENGELUARAN', '1', 'H', '61000', 'BELANJA OPERASIONAL', '2', 'H', '61200', 'BELANJA BARANG DAN JASA', '3', 'H', '61201', 'BELANJA PAKAIAN KARYAWAN', 'D'),
+(53, '60000', 'PENGELUARAN', '1', 'H', '61000', 'BELANJA OPERASIONAL', '2', 'H', '61200', 'BELANJA BARANG DAN JASA', '3', 'H', '61202', 'BELANJA ASURANSI', 'D'),
+(54, '10000', 'HARTA', '1', 'H', '12000', 'ASET TETAP', '2', 'H', '12500', 'AKUMULASI PENYUSUTAN', '3', 'H', '12503', 'AKP. KENDARAAN', 'D'),
+(55, '10000', 'HARTA', '1', 'H', '11000', 'ASET LANCAR', '2', 'H', '11600', 'PERSEDIAAN', '3', 'H', '11604', 'PERSEDIAAN GAS', 'D'),
+(56, '10000', 'HARTA', '1', 'H', '11000', 'ASET LANCAR', '2', 'H', '11600', 'PERSEDIAAN', '3', 'H', '11605', 'PERSEDIAAN OLI', 'D'),
+(57, '60000', 'PENGELUARAN', '1', 'H', '61000', 'BELANJA OPERASIONAL', '2', 'H', '61200', 'BELANJA BARANG DAN JASA', '3', 'H', '61203', 'BELANJA PEMELIHARAAN', 'D'),
+(58, '10000', 'HARTA', '1', 'H', '11000', 'ASET LANCAR', '2', 'H', '11100', 'KAS DAN SETARA KAS', '3', 'H', '11110', 'KAS', 'D'),
+(59, '10000', 'HARTA', '1', 'H', '11000', 'ASET LANCAR', '2', 'H', '11200', 'KAS BANK', '3', 'H', '11210', 'BANK BNI', 'D'),
 (60, '60000', 'PENGELUARAN', '1', 'H', '62000', 'BIAYA LAINNYA', '2', 'H', '62200', 'BIAYA LAIN-LAIN', '3', 'H', '62202', 'BIAYA KONSUMSI', 'D'),
-(61, '60000', 'PENGELUARAN', '1', 'H', '61000', 'BELANJA OPERASIONAL', '2', 'H', '61200', 'BELANJA BARANG DAN JASA', '3', 'H', '61203', 'BELANJA PEMELIHARAAN', 'D'),
-(62, '60000', 'PENGELUARAN', '1', 'H', '61000', 'BELANJA OPERASIONAL', '2', 'H', '61200', 'BELANJA BARANG DAN JASA', '3', 'H', '61202', 'BELANJA ASURANSI', 'D'),
-(63, '60000', 'PENGELUARAN', '1', 'H', '61000', 'BELANJA OPERASIONAL', '2', 'H', '61200', 'BELANJA BARANG DAN JASA', '3', 'H', '61201', 'BELANJA PAKAIAN KARYAWAN', 'D'),
-(64, '60000', 'PENGELUARAN', '1', 'H', '62000', 'BIAYA LAINNYA', '2', 'H', '62200', 'BIAYA LAIN-LAIN', '3', 'H', '62204', 'BIAYA LAIN-LAIN', 'D'),
-(65, '60000', 'PENGELUARAN', '1', 'H', '62000', 'BIAYA LAINNYA', '2', 'H', '62200', 'BIAYA LAIN-LAIN', '3', 'H', '62201', 'BIAYA BANTEN', 'D'),
-(66, '60000', 'PENGELUARAN', '1', 'H', '62000', 'BIAYA LAINNYA', '2', 'H', '62200', 'BIAYA LAIN-LAIN', '3', 'H', '62203', 'BIAYA MATERAI', 'D');
+(61, '60000', 'PENGELUARAN', '1', 'H', '61000', 'BELANJA OPERASIONAL', '2', 'H', '61100', 'BELANJA BEDAN', '3', 'H', '61101', 'BEBAN GAJI', 'D'),
+(62, '60000', 'PENGELUARAN', '1', 'H', '61000', 'BELANJA OPERASIONAL', '2', 'H', '61100', 'BELANJA BEDAN', '3', 'H', '61102', 'BEBAN LISTRIK DAN AIR', 'D'),
+(63, '60000', 'PENGELUARAN', '1', 'H', '61000', 'BELANJA OPERASIONAL', '2', 'H', '61100', 'BELANJA BEDAN', '3', 'H', '61103', 'BEBAN PENYUSUTAN ASET', 'D'),
+(64, '10000', 'HARTA', '1', 'H', '11000', 'ASET LANCAR', '2', 'H', '11400', 'PERSEDIAAN LAINNYA', '3', 'H', '11401', 'PERSEDIAAN DI BAYAR DIMUKA', 'D'),
+(65, '10000', 'HARTA', '1', 'H', '11000', 'ASET LANCAR', '2', 'H', '11400', 'PERSEDIAAN LAINNYA', '3', 'H', '11402', 'PERSEDIAAN ATK', 'D'),
+(66, '10000', 'HARTA', '1', 'H', '11000', 'ASET LANCAR', '2', 'H', '11400', 'PERSEDIAAN LAINNYA', '3', 'H', '11403', 'PERSEDIAAN MATERAI', 'D');
 
 -- --------------------------------------------------------
 
@@ -218,7 +218,15 @@ INSERT INTO `general_ledger` (`id`, `notrans`, `order_no`, `invoice_no`, `r_angg
 (131, 'GJ000060', 'BR0320233', '0', 99999, 1, 'general_ledger', '2023-03-22 00:00:00', '21800000.00', 'BBM-Datang', 'JK', '01020', 'Comp-Loc', '0', '0', '0', '0', 0, 0, 0, 'user', 'uerr', '2023-03-22 18:41:18', '2023-03-22 18:41:18'),
 (132, 'GJ000061', 'BR0320233', '0', 99999, 1, 'general_ledger', '2023-03-22 00:00:00', '26000000.00', 'BBM-Datang', 'JK', '01020', 'Comp-Loc', '0', '0', '0', '0', 0, 0, 0, 'user', 'uerr', '2023-03-22 18:41:18', '2023-03-22 18:41:18'),
 (133, 'GJ000062', 'GJ2303000001', '0', 99999, 1, 'general_ledger', '2023-03-22 00:00:00', '0.00', 'yy', 'GJ', '01020', 'Comp-Loc', '0', '0', '0', '0', 0, 0, 0, 'user', 'uerr', '2023-03-22 19:49:57', '2023-03-22 19:49:57'),
-(134, 'GJ000063', 'GJ2303000001', '0', 99999, 1, 'general_ledger', '2023-03-22 00:00:00', '200000.00', 'penyusutan', 'GJ', '01020', 'Comp-Loc', '0', '0', '0', '0', 0, 0, 0, 'user', 'uerr', '2023-03-22 19:51:58', '2023-03-22 19:51:58');
+(134, 'GJ000063', 'GJ2303000001', '0', 99999, 1, 'general_ledger', '2023-03-22 00:00:00', '200000.00', 'penyusutan', 'GJ', '01020', 'Comp-Loc', '0', '0', '0', '0', 0, 0, 0, 'user', 'uerr', '2023-03-22 19:51:58', '2023-03-22 19:51:58'),
+(135, 'GJ000064', 'PO0320233', '0', 99999, 1, 'general_ledger', '2023-03-24 00:00:00', '37500000.00', 'PO-BBM', 'JK', '01020', 'Comp-Loc', '0', '0', '0', '0', 0, 0, 0, 'user', 'uerr', '2023-03-24 12:14:32', '2023-03-24 12:14:32'),
+(136, 'GJ000065', 'PO0320233', '0', 99999, 1, 'general_ledger', '2023-03-24 00:00:00', '19000000.00', 'PO-BBM', 'JK', '01020', 'Comp-Loc', '0', '0', '0', '0', 0, 0, 0, 'user', 'uerr', '2023-03-24 12:14:32', '2023-03-24 12:14:32'),
+(137, 'GJ000066', 'BR0320234', '0', 99999, 1, 'general_ledger', '2023-03-24 00:00:00', '12500000.00', 'BBM-Datang', 'JK', '01020', 'Comp-Loc', '0', '0', '0', '0', 0, 0, 0, 'user', 'uerr', '2023-03-24 12:23:46', '2023-03-24 12:23:46'),
+(138, 'GJ000067', 'BR0320234', '0', 99999, 1, 'general_ledger', '2023-03-24 00:00:00', '9500000.00', 'BBM-Datang', 'JK', '01020', 'Comp-Loc', '0', '0', '0', '0', 0, 0, 0, 'user', 'uerr', '2023-03-24 12:23:46', '2023-03-24 12:23:46'),
+(139, 'GJ000068', 'PO0320231', '0', 99999, 1, 'general_ledger', '2023-03-24 00:00:00', '37500000.00', 'PO-BBM', 'JK', '01020', 'Comp-Loc', '0', '0', '0', '0', 0, 0, 0, 'user', 'uerr', '2023-03-24 13:58:56', '2023-03-24 13:58:56'),
+(140, 'GJ000069', 'PO0320231', '0', 99999, 1, 'general_ledger', '2023-03-24 00:00:00', '21000000.00', 'PO-BBM', 'JK', '01020', 'Comp-Loc', '0', '0', '0', '0', 0, 0, 0, 'user', 'uerr', '2023-03-24 13:58:56', '2023-03-24 13:58:56'),
+(141, 'GJ000070', 'BR0320235', '0', 99999, 1, 'general_ledger', '2023-03-24 00:00:00', '12500000.00', 'BBM-Datang', 'JK', '01020', 'Comp-Loc', '0', '0', '0', '0', 0, 0, 0, 'user', 'uerr', '2023-03-24 13:59:32', '2023-03-24 13:59:32'),
+(142, 'GJ000071', 'BR0320235', '0', 99999, 1, 'general_ledger', '2023-03-24 00:00:00', '10500000.00', 'BBM-Datang', 'JK', '01020', 'Comp-Loc', '0', '0', '0', '0', 0, 0, 0, 'user', 'uerr', '2023-03-24 13:59:32', '2023-03-24 13:59:32');
 
 -- --------------------------------------------------------
 
@@ -237,36 +245,8 @@ CREATE TABLE `gl` (
 --
 
 INSERT INTO `gl` (`id`, `acc_id`, `amount`) VALUES
-(1, '11110', '8235000.00'),
-(2, '32200', '-97000000.00'),
-(3, '21200', '-375000.00'),
-(4, '11401', '0.00'),
-(5, '11601', '47475000.00'),
-(6, '11602', '-1992400.00'),
-(7, '11603', '48048000.00'),
-(8, '62201', '-20000.00'),
-(9, '32300', '-6122600.00'),
-(10, '61202', '-30000.00'),
-(11, '11604', '962000.00'),
-(12, '11605', '570000.00'),
-(13, '51100', '2500000.00'),
-(14, '41100', '2980000.00'),
-(15, '51200', '45360000.00'),
-(16, '41200', '49980000.00'),
-(17, '51300', '3900000.00'),
-(18, '41300', '5340000.00'),
-(19, '41400', '44000.00'),
-(20, '51400', '36000.00'),
-(21, '62204', '-75000.00'),
-(22, '52100', '25000.00'),
-(23, '52200', '32400.00'),
-(24, '52300', '52000.00'),
-(25, '52400', '146000.00'),
-(26, '52500', '45000.00'),
-(27, '21100', '0.00'),
-(28, '12502', '200000.00'),
-(29, '38100', '110315400.00'),
-(30, '38999', NULL);
+(1, '38100', '0.00'),
+(2, '38999', NULL);
 
 -- --------------------------------------------------------
 
@@ -414,7 +394,23 @@ INSERT INTO `gl_detail` (`id`, `rgl`, `acc_id`, `debet`, `kredit`, `trans_detail
 (485, 'GJ000061', 11401, '0.00', '26000000.00', 'BBM-Datang', 0, '2023-03-22 17:41:18', '2023-03-22 17:41:18'),
 (486, 'GJ000062', 21100, '0.00', '0.00', 'Jurnal-Umum', 0, '2023-03-22 18:49:57', '2023-03-22 18:49:57'),
 (487, 'GJ000063', 12502, '200000.00', '0.00', 'Jurnal-Umum', 0, '2023-03-22 18:51:58', '2023-03-22 18:51:58'),
-(488, 'GJ000063', 11110, '0.00', '200000.00', 'Jurnal-Umum', 0, '2023-03-22 18:51:58', '2023-03-22 18:51:58');
+(488, 'GJ000063', 11110, '0.00', '200000.00', 'Jurnal-Umum', 0, '2023-03-22 18:51:58', '2023-03-22 18:51:58'),
+(489, 'GJ000064', 11401, '37500000.00', '0.00', 'PO-BBM', 0, '2023-03-24 11:14:32', '2023-03-24 11:14:32'),
+(490, 'GJ000064', 11110, '0.00', '37500000.00', 'PO-BBM', 0, '2023-03-24 11:14:32', '2023-03-24 11:14:32'),
+(491, 'GJ000065', 11401, '19000000.00', '0.00', 'PO-BBM', 0, '2023-03-24 11:14:32', '2023-03-24 11:14:32'),
+(492, 'GJ000065', 11110, '0.00', '19000000.00', 'PO-BBM', 0, '2023-03-24 11:14:32', '2023-03-24 11:14:32'),
+(493, 'GJ000066', 11601, '12500000.00', '0.00', 'BBM-Datang', 0, '2023-03-24 11:23:46', '2023-03-24 11:23:46'),
+(494, 'GJ000066', 11401, '0.00', '12500000.00', 'BBM-Datang', 0, '2023-03-24 11:23:46', '2023-03-24 11:23:46'),
+(495, 'GJ000067', 11602, '9500000.00', '0.00', 'BBM-Datang', 0, '2023-03-24 11:23:46', '2023-03-24 11:23:46'),
+(496, 'GJ000067', 11401, '0.00', '9500000.00', 'BBM-Datang', 0, '2023-03-24 11:23:46', '2023-03-24 11:23:46'),
+(497, 'GJ000068', 11401, '37500000.00', '0.00', 'PO-BBM', 0, '2023-03-24 12:58:56', '2023-03-24 12:58:56'),
+(498, 'GJ000068', 11110, '0.00', '37500000.00', 'PO-BBM', 0, '2023-03-24 12:58:56', '2023-03-24 12:58:56'),
+(499, 'GJ000069', 11401, '21000000.00', '0.00', 'PO-BBM', 0, '2023-03-24 12:58:56', '2023-03-24 12:58:56'),
+(500, 'GJ000069', 11110, '0.00', '21000000.00', 'PO-BBM', 0, '2023-03-24 12:58:56', '2023-03-24 12:58:56'),
+(501, 'GJ000070', 11601, '12500000.00', '0.00', 'BBM-Datang', 0, '2023-03-24 12:59:32', '2023-03-24 12:59:32'),
+(502, 'GJ000070', 11401, '0.00', '12500000.00', 'BBM-Datang', 0, '2023-03-24 12:59:32', '2023-03-24 12:59:32'),
+(503, 'GJ000071', 11602, '10500000.00', '0.00', 'BBM-Datang', 0, '2023-03-24 12:59:32', '2023-03-24 12:59:32'),
+(504, 'GJ000071', 11401, '0.00', '10500000.00', 'BBM-Datang', 0, '2023-03-24 12:59:32', '2023-03-24 12:59:32');
 
 -- --------------------------------------------------------
 
@@ -433,36 +429,8 @@ CREATE TABLE `gl_lr` (
 --
 
 INSERT INTO `gl_lr` (`id`, `acc_id`, `amount`) VALUES
-(1, '11110', '8235000.00'),
-(2, '32200', '-97000000.00'),
-(3, '21200', '-375000.00'),
-(4, '11401', '0.00'),
-(5, '11601', '47475000.00'),
-(6, '11602', '-1992400.00'),
-(7, '11603', '48048000.00'),
-(8, '62201', '-20000.00'),
-(9, '32300', '-6122600.00'),
-(10, '61202', '-30000.00'),
-(11, '11604', '962000.00'),
-(12, '11605', '570000.00'),
-(13, '51100', '2500000.00'),
-(14, '41100', '2980000.00'),
-(15, '51200', '45360000.00'),
-(16, '41200', '49980000.00'),
-(17, '51300', '3900000.00'),
-(18, '41300', '5340000.00'),
-(19, '41400', '44000.00'),
-(20, '51400', '36000.00'),
-(21, '62204', '-75000.00'),
-(22, '52100', '25000.00'),
-(23, '52200', '32400.00'),
-(24, '52300', '52000.00'),
-(25, '52400', '146000.00'),
-(26, '52500', '45000.00'),
-(27, '21100', '0.00'),
-(28, '12502', '200000.00'),
-(29, '38100', '0.00'),
-(30, '38999', '0.00');
+(1, '38100', '0.00'),
+(2, '38999', '0.00');
 
 -- --------------------------------------------------------
 
@@ -916,7 +884,7 @@ CREATE TABLE `tblbbm` (
 
 INSERT INTO `tblbbm` (`id`, `code_bbm`, `nama_bbm`, `last_meter`, `last_price`, `sale_price`, `stokBbm_old`, `logo_bbm`, `accid`, `accid_hpp`, `accid_persediaan`, `accid_biaya`, `created_at`, `updated_at`) VALUES
 (1, 'BRG0001', 'PERTAMAX', 0, '12500.00', '14900.00', '-2880.00', 'pertamax.png', '41100', '51100', '11601', '52100', '2023-01-12 12:56:36', '2023-03-21 06:01:39'),
-(2, 'BRG0002', 'PERLITE', 0, '10900.00', '11900.00', '-5599.00', 'pertalite.png', '41200', '51200', '11602', '52200', '2023-01-12 12:56:36', '2023-03-21 06:02:05'),
+(2, 'BRG0002', 'PERLITE', 0, '10500.00', '11900.00', '-5599.00', 'pertalite.png', '41200', '51200', '11602', '52200', '2023-01-12 12:56:36', '2023-03-21 06:02:05'),
 (3, 'BRG0003', 'DEX LITE', 0, '13000.00', '17800.00', '-2395.00', 'dexlite.png', '41300', '51300', '11603', '52300', '2023-01-14 08:29:46', '2023-03-21 06:02:27');
 
 --
@@ -1396,8 +1364,8 @@ CREATE TABLE `tblpersediaan` (
 --
 
 INSERT INTO `tblpersediaan` (`idPersediaan`, `kdPersediaan`, `nmPersediaan`, `stokPersediaan`, `satuanPersediaan`, `ktgPersediaan`, `lastPrice`, `salePrice`, `created_at`, `updated_at`) VALUES
-(1, 'BRG0001', 'PERTAMAX', 3786, 'Liter', 'KT-2021-1', '12500.00', '14900.00', '2023-01-19 22:24:13', '2023-01-19 22:24:13'),
-(2, 'BRG0002', 'PERTALITE', 4190, 'Liter', 'KT-2021-1', '10900.00', '11900.00', '2023-01-19 22:25:23', '2023-01-19 22:25:23'),
+(1, 'BRG0001', 'PERTAMAX', 5786, 'Liter', 'KT-2021-1', '12500.00', '14900.00', '2023-01-19 22:24:13', '2023-01-19 22:24:13'),
+(2, 'BRG0002', 'PERTALITE', 6190, 'Liter', 'KT-2021-1', '10500.00', '11900.00', '2023-01-19 22:25:23', '2023-01-19 22:25:23'),
 (3, 'BRG0003', 'DEX LITE', 3685, 'Liter', 'KT-2021-1', '13000.00', '17800.00', '2023-01-19 22:26:32', '2023-01-19 22:26:32'),
 (4, 'BRG0004', 'GAS ELPIGI 3KG', 6, 'TABUNG', 'KT-2021-3', '18000.00', '22000.00', '2023-01-20 12:14:45', '2023-01-20 12:14:45'),
 (6, 'BRG0005', 'GAS ELPIGI 12KG', 8, 'TABUNG', 'KT-2021-3', '110000.00', '0.00', NULL, NULL),
@@ -1473,8 +1441,7 @@ CREATE TABLE `tblpobbm` (
 --
 
 INSERT INTO `tblpobbm` (`idPo`, `no_po`, `no_so`, `tgl_po`, `r_supplier`, `subTotal`, `disc`, `discPercent`, `tax`, `pph`, `total`, `note`, `term`, `jthTempo`, `created_at`, `updated_at`) VALUES
-(1, 'PO0320231', '12345', '2023-03-21 00:00:00', 'SP0001', '72600000.00', '0.00', '0.00', '11.00', '145000.00', '72745000.00', NULL, 0, '2023-03-21 00:00:00', '2023-03-21 06:06:59', '2023-03-21 06:06:59'),
-(2, 'PO0320232', '12345', '2023-03-22 00:00:00', 'SP0001', '72800000.00', '0.00', '0.00', '11.00', '156000.00', '72956000.00', NULL, 0, '2023-03-22 00:00:00', '2023-03-22 09:39:23', '2023-03-22 09:39:23');
+(4, 'PO0320231', '123456', '2023-03-24 00:00:00', 'SP0001', '58500000.00', '0.00', '0.00', '11.00', '125000.00', '58625000.00', NULL, 0, '2023-03-24 00:00:00', '2023-03-24 04:58:56', '2023-03-24 04:58:56');
 
 -- --------------------------------------------------------
 
@@ -1500,12 +1467,8 @@ CREATE TABLE `tblpobbm_detail` (
 --
 
 INSERT INTO `tblpobbm_detail` (`idPoDetail`, `r_noPo`, `kdBarang`, `nmBarang`, `hrgBeli`, `qty`, `qty_recieve`, `total`, `created_at`, `updated_at`) VALUES
-(1, 'PO0320231', 'BRG0001', 'PERTAMAX', '12500.00', '2000.00', '2000.00', '25000000.00', '2023-03-21 06:06:59', '2023-03-21 06:06:59'),
-(2, 'PO0320231', 'BRG0002', 'PERLITE', '10800.00', '2000.00', '2000.00', '21600000.00', '2023-03-21 06:06:59', '2023-03-21 06:06:59'),
-(3, 'PO0320231', 'BRG0003', 'DEX LITE', '13000.00', '2000.00', '2000.00', '26000000.00', '2023-03-21 06:06:59', '2023-03-21 06:06:59'),
-(4, 'PO0320232', 'BRG0001', 'PERTAMAX', '12500.00', '2000.00', '2000.00', '25000000.00', '2023-03-22 09:39:23', '2023-03-22 09:39:23'),
-(5, 'PO0320232', 'BRG0002', 'PERLITE', '10900.00', '2000.00', '2000.00', '21800000.00', '2023-03-22 09:39:23', '2023-03-22 09:39:23'),
-(6, 'PO0320232', 'BRG0003', 'DEX LITE', '13000.00', '2000.00', '2000.00', '26000000.00', '2023-03-22 09:39:23', '2023-03-22 09:39:23');
+(9, 'PO0320231', 'BRG0001', 'PERTAMAX', '12500.00', '3000.00', '1000.00', '37500000.00', '2023-03-24 04:58:56', '2023-03-24 04:58:56'),
+(10, 'PO0320231', 'BRG0002', 'PERLITE', '10500.00', '2000.00', '1000.00', '21000000.00', '2023-03-24 04:58:56', '2023-03-24 04:58:56');
 
 -- --------------------------------------------------------
 
@@ -1622,6 +1585,7 @@ CREATE TABLE `tblterimabbm` (
   `id` bigint NOT NULL,
   `kd_terima` varchar(20) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `no_po` varchar(20) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `no_so` varchar(20) COLLATE latin1_general_ci NOT NULL,
   `tgl_terima` datetime NOT NULL,
   `kd_supplier` varchar(20) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `created_at` datetime NOT NULL,
@@ -1632,10 +1596,8 @@ CREATE TABLE `tblterimabbm` (
 -- Dumping data for table `tblterimabbm`
 --
 
-INSERT INTO `tblterimabbm` (`id`, `kd_terima`, `no_po`, `tgl_terima`, `kd_supplier`, `created_at`, `updated_at`) VALUES
-(1, 'BR0320231', 'PO0320231', '2023-03-21 00:00:00', 'SP0001', '2023-03-21 14:07:55', '2023-03-21 14:07:55'),
-(2, 'BR0320232', 'PO0320231', '2023-03-21 00:00:00', 'SP0001', '2023-03-21 19:18:14', '2023-03-21 19:18:14'),
-(3, 'BR0320233', 'PO0320232', '2023-03-22 00:00:00', 'SP0001', '2023-03-22 17:41:18', '2023-03-22 17:41:18');
+INSERT INTO `tblterimabbm` (`id`, `kd_terima`, `no_po`, `no_so`, `tgl_terima`, `kd_supplier`, `created_at`, `updated_at`) VALUES
+(5, 'BR0320235', 'PO0320231', '123456', '2023-03-24 00:00:00', 'SP0001', '2023-03-24 12:59:32', '2023-03-24 12:59:32');
 
 -- --------------------------------------------------------
 
@@ -1647,6 +1609,7 @@ CREATE TABLE `tblterimabbm_detail` (
   `id_detail` bigint NOT NULL,
   `r_kdterima` varchar(20) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `r_nopo` varchar(20) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `r_noso` varchar(20) COLLATE latin1_general_ci NOT NULL,
   `tgl_terima` datetime NOT NULL,
   `kd_barang` varchar(20) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `qty_terima` decimal(13,2) NOT NULL,
@@ -1658,16 +1621,9 @@ CREATE TABLE `tblterimabbm_detail` (
 -- Dumping data for table `tblterimabbm_detail`
 --
 
-INSERT INTO `tblterimabbm_detail` (`id_detail`, `r_kdterima`, `r_nopo`, `tgl_terima`, `kd_barang`, `qty_terima`, `created_at`, `updated_at`) VALUES
-(1, 'BR0320231', 'PO0320231', '2023-03-21 00:00:00', 'BRG0001', '1000.00', '2023-03-21 00:00:00', '2023-03-21 14:07:55'),
-(2, 'BR0320231', 'PO0320231', '2023-03-21 00:00:00', 'BRG0002', '1000.00', '2023-03-21 00:00:00', '2023-03-21 14:07:56'),
-(3, 'BR0320231', 'PO0320231', '2023-03-21 00:00:00', 'BRG0003', '1000.00', '2023-03-21 00:00:00', '2023-03-21 14:07:56'),
-(4, 'BR0320232', 'PO0320231', '2023-03-21 00:00:00', 'BRG0001', '1000.00', '2023-03-21 00:00:00', '2023-03-21 19:18:14'),
-(5, 'BR0320232', 'PO0320231', '2023-03-21 00:00:00', 'BRG0002', '1000.00', '2023-03-21 00:00:00', '2023-03-21 19:18:14'),
-(6, 'BR0320232', 'PO0320231', '2023-03-21 00:00:00', 'BRG0003', '1000.00', '2023-03-21 00:00:00', '2023-03-21 19:18:14'),
-(7, 'BR0320233', 'PO0320232', '2023-03-22 00:00:00', 'BRG0001', '2000.00', '2023-03-22 00:00:00', '2023-03-22 17:41:18'),
-(8, 'BR0320233', 'PO0320232', '2023-03-22 00:00:00', 'BRG0002', '2000.00', '2023-03-22 00:00:00', '2023-03-22 17:41:18'),
-(9, 'BR0320233', 'PO0320232', '2023-03-22 00:00:00', 'BRG0003', '2000.00', '2023-03-22 00:00:00', '2023-03-22 17:41:18');
+INSERT INTO `tblterimabbm_detail` (`id_detail`, `r_kdterima`, `r_nopo`, `r_noso`, `tgl_terima`, `kd_barang`, `qty_terima`, `created_at`, `updated_at`) VALUES
+(12, 'BR0320235', 'PO0320231', '123456', '2023-03-24 00:00:00', 'BRG0001', '1000.00', '2023-03-24 00:00:00', '2023-03-24 12:59:32'),
+(13, 'BR0320235', 'PO0320231', '123456', '2023-03-24 00:00:00', 'BRG0002', '1000.00', '2023-03-24 00:00:00', '2023-03-24 12:59:32');
 
 -- --------------------------------------------------------
 
@@ -2339,25 +2295,25 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `general_ledger`
 --
 ALTER TABLE `general_ledger`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=135;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
 
 --
 -- AUTO_INCREMENT for table `gl`
 --
 ALTER TABLE `gl`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `gl_detail`
 --
 ALTER TABLE `gl_detail`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=489;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=505;
 
 --
 -- AUTO_INCREMENT for table `gl_lr`
 --
 ALTER TABLE `gl_lr`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -2507,13 +2463,13 @@ ALTER TABLE `tblperubahan_hargabbm`
 -- AUTO_INCREMENT for table `tblpobbm`
 --
 ALTER TABLE `tblpobbm`
-  MODIFY `idPo` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idPo` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tblpobbm_detail`
 --
 ALTER TABLE `tblpobbm_detail`
-  MODIFY `idPoDetail` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idPoDetail` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tblprofit`
@@ -2543,13 +2499,13 @@ ALTER TABLE `tblsupplier`
 -- AUTO_INCREMENT for table `tblterimabbm`
 --
 ALTER TABLE `tblterimabbm`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tblterimabbm_detail`
 --
 ALTER TABLE `tblterimabbm_detail`
-  MODIFY `id_detail` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_detail` bigint NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `tbltransaksi_nosel`

@@ -235,7 +235,7 @@
                                                     <div class="row">
                                                         <div class="col-xl-9">
                                                             <div class="invoice-container">
-                                                                <div class="table-responsive">
+                                                                <div class="custom-table panel-body p-0">
 
                                                                     <v-client-table :data="listbiaya" :columns="columns" :options="table_option">
                                                                         <template #kd_trans="props"> {{ props.row.kd_trans }} </template>

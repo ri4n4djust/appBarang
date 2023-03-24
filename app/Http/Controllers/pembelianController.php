@@ -134,6 +134,7 @@ class pembelianController extends Controller
                 $post = DB::table('tblterimabbm')->insert([
                     'kd_terima'     => $request[0]['no_br'],
                     'no_po'     => $request[0]['no_po'],
+                    'no_so'     => $request[0]['no_so'],
                     'tgl_terima'   => $tgl_terima,
                     'kd_supplier'     => $request[0]['kdSupplier'],
                     'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
@@ -174,6 +175,7 @@ class pembelianController extends Controller
                         $detail[] = [
                             'r_kdterima' => $no_gr,
                             'r_nopo' => $no_po,
+                            'r_noso'     => $request[0]['no_so'],
                             'tgl_terima' => $tgl_terima,
                             'kd_barang' => $kdBarang,
                             'qty_terima' => $qty_datang,

@@ -190,7 +190,8 @@
                                                                         <input type="text" v-model="item.pph" :id="'pph'+index" class="form-control" placeholder="pph" />
                                                                     </td> -->
                                                                     <td style="padding:0;margin:0;">
-                                                                        <input type="text" v-model="item.total" :id="'total'+index" class="form-control" placeholder="total" />
+                                                                        <!-- <input type="text" v-model="item.total" :id="'total'+index" class="form-control" placeholder="total" /> -->
+                                                                        {{ Number(item.rate * item.quantity).toLocaleString() }}
                                                                         
                                                                     </td>
                                                                 </tr>
@@ -211,7 +212,7 @@
                                                             <div class="invoice-actions-btn">
                                                                 <div class="invoice-action-btn">
                                                                     <div class="row">
-                                                                        <div class="col-sm-4">
+                                                                        <!-- <div class="col-sm-4">
                                                                             <div v-if="divpajak">
                                                                                 <a href="javascript:;" class="btn btn-primary btn-send" @click="taxRemove" >- pajak</a>
                                                                             </div>
@@ -220,9 +221,8 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-sm-4">
-                                                                            <!-- <router-link to="/apps/invoice/preview" class="btn btn-dark btn-preview">Preview</router-link> -->
                                                                             <a href="javascript:;" @click="addPayment" class="btn btn-dark btn-preview" data-bs-toggle="modal" data-bs-target="#modalPayment">Pembayaran</a>
-                                                                        </div>
+                                                                        </div> -->
                                                                         <div class="col-sm-4">
                                                                             <a href="javascript:;" @click="simpanPembelian" class="btn btn-success btn-download">Save</a>
                                                                         </div>
@@ -333,52 +333,54 @@
                                             </div> -->
 
                                             <div class="invoice-detail-header">
-                                                <div class="row justify-content-between"> 
-                                                    <v-client-table :data="listpobbm" :columns="columns" :options="table_option">
-                                                        <template #podate="props"> {{ moment(props.row.podate).format("DD-MM-YYYY") }} </template>
-                                                        <template #no_so="props"> {{ props.row.no_so }} </template>
-                                                        <template #qty_grpo="props"> {{ Number(props.row.qty_grpo).toLocaleString() }} </template>
-                                                        <template #qty_recieve="props"> {{ Number(props.row.qty_recieve).toLocaleString() }} </template>
-                                                        <template #pph="props"> {{ Number(props.row.pph).toLocaleString() }} </template>
-                                                        <template #total="props"> {{ Number(props.row.total).toLocaleString() }} </template>
-                                                        <template #action="props">
-                                                            <div class="custom-dropdown dropdown btn-group ">
-                                                                <div class="btn-group" href="#" role="button" id="pendingTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                    <!-- <button type="button" class="btn btn-blue">Open</button> -->
-                                                                    <div role="group" class="btn-group">
-                                                                        <div class="dropdown b-dropdown custom-dropdown show btn-group">
-                                                                            <a class="btn dropdown-toggle btn-dark"
-                                                                                ><svg
-                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                    width="24"
-                                                                                    height="24"
-                                                                                    viewBox="0 0 24 24"
-                                                                                    fill="none"
-                                                                                    stroke="currentColor"
-                                                                                    stroke-width="2"
-                                                                                    stroke-linecap="round"
-                                                                                    stroke-linejoin="round"
-                                                                                    class="feather feather-chevron-down"
-                                                                                >
-                                                                                    <polyline points="6 9 12 15 18 9"></polyline>
-                                                                                </svg>
-                                                                            </a>
+                                                <div class="row justify-content-between">
+                                                    <div class="custom-table panel-body p-0"> 
+                                                        <v-client-table :data="listpobbm" :columns="columns" :options="table_option">
+                                                            <template #podate="props"> {{ moment(props.row.podate).format("DD-MM-YYYY") }} </template>
+                                                            <template #no_so="props"> {{ props.row.no_so }} </template>
+                                                            <template #qty_grpo="props"> {{ Number(props.row.qty_grpo).toLocaleString() }} </template>
+                                                            <template #qty_recieve="props"> {{ Number(props.row.qty_recieve).toLocaleString() }} </template>
+                                                            <template #pph="props"> {{ Number(props.row.pph).toLocaleString() }} </template>
+                                                            <template #total="props"> {{ Number(props.row.total).toLocaleString() }} </template>
+                                                            <template #action="props">
+                                                                <div class="custom-dropdown dropdown btn-group ">
+                                                                    <div class="btn-group" href="#" role="button" id="pendingTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                        <!-- <button type="button" class="btn btn-blue">Open</button> -->
+                                                                        <div role="group" class="btn-group">
+                                                                            <div class="dropdown b-dropdown custom-dropdown show btn-group">
+                                                                                <a class="btn dropdown-toggle btn-dark"
+                                                                                    ><svg
+                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                        width="24"
+                                                                                        height="24"
+                                                                                        viewBox="0 0 24 24"
+                                                                                        fill="none"
+                                                                                        stroke="currentColor"
+                                                                                        stroke-width="2"
+                                                                                        stroke-linecap="round"
+                                                                                        stroke-linejoin="round"
+                                                                                        class="feather feather-chevron-down"
+                                                                                    >
+                                                                                        <polyline points="6 9 12 15 18 9"></polyline>
+                                                                                    </svg>
+                                                                                </a>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
+                                                                    <ul class="dropdown-menu dropdown-menu-end">
+                                                                        <li>
+                                                                            <!-- <a href="javascript:void(0);" class="btn m-1 btn-light" @click="edit_row(props.row)"> Edit </a> -->
+                                                                            <router-link to="/editpenjualan" class="dropdown-item" @click="edit_row(props.row)">Edit</router-link>
+                                                                        </li>
+                                                                        <li>
+                                                                            <router-link :to="{ name: 'nosel', params: { id: 'hgjhg'} }" class="dropdown-item">coba</router-link>
+                                                                            <!-- <a href="javascript:void(0);" class="btn m-1 btn-light" @click="view_row(props.row)"> Delete </a> -->
+                                                                        </li>
+                                                                    </ul>
                                                                 </div>
-                                                                <ul class="dropdown-menu dropdown-menu-end">
-                                                                    <li>
-                                                                        <!-- <a href="javascript:void(0);" class="btn m-1 btn-light" @click="edit_row(props.row)"> Edit </a> -->
-                                                                        <router-link to="/editpenjualan" class="dropdown-item" @click="edit_row(props.row)">Edit</router-link>
-                                                                    </li>
-                                                                    <li>
-                                                                        <router-link :to="{ name: 'nosel', params: { id: 'hgjhg'} }" class="dropdown-item">coba</router-link>
-                                                                        <!-- <a href="javascript:void(0);" class="btn m-1 btn-light" @click="view_row(props.row)"> Delete </a> -->
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </template>
-                                                    </v-client-table>
+                                                            </template>
+                                                        </v-client-table>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -534,9 +536,9 @@
     const getNoPobbm=() => {
         store.dispatch('GetNoPobbm')
     }
-    const getAcc=() => {
-        store.dispatch('GetAcc')
-    }
+    // const getAcc=() => {
+    //     store.dispatch('GetAcc')
+    // }
 
 
     const getTotal=() =>{
@@ -637,7 +639,7 @@
         // console.log(paramssupplier.value)
        
         getBbm();
-        getAcc();
+        // getAcc();
         getSupplier();
         getCart();
         getNoPobbm();

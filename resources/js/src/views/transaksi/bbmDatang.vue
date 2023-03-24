@@ -7,7 +7,7 @@
                         <nav class="breadcrumb-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:;">Apps</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"><span>Kedatangan BBM</span></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span>Invoice Add</span></li>
                             </ol>
                         </nav>
                     </div>
@@ -15,9 +15,56 @@
             </ul>
         </teleport>
 
-        <div class="row invoice layout-top-spacing layout-spacing">
+        <!-- <div class="row invoice layout-top-spacing layout-spacing">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                <div class="doc-container">
+                <div class="doc-container"> -->
+        <div class="underline-content tabs">
+            <ul class="nav nav-tabs mb-3" id="lineTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="underline-home-tab" data-bs-toggle="tab" href="#underline-home" role="tab" aria-controls="underline-home" aria-selected="true">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-home"
+                        >
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        Transaksi
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="underline-profile-tab" data-bs-toggle="tab" href="#underline-profile" role="tab" aria-controls="underline-profile" aria-selected="false"
+                        ><svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="feather feather-user"
+                        >
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        Daftar
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="lineTabContent-3">
+                <div class="tab-pane fade show active" id="underline-home" role="tabpanel" aria-labelledby="underline-home-tab">
+
                     <div class="row">
                         <div class="col-xl-12">
                             <div class="invoice-content">
@@ -58,7 +105,7 @@
                                                     <div class="input-group mb-4">
                                                         <input type="text" class="form-control" v-model="params.no_so" placeholder="Cari SO" aria-label="Cari SO" />
                                                         <!-- <input type="text" class="form-control" v-model="params.no_po" placeholder="Cari SO" aria-label="Cari SO" /> -->
-                                                        <button class="btn btn-primary" @click="openModal()">Button</button>
+                                                        <button class="btn btn-primary" @click="openModal()">Cari</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -212,7 +259,128 @@
 
                         
                     </div>
+
                 </div>
+                <div class="tab-pane fade" id="underline-profile" role="tabpanel" aria-labelledby="underline-profile-tab">
+
+                    <div class="col-xl-12">
+                        <div class="invoice-content">
+                            <div class="invoice-detail-body">
+                                <!-- <div class="invoice-detail-title">
+                                    
+                                    <div class="invoice-title">
+                                    PO BBM
+                                    </div>
+                                </div> -->
+                                <!-- {{ listbiaya }} -->
+
+                                <div class="invoice-detail-header">
+                                    <div class="row justify-content-between">
+
+                                        <div class="row invoice layout-top-spacing layout-spacing apps-invoice">
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="doc-container">
+                                                    <div class="row">
+                                                        <div class="col-xl-9">
+                                                            <div class="invoice-container">
+                                                                <div class="custom-table panel-body p-0">
+
+                                                                    <v-client-table :data="listbbmdatang" :columns="columns" :options="table_option">
+                                                                        <template #r_kdterima="props"> {{ props.row.r_kdterima }} </template>
+                                                                        <template #tgl_terima="props"> {{ moment(props.row.tgl_terima).format("DD-MM-YYYY") }} </template>
+                                                                        <template #r_pono="props"> {{ props.row.r_pono }} </template>
+                                                                        <template #r_poso="props"> {{ props.row.r_poso }} </template>
+                                                                        <template #nama_bbm="props"> {{ props.row.nama_bbm }} </template>
+                                                                        <template #qty_terima="props"> {{ Number(props.row.qty_terima).toLocaleString() }} </template>
+                                                                        <template #action="props">
+                                                                            <router-link :to="{name: 'rekapan', params: {startDate: props.row.tgl_trans, kd_trans:props.row.kd_trans, regu:props.row.r_regu }}" >
+                                                                                <svg
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    width="24"
+                                                                                    height="24"
+                                                                                    viewBox="0 0 24 24"
+                                                                                    fill="none"
+                                                                                    stroke="currentColor"
+                                                                                    stroke-width="2"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    class="feather feather-edit-2"
+                                                                                >
+                                                                                    <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                                                                                </svg>
+                                                                            </router-link>
+                                                                                <svg
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    width="24"
+                                                                                    height="24"
+                                                                                    viewBox="0 0 24 24"
+                                                                                    fill="none"
+                                                                                    stroke="currentColor"
+                                                                                    stroke-width="2"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    class="feather feather-trash-2"
+                                                                                >
+                                                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                                                </svg>
+                                                                        </template>
+                                                                    </v-client-table>
+
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-3">
+                                                            <div class="invoice-actions-btn">
+                                                                <div class="invoice-action-btn">
+                                                                    <div class="row">
+
+                                                                        <div class="col-xl-12 col-md-3 col-sm-6">
+                                                                            <a href="javascript:;" class="btn btn-info btn-download" @click="print()">Print</a>
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-3 col-sm-6">
+                                                                            <div class="row mb-4">
+                                                                                <div class="col-sm">
+                                                                                    <label for="inputState">Awal</label>
+                                                                                    <flat-pickr v-model="sorting.startDate" 
+                                                                                        :config="{dateFormat: 'd-m-Y'}"
+                                                                                        class="form-control form-control-sm">
+                                                                                    </flat-pickr>
+                                                                                </div>
+                                                                                <div class="col-sm">
+                                                                                    <label for="inputState">Akhir</label>
+                                                                                    <flat-pickr v-model="sorting.endDate" 
+                                                                                        :config="{dateFormat: 'd-m-Y'}"
+                                                                                        class="form-control form-control-sm">
+                                                                                    </flat-pickr>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-3 col-sm-6">
+                                                                            <a href="javascript:;" @click="cari" class="btn btn-success btn-download">Cari</a>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
         </div>
     </div>
@@ -232,6 +400,7 @@
 
     import moment from "moment";
 
+
     import { computed, ref, onMounted, watch } from 'vue';
     import { useStore } from 'vuex';
     import { useRouter, useRoute } from 'vue-router'
@@ -244,6 +413,7 @@
     const route = useRoute();
 
     const items = ref([]);
+    const listbbmdatang = ref([]);
     const brg = ref([]);
     const noterima = ref([]);
     const qty = ref(1);
@@ -272,6 +442,29 @@
         total: total,
         kdSupplier: r_supplier
     });
+
+    const columns = ref(['r_kdterima', 'r_nopo', 'r_noso' ,'tgl_teria', 'nama_bbm' ,'qty_terima', 'action']);
+    const table_option = ref({
+        perPage: 10,
+        perPageValues: [5, 10, 20, 50],
+        skin: 'table table-hover',
+        columnsClasses: { action: 'actions text-center' },
+        pagination: { nav: 'scroll', chunk: 5 },
+        texts: {
+            count: 'Showing {from} to {to} of {count}',
+            filter: '',
+            filterPlaceholder: 'Search...',
+            limit: 'Results:',
+        },
+        sortable: ['r_kdterima', 'r_nopo', 'r_noso' ,'tgl_teria', 'nama_bbm' ,'qty_terima',],
+        sortIcon: {
+            base: 'sort-icon-none',
+            up: 'sort-icon-asc',
+            down: 'sort-icon-desc',
+        },
+        resizableColumns: true,
+        resizableRows: true,
+    });
     const sorting = ref({
         startDate: moment().subtract(30,'d').format("D-M-YYYY"),
         endDate: moment().format("D-M-YYYY")
@@ -293,6 +486,8 @@
     // const getBarang=() => {
     //     store.dispatch('GetPersediaan')
     // }
+
+    
     const getNoTerima=() => {
         store.dispatch('GetTerimabbm')
     }
@@ -300,59 +495,12 @@
         store.dispatch('ListPo', sorting.value)
        
     }
-    // const getAcc=() => {
-    //     store.dispatch('GetAcc')
-    // }
-
-
-    // const getTotal=() =>{
-    //     const pajak = store.state.pajak;
-    //     const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
-    //     total.value = (subtotal.value - (subtotal.value * disc.value / 100))
-    //     tax.value = temptotal * pajak /100
-        
-    //     // console.log('total tanpa pajak :'+tax.value)
-    //     // return { tot }
-    // }
-    // const getTotalWtax=() =>{
-    //     const pajak = store.state.pajak;
-    //     const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
-    //     tax.value = temptotal * pajak /100
-    //     total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + tax.value
-        
-        
-    //     // console.log('total dengan pajak:'+tax.value)
-    //     // return { tot }
-    // }
-
-    // function taxSelected() {
-    //     const pajak = store.state.pajak;
-    //     const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
-    //     // const temppajak = temptotal * pajak /100
-        
-    //     tax.value = temptotal * pajak /100
-    //     total.value = total.value + tax.value
-    //     // total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + tax.value
-    //     divpajak.value = true
-    //     // console.log(tax.value)
-    //     getTotalWtax()
-    //     // console.log('total : '+ temptotal + 'pajak :'+temppajak)
-    // }
-
-    // function taxRemove() {
-    //     const pajak = store.state.pajak;
-    //     const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
-    //     // const temppajak = total.value * pajak /100
-        
-    //     tax.value = temptotal * pajak /100
-    //     total.value = total.value - tax.value
-    //     // total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + tax.value
-    //     divpajak.value = false
-    //     // console.log(tax.value)
-    //     getTotal()
-    //     // console.log('total : '+ temptotal + 'pajak :'+temppajak)
-    // }
-
+    const getListBbmDatang=() => {
+        store.dispatch('GetListBbmDatang', sorting.value)
+        setTimeout(function() { listbbmdatang.value = store.getters.SlistBbmDatang ; }, 4000);
+       
+    }
+    
     const simpanKedatangan=() => {
         const header =params.value
         // const headers =paramssupplier.value
@@ -394,7 +542,7 @@
        
         // getBarang();
         // getAcc();
-        // getSupplier();
+        getListBbmDatang();
         getNoTerima();
         // getListPo();
         
