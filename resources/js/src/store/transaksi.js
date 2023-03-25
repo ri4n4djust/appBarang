@@ -467,6 +467,32 @@ const actions = {
             return
         }
     },
+
+    async DeleteBiaya({dispatch}, kd) {
+        let response
+        try {
+            response = await axios.post('/api/delete/biaya', kd)
+            // console.log(response.data.data)
+        } catch (ex) {
+            // Handle error
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'Biaya Gagal Dihapus',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            return
+        }
+        // await dispatch('GetPembelian')
+    },
     
     async CreateEditPenjualan({commit}, item) {
         // await axios.post('/api/tambah/pelanggan', pel)

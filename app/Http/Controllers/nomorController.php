@@ -435,57 +435,57 @@ class nomorController extends Controller
 
     public function kodeBiaya()
     {
-        $table="tblbiaya";
-        $primary="kd_trans";
-        $prefix="BY";
-        $kodeBarang = autonumber($table,$primary,$prefix);
-        return response()->json([
-            'success' => true,
-            'message' => 'Detail Post!',
-            'kdBiaya'    => $kodeBarang
-        ], 200);
-        // return $kodeBarang;
-        // $count = DB::table('tblbiaya')->where('kd_trans', 'like', 'BY%')->max('kd_trans');
-        // if($count == ''){
-        //     $tahun = date('ym');
-        //     $post = 'BY'.$tahun.'1';
-        //     return response()->json([
-        //         'success' => true,
-        //         'message' => 'Detail Post!',
-        //         'kdBiaya'    => $post
-        //     ], 200);
-        // }else{
+        // $table="tblbiaya";
+        // $primary="kd_trans";
+        // $prefix="BY";
+        // $kodeBarang = autonumber($table,$primary,$prefix);
+        // return response()->json([
+        //     'success' => true,
+        //     'message' => 'Detail Post!',
+        //     'kdBiaya'    => $kodeBarang
+        // ], 200);
+        // // return $kodeBarang;
+        $count = DB::table('tblbiaya')->where('kd_trans', 'like', 'BY%')->max('kd_trans');
+        if($count == ''){
+            $tahun = date('ym');
+            $post = 'BY'.$tahun.'1';
+            return response()->json([
+                'success' => true,
+                'message' => 'Detail Post!',
+                'kdBiaya'    => $post
+            ], 200);
+        }else{
 
-        //     $no = 0 ;
-        //     $count =  DB::table('tblbiaya')->where('kd_trans', 'like', 'BY%')->max('kd_trans');
+            $no = 0 ;
+            $count =  DB::table('tblbiaya')->where('kd_trans', 'like', 'BY%')->max('kd_trans');
             
-        //     $terakhir = substr($count, 6, 20);
-        //     $kodeBaru = $terakhir + 1  ;
+            $terakhir = substr($count, 6, 20);
+            $kodeBaru = $terakhir + 1  ;
 
-        //     $tahun = date('ym');
-        //     $post = 'BY'.$tahun.''.$kodeBaru;
-        //     // print_r($tahun);
+            $tahun = date('ym');
+            $post = 'BY'.$tahun.''.$kodeBaru;
+            // print_r($tahun);
 
-        //     if (DB::table('tblbiaya')->where('kd_trans', $post)->exists()) {
-        //         $count =  DB::table('tblbiaya')->where('kd_trans', 'like', 'BY%')->max('kd_trans');
-        //         $terakhir = substr($count, 6,  20);
-        //         $kodeBarulagi = $kodeBaru + 1 ;
-        //         $post = 'BY'.$tahun.$kodeBarulagi;
-        //         return response()->json([
-        //             'success' => true,
-        //             'message' => 'Detail Post!',
-        //             'kdBiaya'    => $post
-        //         ], 200);
-        //     } else {
-        //         $tahun = date('ym');
-        //         //$post = 'OP-'.$tahun.'-'.'1';
-        //         return response()->json([
-        //             'success' => true,
-        //             'message' => 'Detail Post!',
-        //             'kdBiaya'    => $post
-        //         ], 200);
-        //     }
-        // }
+            if (DB::table('tblbiaya')->where('kd_trans', $post)->exists()) {
+                $count =  DB::table('tblbiaya')->where('kd_trans', 'like', 'BY%')->max('kd_trans');
+                $terakhir = substr($count, 6,  20);
+                $kodeBarulagi = $kodeBaru + 1 ;
+                $post = 'BY'.$tahun.$kodeBarulagi;
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Detail Post!',
+                    'kdBiaya'    => $post
+                ], 200);
+            } else {
+                $tahun = date('ym');
+                //$post = 'OP-'.$tahun.'-'.'1';
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Detail Post!',
+                    'kdBiaya'    => $post
+                ], 200);
+            }
+        }
     }
 
     public function kodeJurnal()

@@ -170,4 +170,39 @@ class laporanController extends Controller
             'data' => $list
         ], 200);
     }
+
+    public function deleteBiaya(Request $request){
+        try{
+            $exception = DB::transaction(function() use ($request){
+                $kd = $request->input('id');
+                $gl = DB::table('general_ledger')->where('order_no', $kd)->get();
+                for($i=0;$i< count($gl);$i++){
+                    DB::table('general_ledger')->where('notrans', $gl[$i]->notrans)->delete();
+                    DB::table('gl_detail')->where('rgl', $gl[$i]->notrans)->delete();
+                };
+                DB::table('tblbiaya')->where('kd_trans', $kd)->delete();
+                DB::commit();
+            });
+            if(is_null($exception)) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Biaya Berhasil di Hapus',
+                    // 'data' => $detail
+                ], 200);
+            } else {
+                DB::rollback();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Biaya Gagal Dihapus',
+                ], 500);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            // something went wrong
+            return response()->json([
+             'success' => false,
+             'message' => 'exception'.$e,
+         ], 400);
+        }
+    }
 }

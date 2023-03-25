@@ -259,7 +259,7 @@
                                                                                     <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                                                                                 </svg>
                                                                             </router-link>
-                                                                            <!-- <router-link @click="delete_row(props.row)" > -->
+                                                                            <a href="javascript:void(0);" @click="delete_row(props.row)" >
                                                                                 <svg
                                                                                     xmlns="http://www.w3.org/2000/svg"
                                                                                     width="24"
@@ -277,7 +277,7 @@
                                                                                     <line x1="10" y1="11" x2="10" y2="17"></line>
                                                                                     <line x1="14" y1="11" x2="14" y2="17"></line>
                                                                                 </svg>
-                                                                            <!-- </router-link> -->
+                                                                            </a>
                                                                             <!-- <a href="javascript:void(0);" @click="delete_row(props.row)"> Delete </a> -->
                                                                         </template>
                                                                     </v-client-table>
@@ -292,7 +292,7 @@
                                                                     <div class="row">
 
                                                                         <div class="col-xl-12 col-md-3 col-sm-6">
-                                                                            <a href="javascript:;" class="btn btn-secondary btn-print action-print" @click="print()">Print</a>
+                                                                            <a href="javascript:;" class="btn btn-secondary btn-print" @click="print()">Print</a>
                                                                         </div>
                                                                         <div class="col-xl-12 col-md-3 col-sm-6">
                                                                             <div class="row mb-4">
@@ -409,6 +409,7 @@
     }
     const getNoBiaya=() => {
         store.dispatch('GetNoBiaya')
+        setTimeout(function() { nobiaya.value = store.getters.NoBiaya ; }, 2000);
     }
 
 
@@ -421,7 +422,7 @@
         let il = items.value.length;
         // var t = 0;
         for(var i = 0;i<il;i++){
-            total.value += parseInt(items.value[i].biaya);
+            total.value += parseInt(items.value[i].biaya); 
         }
         
     }
@@ -586,7 +587,23 @@
     };
 
     const delete_row = (data) => {
-        alert(data.kd_trans);
+        // alert(data.kd_trans);
+        new window.Swal({
+            title: 'Anda Yahin?',
+            text: "Hapus Biaya !" +data.keterangan_biaya,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Delete',
+            padding: '2em'
+        }).then(result => {
+            if (result.value) {
+                store.dispatch('DeleteBiaya', { id:data.kd_trans});
+                getListBiaya();
+                getNoBiaya();
+                new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
+
+            }
+        });
     }
 
     const cari = () => {

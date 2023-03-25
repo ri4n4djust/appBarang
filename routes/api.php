@@ -62,6 +62,9 @@ Route::post('/list-bbmdatang', [App\Http\Controllers\laporanController::class, '
 // Route::post('/update/room', [App\Http\Controllers\roomController::class, 'update']);
 // Route::delete('/hapus/room/{id}', [App\Http\Controllers\roomController::class, 'destroy']);
 
+//=================hapus
+Route::post('/delete/biaya', [App\Http\Controllers\laporanController::class, 'deleteBiaya']);
+
 //==========PENOMORAN=============
 Route::get('/kdbarang', [App\Http\Controllers\nomorController::class, 'kodeBarang']);
 Route::get('/kdsupplier', [App\Http\Controllers\nomorController::class, 'kodeSupplier']);

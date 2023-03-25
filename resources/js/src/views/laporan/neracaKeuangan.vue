@@ -34,8 +34,8 @@
 
                                                     <div class="table-responsive">
                                                         <!-- <div class="table-responsive"> -->
-                                                            <button type="button" class="btn btn-danger btn-lg mb-3 me-3"><span class="spinner-border text-white me-2 align-self-center loader-sm">Loading...</span> Loading</button>                                        
-                                                            <table>
+                                                            <button type="button" class="btn btn-danger btn-lg mb-3 me-3" v-if="load"><span class="spinner-border text-white me-2 align-self-center loader-sm">Loading...</span> Loading</button>                                        
+                                                            <table style="font-size:10px">
                                                                 <tbody  v-for="hrt in hartalist" :key="hrt.acc_id" :set="amount = hrt.amount" >
                                                                         
                                                                         <tr v-if="hrt.level === '1'" >
@@ -220,10 +220,11 @@
         endDate: moment().format("D-M-YYYY")
     });
 
-    
+    const load = ref();
 
     const hartalist = ref();
     onMounted(() => {
+        load.value = true;
         const harta = ref({
             group: '1,2,3'
         });
@@ -232,12 +233,15 @@
         setTimeout(function() { 
             // store.dispatch('GetCoaList')
             hartalist.value = store.getters.StateHarta;
+            load.value = false ;
         }, 5000);
+
+        
        
     })
 
     const cari = () => {
-        
+        load.value = true;
         const pendapatan = ref({group: '1,2,3'});
         var c = Object.assign(sorting.value, pendapatan.value);
         store.dispatch('GetPendapatan', c );
@@ -247,6 +251,7 @@
             hartalist.value = store.getters.StateCoaPendapatan;
             // const pendapatan = hartalist.value.filter(p => p.acc_id === '60000');
             // console.log(hartalist.value);
+            load.value = false;
         }, 3000);
     }
 

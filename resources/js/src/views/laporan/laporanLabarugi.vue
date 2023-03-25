@@ -34,6 +34,7 @@
 
                                                     <div class="custom-table panel-body p-0">
                                                         <!-- <div class="row invoice layout-top-spacing layout-spacing apps-invoice"></div> -->
+                                                        <button type="button" class="btn btn-danger btn-lg mb-3 me-3" v-if="load"><span class="spinner-border text-white me-2 align-self-center loader-sm">Loading...</span> Loading</button> 
                                                         <!-- <div class="table-responsive"> -->
                                                             <table border="1" cellspacing="3">
                                                                 <tr style="vertical-align:top">
@@ -99,16 +100,18 @@
                                                                                         <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
                                                                                         <td v-else></td>
                                                                                         <td v-if="hrt.jenis === 'Detail'">
-                                                                                            <div v-if="hrt.acc_id.substring(0,1) === '2'|| hrt.acc_id.substring(0,1) === '3' || hrt.acc_id.substring(0,1) === '4' || hrt.acc_id.substring(0,1) === '5'"> 
+                                                                                            <div v-if="hrt.acc_id.substring(0,1) === '3' || hrt.acc_id.substring(0,1) === '4' || hrt.acc_id.substring(0,1) === '5'"> 
                                                                                                 {{ Number(amount).toLocaleString() }}
                                                                                             </div>
-                                                                                            <div v-else>{{ Number(-1*amount).toLocaleString() }}</div>
+                                                                                            <div v-else-if="hrt.acc_id.substring(0,1) === '6'">{{ Number(-1*amount).toLocaleString() }}</div>
+                                                                                            <div v-else>{{ Number(amount).toLocaleString() }}</div>
                                                                                         </td>
                                                                                         <td v-else-if="hrt.jenis === 'Total'"><b>
-                                                                                            <div v-if="hrt.acc_id.substring(0,1) === '2'|| hrt.acc_id.substring(0,1) === '3' || hrt.acc_id.substring(0,1) === '4' || hrt.acc_id.substring(0,1) === '5'"> 
+                                                                                            <div v-if="hrt.acc_id.substring(0,1) === '3' || hrt.acc_id.substring(0,1) === '4' || hrt.acc_id.substring(0,1) === '5'"> 
                                                                                                 {{ Number(amount).toLocaleString() }}
                                                                                             </div>
-                                                                                            <div v-else>{{ Number(-1*amount).toLocaleString() }}</div>
+                                                                                            <div v-else-if="hrt.acc_id.substring(0,1) === '6'">{{ Number(-1*amount).toLocaleString() }}</div>
+                                                                                            <div v-else>{{ Number(amount).toLocaleString() }}</div>
                                                                                         </b></td>
                                                                                         <td v-else></td>
                                                                                     </tr>
@@ -121,16 +124,18 @@
                                                                                         <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
                                                                                         <td v-else></td>
                                                                                         <td v-if="hrt.jenis === 'Detail'">
-                                                                                            <div v-if="hrt.acc_id.substring(0,1) === '2'|| hrt.acc_id.substring(0,1) === '3' || hrt.acc_id.substring(0,1) === '4' || hrt.acc_id.substring(0,1) === '5'"> 
+                                                                                            <div v-if="hrt.acc_id.substring(0,1) === '3' || hrt.acc_id.substring(0,1) === '4' || hrt.acc_id.substring(0,1) === '5'"> 
                                                                                                 {{ Number(amount).toLocaleString() }}
                                                                                             </div>
-                                                                                            <div v-else>{{ Number(-1*amount).toLocaleString() }}</div>
+                                                                                            <div v-else-if="hrt.acc_id.substring(0,1) === '6'">{{ Number(-1*amount).toLocaleString() }}</div>
+                                                                                            <div v-else>{{ Number(amount).toLocaleString() }}</div>
                                                                                         </td>
                                                                                         <td v-else-if="hrt.jenis === 'Total'">
-                                                                                            <div v-if="hrt.acc_id.substring(0,1) === '2'|| hrt.acc_id.substring(0,1) === '3' || hrt.acc_id.substring(0,1) === '4' || hrt.acc_id.substring(0,1) === '5'"> 
+                                                                                            <div v-if="hrt.acc_id.substring(0,1) === '3' || hrt.acc_id.substring(0,1) === '4' || hrt.acc_id.substring(0,1) === '5'"> 
                                                                                                 {{ Number(amount).toLocaleString() }}
                                                                                             </div>
-                                                                                            <div v-else>{{ Number(-1*amount).toLocaleString() }}</div>
+                                                                                            <div v-else-if="hrt.acc_id.substring(0,1) === '6'">{{ Number(-1*amount).toLocaleString() }}</div>
+                                                                                            <div v-else>{{ Number(amount).toLocaleString() }}</div>
                                                                                         </td>
                                                                                         <td v-else></td>
                                                                                         <td></td>
@@ -143,16 +148,18 @@
                                                                                         <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
                                                                                         <td v-else></td>
                                                                                         <td v-if="hrt.jenis === 'Detail'">
-                                                                                            <div v-if="hrt.acc_id.substring(0,1) === '2'|| hrt.acc_id.substring(0,1) === '3' || hrt.acc_id.substring(0,1) === '4' || hrt.acc_id.substring(0,1) === '5'"> 
+                                                                                            <div v-if="hrt.acc_id.substring(0,1) === '3' || hrt.acc_id.substring(0,1) === '4' || hrt.acc_id.substring(0,1) === '5'"> 
                                                                                                 {{ Number(amount).toLocaleString() }}
                                                                                             </div>
-                                                                                            <div v-else>{{ Number(-1*amount).toLocaleString() }}</div>    
+                                                                                            <div v-else-if="hrt.acc_id.substring(0,1) === '6'">{{ Number(-1*amount).toLocaleString() }}</div>
+                                                                                            <div v-else>{{ Number(amount).toLocaleString() }}</div>    
                                                                                         </td>
                                                                                         <td v-else-if="hrt.jenis === 'Total'">
-                                                                                            <div v-if="hrt.acc_id.substring(0,1) === '2'|| hrt.acc_id.substring(0,1) === '3' || hrt.acc_id.substring(0,1) === '4' || hrt.acc_id.substring(0,1) === '6'"> 
+                                                                                            <div v-if="hrt.acc_id.substring(0,1) === '3' || hrt.acc_id.substring(0,1) === '4' || hrt.acc_id.substring(0,1) === '5'"> 
                                                                                                 {{ Number(amount).toLocaleString() }}
                                                                                             </div>
-                                                                                            <div v-else>{{ Number(-1*amount).toLocaleString() }}</div>
+                                                                                            <div v-else-if="hrt.acc_id.substring(0,1) === '6'">{{ Number(-1*amount).toLocaleString() }}</div>
+                                                                                            <div v-else>{{ Number(amount).toLocaleString() }}</div>
                                                                                         </td>
                                                                                         <td></td>
                                                                                         <td></td>
@@ -161,10 +168,11 @@
                                                                                         <td>{{ hrt.acc_id }}</td>
                                                                                         <td style="min-width: 200px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
                                                                                         <td>
-                                                                                            <div v-if="hrt.acc_id.substring(0,1) === '2'|| hrt.acc_id.substring(0,1) === '3' || hrt.acc_id.substring(0,1) === '4' || hrt.acc_id.substring(0,1) === '6'"> 
+                                                                                            <div v-if="hrt.acc_id.substring(0,1) === '3' || hrt.acc_id.substring(0,1) === '4' || hrt.acc_id.substring(0,1) === '5'"> 
                                                                                                 {{ Number(amount).toLocaleString() }}
                                                                                             </div>
-                                                                                            <div v-else>{{ Number(-1*amount).toLocaleString() }}</div>
+                                                                                            <div v-else-if="hrt.acc_id.substring(0,1) === '6'">{{ Number(-1*amount).toLocaleString() }}</div>
+                                                                                            <div v-else>{{ Number(amount).toLocaleString() }}</div>
                                                                                         </td>
                                                                                         <td></td>
                                                                                         <td></td>
@@ -175,8 +183,8 @@
                                                                         </table>
                                                                     </td>
                                                                     <td>
-                                                                        <table border="1" cellspacing="3">
-                                                                            <tbody  v-for="hrt in biayalist" :key="hrt.acc_id" :set="amount = hrt.amount">
+                                                                        <!-- <table border="1" cellspacing="3">
+                                                                            <tbody  v-for="hrt in biayalist" :key="hrt.acc_id" :set="amount = hrt.amount"> -->
                                                                                 
                                                                                     <!-- <tr v-if="hrt.acc_id === '59999'" style="font-size:10px">
                                                                                         <td v-if="hrt.jenis != 'Total'" style="min-width:20px">{{ hrt.acc_id }}</td>
@@ -308,8 +316,8 @@
                                                                                         <td></td>
                                                                                     </tr> -->
 
-                                                                            </tbody>
-                                                                        </table>
+                                                                            <!-- </tbody>
+                                                                        </table> -->
                                                                         
                                                                     </td>
                                                                 </tr>
@@ -409,6 +417,8 @@
 
     const store = useStore();
 
+    const load = ref();
+
     const sorting = ref({
         startDate: moment().subtract(30,'d').format("D-M-YYYY"),
         endDate: moment().format("D-M-YYYY")
@@ -419,10 +429,15 @@
     const hartalist = ref();
     const biayalist = ref();
     onMounted(() => {
-        const pendapatan = ref({group: '4,5'});
-        store.dispatch('GetPendapatan', pendapatan.value);
+        load.value = true;
+        // const pendapatan = ref({group: '4,5'});
+        // store.dispatch('GetPendapatan', pendapatan.value);
+        // const biaya = ref({group: '4,5,6'});
+        // store.dispatch('GetHarta', biaya.value);
+
         const biaya = ref({group: '4,5,6'});
-        store.dispatch('GetHarta', biaya.value);
+        var d = Object.assign(sorting.value, biaya.value);
+        store.dispatch('GetHarta', d );
 
         // const biaya = ref({group: '6'});
         // store.dispatch('GetHarta', biaya.value);
@@ -431,7 +446,7 @@
             // store.dispatch('GetCoaList')
             hartalist.value = store.getters.StateCoaPendapatan;
             biayalist.value = store.getters.StateHarta;
-
+            load.value = false;
             // const pendapatan = hartalist.value.filter(p => p.acc_id === '60000');
             // console.log(hartalist.value);
         }, 3000);
@@ -441,10 +456,10 @@
     })
 
     const cari = () => {
-        
-        const pendapatan = ref({group: '4,5'});
-        var c = Object.assign(sorting.value, pendapatan.value);
-        store.dispatch('GetPendapatan', c );
+        load.value = true;
+        // const pendapatan = ref({group: '4,5'});
+        // var c = Object.assign(sorting.value, pendapatan.value);
+        // store.dispatch('GetPendapatan', c );
         
         const biaya = ref({group: '4,5,6'});
         var d = Object.assign(sorting.value, biaya.value);
@@ -457,7 +472,7 @@
             // store.dispatch('GetCoaList')
             hartalist.value = store.getters.StateCoaPendapatan;
             biayalist.value = store.getters.StateHarta;
-
+            load.value = false;
             // const pendapatan = hartalist.value.filter(p => p.acc_id === '60000');
             // console.log(hartalist.value);
         }, 3000);
