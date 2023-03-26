@@ -334,52 +334,130 @@
 
                                             <div class="invoice-detail-header">
                                                 <div class="row justify-content-between">
-                                                    <div class="custom-table panel-body p-0"> 
-                                                        <v-client-table :data="listpobbm" :columns="columns" :options="table_option">
-                                                            <template #podate="props"> {{ moment(props.row.podate).format("DD-MM-YYYY") }} </template>
-                                                            <template #no_so="props"> {{ props.row.no_so }} </template>
-                                                            <template #qty_grpo="props"> {{ Number(props.row.qty_grpo).toLocaleString() }} </template>
-                                                            <template #qty_recieve="props"> {{ Number(props.row.qty_recieve).toLocaleString() }} </template>
-                                                            <template #pph="props"> {{ Number(props.row.pph).toLocaleString() }} </template>
-                                                            <template #total="props"> {{ Number(props.row.total).toLocaleString() }} </template>
-                                                            <template #action="props">
-                                                                <div class="custom-dropdown dropdown btn-group ">
-                                                                    <div class="btn-group" href="#" role="button" id="pendingTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                        <!-- <button type="button" class="btn btn-blue">Open</button> -->
-                                                                        <div role="group" class="btn-group">
-                                                                            <div class="dropdown b-dropdown custom-dropdown show btn-group">
-                                                                                <a class="btn dropdown-toggle btn-dark"
-                                                                                    ><svg
-                                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                                        width="24"
-                                                                                        height="24"
-                                                                                        viewBox="0 0 24 24"
-                                                                                        fill="none"
-                                                                                        stroke="currentColor"
-                                                                                        stroke-width="2"
-                                                                                        stroke-linecap="round"
-                                                                                        stroke-linejoin="round"
-                                                                                        class="feather feather-chevron-down"
-                                                                                    >
-                                                                                        <polyline points="6 9 12 15 18 9"></polyline>
-                                                                                    </svg>
-                                                                                </a>
+                                                    <div class="row invoice layout-top-spacing layout-spacing apps-invoice">
+                                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                            <div class="doc-container">
+                                                                <div class="row">
+                                                                    <div class="col-xl-9">
+                                                                        <div class="invoice-container">
+                                                                            <div class="custom-table panel-body p-0"> 
+                                                                                <v-client-table :data="listpobbm" :columns="columns" :options="table_option">
+                                                                                    <template #podate="props"> {{ moment(props.row.podate).format("DD-MM-YYYY") }} </template>
+                                                                                    <template #no_so="props"> {{ props.row.no_so }} </template>
+                                                                                    <template #qty_grpo="props"> {{ Number(props.row.qty_grpo).toLocaleString() }} </template>
+                                                                                    <template #qty_recieve="props"> {{ Number(props.row.qty_recieve).toLocaleString() }} </template>
+                                                                                    <template #pph="props"> {{ Number(props.row.pph).toLocaleString() }} </template>
+                                                                                    <template #total="props"> {{ Number(props.row.total).toLocaleString() }} </template>
+                                                                                    <template #action="props">
+                                                                                        <a href="javascript:void(0);" @click="edit_row(props.row)" >
+                                                                                            <svg
+                                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                                width="24"
+                                                                                                height="24"
+                                                                                                viewBox="0 0 24 24"
+                                                                                                fill="none"
+                                                                                                stroke="currentColor"
+                                                                                                stroke-width="2"
+                                                                                                stroke-linecap="round"
+                                                                                                stroke-linejoin="round"
+                                                                                                class="feather feather-edit-2"
+                                                                                            >
+                                                                                                <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                                                                                            </svg>
+                                                                                        </a>
+                                                                                        <a href="javascript:void(0);" @click="delete_row(props.row)" >
+                                                                                            <svg
+                                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                                width="24"
+                                                                                                height="24"
+                                                                                                viewBox="0 0 24 24"
+                                                                                                fill="none"
+                                                                                                stroke="currentColor"
+                                                                                                stroke-width="2"
+                                                                                                stroke-linecap="round"
+                                                                                                stroke-linejoin="round"
+                                                                                                class="feather feather-trash-2"
+                                                                                            >
+                                                                                                <polyline points="3 6 5 6 21 6"></polyline>
+                                                                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                                                                <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                                                                <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                                                            </svg>
+                                                                                        </a>
+                                                                                        <!-- <div class="custom-dropdown dropdown btn-group ">
+                                                                                            <div class="btn-group" href="#" role="button" id="pendingTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                                                <div role="group" class="btn-group">
+                                                                                                    <div class="dropdown b-dropdown custom-dropdown show btn-group">
+                                                                                                        <a class="btn dropdown-toggle btn-dark"
+                                                                                                            ><svg
+                                                                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                                                                width="24"
+                                                                                                                height="24"
+                                                                                                                viewBox="0 0 24 24"
+                                                                                                                fill="none"
+                                                                                                                stroke="currentColor"
+                                                                                                                stroke-width="2"
+                                                                                                                stroke-linecap="round"
+                                                                                                                stroke-linejoin="round"
+                                                                                                                class="feather feather-chevron-down"
+                                                                                                            >
+                                                                                                                <polyline points="6 9 12 15 18 9"></polyline>
+                                                                                                            </svg>
+                                                                                                        </a>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <ul class="dropdown-menu dropdown-menu-end">
+                                                                                                <li>
+                                                                                                    <router-link to="/editpenjualan" class="dropdown-item" @click="edit_row(props.row)">Edit</router-link>
+                                                                                                </li>
+                                                                                                <li>
+                                                                                                    <router-link :to="{ name: 'nosel', params: { id: 'hgjhg'} }" class="dropdown-item">coba</router-link>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </div> -->
+                                                                                    </template>
+                                                                                </v-client-table>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <ul class="dropdown-menu dropdown-menu-end">
-                                                                        <li>
-                                                                            <!-- <a href="javascript:void(0);" class="btn m-1 btn-light" @click="edit_row(props.row)"> Edit </a> -->
-                                                                            <router-link to="/editpenjualan" class="dropdown-item" @click="edit_row(props.row)">Edit</router-link>
-                                                                        </li>
-                                                                        <li>
-                                                                            <router-link :to="{ name: 'nosel', params: { id: 'hgjhg'} }" class="dropdown-item">coba</router-link>
-                                                                            <!-- <a href="javascript:void(0);" class="btn m-1 btn-light" @click="view_row(props.row)"> Delete </a> -->
-                                                                        </li>
-                                                                    </ul>
+                                                                    <div class="col-xl-3">
+                                                                        <div class="invoice-actions-btn">
+                                                                            <div class="invoice-action-btn">
+                                                                                <div class="row">
+
+                                                                                    <div class="col-xl-12 col-md-3 col-sm-6">
+                                                                                        <a href="javascript:;" class="btn btn-secondary btn-print" @click="print()">Print</a>
+                                                                                    </div>
+                                                                                    <div class="col-xl-12 col-md-3 col-sm-6">
+                                                                                        <div class="row mb-4">
+                                                                                            <div class="col-sm">
+                                                                                                <label for="inputState">Awal</label>
+                                                                                                <flat-pickr v-model="sorting.startDate" 
+                                                                                                    :config="{dateFormat: 'd-m-Y'}"
+                                                                                                    class="form-control form-control-sm">
+                                                                                                </flat-pickr>
+                                                                                            </div>
+                                                                                            <div class="col-sm">
+                                                                                                <label for="inputState">Akhir</label>
+                                                                                                <flat-pickr v-model="sorting.endDate" 
+                                                                                                    :config="{dateFormat: 'd-m-Y'}"
+                                                                                                    class="form-control form-control-sm">
+                                                                                                </flat-pickr>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-xl-12 col-md-3 col-sm-6">
+                                                                                        <a href="javascript:;" @click="cari" class="btn btn-success btn-download">Cari</a>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
-                                                            </template>
-                                                        </v-client-table>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -536,9 +614,10 @@
     const getNoPobbm=() => {
         store.dispatch('GetNoPobbm')
     }
-    // const getAcc=() => {
-    //     store.dispatch('GetAcc')
-    // }
+
+    const cari = () => {
+        getListPo();
+    }
 
 
     const getTotal=() =>{
@@ -613,6 +692,31 @@
         store.dispatch('CreatePo', [headerfull,detail] )
         setTimeout(function() { getCart(); }, 5000);
         getNoPobbm();
+    }
+
+    const edit_row = (row) => {
+        // alert('edit '+row);
+        console.log(row);
+    };
+
+    const delete_row = (row) => {
+        // alert('delete ' + row);
+        new window.Swal({
+            title: 'Anda Yahin?',
+            text: "Hapus Po !" +row.no_po,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Delete',
+            padding: '2em'
+        }).then(result => {
+            if (result.value) {
+                store.dispatch('DeletePObbm', { id:row.no_po});
+                getListPo();
+                getNoPobbm();
+                new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
+
+            }
+        });
     }
 
     onMounted(() => {

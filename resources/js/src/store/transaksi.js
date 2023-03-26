@@ -468,6 +468,57 @@ const actions = {
         }
     },
 
+    async DeletePObbm({dispatch}, kd) {
+        let response
+        try {
+            response = await axios.post('/api/delete/pobbm', kd)
+            // console.log(response.data.data)
+        } catch (ex) {
+            // Handle error
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'PO Gagal Dihapus',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            return
+        }
+        // await dispatch('GetPembelian')
+    },
+    async getDetailPObbm({dispatch}, kd) {
+        let response
+        try {
+            response = await axios.post('/api/detail/pobbm', kd)
+            // console.log(response.data.data)
+        } catch (ex) {
+            // Handle error
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'PO Gagal Dihapus',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            return
+        }
+        // await dispatch('GetPembelian')
+    },
+
     async DeleteBiaya({dispatch}, kd) {
         let response
         try {

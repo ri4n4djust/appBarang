@@ -9,7 +9,9 @@ const state = {
     noterimabbm: [],
     nokupon: [],
     nobiaya: [],
-    nojurnalumum: []
+    nojurnalumum: [],
+    noinventaris: [],
+    nopengadaan: []
   };
   
 const getters = {
@@ -21,7 +23,9 @@ const getters = {
     NoTerimaBbm: state => state.noterimabbm,
     NoKupon: state => state.nokupon,
     NoBiaya: state => state.nobiaya,
-    NoJurnalUmum: state => state.nojurnalumum
+    NoJurnalUmum: state => state.nojurnalumum,
+    NoInventaris: state => state.noinventaris,
+    NoPengadaan: state => state.nopengadaan
 };
 
 const actions = {  
@@ -133,6 +137,30 @@ const actions = {
         }
     
     },
+    async GetNoInventaris({ commit }){
+        let response
+        try {
+            response = await axios.get('/api/kdinventaris')
+            commit('setKdInventaris', response.data.kdInventaris)
+        } catch (ex) {
+            // Handle error
+            alert('error no po bbm')
+            return
+        }
+    
+    },
+    async GetNoPengadaan({ commit }){
+        let response
+        try {
+            response = await axios.get('/api/kdpengadaan')
+            commit('setKdPengadaan', response.data.kdPengadaan)
+        } catch (ex) {
+            // Handle error
+            alert('error no pengadaan')
+            return
+        }
+    
+    },
 
 };
 const mutations = {
@@ -162,6 +190,12 @@ const mutations = {
     },
     setTerimabbm(state, gr){
         state.noterimabbm = gr
+    },
+    setKdInventaris(state, inv){
+        state.noinventaris = inv
+    },
+    setKdPengadaan(state, pga){
+        state.nopengadaan = pga
     },
 
 };

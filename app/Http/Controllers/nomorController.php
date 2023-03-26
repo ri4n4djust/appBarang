@@ -14,6 +14,8 @@ use App\Models\Kupon;
 use App\Models\KuponPenjualan;
 use App\Models\Pobbm;
 use App\Models\BbmDatang;
+use App\Models\Inventaris;
+use App\Models\Pengadaan;
 use Illuminate\Support\Facades\DB;
 
 class nomorController extends Controller
@@ -428,6 +430,92 @@ class nomorController extends Controller
                     'success' => true,
                     'message' => 'Detail Post!',
                     'kdBbmdatang'    => $post
+                ], 200);
+            }
+        }
+    }
+
+    public function kodeInventaris()
+    {
+        $count = Inventaris::all();
+        if($count->isEmpty()){
+            $tahun = date('mY');
+            $post = 'INV'.$tahun.'1';
+            return response()->json([
+                'success' => true,
+                'message' => 'Detail Post!',
+                'kdInventaris'    => $post
+            ], 200);
+        }else{
+
+            $no = 0 ;
+            $count = Inventaris::all()->last();
+            $terakhir = substr($count->kode_inventaris, 8,  20);
+            $kodeBaru = $terakhir + 1  ;
+
+            $tahun = date('mY');
+            $post = 'INV'.$tahun.''.$kodeBaru;
+
+            if (Inventaris::where('kode_inventaris', $post)->exists()) {
+                $count = Inventaris::all()->last();
+                $terakhir = substr($count->kode_inventaris, 8,  20);
+                $kodeBarulagi = $kodeBaru + 1 ;
+                $post = 'INV'.$tahun.$kodeBarulagi;
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Detail Post!',
+                    'kdInventaris'    => $post
+                ], 200);
+            } else {
+                $tahun = date('mY');
+                //$post = 'OP-'.$tahun.'-'.'1';
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Detail Post!',
+                    'kdInventaris'    => $post
+                ], 200);
+            }
+        }
+    }
+
+    public function kodePengadaan()
+    {
+        $count = Pengadaan::all();
+        if($count->isEmpty()){
+            $tahun = date('mY');
+            $post = 'PGA'.$tahun.'1';
+            return response()->json([
+                'success' => true,
+                'message' => 'Detail Post!',
+                'kdPengadaan'    => $post
+            ], 200);
+        }else{
+
+            $no = 0 ;
+            $count = Pengadaan::all()->last();
+            $terakhir = substr($count->pengadaan_sysno, 8,  20);
+            $kodeBaru = $terakhir + 1  ;
+
+            $tahun = date('mY');
+            $post = 'PGA'.$tahun.''.$kodeBaru;
+
+            if (Pengadaan::where('pengadaan_sysno', $post)->exists()) {
+                $count = Pengadaan::all()->last();
+                $terakhir = substr($count->pengadaan_sysno, 8,  20);
+                $kodeBarulagi = $kodeBaru + 1 ;
+                $post = 'PGA'.$tahun.$kodeBarulagi;
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Detail Post!',
+                    'kdPengadaan'    => $post
+                ], 200);
+            } else {
+                $tahun = date('mY');
+                //$post = 'OP-'.$tahun.'-'.'1';
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Detail Post!',
+                    'kdPengadaan'    => $post
                 ], 200);
             }
         }

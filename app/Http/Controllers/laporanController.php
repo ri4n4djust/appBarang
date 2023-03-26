@@ -171,6 +171,84 @@ class laporanController extends Controller
         ], 200);
     }
 
+    public function deletePobbm(Request $request){
+        try{
+            $exception = DB::transaction(function() use ($request){
+                $kd = $request->input('id');
+                //====hapus jurnal
+                $gl = DB::table('general_ledger')->where('order_no', $kd)->get();
+                for($i=0;$i< count($gl);$i++){
+                    DB::table('general_ledger')->where('notrans', $gl[$i]->notrans)->delete();
+                    DB::table('gl_detail')->where('rgl', $gl[$i]->notrans)->delete();
+                };
+                //=====end jurnal
+                DB::table('tblpobbm')->where('no_po', $kd)->delete();
+                DB::table('tblpobbm_detail')->where('r_noPo', $kd)->delete();
+                DB::commit();
+            });
+            if(is_null($exception)) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Po Berhasil di Hapus',
+                    // 'data' => $detail
+                ], 200);
+            } else {
+                DB::rollback();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'po Gagal Dihapus',
+                ], 500);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            // something went wrong
+            return response()->json([
+             'success' => false,
+             'message' => 'exception'.$e,
+         ], 400);
+        }
+    }
+
+    public function detailPobbm(Request $request){
+        try{
+            $exception = DB::transaction(function() use ($request){
+                $kd = $request->input('id');
+                //====hapus jurnal
+                $gl = DB::table('general_ledger')->where('order_no', $kd)->get();
+                // for($i=0;$i< count($gl);$i++){
+                //     DB::table('general_ledger')->where('notrans', $gl[$i]->notrans)->delete();
+                //     DB::table('gl_detail')->where('rgl', $gl[$i]->notrans)->delete();
+                // };
+                //=====end jurnal
+                $header = DB::table('tblpobbm')->where('no_po', $kd)->get();
+                $detail = DB::table('tblpobbm_detail')->where('r_noPo', $kd)->get();
+                // DB::table('tblpobbm')->where('no_po', $kd)->delete();
+                // DB::table('tblpobbm_detail')->where('r_noPo', $kd)->delete();
+                DB::commit();
+            });
+            if(is_null($exception)) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Detail PO',
+                    'data' => [$header, $detail, $gl]
+                ], 200);
+            } else {
+                DB::rollback();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Gagal Load Po',
+                ], 500);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            // something went wrong
+            return response()->json([
+             'success' => false,
+             'message' => 'exception'.$e,
+         ], 400);
+        }
+    }
+
     public function deleteBiaya(Request $request){
         try{
             $exception = DB::transaction(function() use ($request){

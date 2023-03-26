@@ -62,13 +62,26 @@ Route::post('/list-bbmdatang', [App\Http\Controllers\laporanController::class, '
 // Route::post('/update/room', [App\Http\Controllers\roomController::class, 'update']);
 // Route::delete('/hapus/room/{id}', [App\Http\Controllers\roomController::class, 'destroy']);
 
+//====================inventaris
+Route::get('/inventaris', [App\Http\Controllers\inventarisController::class, 'indexInventaris']);
+Route::post('/store/inventaris', [App\Http\Controllers\inventarisController::class, 'tambahInventaris']);
+Route::post('/pembelian/inventaris', [App\Http\Controllers\inventarisController::class, 'beliInventaris']);
+Route::post('/hapus/inventaris', [App\Http\Controllers\inventarisController::class, 'hapusInventaris']);
+Route::post('/jurnal/inventaris', [App\Http\Controllers\inventarisController::class, 'jurnalInventaris']);
+
 //=================hapus
 Route::post('/delete/biaya', [App\Http\Controllers\laporanController::class, 'deleteBiaya']);
+Route::post('/delete/pobbm', [App\Http\Controllers\laporanController::class, 'deletePobbm']);
+
+//==================detail
+Route::post('/detail/pobbm', [App\Http\Controllers\laporanController::class, 'detailPobbm']);
 
 //==========PENOMORAN=============
 Route::get('/kdbarang', [App\Http\Controllers\nomorController::class, 'kodeBarang']);
 Route::get('/kdsupplier', [App\Http\Controllers\nomorController::class, 'kodeSupplier']);
 Route::get('/kdpembelian', [App\Http\Controllers\nomorController::class, 'kodePembelian']);
+Route::get('/kdinventaris', [App\Http\Controllers\nomorController::class, 'kodeInventaris']);
+Route::get('/kdpengadaan', [App\Http\Controllers\nomorController::class, 'kodePengadaan']);
 Route::get('/kdpenjualan', [App\Http\Controllers\nomorController::class, 'kodePenjualan']);
 Route::get('/kdkupon', [App\Http\Controllers\nomorController::class, 'kodeKupon']);
 Route::get('/kdkategori', [App\Http\Controllers\nomorController::class, 'kodeKategori']);

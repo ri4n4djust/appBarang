@@ -85,6 +85,7 @@ const routes = [
         // meta: { requiresAuth: true },
     },
     //============end oof coa
+    //============master
     {
         path: '/transaksi-aplusan',
         name: 'transaksi-aplusan',
@@ -111,6 +112,12 @@ const routes = [
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexPersediaan.vue'),
         // meta: { requiresAuth: true },
     },
+    {
+        path: '/inventaris',
+        name: 'inventaris',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexInventaris.vue'),
+        // meta: { requiresAuth: true },
+    },
 
     {
         path: '/nosel',
@@ -119,7 +126,7 @@ const routes = [
         // meta: { requiresAuth: true },
         props: true,
     },
-
+    //================end of master
     // transaksi
     {
         path: '/po-bbm',
@@ -137,6 +144,12 @@ const routes = [
         path: '/pembelian',
         name: 'pembelian',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/pembelian.vue'),
+        props: true,
+    },
+    {
+        path: '/pembelian-inventaris',
+        name: 'pembelian-inventaris',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/pembelianInventaris.vue'),
         props: true,
     },
     {

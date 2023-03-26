@@ -155,6 +155,9 @@
                             <router-link to="/persediaan" @click="toggleMobileMenu">Persediaan</router-link>
                         </li>
                         <li>
+                            <router-link to="/inventaris" @click="toggleMobileMenu">Inventaris</router-link>
+                        </li>
+                        <li>
                             <router-link to="/kas" @click="toggleMobileMenu">Buku Kas</router-link>
                         </li>
                         <li class="menu">
@@ -274,6 +277,9 @@
                         </li>
                         <li>
                             <router-link to="/pembelian" @click="toggleMobileMenu">Pembelian</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/pembelian-inventaris" @click="toggleMobileMenu">Pembelian Inventaris</router-link>
                         </li>
                         <li>
                             <router-link to="/penjualan" @click="toggleMobileMenu">Penjualan</router-link>
