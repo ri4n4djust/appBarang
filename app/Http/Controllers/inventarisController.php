@@ -79,4 +79,120 @@ class inventarisController extends Controller
         }
     }
 
+    public function beliInventaris(Request $request){
+        try{
+            $exception = DB::transaction(function() use ($request){
+                $editid = $request->input('editid');
+                // array key 0 = Header
+                // array kkey 1 = Detail
+                $tglNota = $request[0]['tglNota'];
+                $noNota = $request[0]['noNota'];
+                $post = DB::table('tblinventaris_pengadaan')->insert([
+                    'pengadaan_sysno'     => $request[0]['noNota'],
+                    'pengadaan_docno'     => $request[0]['noNota'],
+                    'tgl_spk'   => $tglNota,
+                    'total'     => $request[0]['total'],
+                    'memo'     => $request[0]['notes'],
+                    'supplier_code' => $request[0]['kdSupplier'],
+                    'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                ]);
+                $detpem = $request[1];
+                for ($i = 0; $i < count($detpem); $i++) {
+
+                    $kdBarang = $detpem[$i]['kdBarang'];
+                    $qty = $detpem[$i]['qty'];
+                    // $brg = DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->first();
+                    // $oldStok = $brg->stokPersediaan;
+                    // DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->update([
+                    //     'stokPersediaan' => $oldStok + $qty,
+                    //     'lastPrice' => $detpem[$i]['hrgPokok'],
+                    // ]);
+                    // DB::table('tblbarang')->where('kdBarang', $kdBarang)->update([
+                    //     'stkBarang' => $oldStok + $qty,
+                    //     'hrgPokok' => $detpem[$i]['hrgPokok'],
+                    // ]);
+
+                    DB::table('tblinventaris_pengadaan_detail')->upsert([
+                        'rsysno_pengadaan' => $noNota,
+                        'rkode_inventaris' => $kdBarang,
+                        'rkode_pengadaan' => $noNota,
+                        'kode_pengadaan_detail' => $noNota.$kdBarang.$i+1,
+                        'harga_perolehan' => $detpem[$i]['hrgPokok'],
+                        'qty' => $qty,
+                        'subtotal' => $detpem[$i]['total'],
+                        'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                    ],
+                    [
+                        // 'rsysno_pengadaan' => $noNota,
+                        'rkode_inventaris' => $kdBarang,
+                        'rkode_pengadaan' => $noNota,
+                        'kode_pengadaan_detail' => $noNota.$kdBarang.$i+1,
+                        'harga_perolehan' => $detpem[$i]['hrgPokok'],
+                        'qty' => $qty,
+                        'subtotal' => $detpem[$i]['total'],
+                        'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                    ]);
+
+                    //===========jurnal
+                    // $acc_id_d = $detpem[$i]['accid_persediaan']; // acc id yg di debet
+                    // $acc_id_k = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
+                    // $memo = 'Pembelian-Barang';
+                    // $jurnal = 'JK';
+                    // $subtotal = $detpem[$i]['total'];
+                    // insert_gl($noNota,$tglNota,$subtotal,$memo,$jurnal);
+                    // $rgl = DB::table('general_ledger')->get()->last()->notrans;
+                    // $ac = [
+                    //     [
+                    //         'rgl' => $rgl,
+                    //         'acc_id' => $acc_id_d,
+                    //         'debet' => $subtotal,
+                    //         'kredit' => 0,
+                    //         'trans_detail' => 'Pembelian-Barang',
+                    //         'void_flag' => 0,
+                    //     ], 
+                    //     [
+                    //         'rgl' => $rgl,
+                    //         'acc_id' => $acc_id_k,
+                    //         'debet' => 0,
+                    //         'kredit' => $subtotal,
+                    //         'trans_detail' => 'Pembelian-Barang',
+                    //         'void_flag' => 0,
+                    //     ]
+                    // ];
+                    
+                    // insert_gl_detail($ac);
+                    //===========end jurnal
+                    // DB::table('tblinventari_pengadaan_detail')->upsert($detail);
+                }
+                // PembelianDetail::insert($detail);
+                
+
+                DB::commit();
+            });
+            if(is_null($exception)) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Inventaris Berhasil di insert!',
+                    // 'data' => $detail
+                ], 200);
+            } else {
+                DB::rollback();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Inventaris Gagal Diupdate!',
+                ], 500);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            // something went wrong
+            return response()->json([
+             'success' => false,
+             'message' => 'exception'.$e,
+         ], 400);
+        }
+    }
+
 }

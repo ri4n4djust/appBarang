@@ -23,41 +23,43 @@ const actions = {
         await dispatch('GetInventaris')
         // await commit('setUser', detUser.data.user)
     },
-    // async UpdateHargaBbm({dispatch}, newhrg){
-    //     try{
-    //         await axios.post('api/update/harga-bbm', newhrg)
-    //         console.log(newhrg)
-    //         await dispatch('GetBbm')
-    //         const toast = window.Swal.mixin({
-    //             toast: true,
-    //             position: 'top-center',
-    //             showConfirmButton: false,
-    //             timer: 3000,
-    //             padding: '2em',
-    //         });
-    //         toast.fire({
-    //             icon: 'success',
-    //             title: 'Berhasil Simpan Barang',
-    //             padding: '2em',
-    //         });
-    //     } catch (err){
-    //         const toast =  window.Swal.mixin({
-    //             toast: true,
-    //             position: 'top-center',
-    //             showConfirmButton: false,
-    //             timer: 3000,
-    //             padding: '2em'
-    //         });
-    //         toast.fire({
-    //             title: 'Error!',
-    //             text: 'gagal disimpan',
-    //             icon: 'error',
-    //             // confirmButtonText: 'Cool',
-    //             padding: '2em'
-    //         });
-
-    //     }
-    // },
+    async CreatePembelianInventaris({dispatch}, detail) {
+        let response
+        try {
+            response = await axios.post('/api/pembelian/inventaris', detail)
+            localStorage.setItem('cartItemsPe', '[]')
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Pembelian berhasil tersimpan',
+                padding: '2em',
+            });
+        } catch (ex) {
+            // Handle error
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'Mohon Lengkapi Data',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            return
+        }
+        // await dispatch('GetPembelian')
+    },
 
 };
 const mutations = {

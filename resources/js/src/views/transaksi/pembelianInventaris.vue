@@ -115,8 +115,8 @@
                                                     v-model="brg" 
                                                     :options="pembelian.barangs" 
                                                     :searchable="true"
-                                                    track-by="nmPersediaan"
-                                                    label="nmPersediaan"
+                                                    track-by="nama_inventaris"
+                                                    label="nama_inventaris"
                                                     open-direction="top"
                                                     placeholder="Choose..." 
                                                     selected-label="" 
@@ -194,7 +194,7 @@
                                                 <div class="invoice-actions-btn">
                                                     <div class="invoice-action-btn">
                                                         <div class="row">
-                                                            <div class="col-sm-4">
+                                                            <!-- <div class="col-sm-4">
                                                                 <div v-if="divpajak">
                                                                     <a href="javascript:;" class="btn btn-primary btn-send" @click="taxRemove" >- pajak</a>
                                                                 </div>
@@ -203,9 +203,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-4">
-                                                                <!-- <router-link to="/apps/invoice/preview" class="btn btn-dark btn-preview">Preview</router-link> -->
                                                                 <a href="javascript:;" @click="addPayment" class="btn btn-dark btn-preview" data-bs-toggle="modal" data-bs-target="#modalPayment">Pembayaran</a>
-                                                            </div>
+                                                            </div> -->
                                                             <div class="col-sm-4">
                                                                 <a href="javascript:;" @click="simpanPembelian" class="btn btn-success btn-download">Save</a>
                                                             </div>
@@ -214,7 +213,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="modal fade" id="modalPayment" tabindex="-1" role="dialog" aria-labelledby="modalPayment" aria-hidden="true">
+                                            <!-- <div class="modal fade" id="modalPayment" tabindex="-1" role="dialog" aria-labelledby="modalPayment" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
@@ -241,7 +240,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                             <div class="col-md-6">
                                                 <div class="totals-row">
@@ -333,7 +332,7 @@
     import { useRouter, useRoute } from 'vue-router'
 
     import { useMeta } from '@/composables/use-meta';
-    useMeta({ title: 'Pembelian' });
+    useMeta({ title: 'Pembelian Inventaris' });
 
     const store = useStore();
     const router = useRouter();
@@ -380,14 +379,14 @@
     // const currency_list = ref([]);
 
     const pembelian = computed(() => {
-        const barangs = store.getters.StatePersediaan;
+        const barangs = store.getters.StateInventaris;
         const suppliers = store.getters.StateSupplier;
-        const accs = store.getters.StateAcc;
+        // const accs = store.getters.StateAcc;
         nopengadaan.value = store.getters.NoPengadaan;
         const pajak = store.state.pajak;
         tot.value = brg.value.lastPrice * qty.value;
         // console.log(suppliers)
-        return { barangs, pajak, suppliers, nopengadaan, accs, tot }
+        return { barangs, pajak, suppliers, nopengadaan, tot }
     });
 
     const getBarang=() => {
@@ -455,7 +454,7 @@
         const headers =paramssupplier.value
             const headerfull = Object.assign(header, headers)
             const detail =cartItems.value
-            store.dispatch('CreatePembelian', [headerfull,detail] )
+            store.dispatch('CreatePembelianInventaris', [headerfull,detail] )
             setTimeout(function() { getCart(); }, 5000);
             getNoPengadaan();
     }
@@ -495,17 +494,17 @@
 
     function addToCart(brg) {
         // console.log(brg)
-        if (localStorage.getItem('cartItemsP')===null){
+        if (localStorage.getItem('cartItemsPe')===null){
             cartItems.value = [];
             // console.log(cartItems.value)
         }else{
-            cartItems.value = JSON.parse(localStorage.getItem('cartItemsP'));
+            cartItems.value = JSON.parse(localStorage.getItem('cartItemsPe'));
         }
-            const oldItems = JSON.parse(localStorage.getItem('cartItemsP')) || [];
+            const oldItems = JSON.parse(localStorage.getItem('cartItemsPe')) || [];
             // console.log(oldItems)
-            const existingItem = oldItems.find(({ kdBarang }) => kdBarang === brg.kdPersediaan);
+            const existingItem = oldItems.find(({ kdBarang }) => kdBarang === brg.kode_inventaris);
             if (existingItem) {
-                const objIndex = cartItems.value.findIndex((e => e.kdBarang === brg.kdPersediaan));
+                const objIndex = cartItems.value.findIndex((e => e.kdBarang === brg.kode_inventaris));
                 const oldName = cartItems.value[objIndex].nmBarang;
                 const oldQty = cartItems.value[objIndex].qty;
                 const oldTotal = cartItems.value[objIndex].total;
@@ -513,23 +512,23 @@
                 const newTotal = parseInt(oldTotal) + parseInt(qty.value * brg.lastPrice) ;
                 cartItems.value[objIndex].qty = parseInt(newQty);
                 cartItems.value[objIndex].total = parseInt(newTotal);
-                localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
+                localStorage.setItem('cartItemsPe',JSON.stringify(cartItems.value));
                 alert(oldName+' Quantity Update')
                 getCart();
                 // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
             }else{
-            cartItems.value.push({kdBarang:brg.kdPersediaan, nmBarang:brg.nmPersediaan,accid_persediaan:brg.accid_persediaan,hrgPokok:brg.lastPrice,qty:qty.value,satuan:brg.satuanPersediaan,total:qty.value * brg.lastPrice});	
-            localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
+            cartItems.value.push({kdBarang:brg.kode_inventaris, nmBarang:brg.nama_inventaris,accid_persediaan:brg.accid_persediaan,hrgPokok:brg.lastPrice,qty:qty.value,satuan:brg.satuanPersediaan,total:qty.value * brg.lastPrice});	
+            localStorage.setItem('cartItemsPe',JSON.stringify(cartItems.value));
             getCart();
             // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
-            alert(brg.nmPersediaan+ " berhasil disimpan")
+            alert(brg.nama_inventaris+ " berhasil disimpan")
             }
     }
     function removeItem(id) {
         // alert(id)
-        const arrayFromStroage = JSON.parse(localStorage.getItem('cartItemsP'));
+        const arrayFromStroage = JSON.parse(localStorage.getItem('cartItemsPe'));
         const filtered = arrayFromStroage.filter(arrayFromStroage => arrayFromStroage.kdBarang !== id);
-        localStorage.setItem('cartItemsP', JSON.stringify(filtered));
+        localStorage.setItem('cartItemsPe', JSON.stringify(filtered));
         // cartItems.value.splice(index, 1)
         // this.isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
         getCart();
@@ -549,11 +548,11 @@
 
     function getCart() {
         // subtotal.value = []
-        if (localStorage.getItem('cartItemsP')===null){
-            cartItems.value = localStorage.setItem('cartItemsP', '[]');
+        if (localStorage.getItem('cartItemsPe')===null){
+            cartItems.value = localStorage.setItem('cartItemsPe', '[]');
             subtotal.value = 0
         }else{
-            cartItems.value = JSON.parse(localStorage.getItem('cartItemsP'));
+            cartItems.value = JSON.parse(localStorage.getItem('cartItemsPe'));
             getSubtotal();
             getTotal();
             
@@ -568,7 +567,7 @@
     };
 
     function getSubtotal(){
-        const allItems = JSON.parse(localStorage.getItem('cartItemsP')) || [];
+        const allItems = JSON.parse(localStorage.getItem('cartItemsPe')) || [];
         let sum = 0;
         subtotal.value = 0
         for(let i = 0; i < allItems.length; i++){
