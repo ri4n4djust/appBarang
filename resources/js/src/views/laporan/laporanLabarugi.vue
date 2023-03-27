@@ -36,7 +36,7 @@
                                                         <!-- <div class="row invoice layout-top-spacing layout-spacing apps-invoice"></div> -->
                                                         <button type="button" class="btn btn-danger btn-lg mb-3 me-3" v-if="load"><span class="spinner-border text-white me-2 align-self-center loader-sm">Loading...</span> Loading</button> 
                                                         <!-- <div class="table-responsive"> -->
-                                                            <table border="1" cellspacing="3">
+                                                            <table border="1" cellspacing="3" style="font-size:10px">
                                                                 <tr style="vertical-align:top">
                                                                     <td>
                                                                         <table border="1" cellspacing="3" >
@@ -58,7 +58,7 @@
                                                                                         <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
                                                                                         <td v-else></td>
                                                                                     </tr> -->
-                                                                                    <tr v-if="hrt.acc_id === '69999'" style="font-size:10px">
+                                                                                    <tr v-if="hrt.acc_id === '69999'" >
                                                                                         <td v-if="hrt.jenis != 'Total'" style="min-width:20px">{{ hrt.acc_id }}</td>
                                                                                         <td v-else></td>
                                                                                         <td v-if="hrt.jenis === 'Total'" style="min-width: 200px;" ><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
@@ -90,7 +90,7 @@
                                                                                         <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
                                                                                         <td v-else></td>
                                                                                     </tr> -->
-                                                                                    <tr v-if="hrt.level === '1'" style="font-size:10px">
+                                                                                    <tr v-if="hrt.level === '1'" >
                                                                                         <td v-if="hrt.jenis != 'Total'" style="min-width:20px">{{ hrt.acc_id }}</td>
                                                                                         <td v-else></td>
                                                                                         <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'" style="min-width: 200px;" ><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
@@ -115,7 +115,7 @@
                                                                                         </b></td>
                                                                                         <td v-else></td>
                                                                                     </tr>
-                                                                                    <tr v-if="hrt.level === '2'" style="font-size:10px">
+                                                                                    <tr v-if="hrt.level === '2'">
                                                                                         <td v-if="hrt.jenis != 'Total'" >{{ hrt.acc_id }}</td>
                                                                                         <td v-else></td>
                                                                                         <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'" style="min-width: 200px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</b></td>
@@ -140,7 +140,7 @@
                                                                                         <td v-else></td>
                                                                                         <td></td>
                                                                                     </tr>
-                                                                                    <tr v-if="hrt.level === '3'" style="font-size:10px">
+                                                                                    <tr v-if="hrt.level === '3'" >
                                                                                         <td v-if="hrt.jenis != 'Total'">{{ hrt.acc_id }}</td>
                                                                                         <td v-else></td>
                                                                                         <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'" style="min-width: 200px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</b></td>
@@ -164,7 +164,7 @@
                                                                                         <td></td>
                                                                                         <td></td>
                                                                                     </tr>
-                                                                                    <tr v-if="hrt.level === '4'" style="font-size:10px">
+                                                                                    <tr v-if="hrt.level === '4'" >
                                                                                         <td>{{ hrt.acc_id }}</td>
                                                                                         <td style="min-width: 200px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
                                                                                         <td>

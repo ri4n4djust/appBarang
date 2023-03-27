@@ -108,7 +108,7 @@ class transaksiNoselController extends Controller
                         // $total = $detop[$i]['total'];
                         // $hrg = $detop[$i]['hrgJual'];
                         $oldStokPer = DB::table('tblpersediaan')->select('stokPersediaan')->where('kdPersediaan', $kdBarang)->first();
-                        $oldStokBbm = DB::table('tblbbm')->select('stokBbm')->where('code_bbm', $kdBarang)->first();
+                        // $oldStokBbm = DB::table('tblbbm')->select('stokBbm')->where('code_bbm', $kdBarang)->first();
                         $mtr_awal = DB::table('tblnosel_detail')->select('meter_akhir')->where('id_nosel', $id_nosel)->first();
 
 
@@ -126,7 +126,7 @@ class transaksiNoselController extends Controller
                                 'salePrice' => $hrg,
                             ]);
                             DB::table('tblbbm')->where('code_bbm', $kdBarang)->update([
-                                'stokBbm' => $oldStokBbm->stokBbm - $costLiter,
+                                // 'stokBbm' => $oldStokBbm->stokBbm - $costLiter,
                                 'sale_price' => $hrg,
                             ]);
 
