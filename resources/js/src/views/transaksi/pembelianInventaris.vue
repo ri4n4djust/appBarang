@@ -517,7 +517,7 @@
                 getCart();
                 // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
             }else{
-            cartItems.value.push({kdBarang:brg.kode_inventaris, nmBarang:brg.nama_inventaris,accid_persediaan:brg.accid_persediaan,hrgPokok:brg.lastPrice,qty:qty.value,satuan:brg.satuanPersediaan,total:qty.value * brg.lastPrice});	
+            cartItems.value.push({kdBarang:brg.kode_inventaris, nmBarang:brg.nama_inventaris,group_inventaris:brg.group_inventaris,hrgPokok:brg.lastPrice,qty:qty.value,satuan:brg.satuanPersediaan,total:qty.value * brg.lastPrice});	
             localStorage.setItem('cartItemsPe',JSON.stringify(cartItems.value));
             getCart();
             // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;

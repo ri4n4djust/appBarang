@@ -137,33 +137,33 @@ class inventarisController extends Controller
                     ]);
 
                     //===========jurnal
-                    // $acc_id_d = $detpem[$i]['accid_persediaan']; // acc id yg di debet
-                    // $acc_id_k = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
-                    // $memo = 'Pembelian-Barang';
-                    // $jurnal = 'JK';
-                    // $subtotal = $detpem[$i]['total'];
-                    // insert_gl($noNota,$tglNota,$subtotal,$memo,$jurnal);
-                    // $rgl = DB::table('general_ledger')->get()->last()->notrans;
-                    // $ac = [
-                    //     [
-                    //         'rgl' => $rgl,
-                    //         'acc_id' => $acc_id_d,
-                    //         'debet' => $subtotal,
-                    //         'kredit' => 0,
-                    //         'trans_detail' => 'Pembelian-Barang',
-                    //         'void_flag' => 0,
-                    //     ], 
-                    //     [
-                    //         'rgl' => $rgl,
-                    //         'acc_id' => $acc_id_k,
-                    //         'debet' => 0,
-                    //         'kredit' => $subtotal,
-                    //         'trans_detail' => 'Pembelian-Barang',
-                    //         'void_flag' => 0,
-                    //     ]
-                    // ];
+                    $acc_id_d =  $detpem[$i]['group_inventaris']; // acc id yg di debet
+                    $acc_id_k = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
+                    $memo = 'Pembelian-Inventaris';
+                    $jurnal = 'JK';
+                    $subtotal = $detpem[$i]['total'];
+                    insert_gl($noNota,$tglNota,$subtotal,$memo,$jurnal);
+                    $rgl = DB::table('general_ledger')->get()->last()->notrans;
+                    $ac = [
+                        [
+                            'rgl' => $rgl,
+                            'acc_id' => $acc_id_d,
+                            'debet' => $subtotal,
+                            'kredit' => 0,
+                            'trans_detail' => 'Pembelian-Inventaris',
+                            'void_flag' => 0,
+                        ], 
+                        [
+                            'rgl' => $rgl,
+                            'acc_id' => $acc_id_k,
+                            'debet' => 0,
+                            'kredit' => $subtotal,
+                            'trans_detail' => 'Pembelian-Inventaris',
+                            'void_flag' => 0,
+                        ]
+                    ];
                     
-                    // insert_gl_detail($ac);
+                    insert_gl_detail($ac);
                     //===========end jurnal
                     // DB::table('tblinventari_pengadaan_detail')->upsert($detail);
                 }

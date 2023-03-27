@@ -115,8 +115,8 @@
                                                 <label for="nama" class="col-sm-3 col-form-label col-form-label-sm">Kategori</label>
                                                 <div class="col-sm-9">
                                                     <select id="inputState" v-model="input.group_inventaris" class="form-select">
-                                                        <option value="1" selected>Mesin</option>
-                                                        <option value="2">Furniture</option>
+                                                        <option value="12300" selected>Peralatan Dan Mesin</option>
+                                                        <option value="12400">Kendaraan</option>
                                                     </select>
                                                 </div>
                                             </div>

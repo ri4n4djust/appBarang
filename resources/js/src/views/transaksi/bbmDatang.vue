@@ -443,7 +443,7 @@
         kdSupplier: r_supplier
     });
 
-    const columns = ref(['r_kdterima', 'r_nopo', 'r_noso' ,'tgl_teria', 'nama_bbm' ,'qty_terima', 'action']);
+    const columns = ref(['r_kdterima', 'r_nopo', 'r_noso' ,'tgl_terima', 'nama_bbm' ,'qty_terima', 'action']);
     const table_option = ref({
         perPage: 10,
         perPageValues: [5, 10, 20, 50],
@@ -456,7 +456,7 @@
             filterPlaceholder: 'Search...',
             limit: 'Results:',
         },
-        sortable: ['r_kdterima', 'r_nopo', 'r_noso' ,'tgl_teria', 'nama_bbm' ,'qty_terima',],
+        sortable: ['r_kdterima', 'r_nopo', 'r_noso' ,'tgl_terima', 'nama_bbm' ,'qty_terima',],
         sortIcon: {
             base: 'sort-icon-none',
             up: 'sort-icon-asc',

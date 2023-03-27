@@ -302,9 +302,11 @@
                                 <input type="text" class="form-control form-control-sm col-sm-4" v-model="meter_now[index]" >
                             </div>
                         </td>
-                        <td>{{ Math.abs(meter_now[index] - list.meter_akhir) }}</td>
-                        <td>{{ Number(list.harga).toLocaleString() }}</td>
-                        <td>{{ Number((meter_now[index] - list.meter_akhir) * list.harga).toLocaleString() }}</td>
+                        <td v-if="meter_now[index] != ''">{{ Math.abs(meter_now[index] - list.meter_akhir) }}</td>
+                        <td v-else>0</td>
+                        <td >{{ Number(list.harga).toLocaleString() }}</td>
+                        <td v-if="meter_now[index] != ''">{{ Number((meter_now[index] - list.meter_akhir) * list.harga).toLocaleString() }}</td>
+                        <td v-else>0</td>
                     </tr>
                 </tbody>
             </table>
@@ -374,6 +376,7 @@
         console.log(input_perubahan.value)
         store.dispatch('UpdateMeterNosel', input_perubahan.value)
         isOpen.value = false;
+        getNosel();
     }
     
     
@@ -398,18 +401,23 @@
         const arr = [];
         for (let i = 0; i < dataArr.length; i++) {
             // console.log({kdBarang : dataArr[i].r_kdBarang, nmBarang : dataArr[i].r_nmBarang,});
+            let last_meter =  meter_now.value[i];
+            if(meter_now.value[i] === ''){
+                last_meter = dataArr[i].meter_akhir;
+            };
             let id_nosel = dataArr[i].id_nosel
-            let cost = meter_now.value[i] - dataArr[i].meter_akhir  || 0;
+            let cost = last_meter - dataArr[i].meter_akhir  || 0;
             let subto = dataArr[i].harga * cost || 0;
             let subtohpp = dataArr[i].last_price * cost || 0;
             // subto = subto ?? 0 ;
-            let last_meter =  meter_now.value[i];
+            
             // let ket = keterangan.value[i]
             if (subto === 0){
                 last_meter = dataArr[i].meter_akhir;
             } else{
                 last_meter =  meter_now.value[i];
-            }
+            };
+            
             arr.push ({
                 'kd_bbm': dataArr[i].r_bbm,
                 'kodeBrg': dataArr[i].r_code_bbm,
@@ -527,10 +535,13 @@
 
         setTimeout(() => {
             // getlist();
+            getNosel();
+            getTrans();
+            getRegu();
             store.dispatch('NewKupon', [])
             store.dispatch('NewBiaya', [])
             store.dispatch('NewLink', [])
-        }, 1000)
+        }, 2000)
 
     }
 
@@ -575,7 +586,7 @@
         getNosel();
         getTrans();
         getRegu();
-        console.log('onmount index nosel')
+        // console.log('onmount index nosel')
         
         localStorage.setItem('kupon', '[]');
         localStorage.setItem('biaya', '[]');
