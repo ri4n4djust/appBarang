@@ -66,7 +66,7 @@
                 <div class="tab-pane fade show active" id="underline-home" role="tabpanel" aria-labelledby="underline-home-tab">
 
                     <div class="row">
-                        <div class="col-xl-12">
+                        <!-- <div class="col-xl-12"> -->
                             <div class="invoice-content">
                                 <div class="invoice-detail-body">
                                     <div class="invoice-detail-title">
@@ -255,7 +255,7 @@
                                     
                                 </div>
                             </div>
-                        </div>
+                        <!-- </div> -->
 
                         
                     </div>
