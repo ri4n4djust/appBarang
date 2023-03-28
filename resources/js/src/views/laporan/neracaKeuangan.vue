@@ -216,7 +216,7 @@
     const store = useStore();
 
     const sorting = ref({
-        startDate: moment().subtract(30,'d').format("D-M-YYYY"),
+        startDate: '01-01-2022', // moment().subtract(30,'d').format("D-M-YYYY"),
         endDate: moment().format("D-M-YYYY")
     });
 
@@ -228,7 +228,8 @@
         const harta = ref({
             group: '1,2,3'
         });
-        store.dispatch('GetHarta', harta.value);
+        var c = Object.assign(sorting.value, harta.value);
+        store.dispatch('GetHarta', c);
         // hartalist.value = store.getters.StateHarta;
         setTimeout(function() { 
             // store.dispatch('GetCoaList')

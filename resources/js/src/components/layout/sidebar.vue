@@ -378,6 +378,9 @@
                             <router-link to="/laporan/opnum" @click="toggleMobileMenu">Laporan Opnum</router-link>
                         </li>
                         <li>
+                            <router-link to="/laporan/penyusutan" @click="toggleMobileMenu">Laporan Penyusutan</router-link>
+                        </li>
+                        <li>
                             <router-link to="/laporan/labarugi" @click="toggleMobileMenu">Laba Rugi</router-link>
                         </li>
                         <li>

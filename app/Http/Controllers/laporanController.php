@@ -283,4 +283,20 @@ class laporanController extends Controller
          ], 400);
         }
     }
+
+    public function laporanPenyusutan(Request $request){
+        $startDate = date("Y-m-d", strtotime($request->input('startDate')));
+        $endDate = date("Y-m-d", strtotime($request->input('endDate')));
+        $list = DB::table('tblinventaris_penyusutan_detail')
+                ->whereBetween('tgl_penyusutan', [$startDate, $endDate])
+                ->orderBy("id_penyusutan_detail", "desc")
+                ->get();
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'List Penyusutan',
+            'data' => $list
+        ], 200);
+
+    }
 }

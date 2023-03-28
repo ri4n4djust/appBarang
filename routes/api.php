@@ -56,6 +56,7 @@ Route::post('/list-aplusan', [App\Http\Controllers\laporanController::class, 'da
 Route::post('/list-biaya', [App\Http\Controllers\laporanController::class, 'daftarBiaya']);
 Route::post('/laporan-barang', [App\Http\Controllers\laporanController::class, 'laporanBrg']);
 Route::post('/laporan-opnum', [App\Http\Controllers\laporanController::class, 'laporanOpnum']);
+Route::post('/laporan-penyusutan', [App\Http\Controllers\laporanController::class, 'laporanPenyusutan']);
 Route::post('/listpenjualan-kupon', [App\Http\Controllers\laporanController::class, 'listKupon']);
 Route::post('/pembelian-barang', [App\Http\Controllers\laporanController::class, 'pembelianBrg']);
 Route::post('/list-bbmdatang', [App\Http\Controllers\laporanController::class, 'daftarBbmDatang']);
@@ -67,7 +68,7 @@ Route::get('/inventaris', [App\Http\Controllers\inventarisController::class, 'in
 Route::post('/store/inventaris', [App\Http\Controllers\inventarisController::class, 'tambahInventaris']);
 Route::post('/pembelian/inventaris', [App\Http\Controllers\inventarisController::class, 'beliInventaris']);
 Route::post('/hapus/inventaris', [App\Http\Controllers\inventarisController::class, 'hapusInventaris']);
-Route::post('/jurnal/inventaris', [App\Http\Controllers\inventarisController::class, 'jurnalInventaris']);
+Route::post('/penyusutan/inventaris', [App\Http\Controllers\inventarisController::class, 'penyusutanInventaris']);
 
 //=================hapus
 Route::post('/delete/biaya', [App\Http\Controllers\laporanController::class, 'deleteBiaya']);

@@ -29,8 +29,8 @@
                         </div>
 
                         <v-client-table :data="items" :columns="columns" :options="table_option">
-                            <template #lastPrice="props"> {{ Number(props.row.lastPrice).toLocaleString() }} </template>
-                            <template #salePrice="props"> {{ Number(props.row.salePrice).toLocaleString() }} </template>
+                            <template #nilai_inventaris="props"> {{ Number(props.row.nilai_inventaris).toLocaleString() }} </template>
+                            <template #qty_inventaris="props"> {{ Number(props.row.qty_inventaris).toLocaleString() }} </template>
                             <template #action="props">
                                 <a href="javascript:void(0);" @click="jurnal_row(props.row)" >
                                     <svg
@@ -186,6 +186,7 @@
     import 'jspdf-autotable';
 
     import { useStore } from 'vuex';
+    import moment from "moment";
 
     //flatpickr
     import flatPickr from 'vue-flatpickr-component';
@@ -197,7 +198,7 @@
 
     const store = useStore();
 
-    const columns = ref(['kode_inventaris', 'nama_inventaris', 'tahun_pembuatan', 'tahun_perakitan', 'merek', 'umur_ekonomis', 'action']);
+    const columns = ref(['kode_inventaris', 'nama_inventaris', 'tahun_pembuatan', 'tahun_perakitan', 'merek', 'umur_ekonomis', 'nilai_inventaris', 'qty_inventaris' ,'action']);
     const items = ref([]);
     const table_option = ref({
         perPage: 10,
@@ -241,7 +242,11 @@
     
     const bind_data = () => {
         store.dispatch('GetInventaris');
-        setTimeout(function() { items.value = store.getters.StateInventaris; }, 2000);
+        setTimeout(function() { 
+            let c = store.getters.StateInventaris;
+            items.value = c[0];
+            // console.log(items.value);
+        }, 2000);
     };
 
     const simpan_inventaris = () => {
@@ -253,12 +258,46 @@
         store.dispatch('GetNoInventaris');
         setTimeout(function() { 
             kd.value = store.getters.NoInventaris ; 
-            console.log(kd.value)
+            // console.log(kd.value)
         }, 4000);
     };
 
     const jurnal_row = (row) => {
-        console.log(row)
+        // console.log(row)
+        let kode = row.kode_inventaris ;
+        let bulan = row.umur_ekonomis * 12 || 0;
+        let qty_aset = row.qty_inventaris ;
+        let acc_id = row.group_inventaris ;
+        let nilai_inv = row.nilai_inventaris ;
+        let nilai1 = nilai_inv / qty_aset || 0 ;
+        let penyusutan1bln = Math.floor(nilai1 / bulan || 0) ;
+        let tgl = moment().format("D-M-YYYY");
+        const arrp = [] ;
+        arrp.push({
+            'kode_inventaris' : kode,
+            'tgl_penyusutan' : tgl,
+            'jumlah_penyusutan' : penyusutan1bln,
+            'acc_id' : acc_id
+
+        });
+
+        new window.Swal({
+            title: 'Anda Yahin?',
+            text: "Anda akan menyusutkan" +row.nama_inventaris,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya',
+            padding: '2em'
+        }).then(result => {
+            if (result.value) {
+                store.dispatch('CreatePenyusutanInventaris', arrp);
+                // getListBiaya();
+                // getNoBiaya();
+                new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
+
+            }
+        });
+
     };
 
     const export_table = (type) => {

@@ -10,10 +10,12 @@ class inventarisController extends Controller
     //
     public function indexInventaris(){
         $inv = DB::table('tblinventaris')->get();
+        $thismonth = date("Y-m");
+        $penyu = DB::table('tblinventaris_penyusutan_detail')->where('tgl_penyusutan', 'like', '$thismonth%')->get();
         return response()->json([
             'success' => true,
             'message' => 'data inventaris',
-            'data' => $inv
+            'data' => [$inv, $penyu]
         ], 200);
     }
 
@@ -97,6 +99,7 @@ class inventarisController extends Controller
                     'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                     'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                 ]);
+
                 $detpem = $request[1];
                 for ($i = 0; $i < count($detpem); $i++) {
 
@@ -112,6 +115,11 @@ class inventarisController extends Controller
                     //     'stkBarang' => $oldStok + $qty,
                     //     'hrgPokok' => $detpem[$i]['hrgPokok'],
                     // ]);
+                    DB::table('tblinventaris')->where('kode_inventaris', $kdBarang)->update([
+                        'nilai_inventaris' => $detpem[$i]['total'],
+                        'qty_inventaris' => $qty,
+                        'kode_pengadaan' => $noNota
+                    ]);
 
                     DB::table('tblinventaris_pengadaan_detail')->upsert([
                         'rsysno_pengadaan' => $noNota,
@@ -193,6 +201,38 @@ class inventarisController extends Controller
              'message' => 'exception'.$e,
          ], 400);
         }
+    }
+
+    public function penyusutanInventaris(Request $request){
+        try{
+            $exception = DB::transaction(function() use ($request){
+
+
+             
+                DB::commit();
+            });
+            if(is_null($exception)) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Inventaris Berhasil di susutkan!',
+                    // 'data' => $detail
+                ], 200);
+            } else {
+                DB::rollback();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Inventaris Gagal Diupdate!',
+                ], 500);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            // something went wrong
+            return response()->json([
+             'success' => false,
+             'message' => 'exception'.$e,
+         ], 400);
+        }
+
     }
 
 }
