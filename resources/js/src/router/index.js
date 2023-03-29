@@ -229,6 +229,12 @@ const routes = [
         props: true,
     },
     {
+        path: '/laporan/penyusutan',
+        name: 'laporan-penyusutan',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/laporanPenyusutan.vue'),
+        props: true,
+    },
+    {
         path: '/laporan/penjualan-barang',
         name: 'penjualan-barang',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/penjualanBarang.vue'),

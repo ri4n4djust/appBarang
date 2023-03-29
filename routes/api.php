@@ -60,6 +60,7 @@ Route::post('/laporan-penyusutan', [App\Http\Controllers\laporanController::clas
 Route::post('/listpenjualan-kupon', [App\Http\Controllers\laporanController::class, 'listKupon']);
 Route::post('/pembelian-barang', [App\Http\Controllers\laporanController::class, 'pembelianBrg']);
 Route::post('/list-bbmdatang', [App\Http\Controllers\laporanController::class, 'daftarBbmDatang']);
+Route::post('/list-penyusutan', [App\Http\Controllers\laporanController::class, 'laporanPenyusutan']);
 // Route::post('/update/room', [App\Http\Controllers\roomController::class, 'update']);
 // Route::delete('/hapus/room/{id}', [App\Http\Controllers\roomController::class, 'destroy']);
 
@@ -72,6 +73,7 @@ Route::post('/penyusutan/inventaris', [App\Http\Controllers\inventarisController
 
 //=================hapus
 Route::post('/delete/biaya', [App\Http\Controllers\laporanController::class, 'deleteBiaya']);
+Route::post('/delete/penyusutan', [App\Http\Controllers\laporanController::class, 'deletePenyusutan']);
 Route::post('/delete/pobbm', [App\Http\Controllers\laporanController::class, 'deletePobbm']);
 
 //==================detail

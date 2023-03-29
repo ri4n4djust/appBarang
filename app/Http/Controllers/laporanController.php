@@ -288,8 +288,9 @@ class laporanController extends Controller
         $startDate = date("Y-m-d", strtotime($request->input('startDate')));
         $endDate = date("Y-m-d", strtotime($request->input('endDate')));
         $list = DB::table('tblinventaris_penyusutan_detail')
-                ->whereBetween('tgl_penyusutan', [$startDate, $endDate])
-                ->orderBy("id_penyusutan_detail", "desc")
+                ->join('tblinventaris', 'tblinventaris.kode_inventaris', 'tblinventaris_penyusutan_detail.rkode_inventaris')
+                ->whereBetween('tblinventaris_penyusutan_detail.tgl_penyusutan', [$startDate, $endDate])
+                ->orderBy("tblinventaris_penyusutan_detail.id_penyusutan_detail", "desc")
                 ->get();
         
         return response()->json([
@@ -298,5 +299,41 @@ class laporanController extends Controller
             'data' => $list
         ], 200);
 
+    }
+
+    public function deletePenyusutan(Request $request){
+        try{
+            $exception = DB::transaction(function() use ($request){
+                $kd = $request->input('id');
+                $gl = DB::table('general_ledger')->where('order_no', $kd)->get();
+                for($i=0;$i< count($gl);$i++){
+                    DB::table('general_ledger')->where('notrans', $gl[$i]->notrans)->delete();
+                    DB::table('gl_detail')->where('rgl', $gl[$i]->notrans)->delete();
+                };
+                DB::table('tblinventaris_penyusutan')->where('penyusutan_sysno', $kd)->delete();
+                DB::table('tblinventaris_penyusutan_detail')->where('rsysno_penyusutan', $kd)->delete();
+                DB::commit();
+            });
+            if(is_null($exception)) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Penyustan Berhasil di Hapus',
+                    // 'data' => $detail
+                ], 200);
+            } else {
+                DB::rollback();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Penyusutan Gagal Dihapus',
+                ], 500);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            // something went wrong
+            return response()->json([
+             'success' => false,
+             'message' => 'exception'.$e,
+         ], 400);
+        }
     }
 }

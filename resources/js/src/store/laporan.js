@@ -132,7 +132,7 @@ const actions = {
             return
         }
     },
-    async GetListPenyusutan({ commit }, bbmdatang){
+    async GetListPenyusutan({ commit }, penyusutan){
         let response
         try {
             response = await axios.post('/api/list-penyusutan', penyusutan)
