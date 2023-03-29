@@ -83,6 +83,7 @@ Route::get('/kdsupplier', [App\Http\Controllers\nomorController::class, 'kodeSup
 Route::get('/kdpembelian', [App\Http\Controllers\nomorController::class, 'kodePembelian']);
 Route::get('/kdinventaris', [App\Http\Controllers\nomorController::class, 'kodeInventaris']);
 Route::get('/kdpengadaan', [App\Http\Controllers\nomorController::class, 'kodePengadaan']);
+Route::get('/kdpenyusutan', [App\Http\Controllers\nomorController::class, 'kodePenyusutan']);
 Route::get('/kdpenjualan', [App\Http\Controllers\nomorController::class, 'kodePenjualan']);
 Route::get('/kdkupon', [App\Http\Controllers\nomorController::class, 'kodeKupon']);
 Route::get('/kdkategori', [App\Http\Controllers\nomorController::class, 'kodeKategori']);

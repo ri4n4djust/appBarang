@@ -11,7 +11,10 @@ class inventarisController extends Controller
     public function indexInventaris(){
         $inv = DB::table('tblinventaris')->get();
         $thismonth = date("Y-m");
-        $penyu = DB::table('tblinventaris_penyusutan_detail')->where('tgl_penyusutan', 'like', '$thismonth%')->get();
+        // $penyu = DB::table('tblinventaris_penyusutan_detail')->where('tgl_penyusutan', 'like', $thismonth'%')->get();
+        $penyu = DB::select("SELECT * FROM `tblinventaris_penyusutan_detail` WHERE tgl_penyusutan LIKE '$thismonth%';");
+        // print_r($penyu);
+
         return response()->json([
             'success' => true,
             'message' => 'data inventaris',
@@ -27,6 +30,7 @@ class inventarisController extends Controller
                 $tahun_pembuatan = $request->input('tahun_pembuatan');
                 $tahun_perakitan = $request->input('tahun_perakitan');
                 $group_inventaris = $request->input('group_inventaris');
+                $accid_akum = $request->input('accid_akum');
                 $warna = $request->input('warna');
                 $merek = $request->input('merek');
                 $umur_ekonomis = $request->input('umur_ekonomis');
@@ -37,6 +41,7 @@ class inventarisController extends Controller
                         'tahun_pembuatan' => $tahun_pembuatan,
                         'tahun_perakitan' => $tahun_perakitan,
                         'group_inventaris' => $group_inventaris,
+                        'accid_akum' => $accid_akum,
                         'warna' => $warna,
                         'merek' => $merek,
                         'umur_ekonomis' => $umur_ekonomis,
@@ -48,6 +53,7 @@ class inventarisController extends Controller
                         'tahun_pembuatan' => $tahun_pembuatan,
                         'tahun_perakitan' => $tahun_perakitan,
                         'group_inventaris' => $group_inventaris,
+                        'accid_akum' => $accid_akum,
                         'warna' => $warna,
                         'merek' => $merek,
                         'umur_ekonomis' => $umur_ekonomis,
@@ -55,6 +61,7 @@ class inventarisController extends Controller
                         'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                     ]
                 );
+                
 
                 DB::commit();
             });
@@ -207,7 +214,104 @@ class inventarisController extends Controller
         try{
             $exception = DB::transaction(function() use ($request){
 
+                $detail = $request[0];
+                $noNota = $detail['kode_penyusutan'];
+                $tglNota = $detail['tgl_penyusutan'];
 
+                // print_r($detail) ;
+
+                DB::table('tblinventaris_penyusutan')->insert([
+                    // [
+                        'penyusutan_sysno' => $detail['kode_penyusutan'],
+                        'penyusutan_docno' => $detail['kode_penyusutan'],
+                        'tgl_penyusutan' => $detail['tgl_penyusutan'],
+                        'memo_penyusutan' => 'memo',
+                        'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                    // ],
+                    // [
+                    //     'penyusutan_docno' => $detail['kode_penyusutan'],
+                    //     'tgl_penyusutan' => $detail['tgl_penyusutan'],
+                    //     'memo_penyusutan' => 'memo',
+                    //     'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                    //     'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                    // ]
+                ]);
+
+                DB::table('tblinventaris_penyusutan_detail')->insert([
+                    // [
+                        'rsysno_penyusutan' => $detail['kode_penyusutan'],
+                        'rkode_inventaris' => $detail['kode_inventaris'],
+                        'tgl_penyusutan' => $detail['tgl_penyusutan'],
+                        'jumlah_penyusutan' => $detail['jumlah_penyusutan'],
+                        'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                    // ],
+                    // [
+                    //     'rsysno_penyusutan' => $detail['kode_penyusutan'],
+                    //     'rkode_inventaris' => $detail['kode_inventaris'],
+                    //     'tgl_penyusutan' => $detail['tgl_penyusutan'],
+                    //     'jumlah_penyusutan' => $detail['jumlah_penyusutan'],
+                    //     'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                    //     'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                    // ]
+                ]);
+
+                //===========jurnal
+                $acc_id_d =  $detail['acc_id']; // acc id yg di debet
+                $acc_id_akum =  $detail['accid_akum'];
+                $acc_id_k = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
+                $acc_id_p = '61103';
+                $acc_id_l = '32300';
+                $memo = 'Penyusutan-Inventaris';
+                $jurnal = 'JK';
+                $subtotal = $detail['jumlah_penyusutan'];
+                insert_gl($noNota,$tglNota,$subtotal,$memo,$jurnal);
+                $rgl = DB::table('general_ledger')->get()->last()->notrans;
+                $ac = [
+                    [
+                        'rgl' => $rgl,
+                        'acc_id' => $acc_id_d,
+                        'debet' => 0,
+                        'kredit' => $subtotal,
+                        'trans_detail' => 'Penyusutan-Inventaris',
+                        'void_flag' => 0,
+                    ],
+                    [
+                        'rgl' => $rgl,
+                        'acc_id' => $acc_id_akum,
+                        'debet' => $subtotal,
+                        'kredit' => 0,
+                        'trans_detail' => 'Penyusutan-Inventaris',
+                        'void_flag' => 0,
+                    ], 
+                    [
+                        'rgl' => $rgl,
+                        'acc_id' => $acc_id_k,
+                        'debet' => 0,
+                        'kredit' => $subtotal,
+                        'trans_detail' => 'Penyusutan-Inventaris',
+                        'void_flag' => 0,
+                    ],
+                    [
+                        'rgl' => $rgl,
+                        'acc_id' => $acc_id_p,
+                        'debet' => 0,
+                        'kredit' => $subtotal,
+                        'trans_detail' => 'Penyusutan-Inventaris',
+                        'void_flag' => 0,
+                    ],
+                    [
+                        'rgl' => $rgl,
+                        'acc_id' => $acc_id_l,
+                        'debet' => 0,
+                        'kredit' => -1*$subtotal,
+                        'trans_detail' => 'Penyusutan-Inventaris',
+                        'void_flag' => 0,
+                    ]
+                ];
+                
+                insert_gl_detail($ac);
              
                 DB::commit();
             });

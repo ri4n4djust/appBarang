@@ -113,7 +113,7 @@
                                                 <label for="inputCity">NAMA BARANG</label>
                                                 <multiselect 
                                                     v-model="brg" 
-                                                    :options="pembelian.barangs" 
+                                                    :options="barangs" 
                                                     :searchable="true"
                                                     track-by="nama_inventaris"
                                                     label="nama_inventaris"
@@ -340,6 +340,7 @@
 
     const items = ref([]);
     const brg = ref([]);
+    const barangs = ref([]);
     const nopengadaan = ref([]);
     const qty = ref(1);
     const tot = ref();
@@ -379,18 +380,25 @@
     // const currency_list = ref([]);
 
     const pembelian = computed(() => {
-        const barangs = store.getters.StateInventaris;
+        // let s = store.getters.StateInventaris;
+        // const barangs = s[0];
         const suppliers = store.getters.StateSupplier;
         // const accs = store.getters.StateAcc;
         nopengadaan.value = store.getters.NoPengadaan;
         const pajak = store.state.pajak;
         tot.value = brg.value.lastPrice * qty.value;
         // console.log(suppliers)
-        return { barangs, pajak, suppliers, nopengadaan, tot }
+        return { pajak, suppliers, nopengadaan, tot }
     });
 
     const getBarang=() => {
-        store.dispatch('GetInventaris')
+        store.dispatch('GetInventaris');
+        setTimeout(function() { 
+            let c = store.getters.StateInventaris;
+            barangs.value = c[0];
+            // itemsjurnal.value = c[1];
+            // console.log(items.value);
+        }, 2000);
     }
     const getSupplier=() => {
         store.dispatch('GetSupplier')

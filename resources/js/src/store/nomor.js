@@ -11,7 +11,8 @@ const state = {
     nobiaya: [],
     nojurnalumum: [],
     noinventaris: [],
-    nopengadaan: []
+    nopengadaan: [],
+    nopenyusutan: []
   };
   
 const getters = {
@@ -25,7 +26,8 @@ const getters = {
     NoBiaya: state => state.nobiaya,
     NoJurnalUmum: state => state.nojurnalumum,
     NoInventaris: state => state.noinventaris,
-    NoPengadaan: state => state.nopengadaan
+    NoPengadaan: state => state.nopengadaan,
+    NoPenyusutan: state => state.nopenyusutan
 };
 
 const actions = {  
@@ -162,6 +164,19 @@ const actions = {
     
     },
 
+    async GetNoPenyusutan({ commit }){
+        let response
+        try {
+            response = await axios.get('/api/kdpenyusutan')
+            commit('setKdPenyusutan', response.data.kdPenyusutan)
+        } catch (ex) {
+            // Handle error
+            alert('error no Penyusutan')
+            return
+        }
+    
+    },
+
 };
 const mutations = {
     setNoPembelian(state, pembelian){
@@ -196,6 +211,9 @@ const mutations = {
     },
     setKdPengadaan(state, pga){
         state.nopengadaan = pga
+    },
+    setKdPenyusutan(state, pyu){
+        state.nopenyusutan = pyu
     },
 
 };

@@ -15,7 +15,6 @@
             </ul>
         </teleport>
 
-        
 
         <div class="row layout-top-spacing">
             <div class="col-12 layout-spacing">
@@ -31,26 +30,66 @@
                         <v-client-table :data="items" :columns="columns" :options="table_option">
                             <template #nilai_inventaris="props"> {{ Number(props.row.nilai_inventaris).toLocaleString() }} </template>
                             <template #qty_inventaris="props"> {{ Number(props.row.qty_inventaris).toLocaleString() }} </template>
+                            <template #action_jurnal="props">
+                                
+                                <div v-if="itemsjurnal.length === 0 ">
+                                    <!-- Belum Disusutkan 
+                                        <a href="javascript:void(0);" @click="jurnal_row(props.row)" >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="24"
+                                                height="24"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="feather feather-settings text-primary"
+                                            >
+                                                <circle cx="12" cy="12" r="3"></circle>
+                                                <path
+                                                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                                                ></path>
+                                            </svg>
+                                        </a> -->
+                                </div>
+                                <!-- <div v-elseif="itemsjurnal.length > 0 "> -->
+                                    <div v-for="jr in itemsjurnal" :key="jr">
+                                        
+                                        <div v-if="props.row.kode_inventaris === jr.rkode_inventaris">
+                                            Sudah Disusutkan
+                                        </div>
+                                        <div v-else-if="props.row.kode_inventaris != jr.rkode_inventaris">
+                                            Belum Disusutkan 
+                                            <a href="javascript:void(0);" @click="jurnal_row(props.row)" >
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    width="24"
+                                                    height="24"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    stroke-width="2"
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    class="feather feather-settings text-primary"
+                                                >
+                                                    <circle cx="12" cy="12" r="3"></circle>
+                                                    <path
+                                                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                                                    ></path>
+                                                </svg>
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                <!-- </div> -->
+                                
+                                
+                            </template>
                             <template #action="props">
-                                <a href="javascript:void(0);" @click="jurnal_row(props.row)" >
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="feather feather-settings text-primary"
-                                    >
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                        <path
-                                            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
-                                        ></path>
-                                    </svg>
-                                </a>
+                                
                                 <router-link :to="{name: 'rekapan', params: {startDate: props.row.tgl_trans, kd_trans:props.row.kd_trans, regu:props.row.r_regu }}" >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -117,6 +156,15 @@
                                                     <select id="inputState" v-model="input.group_inventaris" class="form-select">
                                                         <option value="12300" selected>Peralatan Dan Mesin</option>
                                                         <option value="12400">Kendaraan</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="nama" class="col-sm-3 col-form-label col-form-label-sm">Akun Akumulasi</label>
+                                                <div class="col-sm-9">
+                                                    <select id="inputState" v-model="input.accid_akum" class="form-select">
+                                                        <option value="12501" selected>Peralatan Dan mesin</option>
+                                                        <option value="12502">BANGUNAN DAN GEDUNG</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -198,8 +246,9 @@
 
     const store = useStore();
 
-    const columns = ref(['kode_inventaris', 'nama_inventaris', 'tahun_pembuatan', 'tahun_perakitan', 'merek', 'umur_ekonomis', 'nilai_inventaris', 'qty_inventaris' ,'action']);
+    const columns = ref(['kode_inventaris', 'action_jurnal','nama_inventaris', 'tahun_pembuatan', 'tahun_perakitan', 'merek', 'umur_ekonomis', 'nilai_inventaris', 'qty_inventaris' ,'action']);
     const items = ref([]);
+    const itemsjurnal = ref([]);
     const table_option = ref({
         perPage: 10,
         perPageValues: [5, 10, 20, 50],
@@ -230,6 +279,7 @@
     });
 
     const kd = ref([]);
+    const kdpenyusutan = ref([]);
     const input = ref({
         kode_inventaris: kd,
     });
@@ -237,6 +287,7 @@
     onMounted(() => {
         bind_data();
         getKdInventaris();
+        getKdPenyusutan();
     });
 
     
@@ -245,6 +296,7 @@
         setTimeout(function() { 
             let c = store.getters.StateInventaris;
             items.value = c[0];
+            itemsjurnal.value = c[1];
             // console.log(items.value);
         }, 2000);
     };
@@ -262,6 +314,14 @@
         }, 4000);
     };
 
+    const getKdPenyusutan = () =>{
+        store.dispatch('GetNoPenyusutan');
+        setTimeout(function() { 
+            kdpenyusutan.value = store.getters.NoPenyusutan ; 
+            // console.log(kd.value)
+        }, 4000);
+    };
+
     const jurnal_row = (row) => {
         // console.log(row)
         let kode = row.kode_inventaris ;
@@ -271,19 +331,21 @@
         let nilai_inv = row.nilai_inventaris ;
         let nilai1 = nilai_inv / qty_aset || 0 ;
         let penyusutan1bln = Math.floor(nilai1 / bulan || 0) ;
-        let tgl = moment().format("D-M-YYYY");
+        let tgl = moment().format("YYYY-M-D");
         const arrp = [] ;
         arrp.push({
+            'kode_penyusutan': kdpenyusutan.value,
             'kode_inventaris' : kode,
             'tgl_penyusutan' : tgl,
             'jumlah_penyusutan' : penyusutan1bln,
-            'acc_id' : acc_id
+            'acc_id' : acc_id,
+            'accid_akum': row.accid_akum
 
         });
 
         new window.Swal({
             title: 'Anda Yahin?',
-            text: "Anda akan menyusutkan" +row.nama_inventaris,
+            text: "Anda akan menyusutkan " +row.nama_inventaris,
             type: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Ya',
@@ -291,9 +353,10 @@
         }).then(result => {
             if (result.value) {
                 store.dispatch('CreatePenyusutanInventaris', arrp);
-                // getListBiaya();
-                // getNoBiaya();
-                new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
+                bind_data();
+                getKdInventaris();
+                getKdPenyusutan();
+                // new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
 
             }
         });

@@ -16,6 +16,7 @@ use App\Models\Pobbm;
 use App\Models\BbmDatang;
 use App\Models\Inventaris;
 use App\Models\Pengadaan;
+use App\Models\Penyusutan;
 use Illuminate\Support\Facades\DB;
 
 class nomorController extends Controller
@@ -473,6 +474,49 @@ class nomorController extends Controller
                     'success' => true,
                     'message' => 'Detail Post!',
                     'kdInventaris'    => $post
+                ], 200);
+            }
+        }
+    }
+
+    public function kodePenyusutan()
+    {
+        $count = Penyusutan::all();
+        if($count->isEmpty()){
+            $tahun = date('mY');
+            $post = 'SS'.$tahun.'1';
+            return response()->json([
+                'success' => true,
+                'message' => 'Detail Post!',
+                'kdPenyusutan'    => $post
+            ], 200);
+        }else{
+
+            $no = 0 ;
+            $count = Penyusutan::all()->last();
+            $terakhir = substr($count->penyusutan_sysno, 8,  20);
+            $kodeBaru = $terakhir + 1  ;
+
+            $tahun = date('mY');
+            $post = 'SS'.$tahun.''.$kodeBaru;
+
+            if (Penyusutan::where('penyusutan_sysno', $post)->exists()) {
+                $count = Penyusutan::all()->last();
+                $terakhir = substr($count->penyusutan_sysno, 8,  20);
+                $kodeBarulagi = $kodeBaru + 1 ;
+                $post = 'SS'.$tahun.$kodeBarulagi;
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Detail Post!',
+                    'kdPenyusutan'    => $post
+                ], 200);
+            } else {
+                $tahun = date('mY');
+                //$post = 'OP-'.$tahun.'-'.'1';
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Detail Post!',
+                    'kdPenyusutan'    => $post
                 ], 200);
             }
         }
