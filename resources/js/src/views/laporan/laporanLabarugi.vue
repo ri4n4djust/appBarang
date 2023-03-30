@@ -183,23 +183,32 @@
                                                                         </table>
                                                                     </td>
                                                                     <td>
+                                                                        <!-- {{ hartalist }} -->
                                                                         <table border="1" cellspacing="3" >
-                                                                            <tbody  v-for="hrt in biayalist" :key="hrt.acc_id" :set="amount = hrt.amount" style="border: 1px;">
-                                                                                <tr v-if="hrt.acc_id === '69999'" >
-                                                                                    <td v-if="hrt.jenis != 'Total'" style="min-width:20px">{{ hrt.acc_id }}</td>
-                                                                                    <td v-else></td>
-                                                                                    <td v-if="hrt.jenis === 'Total'" style="min-width: 200px;" ><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
-                                                                                    <td v-else style="min-width: 200px;">&nbsp;&nbsp;{{ hrt.name }}</td>
+                                                                            <tbody >
+                                                                                <tr :set="data = hartalist.filter(n => n.acc_id === '69999')">
+                                                                                    <td>{{ data }}</td>
                                                                                     <td></td>
+                                                                                    <td ><b>&nbsp;&nbsp;{{ data.name }}</b></td>
                                                                                     <td></td>
+                                                                                    <td>{{ data.ammount }}</td>
                                                                                     <td></td>
-                                                                                    <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
-                                                                                    <td v-else></td>
-                                                                                    <td v-if="hrt.jenis === 'Detail'">
-                                                                                            {{ Number(amount).toLocaleString() }}
-                                                                                    </td>
-                                                                                    <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
-                                                                                    <td v-else></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>1111</td>
+                                                                                    <td></td>
+                                                                                    <td ><b>&nbsp;&nbsp;Pajak PPH 22</b></td>
+                                                                                    <td></td>
+                                                                                    <td>20,0000</td>
+                                                                                    <td></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>1111</td>
+                                                                                    <td></td>
+                                                                                    <td ><b>&nbsp;&nbsp;Total setelah Pajak PPH 22</b></td>
+                                                                                    <td></td>
+                                                                                    <td>{{ data.ammount - 20000 }}</td>
+                                                                                    <td></td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>
@@ -447,7 +456,7 @@
 
     
 
-    const hartalist = ref();
+    const hartalist = ref([]);
     const biayalist = ref();
     onMounted(() => {
         load.value = true;
@@ -465,7 +474,7 @@
         // hartalist.value = store.getters.StateHarta;
         setTimeout(function() { 
             // store.dispatch('GetCoaList')
-            hartalist.value = store.getters.StateCoaPendapatan;
+            hartalist.value = store.getters.StateHarta;
             biayalist.value = store.getters.StateHarta;
             load.value = false;
             // const pendapatan = hartalist.value.filter(p => p.acc_id === '60000');
@@ -491,7 +500,7 @@
         // hartalist.value = store.getters.StateHarta;
         setTimeout(function() { 
             // store.dispatch('GetCoaList')
-            hartalist.value = store.getters.StateCoaPendapatan;
+            hartalist.value = store.getters.StateHarta;
             biayalist.value = store.getters.StateHarta;
             load.value = false;
             // const pendapatan = hartalist.value.filter(p => p.acc_id === '60000');
