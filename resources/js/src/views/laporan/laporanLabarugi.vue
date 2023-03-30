@@ -183,6 +183,27 @@
                                                                         </table>
                                                                     </td>
                                                                     <td>
+                                                                        <table border="1" cellspacing="3" >
+                                                                            <tbody  v-for="hrt in biayalist" :key="hrt.acc_id" :set="amount = hrt.amount" style="border: 1px;">
+                                                                                <tr v-if="hrt.acc_id === '69999'" >
+                                                                                    <td v-if="hrt.jenis != 'Total'" style="min-width:20px">{{ hrt.acc_id }}</td>
+                                                                                    <td v-else></td>
+                                                                                    <td v-if="hrt.jenis === 'Total'" style="min-width: 200px;" ><b>&nbsp;&nbsp;{{ hrt.name }}</b></td>
+                                                                                    <td v-else style="min-width: 200px;">&nbsp;&nbsp;{{ hrt.name }}</td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td></td>
+                                                                                    <td v-if="hrt.jenis === 'Total'" style="border-top: 1px solid black"></td>
+                                                                                    <td v-else></td>
+                                                                                    <td v-if="hrt.jenis === 'Detail'">
+                                                                                            {{ Number(amount).toLocaleString() }}
+                                                                                    </td>
+                                                                                    <td v-else-if="hrt.jenis === 'Total'"><b>{{ Number(amount).toLocaleString() }}</b></td>
+                                                                                    <td v-else></td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+
                                                                         <!-- <table border="1" cellspacing="3">
                                                                             <tbody  v-for="hrt in biayalist" :key="hrt.acc_id" :set="amount = hrt.amount"> -->
                                                                                 
