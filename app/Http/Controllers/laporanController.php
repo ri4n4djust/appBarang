@@ -336,4 +336,21 @@ class laporanController extends Controller
          ], 400);
         }
     }
+
+    public function bukubesar(Request $request){
+        $startDate = date("Y-m-d", strtotime($request->input('startDate')));
+        $endDate = date("Y-m-d", strtotime($request->input('endDate')));
+        $list = DB::table('general_ledger')
+                ->join('gl_detail', 'gl_detail.rgl', 'general_ledger.notrans')
+                ->whereBetween('general_ledger.tgl', [$startDate, $endDate])
+                ->orderBy("general_ledger.id", "desc")
+                ->get();
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'buku besar',
+            'data' => $list
+        ], 200);
+
+    }
 }

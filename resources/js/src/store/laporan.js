@@ -11,7 +11,8 @@ const state = {
     listpenjualankupon: [],
     listbiaya: [],
     listbbmdatang: [],
-    listpenyusutan: []
+    listpenyusutan: [],
+    bukubesar: []
   };
   
 const getters = {
@@ -25,6 +26,7 @@ const getters = {
     SlistPenjualanKupon: state => state.listpenjualankupon,
     SlistBbmDatang: state => state.listbbmdatang,
     SlistPenyusutan: state => state.listpenyusutan,
+    SBukuBesar: state => state.bukubesar
 };
 
 const actions = {  
@@ -143,6 +145,17 @@ const actions = {
             return
         }
     },
+    async GetBukuBesar({ commit }, buku){
+        let response
+        try {
+            response = await axios.post('/api/buku-besar', buku)
+            commit('setBukuBesar', response.data.data)
+        } catch (ex) {
+            // Handle error
+            alert('error load buku besar')
+            return
+        }
+    },
     async EditBarang({dispatch}, Brg) {
         await axios.post('/api/update/barang', Brg)
         await dispatch('GetBarang')
@@ -190,7 +203,11 @@ const mutations = {
     },
     setListPenyusutan(state, listsusut){
         state.listpenyusutan = listsusut
+    },
+    setBukuBesar(state, bukubesar){
+        state.bukubesar = bukubesar
     }
+
 
 };
 

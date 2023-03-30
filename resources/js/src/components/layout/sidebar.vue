@@ -158,7 +158,7 @@
                             <router-link to="/inventaris" @click="toggleMobileMenu">Inventaris</router-link>
                         </li>
                         <li>
-                            <router-link to="/kas" @click="toggleMobileMenu">Buku Kas</router-link>
+                            <router-link to="/buku-besar" @click="toggleMobileMenu">Buku Kas</router-link>
                         </li>
                         <li class="menu">
                             <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#neraca" aria-controls="neraca" aria-expanded="false">

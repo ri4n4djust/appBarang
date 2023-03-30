@@ -6414,7 +6414,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "isStaticProperty": () => (/* binding */ isStaticProperty),
 /* harmony export */   "isStaticPropertyKey": () => (/* binding */ isStaticPropertyKey),
 /* harmony export */   "isTemplateNode": () => (/* binding */ isTemplateNode),
-/* harmony export */   "isText": () => (/* binding */ isText$1),
+/* harmony export */   "isText": () => (/* binding */ isText),
 /* harmony export */   "isVSlot": () => (/* binding */ isVSlot),
 /* harmony export */   "locStub": () => (/* binding */ locStub),
 /* harmony export */   "makeBlock": () => (/* binding */ makeBlock),
@@ -6425,7 +6425,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "processSlotOutlet": () => (/* binding */ processSlotOutlet),
 /* harmony export */   "registerRuntimeHelpers": () => (/* binding */ registerRuntimeHelpers),
 /* harmony export */   "resolveComponentType": () => (/* binding */ resolveComponentType),
-/* harmony export */   "stringifyExpression": () => (/* binding */ stringifyExpression),
 /* harmony export */   "toValidAssetId": () => (/* binding */ toValidAssetId),
 /* harmony export */   "trackSlotScopes": () => (/* binding */ trackSlotScopes),
 /* harmony export */   "trackVForSlotScopes": () => (/* binding */ trackVForSlotScopes),
@@ -6462,66 +6461,65 @@ function createCompilerError(code, loc, messages, additionalMessage) {
 }
 const errorMessages = {
     // parse errors
-    [0 /* ErrorCodes.ABRUPT_CLOSING_OF_EMPTY_COMMENT */]: 'Illegal comment.',
-    [1 /* ErrorCodes.CDATA_IN_HTML_CONTENT */]: 'CDATA section is allowed only in XML context.',
-    [2 /* ErrorCodes.DUPLICATE_ATTRIBUTE */]: 'Duplicate attribute.',
-    [3 /* ErrorCodes.END_TAG_WITH_ATTRIBUTES */]: 'End tag cannot have attributes.',
-    [4 /* ErrorCodes.END_TAG_WITH_TRAILING_SOLIDUS */]: "Illegal '/' in tags.",
-    [5 /* ErrorCodes.EOF_BEFORE_TAG_NAME */]: 'Unexpected EOF in tag.',
-    [6 /* ErrorCodes.EOF_IN_CDATA */]: 'Unexpected EOF in CDATA section.',
-    [7 /* ErrorCodes.EOF_IN_COMMENT */]: 'Unexpected EOF in comment.',
-    [8 /* ErrorCodes.EOF_IN_SCRIPT_HTML_COMMENT_LIKE_TEXT */]: 'Unexpected EOF in script.',
-    [9 /* ErrorCodes.EOF_IN_TAG */]: 'Unexpected EOF in tag.',
-    [10 /* ErrorCodes.INCORRECTLY_CLOSED_COMMENT */]: 'Incorrectly closed comment.',
-    [11 /* ErrorCodes.INCORRECTLY_OPENED_COMMENT */]: 'Incorrectly opened comment.',
-    [12 /* ErrorCodes.INVALID_FIRST_CHARACTER_OF_TAG_NAME */]: "Illegal tag name. Use '&lt;' to print '<'.",
-    [13 /* ErrorCodes.MISSING_ATTRIBUTE_VALUE */]: 'Attribute value was expected.',
-    [14 /* ErrorCodes.MISSING_END_TAG_NAME */]: 'End tag name was expected.',
-    [15 /* ErrorCodes.MISSING_WHITESPACE_BETWEEN_ATTRIBUTES */]: 'Whitespace was expected.',
-    [16 /* ErrorCodes.NESTED_COMMENT */]: "Unexpected '<!--' in comment.",
-    [17 /* ErrorCodes.UNEXPECTED_CHARACTER_IN_ATTRIBUTE_NAME */]: 'Attribute name cannot contain U+0022 ("), U+0027 (\'), and U+003C (<).',
-    [18 /* ErrorCodes.UNEXPECTED_CHARACTER_IN_UNQUOTED_ATTRIBUTE_VALUE */]: 'Unquoted attribute value cannot contain U+0022 ("), U+0027 (\'), U+003C (<), U+003D (=), and U+0060 (`).',
-    [19 /* ErrorCodes.UNEXPECTED_EQUALS_SIGN_BEFORE_ATTRIBUTE_NAME */]: "Attribute name cannot start with '='.",
-    [21 /* ErrorCodes.UNEXPECTED_QUESTION_MARK_INSTEAD_OF_TAG_NAME */]: "'<?' is allowed only in XML context.",
-    [20 /* ErrorCodes.UNEXPECTED_NULL_CHARACTER */]: `Unexpected null character.`,
-    [22 /* ErrorCodes.UNEXPECTED_SOLIDUS_IN_TAG */]: "Illegal '/' in tags.",
+    [0 /* ABRUPT_CLOSING_OF_EMPTY_COMMENT */]: 'Illegal comment.',
+    [1 /* CDATA_IN_HTML_CONTENT */]: 'CDATA section is allowed only in XML context.',
+    [2 /* DUPLICATE_ATTRIBUTE */]: 'Duplicate attribute.',
+    [3 /* END_TAG_WITH_ATTRIBUTES */]: 'End tag cannot have attributes.',
+    [4 /* END_TAG_WITH_TRAILING_SOLIDUS */]: "Illegal '/' in tags.",
+    [5 /* EOF_BEFORE_TAG_NAME */]: 'Unexpected EOF in tag.',
+    [6 /* EOF_IN_CDATA */]: 'Unexpected EOF in CDATA section.',
+    [7 /* EOF_IN_COMMENT */]: 'Unexpected EOF in comment.',
+    [8 /* EOF_IN_SCRIPT_HTML_COMMENT_LIKE_TEXT */]: 'Unexpected EOF in script.',
+    [9 /* EOF_IN_TAG */]: 'Unexpected EOF in tag.',
+    [10 /* INCORRECTLY_CLOSED_COMMENT */]: 'Incorrectly closed comment.',
+    [11 /* INCORRECTLY_OPENED_COMMENT */]: 'Incorrectly opened comment.',
+    [12 /* INVALID_FIRST_CHARACTER_OF_TAG_NAME */]: "Illegal tag name. Use '&lt;' to print '<'.",
+    [13 /* MISSING_ATTRIBUTE_VALUE */]: 'Attribute value was expected.',
+    [14 /* MISSING_END_TAG_NAME */]: 'End tag name was expected.',
+    [15 /* MISSING_WHITESPACE_BETWEEN_ATTRIBUTES */]: 'Whitespace was expected.',
+    [16 /* NESTED_COMMENT */]: "Unexpected '<!--' in comment.",
+    [17 /* UNEXPECTED_CHARACTER_IN_ATTRIBUTE_NAME */]: 'Attribute name cannot contain U+0022 ("), U+0027 (\'), and U+003C (<).',
+    [18 /* UNEXPECTED_CHARACTER_IN_UNQUOTED_ATTRIBUTE_VALUE */]: 'Unquoted attribute value cannot contain U+0022 ("), U+0027 (\'), U+003C (<), U+003D (=), and U+0060 (`).',
+    [19 /* UNEXPECTED_EQUALS_SIGN_BEFORE_ATTRIBUTE_NAME */]: "Attribute name cannot start with '='.",
+    [21 /* UNEXPECTED_QUESTION_MARK_INSTEAD_OF_TAG_NAME */]: "'<?' is allowed only in XML context.",
+    [20 /* UNEXPECTED_NULL_CHARACTER */]: `Unexpected null character.`,
+    [22 /* UNEXPECTED_SOLIDUS_IN_TAG */]: "Illegal '/' in tags.",
     // Vue-specific parse errors
-    [23 /* ErrorCodes.X_INVALID_END_TAG */]: 'Invalid end tag.',
-    [24 /* ErrorCodes.X_MISSING_END_TAG */]: 'Element is missing end tag.',
-    [25 /* ErrorCodes.X_MISSING_INTERPOLATION_END */]: 'Interpolation end sign was not found.',
-    [27 /* ErrorCodes.X_MISSING_DYNAMIC_DIRECTIVE_ARGUMENT_END */]: 'End bracket for dynamic directive argument was not found. ' +
+    [23 /* X_INVALID_END_TAG */]: 'Invalid end tag.',
+    [24 /* X_MISSING_END_TAG */]: 'Element is missing end tag.',
+    [25 /* X_MISSING_INTERPOLATION_END */]: 'Interpolation end sign was not found.',
+    [27 /* X_MISSING_DYNAMIC_DIRECTIVE_ARGUMENT_END */]: 'End bracket for dynamic directive argument was not found. ' +
         'Note that dynamic directive argument cannot contain spaces.',
-    [26 /* ErrorCodes.X_MISSING_DIRECTIVE_NAME */]: 'Legal directive name was expected.',
+    [26 /* X_MISSING_DIRECTIVE_NAME */]: 'Legal directive name was expected.',
     // transform errors
-    [28 /* ErrorCodes.X_V_IF_NO_EXPRESSION */]: `v-if/v-else-if is missing expression.`,
-    [29 /* ErrorCodes.X_V_IF_SAME_KEY */]: `v-if/else branches must use unique keys.`,
-    [30 /* ErrorCodes.X_V_ELSE_NO_ADJACENT_IF */]: `v-else/v-else-if has no adjacent v-if or v-else-if.`,
-    [31 /* ErrorCodes.X_V_FOR_NO_EXPRESSION */]: `v-for is missing expression.`,
-    [32 /* ErrorCodes.X_V_FOR_MALFORMED_EXPRESSION */]: `v-for has invalid expression.`,
-    [33 /* ErrorCodes.X_V_FOR_TEMPLATE_KEY_PLACEMENT */]: `<template v-for> key should be placed on the <template> tag.`,
-    [34 /* ErrorCodes.X_V_BIND_NO_EXPRESSION */]: `v-bind is missing expression.`,
-    [35 /* ErrorCodes.X_V_ON_NO_EXPRESSION */]: `v-on is missing expression.`,
-    [36 /* ErrorCodes.X_V_SLOT_UNEXPECTED_DIRECTIVE_ON_SLOT_OUTLET */]: `Unexpected custom directive on <slot> outlet.`,
-    [37 /* ErrorCodes.X_V_SLOT_MIXED_SLOT_USAGE */]: `Mixed v-slot usage on both the component and nested <template>. ` +
+    [28 /* X_V_IF_NO_EXPRESSION */]: `v-if/v-else-if is missing expression.`,
+    [29 /* X_V_IF_SAME_KEY */]: `v-if/else branches must use unique keys.`,
+    [30 /* X_V_ELSE_NO_ADJACENT_IF */]: `v-else/v-else-if has no adjacent v-if or v-else-if.`,
+    [31 /* X_V_FOR_NO_EXPRESSION */]: `v-for is missing expression.`,
+    [32 /* X_V_FOR_MALFORMED_EXPRESSION */]: `v-for has invalid expression.`,
+    [33 /* X_V_FOR_TEMPLATE_KEY_PLACEMENT */]: `<template v-for> key should be placed on the <template> tag.`,
+    [34 /* X_V_BIND_NO_EXPRESSION */]: `v-bind is missing expression.`,
+    [35 /* X_V_ON_NO_EXPRESSION */]: `v-on is missing expression.`,
+    [36 /* X_V_SLOT_UNEXPECTED_DIRECTIVE_ON_SLOT_OUTLET */]: `Unexpected custom directive on <slot> outlet.`,
+    [37 /* X_V_SLOT_MIXED_SLOT_USAGE */]: `Mixed v-slot usage on both the component and nested <template>.` +
         `When there are multiple named slots, all slots should use <template> ` +
         `syntax to avoid scope ambiguity.`,
-    [38 /* ErrorCodes.X_V_SLOT_DUPLICATE_SLOT_NAMES */]: `Duplicate slot names found. `,
-    [39 /* ErrorCodes.X_V_SLOT_EXTRANEOUS_DEFAULT_SLOT_CHILDREN */]: `Extraneous children found when component already has explicitly named ` +
+    [38 /* X_V_SLOT_DUPLICATE_SLOT_NAMES */]: `Duplicate slot names found. `,
+    [39 /* X_V_SLOT_EXTRANEOUS_DEFAULT_SLOT_CHILDREN */]: `Extraneous children found when component already has explicitly named ` +
         `default slot. These children will be ignored.`,
-    [40 /* ErrorCodes.X_V_SLOT_MISPLACED */]: `v-slot can only be used on components or <template> tags.`,
-    [41 /* ErrorCodes.X_V_MODEL_NO_EXPRESSION */]: `v-model is missing expression.`,
-    [42 /* ErrorCodes.X_V_MODEL_MALFORMED_EXPRESSION */]: `v-model value must be a valid JavaScript member expression.`,
-    [43 /* ErrorCodes.X_V_MODEL_ON_SCOPE_VARIABLE */]: `v-model cannot be used on v-for or v-slot scope variables because they are not writable.`,
-    [44 /* ErrorCodes.X_V_MODEL_ON_PROPS */]: `v-model cannot be used on a prop, because local prop bindings are not writable.\nUse a v-bind binding combined with a v-on listener that emits update:x event instead.`,
-    [45 /* ErrorCodes.X_INVALID_EXPRESSION */]: `Error parsing JavaScript expression: `,
-    [46 /* ErrorCodes.X_KEEP_ALIVE_INVALID_CHILDREN */]: `<KeepAlive> expects exactly one child component.`,
+    [40 /* X_V_SLOT_MISPLACED */]: `v-slot can only be used on components or <template> tags.`,
+    [41 /* X_V_MODEL_NO_EXPRESSION */]: `v-model is missing expression.`,
+    [42 /* X_V_MODEL_MALFORMED_EXPRESSION */]: `v-model value must be a valid JavaScript member expression.`,
+    [43 /* X_V_MODEL_ON_SCOPE_VARIABLE */]: `v-model cannot be used on v-for or v-slot scope variables because they are not writable.`,
+    [44 /* X_INVALID_EXPRESSION */]: `Error parsing JavaScript expression: `,
+    [45 /* X_KEEP_ALIVE_INVALID_CHILDREN */]: `<KeepAlive> expects exactly one child component.`,
     // generic errors
-    [47 /* ErrorCodes.X_PREFIX_ID_NOT_SUPPORTED */]: `"prefixIdentifiers" option is not supported in this build of compiler.`,
-    [48 /* ErrorCodes.X_MODULE_MODE_NOT_SUPPORTED */]: `ES module mode is not supported in this build of compiler.`,
-    [49 /* ErrorCodes.X_CACHE_HANDLER_NOT_SUPPORTED */]: `"cacheHandlers" option is only supported when the "prefixIdentifiers" option is enabled.`,
-    [50 /* ErrorCodes.X_SCOPE_ID_NOT_SUPPORTED */]: `"scopeId" option is only supported in module mode.`,
+    [46 /* X_PREFIX_ID_NOT_SUPPORTED */]: `"prefixIdentifiers" option is not supported in this build of compiler.`,
+    [47 /* X_MODULE_MODE_NOT_SUPPORTED */]: `ES module mode is not supported in this build of compiler.`,
+    [48 /* X_CACHE_HANDLER_NOT_SUPPORTED */]: `"cacheHandlers" option is only supported when the "prefixIdentifiers" option is enabled.`,
+    [49 /* X_SCOPE_ID_NOT_SUPPORTED */]: `"scopeId" option is only supported in module mode.`,
     // just to fulfill types
-    [51 /* ErrorCodes.__EXTEND_POINT__ */]: ``
+    [50 /* __EXTEND_POINT__ */]: ``
 };
 
 const FRAGMENT = Symbol(( true) ? `Fragment` : 0);
@@ -6565,6 +6563,7 @@ const WITH_MEMO = Symbol(( true) ? `withMemo` : 0);
 const IS_MEMO_SAME = Symbol(( true) ? `isMemoSame` : 0);
 // Name mapping for runtime helpers that need to be imported from 'vue' in
 // generated code. Make sure these are correctly exported in the runtime!
+// Using `any` here because TS doesn't allow symbols as index type.
 const helperNameMap = {
     [FRAGMENT]: `Fragment`,
     [TELEPORT]: `Teleport`,
@@ -6623,9 +6622,9 @@ const locStub = {
 };
 function createRoot(children, loc = locStub) {
     return {
-        type: 0 /* NodeTypes.ROOT */,
+        type: 0 /* ROOT */,
         children,
-        helpers: new Set(),
+        helpers: [],
         components: [],
         directives: [],
         hoists: [],
@@ -6650,7 +6649,7 @@ function createVNodeCall(context, tag, props, children, patchFlag, dynamicProps,
         }
     }
     return {
-        type: 13 /* NodeTypes.VNODE_CALL */,
+        type: 13 /* VNODE_CALL */,
         tag,
         props,
         children,
@@ -6665,38 +6664,38 @@ function createVNodeCall(context, tag, props, children, patchFlag, dynamicProps,
 }
 function createArrayExpression(elements, loc = locStub) {
     return {
-        type: 17 /* NodeTypes.JS_ARRAY_EXPRESSION */,
+        type: 17 /* JS_ARRAY_EXPRESSION */,
         loc,
         elements
     };
 }
 function createObjectExpression(properties, loc = locStub) {
     return {
-        type: 15 /* NodeTypes.JS_OBJECT_EXPRESSION */,
+        type: 15 /* JS_OBJECT_EXPRESSION */,
         loc,
         properties
     };
 }
 function createObjectProperty(key, value) {
     return {
-        type: 16 /* NodeTypes.JS_PROPERTY */,
+        type: 16 /* JS_PROPERTY */,
         loc: locStub,
         key: (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(key) ? createSimpleExpression(key, true) : key,
         value
     };
 }
-function createSimpleExpression(content, isStatic = false, loc = locStub, constType = 0 /* ConstantTypes.NOT_CONSTANT */) {
+function createSimpleExpression(content, isStatic = false, loc = locStub, constType = 0 /* NOT_CONSTANT */) {
     return {
-        type: 4 /* NodeTypes.SIMPLE_EXPRESSION */,
+        type: 4 /* SIMPLE_EXPRESSION */,
         loc,
         content,
         isStatic,
-        constType: isStatic ? 3 /* ConstantTypes.CAN_STRINGIFY */ : constType
+        constType: isStatic ? 3 /* CAN_STRINGIFY */ : constType
     };
 }
 function createInterpolation(content, loc) {
     return {
-        type: 5 /* NodeTypes.INTERPOLATION */,
+        type: 5 /* INTERPOLATION */,
         loc,
         content: (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(content)
             ? createSimpleExpression(content, false, loc)
@@ -6705,14 +6704,14 @@ function createInterpolation(content, loc) {
 }
 function createCompoundExpression(children, loc = locStub) {
     return {
-        type: 8 /* NodeTypes.COMPOUND_EXPRESSION */,
+        type: 8 /* COMPOUND_EXPRESSION */,
         loc,
         children
     };
 }
 function createCallExpression(callee, args = [], loc = locStub) {
     return {
-        type: 14 /* NodeTypes.JS_CALL_EXPRESSION */,
+        type: 14 /* JS_CALL_EXPRESSION */,
         loc,
         callee,
         arguments: args
@@ -6720,7 +6719,7 @@ function createCallExpression(callee, args = [], loc = locStub) {
 }
 function createFunctionExpression(params, returns = undefined, newline = false, isSlot = false, loc = locStub) {
     return {
-        type: 18 /* NodeTypes.JS_FUNCTION_EXPRESSION */,
+        type: 18 /* JS_FUNCTION_EXPRESSION */,
         params,
         returns,
         newline,
@@ -6730,7 +6729,7 @@ function createFunctionExpression(params, returns = undefined, newline = false, 
 }
 function createConditionalExpression(test, consequent, alternate, newline = true) {
     return {
-        type: 19 /* NodeTypes.JS_CONDITIONAL_EXPRESSION */,
+        type: 19 /* JS_CONDITIONAL_EXPRESSION */,
         test,
         consequent,
         alternate,
@@ -6740,7 +6739,7 @@ function createConditionalExpression(test, consequent, alternate, newline = true
 }
 function createCacheExpression(index, value, isVNode = false) {
     return {
-        type: 20 /* NodeTypes.JS_CACHE_EXPRESSION */,
+        type: 20 /* JS_CACHE_EXPRESSION */,
         index,
         value,
         isVNode,
@@ -6749,21 +6748,21 @@ function createCacheExpression(index, value, isVNode = false) {
 }
 function createBlockStatement(body) {
     return {
-        type: 21 /* NodeTypes.JS_BLOCK_STATEMENT */,
+        type: 21 /* JS_BLOCK_STATEMENT */,
         body,
         loc: locStub
     };
 }
 function createTemplateLiteral(elements) {
     return {
-        type: 22 /* NodeTypes.JS_TEMPLATE_LITERAL */,
+        type: 22 /* JS_TEMPLATE_LITERAL */,
         elements,
         loc: locStub
     };
 }
 function createIfStatement(test, consequent, alternate) {
     return {
-        type: 23 /* NodeTypes.JS_IF_STATEMENT */,
+        type: 23 /* JS_IF_STATEMENT */,
         test,
         consequent,
         alternate,
@@ -6772,7 +6771,7 @@ function createIfStatement(test, consequent, alternate) {
 }
 function createAssignmentExpression(left, right) {
     return {
-        type: 24 /* NodeTypes.JS_ASSIGNMENT_EXPRESSION */,
+        type: 24 /* JS_ASSIGNMENT_EXPRESSION */,
         left,
         right,
         loc: locStub
@@ -6780,20 +6779,20 @@ function createAssignmentExpression(left, right) {
 }
 function createSequenceExpression(expressions) {
     return {
-        type: 25 /* NodeTypes.JS_SEQUENCE_EXPRESSION */,
+        type: 25 /* JS_SEQUENCE_EXPRESSION */,
         expressions,
         loc: locStub
     };
 }
 function createReturnStatement(returns) {
     return {
-        type: 26 /* NodeTypes.JS_RETURN_STATEMENT */,
+        type: 26 /* JS_RETURN_STATEMENT */,
         returns,
         loc: locStub
     };
 }
 
-const isStaticExp = (p) => p.type === 4 /* NodeTypes.SIMPLE_EXPRESSION */ && p.isStatic;
+const isStaticExp = (p) => p.type === 4 /* SIMPLE_EXPRESSION */ && p.isStatic;
 const isBuiltInType = (tag, expected) => tag === expected || tag === (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.hyphenate)(expected);
 function isCoreComponent(tag) {
     if (isBuiltInType(tag, 'Teleport')) {
@@ -6823,7 +6822,7 @@ const whitespaceRE = /\s+[.[]\s*|\s*[.[]\s+/g;
 const isMemberExpressionBrowser = (path) => {
     // remove whitespaces around . or [ first
     path = path.trim().replace(whitespaceRE, s => s.trim());
-    let state = 0 /* MemberExpLexState.inMemberExp */;
+    let state = 0 /* inMemberExp */;
     let stateStack = [];
     let currentOpenBracketCount = 0;
     let currentOpenParensCount = 0;
@@ -6831,25 +6830,25 @@ const isMemberExpressionBrowser = (path) => {
     for (let i = 0; i < path.length; i++) {
         const char = path.charAt(i);
         switch (state) {
-            case 0 /* MemberExpLexState.inMemberExp */:
+            case 0 /* inMemberExp */:
                 if (char === '[') {
                     stateStack.push(state);
-                    state = 1 /* MemberExpLexState.inBrackets */;
+                    state = 1 /* inBrackets */;
                     currentOpenBracketCount++;
                 }
                 else if (char === '(') {
                     stateStack.push(state);
-                    state = 2 /* MemberExpLexState.inParens */;
+                    state = 2 /* inParens */;
                     currentOpenParensCount++;
                 }
                 else if (!(i === 0 ? validFirstIdentCharRE : validIdentCharRE).test(char)) {
                     return false;
                 }
                 break;
-            case 1 /* MemberExpLexState.inBrackets */:
+            case 1 /* inBrackets */:
                 if (char === `'` || char === `"` || char === '`') {
                     stateStack.push(state);
-                    state = 3 /* MemberExpLexState.inString */;
+                    state = 3 /* inString */;
                     currentStringType = char;
                 }
                 else if (char === `[`) {
@@ -6861,10 +6860,10 @@ const isMemberExpressionBrowser = (path) => {
                     }
                 }
                 break;
-            case 2 /* MemberExpLexState.inParens */:
+            case 2 /* inParens */:
                 if (char === `'` || char === `"` || char === '`') {
                     stateStack.push(state);
-                    state = 3 /* MemberExpLexState.inString */;
+                    state = 3 /* inString */;
                     currentStringType = char;
                 }
                 else if (char === `(`) {
@@ -6880,7 +6879,7 @@ const isMemberExpressionBrowser = (path) => {
                     }
                 }
                 break;
-            case 3 /* MemberExpLexState.inString */:
+            case 3 /* inString */:
                 if (char === currentStringType) {
                     state = stateStack.pop();
                     currentStringType = null;
@@ -6937,7 +6936,7 @@ function assert(condition, msg) {
 function findDir(node, name, allowEmpty = false) {
     for (let i = 0; i < node.props.length; i++) {
         const p = node.props[i];
-        if (p.type === 7 /* NodeTypes.DIRECTIVE */ &&
+        if (p.type === 7 /* DIRECTIVE */ &&
             (allowEmpty || p.exp) &&
             ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(name) ? p.name === name : name.test(p.name))) {
             return p;
@@ -6947,7 +6946,7 @@ function findDir(node, name, allowEmpty = false) {
 function findProp(node, name, dynamicOnly = false, allowEmpty = false) {
     for (let i = 0; i < node.props.length; i++) {
         const p = node.props[i];
-        if (p.type === 6 /* NodeTypes.ATTRIBUTE */) {
+        if (p.type === 6 /* ATTRIBUTE */) {
             if (dynamicOnly)
                 continue;
             if (p.name === name && (p.value || allowEmpty)) {
@@ -6965,24 +6964,24 @@ function isStaticArgOf(arg, name) {
     return !!(arg && isStaticExp(arg) && arg.content === name);
 }
 function hasDynamicKeyVBind(node) {
-    return node.props.some(p => p.type === 7 /* NodeTypes.DIRECTIVE */ &&
+    return node.props.some(p => p.type === 7 /* DIRECTIVE */ &&
         p.name === 'bind' &&
         (!p.arg || // v-bind="obj"
-            p.arg.type !== 4 /* NodeTypes.SIMPLE_EXPRESSION */ || // v-bind:[_ctx.foo]
+            p.arg.type !== 4 /* SIMPLE_EXPRESSION */ || // v-bind:[_ctx.foo]
             !p.arg.isStatic) // v-bind:[foo]
     );
 }
-function isText$1(node) {
-    return node.type === 5 /* NodeTypes.INTERPOLATION */ || node.type === 2 /* NodeTypes.TEXT */;
+function isText(node) {
+    return node.type === 5 /* INTERPOLATION */ || node.type === 2 /* TEXT */;
 }
 function isVSlot(p) {
-    return p.type === 7 /* NodeTypes.DIRECTIVE */ && p.name === 'slot';
+    return p.type === 7 /* DIRECTIVE */ && p.name === 'slot';
 }
 function isTemplateNode(node) {
-    return (node.type === 1 /* NodeTypes.ELEMENT */ && node.tagType === 3 /* ElementTypes.TEMPLATE */);
+    return (node.type === 1 /* ELEMENT */ && node.tagType === 3 /* TEMPLATE */);
 }
 function isSlotOutlet(node) {
-    return node.type === 1 /* NodeTypes.ELEMENT */ && node.tagType === 2 /* ElementTypes.SLOT */;
+    return node.type === 1 /* ELEMENT */ && node.tagType === 2 /* SLOT */;
 }
 function getVNodeHelper(ssr, isComponent) {
     return ssr || isComponent ? CREATE_VNODE : CREATE_ELEMENT_VNODE;
@@ -6994,7 +6993,7 @@ const propsHelperSet = new Set([NORMALIZE_PROPS, GUARD_REACTIVE_PROPS]);
 function getUnnormalizedProps(props, callPath = []) {
     if (props &&
         !(0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(props) &&
-        props.type === 14 /* NodeTypes.JS_CALL_EXPRESSION */) {
+        props.type === 14 /* JS_CALL_EXPRESSION */) {
         const callee = props.callee;
         if (!(0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(callee) && propsHelperSet.has(callee)) {
             return getUnnormalizedProps(props.arguments[0], callPath.concat(props));
@@ -7012,12 +7011,12 @@ function injectProp(node, prop, context) {
      *
      * we need to get the real props before normalization
      */
-    let props = node.type === 13 /* NodeTypes.VNODE_CALL */ ? node.props : node.arguments[2];
+    let props = node.type === 13 /* VNODE_CALL */ ? node.props : node.arguments[2];
     let callPath = [];
     let parentCall;
     if (props &&
         !(0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(props) &&
-        props.type === 14 /* NodeTypes.JS_CALL_EXPRESSION */) {
+        props.type === 14 /* JS_CALL_EXPRESSION */) {
         const ret = getUnnormalizedProps(props);
         props = ret[0];
         callPath = ret[1];
@@ -7026,16 +7025,13 @@ function injectProp(node, prop, context) {
     if (props == null || (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(props)) {
         propsWithInjection = createObjectExpression([prop]);
     }
-    else if (props.type === 14 /* NodeTypes.JS_CALL_EXPRESSION */) {
+    else if (props.type === 14 /* JS_CALL_EXPRESSION */) {
         // merged props... add ours
         // only inject key to object literal if it's the first argument so that
         // if doesn't override user provided keys
         const first = props.arguments[0];
-        if (!(0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(first) && first.type === 15 /* NodeTypes.JS_OBJECT_EXPRESSION */) {
-            // #6631
-            if (!hasProp(prop, first)) {
-                first.properties.unshift(prop);
-            }
+        if (!(0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(first) && first.type === 15 /* JS_OBJECT_EXPRESSION */) {
+            first.properties.unshift(prop);
         }
         else {
             if (props.callee === TO_HANDLERS) {
@@ -7051,8 +7047,15 @@ function injectProp(node, prop, context) {
         }
         !propsWithInjection && (propsWithInjection = props);
     }
-    else if (props.type === 15 /* NodeTypes.JS_OBJECT_EXPRESSION */) {
-        if (!hasProp(prop, props)) {
+    else if (props.type === 15 /* JS_OBJECT_EXPRESSION */) {
+        let alreadyExists = false;
+        // check existing key to avoid overriding user provided keys
+        if (prop.key.type === 4 /* SIMPLE_EXPRESSION */) {
+            const propKeyName = prop.key.content;
+            alreadyExists = props.properties.some(p => p.key.type === 4 /* SIMPLE_EXPRESSION */ &&
+                p.key.content === propKeyName);
+        }
+        if (!alreadyExists) {
             props.properties.unshift(prop);
         }
         propsWithInjection = props;
@@ -7070,7 +7073,7 @@ function injectProp(node, prop, context) {
             parentCall = callPath[callPath.length - 2];
         }
     }
-    if (node.type === 13 /* NodeTypes.VNODE_CALL */) {
+    if (node.type === 13 /* VNODE_CALL */) {
         if (parentCall) {
             parentCall.arguments[0] = propsWithInjection;
         }
@@ -7087,16 +7090,6 @@ function injectProp(node, prop, context) {
         }
     }
 }
-// check existing key to avoid overriding user provided keys
-function hasProp(prop, props) {
-    let result = false;
-    if (prop.key.type === 4 /* NodeTypes.SIMPLE_EXPRESSION */) {
-        const propKeyName = prop.key.content;
-        result = props.properties.some(p => p.key.type === 4 /* NodeTypes.SIMPLE_EXPRESSION */ &&
-            p.key.content === propKeyName);
-    }
-    return result;
-}
 function toValidAssetId(name, type) {
     // see issue#4422, we need adding identifier on validAssetId if variable `name` has specific character
     return `_${type}_${name.replace(/[^\w]/g, (searchValue, replaceValue) => {
@@ -7109,38 +7102,38 @@ function hasScopeRef(node, ids) {
         return false;
     }
     switch (node.type) {
-        case 1 /* NodeTypes.ELEMENT */:
+        case 1 /* ELEMENT */:
             for (let i = 0; i < node.props.length; i++) {
                 const p = node.props[i];
-                if (p.type === 7 /* NodeTypes.DIRECTIVE */ &&
+                if (p.type === 7 /* DIRECTIVE */ &&
                     (hasScopeRef(p.arg, ids) || hasScopeRef(p.exp, ids))) {
                     return true;
                 }
             }
             return node.children.some(c => hasScopeRef(c, ids));
-        case 11 /* NodeTypes.FOR */:
+        case 11 /* FOR */:
             if (hasScopeRef(node.source, ids)) {
                 return true;
             }
             return node.children.some(c => hasScopeRef(c, ids));
-        case 9 /* NodeTypes.IF */:
+        case 9 /* IF */:
             return node.branches.some(b => hasScopeRef(b, ids));
-        case 10 /* NodeTypes.IF_BRANCH */:
+        case 10 /* IF_BRANCH */:
             if (hasScopeRef(node.condition, ids)) {
                 return true;
             }
             return node.children.some(c => hasScopeRef(c, ids));
-        case 4 /* NodeTypes.SIMPLE_EXPRESSION */:
+        case 4 /* SIMPLE_EXPRESSION */:
             return (!node.isStatic &&
                 isSimpleIdentifier(node.content) &&
                 !!ids[node.content]);
-        case 8 /* NodeTypes.COMPOUND_EXPRESSION */:
+        case 8 /* COMPOUND_EXPRESSION */:
             return node.children.some(c => (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(c) && hasScopeRef(c, ids));
-        case 5 /* NodeTypes.INTERPOLATION */:
-        case 12 /* NodeTypes.TEXT_CALL */:
+        case 5 /* INTERPOLATION */:
+        case 12 /* TEXT_CALL */:
             return hasScopeRef(node.content, ids);
-        case 2 /* NodeTypes.TEXT */:
-        case 3 /* NodeTypes.COMMENT */:
+        case 2 /* TEXT */:
+        case 3 /* COMMENT */:
             return false;
         default:
             if ((true)) ;
@@ -7148,7 +7141,7 @@ function hasScopeRef(node, ids) {
     }
 }
 function getMemoedVNodeCall(node) {
-    if (node.type === 14 /* NodeTypes.JS_CALL_EXPRESSION */ && node.callee === WITH_MEMO) {
+    if (node.type === 14 /* JS_CALL_EXPRESSION */ && node.callee === WITH_MEMO) {
         return node.arguments[1].returns;
     }
     else {
@@ -7165,23 +7158,23 @@ function makeBlock(node, { helper, removeHelper, inSSR }) {
 }
 
 const deprecationData = {
-    ["COMPILER_IS_ON_ELEMENT" /* CompilerDeprecationTypes.COMPILER_IS_ON_ELEMENT */]: {
+    ["COMPILER_IS_ON_ELEMENT" /* COMPILER_IS_ON_ELEMENT */]: {
         message: `Platform-native elements with "is" prop will no longer be ` +
             `treated as components in Vue 3 unless the "is" value is explicitly ` +
             `prefixed with "vue:".`,
         link: `https://v3-migration.vuejs.org/breaking-changes/custom-elements-interop.html`
     },
-    ["COMPILER_V_BIND_SYNC" /* CompilerDeprecationTypes.COMPILER_V_BIND_SYNC */]: {
+    ["COMPILER_V_BIND_SYNC" /* COMPILER_V_BIND_SYNC */]: {
         message: key => `.sync modifier for v-bind has been removed. Use v-model with ` +
             `argument instead. \`v-bind:${key}.sync\` should be changed to ` +
             `\`v-model:${key}\`.`,
         link: `https://v3-migration.vuejs.org/breaking-changes/v-model.html`
     },
-    ["COMPILER_V_BIND_PROP" /* CompilerDeprecationTypes.COMPILER_V_BIND_PROP */]: {
+    ["COMPILER_V_BIND_PROP" /* COMPILER_V_BIND_PROP */]: {
         message: `.prop modifier for v-bind has been removed and no longer necessary. ` +
             `Vue 3 will automatically set a binding as DOM property when appropriate.`
     },
-    ["COMPILER_V_BIND_OBJECT_ORDER" /* CompilerDeprecationTypes.COMPILER_V_BIND_OBJECT_ORDER */]: {
+    ["COMPILER_V_BIND_OBJECT_ORDER" /* COMPILER_V_BIND_OBJECT_ORDER */]: {
         message: `v-bind="obj" usage is now order sensitive and behaves like JavaScript ` +
             `object spread: it will now overwrite an existing non-mergeable attribute ` +
             `that appears before v-bind in the case of conflict. ` +
@@ -7189,11 +7182,11 @@ const deprecationData = {
             `You can also suppress this warning if the usage is intended.`,
         link: `https://v3-migration.vuejs.org/breaking-changes/v-bind.html`
     },
-    ["COMPILER_V_ON_NATIVE" /* CompilerDeprecationTypes.COMPILER_V_ON_NATIVE */]: {
+    ["COMPILER_V_ON_NATIVE" /* COMPILER_V_ON_NATIVE */]: {
         message: `.native modifier for v-on has been removed as is no longer necessary.`,
         link: `https://v3-migration.vuejs.org/breaking-changes/v-on-native-modifier-removed.html`
     },
-    ["COMPILER_V_IF_V_FOR_PRECEDENCE" /* CompilerDeprecationTypes.COMPILER_V_IF_V_FOR_PRECEDENCE */]: {
+    ["COMPILER_V_IF_V_FOR_PRECEDENCE" /* COMPILER_V_IF_V_FOR_PRECEDENCE */]: {
         message: `v-if / v-for precedence when used on the same element has changed ` +
             `in Vue 3: v-if now takes higher precedence and will no longer have ` +
             `access to v-for scope variables. It is best to avoid the ambiguity ` +
@@ -7201,15 +7194,15 @@ const deprecationData = {
             `data source.`,
         link: `https://v3-migration.vuejs.org/breaking-changes/v-if-v-for.html`
     },
-    ["COMPILER_NATIVE_TEMPLATE" /* CompilerDeprecationTypes.COMPILER_NATIVE_TEMPLATE */]: {
+    ["COMPILER_NATIVE_TEMPLATE" /* COMPILER_NATIVE_TEMPLATE */]: {
         message: `<template> with no special directives will render as a native template ` +
             `element instead of its inner content in Vue 3.`
     },
-    ["COMPILER_INLINE_TEMPLATE" /* CompilerDeprecationTypes.COMPILER_INLINE_TEMPLATE */]: {
+    ["COMPILER_INLINE_TEMPLATE" /* COMPILER_INLINE_TEMPLATE */]: {
         message: `"inline-template" has been removed in Vue 3.`,
         link: `https://v3-migration.vuejs.org/breaking-changes/inline-template-attribute.html`
     },
-    ["COMPILER_FILTER" /* CompilerDeprecationTypes.COMPILER_FILTERS */]: {
+    ["COMPILER_FILTER" /* COMPILER_FILTERS */]: {
         message: `filters have been removed in Vue 3. ` +
             `The "|" symbol will be treated as native JavaScript bitwise OR operator. ` +
             `Use method calls or computed properties instead.`,
@@ -7269,8 +7262,8 @@ const decodeMap = {
 };
 const defaultParserOptions = {
     delimiters: [`{{`, `}}`],
-    getNamespace: () => 0 /* Namespaces.HTML */,
-    getTextMode: () => 0 /* TextModes.DATA */,
+    getNamespace: () => 0 /* HTML */,
+    getTextMode: () => 0 /* DATA */,
     isVoidTag: _vue_shared__WEBPACK_IMPORTED_MODULE_0__.NO,
     isPreTag: _vue_shared__WEBPACK_IMPORTED_MODULE_0__.NO,
     isCustomElement: _vue_shared__WEBPACK_IMPORTED_MODULE_0__.NO,
@@ -7282,7 +7275,7 @@ const defaultParserOptions = {
 function baseParse(content, options = {}) {
     const context = createParserContext(content, options);
     const start = getCursor(context);
-    return createRoot(parseChildren(context, 0 /* TextModes.DATA */, []), getSelection(context, start));
+    return createRoot(parseChildren(context, 0 /* DATA */, []), getSelection(context, start));
 }
 function createParserContext(content, rawOptions) {
     const options = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.extend)({}, defaultParserOptions);
@@ -7308,20 +7301,20 @@ function createParserContext(content, rawOptions) {
 }
 function parseChildren(context, mode, ancestors) {
     const parent = last(ancestors);
-    const ns = parent ? parent.ns : 0 /* Namespaces.HTML */;
+    const ns = parent ? parent.ns : 0 /* HTML */;
     const nodes = [];
     while (!isEnd(context, mode, ancestors)) {
         const s = context.source;
         let node = undefined;
-        if (mode === 0 /* TextModes.DATA */ || mode === 1 /* TextModes.RCDATA */) {
+        if (mode === 0 /* DATA */ || mode === 1 /* RCDATA */) {
             if (!context.inVPre && startsWith(s, context.options.delimiters[0])) {
                 // '{{'
                 node = parseInterpolation(context, mode);
             }
-            else if (mode === 0 /* TextModes.DATA */ && s[0] === '<') {
+            else if (mode === 0 /* DATA */ && s[0] === '<') {
                 // https://html.spec.whatwg.org/multipage/parsing.html#tag-open-state
                 if (s.length === 1) {
-                    emitError(context, 5 /* ErrorCodes.EOF_BEFORE_TAG_NAME */, 1);
+                    emitError(context, 5 /* EOF_BEFORE_TAG_NAME */, 1);
                 }
                 else if (s[1] === '!') {
                     // https://html.spec.whatwg.org/multipage/parsing.html#markup-declaration-open-state
@@ -7333,58 +7326,58 @@ function parseChildren(context, mode, ancestors) {
                         node = parseBogusComment(context);
                     }
                     else if (startsWith(s, '<![CDATA[')) {
-                        if (ns !== 0 /* Namespaces.HTML */) {
+                        if (ns !== 0 /* HTML */) {
                             node = parseCDATA(context, ancestors);
                         }
                         else {
-                            emitError(context, 1 /* ErrorCodes.CDATA_IN_HTML_CONTENT */);
+                            emitError(context, 1 /* CDATA_IN_HTML_CONTENT */);
                             node = parseBogusComment(context);
                         }
                     }
                     else {
-                        emitError(context, 11 /* ErrorCodes.INCORRECTLY_OPENED_COMMENT */);
+                        emitError(context, 11 /* INCORRECTLY_OPENED_COMMENT */);
                         node = parseBogusComment(context);
                     }
                 }
                 else if (s[1] === '/') {
                     // https://html.spec.whatwg.org/multipage/parsing.html#end-tag-open-state
                     if (s.length === 2) {
-                        emitError(context, 5 /* ErrorCodes.EOF_BEFORE_TAG_NAME */, 2);
+                        emitError(context, 5 /* EOF_BEFORE_TAG_NAME */, 2);
                     }
                     else if (s[2] === '>') {
-                        emitError(context, 14 /* ErrorCodes.MISSING_END_TAG_NAME */, 2);
+                        emitError(context, 14 /* MISSING_END_TAG_NAME */, 2);
                         advanceBy(context, 3);
                         continue;
                     }
                     else if (/[a-z]/i.test(s[2])) {
-                        emitError(context, 23 /* ErrorCodes.X_INVALID_END_TAG */);
-                        parseTag(context, 1 /* TagType.End */, parent);
+                        emitError(context, 23 /* X_INVALID_END_TAG */);
+                        parseTag(context, 1 /* End */, parent);
                         continue;
                     }
                     else {
-                        emitError(context, 12 /* ErrorCodes.INVALID_FIRST_CHARACTER_OF_TAG_NAME */, 2);
+                        emitError(context, 12 /* INVALID_FIRST_CHARACTER_OF_TAG_NAME */, 2);
                         node = parseBogusComment(context);
                     }
                 }
                 else if (/[a-z]/i.test(s[1])) {
                     node = parseElement(context, ancestors);
                     // 2.x <template> with no directive compat
-                    if (isCompatEnabled("COMPILER_NATIVE_TEMPLATE" /* CompilerDeprecationTypes.COMPILER_NATIVE_TEMPLATE */, context) &&
+                    if (isCompatEnabled("COMPILER_NATIVE_TEMPLATE" /* COMPILER_NATIVE_TEMPLATE */, context) &&
                         node &&
                         node.tag === 'template' &&
-                        !node.props.some(p => p.type === 7 /* NodeTypes.DIRECTIVE */ &&
+                        !node.props.some(p => p.type === 7 /* DIRECTIVE */ &&
                             isSpecialTemplateDirective(p.name))) {
                         ( true) &&
-                            warnDeprecation("COMPILER_NATIVE_TEMPLATE" /* CompilerDeprecationTypes.COMPILER_NATIVE_TEMPLATE */, context, node.loc);
+                            warnDeprecation("COMPILER_NATIVE_TEMPLATE" /* COMPILER_NATIVE_TEMPLATE */, context, node.loc);
                         node = node.children;
                     }
                 }
                 else if (s[1] === '?') {
-                    emitError(context, 21 /* ErrorCodes.UNEXPECTED_QUESTION_MARK_INSTEAD_OF_TAG_NAME */, 1);
+                    emitError(context, 21 /* UNEXPECTED_QUESTION_MARK_INSTEAD_OF_TAG_NAME */, 1);
                     node = parseBogusComment(context);
                 }
                 else {
-                    emitError(context, 12 /* ErrorCodes.INVALID_FIRST_CHARACTER_OF_TAG_NAME */, 1);
+                    emitError(context, 12 /* INVALID_FIRST_CHARACTER_OF_TAG_NAME */, 1);
                 }
             }
         }
@@ -7402,55 +7395,42 @@ function parseChildren(context, mode, ancestors) {
     }
     // Whitespace handling strategy like v2
     let removedWhitespace = false;
-    if (mode !== 2 /* TextModes.RAWTEXT */ && mode !== 1 /* TextModes.RCDATA */) {
+    if (mode !== 2 /* RAWTEXT */ && mode !== 1 /* RCDATA */) {
         const shouldCondense = context.options.whitespace !== 'preserve';
         for (let i = 0; i < nodes.length; i++) {
             const node = nodes[i];
-            if (node.type === 2 /* NodeTypes.TEXT */) {
-                if (!context.inPre) {
-                    if (!/[^\t\r\n\f ]/.test(node.content)) {
-                        const prev = nodes[i - 1];
-                        const next = nodes[i + 1];
-                        // Remove if:
-                        // - the whitespace is the first or last node, or:
-                        // - (condense mode) the whitespace is between twos comments, or:
-                        // - (condense mode) the whitespace is between comment and element, or:
-                        // - (condense mode) the whitespace is between two elements AND contains newline
-                        if (!prev ||
-                            !next ||
-                            (shouldCondense &&
-                                ((prev.type === 3 /* NodeTypes.COMMENT */ &&
-                                    next.type === 3 /* NodeTypes.COMMENT */) ||
-                                    (prev.type === 3 /* NodeTypes.COMMENT */ &&
-                                        next.type === 1 /* NodeTypes.ELEMENT */) ||
-                                    (prev.type === 1 /* NodeTypes.ELEMENT */ &&
-                                        next.type === 3 /* NodeTypes.COMMENT */) ||
-                                    (prev.type === 1 /* NodeTypes.ELEMENT */ &&
-                                        next.type === 1 /* NodeTypes.ELEMENT */ &&
-                                        /[\r\n]/.test(node.content))))) {
-                            removedWhitespace = true;
-                            nodes[i] = null;
-                        }
-                        else {
-                            // Otherwise, the whitespace is condensed into a single space
-                            node.content = ' ';
-                        }
+            if (!context.inPre && node.type === 2 /* TEXT */) {
+                if (!/[^\t\r\n\f ]/.test(node.content)) {
+                    const prev = nodes[i - 1];
+                    const next = nodes[i + 1];
+                    // Remove if:
+                    // - the whitespace is the first or last node, or:
+                    // - (condense mode) the whitespace is adjacent to a comment, or:
+                    // - (condense mode) the whitespace is between two elements AND contains newline
+                    if (!prev ||
+                        !next ||
+                        (shouldCondense &&
+                            (prev.type === 3 /* COMMENT */ ||
+                                next.type === 3 /* COMMENT */ ||
+                                (prev.type === 1 /* ELEMENT */ &&
+                                    next.type === 1 /* ELEMENT */ &&
+                                    /[\r\n]/.test(node.content))))) {
+                        removedWhitespace = true;
+                        nodes[i] = null;
                     }
-                    else if (shouldCondense) {
-                        // in condense mode, consecutive whitespaces in text are condensed
-                        // down to a single space.
-                        node.content = node.content.replace(/[\t\r\n\f ]+/g, ' ');
+                    else {
+                        // Otherwise, the whitespace is condensed into a single space
+                        node.content = ' ';
                     }
                 }
-                else {
-                    // #6410 normalize windows newlines in <pre>:
-                    // in SSR, browsers normalize server-rendered \r\n into a single \n
-                    // in the DOM
-                    node.content = node.content.replace(/\r\n/g, '\n');
+                else if (shouldCondense) {
+                    // in condense mode, consecutive whitespaces in text are condensed
+                    // down to a single space.
+                    node.content = node.content.replace(/[\t\r\n\f ]+/g, ' ');
                 }
             }
             // Remove comment nodes if desired by configuration.
-            else if (node.type === 3 /* NodeTypes.COMMENT */ && !context.options.comments) {
+            else if (node.type === 3 /* COMMENT */ && !context.options.comments) {
                 removedWhitespace = true;
                 nodes[i] = null;
             }
@@ -7459,7 +7439,7 @@ function parseChildren(context, mode, ancestors) {
             // remove leading newline per html spec
             // https://html.spec.whatwg.org/multipage/grouping-content.html#the-pre-element
             const first = nodes[0];
-            if (first && first.type === 2 /* NodeTypes.TEXT */) {
+            if (first && first.type === 2 /* TEXT */) {
                 first.content = first.content.replace(/^\r?\n/, '');
             }
         }
@@ -7467,12 +7447,12 @@ function parseChildren(context, mode, ancestors) {
     return removedWhitespace ? nodes.filter(Boolean) : nodes;
 }
 function pushNode(nodes, node) {
-    if (node.type === 2 /* NodeTypes.TEXT */) {
+    if (node.type === 2 /* TEXT */) {
         const prev = last(nodes);
         // Merge if both this and the previous node are text and those are
         // consecutive. This happens for cases like "a < b".
         if (prev &&
-            prev.type === 2 /* NodeTypes.TEXT */ &&
+            prev.type === 2 /* TEXT */ &&
             prev.loc.end.offset === node.loc.start.offset) {
             prev.content += node.content;
             prev.loc.end = node.loc.end;
@@ -7484,9 +7464,9 @@ function pushNode(nodes, node) {
 }
 function parseCDATA(context, ancestors) {
     advanceBy(context, 9);
-    const nodes = parseChildren(context, 3 /* TextModes.CDATA */, ancestors);
+    const nodes = parseChildren(context, 3 /* CDATA */, ancestors);
     if (context.source.length === 0) {
-        emitError(context, 6 /* ErrorCodes.EOF_IN_CDATA */);
+        emitError(context, 6 /* EOF_IN_CDATA */);
     }
     else {
         advanceBy(context, 3);
@@ -7501,14 +7481,14 @@ function parseComment(context) {
     if (!match) {
         content = context.source.slice(4);
         advanceBy(context, context.source.length);
-        emitError(context, 7 /* ErrorCodes.EOF_IN_COMMENT */);
+        emitError(context, 7 /* EOF_IN_COMMENT */);
     }
     else {
         if (match.index <= 3) {
-            emitError(context, 0 /* ErrorCodes.ABRUPT_CLOSING_OF_EMPTY_COMMENT */);
+            emitError(context, 0 /* ABRUPT_CLOSING_OF_EMPTY_COMMENT */);
         }
         if (match[1]) {
-            emitError(context, 10 /* ErrorCodes.INCORRECTLY_CLOSED_COMMENT */);
+            emitError(context, 10 /* INCORRECTLY_CLOSED_COMMENT */);
         }
         content = context.source.slice(4, match.index);
         // Advancing with reporting nested comments.
@@ -7517,14 +7497,14 @@ function parseComment(context) {
         while ((nestedIndex = s.indexOf('<!--', prevIndex)) !== -1) {
             advanceBy(context, nestedIndex - prevIndex + 1);
             if (nestedIndex + 4 < s.length) {
-                emitError(context, 16 /* ErrorCodes.NESTED_COMMENT */);
+                emitError(context, 16 /* NESTED_COMMENT */);
             }
             prevIndex = nestedIndex + 1;
         }
         advanceBy(context, match.index + match[0].length - prevIndex + 1);
     }
     return {
-        type: 3 /* NodeTypes.COMMENT */,
+        type: 3 /* COMMENT */,
         content,
         loc: getSelection(context, start)
     };
@@ -7543,7 +7523,7 @@ function parseBogusComment(context) {
         advanceBy(context, closeIndex + 1);
     }
     return {
-        type: 3 /* NodeTypes.COMMENT */,
+        type: 3 /* COMMENT */,
         content,
         loc: getSelection(context, start)
     };
@@ -7553,7 +7533,7 @@ function parseElement(context, ancestors) {
     const wasInPre = context.inPre;
     const wasInVPre = context.inVPre;
     const parent = last(ancestors);
-    const element = parseTag(context, 0 /* TagType.Start */, parent);
+    const element = parseTag(context, 0 /* Start */, parent);
     const isPreBoundary = context.inPre && !wasInPre;
     const isVPreBoundary = context.inVPre && !wasInVPre;
     if (element.isSelfClosing || context.options.isVoidTag(element.tag)) {
@@ -7573,12 +7553,12 @@ function parseElement(context, ancestors) {
     ancestors.pop();
     // 2.x inline-template compat
     {
-        const inlineTemplateProp = element.props.find(p => p.type === 6 /* NodeTypes.ATTRIBUTE */ && p.name === 'inline-template');
+        const inlineTemplateProp = element.props.find(p => p.type === 6 /* ATTRIBUTE */ && p.name === 'inline-template');
         if (inlineTemplateProp &&
-            checkCompatEnabled("COMPILER_INLINE_TEMPLATE" /* CompilerDeprecationTypes.COMPILER_INLINE_TEMPLATE */, context, inlineTemplateProp.loc)) {
+            checkCompatEnabled("COMPILER_INLINE_TEMPLATE" /* COMPILER_INLINE_TEMPLATE */, context, inlineTemplateProp.loc)) {
             const loc = getSelection(context, element.loc.end);
             inlineTemplateProp.value = {
-                type: 2 /* NodeTypes.TEXT */,
+                type: 2 /* TEXT */,
                 content: loc.source,
                 loc
             };
@@ -7587,14 +7567,14 @@ function parseElement(context, ancestors) {
     element.children = children;
     // End tag.
     if (startsWithEndTagOpen(context.source, element.tag)) {
-        parseTag(context, 1 /* TagType.End */, parent);
+        parseTag(context, 1 /* End */, parent);
     }
     else {
-        emitError(context, 24 /* ErrorCodes.X_MISSING_END_TAG */, 0, element.loc.start);
+        emitError(context, 24 /* X_MISSING_END_TAG */, 0, element.loc.start);
         if (context.source.length === 0 && element.tag.toLowerCase() === 'script') {
             const first = children[0];
             if (first && startsWith(first.loc.source, '<!--')) {
-                emitError(context, 8 /* ErrorCodes.EOF_IN_SCRIPT_HTML_COMMENT_LIKE_TEXT */);
+                emitError(context, 8 /* EOF_IN_SCRIPT_HTML_COMMENT_LIKE_TEXT */);
             }
         }
     }
@@ -7626,9 +7606,9 @@ function parseTag(context, type, parent) {
     // Attributes.
     let props = parseAttributes(context, type);
     // check v-pre
-    if (type === 0 /* TagType.Start */ &&
+    if (type === 0 /* Start */ &&
         !context.inVPre &&
-        props.some(p => p.type === 7 /* NodeTypes.DIRECTIVE */ && p.name === 'pre')) {
+        props.some(p => p.type === 7 /* DIRECTIVE */ && p.name === 'pre')) {
         context.inVPre = true;
         // reset context
         (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.extend)(context, cursor);
@@ -7639,26 +7619,26 @@ function parseTag(context, type, parent) {
     // Tag close.
     let isSelfClosing = false;
     if (context.source.length === 0) {
-        emitError(context, 9 /* ErrorCodes.EOF_IN_TAG */);
+        emitError(context, 9 /* EOF_IN_TAG */);
     }
     else {
         isSelfClosing = startsWith(context.source, '/>');
-        if (type === 1 /* TagType.End */ && isSelfClosing) {
-            emitError(context, 4 /* ErrorCodes.END_TAG_WITH_TRAILING_SOLIDUS */);
+        if (type === 1 /* End */ && isSelfClosing) {
+            emitError(context, 4 /* END_TAG_WITH_TRAILING_SOLIDUS */);
         }
         advanceBy(context, isSelfClosing ? 2 : 1);
     }
-    if (type === 1 /* TagType.End */) {
+    if (type === 1 /* End */) {
         return;
     }
     // 2.x deprecation checks
     if (( true) &&
-        isCompatEnabled("COMPILER_V_IF_V_FOR_PRECEDENCE" /* CompilerDeprecationTypes.COMPILER_V_IF_V_FOR_PRECEDENCE */, context)) {
+        isCompatEnabled("COMPILER_V_IF_V_FOR_PRECEDENCE" /* COMPILER_V_IF_V_FOR_PRECEDENCE */, context)) {
         let hasIf = false;
         let hasFor = false;
         for (let i = 0; i < props.length; i++) {
             const p = props[i];
-            if (p.type === 7 /* NodeTypes.DIRECTIVE */) {
+            if (p.type === 7 /* DIRECTIVE */) {
                 if (p.name === 'if') {
                     hasIf = true;
                 }
@@ -7667,27 +7647,27 @@ function parseTag(context, type, parent) {
                 }
             }
             if (hasIf && hasFor) {
-                warnDeprecation("COMPILER_V_IF_V_FOR_PRECEDENCE" /* CompilerDeprecationTypes.COMPILER_V_IF_V_FOR_PRECEDENCE */, context, getSelection(context, start));
+                warnDeprecation("COMPILER_V_IF_V_FOR_PRECEDENCE" /* COMPILER_V_IF_V_FOR_PRECEDENCE */, context, getSelection(context, start));
                 break;
             }
         }
     }
-    let tagType = 0 /* ElementTypes.ELEMENT */;
+    let tagType = 0 /* ELEMENT */;
     if (!context.inVPre) {
         if (tag === 'slot') {
-            tagType = 2 /* ElementTypes.SLOT */;
+            tagType = 2 /* SLOT */;
         }
         else if (tag === 'template') {
-            if (props.some(p => p.type === 7 /* NodeTypes.DIRECTIVE */ && isSpecialTemplateDirective(p.name))) {
-                tagType = 3 /* ElementTypes.TEMPLATE */;
+            if (props.some(p => p.type === 7 /* DIRECTIVE */ && isSpecialTemplateDirective(p.name))) {
+                tagType = 3 /* TEMPLATE */;
             }
         }
         else if (isComponent(tag, props, context)) {
-            tagType = 1 /* ElementTypes.COMPONENT */;
+            tagType = 1 /* COMPONENT */;
         }
     }
     return {
-        type: 1 /* NodeTypes.ELEMENT */,
+        type: 1 /* ELEMENT */,
         ns,
         tag,
         tagType,
@@ -7714,12 +7694,12 @@ function isComponent(tag, props, context) {
     // casting
     for (let i = 0; i < props.length; i++) {
         const p = props[i];
-        if (p.type === 6 /* NodeTypes.ATTRIBUTE */) {
+        if (p.type === 6 /* ATTRIBUTE */) {
             if (p.name === 'is' && p.value) {
                 if (p.value.content.startsWith('vue:')) {
                     return true;
                 }
-                else if (checkCompatEnabled("COMPILER_IS_ON_ELEMENT" /* CompilerDeprecationTypes.COMPILER_IS_ON_ELEMENT */, context, p.loc)) {
+                else if (checkCompatEnabled("COMPILER_IS_ON_ELEMENT" /* COMPILER_IS_ON_ELEMENT */, context, p.loc)) {
                     return true;
                 }
             }
@@ -7735,7 +7715,7 @@ function isComponent(tag, props, context) {
             p.name === 'bind' &&
                 isStaticArgOf(p.arg, 'is') &&
                 true &&
-                checkCompatEnabled("COMPILER_IS_ON_ELEMENT" /* CompilerDeprecationTypes.COMPILER_IS_ON_ELEMENT */, context, p.loc)) {
+                checkCompatEnabled("COMPILER_IS_ON_ELEMENT" /* COMPILER_IS_ON_ELEMENT */, context, p.loc)) {
                 return true;
             }
         }
@@ -7748,27 +7728,27 @@ function parseAttributes(context, type) {
         !startsWith(context.source, '>') &&
         !startsWith(context.source, '/>')) {
         if (startsWith(context.source, '/')) {
-            emitError(context, 22 /* ErrorCodes.UNEXPECTED_SOLIDUS_IN_TAG */);
+            emitError(context, 22 /* UNEXPECTED_SOLIDUS_IN_TAG */);
             advanceBy(context, 1);
             advanceSpaces(context);
             continue;
         }
-        if (type === 1 /* TagType.End */) {
-            emitError(context, 3 /* ErrorCodes.END_TAG_WITH_ATTRIBUTES */);
+        if (type === 1 /* End */) {
+            emitError(context, 3 /* END_TAG_WITH_ATTRIBUTES */);
         }
         const attr = parseAttribute(context, attributeNames);
         // Trim whitespace between class
         // https://github.com/vuejs/core/issues/4251
-        if (attr.type === 6 /* NodeTypes.ATTRIBUTE */ &&
+        if (attr.type === 6 /* ATTRIBUTE */ &&
             attr.value &&
             attr.name === 'class') {
             attr.value.content = attr.value.content.replace(/\s+/g, ' ').trim();
         }
-        if (type === 0 /* TagType.Start */) {
+        if (type === 0 /* Start */) {
             props.push(attr);
         }
         if (/^[^\t\r\n\f />]/.test(context.source)) {
-            emitError(context, 15 /* ErrorCodes.MISSING_WHITESPACE_BETWEEN_ATTRIBUTES */);
+            emitError(context, 15 /* MISSING_WHITESPACE_BETWEEN_ATTRIBUTES */);
         }
         advanceSpaces(context);
     }
@@ -7780,17 +7760,17 @@ function parseAttribute(context, nameSet) {
     const match = /^[^\t\r\n\f />][^\t\r\n\f />=]*/.exec(context.source);
     const name = match[0];
     if (nameSet.has(name)) {
-        emitError(context, 2 /* ErrorCodes.DUPLICATE_ATTRIBUTE */);
+        emitError(context, 2 /* DUPLICATE_ATTRIBUTE */);
     }
     nameSet.add(name);
     if (name[0] === '=') {
-        emitError(context, 19 /* ErrorCodes.UNEXPECTED_EQUALS_SIGN_BEFORE_ATTRIBUTE_NAME */);
+        emitError(context, 19 /* UNEXPECTED_EQUALS_SIGN_BEFORE_ATTRIBUTE_NAME */);
     }
     {
         const pattern = /["'<]/g;
         let m;
         while ((m = pattern.exec(name))) {
-            emitError(context, 17 /* ErrorCodes.UNEXPECTED_CHARACTER_IN_ATTRIBUTE_NAME */, m.index);
+            emitError(context, 17 /* UNEXPECTED_CHARACTER_IN_ATTRIBUTE_NAME */, m.index);
         }
     }
     advanceBy(context, name.length);
@@ -7802,7 +7782,7 @@ function parseAttribute(context, nameSet) {
         advanceSpaces(context);
         value = parseAttributeValue(context);
         if (!value) {
-            emitError(context, 13 /* ErrorCodes.MISSING_ATTRIBUTE_VALUE */);
+            emitError(context, 13 /* MISSING_ATTRIBUTE_VALUE */);
         }
     }
     const loc = getSelection(context, start);
@@ -7825,7 +7805,7 @@ function parseAttribute(context, nameSet) {
             if (content.startsWith('[')) {
                 isStatic = false;
                 if (!content.endsWith(']')) {
-                    emitError(context, 27 /* ErrorCodes.X_MISSING_DYNAMIC_DIRECTIVE_ARGUMENT_END */);
+                    emitError(context, 27 /* X_MISSING_DYNAMIC_DIRECTIVE_ARGUMENT_END */);
                     content = content.slice(1);
                 }
                 else {
@@ -7839,12 +7819,12 @@ function parseAttribute(context, nameSet) {
                 content += match[3] || '';
             }
             arg = {
-                type: 4 /* NodeTypes.SIMPLE_EXPRESSION */,
+                type: 4 /* SIMPLE_EXPRESSION */,
                 content,
                 isStatic,
                 constType: isStatic
-                    ? 3 /* ConstantTypes.CAN_STRINGIFY */
-                    : 0 /* ConstantTypes.NOT_CONSTANT */,
+                    ? 3 /* CAN_STRINGIFY */
+                    : 0 /* NOT_CONSTANT */,
                 loc
             };
         }
@@ -7861,24 +7841,24 @@ function parseAttribute(context, nameSet) {
         // 2.x compat v-bind:foo.sync -> v-model:foo
         if (dirName === 'bind' && arg) {
             if (modifiers.includes('sync') &&
-                checkCompatEnabled("COMPILER_V_BIND_SYNC" /* CompilerDeprecationTypes.COMPILER_V_BIND_SYNC */, context, loc, arg.loc.source)) {
+                checkCompatEnabled("COMPILER_V_BIND_SYNC" /* COMPILER_V_BIND_SYNC */, context, loc, arg.loc.source)) {
                 dirName = 'model';
                 modifiers.splice(modifiers.indexOf('sync'), 1);
             }
             if (( true) && modifiers.includes('prop')) {
-                checkCompatEnabled("COMPILER_V_BIND_PROP" /* CompilerDeprecationTypes.COMPILER_V_BIND_PROP */, context, loc);
+                checkCompatEnabled("COMPILER_V_BIND_PROP" /* COMPILER_V_BIND_PROP */, context, loc);
             }
         }
         return {
-            type: 7 /* NodeTypes.DIRECTIVE */,
+            type: 7 /* DIRECTIVE */,
             name: dirName,
             exp: value && {
-                type: 4 /* NodeTypes.SIMPLE_EXPRESSION */,
+                type: 4 /* SIMPLE_EXPRESSION */,
                 content: value.content,
                 isStatic: false,
                 // Treat as non-constant by default. This can be potentially set to
                 // other values by `transformExpression` to make it eligible for hoisting.
-                constType: 0 /* ConstantTypes.NOT_CONSTANT */,
+                constType: 0 /* NOT_CONSTANT */,
                 loc: value.loc
             },
             arg,
@@ -7888,13 +7868,13 @@ function parseAttribute(context, nameSet) {
     }
     // missing directive name or illegal directive name
     if (!context.inVPre && startsWith(name, 'v-')) {
-        emitError(context, 26 /* ErrorCodes.X_MISSING_DIRECTIVE_NAME */);
+        emitError(context, 26 /* X_MISSING_DIRECTIVE_NAME */);
     }
     return {
-        type: 6 /* NodeTypes.ATTRIBUTE */,
+        type: 6 /* ATTRIBUTE */,
         name,
         value: value && {
-            type: 2 /* NodeTypes.TEXT */,
+            type: 2 /* TEXT */,
             content: value.content,
             loc: value.loc
         },
@@ -7911,10 +7891,10 @@ function parseAttributeValue(context) {
         advanceBy(context, 1);
         const endIndex = context.source.indexOf(quote);
         if (endIndex === -1) {
-            content = parseTextData(context, context.source.length, 4 /* TextModes.ATTRIBUTE_VALUE */);
+            content = parseTextData(context, context.source.length, 4 /* ATTRIBUTE_VALUE */);
         }
         else {
-            content = parseTextData(context, endIndex, 4 /* TextModes.ATTRIBUTE_VALUE */);
+            content = parseTextData(context, endIndex, 4 /* ATTRIBUTE_VALUE */);
             advanceBy(context, 1);
         }
     }
@@ -7927,9 +7907,9 @@ function parseAttributeValue(context) {
         const unexpectedChars = /["'<=`]/g;
         let m;
         while ((m = unexpectedChars.exec(match[0]))) {
-            emitError(context, 18 /* ErrorCodes.UNEXPECTED_CHARACTER_IN_UNQUOTED_ATTRIBUTE_VALUE */, m.index);
+            emitError(context, 18 /* UNEXPECTED_CHARACTER_IN_UNQUOTED_ATTRIBUTE_VALUE */, m.index);
         }
-        content = parseTextData(context, match[0].length, 4 /* TextModes.ATTRIBUTE_VALUE */);
+        content = parseTextData(context, match[0].length, 4 /* ATTRIBUTE_VALUE */);
     }
     return { content, isQuoted, loc: getSelection(context, start) };
 }
@@ -7937,7 +7917,7 @@ function parseInterpolation(context, mode) {
     const [open, close] = context.options.delimiters;
     const closeIndex = context.source.indexOf(close, open.length);
     if (closeIndex === -1) {
-        emitError(context, 25 /* ErrorCodes.X_MISSING_INTERPOLATION_END */);
+        emitError(context, 25 /* X_MISSING_INTERPOLATION_END */);
         return undefined;
     }
     const start = getCursor(context);
@@ -7956,12 +7936,12 @@ function parseInterpolation(context, mode) {
     advancePositionWithMutation(innerEnd, rawContent, endOffset);
     advanceBy(context, close.length);
     return {
-        type: 5 /* NodeTypes.INTERPOLATION */,
+        type: 5 /* INTERPOLATION */,
         content: {
-            type: 4 /* NodeTypes.SIMPLE_EXPRESSION */,
+            type: 4 /* SIMPLE_EXPRESSION */,
             isStatic: false,
             // Set `isConstant` to false by default and will decide in transformExpression
-            constType: 0 /* ConstantTypes.NOT_CONSTANT */,
+            constType: 0 /* NOT_CONSTANT */,
             content,
             loc: getSelection(context, innerStart, innerEnd)
         },
@@ -7969,7 +7949,7 @@ function parseInterpolation(context, mode) {
     };
 }
 function parseText(context, mode) {
-    const endTokens = mode === 3 /* TextModes.CDATA */ ? [']]>'] : ['<', context.options.delimiters[0]];
+    const endTokens = mode === 3 /* CDATA */ ? [']]>'] : ['<', context.options.delimiters[0]];
     let endIndex = context.source.length;
     for (let i = 0; i < endTokens.length; i++) {
         const index = context.source.indexOf(endTokens[i], 1);
@@ -7980,7 +7960,7 @@ function parseText(context, mode) {
     const start = getCursor(context);
     const content = parseTextData(context, endIndex, mode);
     return {
-        type: 2 /* NodeTypes.TEXT */,
+        type: 2 /* TEXT */,
         content,
         loc: getSelection(context, start)
     };
@@ -7992,14 +7972,14 @@ function parseText(context, mode) {
 function parseTextData(context, length, mode) {
     const rawText = context.source.slice(0, length);
     advanceBy(context, length);
-    if (mode === 2 /* TextModes.RAWTEXT */ ||
-        mode === 3 /* TextModes.CDATA */ ||
+    if (mode === 2 /* RAWTEXT */ ||
+        mode === 3 /* CDATA */ ||
         !rawText.includes('&')) {
         return rawText;
     }
     else {
         // DATA or RCDATA containing "&"". Entity decoding required.
-        return context.options.decodeEntities(rawText, mode === 4 /* TextModes.ATTRIBUTE_VALUE */);
+        return context.options.decodeEntities(rawText, mode === 4 /* ATTRIBUTE_VALUE */);
     }
 }
 function getCursor(context) {
@@ -8048,7 +8028,7 @@ function emitError(context, code, offset, loc = getCursor(context)) {
 function isEnd(context, mode, ancestors) {
     const s = context.source;
     switch (mode) {
-        case 0 /* TextModes.DATA */:
+        case 0 /* DATA */:
             if (startsWith(s, '</')) {
                 // TODO: probably bad performance
                 for (let i = ancestors.length - 1; i >= 0; --i) {
@@ -8058,15 +8038,15 @@ function isEnd(context, mode, ancestors) {
                 }
             }
             break;
-        case 1 /* TextModes.RCDATA */:
-        case 2 /* TextModes.RAWTEXT */: {
+        case 1 /* RCDATA */:
+        case 2 /* RAWTEXT */: {
             const parent = last(ancestors);
             if (parent && startsWithEndTagOpen(s, parent.tag)) {
                 return true;
             }
             break;
         }
-        case 3 /* TextModes.CDATA */:
+        case 3 /* CDATA */:
             if (startsWith(s, ']]>')) {
                 return true;
             }
@@ -8089,7 +8069,7 @@ function hoistStatic(root, context) {
 function isSingleElementRoot(root, child) {
     const { children } = root;
     return (children.length === 1 &&
-        child.type === 1 /* NodeTypes.ELEMENT */ &&
+        child.type === 1 /* ELEMENT */ &&
         !isSlotOutlet(child));
 }
 function walk(node, context, doNotHoistNode = false) {
@@ -8099,15 +8079,15 @@ function walk(node, context, doNotHoistNode = false) {
     for (let i = 0; i < children.length; i++) {
         const child = children[i];
         // only plain elements & text calls are eligible for hoisting.
-        if (child.type === 1 /* NodeTypes.ELEMENT */ &&
-            child.tagType === 0 /* ElementTypes.ELEMENT */) {
+        if (child.type === 1 /* ELEMENT */ &&
+            child.tagType === 0 /* ELEMENT */) {
             const constantType = doNotHoistNode
-                ? 0 /* ConstantTypes.NOT_CONSTANT */
+                ? 0 /* NOT_CONSTANT */
                 : getConstantType(child, context);
-            if (constantType > 0 /* ConstantTypes.NOT_CONSTANT */) {
-                if (constantType >= 2 /* ConstantTypes.CAN_HOIST */) {
+            if (constantType > 0 /* NOT_CONSTANT */) {
+                if (constantType >= 2 /* CAN_HOIST */) {
                     child.codegenNode.patchFlag =
-                        -1 /* PatchFlags.HOISTED */ + (( true) ? ` /* HOISTED */` : 0);
+                        -1 /* HOISTED */ + (( true) ? ` /* HOISTED */` : 0);
                     child.codegenNode = context.hoist(child.codegenNode);
                     hoistedCount++;
                     continue;
@@ -8117,13 +8097,13 @@ function walk(node, context, doNotHoistNode = false) {
                 // node may contain dynamic children, but its props may be eligible for
                 // hoisting.
                 const codegenNode = child.codegenNode;
-                if (codegenNode.type === 13 /* NodeTypes.VNODE_CALL */) {
+                if (codegenNode.type === 13 /* VNODE_CALL */) {
                     const flag = getPatchFlag(codegenNode);
                     if ((!flag ||
-                        flag === 512 /* PatchFlags.NEED_PATCH */ ||
-                        flag === 1 /* PatchFlags.TEXT */) &&
+                        flag === 512 /* NEED_PATCH */ ||
+                        flag === 1 /* TEXT */) &&
                         getGeneratedPropsConstantType(child, context) >=
-                            2 /* ConstantTypes.CAN_HOIST */) {
+                            2 /* CAN_HOIST */) {
                         const props = getNodeProps(child);
                         if (props) {
                             codegenNode.props = context.hoist(props);
@@ -8135,9 +8115,14 @@ function walk(node, context, doNotHoistNode = false) {
                 }
             }
         }
+        else if (child.type === 12 /* TEXT_CALL */ &&
+            getConstantType(child.content, context) >= 2 /* CAN_HOIST */) {
+            child.codegenNode = context.hoist(child.codegenNode);
+            hoistedCount++;
+        }
         // walk further
-        if (child.type === 1 /* NodeTypes.ELEMENT */) {
-            const isComponent = child.tagType === 1 /* ElementTypes.COMPONENT */;
+        if (child.type === 1 /* ELEMENT */) {
+            const isComponent = child.tagType === 1 /* COMPONENT */;
             if (isComponent) {
                 context.scopes.vSlot++;
             }
@@ -8146,11 +8131,11 @@ function walk(node, context, doNotHoistNode = false) {
                 context.scopes.vSlot--;
             }
         }
-        else if (child.type === 11 /* NodeTypes.FOR */) {
+        else if (child.type === 11 /* FOR */) {
             // Do not hoist v-for single child because it has to be a block
             walk(child, context, child.children.length === 1);
         }
-        else if (child.type === 9 /* NodeTypes.IF */) {
+        else if (child.type === 9 /* IF */) {
             for (let i = 0; i < child.branches.length; i++) {
                 // Do not hoist v-if single child because it has to be a block
                 walk(child.branches[i], context, child.branches[i].children.length === 1);
@@ -8163,10 +8148,10 @@ function walk(node, context, doNotHoistNode = false) {
     // all children were hoisted - the entire children array is hoistable.
     if (hoistedCount &&
         hoistedCount === originalCount &&
-        node.type === 1 /* NodeTypes.ELEMENT */ &&
-        node.tagType === 0 /* ElementTypes.ELEMENT */ &&
+        node.type === 1 /* ELEMENT */ &&
+        node.tagType === 0 /* ELEMENT */ &&
         node.codegenNode &&
-        node.codegenNode.type === 13 /* NodeTypes.VNODE_CALL */ &&
+        node.codegenNode.type === 13 /* VNODE_CALL */ &&
         (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(node.codegenNode.children)) {
         node.codegenNode.children = context.hoist(createArrayExpression(node.codegenNode.children));
     }
@@ -8174,35 +8159,35 @@ function walk(node, context, doNotHoistNode = false) {
 function getConstantType(node, context) {
     const { constantCache } = context;
     switch (node.type) {
-        case 1 /* NodeTypes.ELEMENT */:
-            if (node.tagType !== 0 /* ElementTypes.ELEMENT */) {
-                return 0 /* ConstantTypes.NOT_CONSTANT */;
+        case 1 /* ELEMENT */:
+            if (node.tagType !== 0 /* ELEMENT */) {
+                return 0 /* NOT_CONSTANT */;
             }
             const cached = constantCache.get(node);
             if (cached !== undefined) {
                 return cached;
             }
             const codegenNode = node.codegenNode;
-            if (codegenNode.type !== 13 /* NodeTypes.VNODE_CALL */) {
-                return 0 /* ConstantTypes.NOT_CONSTANT */;
+            if (codegenNode.type !== 13 /* VNODE_CALL */) {
+                return 0 /* NOT_CONSTANT */;
             }
             if (codegenNode.isBlock &&
                 node.tag !== 'svg' &&
                 node.tag !== 'foreignObject') {
-                return 0 /* ConstantTypes.NOT_CONSTANT */;
+                return 0 /* NOT_CONSTANT */;
             }
             const flag = getPatchFlag(codegenNode);
             if (!flag) {
-                let returnType = 3 /* ConstantTypes.CAN_STRINGIFY */;
+                let returnType = 3 /* CAN_STRINGIFY */;
                 // Element itself has no patch flag. However we still need to check:
                 // 1. Even for a node with no patch flag, it is possible for it to contain
                 // non-hoistable expressions that refers to scope variables, e.g. compiler
                 // injected keys or cached event handlers. Therefore we need to always
                 // check the codegenNode's props to be sure.
                 const generatedPropsType = getGeneratedPropsConstantType(node, context);
-                if (generatedPropsType === 0 /* ConstantTypes.NOT_CONSTANT */) {
-                    constantCache.set(node, 0 /* ConstantTypes.NOT_CONSTANT */);
-                    return 0 /* ConstantTypes.NOT_CONSTANT */;
+                if (generatedPropsType === 0 /* NOT_CONSTANT */) {
+                    constantCache.set(node, 0 /* NOT_CONSTANT */);
+                    return 0 /* NOT_CONSTANT */;
                 }
                 if (generatedPropsType < returnType) {
                     returnType = generatedPropsType;
@@ -8210,9 +8195,9 @@ function getConstantType(node, context) {
                 // 2. its children.
                 for (let i = 0; i < node.children.length; i++) {
                     const childType = getConstantType(node.children[i], context);
-                    if (childType === 0 /* ConstantTypes.NOT_CONSTANT */) {
-                        constantCache.set(node, 0 /* ConstantTypes.NOT_CONSTANT */);
-                        return 0 /* ConstantTypes.NOT_CONSTANT */;
+                    if (childType === 0 /* NOT_CONSTANT */) {
+                        constantCache.set(node, 0 /* NOT_CONSTANT */);
+                        return 0 /* NOT_CONSTANT */;
                     }
                     if (childType < returnType) {
                         returnType = childType;
@@ -8222,14 +8207,14 @@ function getConstantType(node, context) {
                 // type, check if any of the props can cause the type to be lowered
                 // we can skip can_patch because it's guaranteed by the absence of a
                 // patchFlag.
-                if (returnType > 1 /* ConstantTypes.CAN_SKIP_PATCH */) {
+                if (returnType > 1 /* CAN_SKIP_PATCH */) {
                     for (let i = 0; i < node.props.length; i++) {
                         const p = node.props[i];
-                        if (p.type === 7 /* NodeTypes.DIRECTIVE */ && p.name === 'bind' && p.exp) {
+                        if (p.type === 7 /* DIRECTIVE */ && p.name === 'bind' && p.exp) {
                             const expType = getConstantType(p.exp, context);
-                            if (expType === 0 /* ConstantTypes.NOT_CONSTANT */) {
-                                constantCache.set(node, 0 /* ConstantTypes.NOT_CONSTANT */);
-                                return 0 /* ConstantTypes.NOT_CONSTANT */;
+                            if (expType === 0 /* NOT_CONSTANT */) {
+                                constantCache.set(node, 0 /* NOT_CONSTANT */);
+                                return 0 /* NOT_CONSTANT */;
                             }
                             if (expType < returnType) {
                                 returnType = expType;
@@ -8244,9 +8229,9 @@ function getConstantType(node, context) {
                     // except set custom directives.
                     for (let i = 0; i < node.props.length; i++) {
                         const p = node.props[i];
-                        if (p.type === 7 /* NodeTypes.DIRECTIVE */) {
-                            constantCache.set(node, 0 /* ConstantTypes.NOT_CONSTANT */);
-                            return 0 /* ConstantTypes.NOT_CONSTANT */;
+                        if (p.type === 7 /* DIRECTIVE */) {
+                            constantCache.set(node, 0 /* NOT_CONSTANT */);
+                            return 0 /* NOT_CONSTANT */;
                         }
                     }
                     context.removeHelper(OPEN_BLOCK);
@@ -8258,31 +8243,31 @@ function getConstantType(node, context) {
                 return returnType;
             }
             else {
-                constantCache.set(node, 0 /* ConstantTypes.NOT_CONSTANT */);
-                return 0 /* ConstantTypes.NOT_CONSTANT */;
+                constantCache.set(node, 0 /* NOT_CONSTANT */);
+                return 0 /* NOT_CONSTANT */;
             }
-        case 2 /* NodeTypes.TEXT */:
-        case 3 /* NodeTypes.COMMENT */:
-            return 3 /* ConstantTypes.CAN_STRINGIFY */;
-        case 9 /* NodeTypes.IF */:
-        case 11 /* NodeTypes.FOR */:
-        case 10 /* NodeTypes.IF_BRANCH */:
-            return 0 /* ConstantTypes.NOT_CONSTANT */;
-        case 5 /* NodeTypes.INTERPOLATION */:
-        case 12 /* NodeTypes.TEXT_CALL */:
+        case 2 /* TEXT */:
+        case 3 /* COMMENT */:
+            return 3 /* CAN_STRINGIFY */;
+        case 9 /* IF */:
+        case 11 /* FOR */:
+        case 10 /* IF_BRANCH */:
+            return 0 /* NOT_CONSTANT */;
+        case 5 /* INTERPOLATION */:
+        case 12 /* TEXT_CALL */:
             return getConstantType(node.content, context);
-        case 4 /* NodeTypes.SIMPLE_EXPRESSION */:
+        case 4 /* SIMPLE_EXPRESSION */:
             return node.constType;
-        case 8 /* NodeTypes.COMPOUND_EXPRESSION */:
-            let returnType = 3 /* ConstantTypes.CAN_STRINGIFY */;
+        case 8 /* COMPOUND_EXPRESSION */:
+            let returnType = 3 /* CAN_STRINGIFY */;
             for (let i = 0; i < node.children.length; i++) {
                 const child = node.children[i];
                 if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(child) || (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isSymbol)(child)) {
                     continue;
                 }
                 const childType = getConstantType(child, context);
-                if (childType === 0 /* ConstantTypes.NOT_CONSTANT */) {
-                    return 0 /* ConstantTypes.NOT_CONSTANT */;
+                if (childType === 0 /* NOT_CONSTANT */) {
+                    return 0 /* NOT_CONSTANT */;
                 }
                 else if (childType < returnType) {
                     returnType = childType;
@@ -8291,7 +8276,7 @@ function getConstantType(node, context) {
             return returnType;
         default:
             if ((true)) ;
-            return 0 /* ConstantTypes.NOT_CONSTANT */;
+            return 0 /* NOT_CONSTANT */;
     }
 }
 const allowHoistedHelperSet = new Set([
@@ -8301,48 +8286,48 @@ const allowHoistedHelperSet = new Set([
     GUARD_REACTIVE_PROPS
 ]);
 function getConstantTypeOfHelperCall(value, context) {
-    if (value.type === 14 /* NodeTypes.JS_CALL_EXPRESSION */ &&
+    if (value.type === 14 /* JS_CALL_EXPRESSION */ &&
         !(0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(value.callee) &&
         allowHoistedHelperSet.has(value.callee)) {
         const arg = value.arguments[0];
-        if (arg.type === 4 /* NodeTypes.SIMPLE_EXPRESSION */) {
+        if (arg.type === 4 /* SIMPLE_EXPRESSION */) {
             return getConstantType(arg, context);
         }
-        else if (arg.type === 14 /* NodeTypes.JS_CALL_EXPRESSION */) {
+        else if (arg.type === 14 /* JS_CALL_EXPRESSION */) {
             // in the case of nested helper call, e.g. `normalizeProps(guardReactiveProps(exp))`
             return getConstantTypeOfHelperCall(arg, context);
         }
     }
-    return 0 /* ConstantTypes.NOT_CONSTANT */;
+    return 0 /* NOT_CONSTANT */;
 }
 function getGeneratedPropsConstantType(node, context) {
-    let returnType = 3 /* ConstantTypes.CAN_STRINGIFY */;
+    let returnType = 3 /* CAN_STRINGIFY */;
     const props = getNodeProps(node);
-    if (props && props.type === 15 /* NodeTypes.JS_OBJECT_EXPRESSION */) {
+    if (props && props.type === 15 /* JS_OBJECT_EXPRESSION */) {
         const { properties } = props;
         for (let i = 0; i < properties.length; i++) {
             const { key, value } = properties[i];
             const keyType = getConstantType(key, context);
-            if (keyType === 0 /* ConstantTypes.NOT_CONSTANT */) {
+            if (keyType === 0 /* NOT_CONSTANT */) {
                 return keyType;
             }
             if (keyType < returnType) {
                 returnType = keyType;
             }
             let valueType;
-            if (value.type === 4 /* NodeTypes.SIMPLE_EXPRESSION */) {
+            if (value.type === 4 /* SIMPLE_EXPRESSION */) {
                 valueType = getConstantType(value, context);
             }
-            else if (value.type === 14 /* NodeTypes.JS_CALL_EXPRESSION */) {
+            else if (value.type === 14 /* JS_CALL_EXPRESSION */) {
                 // some helper calls can be hoisted,
                 // such as the `normalizeProps` generated by the compiler for pre-normalize class,
                 // in this case we need to respect the ConstantType of the helper's arguments
                 valueType = getConstantTypeOfHelperCall(value, context);
             }
             else {
-                valueType = 0 /* ConstantTypes.NOT_CONSTANT */;
+                valueType = 0 /* NOT_CONSTANT */;
             }
-            if (valueType === 0 /* ConstantTypes.NOT_CONSTANT */) {
+            if (valueType === 0 /* NOT_CONSTANT */) {
                 return valueType;
             }
             if (valueType < returnType) {
@@ -8354,7 +8339,7 @@ function getGeneratedPropsConstantType(node, context) {
 }
 function getNodeProps(node) {
     const codegenNode = node.codegenNode;
-    if (codegenNode.type === 13 /* NodeTypes.VNODE_CALL */) {
+    if (codegenNode.type === 13 /* VNODE_CALL */) {
         return codegenNode.props;
     }
 }
@@ -8479,7 +8464,7 @@ function createTransformContext(root, { filename = '', prefixIdentifiers = false
             if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(exp))
                 exp = createSimpleExpression(exp);
             context.hoists.push(exp);
-            const identifier = createSimpleExpression(`_hoisted_${context.hoists.length}`, false, exp.loc, 2 /* ConstantTypes.CAN_HOIST */);
+            const identifier = createSimpleExpression(`_hoisted_${context.hoists.length}`, false, exp.loc, 2 /* CAN_HOIST */);
             identifier.hoisted = exp;
             return identifier;
         },
@@ -8502,7 +8487,7 @@ function transform(root, options) {
         createRootCodegen(root, context);
     }
     // finalize meta information
-    root.helpers = new Set([...context.helpers.keys()]);
+    root.helpers = [...context.helpers.keys()];
     root.components = [...context.components];
     root.directives = [...context.directives];
     root.imports = context.imports;
@@ -8523,7 +8508,7 @@ function createRootCodegen(root, context) {
             // single element root is never hoisted so codegenNode will never be
             // SimpleExpressionNode
             const codegenNode = child.codegenNode;
-            if (codegenNode.type === 13 /* NodeTypes.VNODE_CALL */) {
+            if (codegenNode.type === 13 /* VNODE_CALL */) {
                 makeBlock(codegenNode, context);
             }
             root.codegenNode = codegenNode;
@@ -8537,13 +8522,13 @@ function createRootCodegen(root, context) {
     }
     else if (children.length > 1) {
         // root has multiple nodes - return a fragment block.
-        let patchFlag = 64 /* PatchFlags.STABLE_FRAGMENT */;
+        let patchFlag = 64 /* STABLE_FRAGMENT */;
         let patchFlagText = _vue_shared__WEBPACK_IMPORTED_MODULE_0__.PatchFlagNames[64];
         // check if the fragment actually contains a single valid child with
         // the rest being comments
         if (( true) &&
-            children.filter(c => c.type !== 3 /* NodeTypes.COMMENT */).length === 1) {
-            patchFlag |= 2048 /* PatchFlags.DEV_ROOT_FRAGMENT */;
+            children.filter(c => c.type !== 3 /* COMMENT */).length === 1) {
+            patchFlag |= 2048 /* DEV_ROOT_FRAGMENT */;
             patchFlagText += `, ${_vue_shared__WEBPACK_IMPORTED_MODULE_0__.PatchFlagNames[2048]}`;
         }
         root.codegenNode = createVNodeCall(context, helper(FRAGMENT), undefined, root.children, patchFlag + (( true) ? ` /* ${patchFlagText} */` : 0), undefined, undefined, true, undefined, false /* isComponent */);
@@ -8590,29 +8575,29 @@ function traverseNode(node, context) {
         }
     }
     switch (node.type) {
-        case 3 /* NodeTypes.COMMENT */:
+        case 3 /* COMMENT */:
             if (!context.ssr) {
                 // inject import for the Comment symbol, which is needed for creating
                 // comment nodes with `createVNode`
                 context.helper(CREATE_COMMENT);
             }
             break;
-        case 5 /* NodeTypes.INTERPOLATION */:
+        case 5 /* INTERPOLATION */:
             // no need to traverse, but we need to inject toString helper
             if (!context.ssr) {
                 context.helper(TO_DISPLAY_STRING);
             }
             break;
         // for container types, further traverse downwards
-        case 9 /* NodeTypes.IF */:
+        case 9 /* IF */:
             for (let i = 0; i < node.branches.length; i++) {
                 traverseNode(node.branches[i], context);
             }
             break;
-        case 10 /* NodeTypes.IF_BRANCH */:
-        case 11 /* NodeTypes.FOR */:
-        case 1 /* NodeTypes.ELEMENT */:
-        case 0 /* NodeTypes.ROOT */:
+        case 10 /* IF_BRANCH */:
+        case 11 /* FOR */:
+        case 1 /* ELEMENT */:
+        case 0 /* ROOT */:
             traverseChildren(node, context);
             break;
     }
@@ -8628,17 +8613,17 @@ function createStructuralDirectiveTransform(name, fn) {
         ? (n) => n === name
         : (n) => name.test(n);
     return (node, context) => {
-        if (node.type === 1 /* NodeTypes.ELEMENT */) {
+        if (node.type === 1 /* ELEMENT */) {
             const { props } = node;
             // structural directive transforms are not concerned with slots
             // as they are handled separately in vSlot.ts
-            if (node.tagType === 3 /* ElementTypes.TEMPLATE */ && props.some(isVSlot)) {
+            if (node.tagType === 3 /* TEMPLATE */ && props.some(isVSlot)) {
                 return;
             }
             const exitFns = [];
             for (let i = 0; i < props.length; i++) {
                 const prop = props[i];
-                if (prop.type === 7 /* NodeTypes.DIRECTIVE */ && matches(prop.name)) {
+                if (prop.type === 7 /* DIRECTIVE */ && matches(prop.name)) {
                     // structural directives are removed to avoid infinite recursion
                     // also we remove them *before* applying so that it can further
                     // traverse itself in case it moves the node around
@@ -8709,16 +8694,12 @@ function generate(ast, options = {}) {
     if (options.onContextCreated)
         options.onContextCreated(context);
     const { mode, push, prefixIdentifiers, indent, deindent, newline, scopeId, ssr } = context;
-    const helpers = Array.from(ast.helpers);
-    const hasHelpers = helpers.length > 0;
+    const hasHelpers = ast.helpers.length > 0;
     const useWithBlock = !prefixIdentifiers && mode !== 'module';
-    const isSetupInlined = !true ;
     // preambles
     // in setup() inline mode, the preamble is generated in a sub context
     // and returned separately.
-    const preambleContext = isSetupInlined
-        ? createCodegenContext(ast, options)
-        : context;
+    const preambleContext = context;
     {
         genFunctionPreamble(ast, preambleContext);
     }
@@ -8736,7 +8717,7 @@ function generate(ast, options = {}) {
         // function mode const declarations should be inside with block
         // also they should be renamed to avoid collision with user properties
         if (hasHelpers) {
-            push(`const { ${helpers.map(aliasHelper).join(', ')} } = _Vue`);
+            push(`const { ${ast.helpers.map(aliasHelper).join(', ')} } = _Vue`);
             push(`\n`);
             newline();
         }
@@ -8788,7 +8769,7 @@ function generate(ast, options = {}) {
     return {
         ast,
         code: context.code,
-        preamble: isSetupInlined ? preambleContext.code : ``,
+        preamble: ``,
         // SourceMapGenerator does have toJSON() method but it's not in the types
         map: context.map ? context.map.toJSON() : undefined
     };
@@ -8800,8 +8781,7 @@ function genFunctionPreamble(ast, context) {
     // In prefix mode, we place the const declaration at top so it's done
     // only once; But if we not prefixing, we place the declaration inside the
     // with block so it doesn't incur the `in` check cost for every helper access.
-    const helpers = Array.from(ast.helpers);
-    if (helpers.length > 0) {
+    if (ast.helpers.length > 0) {
         {
             // "with" mode.
             // save Vue in a separate variable to avoid collision
@@ -8817,7 +8797,7 @@ function genFunctionPreamble(ast, context) {
                     CREATE_TEXT,
                     CREATE_STATIC
                 ]
-                    .filter(helper => helpers.includes(helper))
+                    .filter(helper => ast.helpers.includes(helper))
                     .map(aliasHelper)
                     .join(', ');
                 push(`const { ${staticHelpers} } = _Vue\n`);
@@ -8864,16 +8844,16 @@ function genHoists(hoists, context) {
     }
     context.pure = false;
 }
-function isText(n) {
+function isText$1(n) {
     return ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(n) ||
-        n.type === 4 /* NodeTypes.SIMPLE_EXPRESSION */ ||
-        n.type === 2 /* NodeTypes.TEXT */ ||
-        n.type === 5 /* NodeTypes.INTERPOLATION */ ||
-        n.type === 8 /* NodeTypes.COMPOUND_EXPRESSION */);
+        n.type === 4 /* SIMPLE_EXPRESSION */ ||
+        n.type === 2 /* TEXT */ ||
+        n.type === 5 /* INTERPOLATION */ ||
+        n.type === 8 /* COMPOUND_EXPRESSION */);
 }
 function genNodeListAsArray(nodes, context) {
     const multilines = nodes.length > 3 ||
-        ((( true)) && nodes.some(n => (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(n) || !isText(n)));
+        ((( true)) && nodes.some(n => (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(n) || !isText$1(n)));
     context.push(`[`);
     multilines && context.indent();
     genNodeList(nodes, context, multilines);
@@ -8914,69 +8894,69 @@ function genNode(node, context) {
         return;
     }
     switch (node.type) {
-        case 1 /* NodeTypes.ELEMENT */:
-        case 9 /* NodeTypes.IF */:
-        case 11 /* NodeTypes.FOR */:
+        case 1 /* ELEMENT */:
+        case 9 /* IF */:
+        case 11 /* FOR */:
             ( true) &&
                 assert(node.codegenNode != null, `Codegen node is missing for element/if/for node. ` +
                     `Apply appropriate transforms first.`);
             genNode(node.codegenNode, context);
             break;
-        case 2 /* NodeTypes.TEXT */:
+        case 2 /* TEXT */:
             genText(node, context);
             break;
-        case 4 /* NodeTypes.SIMPLE_EXPRESSION */:
+        case 4 /* SIMPLE_EXPRESSION */:
             genExpression(node, context);
             break;
-        case 5 /* NodeTypes.INTERPOLATION */:
+        case 5 /* INTERPOLATION */:
             genInterpolation(node, context);
             break;
-        case 12 /* NodeTypes.TEXT_CALL */:
+        case 12 /* TEXT_CALL */:
             genNode(node.codegenNode, context);
             break;
-        case 8 /* NodeTypes.COMPOUND_EXPRESSION */:
+        case 8 /* COMPOUND_EXPRESSION */:
             genCompoundExpression(node, context);
             break;
-        case 3 /* NodeTypes.COMMENT */:
+        case 3 /* COMMENT */:
             genComment(node, context);
             break;
-        case 13 /* NodeTypes.VNODE_CALL */:
+        case 13 /* VNODE_CALL */:
             genVNodeCall(node, context);
             break;
-        case 14 /* NodeTypes.JS_CALL_EXPRESSION */:
+        case 14 /* JS_CALL_EXPRESSION */:
             genCallExpression(node, context);
             break;
-        case 15 /* NodeTypes.JS_OBJECT_EXPRESSION */:
+        case 15 /* JS_OBJECT_EXPRESSION */:
             genObjectExpression(node, context);
             break;
-        case 17 /* NodeTypes.JS_ARRAY_EXPRESSION */:
+        case 17 /* JS_ARRAY_EXPRESSION */:
             genArrayExpression(node, context);
             break;
-        case 18 /* NodeTypes.JS_FUNCTION_EXPRESSION */:
+        case 18 /* JS_FUNCTION_EXPRESSION */:
             genFunctionExpression(node, context);
             break;
-        case 19 /* NodeTypes.JS_CONDITIONAL_EXPRESSION */:
+        case 19 /* JS_CONDITIONAL_EXPRESSION */:
             genConditionalExpression(node, context);
             break;
-        case 20 /* NodeTypes.JS_CACHE_EXPRESSION */:
+        case 20 /* JS_CACHE_EXPRESSION */:
             genCacheExpression(node, context);
             break;
-        case 21 /* NodeTypes.JS_BLOCK_STATEMENT */:
+        case 21 /* JS_BLOCK_STATEMENT */:
             genNodeList(node.body, context, true, false);
             break;
         // SSR only types
-        case 22 /* NodeTypes.JS_TEMPLATE_LITERAL */:
+        case 22 /* JS_TEMPLATE_LITERAL */:
             break;
-        case 23 /* NodeTypes.JS_IF_STATEMENT */:
+        case 23 /* JS_IF_STATEMENT */:
             break;
-        case 24 /* NodeTypes.JS_ASSIGNMENT_EXPRESSION */:
+        case 24 /* JS_ASSIGNMENT_EXPRESSION */:
             break;
-        case 25 /* NodeTypes.JS_SEQUENCE_EXPRESSION */:
+        case 25 /* JS_SEQUENCE_EXPRESSION */:
             break;
-        case 26 /* NodeTypes.JS_RETURN_STATEMENT */:
+        case 26 /* JS_RETURN_STATEMENT */:
             break;
         /* istanbul ignore next */
-        case 10 /* NodeTypes.IF_BRANCH */:
+        case 10 /* IF_BRANCH */:
             // noop
             break;
         default:
@@ -9016,7 +8996,7 @@ function genCompoundExpression(node, context) {
 }
 function genExpressionAsPropertyKey(node, context) {
     const { push } = context;
-    if (node.type === 8 /* NodeTypes.COMPOUND_EXPRESSION */) {
+    if (node.type === 8 /* COMPOUND_EXPRESSION */) {
         push(`[`);
         genCompoundExpression(node, context);
         push(`]`);
@@ -9094,7 +9074,7 @@ function genObjectExpression(node, context) {
     }
     const multilines = properties.length > 1 ||
         ((( true)) &&
-            properties.some(p => p.value.type !== 4 /* NodeTypes.SIMPLE_EXPRESSION */));
+            properties.some(p => p.value.type !== 4 /* SIMPLE_EXPRESSION */));
     push(multilines ? `{` : `{ `);
     multilines && indent();
     for (let i = 0; i < properties.length; i++) {
@@ -9163,7 +9143,7 @@ function genFunctionExpression(node, context) {
 function genConditionalExpression(node, context) {
     const { test, consequent, alternate, newline: needNewline } = node;
     const { push, indent, deindent, newline } = context;
-    if (test.type === 4 /* NodeTypes.SIMPLE_EXPRESSION */) {
+    if (test.type === 4 /* SIMPLE_EXPRESSION */) {
         const needsParens = !isSimpleIdentifier(test.content);
         needsParens && push(`(`);
         genExpression(test, context);
@@ -9183,7 +9163,7 @@ function genConditionalExpression(node, context) {
     needNewline && newline();
     needNewline || push(` `);
     push(`: `);
-    const isNested = alternate.type === 19 /* NodeTypes.JS_CONDITIONAL_EXPRESSION */;
+    const isNested = alternate.type === 19 /* JS_CONDITIONAL_EXPRESSION */;
     if (!isNested) {
         context.indentLevel++;
     }
@@ -9312,11 +9292,11 @@ const isStaticProperty = (node) => node &&
 const isStaticPropertyKey = (node, parent) => isStaticProperty(parent) && parent.key === node;
 
 // these keywords should not appear inside expressions, but operators like
-// 'typeof', 'instanceof', and 'in' are allowed
+// typeof, instanceof and in are allowed
 const prohibitedKeywordRE = new RegExp('\\b' +
-    ('arguments,await,break,case,catch,class,const,continue,debugger,default,' +
-        'delete,do,else,export,extends,finally,for,function,if,import,let,new,' +
-        'return,super,switch,throw,try,var,void,while,with,yield')
+    ('do,if,for,let,new,try,var,case,else,with,await,break,catch,class,const,' +
+        'super,throw,while,yield,delete,export,import,return,switch,default,' +
+        'extends,finally,continue,debugger,function,arguments,typeof,void')
         .split(',')
         .join('\\b|\\b') +
     '\\b');
@@ -9347,32 +9327,32 @@ function validateBrowserExpression(node, context, asParams = false, asRawStateme
         if (keywordMatch) {
             message = `avoid using JavaScript keyword as property name: "${keywordMatch[0]}"`;
         }
-        context.onError(createCompilerError(45 /* ErrorCodes.X_INVALID_EXPRESSION */, node.loc, undefined, message));
+        context.onError(createCompilerError(44 /* X_INVALID_EXPRESSION */, node.loc, undefined, message));
     }
 }
 
 const transformExpression = (node, context) => {
-    if (node.type === 5 /* NodeTypes.INTERPOLATION */) {
+    if (node.type === 5 /* INTERPOLATION */) {
         node.content = processExpression(node.content, context);
     }
-    else if (node.type === 1 /* NodeTypes.ELEMENT */) {
+    else if (node.type === 1 /* ELEMENT */) {
         // handle directives on element
         for (let i = 0; i < node.props.length; i++) {
             const dir = node.props[i];
             // do not process for v-on & v-for since they are special handled
-            if (dir.type === 7 /* NodeTypes.DIRECTIVE */ && dir.name !== 'for') {
+            if (dir.type === 7 /* DIRECTIVE */ && dir.name !== 'for') {
                 const exp = dir.exp;
                 const arg = dir.arg;
                 // do not process exp if this is v-on:arg - we need special handling
                 // for wrapping inline statements.
                 if (exp &&
-                    exp.type === 4 /* NodeTypes.SIMPLE_EXPRESSION */ &&
+                    exp.type === 4 /* SIMPLE_EXPRESSION */ &&
                     !(dir.name === 'on' && arg)) {
                     dir.exp = processExpression(exp, context, 
                     // slot args must be processed as function params
                     dir.name === 'slot');
                 }
-                if (arg && arg.type === 4 /* NodeTypes.SIMPLE_EXPRESSION */ && !arg.isStatic) {
+                if (arg && arg.type === 4 /* SIMPLE_EXPRESSION */ && !arg.isStatic) {
                     dir.arg = processExpression(arg, context);
                 }
             }
@@ -9396,19 +9376,6 @@ asRawStatements = false, localVars = Object.create(context.identifiers)) {
         return node;
     }
 }
-function stringifyExpression(exp) {
-    if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(exp)) {
-        return exp;
-    }
-    else if (exp.type === 4 /* NodeTypes.SIMPLE_EXPRESSION */) {
-        return exp.content;
-    }
-    else {
-        return exp.children
-            .map(stringifyExpression)
-            .join('');
-    }
-}
 
 const transformIf = createStructuralDirectiveTransform(/^(if|else|else-if)$/, (node, dir, context) => {
     return processIf(node, dir, context, (ifNode, branch, isRoot) => {
@@ -9420,7 +9387,7 @@ const transformIf = createStructuralDirectiveTransform(/^(if|else|else-if)$/, (n
         let key = 0;
         while (i-- >= 0) {
             const sibling = siblings[i];
-            if (sibling && sibling.type === 9 /* NodeTypes.IF */) {
+            if (sibling && sibling.type === 9 /* IF */) {
                 key += sibling.branches.length;
             }
         }
@@ -9443,7 +9410,7 @@ function processIf(node, dir, context, processCodegen) {
     if (dir.name !== 'else' &&
         (!dir.exp || !dir.exp.content.trim())) {
         const loc = dir.exp ? dir.exp.loc : node.loc;
-        context.onError(createCompilerError(28 /* ErrorCodes.X_V_IF_NO_EXPRESSION */, dir.loc));
+        context.onError(createCompilerError(28 /* X_V_IF_NO_EXPRESSION */, dir.loc));
         dir.exp = createSimpleExpression(`true`, false, loc);
     }
     if ( true && dir.exp) {
@@ -9452,7 +9419,7 @@ function processIf(node, dir, context, processCodegen) {
     if (dir.name === 'if') {
         const branch = createIfBranch(node, dir);
         const ifNode = {
-            type: 9 /* NodeTypes.IF */,
+            type: 9 /* IF */,
             loc: node.loc,
             branches: [branch]
         };
@@ -9468,22 +9435,22 @@ function processIf(node, dir, context, processCodegen) {
         let i = siblings.indexOf(node);
         while (i-- >= -1) {
             const sibling = siblings[i];
-            if (sibling && sibling.type === 3 /* NodeTypes.COMMENT */) {
+            if (( true) && sibling && sibling.type === 3 /* COMMENT */) {
                 context.removeNode(sibling);
-                ( true) && comments.unshift(sibling);
+                comments.unshift(sibling);
                 continue;
             }
             if (sibling &&
-                sibling.type === 2 /* NodeTypes.TEXT */ &&
+                sibling.type === 2 /* TEXT */ &&
                 !sibling.content.trim().length) {
                 context.removeNode(sibling);
                 continue;
             }
-            if (sibling && sibling.type === 9 /* NodeTypes.IF */) {
+            if (sibling && sibling.type === 9 /* IF */) {
                 // Check if v-else was followed by v-else-if
                 if (dir.name === 'else-if' &&
                     sibling.branches[sibling.branches.length - 1].condition === undefined) {
-                    context.onError(createCompilerError(30 /* ErrorCodes.X_V_ELSE_NO_ADJACENT_IF */, node.loc));
+                    context.onError(createCompilerError(30 /* X_V_ELSE_NO_ADJACENT_IF */, node.loc));
                 }
                 // move the node to the if node's branches
                 context.removeNode();
@@ -9492,7 +9459,7 @@ function processIf(node, dir, context, processCodegen) {
                     comments.length &&
                     // #3619 ignore comments if the v-if is direct child of <transition>
                     !(context.parent &&
-                        context.parent.type === 1 /* NodeTypes.ELEMENT */ &&
+                        context.parent.type === 1 /* ELEMENT */ &&
                         isBuiltInType(context.parent.tag, 'transition'))) {
                     branch.children = [...comments, ...branch.children];
                 }
@@ -9502,7 +9469,7 @@ function processIf(node, dir, context, processCodegen) {
                     if (key) {
                         sibling.branches.forEach(({ userKey }) => {
                             if (isSameKey(userKey, key)) {
-                                context.onError(createCompilerError(29 /* ErrorCodes.X_V_IF_SAME_KEY */, branch.userKey.loc));
+                                context.onError(createCompilerError(29 /* X_V_IF_SAME_KEY */, branch.userKey.loc));
                             }
                         });
                     }
@@ -9520,16 +9487,16 @@ function processIf(node, dir, context, processCodegen) {
                 context.currentNode = null;
             }
             else {
-                context.onError(createCompilerError(30 /* ErrorCodes.X_V_ELSE_NO_ADJACENT_IF */, node.loc));
+                context.onError(createCompilerError(30 /* X_V_ELSE_NO_ADJACENT_IF */, node.loc));
             }
             break;
         }
     }
 }
 function createIfBranch(node, dir) {
-    const isTemplateIf = node.tagType === 3 /* ElementTypes.TEMPLATE */;
+    const isTemplateIf = node.tagType === 3 /* TEMPLATE */;
     return {
-        type: 10 /* NodeTypes.IF_BRANCH */,
+        type: 10 /* IF_BRANCH */,
         loc: node.loc,
         condition: dir.name === 'else' ? undefined : dir.exp,
         children: isTemplateIf && !findDir(node, 'for') ? node.children : [node],
@@ -9553,26 +9520,26 @@ function createCodegenNodeForBranch(branch, keyIndex, context) {
 }
 function createChildrenCodegenNode(branch, keyIndex, context) {
     const { helper } = context;
-    const keyProperty = createObjectProperty(`key`, createSimpleExpression(`${keyIndex}`, false, locStub, 2 /* ConstantTypes.CAN_HOIST */));
+    const keyProperty = createObjectProperty(`key`, createSimpleExpression(`${keyIndex}`, false, locStub, 2 /* CAN_HOIST */));
     const { children } = branch;
     const firstChild = children[0];
-    const needFragmentWrapper = children.length !== 1 || firstChild.type !== 1 /* NodeTypes.ELEMENT */;
+    const needFragmentWrapper = children.length !== 1 || firstChild.type !== 1 /* ELEMENT */;
     if (needFragmentWrapper) {
-        if (children.length === 1 && firstChild.type === 11 /* NodeTypes.FOR */) {
+        if (children.length === 1 && firstChild.type === 11 /* FOR */) {
             // optimize away nested fragments when child is a ForNode
             const vnodeCall = firstChild.codegenNode;
             injectProp(vnodeCall, keyProperty, context);
             return vnodeCall;
         }
         else {
-            let patchFlag = 64 /* PatchFlags.STABLE_FRAGMENT */;
+            let patchFlag = 64 /* STABLE_FRAGMENT */;
             let patchFlagText = _vue_shared__WEBPACK_IMPORTED_MODULE_0__.PatchFlagNames[64];
             // check if the fragment actually contains a single valid child with
             // the rest being comments
             if (( true) &&
                 !branch.isTemplateIf &&
-                children.filter(c => c.type !== 3 /* NodeTypes.COMMENT */).length === 1) {
-                patchFlag |= 2048 /* PatchFlags.DEV_ROOT_FRAGMENT */;
+                children.filter(c => c.type !== 3 /* COMMENT */).length === 1) {
+                patchFlag |= 2048 /* DEV_ROOT_FRAGMENT */;
                 patchFlagText += `, ${_vue_shared__WEBPACK_IMPORTED_MODULE_0__.PatchFlagNames[2048]}`;
             }
             return createVNodeCall(context, helper(FRAGMENT), createObjectExpression([keyProperty]), children, patchFlag + (( true) ? ` /* ${patchFlagText} */` : 0), undefined, undefined, true, false, false /* isComponent */, branch.loc);
@@ -9582,7 +9549,7 @@ function createChildrenCodegenNode(branch, keyIndex, context) {
         const ret = firstChild.codegenNode;
         const vnodeCall = getMemoedVNodeCall(ret);
         // Change createVNode to createBlock.
-        if (vnodeCall.type === 13 /* NodeTypes.VNODE_CALL */) {
+        if (vnodeCall.type === 13 /* VNODE_CALL */) {
             makeBlock(vnodeCall, context);
         }
         // inject branch key
@@ -9594,7 +9561,7 @@ function isSameKey(a, b) {
     if (!a || a.type !== b.type) {
         return false;
     }
-    if (a.type === 6 /* NodeTypes.ATTRIBUTE */) {
+    if (a.type === 6 /* ATTRIBUTE */) {
         if (a.value.content !== b.value.content) {
             return false;
         }
@@ -9606,7 +9573,7 @@ function isSameKey(a, b) {
         if (exp.type !== branchExp.type) {
             return false;
         }
-        if (exp.type !== 4 /* NodeTypes.SIMPLE_EXPRESSION */ ||
+        if (exp.type !== 4 /* SIMPLE_EXPRESSION */ ||
             exp.isStatic !== branchExp.isStatic ||
             exp.content !== branchExp.content) {
             return false;
@@ -9616,15 +9583,15 @@ function isSameKey(a, b) {
 }
 function getParentCondition(node) {
     while (true) {
-        if (node.type === 19 /* NodeTypes.JS_CONDITIONAL_EXPRESSION */) {
-            if (node.alternate.type === 19 /* NodeTypes.JS_CONDITIONAL_EXPRESSION */) {
+        if (node.type === 19 /* JS_CONDITIONAL_EXPRESSION */) {
+            if (node.alternate.type === 19 /* JS_CONDITIONAL_EXPRESSION */) {
                 node = node.alternate;
             }
             else {
                 return node;
             }
         }
-        else if (node.type === 20 /* NodeTypes.JS_CACHE_EXPRESSION */) {
+        else if (node.type === 20 /* JS_CACHE_EXPRESSION */) {
             node = node.value;
         }
     }
@@ -9642,17 +9609,17 @@ const transformFor = createStructuralDirectiveTransform('for', (node, dir, conte
         const memo = findDir(node, 'memo');
         const keyProp = findProp(node, `key`);
         const keyExp = keyProp &&
-            (keyProp.type === 6 /* NodeTypes.ATTRIBUTE */
+            (keyProp.type === 6 /* ATTRIBUTE */
                 ? createSimpleExpression(keyProp.value.content, true)
                 : keyProp.exp);
         const keyProperty = keyProp ? createObjectProperty(`key`, keyExp) : null;
-        const isStableFragment = forNode.source.type === 4 /* NodeTypes.SIMPLE_EXPRESSION */ &&
-            forNode.source.constType > 0 /* ConstantTypes.NOT_CONSTANT */;
+        const isStableFragment = forNode.source.type === 4 /* SIMPLE_EXPRESSION */ &&
+            forNode.source.constType > 0 /* NOT_CONSTANT */;
         const fragmentFlag = isStableFragment
-            ? 64 /* PatchFlags.STABLE_FRAGMENT */
+            ? 64 /* STABLE_FRAGMENT */
             : keyProp
-                ? 128 /* PatchFlags.KEYED_FRAGMENT */
-                : 256 /* PatchFlags.UNKEYED_FRAGMENT */;
+                ? 128 /* KEYED_FRAGMENT */
+                : 256 /* UNKEYED_FRAGMENT */;
         forNode.codegenNode = createVNodeCall(context, helper(FRAGMENT), undefined, renderExp, fragmentFlag +
             (( true) ? ` /* ${_vue_shared__WEBPACK_IMPORTED_MODULE_0__.PatchFlagNames[fragmentFlag]} */` : 0), undefined, undefined, true /* isBlock */, !isStableFragment /* disableTracking */, false /* isComponent */, node.loc);
         return () => {
@@ -9662,16 +9629,16 @@ const transformFor = createStructuralDirectiveTransform('for', (node, dir, conte
             // check <template v-for> key placement
             if (( true) && isTemplate) {
                 node.children.some(c => {
-                    if (c.type === 1 /* NodeTypes.ELEMENT */) {
+                    if (c.type === 1 /* ELEMENT */) {
                         const key = findProp(c, 'key');
                         if (key) {
-                            context.onError(createCompilerError(33 /* ErrorCodes.X_V_FOR_TEMPLATE_KEY_PLACEMENT */, key.loc));
+                            context.onError(createCompilerError(33 /* X_V_FOR_TEMPLATE_KEY_PLACEMENT */, key.loc));
                             return true;
                         }
                     }
                 });
             }
-            const needFragmentWrapper = children.length !== 1 || children[0].type !== 1 /* NodeTypes.ELEMENT */;
+            const needFragmentWrapper = children.length !== 1 || children[0].type !== 1 /* ELEMENT */;
             const slotOutlet = isSlotOutlet(node)
                 ? node
                 : isTemplate &&
@@ -9692,7 +9659,7 @@ const transformFor = createStructuralDirectiveTransform('for', (node, dir, conte
             else if (needFragmentWrapper) {
                 // <template v-for="..."> with text or multi-elements
                 // should generate a fragment block for each loop
-                childBlock = createVNodeCall(context, helper(FRAGMENT), keyProperty ? createObjectExpression([keyProperty]) : undefined, node.children, 64 /* PatchFlags.STABLE_FRAGMENT */ +
+                childBlock = createVNodeCall(context, helper(FRAGMENT), keyProperty ? createObjectExpression([keyProperty]) : undefined, node.children, 64 /* STABLE_FRAGMENT */ +
                     (( true)
                         ? ` /* ${_vue_shared__WEBPACK_IMPORTED_MODULE_0__.PatchFlagNames[64]} */`
                         : 0), undefined, undefined, true, undefined, false /* isComponent */);
@@ -9751,7 +9718,7 @@ const transformFor = createStructuralDirectiveTransform('for', (node, dir, conte
 // target-agnostic transform used for both Client and SSR
 function processFor(node, dir, context, processCodegen) {
     if (!dir.exp) {
-        context.onError(createCompilerError(31 /* ErrorCodes.X_V_FOR_NO_EXPRESSION */, dir.loc));
+        context.onError(createCompilerError(31 /* X_V_FOR_NO_EXPRESSION */, dir.loc));
         return;
     }
     const parseResult = parseForExpression(
@@ -9759,13 +9726,13 @@ function processFor(node, dir, context, processCodegen) {
     // before expression transform.
     dir.exp, context);
     if (!parseResult) {
-        context.onError(createCompilerError(32 /* ErrorCodes.X_V_FOR_MALFORMED_EXPRESSION */, dir.loc));
+        context.onError(createCompilerError(32 /* X_V_FOR_MALFORMED_EXPRESSION */, dir.loc));
         return;
     }
     const { addIdentifiers, removeIdentifiers, scopes } = context;
     const { source, value, key, index } = parseResult;
     const forNode = {
-        type: 11 /* NodeTypes.FOR */,
+        type: 11 /* FOR */,
         loc: dir.loc,
         source,
         valueAlias: value,
@@ -9865,9 +9832,9 @@ const defaultFallback = createSimpleExpression(`undefined`, false);
 //    Note the exit callback is executed before buildSlots() on the same node,
 //    so only nested slots see positive numbers.
 const trackSlotScopes = (node, context) => {
-    if (node.type === 1 /* NodeTypes.ELEMENT */ &&
-        (node.tagType === 1 /* ElementTypes.COMPONENT */ ||
-            node.tagType === 3 /* ElementTypes.TEMPLATE */)) {
+    if (node.type === 1 /* ELEMENT */ &&
+        (node.tagType === 1 /* COMPONENT */ ||
+            node.tagType === 3 /* TEMPLATE */)) {
         // We are only checking non-empty v-slot here
         // since we only care about slots that introduce scope variables.
         const vSlot = findDir(node, 'slot');
@@ -9929,21 +9896,20 @@ function buildSlots(node, context, buildSlotFn = buildClientSlotFn) {
     let hasNamedDefaultSlot = false;
     const implicitDefaultChildren = [];
     const seenSlotNames = new Set();
-    let conditionalBranchIndex = 0;
     for (let i = 0; i < children.length; i++) {
         const slotElement = children[i];
         let slotDir;
         if (!isTemplateNode(slotElement) ||
             !(slotDir = findDir(slotElement, 'slot', true))) {
             // not a <template v-slot>, skip.
-            if (slotElement.type !== 3 /* NodeTypes.COMMENT */) {
+            if (slotElement.type !== 3 /* COMMENT */) {
                 implicitDefaultChildren.push(slotElement);
             }
             continue;
         }
         if (onComponentSlot) {
             // already has on-component slot - this is incorrect usage.
-            context.onError(createCompilerError(37 /* ErrorCodes.X_V_SLOT_MIXED_SLOT_USAGE */, slotDir.loc));
+            context.onError(createCompilerError(37 /* X_V_SLOT_MIXED_SLOT_USAGE */, slotDir.loc));
             break;
         }
         hasTemplateSlots = true;
@@ -9964,7 +9930,7 @@ function buildSlots(node, context, buildSlotFn = buildClientSlotFn) {
         let vFor;
         if ((vIf = findDir(slotElement, 'if'))) {
             hasDynamicSlots = true;
-            dynamicSlots.push(createConditionalExpression(vIf.exp, buildDynamicSlot(slotName, slotFunction, conditionalBranchIndex++), defaultFallback));
+            dynamicSlots.push(createConditionalExpression(vIf.exp, buildDynamicSlot(slotName, slotFunction), defaultFallback));
         }
         else if ((vElse = findDir(slotElement, /^else(-if)?$/, true /* allowEmpty */))) {
             // find adjacent v-if
@@ -9972,7 +9938,7 @@ function buildSlots(node, context, buildSlotFn = buildClientSlotFn) {
             let prev;
             while (j--) {
                 prev = children[j];
-                if (prev.type !== 3 /* NodeTypes.COMMENT */) {
+                if (prev.type !== 3 /* COMMENT */) {
                     break;
                 }
             }
@@ -9982,15 +9948,15 @@ function buildSlots(node, context, buildSlotFn = buildClientSlotFn) {
                 i--;
                 // attach this slot to previous conditional
                 let conditional = dynamicSlots[dynamicSlots.length - 1];
-                while (conditional.alternate.type === 19 /* NodeTypes.JS_CONDITIONAL_EXPRESSION */) {
+                while (conditional.alternate.type === 19 /* JS_CONDITIONAL_EXPRESSION */) {
                     conditional = conditional.alternate;
                 }
                 conditional.alternate = vElse.exp
-                    ? createConditionalExpression(vElse.exp, buildDynamicSlot(slotName, slotFunction, conditionalBranchIndex++), defaultFallback)
-                    : buildDynamicSlot(slotName, slotFunction, conditionalBranchIndex++);
+                    ? createConditionalExpression(vElse.exp, buildDynamicSlot(slotName, slotFunction), defaultFallback)
+                    : buildDynamicSlot(slotName, slotFunction);
             }
             else {
-                context.onError(createCompilerError(30 /* ErrorCodes.X_V_ELSE_NO_ADJACENT_IF */, vElse.loc));
+                context.onError(createCompilerError(30 /* X_V_ELSE_NO_ADJACENT_IF */, vElse.loc));
             }
         }
         else if ((vFor = findDir(slotElement, 'for'))) {
@@ -10006,14 +9972,14 @@ function buildSlots(node, context, buildSlotFn = buildClientSlotFn) {
                 ]));
             }
             else {
-                context.onError(createCompilerError(32 /* ErrorCodes.X_V_FOR_MALFORMED_EXPRESSION */, vFor.loc));
+                context.onError(createCompilerError(32 /* X_V_FOR_MALFORMED_EXPRESSION */, vFor.loc));
             }
         }
         else {
             // check duplicate static names
             if (staticSlotName) {
                 if (seenSlotNames.has(staticSlotName)) {
-                    context.onError(createCompilerError(38 /* ErrorCodes.X_V_SLOT_DUPLICATE_SLOT_NAMES */, dirLoc));
+                    context.onError(createCompilerError(38 /* X_V_SLOT_DUPLICATE_SLOT_NAMES */, dirLoc));
                     continue;
                 }
                 seenSlotNames.add(staticSlotName);
@@ -10043,7 +10009,7 @@ function buildSlots(node, context, buildSlotFn = buildClientSlotFn) {
             implicitDefaultChildren.some(node => isNonWhitespaceContent(node))) {
             // implicit default slot (mixed with named slots)
             if (hasNamedDefaultSlot) {
-                context.onError(createCompilerError(39 /* ErrorCodes.X_V_SLOT_EXTRANEOUS_DEFAULT_SLOT_CHILDREN */, implicitDefaultChildren[0].loc));
+                context.onError(createCompilerError(39 /* X_V_SLOT_EXTRANEOUS_DEFAULT_SLOT_CHILDREN */, implicitDefaultChildren[0].loc));
             }
             else {
                 slotsProperties.push(buildDefaultSlotProperty(undefined, implicitDefaultChildren));
@@ -10051,10 +10017,10 @@ function buildSlots(node, context, buildSlotFn = buildClientSlotFn) {
         }
     }
     const slotFlag = hasDynamicSlots
-        ? 2 /* SlotFlags.DYNAMIC */
+        ? 2 /* DYNAMIC */
         : hasForwardedSlots(node.children)
-            ? 3 /* SlotFlags.FORWARDED */
-            : 1 /* SlotFlags.STABLE */;
+            ? 3 /* FORWARDED */
+            : 1 /* STABLE */;
     let slots = createObjectExpression(slotsProperties.concat(createObjectProperty(`_`, 
     // 2 = compiled but dynamic = can skip normalization, but must run diff
     // 1 = compiled and static = can skip normalization AND diff as optimized
@@ -10070,32 +10036,28 @@ function buildSlots(node, context, buildSlotFn = buildClientSlotFn) {
         hasDynamicSlots
     };
 }
-function buildDynamicSlot(name, fn, index) {
-    const props = [
+function buildDynamicSlot(name, fn) {
+    return createObjectExpression([
         createObjectProperty(`name`, name),
         createObjectProperty(`fn`, fn)
-    ];
-    if (index != null) {
-        props.push(createObjectProperty(`key`, createSimpleExpression(String(index), true)));
-    }
-    return createObjectExpression(props);
+    ]);
 }
 function hasForwardedSlots(children) {
     for (let i = 0; i < children.length; i++) {
         const child = children[i];
         switch (child.type) {
-            case 1 /* NodeTypes.ELEMENT */:
-                if (child.tagType === 2 /* ElementTypes.SLOT */ ||
+            case 1 /* ELEMENT */:
+                if (child.tagType === 2 /* SLOT */ ||
                     hasForwardedSlots(child.children)) {
                     return true;
                 }
                 break;
-            case 9 /* NodeTypes.IF */:
+            case 9 /* IF */:
                 if (hasForwardedSlots(child.branches))
                     return true;
                 break;
-            case 10 /* NodeTypes.IF_BRANCH */:
-            case 11 /* NodeTypes.FOR */:
+            case 10 /* IF_BRANCH */:
+            case 11 /* FOR */:
                 if (hasForwardedSlots(child.children))
                     return true;
                 break;
@@ -10104,9 +10066,9 @@ function hasForwardedSlots(children) {
     return false;
 }
 function isNonWhitespaceContent(node) {
-    if (node.type !== 2 /* NodeTypes.TEXT */ && node.type !== 12 /* NodeTypes.TEXT_CALL */)
+    if (node.type !== 2 /* TEXT */ && node.type !== 12 /* TEXT_CALL */)
         return true;
-    return node.type === 2 /* NodeTypes.TEXT */
+    return node.type === 2 /* TEXT */
         ? !!node.content.trim()
         : isNonWhitespaceContent(node.content);
 }
@@ -10120,13 +10082,13 @@ const transformElement = (node, context) => {
     // processed and merged.
     return function postTransformElement() {
         node = context.currentNode;
-        if (!(node.type === 1 /* NodeTypes.ELEMENT */ &&
-            (node.tagType === 0 /* ElementTypes.ELEMENT */ ||
-                node.tagType === 1 /* ElementTypes.COMPONENT */))) {
+        if (!(node.type === 1 /* ELEMENT */ &&
+            (node.tagType === 0 /* ELEMENT */ ||
+                node.tagType === 1 /* COMPONENT */))) {
             return;
         }
         const { tag, props } = node;
-        const isComponent = node.tagType === 1 /* ElementTypes.COMPONENT */;
+        const isComponent = node.tagType === 1 /* COMPONENT */;
         // The goal of the transform is to create a codegenNode implementing the
         // VNodeCall interface.
         let vnodeTag = isComponent
@@ -10177,9 +10139,9 @@ const transformElement = (node, context) => {
                 //    collected by a parent block.
                 shouldUseBlock = true;
                 // 2. Force keep-alive to always be updated, since it uses raw children.
-                patchFlag |= 1024 /* PatchFlags.DYNAMIC_SLOTS */;
+                patchFlag |= 1024 /* DYNAMIC_SLOTS */;
                 if (( true) && node.children.length > 1) {
-                    context.onError(createCompilerError(46 /* ErrorCodes.X_KEEP_ALIVE_INVALID_CHILDREN */, {
+                    context.onError(createCompilerError(45 /* X_KEEP_ALIVE_INVALID_CHILDREN */, {
                         start: node.children[0].loc.start,
                         end: node.children[node.children.length - 1].loc.end,
                         source: ''
@@ -10195,22 +10157,22 @@ const transformElement = (node, context) => {
                 const { slots, hasDynamicSlots } = buildSlots(node, context);
                 vnodeChildren = slots;
                 if (hasDynamicSlots) {
-                    patchFlag |= 1024 /* PatchFlags.DYNAMIC_SLOTS */;
+                    patchFlag |= 1024 /* DYNAMIC_SLOTS */;
                 }
             }
             else if (node.children.length === 1 && vnodeTag !== TELEPORT) {
                 const child = node.children[0];
                 const type = child.type;
                 // check for dynamic text children
-                const hasDynamicTextChild = type === 5 /* NodeTypes.INTERPOLATION */ ||
-                    type === 8 /* NodeTypes.COMPOUND_EXPRESSION */;
+                const hasDynamicTextChild = type === 5 /* INTERPOLATION */ ||
+                    type === 8 /* COMPOUND_EXPRESSION */;
                 if (hasDynamicTextChild &&
-                    getConstantType(child, context) === 0 /* ConstantTypes.NOT_CONSTANT */) {
-                    patchFlag |= 1 /* PatchFlags.TEXT */;
+                    getConstantType(child, context) === 0 /* NOT_CONSTANT */) {
+                    patchFlag |= 1 /* TEXT */;
                 }
                 // pass directly if the only child is a text node
                 // (plain / interpolation / expression)
-                if (hasDynamicTextChild || type === 2 /* NodeTypes.TEXT */) {
+                if (hasDynamicTextChild || type === 2 /* TEXT */) {
                     vnodeChildren = child;
                 }
                 else {
@@ -10253,8 +10215,8 @@ function resolveComponentType(node, context, ssr = false) {
     const isProp = findProp(node, 'is');
     if (isProp) {
         if (isExplicitDynamic ||
-            (isCompatEnabled("COMPILER_IS_ON_ELEMENT" /* CompilerDeprecationTypes.COMPILER_IS_ON_ELEMENT */, context))) {
-            const exp = isProp.type === 6 /* NodeTypes.ATTRIBUTE */
+            (isCompatEnabled("COMPILER_IS_ON_ELEMENT" /* COMPILER_IS_ON_ELEMENT */, context))) {
+            const exp = isProp.type === 6 /* ATTRIBUTE */
                 ? isProp.value && createSimpleExpression(isProp.value.content, true)
                 : isProp.exp;
             if (exp) {
@@ -10263,7 +10225,7 @@ function resolveComponentType(node, context, ssr = false) {
                 ]);
             }
         }
-        else if (isProp.type === 6 /* NodeTypes.ATTRIBUTE */ &&
+        else if (isProp.type === 6 /* ATTRIBUTE */ &&
             isProp.value.content.startsWith('vue:')) {
             // <button is="vue:xxx">
             // if not <component>, only is value that starts with "vue:" will be
@@ -10309,14 +10271,6 @@ function buildProps(node, context, props = node.props, isComponent, isDynamicCom
     let hasDynamicKeys = false;
     let hasVnodeHook = false;
     const dynamicPropNames = [];
-    const pushMergeArg = (arg) => {
-        if (properties.length) {
-            mergeArgs.push(createObjectExpression(dedupeProperties(properties), elementLoc));
-            properties = [];
-        }
-        if (arg)
-            mergeArgs.push(arg);
-    };
     const analyzePatchFlag = ({ key, value }) => {
         if (isStaticExp(key)) {
             const name = key.content;
@@ -10335,9 +10289,9 @@ function buildProps(node, context, props = node.props, isComponent, isDynamicCom
             if (isEventHandler && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isReservedProp)(name)) {
                 hasVnodeHook = true;
             }
-            if (value.type === 20 /* NodeTypes.JS_CACHE_EXPRESSION */ ||
-                ((value.type === 4 /* NodeTypes.SIMPLE_EXPRESSION */ ||
-                    value.type === 8 /* NodeTypes.COMPOUND_EXPRESSION */) &&
+            if (value.type === 20 /* JS_CACHE_EXPRESSION */ ||
+                ((value.type === 4 /* SIMPLE_EXPRESSION */ ||
+                    value.type === 8 /* COMPOUND_EXPRESSION */) &&
                     getConstantType(value, context) > 0)) {
                 // skip if the prop is a cached handler or has constant value
                 return;
@@ -10368,7 +10322,7 @@ function buildProps(node, context, props = node.props, isComponent, isDynamicCom
     for (let i = 0; i < props.length; i++) {
         // static attribute
         const prop = props[i];
-        if (prop.type === 6 /* NodeTypes.ATTRIBUTE */) {
+        if (prop.type === 6 /* ATTRIBUTE */) {
             const { loc, name, value } = prop;
             let isStatic = true;
             if (name === 'ref') {
@@ -10381,7 +10335,7 @@ function buildProps(node, context, props = node.props, isComponent, isDynamicCom
             if (name === 'is' &&
                 (isComponentTag(tag) ||
                     (value && value.content.startsWith('vue:')) ||
-                    (isCompatEnabled("COMPILER_IS_ON_ELEMENT" /* CompilerDeprecationTypes.COMPILER_IS_ON_ELEMENT */, context)))) {
+                    (isCompatEnabled("COMPILER_IS_ON_ELEMENT" /* COMPILER_IS_ON_ELEMENT */, context)))) {
                 continue;
             }
             properties.push(createObjectProperty(createSimpleExpression(name, true, getInnerRange(loc, 0, name.length)), createSimpleExpression(value ? value.content : '', isStatic, value ? value.loc : loc)));
@@ -10394,7 +10348,7 @@ function buildProps(node, context, props = node.props, isComponent, isDynamicCom
             // skip v-slot - it is handled by its dedicated transform.
             if (name === 'slot') {
                 if (!isComponent) {
-                    context.onError(createCompilerError(40 /* ErrorCodes.X_V_SLOT_MISPLACED */, loc));
+                    context.onError(createCompilerError(40 /* X_V_SLOT_MISPLACED */, loc));
                 }
                 continue;
             }
@@ -10407,7 +10361,7 @@ function buildProps(node, context, props = node.props, isComponent, isDynamicCom
                 (isVBind &&
                     isStaticArgOf(arg, 'is') &&
                     (isComponentTag(tag) ||
-                        (isCompatEnabled("COMPILER_IS_ON_ELEMENT" /* CompilerDeprecationTypes.COMPILER_IS_ON_ELEMENT */, context))))) {
+                        (isCompatEnabled("COMPILER_IS_ON_ELEMENT" /* COMPILER_IS_ON_ELEMENT */, context))))) {
                 continue;
             }
             // skip v-on in SSR compilation
@@ -10429,16 +10383,18 @@ function buildProps(node, context, props = node.props, isComponent, isDynamicCom
             if (!arg && (isVBind || isVOn)) {
                 hasDynamicKeys = true;
                 if (exp) {
+                    if (properties.length) {
+                        mergeArgs.push(createObjectExpression(dedupeProperties(properties), elementLoc));
+                        properties = [];
+                    }
                     if (isVBind) {
-                        // have to merge early for compat build check
-                        pushMergeArg();
                         {
                             // 2.x v-bind object order compat
                             if ((true)) {
                                 const hasOverridableKeys = mergeArgs.some(arg => {
-                                    if (arg.type === 15 /* NodeTypes.JS_OBJECT_EXPRESSION */) {
+                                    if (arg.type === 15 /* JS_OBJECT_EXPRESSION */) {
                                         return arg.properties.some(({ key }) => {
-                                            if (key.type !== 4 /* NodeTypes.SIMPLE_EXPRESSION */ ||
+                                            if (key.type !== 4 /* SIMPLE_EXPRESSION */ ||
                                                 !key.isStatic) {
                                                 return true;
                                             }
@@ -10453,10 +10409,10 @@ function buildProps(node, context, props = node.props, isComponent, isDynamicCom
                                     }
                                 });
                                 if (hasOverridableKeys) {
-                                    checkCompatEnabled("COMPILER_V_BIND_OBJECT_ORDER" /* CompilerDeprecationTypes.COMPILER_V_BIND_OBJECT_ORDER */, context, loc);
+                                    checkCompatEnabled("COMPILER_V_BIND_OBJECT_ORDER" /* COMPILER_V_BIND_OBJECT_ORDER */, context, loc);
                                 }
                             }
-                            if (isCompatEnabled("COMPILER_V_BIND_OBJECT_ORDER" /* CompilerDeprecationTypes.COMPILER_V_BIND_OBJECT_ORDER */, context)) {
+                            if (isCompatEnabled("COMPILER_V_BIND_OBJECT_ORDER" /* COMPILER_V_BIND_OBJECT_ORDER */, context)) {
                                 mergeArgs.unshift(exp);
                                 continue;
                             }
@@ -10465,18 +10421,18 @@ function buildProps(node, context, props = node.props, isComponent, isDynamicCom
                     }
                     else {
                         // v-on="obj" -> toHandlers(obj)
-                        pushMergeArg({
-                            type: 14 /* NodeTypes.JS_CALL_EXPRESSION */,
+                        mergeArgs.push({
+                            type: 14 /* JS_CALL_EXPRESSION */,
                             loc,
                             callee: context.helper(TO_HANDLERS),
-                            arguments: isComponent ? [exp] : [exp, `true`]
+                            arguments: [exp]
                         });
                     }
                 }
                 else {
                     context.onError(createCompilerError(isVBind
-                        ? 34 /* ErrorCodes.X_V_BIND_NO_EXPRESSION */
-                        : 35 /* ErrorCodes.X_V_ON_NO_EXPRESSION */, loc));
+                        ? 34 /* X_V_BIND_NO_EXPRESSION */
+                        : 35 /* X_V_ON_NO_EXPRESSION */, loc));
                 }
                 continue;
             }
@@ -10485,12 +10441,7 @@ function buildProps(node, context, props = node.props, isComponent, isDynamicCom
                 // has built-in directive transform.
                 const { props, needRuntime } = directiveTransform(prop, node, context);
                 !ssr && props.forEach(analyzePatchFlag);
-                if (isVOn && arg && !isStaticExp(arg)) {
-                    pushMergeArg(createObjectExpression(props, elementLoc));
-                }
-                else {
-                    properties.push(...props);
-                }
+                properties.push(...props);
                 if (needRuntime) {
                     runtimeDirectives.push(prop);
                     if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isSymbol)(needRuntime)) {
@@ -10512,8 +10463,9 @@ function buildProps(node, context, props = node.props, isComponent, isDynamicCom
     let propsExpression = undefined;
     // has v-bind="object" or v-on="object", wrap with mergeProps
     if (mergeArgs.length) {
-        // close up any not-yet-merged props
-        pushMergeArg();
+        if (properties.length) {
+            mergeArgs.push(createObjectExpression(dedupeProperties(properties), elementLoc));
+        }
         if (mergeArgs.length > 1) {
             propsExpression = createCallExpression(context.helper(MERGE_PROPS), mergeArgs, elementLoc);
         }
@@ -10527,31 +10479,31 @@ function buildProps(node, context, props = node.props, isComponent, isDynamicCom
     }
     // patchFlag analysis
     if (hasDynamicKeys) {
-        patchFlag |= 16 /* PatchFlags.FULL_PROPS */;
+        patchFlag |= 16 /* FULL_PROPS */;
     }
     else {
         if (hasClassBinding && !isComponent) {
-            patchFlag |= 2 /* PatchFlags.CLASS */;
+            patchFlag |= 2 /* CLASS */;
         }
         if (hasStyleBinding && !isComponent) {
-            patchFlag |= 4 /* PatchFlags.STYLE */;
+            patchFlag |= 4 /* STYLE */;
         }
         if (dynamicPropNames.length) {
-            patchFlag |= 8 /* PatchFlags.PROPS */;
+            patchFlag |= 8 /* PROPS */;
         }
         if (hasHydrationEventBinding) {
-            patchFlag |= 32 /* PatchFlags.HYDRATE_EVENTS */;
+            patchFlag |= 32 /* HYDRATE_EVENTS */;
         }
     }
     if (!shouldUseBlock &&
-        (patchFlag === 0 || patchFlag === 32 /* PatchFlags.HYDRATE_EVENTS */) &&
+        (patchFlag === 0 || patchFlag === 32 /* HYDRATE_EVENTS */) &&
         (hasRef || hasVnodeHook || runtimeDirectives.length > 0)) {
-        patchFlag |= 512 /* PatchFlags.NEED_PATCH */;
+        patchFlag |= 512 /* NEED_PATCH */;
     }
     // pre-normalize props, SSR is skipped for now
     if (!context.inSSR && propsExpression) {
         switch (propsExpression.type) {
-            case 15 /* NodeTypes.JS_OBJECT_EXPRESSION */:
+            case 15 /* JS_OBJECT_EXPRESSION */:
                 // means that there is no v-bind,
                 // but still need to deal with dynamic key binding
                 let classKeyIndex = -1;
@@ -10582,11 +10534,11 @@ function buildProps(node, context, props = node.props, isComponent, isDynamicCom
                         // the static style is compiled into an object,
                         // so use `hasStyleBinding` to ensure that it is a dynamic style binding
                         (hasStyleBinding ||
-                            (styleProp.value.type === 4 /* NodeTypes.SIMPLE_EXPRESSION */ &&
+                            (styleProp.value.type === 4 /* SIMPLE_EXPRESSION */ &&
                                 styleProp.value.content.trim()[0] === `[`) ||
                             // v-bind:style and style both exist,
                             // v-bind:style with static literal object
-                            styleProp.value.type === 17 /* NodeTypes.JS_ARRAY_EXPRESSION */)) {
+                            styleProp.value.type === 17 /* JS_ARRAY_EXPRESSION */)) {
                         styleProp.value = createCallExpression(context.helper(NORMALIZE_STYLE), [styleProp.value]);
                     }
                 }
@@ -10595,7 +10547,7 @@ function buildProps(node, context, props = node.props, isComponent, isDynamicCom
                     propsExpression = createCallExpression(context.helper(NORMALIZE_PROPS), [propsExpression]);
                 }
                 break;
-            case 14 /* NodeTypes.JS_CALL_EXPRESSION */:
+            case 14 /* JS_CALL_EXPRESSION */:
                 // mergeProps call, do nothing
                 break;
             default:
@@ -10628,7 +10580,7 @@ function dedupeProperties(properties) {
     for (let i = 0; i < properties.length; i++) {
         const prop = properties[i];
         // dynamic keys are always allowed
-        if (prop.key.type === 8 /* NodeTypes.COMPOUND_EXPRESSION */ || !prop.key.isStatic) {
+        if (prop.key.type === 8 /* COMPOUND_EXPRESSION */ || !prop.key.isStatic) {
             deduped.push(prop);
             continue;
         }
@@ -10648,7 +10600,7 @@ function dedupeProperties(properties) {
     return deduped;
 }
 function mergeAsArray(existing, incoming) {
-    if (existing.value.type === 17 /* NodeTypes.JS_ARRAY_EXPRESSION */) {
+    if (existing.value.type === 17 /* JS_ARRAY_EXPRESSION */) {
         existing.value.elements.push(incoming.value);
     }
     else {
@@ -10756,7 +10708,7 @@ function processSlotOutlet(node, context) {
     const nonNameProps = [];
     for (let i = 0; i < node.props.length; i++) {
         const p = node.props[i];
-        if (p.type === 6 /* NodeTypes.ATTRIBUTE */) {
+        if (p.type === 6 /* ATTRIBUTE */) {
             if (p.value) {
                 if (p.name === 'name') {
                     slotName = JSON.stringify(p.value.content);
@@ -10784,7 +10736,7 @@ function processSlotOutlet(node, context) {
         const { props, directives } = buildProps(node, context, nonNameProps, false, false);
         slotProps = props;
         if (directives.length) {
-            context.onError(createCompilerError(36 /* ErrorCodes.X_V_SLOT_UNEXPECTED_DIRECTIVE_ON_SLOT_OUTLET */, directives[0].loc));
+            context.onError(createCompilerError(36 /* X_V_SLOT_UNEXPECTED_DIRECTIVE_ON_SLOT_OUTLET */, directives[0].loc));
         }
     }
     return {
@@ -10793,30 +10745,22 @@ function processSlotOutlet(node, context) {
     };
 }
 
-const fnExpRE = /^\s*([\w$_]+|(async\s*)?\([^)]*?\))\s*(:[^=]+)?=>|^\s*(async\s+)?function(?:\s+[\w$]+)?\s*\(/;
+const fnExpRE = /^\s*([\w$_]+|(async\s*)?\([^)]*?\))\s*=>|^\s*(async\s+)?function(?:\s+[\w$]+)?\s*\(/;
 const transformOn = (dir, node, context, augmentor) => {
     const { loc, modifiers, arg } = dir;
     if (!dir.exp && !modifiers.length) {
-        context.onError(createCompilerError(35 /* ErrorCodes.X_V_ON_NO_EXPRESSION */, loc));
+        context.onError(createCompilerError(35 /* X_V_ON_NO_EXPRESSION */, loc));
     }
     let eventName;
-    if (arg.type === 4 /* NodeTypes.SIMPLE_EXPRESSION */) {
+    if (arg.type === 4 /* SIMPLE_EXPRESSION */) {
         if (arg.isStatic) {
             let rawName = arg.content;
             // TODO deprecate @vnodeXXX usage
             if (rawName.startsWith('vue:')) {
                 rawName = `vnode-${rawName.slice(4)}`;
             }
-            const eventString = node.tagType !== 0 /* ElementTypes.ELEMENT */ ||
-                rawName.startsWith('vnode') ||
-                !/[A-Z]/.test(rawName)
-                ? // for non-element and vnode lifecycle event listeners, auto convert
-                    // it to camelCase. See issue #2249
-                    (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.toHandlerKey)((0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.camelize)(rawName))
-                : // preserve case for plain element listeners that have uppercase
-                    // letters, as these may be custom elements' custom events
-                    `on:${rawName}`;
-            eventName = createSimpleExpression(eventString, true, arg.loc);
+            // for all event listeners, auto convert it to camelCase. See issue #2249
+            eventName = createSimpleExpression((0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.toHandlerKey)((0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.camelize)(rawName)), true, arg.loc);
         }
         else {
             // #2388
@@ -10883,7 +10827,7 @@ const transformOn = (dir, node, context, augmentor) => {
 const transformBind = (dir, _node, context) => {
     const { exp, modifiers, loc } = dir;
     const arg = dir.arg;
-    if (arg.type !== 4 /* NodeTypes.SIMPLE_EXPRESSION */) {
+    if (arg.type !== 4 /* SIMPLE_EXPRESSION */) {
         arg.children.unshift(`(`);
         arg.children.push(`) || ""`);
     }
@@ -10892,7 +10836,7 @@ const transformBind = (dir, _node, context) => {
     }
     // .sync is replaced by v-model:arg
     if (modifiers.includes('camel')) {
-        if (arg.type === 4 /* NodeTypes.SIMPLE_EXPRESSION */) {
+        if (arg.type === 4 /* SIMPLE_EXPRESSION */) {
             if (arg.isStatic) {
                 arg.content = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.camelize)(arg.content);
             }
@@ -10914,8 +10858,8 @@ const transformBind = (dir, _node, context) => {
         }
     }
     if (!exp ||
-        (exp.type === 4 /* NodeTypes.SIMPLE_EXPRESSION */ && !exp.content.trim())) {
-        context.onError(createCompilerError(34 /* ErrorCodes.X_V_BIND_NO_EXPRESSION */, loc));
+        (exp.type === 4 /* SIMPLE_EXPRESSION */ && !exp.content.trim())) {
+        context.onError(createCompilerError(34 /* X_V_BIND_NO_EXPRESSION */, loc));
         return {
             props: [createObjectProperty(arg, createSimpleExpression('', true, loc))]
         };
@@ -10925,7 +10869,7 @@ const transformBind = (dir, _node, context) => {
     };
 };
 const injectPrefix = (arg, prefix) => {
-    if (arg.type === 4 /* NodeTypes.SIMPLE_EXPRESSION */) {
+    if (arg.type === 4 /* SIMPLE_EXPRESSION */) {
         if (arg.isStatic) {
             arg.content = prefix + arg.content;
         }
@@ -10942,10 +10886,10 @@ const injectPrefix = (arg, prefix) => {
 // Merge adjacent text nodes and expressions into a single expression
 // e.g. <div>abc {{ d }} {{ e }}</div> should have a single expression node as child.
 const transformText = (node, context) => {
-    if (node.type === 0 /* NodeTypes.ROOT */ ||
-        node.type === 1 /* NodeTypes.ELEMENT */ ||
-        node.type === 11 /* NodeTypes.FOR */ ||
-        node.type === 10 /* NodeTypes.IF_BRANCH */) {
+    if (node.type === 0 /* ROOT */ ||
+        node.type === 1 /* ELEMENT */ ||
+        node.type === 11 /* FOR */ ||
+        node.type === 10 /* IF_BRANCH */) {
         // perform the transform on node exit so that all expressions have already
         // been processed.
         return () => {
@@ -10954,11 +10898,11 @@ const transformText = (node, context) => {
             let hasText = false;
             for (let i = 0; i < children.length; i++) {
                 const child = children[i];
-                if (isText$1(child)) {
+                if (isText(child)) {
                     hasText = true;
                     for (let j = i + 1; j < children.length; j++) {
                         const next = children[j];
-                        if (isText$1(next)) {
+                        if (isText(next)) {
                             if (!currentContainer) {
                                 currentContainer = children[i] = createCompoundExpression([child], child.loc);
                             }
@@ -10980,15 +10924,15 @@ const transformText = (node, context) => {
                 // setting textContent of the element.
                 // for component root it's always normalized anyway.
                 (children.length === 1 &&
-                    (node.type === 0 /* NodeTypes.ROOT */ ||
-                        (node.type === 1 /* NodeTypes.ELEMENT */ &&
-                            node.tagType === 0 /* ElementTypes.ELEMENT */ &&
+                    (node.type === 0 /* ROOT */ ||
+                        (node.type === 1 /* ELEMENT */ &&
+                            node.tagType === 0 /* ELEMENT */ &&
                             // #3756
                             // custom directives can potentially add DOM elements arbitrarily,
                             // we need to avoid setting textContent of the element at runtime
                             // to avoid accidentally overwriting the DOM elements added
                             // by the user through custom directives.
-                            !node.props.find(p => p.type === 7 /* NodeTypes.DIRECTIVE */ &&
+                            !node.props.find(p => p.type === 7 /* DIRECTIVE */ &&
                                 !context.directiveTransforms[p.name]) &&
                             // in compat mode, <template> tags with no special directives
                             // will be rendered as a fragment so its children must be
@@ -11000,21 +10944,21 @@ const transformText = (node, context) => {
             // runtime normalization.
             for (let i = 0; i < children.length; i++) {
                 const child = children[i];
-                if (isText$1(child) || child.type === 8 /* NodeTypes.COMPOUND_EXPRESSION */) {
+                if (isText(child) || child.type === 8 /* COMPOUND_EXPRESSION */) {
                     const callArgs = [];
                     // createTextVNode defaults to single whitespace, so if it is a
                     // single space the code could be an empty call to save bytes.
-                    if (child.type !== 2 /* NodeTypes.TEXT */ || child.content !== ' ') {
+                    if (child.type !== 2 /* TEXT */ || child.content !== ' ') {
                         callArgs.push(child);
                     }
                     // mark dynamic text with flag so it gets patched inside a block
                     if (!context.ssr &&
-                        getConstantType(child, context) === 0 /* ConstantTypes.NOT_CONSTANT */) {
-                        callArgs.push(1 /* PatchFlags.TEXT */ +
+                        getConstantType(child, context) === 0 /* NOT_CONSTANT */) {
+                        callArgs.push(1 /* TEXT */ +
                             (( true) ? ` /* ${_vue_shared__WEBPACK_IMPORTED_MODULE_0__.PatchFlagNames[1]} */` : 0));
                     }
                     children[i] = {
-                        type: 12 /* NodeTypes.TEXT_CALL */,
+                        type: 12 /* TEXT_CALL */,
                         content: child,
                         loc: child.loc,
                         codegenNode: createCallExpression(context.helper(CREATE_TEXT), callArgs)
@@ -11025,13 +10969,13 @@ const transformText = (node, context) => {
     }
 };
 
-const seen$1 = new WeakSet();
+const seen = new WeakSet();
 const transformOnce = (node, context) => {
-    if (node.type === 1 /* NodeTypes.ELEMENT */ && findDir(node, 'once', true)) {
-        if (seen$1.has(node) || context.inVOnce) {
+    if (node.type === 1 /* ELEMENT */ && findDir(node, 'once', true)) {
+        if (seen.has(node) || context.inVOnce) {
             return;
         }
-        seen$1.add(node);
+        seen.add(node);
         context.inVOnce = true;
         context.helper(SET_BLOCK_TRACKING);
         return () => {
@@ -11047,30 +10991,24 @@ const transformOnce = (node, context) => {
 const transformModel = (dir, node, context) => {
     const { exp, arg } = dir;
     if (!exp) {
-        context.onError(createCompilerError(41 /* ErrorCodes.X_V_MODEL_NO_EXPRESSION */, dir.loc));
+        context.onError(createCompilerError(41 /* X_V_MODEL_NO_EXPRESSION */, dir.loc));
         return createTransformProps();
     }
     const rawExp = exp.loc.source;
-    const expString = exp.type === 4 /* NodeTypes.SIMPLE_EXPRESSION */ ? exp.content : rawExp;
+    const expString = exp.type === 4 /* SIMPLE_EXPRESSION */ ? exp.content : rawExp;
     // im SFC <script setup> inline mode, the exp may have been transformed into
     // _unref(exp)
-    const bindingType = context.bindingMetadata[rawExp];
-    // check props
-    if (bindingType === "props" /* BindingTypes.PROPS */ ||
-        bindingType === "props-aliased" /* BindingTypes.PROPS_ALIASED */) {
-        context.onError(createCompilerError(44 /* ErrorCodes.X_V_MODEL_ON_PROPS */, exp.loc));
-        return createTransformProps();
-    }
-    const maybeRef = !true  ;
+    context.bindingMetadata[rawExp];
+    const maybeRef = !true    /* SETUP_CONST */;
     if (!expString.trim() ||
         (!isMemberExpression(expString) && !maybeRef)) {
-        context.onError(createCompilerError(42 /* ErrorCodes.X_V_MODEL_MALFORMED_EXPRESSION */, exp.loc));
+        context.onError(createCompilerError(42 /* X_V_MODEL_MALFORMED_EXPRESSION */, exp.loc));
         return createTransformProps();
     }
     const propName = arg ? arg : createSimpleExpression('modelValue', true);
     const eventName = arg
         ? isStaticExp(arg)
-            ? `onUpdate:${(0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.camelize)(arg.content)}`
+            ? `onUpdate:${arg.content}`
             : createCompoundExpression(['"onUpdate:" + ', arg])
         : `onUpdate:modelValue`;
     let assignmentExp;
@@ -11089,7 +11027,7 @@ const transformModel = (dir, node, context) => {
         createObjectProperty(eventName, assignmentExp)
     ];
     // modelModifiers: { foo: true, "bar-baz": true }
-    if (dir.modifiers.length && node.tagType === 1 /* ElementTypes.COMPONENT */) {
+    if (dir.modifiers.length && node.tagType === 1 /* COMPONENT */) {
         const modifiers = dir.modifiers
             .map(m => (isSimpleIdentifier(m) ? m : JSON.stringify(m)) + `: true`)
             .join(`, `);
@@ -11098,7 +11036,7 @@ const transformModel = (dir, node, context) => {
                 ? `${arg.content}Modifiers`
                 : createCompoundExpression([arg, ' + "Modifiers"'])
             : `modelModifiers`;
-        props.push(createObjectProperty(modifiersKey, createSimpleExpression(`{ ${modifiers} }`, false, dir.loc, 2 /* ConstantTypes.CAN_HOIST */)));
+        props.push(createObjectProperty(modifiersKey, createSimpleExpression(`{ ${modifiers} }`, false, dir.loc, 2 /* CAN_HOIST */)));
     }
     return createTransformProps(props);
 };
@@ -11108,17 +11046,17 @@ function createTransformProps(props = []) {
 
 const validDivisionCharRE = /[\w).+\-_$\]]/;
 const transformFilter = (node, context) => {
-    if (!isCompatEnabled("COMPILER_FILTER" /* CompilerDeprecationTypes.COMPILER_FILTERS */, context)) {
+    if (!isCompatEnabled("COMPILER_FILTER" /* COMPILER_FILTERS */, context)) {
         return;
     }
-    if (node.type === 5 /* NodeTypes.INTERPOLATION */) {
+    if (node.type === 5 /* INTERPOLATION */) {
         // filter rewrite is applied before expression transform so only
         // simple expressions are possible at this stage
         rewriteFilter(node.content, context);
     }
-    if (node.type === 1 /* NodeTypes.ELEMENT */) {
+    if (node.type === 1 /* ELEMENT */) {
         node.props.forEach((prop) => {
-            if (prop.type === 7 /* NodeTypes.DIRECTIVE */ &&
+            if (prop.type === 7 /* DIRECTIVE */ &&
                 prop.name !== 'for' &&
                 prop.exp) {
                 rewriteFilter(prop.exp, context);
@@ -11127,7 +11065,7 @@ const transformFilter = (node, context) => {
     }
 };
 function rewriteFilter(node, context) {
-    if (node.type === 4 /* NodeTypes.SIMPLE_EXPRESSION */) {
+    if (node.type === 4 /* SIMPLE_EXPRESSION */) {
         parseFilter(node, context);
     }
     else {
@@ -11135,13 +11073,13 @@ function rewriteFilter(node, context) {
             const child = node.children[i];
             if (typeof child !== 'object')
                 continue;
-            if (child.type === 4 /* NodeTypes.SIMPLE_EXPRESSION */) {
+            if (child.type === 4 /* SIMPLE_EXPRESSION */) {
                 parseFilter(child, context);
             }
-            else if (child.type === 8 /* NodeTypes.COMPOUND_EXPRESSION */) {
+            else if (child.type === 8 /* COMPOUND_EXPRESSION */) {
                 rewriteFilter(node, context);
             }
-            else if (child.type === 5 /* NodeTypes.INTERPOLATION */) {
+            else if (child.type === 5 /* INTERPOLATION */) {
                 rewriteFilter(child.content, context);
             }
         }
@@ -11250,7 +11188,7 @@ function parseFilter(node, context) {
     }
     if (filters.length) {
         ( true) &&
-            warnDeprecation("COMPILER_FILTER" /* CompilerDeprecationTypes.COMPILER_FILTERS */, context, node.loc);
+            warnDeprecation("COMPILER_FILTER" /* COMPILER_FILTERS */, context, node.loc);
         for (i = 0; i < filters.length; i++) {
             expression = wrapFilter(expression, filters[i], context);
         }
@@ -11272,20 +11210,20 @@ function wrapFilter(exp, filter, context) {
     }
 }
 
-const seen = new WeakSet();
+const seen$1 = new WeakSet();
 const transformMemo = (node, context) => {
-    if (node.type === 1 /* NodeTypes.ELEMENT */) {
+    if (node.type === 1 /* ELEMENT */) {
         const dir = findDir(node, 'memo');
-        if (!dir || seen.has(node)) {
+        if (!dir || seen$1.has(node)) {
             return;
         }
-        seen.add(node);
+        seen$1.add(node);
         return () => {
             const codegenNode = node.codegenNode ||
                 context.currentNode.codegenNode;
-            if (codegenNode && codegenNode.type === 13 /* NodeTypes.VNODE_CALL */) {
+            if (codegenNode && codegenNode.type === 13 /* VNODE_CALL */) {
                 // non-component sub tree should be turned into a block
-                if (node.tagType !== 1 /* ElementTypes.COMPONENT */) {
+                if (node.tagType !== 1 /* COMPONENT */) {
                     makeBlock(codegenNode, context);
                 }
                 node.codegenNode = createCallExpression(context.helper(WITH_MEMO), [
@@ -11330,18 +11268,18 @@ function baseCompile(template, options = {}) {
     /* istanbul ignore if */
     {
         if (options.prefixIdentifiers === true) {
-            onError(createCompilerError(47 /* ErrorCodes.X_PREFIX_ID_NOT_SUPPORTED */));
+            onError(createCompilerError(46 /* X_PREFIX_ID_NOT_SUPPORTED */));
         }
         else if (isModuleMode) {
-            onError(createCompilerError(48 /* ErrorCodes.X_MODULE_MODE_NOT_SUPPORTED */));
+            onError(createCompilerError(47 /* X_MODULE_MODE_NOT_SUPPORTED */));
         }
     }
     const prefixIdentifiers = !true ;
     if (options.cacheHandlers) {
-        onError(createCompilerError(49 /* ErrorCodes.X_CACHE_HANDLER_NOT_SUPPORTED */));
+        onError(createCompilerError(48 /* X_CACHE_HANDLER_NOT_SUPPORTED */));
     }
     if (options.scopeId && !isModuleMode) {
-        onError(createCompilerError(50 /* ErrorCodes.X_SCOPE_ID_NOT_SUPPORTED */));
+        onError(createCompilerError(49 /* X_SCOPE_ID_NOT_SUPPORTED */));
     }
     const ast = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isString)(template) ? baseParse(template, options) : template;
     const [nodeTransforms, directiveTransforms] = getBaseTransformPreset();
@@ -11502,7 +11440,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "processSlotOutlet": () => (/* reexport safe */ _vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.processSlotOutlet),
 /* harmony export */   "registerRuntimeHelpers": () => (/* reexport safe */ _vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.registerRuntimeHelpers),
 /* harmony export */   "resolveComponentType": () => (/* reexport safe */ _vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.resolveComponentType),
-/* harmony export */   "stringifyExpression": () => (/* reexport safe */ _vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.stringifyExpression),
 /* harmony export */   "toValidAssetId": () => (/* reexport safe */ _vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.toValidAssetId),
 /* harmony export */   "trackSlotScopes": () => (/* reexport safe */ _vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.trackSlotScopes),
 /* harmony export */   "trackVForSlotScopes": () => (/* reexport safe */ _vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.trackVForSlotScopes),
@@ -11580,54 +11517,54 @@ const parserOptions = {
     },
     // https://html.spec.whatwg.org/multipage/parsing.html#tree-construction-dispatcher
     getNamespace(tag, parent) {
-        let ns = parent ? parent.ns : 0 /* DOMNamespaces.HTML */;
-        if (parent && ns === 2 /* DOMNamespaces.MATH_ML */) {
+        let ns = parent ? parent.ns : 0 /* HTML */;
+        if (parent && ns === 2 /* MATH_ML */) {
             if (parent.tag === 'annotation-xml') {
                 if (tag === 'svg') {
-                    return 1 /* DOMNamespaces.SVG */;
+                    return 1 /* SVG */;
                 }
-                if (parent.props.some(a => a.type === 6 /* NodeTypes.ATTRIBUTE */ &&
+                if (parent.props.some(a => a.type === 6 /* ATTRIBUTE */ &&
                     a.name === 'encoding' &&
                     a.value != null &&
                     (a.value.content === 'text/html' ||
                         a.value.content === 'application/xhtml+xml'))) {
-                    ns = 0 /* DOMNamespaces.HTML */;
+                    ns = 0 /* HTML */;
                 }
             }
             else if (/^m(?:[ions]|text)$/.test(parent.tag) &&
                 tag !== 'mglyph' &&
                 tag !== 'malignmark') {
-                ns = 0 /* DOMNamespaces.HTML */;
+                ns = 0 /* HTML */;
             }
         }
-        else if (parent && ns === 1 /* DOMNamespaces.SVG */) {
+        else if (parent && ns === 1 /* SVG */) {
             if (parent.tag === 'foreignObject' ||
                 parent.tag === 'desc' ||
                 parent.tag === 'title') {
-                ns = 0 /* DOMNamespaces.HTML */;
+                ns = 0 /* HTML */;
             }
         }
-        if (ns === 0 /* DOMNamespaces.HTML */) {
+        if (ns === 0 /* HTML */) {
             if (tag === 'svg') {
-                return 1 /* DOMNamespaces.SVG */;
+                return 1 /* SVG */;
             }
             if (tag === 'math') {
-                return 2 /* DOMNamespaces.MATH_ML */;
+                return 2 /* MATH_ML */;
             }
         }
         return ns;
     },
     // https://html.spec.whatwg.org/multipage/parsing.html#parsing-html-fragments
     getTextMode({ tag, ns }) {
-        if (ns === 0 /* DOMNamespaces.HTML */) {
+        if (ns === 0 /* HTML */) {
             if (tag === 'textarea' || tag === 'title') {
-                return 1 /* TextModes.RCDATA */;
+                return 1 /* RCDATA */;
             }
             if (isRawTextContainer(tag)) {
-                return 2 /* TextModes.RAWTEXT */;
+                return 2 /* RAWTEXT */;
             }
         }
-        return 0 /* TextModes.DATA */;
+        return 0 /* DATA */;
     }
 };
 
@@ -11638,12 +11575,12 @@ const parserOptions = {
 // It is then processed by `transformElement` and included in the generated
 // props.
 const transformStyle = node => {
-    if (node.type === 1 /* NodeTypes.ELEMENT */) {
+    if (node.type === 1 /* ELEMENT */) {
         node.props.forEach((p, i) => {
-            if (p.type === 6 /* NodeTypes.ATTRIBUTE */ && p.name === 'style' && p.value) {
+            if (p.type === 6 /* ATTRIBUTE */ && p.name === 'style' && p.value) {
                 // replace p with an expression node
                 node.props[i] = {
-                    type: 7 /* NodeTypes.DIRECTIVE */,
+                    type: 7 /* DIRECTIVE */,
                     name: `bind`,
                     arg: (0,_vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.createSimpleExpression)(`style`, true, p.loc),
                     exp: parseInlineCSS(p.value.content, p.loc),
@@ -11656,33 +11593,33 @@ const transformStyle = node => {
 };
 const parseInlineCSS = (cssText, loc) => {
     const normalized = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.parseStringStyle)(cssText);
-    return (0,_vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.createSimpleExpression)(JSON.stringify(normalized), false, loc, 3 /* ConstantTypes.CAN_STRINGIFY */);
+    return (0,_vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.createSimpleExpression)(JSON.stringify(normalized), false, loc, 3 /* CAN_STRINGIFY */);
 };
 
 function createDOMCompilerError(code, loc) {
     return (0,_vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.createCompilerError)(code, loc,  true ? DOMErrorMessages : 0);
 }
 const DOMErrorMessages = {
-    [51 /* DOMErrorCodes.X_V_HTML_NO_EXPRESSION */]: `v-html is missing expression.`,
-    [52 /* DOMErrorCodes.X_V_HTML_WITH_CHILDREN */]: `v-html will override element children.`,
-    [53 /* DOMErrorCodes.X_V_TEXT_NO_EXPRESSION */]: `v-text is missing expression.`,
-    [54 /* DOMErrorCodes.X_V_TEXT_WITH_CHILDREN */]: `v-text will override element children.`,
-    [55 /* DOMErrorCodes.X_V_MODEL_ON_INVALID_ELEMENT */]: `v-model can only be used on <input>, <textarea> and <select> elements.`,
-    [56 /* DOMErrorCodes.X_V_MODEL_ARG_ON_ELEMENT */]: `v-model argument is not supported on plain elements.`,
-    [57 /* DOMErrorCodes.X_V_MODEL_ON_FILE_INPUT_ELEMENT */]: `v-model cannot be used on file inputs since they are read-only. Use a v-on:change listener instead.`,
-    [58 /* DOMErrorCodes.X_V_MODEL_UNNECESSARY_VALUE */]: `Unnecessary value binding used alongside v-model. It will interfere with v-model's behavior.`,
-    [59 /* DOMErrorCodes.X_V_SHOW_NO_EXPRESSION */]: `v-show is missing expression.`,
-    [60 /* DOMErrorCodes.X_TRANSITION_INVALID_CHILDREN */]: `<Transition> expects exactly one child element or component.`,
-    [61 /* DOMErrorCodes.X_IGNORED_SIDE_EFFECT_TAG */]: `Tags with side effect (<script> and <style>) are ignored in client component templates.`
+    [50 /* X_V_HTML_NO_EXPRESSION */]: `v-html is missing expression.`,
+    [51 /* X_V_HTML_WITH_CHILDREN */]: `v-html will override element children.`,
+    [52 /* X_V_TEXT_NO_EXPRESSION */]: `v-text is missing expression.`,
+    [53 /* X_V_TEXT_WITH_CHILDREN */]: `v-text will override element children.`,
+    [54 /* X_V_MODEL_ON_INVALID_ELEMENT */]: `v-model can only be used on <input>, <textarea> and <select> elements.`,
+    [55 /* X_V_MODEL_ARG_ON_ELEMENT */]: `v-model argument is not supported on plain elements.`,
+    [56 /* X_V_MODEL_ON_FILE_INPUT_ELEMENT */]: `v-model cannot be used on file inputs since they are read-only. Use a v-on:change listener instead.`,
+    [57 /* X_V_MODEL_UNNECESSARY_VALUE */]: `Unnecessary value binding used alongside v-model. It will interfere with v-model's behavior.`,
+    [58 /* X_V_SHOW_NO_EXPRESSION */]: `v-show is missing expression.`,
+    [59 /* X_TRANSITION_INVALID_CHILDREN */]: `<Transition> expects exactly one child element or component.`,
+    [60 /* X_IGNORED_SIDE_EFFECT_TAG */]: `Tags with side effect (<script> and <style>) are ignored in client component templates.`
 };
 
 const transformVHtml = (dir, node, context) => {
     const { exp, loc } = dir;
     if (!exp) {
-        context.onError(createDOMCompilerError(51 /* DOMErrorCodes.X_V_HTML_NO_EXPRESSION */, loc));
+        context.onError(createDOMCompilerError(50 /* X_V_HTML_NO_EXPRESSION */, loc));
     }
     if (node.children.length) {
-        context.onError(createDOMCompilerError(52 /* DOMErrorCodes.X_V_HTML_WITH_CHILDREN */, loc));
+        context.onError(createDOMCompilerError(51 /* X_V_HTML_WITH_CHILDREN */, loc));
         node.children.length = 0;
     }
     return {
@@ -11695,10 +11632,10 @@ const transformVHtml = (dir, node, context) => {
 const transformVText = (dir, node, context) => {
     const { exp, loc } = dir;
     if (!exp) {
-        context.onError(createDOMCompilerError(53 /* DOMErrorCodes.X_V_TEXT_NO_EXPRESSION */, loc));
+        context.onError(createDOMCompilerError(52 /* X_V_TEXT_NO_EXPRESSION */, loc));
     }
     if (node.children.length) {
-        context.onError(createDOMCompilerError(54 /* DOMErrorCodes.X_V_TEXT_WITH_CHILDREN */, loc));
+        context.onError(createDOMCompilerError(53 /* X_V_TEXT_WITH_CHILDREN */, loc));
         node.children.length = 0;
     }
     return {
@@ -11715,16 +11652,16 @@ const transformVText = (dir, node, context) => {
 const transformModel = (dir, node, context) => {
     const baseResult = (0,_vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.transformModel)(dir, node, context);
     // base transform has errors OR component v-model (only need props)
-    if (!baseResult.props.length || node.tagType === 1 /* ElementTypes.COMPONENT */) {
+    if (!baseResult.props.length || node.tagType === 1 /* COMPONENT */) {
         return baseResult;
     }
     if (dir.arg) {
-        context.onError(createDOMCompilerError(56 /* DOMErrorCodes.X_V_MODEL_ARG_ON_ELEMENT */, dir.arg.loc));
+        context.onError(createDOMCompilerError(55 /* X_V_MODEL_ARG_ON_ELEMENT */, dir.arg.loc));
     }
     function checkDuplicatedValue() {
         const value = (0,_vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.findProp)(node, 'value');
         if (value) {
-            context.onError(createDOMCompilerError(58 /* DOMErrorCodes.X_V_MODEL_UNNECESSARY_VALUE */, value.loc));
+            context.onError(createDOMCompilerError(57 /* X_V_MODEL_UNNECESSARY_VALUE */, value.loc));
         }
     }
     const { tag } = node;
@@ -11738,7 +11675,7 @@ const transformModel = (dir, node, context) => {
         if (tag === 'input' || isCustomElement) {
             const type = (0,_vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.findProp)(node, `type`);
             if (type) {
-                if (type.type === 7 /* NodeTypes.DIRECTIVE */) {
+                if (type.type === 7 /* DIRECTIVE */) {
                     // :type="foo"
                     directiveToUse = V_MODEL_DYNAMIC;
                 }
@@ -11752,7 +11689,7 @@ const transformModel = (dir, node, context) => {
                             break;
                         case 'file':
                             isInvalidType = true;
-                            context.onError(createDOMCompilerError(57 /* DOMErrorCodes.X_V_MODEL_ON_FILE_INPUT_ELEMENT */, dir.loc));
+                            context.onError(createDOMCompilerError(56 /* X_V_MODEL_ON_FILE_INPUT_ELEMENT */, dir.loc));
                             break;
                         default:
                             // text type
@@ -11786,11 +11723,11 @@ const transformModel = (dir, node, context) => {
         }
     }
     else {
-        context.onError(createDOMCompilerError(55 /* DOMErrorCodes.X_V_MODEL_ON_INVALID_ELEMENT */, dir.loc));
+        context.onError(createDOMCompilerError(54 /* X_V_MODEL_ON_INVALID_ELEMENT */, dir.loc));
     }
     // native vmodel doesn't need the `modelValue` props since they are also
     // passed to the runtime as `binding.value`. removing it reduces code size.
-    baseResult.props = baseResult.props.filter(p => !(p.key.type === 4 /* NodeTypes.SIMPLE_EXPRESSION */ &&
+    baseResult.props = baseResult.props.filter(p => !(p.key.type === 4 /* SIMPLE_EXPRESSION */ &&
         p.key.content === 'modelValue'));
     return baseResult;
 };
@@ -11813,7 +11750,7 @@ const resolveModifiers = (key, modifiers, context, loc) => {
     for (let i = 0; i < modifiers.length; i++) {
         const modifier = modifiers[i];
         if (modifier === 'native' &&
-            (0,_vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.checkCompatEnabled)("COMPILER_V_ON_NATIVE" /* CompilerDeprecationTypes.COMPILER_V_ON_NATIVE */, context, loc)) {
+            (0,_vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.checkCompatEnabled)("COMPILER_V_ON_NATIVE" /* COMPILER_V_ON_NATIVE */, context, loc)) {
             eventOptionModifiers.push(modifier);
         }
         else if (isEventOptionModifier(modifier)) {
@@ -11857,7 +11794,7 @@ const transformClick = (key, event) => {
     const isStaticClick = (0,_vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.isStaticExp)(key) && key.content.toLowerCase() === 'onclick';
     return isStaticClick
         ? (0,_vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.createSimpleExpression)(event, true)
-        : key.type !== 4 /* NodeTypes.SIMPLE_EXPRESSION */
+        : key.type !== 4 /* SIMPLE_EXPRESSION */
             ? (0,_vue_compiler_core__WEBPACK_IMPORTED_MODULE_0__.createCompoundExpression)([
                 `(`,
                 key,
@@ -11910,7 +11847,7 @@ const transformOn = (dir, node, context) => {
 const transformShow = (dir, node, context) => {
     const { exp, loc } = dir;
     if (!exp) {
-        context.onError(createDOMCompilerError(59 /* DOMErrorCodes.X_V_SHOW_NO_EXPRESSION */, loc));
+        context.onError(createDOMCompilerError(58 /* X_V_SHOW_NO_EXPRESSION */, loc));
     }
     return {
         props: [],
@@ -11919,8 +11856,8 @@ const transformShow = (dir, node, context) => {
 };
 
 const transformTransition = (node, context) => {
-    if (node.type === 1 /* NodeTypes.ELEMENT */ &&
-        node.tagType === 1 /* ElementTypes.COMPONENT */) {
+    if (node.type === 1 /* ELEMENT */ &&
+        node.tagType === 1 /* COMPONENT */) {
         const component = context.isBuiltInComponent(node.tag);
         if (component === TRANSITION) {
             return () => {
@@ -11929,7 +11866,7 @@ const transformTransition = (node, context) => {
                 }
                 // warn multiple transition children
                 if (hasMultipleChildren(node)) {
-                    context.onError(createDOMCompilerError(60 /* DOMErrorCodes.X_TRANSITION_INVALID_CHILDREN */, {
+                    context.onError(createDOMCompilerError(59 /* X_TRANSITION_INVALID_CHILDREN */, {
                         start: node.children[0].loc.start,
                         end: node.children[node.children.length - 1].loc.end,
                         source: ''
@@ -11938,11 +11875,11 @@ const transformTransition = (node, context) => {
                 // check if it's s single child w/ v-show
                 // if yes, inject "persisted: true" to the transition props
                 const child = node.children[0];
-                if (child.type === 1 /* NodeTypes.ELEMENT */) {
+                if (child.type === 1 /* ELEMENT */) {
                     for (const p of child.props) {
-                        if (p.type === 7 /* NodeTypes.DIRECTIVE */ && p.name === 'show') {
+                        if (p.type === 7 /* DIRECTIVE */ && p.name === 'show') {
                             node.props.push({
-                                type: 6 /* NodeTypes.ATTRIBUTE */,
+                                type: 6 /* ATTRIBUTE */,
                                 name: 'persisted',
                                 value: undefined,
                                 loc: node.loc
@@ -11956,19 +11893,19 @@ const transformTransition = (node, context) => {
 };
 function hasMultipleChildren(node) {
     // #1352 filter out potential comment nodes.
-    const children = (node.children = node.children.filter(c => c.type !== 3 /* NodeTypes.COMMENT */ &&
-        !(c.type === 2 /* NodeTypes.TEXT */ && !c.content.trim())));
+    const children = (node.children = node.children.filter(c => c.type !== 3 /* COMMENT */ &&
+        !(c.type === 2 /* TEXT */ && !c.content.trim())));
     const child = children[0];
     return (children.length !== 1 ||
-        child.type === 11 /* NodeTypes.FOR */ ||
-        (child.type === 9 /* NodeTypes.IF */ && child.branches.some(hasMultipleChildren)));
+        child.type === 11 /* FOR */ ||
+        (child.type === 9 /* IF */ && child.branches.some(hasMultipleChildren)));
 }
 
 const ignoreSideEffectTags = (node, context) => {
-    if (node.type === 1 /* NodeTypes.ELEMENT */ &&
-        node.tagType === 0 /* ElementTypes.ELEMENT */ &&
+    if (node.type === 1 /* ELEMENT */ &&
+        node.tagType === 0 /* ELEMENT */ &&
         (node.tag === 'script' || node.tag === 'style')) {
-        context.onError(createDOMCompilerError(61 /* DOMErrorCodes.X_IGNORED_SIDE_EFFECT_TAG */, node.loc));
+        context.onError(createDOMCompilerError(60 /* X_IGNORED_SIDE_EFFECT_TAG */, node.loc));
         context.removeNode();
     }
 };
@@ -12319,11 +12256,10 @@ function warn(msg, ...args) {
 let activeEffectScope;
 class EffectScope {
     constructor(detached = false) {
-        this.detached = detached;
         /**
          * @internal
          */
-        this._active = true;
+        this.active = true;
         /**
          * @internal
          */
@@ -12332,17 +12268,14 @@ class EffectScope {
          * @internal
          */
         this.cleanups = [];
-        this.parent = activeEffectScope;
         if (!detached && activeEffectScope) {
+            this.parent = activeEffectScope;
             this.index =
                 (activeEffectScope.scopes || (activeEffectScope.scopes = [])).push(this) - 1;
         }
     }
-    get active() {
-        return this._active;
-    }
     run(fn) {
-        if (this._active) {
+        if (this.active) {
             const currentEffectScope = activeEffectScope;
             try {
                 activeEffectScope = this;
@@ -12371,7 +12304,7 @@ class EffectScope {
         activeEffectScope = this.parent;
     }
     stop(fromParent) {
-        if (this._active) {
+        if (this.active) {
             let i, l;
             for (i = 0, l = this.effects.length; i < l; i++) {
                 this.effects[i].stop();
@@ -12385,7 +12318,7 @@ class EffectScope {
                 }
             }
             // nested scope, dereference from parent to avoid memory leaks
-            if (!this.detached && this.parent && !fromParent) {
+            if (this.parent && !fromParent) {
                 // optimized O(1) removal
                 const last = this.parent.scopes.pop();
                 if (last && last !== this) {
@@ -12393,8 +12326,7 @@ class EffectScope {
                     last.index = this.index;
                 }
             }
-            this.parent = undefined;
-            this._active = false;
+            this.active = false;
         }
     }
 }
@@ -12614,15 +12546,14 @@ function trigger(target, type, key, newValue, oldValue, oldTarget) {
         return;
     }
     let deps = [];
-    if (type === "clear" /* TriggerOpTypes.CLEAR */) {
+    if (type === "clear" /* CLEAR */) {
         // collection being cleared
         // trigger all effects for target
         deps = [...depsMap.values()];
     }
     else if (key === 'length' && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(target)) {
-        const newLength = Number(newValue);
         depsMap.forEach((dep, key) => {
-            if (key === 'length' || key >= newLength) {
+            if (key === 'length' || key >= newValue) {
                 deps.push(dep);
             }
         });
@@ -12634,7 +12565,7 @@ function trigger(target, type, key, newValue, oldValue, oldTarget) {
         }
         // also run for iteration key on ADD | DELETE | Map.SET
         switch (type) {
-            case "add" /* TriggerOpTypes.ADD */:
+            case "add" /* ADD */:
                 if (!(0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(target)) {
                     deps.push(depsMap.get(ITERATE_KEY));
                     if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isMap)(target)) {
@@ -12646,7 +12577,7 @@ function trigger(target, type, key, newValue, oldValue, oldTarget) {
                     deps.push(depsMap.get('length'));
                 }
                 break;
-            case "delete" /* TriggerOpTypes.DELETE */:
+            case "delete" /* DELETE */:
                 if (!(0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(target)) {
                     deps.push(depsMap.get(ITERATE_KEY));
                     if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isMap)(target)) {
@@ -12654,7 +12585,7 @@ function trigger(target, type, key, newValue, oldValue, oldTarget) {
                     }
                 }
                 break;
-            case "set" /* TriggerOpTypes.SET */:
+            case "set" /* SET */:
                 if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isMap)(target)) {
                     deps.push(depsMap.get(ITERATE_KEY));
                 }
@@ -12712,10 +12643,6 @@ function triggerEffect(effect, debuggerEventExtraInfo) {
         }
     }
 }
-function getDepFromReactive(object, key) {
-    var _a;
-    return (_a = targetMap.get(object)) === null || _a === void 0 ? void 0 : _a.get(key);
-}
 
 const isNonTrackableKeys = /*#__PURE__*/ (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.makeMap)(`__proto__,__v_isRef,__isVue`);
 const builtInSymbols = new Set(
@@ -12727,7 +12654,7 @@ Object.getOwnPropertyNames(Symbol)
     .filter(key => key !== 'arguments' && key !== 'caller')
     .map(key => Symbol[key])
     .filter(_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isSymbol));
-const get$1 = /*#__PURE__*/ createGetter();
+const get = /*#__PURE__*/ createGetter();
 const shallowGet = /*#__PURE__*/ createGetter(false, true);
 const readonlyGet = /*#__PURE__*/ createGetter(true);
 const shallowReadonlyGet = /*#__PURE__*/ createGetter(true, true);
@@ -12738,7 +12665,7 @@ function createArrayInstrumentations() {
         instrumentations[key] = function (...args) {
             const arr = toRaw(this);
             for (let i = 0, l = this.length; i < l; i++) {
-                track(arr, "get" /* TrackOpTypes.GET */, i + '');
+                track(arr, "get" /* GET */, i + '');
             }
             // we run the method using the original args first (which may be reactive)
             const res = arr[key](...args);
@@ -12761,23 +12688,18 @@ function createArrayInstrumentations() {
     });
     return instrumentations;
 }
-function hasOwnProperty(key) {
-    const obj = toRaw(this);
-    track(obj, "has" /* TrackOpTypes.HAS */, key);
-    return obj.hasOwnProperty(key);
-}
 function createGetter(isReadonly = false, shallow = false) {
     return function get(target, key, receiver) {
-        if (key === "__v_isReactive" /* ReactiveFlags.IS_REACTIVE */) {
+        if (key === "__v_isReactive" /* IS_REACTIVE */) {
             return !isReadonly;
         }
-        else if (key === "__v_isReadonly" /* ReactiveFlags.IS_READONLY */) {
+        else if (key === "__v_isReadonly" /* IS_READONLY */) {
             return isReadonly;
         }
-        else if (key === "__v_isShallow" /* ReactiveFlags.IS_SHALLOW */) {
+        else if (key === "__v_isShallow" /* IS_SHALLOW */) {
             return shallow;
         }
-        else if (key === "__v_raw" /* ReactiveFlags.RAW */ &&
+        else if (key === "__v_raw" /* RAW */ &&
             receiver ===
                 (isReadonly
                     ? shallow
@@ -12789,20 +12711,15 @@ function createGetter(isReadonly = false, shallow = false) {
             return target;
         }
         const targetIsArray = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(target);
-        if (!isReadonly) {
-            if (targetIsArray && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.hasOwn)(arrayInstrumentations, key)) {
-                return Reflect.get(arrayInstrumentations, key, receiver);
-            }
-            if (key === 'hasOwnProperty') {
-                return hasOwnProperty;
-            }
+        if (!isReadonly && targetIsArray && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.hasOwn)(arrayInstrumentations, key)) {
+            return Reflect.get(arrayInstrumentations, key, receiver);
         }
         const res = Reflect.get(target, key, receiver);
         if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isSymbol)(key) ? builtInSymbols.has(key) : isNonTrackableKeys(key)) {
             return res;
         }
         if (!isReadonly) {
-            track(target, "get" /* TrackOpTypes.GET */, key);
+            track(target, "get" /* GET */, key);
         }
         if (shallow) {
             return res;
@@ -12820,7 +12737,7 @@ function createGetter(isReadonly = false, shallow = false) {
         return res;
     };
 }
-const set$1 = /*#__PURE__*/ createSetter();
+const set = /*#__PURE__*/ createSetter();
 const shallowSet = /*#__PURE__*/ createSetter(true);
 function createSetter(shallow = false) {
     return function set(target, key, value, receiver) {
@@ -12828,10 +12745,10 @@ function createSetter(shallow = false) {
         if (isReadonly(oldValue) && isRef(oldValue) && !isRef(value)) {
             return false;
         }
-        if (!shallow) {
-            if (!isShallow(value) && !isReadonly(value)) {
-                oldValue = toRaw(oldValue);
+        if (!shallow && !isReadonly(value)) {
+            if (!isShallow(value)) {
                 value = toRaw(value);
+                oldValue = toRaw(oldValue);
             }
             if (!(0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(target) && isRef(oldValue) && !isRef(value)) {
                 oldValue.value = value;
@@ -12845,10 +12762,10 @@ function createSetter(shallow = false) {
         // don't trigger if target is something up in the prototype chain of original
         if (target === toRaw(receiver)) {
             if (!hadKey) {
-                trigger(target, "add" /* TriggerOpTypes.ADD */, key, value);
+                trigger(target, "add" /* ADD */, key, value);
             }
             else if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.hasChanged)(value, oldValue)) {
-                trigger(target, "set" /* TriggerOpTypes.SET */, key, value, oldValue);
+                trigger(target, "set" /* SET */, key, value, oldValue);
             }
         }
         return result;
@@ -12859,26 +12776,26 @@ function deleteProperty(target, key) {
     const oldValue = target[key];
     const result = Reflect.deleteProperty(target, key);
     if (result && hadKey) {
-        trigger(target, "delete" /* TriggerOpTypes.DELETE */, key, undefined, oldValue);
+        trigger(target, "delete" /* DELETE */, key, undefined, oldValue);
     }
     return result;
 }
-function has$1(target, key) {
+function has(target, key) {
     const result = Reflect.has(target, key);
     if (!(0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isSymbol)(key) || !builtInSymbols.has(key)) {
-        track(target, "has" /* TrackOpTypes.HAS */, key);
+        track(target, "has" /* HAS */, key);
     }
     return result;
 }
 function ownKeys(target) {
-    track(target, "iterate" /* TrackOpTypes.ITERATE */, (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(target) ? 'length' : ITERATE_KEY);
+    track(target, "iterate" /* ITERATE */, (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isArray)(target) ? 'length' : ITERATE_KEY);
     return Reflect.ownKeys(target);
 }
 const mutableHandlers = {
-    get: get$1,
-    set: set$1,
+    get,
+    set,
     deleteProperty,
-    has: has$1,
+    has,
     ownKeys
 };
 const readonlyHandlers = {
@@ -12909,17 +12826,17 @@ const shallowReadonlyHandlers = /*#__PURE__*/ (0,_vue_shared__WEBPACK_IMPORTED_M
 
 const toShallow = (value) => value;
 const getProto = (v) => Reflect.getPrototypeOf(v);
-function get(target, key, isReadonly = false, isShallow = false) {
+function get$1(target, key, isReadonly = false, isShallow = false) {
     // #1772: readonly(reactive(Map)) should return readonly + reactive version
     // of the value
-    target = target["__v_raw" /* ReactiveFlags.RAW */];
+    target = target["__v_raw" /* RAW */];
     const rawTarget = toRaw(target);
     const rawKey = toRaw(key);
     if (!isReadonly) {
         if (key !== rawKey) {
-            track(rawTarget, "get" /* TrackOpTypes.GET */, key);
+            track(rawTarget, "get" /* GET */, key);
         }
-        track(rawTarget, "get" /* TrackOpTypes.GET */, rawKey);
+        track(rawTarget, "get" /* GET */, rawKey);
     }
     const { has } = getProto(rawTarget);
     const wrap = isShallow ? toShallow : isReadonly ? toReadonly : toReactive;
@@ -12935,23 +12852,23 @@ function get(target, key, isReadonly = false, isShallow = false) {
         target.get(key);
     }
 }
-function has(key, isReadonly = false) {
-    const target = this["__v_raw" /* ReactiveFlags.RAW */];
+function has$1(key, isReadonly = false) {
+    const target = this["__v_raw" /* RAW */];
     const rawTarget = toRaw(target);
     const rawKey = toRaw(key);
     if (!isReadonly) {
         if (key !== rawKey) {
-            track(rawTarget, "has" /* TrackOpTypes.HAS */, key);
+            track(rawTarget, "has" /* HAS */, key);
         }
-        track(rawTarget, "has" /* TrackOpTypes.HAS */, rawKey);
+        track(rawTarget, "has" /* HAS */, rawKey);
     }
     return key === rawKey
         ? target.has(key)
         : target.has(key) || target.has(rawKey);
 }
 function size(target, isReadonly = false) {
-    target = target["__v_raw" /* ReactiveFlags.RAW */];
-    !isReadonly && track(toRaw(target), "iterate" /* TrackOpTypes.ITERATE */, ITERATE_KEY);
+    target = target["__v_raw" /* RAW */];
+    !isReadonly && track(toRaw(target), "iterate" /* ITERATE */, ITERATE_KEY);
     return Reflect.get(target, 'size', target);
 }
 function add(value) {
@@ -12961,11 +12878,11 @@ function add(value) {
     const hadKey = proto.has.call(target, value);
     if (!hadKey) {
         target.add(value);
-        trigger(target, "add" /* TriggerOpTypes.ADD */, value, value);
+        trigger(target, "add" /* ADD */, value, value);
     }
     return this;
 }
-function set(key, value) {
+function set$1(key, value) {
     value = toRaw(value);
     const target = toRaw(this);
     const { has, get } = getProto(target);
@@ -12980,10 +12897,10 @@ function set(key, value) {
     const oldValue = get.call(target, key);
     target.set(key, value);
     if (!hadKey) {
-        trigger(target, "add" /* TriggerOpTypes.ADD */, key, value);
+        trigger(target, "add" /* ADD */, key, value);
     }
     else if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.hasChanged)(value, oldValue)) {
-        trigger(target, "set" /* TriggerOpTypes.SET */, key, value, oldValue);
+        trigger(target, "set" /* SET */, key, value, oldValue);
     }
     return this;
 }
@@ -13002,7 +12919,7 @@ function deleteEntry(key) {
     // forward the operation before queueing reactions
     const result = target.delete(key);
     if (hadKey) {
-        trigger(target, "delete" /* TriggerOpTypes.DELETE */, key, undefined, oldValue);
+        trigger(target, "delete" /* DELETE */, key, undefined, oldValue);
     }
     return result;
 }
@@ -13017,17 +12934,17 @@ function clear() {
     // forward the operation before queueing reactions
     const result = target.clear();
     if (hadItems) {
-        trigger(target, "clear" /* TriggerOpTypes.CLEAR */, undefined, undefined, oldTarget);
+        trigger(target, "clear" /* CLEAR */, undefined, undefined, oldTarget);
     }
     return result;
 }
 function createForEach(isReadonly, isShallow) {
     return function forEach(callback, thisArg) {
         const observed = this;
-        const target = observed["__v_raw" /* ReactiveFlags.RAW */];
+        const target = observed["__v_raw" /* RAW */];
         const rawTarget = toRaw(target);
         const wrap = isShallow ? toShallow : isReadonly ? toReadonly : toReactive;
-        !isReadonly && track(rawTarget, "iterate" /* TrackOpTypes.ITERATE */, ITERATE_KEY);
+        !isReadonly && track(rawTarget, "iterate" /* ITERATE */, ITERATE_KEY);
         return target.forEach((value, key) => {
             // important: make sure the callback is
             // 1. invoked with the reactive map as `this` and 3rd arg
@@ -13038,7 +12955,7 @@ function createForEach(isReadonly, isShallow) {
 }
 function createIterableMethod(method, isReadonly, isShallow) {
     return function (...args) {
-        const target = this["__v_raw" /* ReactiveFlags.RAW */];
+        const target = this["__v_raw" /* RAW */];
         const rawTarget = toRaw(target);
         const targetIsMap = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isMap)(rawTarget);
         const isPair = method === 'entries' || (method === Symbol.iterator && targetIsMap);
@@ -13046,7 +12963,7 @@ function createIterableMethod(method, isReadonly, isShallow) {
         const innerIterator = target[method](...args);
         const wrap = isShallow ? toShallow : isReadonly ? toReadonly : toReactive;
         !isReadonly &&
-            track(rawTarget, "iterate" /* TrackOpTypes.ITERATE */, isKeyOnly ? MAP_KEY_ITERATE_KEY : ITERATE_KEY);
+            track(rawTarget, "iterate" /* ITERATE */, isKeyOnly ? MAP_KEY_ITERATE_KEY : ITERATE_KEY);
         // return a wrapped iterator which returns observed versions of the
         // values emitted from the real iterator
         return {
@@ -13073,68 +12990,68 @@ function createReadonlyMethod(type) {
             const key = args[0] ? `on key "${args[0]}" ` : ``;
             console.warn(`${(0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.capitalize)(type)} operation ${key}failed: target is readonly.`, toRaw(this));
         }
-        return type === "delete" /* TriggerOpTypes.DELETE */ ? false : this;
+        return type === "delete" /* DELETE */ ? false : this;
     };
 }
 function createInstrumentations() {
     const mutableInstrumentations = {
         get(key) {
-            return get(this, key);
+            return get$1(this, key);
         },
         get size() {
             return size(this);
         },
-        has,
+        has: has$1,
         add,
-        set,
+        set: set$1,
         delete: deleteEntry,
         clear,
         forEach: createForEach(false, false)
     };
     const shallowInstrumentations = {
         get(key) {
-            return get(this, key, false, true);
+            return get$1(this, key, false, true);
         },
         get size() {
             return size(this);
         },
-        has,
+        has: has$1,
         add,
-        set,
+        set: set$1,
         delete: deleteEntry,
         clear,
         forEach: createForEach(false, true)
     };
     const readonlyInstrumentations = {
         get(key) {
-            return get(this, key, true);
+            return get$1(this, key, true);
         },
         get size() {
             return size(this, true);
         },
         has(key) {
-            return has.call(this, key, true);
+            return has$1.call(this, key, true);
         },
-        add: createReadonlyMethod("add" /* TriggerOpTypes.ADD */),
-        set: createReadonlyMethod("set" /* TriggerOpTypes.SET */),
-        delete: createReadonlyMethod("delete" /* TriggerOpTypes.DELETE */),
-        clear: createReadonlyMethod("clear" /* TriggerOpTypes.CLEAR */),
+        add: createReadonlyMethod("add" /* ADD */),
+        set: createReadonlyMethod("set" /* SET */),
+        delete: createReadonlyMethod("delete" /* DELETE */),
+        clear: createReadonlyMethod("clear" /* CLEAR */),
         forEach: createForEach(true, false)
     };
     const shallowReadonlyInstrumentations = {
         get(key) {
-            return get(this, key, true, true);
+            return get$1(this, key, true, true);
         },
         get size() {
             return size(this, true);
         },
         has(key) {
-            return has.call(this, key, true);
+            return has$1.call(this, key, true);
         },
-        add: createReadonlyMethod("add" /* TriggerOpTypes.ADD */),
-        set: createReadonlyMethod("set" /* TriggerOpTypes.SET */),
-        delete: createReadonlyMethod("delete" /* TriggerOpTypes.DELETE */),
-        clear: createReadonlyMethod("clear" /* TriggerOpTypes.CLEAR */),
+        add: createReadonlyMethod("add" /* ADD */),
+        set: createReadonlyMethod("set" /* SET */),
+        delete: createReadonlyMethod("delete" /* DELETE */),
+        clear: createReadonlyMethod("clear" /* CLEAR */),
         forEach: createForEach(true, true)
     };
     const iteratorMethods = ['keys', 'values', 'entries', Symbol.iterator];
@@ -13161,13 +13078,13 @@ function createInstrumentationGetter(isReadonly, shallow) {
             ? readonlyInstrumentations
             : mutableInstrumentations;
     return (target, key, receiver) => {
-        if (key === "__v_isReactive" /* ReactiveFlags.IS_REACTIVE */) {
+        if (key === "__v_isReactive" /* IS_REACTIVE */) {
             return !isReadonly;
         }
-        else if (key === "__v_isReadonly" /* ReactiveFlags.IS_READONLY */) {
+        else if (key === "__v_isReadonly" /* IS_READONLY */) {
             return isReadonly;
         }
-        else if (key === "__v_raw" /* ReactiveFlags.RAW */) {
+        else if (key === "__v_raw" /* RAW */) {
             return target;
         }
         return Reflect.get((0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.hasOwn)(instrumentations, key) && key in target
@@ -13207,19 +13124,19 @@ function targetTypeMap(rawType) {
     switch (rawType) {
         case 'Object':
         case 'Array':
-            return 1 /* TargetType.COMMON */;
+            return 1 /* COMMON */;
         case 'Map':
         case 'Set':
         case 'WeakMap':
         case 'WeakSet':
-            return 2 /* TargetType.COLLECTION */;
+            return 2 /* COLLECTION */;
         default:
-            return 0 /* TargetType.INVALID */;
+            return 0 /* INVALID */;
     }
 }
 function getTargetType(value) {
-    return value["__v_skip" /* ReactiveFlags.SKIP */] || !Object.isExtensible(value)
-        ? 0 /* TargetType.INVALID */
+    return value["__v_skip" /* SKIP */] || !Object.isExtensible(value)
+        ? 0 /* INVALID */
         : targetTypeMap((0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.toRawType)(value));
 }
 function reactive(target) {
@@ -13262,8 +13179,8 @@ function createReactiveObject(target, isReadonly, baseHandlers, collectionHandle
     }
     // target is already a Proxy, return it.
     // exception: calling readonly() on a reactive object
-    if (target["__v_raw" /* ReactiveFlags.RAW */] &&
-        !(isReadonly && target["__v_isReactive" /* ReactiveFlags.IS_REACTIVE */])) {
+    if (target["__v_raw" /* RAW */] &&
+        !(isReadonly && target["__v_isReactive" /* IS_REACTIVE */])) {
         return target;
     }
     // target already has corresponding Proxy
@@ -13273,34 +13190,34 @@ function createReactiveObject(target, isReadonly, baseHandlers, collectionHandle
     }
     // only specific value types can be observed.
     const targetType = getTargetType(target);
-    if (targetType === 0 /* TargetType.INVALID */) {
+    if (targetType === 0 /* INVALID */) {
         return target;
     }
-    const proxy = new Proxy(target, targetType === 2 /* TargetType.COLLECTION */ ? collectionHandlers : baseHandlers);
+    const proxy = new Proxy(target, targetType === 2 /* COLLECTION */ ? collectionHandlers : baseHandlers);
     proxyMap.set(target, proxy);
     return proxy;
 }
 function isReactive(value) {
     if (isReadonly(value)) {
-        return isReactive(value["__v_raw" /* ReactiveFlags.RAW */]);
+        return isReactive(value["__v_raw" /* RAW */]);
     }
-    return !!(value && value["__v_isReactive" /* ReactiveFlags.IS_REACTIVE */]);
+    return !!(value && value["__v_isReactive" /* IS_REACTIVE */]);
 }
 function isReadonly(value) {
-    return !!(value && value["__v_isReadonly" /* ReactiveFlags.IS_READONLY */]);
+    return !!(value && value["__v_isReadonly" /* IS_READONLY */]);
 }
 function isShallow(value) {
-    return !!(value && value["__v_isShallow" /* ReactiveFlags.IS_SHALLOW */]);
+    return !!(value && value["__v_isShallow" /* IS_SHALLOW */]);
 }
 function isProxy(value) {
     return isReactive(value) || isReadonly(value);
 }
 function toRaw(observed) {
-    const raw = observed && observed["__v_raw" /* ReactiveFlags.RAW */];
+    const raw = observed && observed["__v_raw" /* RAW */];
     return raw ? toRaw(raw) : observed;
 }
 function markRaw(value) {
-    (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.def)(value, "__v_skip" /* ReactiveFlags.SKIP */, true);
+    (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.def)(value, "__v_skip" /* SKIP */, true);
     return value;
 }
 const toReactive = (value) => (0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.isObject)(value) ? reactive(value) : value;
@@ -13312,7 +13229,7 @@ function trackRefValue(ref) {
         if ((true)) {
             trackEffects(ref.dep || (ref.dep = createDep()), {
                 target: ref,
-                type: "get" /* TrackOpTypes.GET */,
+                type: "get" /* GET */,
                 key: 'value'
             });
         }
@@ -13321,12 +13238,11 @@ function trackRefValue(ref) {
 }
 function triggerRefValue(ref, newVal) {
     ref = toRaw(ref);
-    const dep = ref.dep;
-    if (dep) {
+    if (ref.dep) {
         if ((true)) {
-            triggerEffects(dep, {
+            triggerEffects(ref.dep, {
                 target: ref,
-                type: "set" /* TriggerOpTypes.SET */,
+                type: "set" /* SET */,
                 key: 'value',
                 newValue: newVal
             });
@@ -13362,11 +13278,10 @@ class RefImpl {
         return this._value;
     }
     set value(newVal) {
-        const useDirectValue = this.__v_isShallow || isShallow(newVal) || isReadonly(newVal);
-        newVal = useDirectValue ? newVal : toRaw(newVal);
+        newVal = this.__v_isShallow ? newVal : toRaw(newVal);
         if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_0__.hasChanged)(newVal, this._rawValue)) {
             this._rawValue = newVal;
-            this._value = useDirectValue ? newVal : toReactive(newVal);
+            this._value = this.__v_isShallow ? newVal : toReactive(newVal);
             triggerRefValue(this, newVal);
         }
     }
@@ -13437,9 +13352,6 @@ class ObjectRefImpl {
     set value(newVal) {
         this._object[this._key] = newVal;
     }
-    get dep() {
-        return getDepFromReactive(toRaw(this._object), this._key);
-    }
 }
 function toRef(object, key, defaultValue) {
     const val = object[key];
@@ -13448,13 +13360,11 @@ function toRef(object, key, defaultValue) {
         : new ObjectRefImpl(object, key, defaultValue);
 }
 
-var _a$1;
 class ComputedRefImpl {
     constructor(getter, _setter, isReadonly, isSSR) {
         this._setter = _setter;
         this.dep = undefined;
         this.__v_isRef = true;
-        this[_a$1] = false;
         this._dirty = true;
         this.effect = new ReactiveEffect(getter, () => {
             if (!this._dirty) {
@@ -13464,7 +13374,7 @@ class ComputedRefImpl {
         });
         this.effect.computed = this;
         this.effect.active = this._cacheable = !isSSR;
-        this["__v_isReadonly" /* ReactiveFlags.IS_READONLY */] = isReadonly;
+        this["__v_isReadonly" /* IS_READONLY */] = isReadonly;
     }
     get value() {
         // the computed ref may get wrapped by other proxies e.g. readonly() #3376
@@ -13480,7 +13390,6 @@ class ComputedRefImpl {
         this._setter(newValue);
     }
 }
-_a$1 = "__v_isReadonly" /* ReactiveFlags.IS_READONLY */;
 function computed(getterOrOptions, debugOptions, isSSR = false) {
     let getter;
     let setter;
@@ -13575,7 +13484,7 @@ class DeferredComputedRefImpl {
         return toRaw(this)._get();
     }
 }
-_a = "__v_isReadonly" /* ReactiveFlags.IS_READONLY */;
+_a = "__v_isReadonly" /* IS_READONLY */;
 function deferredComputed(getter) {
     return new DeferredComputedRefImpl(getter);
 }
@@ -13604,7 +13513,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Suspense": () => (/* binding */ Suspense),
 /* harmony export */   "Teleport": () => (/* binding */ Teleport),
 /* harmony export */   "Text": () => (/* binding */ Text),
-/* harmony export */   "assertNumber": () => (/* binding */ assertNumber),
 /* harmony export */   "callWithAsyncErrorHandling": () => (/* binding */ callWithAsyncErrorHandling),
 /* harmony export */   "callWithErrorHandling": () => (/* binding */ callWithErrorHandling),
 /* harmony export */   "camelize": () => (/* reexport safe */ _vue_shared__WEBPACK_IMPORTED_MODULE_1__.camelize),
@@ -13735,8 +13643,6 @@ function popWarningContext() {
     stack.pop();
 }
 function warn(msg, ...args) {
-    if (false)
-        {}
     // avoid props formatting or warn handler tracking deps that might be mutated
     // during patch, leading to infinite recursion.
     (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.pauseTracking)();
@@ -13744,7 +13650,7 @@ function warn(msg, ...args) {
     const appWarnHandler = instance && instance.appContext.config.warnHandler;
     const trace = getComponentTrace();
     if (appWarnHandler) {
-        callWithErrorHandling(appWarnHandler, instance, 11 /* ErrorCodes.APP_WARN_HANDLER */, [
+        callWithErrorHandling(appWarnHandler, instance, 11 /* APP_WARN_HANDLER */, [
             msg + args.join(''),
             instance && instance.proxy,
             trace
@@ -13842,53 +13748,37 @@ function formatProp(key, value, raw) {
         return raw ? value : [`${key}=`, value];
     }
 }
-/**
- * @internal
- */
-function assertNumber(val, type) {
-    if (false)
-        {}
-    if (val === undefined) {
-        return;
-    }
-    else if (typeof val !== 'number') {
-        warn(`${type} is not a valid number - ` + `got ${JSON.stringify(val)}.`);
-    }
-    else if (isNaN(val)) {
-        warn(`${type} is NaN - ` + 'the duration expression might be incorrect.');
-    }
-}
 
 const ErrorTypeStrings = {
-    ["sp" /* LifecycleHooks.SERVER_PREFETCH */]: 'serverPrefetch hook',
-    ["bc" /* LifecycleHooks.BEFORE_CREATE */]: 'beforeCreate hook',
-    ["c" /* LifecycleHooks.CREATED */]: 'created hook',
-    ["bm" /* LifecycleHooks.BEFORE_MOUNT */]: 'beforeMount hook',
-    ["m" /* LifecycleHooks.MOUNTED */]: 'mounted hook',
-    ["bu" /* LifecycleHooks.BEFORE_UPDATE */]: 'beforeUpdate hook',
-    ["u" /* LifecycleHooks.UPDATED */]: 'updated',
-    ["bum" /* LifecycleHooks.BEFORE_UNMOUNT */]: 'beforeUnmount hook',
-    ["um" /* LifecycleHooks.UNMOUNTED */]: 'unmounted hook',
-    ["a" /* LifecycleHooks.ACTIVATED */]: 'activated hook',
-    ["da" /* LifecycleHooks.DEACTIVATED */]: 'deactivated hook',
-    ["ec" /* LifecycleHooks.ERROR_CAPTURED */]: 'errorCaptured hook',
-    ["rtc" /* LifecycleHooks.RENDER_TRACKED */]: 'renderTracked hook',
-    ["rtg" /* LifecycleHooks.RENDER_TRIGGERED */]: 'renderTriggered hook',
-    [0 /* ErrorCodes.SETUP_FUNCTION */]: 'setup function',
-    [1 /* ErrorCodes.RENDER_FUNCTION */]: 'render function',
-    [2 /* ErrorCodes.WATCH_GETTER */]: 'watcher getter',
-    [3 /* ErrorCodes.WATCH_CALLBACK */]: 'watcher callback',
-    [4 /* ErrorCodes.WATCH_CLEANUP */]: 'watcher cleanup function',
-    [5 /* ErrorCodes.NATIVE_EVENT_HANDLER */]: 'native event handler',
-    [6 /* ErrorCodes.COMPONENT_EVENT_HANDLER */]: 'component event handler',
-    [7 /* ErrorCodes.VNODE_HOOK */]: 'vnode hook',
-    [8 /* ErrorCodes.DIRECTIVE_HOOK */]: 'directive hook',
-    [9 /* ErrorCodes.TRANSITION_HOOK */]: 'transition hook',
-    [10 /* ErrorCodes.APP_ERROR_HANDLER */]: 'app errorHandler',
-    [11 /* ErrorCodes.APP_WARN_HANDLER */]: 'app warnHandler',
-    [12 /* ErrorCodes.FUNCTION_REF */]: 'ref function',
-    [13 /* ErrorCodes.ASYNC_COMPONENT_LOADER */]: 'async component loader',
-    [14 /* ErrorCodes.SCHEDULER */]: 'scheduler flush. This is likely a Vue internals bug. ' +
+    ["sp" /* SERVER_PREFETCH */]: 'serverPrefetch hook',
+    ["bc" /* BEFORE_CREATE */]: 'beforeCreate hook',
+    ["c" /* CREATED */]: 'created hook',
+    ["bm" /* BEFORE_MOUNT */]: 'beforeMount hook',
+    ["m" /* MOUNTED */]: 'mounted hook',
+    ["bu" /* BEFORE_UPDATE */]: 'beforeUpdate hook',
+    ["u" /* UPDATED */]: 'updated',
+    ["bum" /* BEFORE_UNMOUNT */]: 'beforeUnmount hook',
+    ["um" /* UNMOUNTED */]: 'unmounted hook',
+    ["a" /* ACTIVATED */]: 'activated hook',
+    ["da" /* DEACTIVATED */]: 'deactivated hook',
+    ["ec" /* ERROR_CAPTURED */]: 'errorCaptured hook',
+    ["rtc" /* RENDER_TRACKED */]: 'renderTracked hook',
+    ["rtg" /* RENDER_TRIGGERED */]: 'renderTriggered hook',
+    [0 /* SETUP_FUNCTION */]: 'setup function',
+    [1 /* RENDER_FUNCTION */]: 'render function',
+    [2 /* WATCH_GETTER */]: 'watcher getter',
+    [3 /* WATCH_CALLBACK */]: 'watcher callback',
+    [4 /* WATCH_CLEANUP */]: 'watcher cleanup function',
+    [5 /* NATIVE_EVENT_HANDLER */]: 'native event handler',
+    [6 /* COMPONENT_EVENT_HANDLER */]: 'component event handler',
+    [7 /* VNODE_HOOK */]: 'vnode hook',
+    [8 /* DIRECTIVE_HOOK */]: 'directive hook',
+    [9 /* TRANSITION_HOOK */]: 'transition hook',
+    [10 /* APP_ERROR_HANDLER */]: 'app errorHandler',
+    [11 /* APP_WARN_HANDLER */]: 'app warnHandler',
+    [12 /* FUNCTION_REF */]: 'ref function',
+    [13 /* ASYNC_COMPONENT_LOADER */]: 'async component loader',
+    [14 /* SCHEDULER */]: 'scheduler flush. This is likely a Vue internals bug. ' +
         'Please open an issue at https://new-issue.vuejs.org/?repo=vuejs/core'
 };
 function callWithErrorHandling(fn, instance, type, args) {
@@ -13939,7 +13829,7 @@ function handleError(err, instance, type, throwInDev = true) {
         // app-level handling
         const appErrorHandler = instance.appContext.config.errorHandler;
         if (appErrorHandler) {
-            callWithErrorHandling(appErrorHandler, null, 10 /* ErrorCodes.APP_ERROR_HANDLER */, [err, exposedInstance, errorInfo]);
+            callWithErrorHandling(appErrorHandler, null, 10 /* APP_ERROR_HANDLER */, [err, exposedInstance, errorInfo]);
             return;
         }
     }
@@ -13970,11 +13860,15 @@ let isFlushing = false;
 let isFlushPending = false;
 const queue = [];
 let flushIndex = 0;
+const pendingPreFlushCbs = [];
+let activePreFlushCbs = null;
+let preFlushIndex = 0;
 const pendingPostFlushCbs = [];
 let activePostFlushCbs = null;
 let postFlushIndex = 0;
 const resolvedPromise = /*#__PURE__*/ Promise.resolve();
 let currentFlushPromise = null;
+let currentPreFlushParentJob = null;
 const RECURSION_LIMIT = 100;
 function nextTick(fn) {
     const p = currentFlushPromise || resolvedPromise;
@@ -14002,8 +13896,9 @@ function queueJob(job) {
     // if the job is a watch() callback, the search will start with a +1 index to
     // allow it recursively trigger itself - it is the user's responsibility to
     // ensure it doesn't end up in an infinite loop.
-    if (!queue.length ||
-        !queue.includes(job, isFlushing && job.allowRecurse ? flushIndex + 1 : flushIndex)) {
+    if ((!queue.length ||
+        !queue.includes(job, isFlushing && job.allowRecurse ? flushIndex + 1 : flushIndex)) &&
+        job !== currentPreFlushParentJob) {
         if (job.id == null) {
             queue.push(job);
         }
@@ -14025,40 +13920,52 @@ function invalidateJob(job) {
         queue.splice(i, 1);
     }
 }
-function queuePostFlushCb(cb) {
+function queueCb(cb, activeQueue, pendingQueue, index) {
     if (!(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(cb)) {
-        if (!activePostFlushCbs ||
-            !activePostFlushCbs.includes(cb, cb.allowRecurse ? postFlushIndex + 1 : postFlushIndex)) {
-            pendingPostFlushCbs.push(cb);
+        if (!activeQueue ||
+            !activeQueue.includes(cb, cb.allowRecurse ? index + 1 : index)) {
+            pendingQueue.push(cb);
         }
     }
     else {
         // if cb is an array, it is a component lifecycle hook which can only be
         // triggered by a job, which is already deduped in the main queue, so
         // we can skip duplicate check here to improve perf
-        pendingPostFlushCbs.push(...cb);
+        pendingQueue.push(...cb);
     }
     queueFlush();
 }
-function flushPreFlushCbs(seen, 
-// if currently flushing, skip the current job itself
-i = isFlushing ? flushIndex + 1 : 0) {
-    if ((true)) {
-        seen = seen || new Map();
-    }
-    for (; i < queue.length; i++) {
-        const cb = queue[i];
-        if (cb && cb.pre) {
-            if (( true) && checkRecursiveUpdates(seen, cb)) {
+function queuePreFlushCb(cb) {
+    queueCb(cb, activePreFlushCbs, pendingPreFlushCbs, preFlushIndex);
+}
+function queuePostFlushCb(cb) {
+    queueCb(cb, activePostFlushCbs, pendingPostFlushCbs, postFlushIndex);
+}
+function flushPreFlushCbs(seen, parentJob = null) {
+    if (pendingPreFlushCbs.length) {
+        currentPreFlushParentJob = parentJob;
+        activePreFlushCbs = [...new Set(pendingPreFlushCbs)];
+        pendingPreFlushCbs.length = 0;
+        if ((true)) {
+            seen = seen || new Map();
+        }
+        for (preFlushIndex = 0; preFlushIndex < activePreFlushCbs.length; preFlushIndex++) {
+            if (( true) &&
+                checkRecursiveUpdates(seen, activePreFlushCbs[preFlushIndex])) {
                 continue;
             }
-            queue.splice(i, 1);
-            i--;
-            cb();
+            activePreFlushCbs[preFlushIndex]();
         }
+        activePreFlushCbs = null;
+        preFlushIndex = 0;
+        currentPreFlushParentJob = null;
+        // recursively flush until it drains
+        flushPreFlushCbs(seen, parentJob);
     }
 }
 function flushPostFlushCbs(seen) {
+    // flush any pre cbs queued during the flush (e.g. pre watchers)
+    flushPreFlushCbs();
     if (pendingPostFlushCbs.length) {
         const deduped = [...new Set(pendingPostFlushCbs)];
         pendingPostFlushCbs.length = 0;
@@ -14084,22 +13991,13 @@ function flushPostFlushCbs(seen) {
     }
 }
 const getId = (job) => job.id == null ? Infinity : job.id;
-const comparator = (a, b) => {
-    const diff = getId(a) - getId(b);
-    if (diff === 0) {
-        if (a.pre && !b.pre)
-            return -1;
-        if (b.pre && !a.pre)
-            return 1;
-    }
-    return diff;
-};
 function flushJobs(seen) {
     isFlushPending = false;
     isFlushing = true;
     if ((true)) {
         seen = seen || new Map();
     }
+    flushPreFlushCbs(seen);
     // Sort queue before flush.
     // This ensures that:
     // 1. Components are updated from parent to child. (because parent is always
@@ -14107,7 +14005,7 @@ function flushJobs(seen) {
     //    priority number)
     // 2. If a component is unmounted during a parent component's update,
     //    its update can be skipped.
-    queue.sort(comparator);
+    queue.sort((a, b) => getId(a) - getId(b));
     // conditional usage of checkRecursiveUpdate must be determined out of
     // try ... catch block since Rollup by default de-optimizes treeshaking
     // inside try-catch. This can leave all warning code unshaked. Although
@@ -14124,7 +14022,7 @@ function flushJobs(seen) {
                     continue;
                 }
                 // console.log(`running:`, job.id)
-                callWithErrorHandling(job, null, 14 /* ErrorCodes.SCHEDULER */);
+                callWithErrorHandling(job, null, 14 /* SCHEDULER */);
             }
         }
     }
@@ -14136,7 +14034,9 @@ function flushJobs(seen) {
         currentFlushPromise = null;
         // some postFlushCb queued jobs!
         // keep flushing until it drains.
-        if (queue.length || pendingPostFlushCbs.length) {
+        if (queue.length ||
+            pendingPreFlushCbs.length ||
+            pendingPostFlushCbs.length) {
             flushJobs(seen);
         }
     }
@@ -14257,6 +14157,12 @@ function reload(id, newComp) {
             // components to be unmounted and re-mounted. Queue the update so that we
             // don't end up forcing the same parent to re-render multiple times.
             queueJob(instance.parent.update);
+            // instance is the inner component of an async custom element
+            // invoke to reset styles
+            if (instance.parent.type.__asyncLoader &&
+                instance.parent.ceReload) {
+                instance.parent.ceReload(newComp.styles);
+            }
         }
         else if (instance.appContext.reload) {
             // root instance mounted via createApp() has a reload method
@@ -14301,7 +14207,7 @@ function tryWrap(fn) {
 let devtools;
 let buffer = [];
 let devtoolsNotInstalled = false;
-function emit$1(event, ...args) {
+function emit(event, ...args) {
     if (devtools) {
         devtools.emit(event, ...args);
     }
@@ -14348,7 +14254,7 @@ function setDevtoolsHook(hook, target) {
     }
 }
 function devtoolsInitApp(app, version) {
-    emit$1("app:init" /* DevtoolsHooks.APP_INIT */, app, version, {
+    emit("app:init" /* APP_INIT */, app, version, {
         Fragment,
         Text,
         Comment,
@@ -14356,37 +14262,30 @@ function devtoolsInitApp(app, version) {
     });
 }
 function devtoolsUnmountApp(app) {
-    emit$1("app:unmount" /* DevtoolsHooks.APP_UNMOUNT */, app);
+    emit("app:unmount" /* APP_UNMOUNT */, app);
 }
-const devtoolsComponentAdded = /*#__PURE__*/ createDevtoolsComponentHook("component:added" /* DevtoolsHooks.COMPONENT_ADDED */);
+const devtoolsComponentAdded = /*#__PURE__*/ createDevtoolsComponentHook("component:added" /* COMPONENT_ADDED */);
 const devtoolsComponentUpdated = 
-/*#__PURE__*/ createDevtoolsComponentHook("component:updated" /* DevtoolsHooks.COMPONENT_UPDATED */);
-const _devtoolsComponentRemoved = /*#__PURE__*/ createDevtoolsComponentHook("component:removed" /* DevtoolsHooks.COMPONENT_REMOVED */);
-const devtoolsComponentRemoved = (component) => {
-    if (devtools &&
-        typeof devtools.cleanupBuffer === 'function' &&
-        // remove the component if it wasn't buffered
-        !devtools.cleanupBuffer(component)) {
-        _devtoolsComponentRemoved(component);
-    }
-};
+/*#__PURE__*/ createDevtoolsComponentHook("component:updated" /* COMPONENT_UPDATED */);
+const devtoolsComponentRemoved = 
+/*#__PURE__*/ createDevtoolsComponentHook("component:removed" /* COMPONENT_REMOVED */);
 function createDevtoolsComponentHook(hook) {
     return (component) => {
-        emit$1(hook, component.appContext.app, component.uid, component.parent ? component.parent.uid : undefined, component);
+        emit(hook, component.appContext.app, component.uid, component.parent ? component.parent.uid : undefined, component);
     };
 }
-const devtoolsPerfStart = /*#__PURE__*/ createDevtoolsPerformanceHook("perf:start" /* DevtoolsHooks.PERFORMANCE_START */);
-const devtoolsPerfEnd = /*#__PURE__*/ createDevtoolsPerformanceHook("perf:end" /* DevtoolsHooks.PERFORMANCE_END */);
+const devtoolsPerfStart = /*#__PURE__*/ createDevtoolsPerformanceHook("perf:start" /* PERFORMANCE_START */);
+const devtoolsPerfEnd = /*#__PURE__*/ createDevtoolsPerformanceHook("perf:end" /* PERFORMANCE_END */);
 function createDevtoolsPerformanceHook(hook) {
     return (component, type, time) => {
-        emit$1(hook, component.appContext.app, component.uid, component, type, time);
+        emit(hook, component.appContext.app, component.uid, component, type, time);
     };
 }
 function devtoolsComponentEmit(component, event, params) {
-    emit$1("component:emit" /* DevtoolsHooks.COMPONENT_EMIT */, component.appContext.app, component, event, params);
+    emit("component:emit" /* COMPONENT_EMIT */, component.appContext.app, component, event, params);
 }
 
-function emit(instance, event, ...rawArgs) {
+function emit$1(instance, event, ...rawArgs) {
     if (instance.isUnmounted)
         return;
     const props = instance.vnode.props || _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ;
@@ -14419,10 +14318,10 @@ function emit(instance, event, ...rawArgs) {
         const modifiersKey = `${modelArg === 'modelValue' ? 'model' : modelArg}Modifiers`;
         const { number, trim } = props[modifiersKey] || _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ;
         if (trim) {
-            args = rawArgs.map(a => ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(a) ? a.trim() : a));
+            args = rawArgs.map(a => a.trim());
         }
         if (number) {
-            args = rawArgs.map(_vue_shared__WEBPACK_IMPORTED_MODULE_1__.looseToNumber);
+            args = rawArgs.map(_vue_shared__WEBPACK_IMPORTED_MODULE_1__.toNumber);
         }
     }
     if (true) {
@@ -14448,7 +14347,7 @@ function emit(instance, event, ...rawArgs) {
         handler = props[(handlerName = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.toHandlerKey)((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hyphenate)(event)))];
     }
     if (handler) {
-        callWithAsyncErrorHandling(handler, instance, 6 /* ErrorCodes.COMPONENT_EVENT_HANDLER */, args);
+        callWithAsyncErrorHandling(handler, instance, 6 /* COMPONENT_EVENT_HANDLER */, args);
     }
     const onceHandler = props[handlerName + `Once`];
     if (onceHandler) {
@@ -14459,7 +14358,7 @@ function emit(instance, event, ...rawArgs) {
             return;
         }
         instance.emitted[handlerName] = true;
-        callWithAsyncErrorHandling(onceHandler, instance, 6 /* ErrorCodes.COMPONENT_EVENT_HANDLER */, args);
+        callWithAsyncErrorHandling(onceHandler, instance, 6 /* COMPONENT_EVENT_HANDLER */, args);
     }
 }
 function normalizeEmitsOptions(comp, appContext, asMixin = false) {
@@ -14491,9 +14390,7 @@ function normalizeEmitsOptions(comp, appContext, asMixin = false) {
         }
     }
     if (!raw && !hasExtends) {
-        if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(comp)) {
-            cache.set(comp, null);
-        }
+        cache.set(comp, null);
         return null;
     }
     if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(raw)) {
@@ -14502,9 +14399,7 @@ function normalizeEmitsOptions(comp, appContext, asMixin = false) {
     else {
         (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.extend)(normalized, raw);
     }
-    if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(comp)) {
-        cache.set(comp, normalized);
-    }
+    cache.set(comp, normalized);
     return normalized;
 }
 // Check if an incoming prop key is a declared emit event listener.
@@ -14584,15 +14479,10 @@ function withCtx(fn, ctx = currentRenderingInstance, isNonScopedSlot // false on
             setBlockTracking(-1);
         }
         const prevInstance = setCurrentRenderingInstance(ctx);
-        let res;
-        try {
-            res = fn(...args);
-        }
-        finally {
-            setCurrentRenderingInstance(prevInstance);
-            if (renderFnWithContext._d) {
-                setBlockTracking(1);
-            }
+        const res = fn(...args);
+        setCurrentRenderingInstance(prevInstance);
+        if (renderFnWithContext._d) {
+            setBlockTracking(1);
         }
         if (true) {
             devtoolsComponentUpdated(ctx);
@@ -14628,7 +14518,7 @@ function renderComponentRoot(instance) {
         accessedAttrs = false;
     }
     try {
-        if (vnode.shapeFlag & 4 /* ShapeFlags.STATEFUL_COMPONENT */) {
+        if (vnode.shapeFlag & 4 /* STATEFUL_COMPONENT */) {
             // withProxy is a proxy with a different `has` trap only for
             // runtime-compiled render functions using `with` block.
             const proxyToUse = withProxy || proxy;
@@ -14661,7 +14551,7 @@ function renderComponentRoot(instance) {
     }
     catch (err) {
         blockStack.length = 0;
-        handleError(err, instance, 1 /* ErrorCodes.RENDER_FUNCTION */);
+        handleError(err, instance, 1 /* RENDER_FUNCTION */);
         result = createVNode(Comment);
     }
     // attr merging
@@ -14671,14 +14561,14 @@ function renderComponentRoot(instance) {
     let setRoot = undefined;
     if (( true) &&
         result.patchFlag > 0 &&
-        result.patchFlag & 2048 /* PatchFlags.DEV_ROOT_FRAGMENT */) {
+        result.patchFlag & 2048 /* DEV_ROOT_FRAGMENT */) {
         [root, setRoot] = getChildRoot(result);
     }
     if (fallthroughAttrs && inheritAttrs !== false) {
         const keys = Object.keys(fallthroughAttrs);
         const { shapeFlag } = root;
         if (keys.length) {
-            if (shapeFlag & (1 /* ShapeFlags.ELEMENT */ | 6 /* ShapeFlags.COMPONENT */)) {
+            if (shapeFlag & (1 /* ELEMENT */ | 6 /* COMPONENT */)) {
                 if (propsOptions && keys.some(_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isModelListener)) {
                     // If a v-model listener (onUpdate:xxx) has a corresponding declared
                     // prop, it indicates this component expects to handle v-model and
@@ -14819,7 +14709,7 @@ const filterModelListeners = (attrs, props) => {
     return res;
 };
 const isElementRoot = (vnode) => {
-    return (vnode.shapeFlag & (6 /* ShapeFlags.COMPONENT */ | 1 /* ShapeFlags.ELEMENT */) ||
+    return (vnode.shapeFlag & (6 /* COMPONENT */ | 1 /* ELEMENT */) ||
         vnode.type === Comment // potential v-if branch switch
     );
 };
@@ -14838,19 +14728,19 @@ function shouldUpdateComponent(prevVNode, nextVNode, optimized) {
         return true;
     }
     if (optimized && patchFlag >= 0) {
-        if (patchFlag & 1024 /* PatchFlags.DYNAMIC_SLOTS */) {
+        if (patchFlag & 1024 /* DYNAMIC_SLOTS */) {
             // slot content that references values that might have changed,
             // e.g. in a v-for
             return true;
         }
-        if (patchFlag & 16 /* PatchFlags.FULL_PROPS */) {
+        if (patchFlag & 16 /* FULL_PROPS */) {
             if (!prevProps) {
                 return !!nextProps;
             }
             // presence of this flag indicates props are always non-null
             return hasPropsChanged(prevProps, nextProps, emits);
         }
-        else if (patchFlag & 8 /* PatchFlags.PROPS */) {
+        else if (patchFlag & 8 /* PROPS */) {
             const dynamicProps = nextVNode.dynamicProps;
             for (let i = 0; i < dynamicProps.length; i++) {
                 const key = dynamicProps[i];
@@ -14930,8 +14820,7 @@ const SuspenseImpl = {
     normalize: normalizeSuspenseChildren
 };
 // Force-casted public typing for h and TSX props inference
-const Suspense = (SuspenseImpl
-    );
+const Suspense = (SuspenseImpl );
 function triggerEvent(vnode, name) {
     const eventListener = vnode.props && vnode.props[name];
     if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(eventListener)) {
@@ -15071,10 +14960,7 @@ function createSuspenseBoundary(vnode, parent, parentComponent, container, hidde
         console[console.info ? 'info' : 'log'](`<Suspense> is an experimental feature and its API will likely change.`);
     }
     const { p: patch, m: move, um: unmount, n: next, o: { parentNode, remove } } = rendererInternals;
-    const timeout = vnode.props ? (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.toNumber)(vnode.props.timeout) : undefined;
-    if ((true)) {
-        assertNumber(timeout, `Suspense timeout`);
-    }
+    const timeout = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.toNumber)(vnode.props && vnode.props.timeout);
     const suspense = {
         vnode,
         parent,
@@ -15112,7 +14998,7 @@ function createSuspenseBoundary(vnode, parent, parentComponent, container, hidde
                 if (delayEnter) {
                     activeBranch.transition.afterLeave = () => {
                         if (pendingId === suspense.pendingId) {
-                            move(pendingBranch, container, anchor, 0 /* MoveType.ENTER */);
+                            move(pendingBranch, container, anchor, 0 /* ENTER */);
                         }
                     };
                 }
@@ -15127,7 +15013,7 @@ function createSuspenseBoundary(vnode, parent, parentComponent, container, hidde
                 }
                 if (!delayEnter) {
                     // move content from off-dom container to actual container
-                    move(pendingBranch, container, anchor, 0 /* MoveType.ENTER */);
+                    move(pendingBranch, container, anchor, 0 /* ENTER */);
                 }
             }
             setActiveBranch(suspense, pendingBranch);
@@ -15201,7 +15087,7 @@ function createSuspenseBoundary(vnode, parent, parentComponent, container, hidde
             const hydratedEl = instance.vnode.el;
             instance
                 .asyncDep.catch(err => {
-                handleError(err, instance, 0 /* ErrorCodes.SETUP_FUNCTION */);
+                handleError(err, instance, 0 /* SETUP_FUNCTION */);
             })
                 .then(asyncSetupResult => {
                 // retry when the setup() promise resolves.
@@ -15275,7 +15161,7 @@ function hydrateSuspense(node, vnode, parentComponent, parentSuspense, isSVG, sl
 }
 function normalizeSuspenseChildren(vnode) {
     const { shapeFlag, children } = vnode;
-    const isSlotChildren = shapeFlag & 32 /* ShapeFlags.SLOTS_CHILDREN */;
+    const isSlotChildren = shapeFlag & 32 /* SLOTS_CHILDREN */;
     vnode.ssContent = normalizeSuspenseSlot(isSlotChildren ? children.default : children);
     vnode.ssFallback = isSlotChildren
         ? normalizeSuspenseSlot(children.fallback)
@@ -15392,10 +15278,12 @@ function watchEffect(effect, options) {
     return doWatch(effect, null, options);
 }
 function watchPostEffect(effect, options) {
-    return doWatch(effect, null, ( true) ? Object.assign(Object.assign({}, options), { flush: 'post' }) : 0);
+    return doWatch(effect, null, (( true)
+        ? Object.assign(Object.assign({}, options), { flush: 'post' }) : 0));
 }
 function watchSyncEffect(effect, options) {
-    return doWatch(effect, null, ( true) ? Object.assign(Object.assign({}, options), { flush: 'sync' }) : 0);
+    return doWatch(effect, null, (( true)
+        ? Object.assign(Object.assign({}, options), { flush: 'sync' }) : 0));
 }
 // initial value for watchers to trigger on undefined initial values
 const INITIAL_WATCHER_VALUE = {};
@@ -15423,8 +15311,7 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = _v
         warn(`Invalid watch source: `, s, `A watch source can only be a getter/effect function, a ref, ` +
             `a reactive object, or an array of these types.`);
     };
-    const instance = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.getCurrentScope)() === (currentInstance === null || currentInstance === void 0 ? void 0 : currentInstance.scope) ? currentInstance : null;
-    // const instance = currentInstance
+    const instance = currentInstance;
     let getter;
     let forceTrigger = false;
     let isMultiSource = false;
@@ -15447,7 +15334,7 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = _v
                 return traverse(s);
             }
             else if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(s)) {
-                return callWithErrorHandling(s, instance, 2 /* ErrorCodes.WATCH_GETTER */);
+                return callWithErrorHandling(s, instance, 2 /* WATCH_GETTER */);
             }
             else {
                 ( true) && warnInvalidSource(s);
@@ -15457,7 +15344,7 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = _v
     else if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(source)) {
         if (cb) {
             // getter with cb
-            getter = () => callWithErrorHandling(source, instance, 2 /* ErrorCodes.WATCH_GETTER */);
+            getter = () => callWithErrorHandling(source, instance, 2 /* WATCH_GETTER */);
         }
         else {
             // no cb -> simple effect
@@ -15468,7 +15355,7 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = _v
                 if (cleanup) {
                     cleanup();
                 }
-                return callWithAsyncErrorHandling(source, instance, 3 /* ErrorCodes.WATCH_CALLBACK */, [onCleanup]);
+                return callWithAsyncErrorHandling(source, instance, 3 /* WATCH_CALLBACK */, [onCleanup]);
             };
         }
     }
@@ -15483,12 +15370,11 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = _v
     let cleanup;
     let onCleanup = (fn) => {
         cleanup = effect.onStop = () => {
-            callWithErrorHandling(fn, instance, 4 /* ErrorCodes.WATCH_CLEANUP */);
+            callWithErrorHandling(fn, instance, 4 /* WATCH_CLEANUP */);
         };
     };
     // in SSR there is no need to setup an actual effect, and it should be noop
-    // unless it's eager or sync flush
-    let ssrCleanup;
+    // unless it's eager
     if (isInSSRComponentSetup) {
         // we will also not call the invalidate callback (+ runner is not set up)
         onCleanup = _vue_shared__WEBPACK_IMPORTED_MODULE_1__.NOOP;
@@ -15496,23 +15382,15 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = _v
             getter();
         }
         else if (immediate) {
-            callWithAsyncErrorHandling(cb, instance, 3 /* ErrorCodes.WATCH_CALLBACK */, [
+            callWithAsyncErrorHandling(cb, instance, 3 /* WATCH_CALLBACK */, [
                 getter(),
                 isMultiSource ? [] : undefined,
                 onCleanup
             ]);
         }
-        if (flush === 'sync') {
-            const ctx = useSSRContext();
-            ssrCleanup = ctx.__watcherHandles || (ctx.__watcherHandles = []);
-        }
-        else {
-            return _vue_shared__WEBPACK_IMPORTED_MODULE_1__.NOOP;
-        }
+        return _vue_shared__WEBPACK_IMPORTED_MODULE_1__.NOOP;
     }
-    let oldValue = isMultiSource
-        ? new Array(source.length).fill(INITIAL_WATCHER_VALUE)
-        : INITIAL_WATCHER_VALUE;
+    let oldValue = isMultiSource ? [] : INITIAL_WATCHER_VALUE;
     const job = () => {
         if (!effect.active) {
             return;
@@ -15530,14 +15408,10 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = _v
                 if (cleanup) {
                     cleanup();
                 }
-                callWithAsyncErrorHandling(cb, instance, 3 /* ErrorCodes.WATCH_CALLBACK */, [
+                callWithAsyncErrorHandling(cb, instance, 3 /* WATCH_CALLBACK */, [
                     newValue,
                     // pass undefined as the old value when it's changed for the first time
-                    oldValue === INITIAL_WATCHER_VALUE
-                        ? undefined
-                        : isMultiSource && oldValue[0] === INITIAL_WATCHER_VALUE
-                            ? []
-                            : oldValue,
+                    oldValue === INITIAL_WATCHER_VALUE ? undefined : oldValue,
                     onCleanup
                 ]);
                 oldValue = newValue;
@@ -15560,10 +15434,7 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = _v
     }
     else {
         // default: 'pre'
-        job.pre = true;
-        if (instance)
-            job.id = instance.uid;
-        scheduler = () => queueJob(job);
+        scheduler = () => queuePreFlushCb(job);
     }
     const effect = new _vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.ReactiveEffect(getter, scheduler);
     if ((true)) {
@@ -15585,15 +15456,12 @@ function doWatch(source, cb, { immediate, deep, flush, onTrack, onTrigger } = _v
     else {
         effect.run();
     }
-    const unwatch = () => {
+    return () => {
         effect.stop();
         if (instance && instance.scope) {
             (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.remove)(instance.scope.effects, effect);
         }
     };
-    if (ssrCleanup)
-        ssrCleanup.push(unwatch);
-    return unwatch;
 }
 // this.$watch
 function instanceWatch(source, value, options) {
@@ -15633,7 +15501,7 @@ function createPathGetter(ctx, path) {
     };
 }
 function traverse(value, seen) {
-    if (!(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(value) || value["__v_skip" /* ReactiveFlags.SKIP */]) {
+    if (!(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(value) || value["__v_skip" /* SKIP */]) {
         return value;
     }
     seen = seen || new Set();
@@ -15778,11 +15646,7 @@ const BaseTransitionImpl = {
                     // return placeholder node and queue update when leave finishes
                     leavingHooks.afterLeave = () => {
                         state.isLeaving = false;
-                        // #6835
-                        // it also needs to be updated when active is undefined
-                        if (instance.update.active !== false) {
-                            instance.update();
-                        }
+                        instance.update();
                     };
                     return emptyPlaceholder(child);
                 }
@@ -15824,7 +15688,7 @@ function resolveTransitionHooks(vnode, props, state, instance) {
     const leavingVNodesCache = getLeavingNodesForType(state, vnode);
     const callHook = (hook, args) => {
         hook &&
-            callWithAsyncErrorHandling(hook, instance, 9 /* ErrorCodes.TRANSITION_HOOK */, args);
+            callWithAsyncErrorHandling(hook, instance, 9 /* TRANSITION_HOOK */, args);
     };
     const callAsyncHook = (hook, args) => {
         const done = args[1];
@@ -15960,10 +15824,10 @@ function getKeepAliveChild(vnode) {
         : vnode;
 }
 function setTransitionHooks(vnode, hooks) {
-    if (vnode.shapeFlag & 6 /* ShapeFlags.COMPONENT */ && vnode.component) {
+    if (vnode.shapeFlag & 6 /* COMPONENT */ && vnode.component) {
         setTransitionHooks(vnode.component.subTree, hooks);
     }
-    else if (vnode.shapeFlag & 128 /* ShapeFlags.SUSPENSE */) {
+    else if (vnode.shapeFlag & 128 /* SUSPENSE */) {
         vnode.ssContent.transition = hooks.clone(vnode.ssContent);
         vnode.ssFallback.transition = hooks.clone(vnode.ssFallback);
     }
@@ -15982,7 +15846,7 @@ function getTransitionRawChildren(children, keepComment = false, parentKey) {
             : String(parentKey) + String(child.key != null ? child.key : i);
         // handle fragment children case, e.g. v-for
         if (child.type === Fragment) {
-            if (child.patchFlag & 128 /* PatchFlags.KEYED_FRAGMENT */)
+            if (child.patchFlag & 128 /* KEYED_FRAGMENT */)
                 keyedFragmentCount++;
             ret = ret.concat(getTransitionRawChildren(child.children, keepComment, key));
         }
@@ -15997,7 +15861,7 @@ function getTransitionRawChildren(children, keepComment = false, parentKey) {
     // these children to force full diffs to ensure correct behavior.
     if (keyedFragmentCount > 1) {
         for (let i = 0; i < ret.length; i++) {
-            ret[i].patchFlag = -2 /* PatchFlags.BAIL */;
+            ret[i].patchFlag = -2 /* BAIL */;
         }
     }
     return ret;
@@ -16075,7 +15939,7 @@ function defineAsyncComponent(source) {
             }
             const onError = (err) => {
                 pendingRequest = null;
-                handleError(err, instance, 13 /* ErrorCodes.ASYNC_COMPONENT_LOADER */, !errorComponent /* do not throw in dev if user provided error component */);
+                handleError(err, instance, 13 /* ASYNC_COMPONENT_LOADER */, !errorComponent /* do not throw in dev if user provided error component */);
             };
             // suspense-controlled or SSR.
             if ((suspensible && instance.suspense) ||
@@ -16139,15 +16003,10 @@ function defineAsyncComponent(source) {
         }
     });
 }
-function createInnerComp(comp, parent) {
-    const { ref, props, children, ce } = parent.vnode;
+function createInnerComp(comp, { vnode: { ref, props, children, shapeFlag }, parent }) {
     const vnode = createVNode(comp, props, children);
     // ensure inner component inherits the async wrapper's ref owner
     vnode.ref = ref;
-    // pass the custom element callback on to the inner comp
-    // and remove it from the async wrapper
-    vnode.ce = ce;
-    delete parent.vnode.ce;
     return vnode;
 }
 
@@ -16190,7 +16049,7 @@ const KeepAliveImpl = {
         const storageContainer = createElement('div');
         sharedContext.activate = (vnode, container, anchor, isSVG, optimized) => {
             const instance = vnode.component;
-            move(vnode, container, anchor, 0 /* MoveType.ENTER */, parentSuspense);
+            move(vnode, container, anchor, 0 /* ENTER */, parentSuspense);
             // in case props have changed
             patch(instance.vnode, vnode, container, anchor, instance, parentSuspense, isSVG, vnode.slotScopeIds, optimized);
             queuePostRenderEffect(() => {
@@ -16210,7 +16069,7 @@ const KeepAliveImpl = {
         };
         sharedContext.deactivate = (vnode) => {
             const instance = vnode.component;
-            move(vnode, storageContainer, null, 1 /* MoveType.LEAVE */, parentSuspense);
+            move(vnode, storageContainer, null, 1 /* LEAVE */, parentSuspense);
             queuePostRenderEffect(() => {
                 if (instance.da) {
                     (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.invokeArrayFns)(instance.da);
@@ -16241,7 +16100,7 @@ const KeepAliveImpl = {
         }
         function pruneCacheEntry(key) {
             const cached = cache.get(key);
-            if (!current || !isSameVNodeType(cached, current)) {
+            if (!current || cached.type !== current.type) {
                 unmount(cached);
             }
             else if (current) {
@@ -16273,7 +16132,7 @@ const KeepAliveImpl = {
             cache.forEach(cached => {
                 const { subTree, suspense } = instance;
                 const vnode = getInnerChild(subTree);
-                if (cached.type === vnode.type && cached.key === vnode.key) {
+                if (cached.type === vnode.type) {
                     // current instance will be unmounted as part of keep-alive's unmount
                     resetShapeFlag(vnode);
                     // but invoke its deactivated hook here
@@ -16299,8 +16158,8 @@ const KeepAliveImpl = {
                 return children;
             }
             else if (!isVNode(rawVNode) ||
-                (!(rawVNode.shapeFlag & 4 /* ShapeFlags.STATEFUL_COMPONENT */) &&
-                    !(rawVNode.shapeFlag & 128 /* ShapeFlags.SUSPENSE */))) {
+                (!(rawVNode.shapeFlag & 4 /* STATEFUL_COMPONENT */) &&
+                    !(rawVNode.shapeFlag & 128 /* SUSPENSE */))) {
                 current = null;
                 return rawVNode;
             }
@@ -16322,7 +16181,7 @@ const KeepAliveImpl = {
             // clone vnode if it's reused because we are going to mutate it
             if (vnode.el) {
                 vnode = cloneVNode(vnode);
-                if (rawVNode.shapeFlag & 128 /* ShapeFlags.SUSPENSE */) {
+                if (rawVNode.shapeFlag & 128 /* SUSPENSE */) {
                     rawVNode.ssContent = vnode;
                 }
             }
@@ -16341,7 +16200,7 @@ const KeepAliveImpl = {
                     setTransitionHooks(vnode, vnode.transition);
                 }
                 // avoid vnode being mounted as fresh
-                vnode.shapeFlag |= 512 /* ShapeFlags.COMPONENT_KEPT_ALIVE */;
+                vnode.shapeFlag |= 512 /* COMPONENT_KEPT_ALIVE */;
                 // make this key the freshest
                 keys.delete(key);
                 keys.add(key);
@@ -16354,7 +16213,7 @@ const KeepAliveImpl = {
                 }
             }
             // avoid vnode being unmounted
-            vnode.shapeFlag |= 256 /* ShapeFlags.COMPONENT_SHOULD_KEEP_ALIVE */;
+            vnode.shapeFlag |= 256 /* COMPONENT_SHOULD_KEEP_ALIVE */;
             current = vnode;
             return isSuspense(rawVNode.type) ? rawVNode : vnode;
         };
@@ -16370,17 +16229,17 @@ function matches(pattern, name) {
     else if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(pattern)) {
         return pattern.split(',').includes(name);
     }
-    else if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isRegExp)(pattern)) {
+    else if (pattern.test) {
         return pattern.test(name);
     }
     /* istanbul ignore next */
     return false;
 }
 function onActivated(hook, target) {
-    registerKeepAliveHook(hook, "a" /* LifecycleHooks.ACTIVATED */, target);
+    registerKeepAliveHook(hook, "a" /* ACTIVATED */, target);
 }
 function onDeactivated(hook, target) {
-    registerKeepAliveHook(hook, "da" /* LifecycleHooks.DEACTIVATED */, target);
+    registerKeepAliveHook(hook, "da" /* DEACTIVATED */, target);
 }
 function registerKeepAliveHook(hook, type, target = currentInstance) {
     // cache the deactivate branch check wrapper for injected hooks so the same
@@ -16423,12 +16282,17 @@ function injectToKeepAliveRoot(hook, type, target, keepAliveRoot) {
     }, target);
 }
 function resetShapeFlag(vnode) {
-    // bitwise operations to remove keep alive flags
-    vnode.shapeFlag &= ~256 /* ShapeFlags.COMPONENT_SHOULD_KEEP_ALIVE */;
-    vnode.shapeFlag &= ~512 /* ShapeFlags.COMPONENT_KEPT_ALIVE */;
+    let shapeFlag = vnode.shapeFlag;
+    if (shapeFlag & 256 /* COMPONENT_SHOULD_KEEP_ALIVE */) {
+        shapeFlag -= 256 /* COMPONENT_SHOULD_KEEP_ALIVE */;
+    }
+    if (shapeFlag & 512 /* COMPONENT_KEPT_ALIVE */) {
+        shapeFlag -= 512 /* COMPONENT_KEPT_ALIVE */;
+    }
+    vnode.shapeFlag = shapeFlag;
 }
 function getInnerChild(vnode) {
-    return vnode.shapeFlag & 128 /* ShapeFlags.SUSPENSE */ ? vnode.ssContent : vnode;
+    return vnode.shapeFlag & 128 /* SUSPENSE */ ? vnode.ssContent : vnode;
 }
 
 function injectHook(type, hook, target = currentInstance, prepend = false) {
@@ -16474,19 +16338,19 @@ function injectHook(type, hook, target = currentInstance, prepend = false) {
 }
 const createHook = (lifecycle) => (hook, target = currentInstance) => 
 // post-create lifecycle registrations are noops during SSR (except for serverPrefetch)
-(!isInSSRComponentSetup || lifecycle === "sp" /* LifecycleHooks.SERVER_PREFETCH */) &&
-    injectHook(lifecycle, (...args) => hook(...args), target);
-const onBeforeMount = createHook("bm" /* LifecycleHooks.BEFORE_MOUNT */);
-const onMounted = createHook("m" /* LifecycleHooks.MOUNTED */);
-const onBeforeUpdate = createHook("bu" /* LifecycleHooks.BEFORE_UPDATE */);
-const onUpdated = createHook("u" /* LifecycleHooks.UPDATED */);
-const onBeforeUnmount = createHook("bum" /* LifecycleHooks.BEFORE_UNMOUNT */);
-const onUnmounted = createHook("um" /* LifecycleHooks.UNMOUNTED */);
-const onServerPrefetch = createHook("sp" /* LifecycleHooks.SERVER_PREFETCH */);
-const onRenderTriggered = createHook("rtg" /* LifecycleHooks.RENDER_TRIGGERED */);
-const onRenderTracked = createHook("rtc" /* LifecycleHooks.RENDER_TRACKED */);
+(!isInSSRComponentSetup || lifecycle === "sp" /* SERVER_PREFETCH */) &&
+    injectHook(lifecycle, hook, target);
+const onBeforeMount = createHook("bm" /* BEFORE_MOUNT */);
+const onMounted = createHook("m" /* MOUNTED */);
+const onBeforeUpdate = createHook("bu" /* BEFORE_UPDATE */);
+const onUpdated = createHook("u" /* UPDATED */);
+const onBeforeUnmount = createHook("bum" /* BEFORE_UNMOUNT */);
+const onUnmounted = createHook("um" /* UNMOUNTED */);
+const onServerPrefetch = createHook("sp" /* SERVER_PREFETCH */);
+const onRenderTriggered = createHook("rtg" /* RENDER_TRIGGERED */);
+const onRenderTracked = createHook("rtc" /* RENDER_TRACKED */);
 function onErrorCaptured(hook, target = currentInstance) {
-    injectHook("ec" /* LifecycleHooks.ERROR_CAPTURED */, hook, target);
+    injectHook("ec" /* ERROR_CAPTURED */, hook, target);
 }
 
 /**
@@ -16520,25 +16384,23 @@ function withDirectives(vnode, directives) {
     const bindings = vnode.dirs || (vnode.dirs = []);
     for (let i = 0; i < directives.length; i++) {
         let [dir, value, arg, modifiers = _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ] = directives[i];
-        if (dir) {
-            if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(dir)) {
-                dir = {
-                    mounted: dir,
-                    updated: dir
-                };
-            }
-            if (dir.deep) {
-                traverse(value);
-            }
-            bindings.push({
-                dir,
-                instance,
-                value,
-                oldValue: void 0,
-                arg,
-                modifiers
-            });
+        if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(dir)) {
+            dir = {
+                mounted: dir,
+                updated: dir
+            };
         }
+        if (dir.deep) {
+            traverse(value);
+        }
+        bindings.push({
+            dir,
+            instance,
+            value,
+            oldValue: void 0,
+            arg,
+            modifiers
+        });
     }
     return vnode;
 }
@@ -16555,7 +16417,7 @@ function invokeDirectiveHook(vnode, prevVNode, instance, name) {
             // disable tracking inside all lifecycle hooks
             // since they can potentially be called inside effects.
             (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.pauseTracking)();
-            callWithAsyncErrorHandling(hook, instance, 8 /* ErrorCodes.DIRECTIVE_HOOK */, [
+            callWithAsyncErrorHandling(hook, instance, 8 /* DIRECTIVE_HOOK */, [
                 vnode.el,
                 binding,
                 vnode,
@@ -16697,16 +16559,7 @@ function createSlots(slots, dynamicSlots) {
         }
         else if (slot) {
             // conditional single slot generated by <template v-if="..." #foo>
-            slots[slot.name] = slot.key
-                ? (...args) => {
-                    const res = slot.fn(...args);
-                    // attach branch key so each conditional branch is considered a
-                    // different fragment
-                    if (res)
-                        res.key = slot.key;
-                    return res;
-                }
-                : slot.fn;
+            slots[slot.name] = slot.fn;
         }
     }
     return slots;
@@ -16724,9 +16577,7 @@ fallback, noSlotted) {
         (currentRenderingInstance.parent &&
             isAsyncWrapper(currentRenderingInstance.parent) &&
             currentRenderingInstance.parent.isCE)) {
-        if (name !== 'default')
-            props.name = name;
-        return createVNode('slot', props, fallback && fallback());
+        return createVNode('slot', name === 'default' ? null : { name }, fallback && fallback());
     }
     let slot = slots[name];
     if (( true) && slot && slot.length > 1) {
@@ -16744,15 +16595,9 @@ fallback, noSlotted) {
     }
     openBlock();
     const validSlotContent = slot && ensureValidVNode(slot(props));
-    const rendered = createBlock(Fragment, {
-        key: props.key ||
-            // slot content array of a dynamic conditional slot may have a branch
-            // key attached in the `createSlots` helper, respect that
-            (validSlotContent && validSlotContent.key) ||
-            `_${name}`
-    }, validSlotContent || (fallback ? fallback() : []), validSlotContent && slots._ === 1 /* SlotFlags.STABLE */
-        ? 64 /* PatchFlags.STABLE_FRAGMENT */
-        : -2 /* PatchFlags.BAIL */);
+    const rendered = createBlock(Fragment, { key: props.key || `_${name}` }, validSlotContent || (fallback ? fallback() : []), validSlotContent && slots._ === 1 /* STABLE */
+        ? 64 /* STABLE_FRAGMENT */
+        : -2 /* BAIL */);
     if (!noSlotted && rendered.scopeId) {
         rendered.slotScopeIds = [rendered.scopeId + '-s'];
     }
@@ -16780,16 +16625,14 @@ function ensureValidVNode(vnodes) {
  * For prefixing keys in v-on="obj" with "on"
  * @private
  */
-function toHandlers(obj, preserveCaseIfNecessary) {
+function toHandlers(obj) {
     const ret = {};
     if (( true) && !(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(obj)) {
         warn(`v-on with no argument expects an object value.`);
         return ret;
     }
     for (const key in obj) {
-        ret[preserveCaseIfNecessary && /[A-Z]/.test(key)
-            ? `on:${key}`
-            : (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.toHandlerKey)(key)] = obj[key];
+        ret[(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.toHandlerKey)(key)] = obj[key];
     }
     return ret;
 }
@@ -16826,13 +16669,22 @@ const publicPropertiesMap =
     $watch: i => ( true ? instanceWatch.bind(i) : 0)
 });
 const isReservedPrefix = (key) => key === '_' || key === '$';
-const hasSetupBinding = (state, key) => state !== _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ && !state.__isScriptSetup && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(state, key);
 const PublicInstanceProxyHandlers = {
     get({ _: instance }, key) {
         const { ctx, setupState, data, props, accessCache, type, appContext } = instance;
         // for internal formatters to know that this is a Vue instance
         if (( true) && key === '__isVue') {
             return true;
+        }
+        // prioritize <script setup> bindings during dev.
+        // this allows even properties that start with _ or $ to be used - so that
+        // it aligns with the production behavior where the render fn is inlined and
+        // indeed has access to all declared variables.
+        if (( true) &&
+            setupState !== _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ &&
+            setupState.__isScriptSetup &&
+            (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(setupState, key)) {
+            return setupState[key];
         }
         // data / props / ctx
         // This getter gets called for every property access on the render context
@@ -16845,23 +16697,23 @@ const PublicInstanceProxyHandlers = {
             const n = accessCache[key];
             if (n !== undefined) {
                 switch (n) {
-                    case 1 /* AccessTypes.SETUP */:
+                    case 1 /* SETUP */:
                         return setupState[key];
-                    case 2 /* AccessTypes.DATA */:
+                    case 2 /* DATA */:
                         return data[key];
-                    case 4 /* AccessTypes.CONTEXT */:
+                    case 4 /* CONTEXT */:
                         return ctx[key];
-                    case 3 /* AccessTypes.PROPS */:
+                    case 3 /* PROPS */:
                         return props[key];
                     // default: just fallthrough
                 }
             }
-            else if (hasSetupBinding(setupState, key)) {
-                accessCache[key] = 1 /* AccessTypes.SETUP */;
+            else if (setupState !== _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(setupState, key)) {
+                accessCache[key] = 1 /* SETUP */;
                 return setupState[key];
             }
             else if (data !== _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(data, key)) {
-                accessCache[key] = 2 /* AccessTypes.DATA */;
+                accessCache[key] = 2 /* DATA */;
                 return data[key];
             }
             else if (
@@ -16869,15 +16721,15 @@ const PublicInstanceProxyHandlers = {
             // props
             (normalizedProps = instance.propsOptions[0]) &&
                 (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(normalizedProps, key)) {
-                accessCache[key] = 3 /* AccessTypes.PROPS */;
+                accessCache[key] = 3 /* PROPS */;
                 return props[key];
             }
             else if (ctx !== _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(ctx, key)) {
-                accessCache[key] = 4 /* AccessTypes.CONTEXT */;
+                accessCache[key] = 4 /* CONTEXT */;
                 return ctx[key];
             }
             else if ( false || shouldCacheAccess) {
-                accessCache[key] = 0 /* AccessTypes.OTHER */;
+                accessCache[key] = 0 /* OTHER */;
             }
         }
         const publicGetter = publicPropertiesMap[key];
@@ -16885,7 +16737,7 @@ const PublicInstanceProxyHandlers = {
         // public $xxx properties
         if (publicGetter) {
             if (key === '$attrs') {
-                (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.track)(instance, "get" /* TrackOpTypes.GET */, key);
+                (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.track)(instance, "get" /* GET */, key);
                 ( true) && markAttrsAccessed();
             }
             return publicGetter(instance);
@@ -16898,7 +16750,7 @@ const PublicInstanceProxyHandlers = {
         }
         else if (ctx !== _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(ctx, key)) {
             // user may set custom properties to `this` that start with `$`
-            accessCache[key] = 4 /* AccessTypes.CONTEXT */;
+            accessCache[key] = 4 /* CONTEXT */;
             return ctx[key];
         }
         else if (
@@ -16927,28 +16779,23 @@ const PublicInstanceProxyHandlers = {
     },
     set({ _: instance }, key, value) {
         const { data, setupState, ctx } = instance;
-        if (hasSetupBinding(setupState, key)) {
+        if (setupState !== _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(setupState, key)) {
             setupState[key] = value;
             return true;
-        }
-        else if (( true) &&
-            setupState.__isScriptSetup &&
-            (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(setupState, key)) {
-            warn(`Cannot mutate <script setup> binding "${key}" from Options API.`);
-            return false;
         }
         else if (data !== _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(data, key)) {
             data[key] = value;
             return true;
         }
         else if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(instance.props, key)) {
-            ( true) && warn(`Attempting to mutate prop "${key}". Props are readonly.`);
+            ( true) &&
+                warn(`Attempting to mutate prop "${key}". Props are readonly.`, instance);
             return false;
         }
         if (key[0] === '$' && key.slice(1) in instance) {
             ( true) &&
                 warn(`Attempting to mutate public property "${key}". ` +
-                    `Properties starting with $ are reserved and readonly.`);
+                    `Properties starting with $ are reserved and readonly.`, instance);
             return false;
         }
         else {
@@ -16969,7 +16816,7 @@ const PublicInstanceProxyHandlers = {
         let normalizedProps;
         return (!!accessCache[key] ||
             (data !== _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(data, key)) ||
-            hasSetupBinding(setupState, key) ||
+            (setupState !== _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(setupState, key)) ||
             ((normalizedProps = propsOptions[0]) && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(normalizedProps, key)) ||
             (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(ctx, key) ||
             (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(publicPropertiesMap, key) ||
@@ -17089,7 +16936,7 @@ function applyOptions(instance) {
     // call beforeCreate first before accessing other options since
     // the hook may mutate resolved options (#2791)
     if (options.beforeCreate) {
-        callHook(options.beforeCreate, instance, "bc" /* LifecycleHooks.BEFORE_CREATE */);
+        callHook(options.beforeCreate, instance, "bc" /* BEFORE_CREATE */);
     }
     const { 
     // state
@@ -17105,7 +16952,7 @@ function applyOptions(instance) {
         const [propsOptions] = instance.propsOptions;
         if (propsOptions) {
             for (const key in propsOptions) {
-                checkDuplicateProperties("Props" /* OptionTypes.PROPS */, key);
+                checkDuplicateProperties("Props" /* PROPS */, key);
             }
         }
     }
@@ -17136,7 +16983,7 @@ function applyOptions(instance) {
                 }
                 else {}
                 if ((true)) {
-                    checkDuplicateProperties("Methods" /* OptionTypes.METHODS */, key);
+                    checkDuplicateProperties("Methods" /* METHODS */, key);
                 }
             }
             else if ((true)) {
@@ -17163,7 +17010,7 @@ function applyOptions(instance) {
             instance.data = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.reactive)(data);
             if ((true)) {
                 for (const key in data) {
-                    checkDuplicateProperties("Data" /* OptionTypes.DATA */, key);
+                    checkDuplicateProperties("Data" /* DATA */, key);
                     // expose data on ctx during dev
                     if (!isReservedPrefix(key[0])) {
                         Object.defineProperty(ctx, key, {
@@ -17208,7 +17055,7 @@ function applyOptions(instance) {
                 set: v => (c.value = v)
             });
             if ((true)) {
-                checkDuplicateProperties("Computed" /* OptionTypes.COMPUTED */, key);
+                checkDuplicateProperties("Computed" /* COMPUTED */, key);
             }
         }
     }
@@ -17226,7 +17073,7 @@ function applyOptions(instance) {
         });
     }
     if (created) {
-        callHook(created, instance, "c" /* LifecycleHooks.CREATED */);
+        callHook(created, instance, "c" /* CREATED */);
     }
     function registerLifecycleHook(register, hook) {
         if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(hook)) {
@@ -17319,7 +17166,7 @@ function resolveInjections(injectOptions, ctx, checkDuplicateProperties = _vue_s
             ctx[key] = injected;
         }
         if ((true)) {
-            checkDuplicateProperties("Inject" /* OptionTypes.INJECT */, key);
+            checkDuplicateProperties("Inject" /* INJECT */, key);
         }
     }
 }
@@ -17390,9 +17237,7 @@ function resolveMergedOptions(instance) {
         }
         mergeOptions(resolved, base, optionMergeStrategies);
     }
-    if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(base)) {
-        cache.set(base, resolved);
-    }
+    cache.set(base, resolved);
     return resolved;
 }
 function mergeOptions(to, from, strats, asMixin = false) {
@@ -17522,13 +17367,6 @@ isSSR = false) {
     }
     instance.attrs = attrs;
 }
-function isInHmrContext(instance) {
-    while (instance) {
-        if (instance.type.__hmrId)
-            return true;
-        instance = instance.parent;
-    }
-}
 function updateProps(instance, rawProps, rawPrevProps, optimized) {
     const { props, attrs, vnode: { patchFlag } } = instance;
     const rawCurrentProps = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.toRaw)(props);
@@ -17538,10 +17376,12 @@ function updateProps(instance, rawProps, rawPrevProps, optimized) {
     // always force full diff in dev
     // - #1942 if hmr is enabled with sfc component
     // - vite#872 non-sfc component used by sfc component
-    !(( true) && isInHmrContext(instance)) &&
+    !(( true) &&
+        (instance.type.__hmrId ||
+            (instance.parent && instance.parent.type.__hmrId))) &&
         (optimized || patchFlag > 0) &&
-        !(patchFlag & 16 /* PatchFlags.FULL_PROPS */)) {
-        if (patchFlag & 8 /* PatchFlags.PROPS */) {
+        !(patchFlag & 16 /* FULL_PROPS */)) {
+        if (patchFlag & 8 /* PROPS */) {
             // Compiler-generated props & no keys change, just set the updated
             // the props.
             const propsToUpdate = instance.vnode.dynamicProps;
@@ -17620,7 +17460,7 @@ function updateProps(instance, rawProps, rawPrevProps, optimized) {
     }
     // trigger updates for $attrs in case it's used in component slots
     if (hasAttrsChanged) {
-        (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.trigger)(instance, "set" /* TriggerOpTypes.SET */, '$attrs');
+        (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.trigger)(instance, "set" /* SET */, '$attrs');
     }
     if ((true)) {
         validateProps(rawProps || {}, props, instance);
@@ -17689,11 +17529,11 @@ function resolvePropValue(options, props, key, value, instance, isAbsent) {
             }
         }
         // boolean casting
-        if (opt[0 /* BooleanFlags.shouldCast */]) {
+        if (opt[0 /* shouldCast */]) {
             if (isAbsent && !hasDefault) {
                 value = false;
             }
-            else if (opt[1 /* BooleanFlags.shouldCastTrue */] &&
+            else if (opt[1 /* shouldCastTrue */] &&
                 (value === '' || value === (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hyphenate)(key))) {
                 value = true;
             }
@@ -17731,9 +17571,7 @@ function normalizePropsOptions(comp, appContext, asMixin = false) {
         }
     }
     if (!raw && !hasExtends) {
-        if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(comp)) {
-            cache.set(comp, _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_ARR);
-        }
+        cache.set(comp, _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_ARR);
         return _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_ARR;
     }
     if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(raw)) {
@@ -17756,12 +17594,12 @@ function normalizePropsOptions(comp, appContext, asMixin = false) {
             if (validatePropName(normalizedKey)) {
                 const opt = raw[key];
                 const prop = (normalized[normalizedKey] =
-                    (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(opt) || (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(opt) ? { type: opt } : Object.assign({}, opt));
+                    (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(opt) || (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(opt) ? { type: opt } : opt);
                 if (prop) {
                     const booleanIndex = getTypeIndex(Boolean, prop.type);
                     const stringIndex = getTypeIndex(String, prop.type);
-                    prop[0 /* BooleanFlags.shouldCast */] = booleanIndex > -1;
-                    prop[1 /* BooleanFlags.shouldCastTrue */] =
+                    prop[0 /* shouldCast */] = booleanIndex > -1;
+                    prop[1 /* shouldCastTrue */] =
                         stringIndex < 0 || booleanIndex < stringIndex;
                     // if the prop needs boolean casting or default value
                     if (booleanIndex > -1 || (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(prop, 'default')) {
@@ -17772,9 +17610,7 @@ function normalizePropsOptions(comp, appContext, asMixin = false) {
         }
     }
     const res = [normalized, needCastKeys];
-    if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(comp)) {
-        cache.set(comp, res);
-    }
+    cache.set(comp, res);
     return res;
 }
 function validatePropName(key) {
@@ -17789,8 +17625,8 @@ function validatePropName(key) {
 // use function string name to check type constructors
 // so that it works across vms / iframes.
 function getType(ctor) {
-    const match = ctor && ctor.toString().match(/^\s*(function|class) (\w+)/);
-    return match ? match[2] : ctor === null ? 'null' : '';
+    const match = ctor && ctor.toString().match(/^\s*function (\w+)/);
+    return match ? match[1] : ctor === null ? 'null' : '';
 }
 function isSameType(a, b) {
     return getType(a) === getType(b);
@@ -17985,7 +17821,7 @@ const normalizeVNodeSlots = (instance, children) => {
     instance.slots.default = () => normalized;
 };
 const initSlots = (instance, children) => {
-    if (instance.vnode.shapeFlag & 32 /* ShapeFlags.SLOTS_CHILDREN */) {
+    if (instance.vnode.shapeFlag & 32 /* SLOTS_CHILDREN */) {
         const type = children._;
         if (type) {
             // users can get the shallow readonly version of the slots object through `this.$slots`,
@@ -18010,7 +17846,7 @@ const updateSlots = (instance, children, optimized) => {
     const { vnode, slots } = instance;
     let needDeletionCheck = true;
     let deletionComparisonTarget = _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ;
-    if (vnode.shapeFlag & 32 /* ShapeFlags.SLOTS_CHILDREN */) {
+    if (vnode.shapeFlag & 32 /* SLOTS_CHILDREN */) {
         const type = children._;
         if (type) {
             // compiled slots.
@@ -18019,7 +17855,7 @@ const updateSlots = (instance, children, optimized) => {
                 // force update slots and mark instance for hmr as well
                 (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.extend)(slots, children);
             }
-            else if (optimized && type === 1 /* SlotFlags.STABLE */) {
+            else if (optimized && type === 1 /* STABLE */) {
                 // compiled AND stable.
                 // no need to update, and skip stale slots removal.
                 needDeletionCheck = false;
@@ -18032,7 +17868,7 @@ const updateSlots = (instance, children, optimized) => {
                 // when rendering the optimized slots by manually written render function,
                 // we need to delete the `slots._` flag if necessary to make subsequent updates reliable,
                 // i.e. let the `renderSlot` create the bailed Fragment
-                if (!optimized && type === 1 /* SlotFlags.STABLE */) {
+                if (!optimized && type === 1 /* STABLE */) {
                     delete slots._;
                 }
             }
@@ -18079,7 +17915,7 @@ function createAppContext() {
         emitsCache: new WeakMap()
     };
 }
-let uid$1 = 0;
+let uid = 0;
 function createAppAPI(render, hydrate) {
     return function createApp(rootComponent, rootProps = null) {
         if (!(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(rootComponent)) {
@@ -18093,7 +17929,7 @@ function createAppAPI(render, hydrate) {
         const installedPlugins = new Set();
         let isMounted = false;
         const app = (context.app = {
-            _uid: uid$1++,
+            _uid: uid++,
             _component: rootComponent,
             _props: rootProps,
             _container: null,
@@ -18244,7 +18080,7 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
         // because the template ref is forwarded to inner component
         return;
     }
-    const refValue = vnode.shapeFlag & 4 /* ShapeFlags.STATEFUL_COMPONENT */
+    const refValue = vnode.shapeFlag & 4 /* STATEFUL_COMPONENT */
         ? getExposeProxy(vnode.component) || vnode.component.proxy
         : vnode.el;
     const value = isUnmount ? null : refValue;
@@ -18270,7 +18106,7 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
         }
     }
     if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(ref)) {
-        callWithErrorHandling(ref, owner, 12 /* ErrorCodes.FUNCTION_REF */, [value, refs]);
+        callWithErrorHandling(ref, owner, 12 /* FUNCTION_REF */, [value, refs]);
     }
     else {
         const _isString = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(ref);
@@ -18278,11 +18114,7 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
         if (_isString || _isRef) {
             const doSet = () => {
                 if (rawRef.f) {
-                    const existing = _isString
-                        ? (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hasOwn)(setupState, ref)
-                            ? setupState[ref]
-                            : refs[ref]
-                        : ref.value;
+                    const existing = _isString ? refs[ref] : ref.value;
                     if (isUnmount) {
                         (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(existing) && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.remove)(existing, refValue);
                     }
@@ -18336,7 +18168,7 @@ function setRef(rawRef, oldRawRef, parentSuspense, vnode, isUnmount = false) {
 
 let hasMismatch = false;
 const isSVGContainer = (container) => /svg/.test(container.namespaceURI) && container.tagName !== 'foreignObject';
-const isComment = (node) => node.nodeType === 8 /* DOMNodeTypes.COMMENT */;
+const isComment = (node) => node.nodeType === 8 /* COMMENT */;
 // Note: hydration is DOM-specific
 // But we have to place it in core due to tight coupling with core - splitting
 // it out creates a ton of unnecessary complexity.
@@ -18367,16 +18199,16 @@ function createHydrationFunctions(rendererInternals) {
         const isFragmentStart = isComment(node) && node.data === '[';
         const onMismatch = () => handleMismatch(node, vnode, parentComponent, parentSuspense, slotScopeIds, isFragmentStart);
         const { type, ref, shapeFlag, patchFlag } = vnode;
-        let domType = node.nodeType;
+        const domType = node.nodeType;
         vnode.el = node;
-        if (patchFlag === -2 /* PatchFlags.BAIL */) {
+        if (patchFlag === -2 /* BAIL */) {
             optimized = false;
             vnode.dynamicChildren = null;
         }
         let nextNode = null;
         switch (type) {
             case Text:
-                if (domType !== 3 /* DOMNodeTypes.TEXT */) {
+                if (domType !== 3 /* TEXT */) {
                     // #5728 empty text node inside a slot can cause hydration failure
                     // because the server rendered HTML won't contain a text node
                     if (vnode.children === '') {
@@ -18400,7 +18232,7 @@ function createHydrationFunctions(rendererInternals) {
                 }
                 break;
             case Comment:
-                if (domType !== 8 /* DOMNodeTypes.COMMENT */ || isFragmentStart) {
+                if (domType !== 8 /* COMMENT */ || isFragmentStart) {
                     nextNode = onMismatch();
                 }
                 else {
@@ -18408,12 +18240,10 @@ function createHydrationFunctions(rendererInternals) {
                 }
                 break;
             case Static:
-                if (isFragmentStart) {
-                    // entire template is static but SSRed as a fragment
-                    node = nextSibling(node);
-                    domType = node.nodeType;
+                if (domType !== 1 /* ELEMENT */ && domType !== 3 /* TEXT */) {
+                    nextNode = onMismatch();
                 }
-                if (domType === 1 /* DOMNodeTypes.ELEMENT */ || domType === 3 /* DOMNodeTypes.TEXT */) {
+                else {
                     // determine anchor, adopt content
                     nextNode = node;
                     // if the static vnode has its content stripped during build,
@@ -18422,7 +18252,7 @@ function createHydrationFunctions(rendererInternals) {
                     for (let i = 0; i < vnode.staticCount; i++) {
                         if (needToAdoptContent)
                             vnode.children +=
-                                nextNode.nodeType === 1 /* DOMNodeTypes.ELEMENT */
+                                nextNode.nodeType === 1 /* ELEMENT */
                                     ? nextNode.outerHTML
                                     : nextNode.data;
                         if (i === vnode.staticCount - 1) {
@@ -18430,10 +18260,7 @@ function createHydrationFunctions(rendererInternals) {
                         }
                         nextNode = nextSibling(nextNode);
                     }
-                    return isFragmentStart ? nextSibling(nextNode) : nextNode;
-                }
-                else {
-                    onMismatch();
+                    return nextNode;
                 }
                 break;
             case Fragment:
@@ -18445,8 +18272,8 @@ function createHydrationFunctions(rendererInternals) {
                 }
                 break;
             default:
-                if (shapeFlag & 1 /* ShapeFlags.ELEMENT */) {
-                    if (domType !== 1 /* DOMNodeTypes.ELEMENT */ ||
+                if (shapeFlag & 1 /* ELEMENT */) {
+                    if (domType !== 1 /* ELEMENT */ ||
                         vnode.type.toLowerCase() !==
                             node.tagName.toLowerCase()) {
                         nextNode = onMismatch();
@@ -18455,7 +18282,7 @@ function createHydrationFunctions(rendererInternals) {
                         nextNode = hydrateElement(node, vnode, parentComponent, parentSuspense, slotScopeIds, optimized);
                     }
                 }
-                else if (shapeFlag & 6 /* ShapeFlags.COMPONENT */) {
+                else if (shapeFlag & 6 /* COMPONENT */) {
                     // when setting up the render effect, if the initial vnode already
                     // has .el set, the component will perform hydration instead of mount
                     // on its sub-tree.
@@ -18494,15 +18321,15 @@ function createHydrationFunctions(rendererInternals) {
                         vnode.component.subTree = subTree;
                     }
                 }
-                else if (shapeFlag & 64 /* ShapeFlags.TELEPORT */) {
-                    if (domType !== 8 /* DOMNodeTypes.COMMENT */) {
+                else if (shapeFlag & 64 /* TELEPORT */) {
+                    if (domType !== 8 /* COMMENT */) {
                         nextNode = onMismatch();
                     }
                     else {
                         nextNode = vnode.type.hydrate(node, vnode, parentComponent, parentSuspense, slotScopeIds, optimized, rendererInternals, hydrateChildren);
                     }
                 }
-                else if (shapeFlag & 128 /* ShapeFlags.SUSPENSE */) {
+                else if (shapeFlag & 128 /* SUSPENSE */) {
                     nextNode = vnode.type.hydrate(node, vnode, parentComponent, parentSuspense, isSVGContainer(parentNode(node)), slotScopeIds, optimized, rendererInternals, hydrateNode);
                 }
                 else if ((true)) {
@@ -18522,7 +18349,7 @@ function createHydrationFunctions(rendererInternals) {
         const forcePatchValue = (type === 'input' && dirs) || type === 'option';
         // skip props & children if this is hoisted static nodes
         // #5405 in dev, always hydrate children for HMR
-        if (true /* PatchFlags.HOISTED */) {
+        if (true /* HOISTED */) {
             if (dirs) {
                 invokeDirectiveHook(vnode, null, parentComponent, 'created');
             }
@@ -18530,7 +18357,7 @@ function createHydrationFunctions(rendererInternals) {
             if (props) {
                 if (forcePatchValue ||
                     !optimized ||
-                    patchFlag & (16 /* PatchFlags.FULL_PROPS */ | 32 /* PatchFlags.HYDRATE_EVENTS */)) {
+                    patchFlag & (16 /* FULL_PROPS */ | 32 /* HYDRATE_EVENTS */)) {
                     for (const key in props) {
                         if ((forcePatchValue && key.endsWith('value')) ||
                             ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isOn)(key) && !(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isReservedProp)(key))) {
@@ -18559,7 +18386,7 @@ function createHydrationFunctions(rendererInternals) {
                 }, parentSuspense);
             }
             // children
-            if (shapeFlag & 16 /* ShapeFlags.ARRAY_CHILDREN */ &&
+            if (shapeFlag & 16 /* ARRAY_CHILDREN */ &&
                 // skip if element has innerHTML / textContent
                 !(props && (props.innerHTML || props.textContent))) {
                 let next = hydrateChildren(el.firstChild, vnode, el, parentComponent, parentSuspense, slotScopeIds, optimized);
@@ -18577,7 +18404,7 @@ function createHydrationFunctions(rendererInternals) {
                     remove(cur);
                 }
             }
-            else if (shapeFlag & 8 /* ShapeFlags.TEXT_CHILDREN */) {
+            else if (shapeFlag & 8 /* TEXT_CHILDREN */) {
                 if (el.textContent !== vnode.children) {
                     hasMismatch = true;
                     ( true) &&
@@ -18642,7 +18469,7 @@ function createHydrationFunctions(rendererInternals) {
     const handleMismatch = (node, vnode, parentComponent, parentSuspense, slotScopeIds, isFragment) => {
         hasMismatch = true;
         ( true) &&
-            warn(`Hydration node mismatch:\n- Client vnode:`, vnode.type, `\n- Server rendered DOM:`, node, node.nodeType === 3 /* DOMNodeTypes.TEXT */
+            warn(`Hydration node mismatch:\n- Client vnode:`, vnode.type, `\n- Server rendered DOM:`, node, node.nodeType === 3 /* TEXT */
                 ? `(text)`
                 : isComment(node) && node.data === '['
                     ? `(start of fragment)`
@@ -18785,7 +18612,7 @@ function baseCreateRenderer(options, createHydrationFns) {
     if (true) {
         setDevtoolsHook(target.__VUE_DEVTOOLS_GLOBAL_HOOK__, target);
     }
-    const { insert: hostInsert, remove: hostRemove, patchProp: hostPatchProp, createElement: hostCreateElement, createText: hostCreateText, createComment: hostCreateComment, setText: hostSetText, setElementText: hostSetElementText, parentNode: hostParentNode, nextSibling: hostNextSibling, setScopeId: hostSetScopeId = _vue_shared__WEBPACK_IMPORTED_MODULE_1__.NOOP, insertStaticContent: hostInsertStaticContent } = options;
+    const { insert: hostInsert, remove: hostRemove, patchProp: hostPatchProp, createElement: hostCreateElement, createText: hostCreateText, createComment: hostCreateComment, setText: hostSetText, setElementText: hostSetElementText, parentNode: hostParentNode, nextSibling: hostNextSibling, setScopeId: hostSetScopeId = _vue_shared__WEBPACK_IMPORTED_MODULE_1__.NOOP, cloneNode: hostCloneNode, insertStaticContent: hostInsertStaticContent } = options;
     // Note: functions inside this closure should use `const xxx = () => {}`
     // style in order to prevent being inlined by minifiers.
     const patch = (n1, n2, container, anchor = null, parentComponent = null, parentSuspense = null, isSVG = false, slotScopeIds = null, optimized = ( true) && isHmrUpdating ? false : !!n2.dynamicChildren) => {
@@ -18798,7 +18625,7 @@ function baseCreateRenderer(options, createHydrationFns) {
             unmount(n1, parentComponent, parentSuspense, true);
             n1 = null;
         }
-        if (n2.patchFlag === -2 /* PatchFlags.BAIL */) {
+        if (n2.patchFlag === -2 /* BAIL */) {
             optimized = false;
             n2.dynamicChildren = null;
         }
@@ -18822,16 +18649,16 @@ function baseCreateRenderer(options, createHydrationFns) {
                 processFragment(n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
                 break;
             default:
-                if (shapeFlag & 1 /* ShapeFlags.ELEMENT */) {
+                if (shapeFlag & 1 /* ELEMENT */) {
                     processElement(n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
                 }
-                else if (shapeFlag & 6 /* ShapeFlags.COMPONENT */) {
+                else if (shapeFlag & 6 /* COMPONENT */) {
                     processComponent(n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
                 }
-                else if (shapeFlag & 64 /* ShapeFlags.TELEPORT */) {
+                else if (shapeFlag & 64 /* TELEPORT */) {
                     type.process(n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized, internals);
                 }
-                else if (shapeFlag & 128 /* ShapeFlags.SUSPENSE */) {
+                else if (shapeFlag & 128 /* SUSPENSE */) {
                     type.process(n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized, internals);
                 }
                 else if ((true)) {
@@ -18912,43 +18739,46 @@ function baseCreateRenderer(options, createHydrationFns) {
     const mountElement = (vnode, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized) => {
         let el;
         let vnodeHook;
-        const { type, props, shapeFlag, transition, dirs } = vnode;
-        el = vnode.el = hostCreateElement(vnode.type, isSVG, props && props.is, props);
-        // mount children first, since some props may rely on child content
-        // being already rendered, e.g. `<select value>`
-        if (shapeFlag & 8 /* ShapeFlags.TEXT_CHILDREN */) {
-            hostSetElementText(el, vnode.children);
-        }
-        else if (shapeFlag & 16 /* ShapeFlags.ARRAY_CHILDREN */) {
-            mountChildren(vnode.children, el, null, parentComponent, parentSuspense, isSVG && type !== 'foreignObject', slotScopeIds, optimized);
-        }
-        if (dirs) {
-            invokeDirectiveHook(vnode, null, parentComponent, 'created');
-        }
-        // scopeId
-        setScopeId(el, vnode, vnode.scopeId, slotScopeIds, parentComponent);
-        // props
-        if (props) {
-            for (const key in props) {
-                if (key !== 'value' && !(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isReservedProp)(key)) {
-                    hostPatchProp(el, key, null, props[key], isSVG, vnode.children, parentComponent, parentSuspense, unmountChildren);
+        const { type, props, shapeFlag, transition, patchFlag, dirs } = vnode;
+        if (false /* HOISTED */) {}
+        else {
+            el = vnode.el = hostCreateElement(vnode.type, isSVG, props && props.is, props);
+            // mount children first, since some props may rely on child content
+            // being already rendered, e.g. `<select value>`
+            if (shapeFlag & 8 /* TEXT_CHILDREN */) {
+                hostSetElementText(el, vnode.children);
+            }
+            else if (shapeFlag & 16 /* ARRAY_CHILDREN */) {
+                mountChildren(vnode.children, el, null, parentComponent, parentSuspense, isSVG && type !== 'foreignObject', slotScopeIds, optimized);
+            }
+            if (dirs) {
+                invokeDirectiveHook(vnode, null, parentComponent, 'created');
+            }
+            // props
+            if (props) {
+                for (const key in props) {
+                    if (key !== 'value' && !(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isReservedProp)(key)) {
+                        hostPatchProp(el, key, null, props[key], isSVG, vnode.children, parentComponent, parentSuspense, unmountChildren);
+                    }
+                }
+                /**
+                 * Special case for setting value on DOM elements:
+                 * - it can be order-sensitive (e.g. should be set *after* min/max, #2325, #4024)
+                 * - it needs to be forced (#1471)
+                 * #2353 proposes adding another renderer option to configure this, but
+                 * the properties affects are so finite it is worth special casing it
+                 * here to reduce the complexity. (Special casing it also should not
+                 * affect non-DOM renderers)
+                 */
+                if ('value' in props) {
+                    hostPatchProp(el, 'value', null, props.value);
+                }
+                if ((vnodeHook = props.onVnodeBeforeMount)) {
+                    invokeVNodeHook(vnodeHook, parentComponent, vnode);
                 }
             }
-            /**
-             * Special case for setting value on DOM elements:
-             * - it can be order-sensitive (e.g. should be set *after* min/max, #2325, #4024)
-             * - it needs to be forced (#1471)
-             * #2353 proposes adding another renderer option to configure this, but
-             * the properties affects are so finite it is worth special casing it
-             * here to reduce the complexity. (Special casing it also should not
-             * affect non-DOM renderers)
-             */
-            if ('value' in props) {
-                hostPatchProp(el, 'value', null, props.value);
-            }
-            if ((vnodeHook = props.onVnodeBeforeMount)) {
-                invokeVNodeHook(vnodeHook, parentComponent, vnode);
-            }
+            // scopeId
+            setScopeId(el, vnode, vnode.scopeId, slotScopeIds, parentComponent);
         }
         if (true) {
             Object.defineProperty(el, '__vnode', {
@@ -18995,7 +18825,7 @@ function baseCreateRenderer(options, createHydrationFns) {
             let subTree = parentComponent.subTree;
             if (( true) &&
                 subTree.patchFlag > 0 &&
-                subTree.patchFlag & 2048 /* PatchFlags.DEV_ROOT_FRAGMENT */) {
+                subTree.patchFlag & 2048 /* DEV_ROOT_FRAGMENT */) {
                 subTree =
                     filterSingleRoot(subTree.children) || subTree;
             }
@@ -19018,7 +18848,7 @@ function baseCreateRenderer(options, createHydrationFns) {
         let { patchFlag, dynamicChildren, dirs } = n2;
         // #1426 take the old vnode's patch flag into account since user may clone a
         // compiler-generated vnode, which de-opts to FULL_PROPS
-        patchFlag |= n1.patchFlag & 16 /* PatchFlags.FULL_PROPS */;
+        patchFlag |= n1.patchFlag & 16 /* FULL_PROPS */;
         const oldProps = n1.props || _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ;
         const newProps = n2.props || _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ;
         let vnodeHook;
@@ -19053,21 +18883,21 @@ function baseCreateRenderer(options, createHydrationFns) {
             // generated by the compiler and can take the fast path.
             // in this path old node and new node are guaranteed to have the same shape
             // (i.e. at the exact same position in the source template)
-            if (patchFlag & 16 /* PatchFlags.FULL_PROPS */) {
+            if (patchFlag & 16 /* FULL_PROPS */) {
                 // element props contain dynamic keys, full diff needed
                 patchProps(el, n2, oldProps, newProps, parentComponent, parentSuspense, isSVG);
             }
             else {
                 // class
                 // this flag is matched when the element has dynamic class bindings.
-                if (patchFlag & 2 /* PatchFlags.CLASS */) {
+                if (patchFlag & 2 /* CLASS */) {
                     if (oldProps.class !== newProps.class) {
                         hostPatchProp(el, 'class', null, newProps.class, isSVG);
                     }
                 }
                 // style
                 // this flag is matched when the element has dynamic style bindings
-                if (patchFlag & 4 /* PatchFlags.STYLE */) {
+                if (patchFlag & 4 /* STYLE */) {
                     hostPatchProp(el, 'style', oldProps.style, newProps.style, isSVG);
                 }
                 // props
@@ -19076,7 +18906,7 @@ function baseCreateRenderer(options, createHydrationFns) {
                 // faster iteration.
                 // Note dynamic keys like :[foo]="bar" will cause this optimization to
                 // bail out and go through a full diff because we need to unset the old key
-                if (patchFlag & 8 /* PatchFlags.PROPS */) {
+                if (patchFlag & 8 /* PROPS */) {
                     // if the flag is present then dynamicProps must be non-null
                     const propsToUpdate = n2.dynamicProps;
                     for (let i = 0; i < propsToUpdate.length; i++) {
@@ -19092,7 +18922,7 @@ function baseCreateRenderer(options, createHydrationFns) {
             }
             // text
             // This flag is matched when the element has only dynamic text children.
-            if (patchFlag & 1 /* PatchFlags.TEXT */) {
+            if (patchFlag & 1 /* TEXT */) {
                 if (n1.children !== n2.children) {
                     hostSetElementText(el, n2.children);
                 }
@@ -19126,7 +18956,7 @@ function baseCreateRenderer(options, createHydrationFns) {
                     // which also requires the correct parent container
                     !isSameVNodeType(oldVNode, newVNode) ||
                     // - In the case of a component, it could contain anything.
-                    oldVNode.shapeFlag & (6 /* ShapeFlags.COMPONENT */ | 64 /* ShapeFlags.TELEPORT */))
+                    oldVNode.shapeFlag & (6 /* COMPONENT */ | 64 /* TELEPORT */))
                 ? hostParentNode(oldVNode.el)
                 : // In other cases, the parent container is not actually used so we
                     // just pass the block element here to avoid a DOM parentNode call.
@@ -19136,13 +18966,6 @@ function baseCreateRenderer(options, createHydrationFns) {
     };
     const patchProps = (el, vnode, oldProps, newProps, parentComponent, parentSuspense, isSVG) => {
         if (oldProps !== newProps) {
-            if (oldProps !== _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ) {
-                for (const key in oldProps) {
-                    if (!(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isReservedProp)(key) && !(key in newProps)) {
-                        hostPatchProp(el, key, oldProps[key], null, isSVG, vnode.children, parentComponent, parentSuspense, unmountChildren);
-                    }
-                }
-            }
             for (const key in newProps) {
                 // empty string is not valid prop
                 if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isReservedProp)(key))
@@ -19152,6 +18975,13 @@ function baseCreateRenderer(options, createHydrationFns) {
                 // defer patching value
                 if (next !== prev && key !== 'value') {
                     hostPatchProp(el, key, prev, next, isSVG, vnode.children, parentComponent, parentSuspense, unmountChildren);
+                }
+            }
+            if (oldProps !== _vue_shared__WEBPACK_IMPORTED_MODULE_1__.EMPTY_OBJ) {
+                for (const key in oldProps) {
+                    if (!(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isReservedProp)(key) && !(key in newProps)) {
+                        hostPatchProp(el, key, oldProps[key], null, isSVG, vnode.children, parentComponent, parentSuspense, unmountChildren);
+                    }
                 }
             }
             if ('value' in newProps) {
@@ -19165,7 +18995,7 @@ function baseCreateRenderer(options, createHydrationFns) {
         let { patchFlag, dynamicChildren, slotScopeIds: fragmentSlotScopeIds } = n2;
         if (( true) &&
             // #5523 dev root fragment may inherit directives
-            (isHmrUpdating || patchFlag & 2048 /* PatchFlags.DEV_ROOT_FRAGMENT */)) {
+            (isHmrUpdating || patchFlag & 2048 /* DEV_ROOT_FRAGMENT */)) {
             // HMR updated / Dev root fragment (w/ comments), force full diff
             patchFlag = 0;
             optimized = false;
@@ -19187,7 +19017,7 @@ function baseCreateRenderer(options, createHydrationFns) {
         }
         else {
             if (patchFlag > 0 &&
-                patchFlag & 64 /* PatchFlags.STABLE_FRAGMENT */ &&
+                patchFlag & 64 /* STABLE_FRAGMENT */ &&
                 dynamicChildren &&
                 // #2715 the previous fragment could've been a BAILed one as a result
                 // of renderSlot() with no valid children
@@ -19220,7 +19050,7 @@ function baseCreateRenderer(options, createHydrationFns) {
     const processComponent = (n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized) => {
         n2.slotScopeIds = slotScopeIds;
         if (n1 == null) {
-            if (n2.shapeFlag & 512 /* ShapeFlags.COMPONENT_KEPT_ALIVE */) {
+            if (n2.shapeFlag & 512 /* COMPONENT_KEPT_ALIVE */) {
                 parentComponent.ctx.activate(n2, container, anchor, isSVG, optimized);
             }
             else {
@@ -19382,10 +19212,10 @@ function baseCreateRenderer(options, createHydrationFns) {
                 // activated hook for keep-alive roots.
                 // #1742 activated hook must be accessed after first render
                 // since the hook may be injected by a child keep-alive
-                if (initialVNode.shapeFlag & 256 /* ShapeFlags.COMPONENT_SHOULD_KEEP_ALIVE */ ||
+                if (initialVNode.shapeFlag & 256 /* COMPONENT_SHOULD_KEEP_ALIVE */ ||
                     (parent &&
                         isAsyncWrapper(parent.vnode) &&
-                        parent.vnode.shapeFlag & 256 /* ShapeFlags.COMPONENT_SHOULD_KEEP_ALIVE */)) {
+                        parent.vnode.shapeFlag & 256 /* COMPONENT_SHOULD_KEEP_ALIVE */)) {
                     instance.a && queuePostRenderEffect(instance.a, parentSuspense);
                 }
                 instance.isMounted = true;
@@ -19496,7 +19326,7 @@ function baseCreateRenderer(options, createHydrationFns) {
         (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.pauseTracking)();
         // props update may have triggered pre-flush watchers.
         // flush them before the render update.
-        flushPreFlushCbs();
+        flushPreFlushCbs(undefined, instance.update);
         (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.resetTracking)();
     };
     const patchChildren = (n1, n2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized = false) => {
@@ -19506,22 +19336,22 @@ function baseCreateRenderer(options, createHydrationFns) {
         const { patchFlag, shapeFlag } = n2;
         // fast path
         if (patchFlag > 0) {
-            if (patchFlag & 128 /* PatchFlags.KEYED_FRAGMENT */) {
+            if (patchFlag & 128 /* KEYED_FRAGMENT */) {
                 // this could be either fully-keyed or mixed (some keyed some not)
                 // presence of patchFlag means children are guaranteed to be arrays
                 patchKeyedChildren(c1, c2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
                 return;
             }
-            else if (patchFlag & 256 /* PatchFlags.UNKEYED_FRAGMENT */) {
+            else if (patchFlag & 256 /* UNKEYED_FRAGMENT */) {
                 // unkeyed
                 patchUnkeyedChildren(c1, c2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
                 return;
             }
         }
         // children has 3 possibilities: text, array or no children.
-        if (shapeFlag & 8 /* ShapeFlags.TEXT_CHILDREN */) {
+        if (shapeFlag & 8 /* TEXT_CHILDREN */) {
             // text children fast path
-            if (prevShapeFlag & 16 /* ShapeFlags.ARRAY_CHILDREN */) {
+            if (prevShapeFlag & 16 /* ARRAY_CHILDREN */) {
                 unmountChildren(c1, parentComponent, parentSuspense);
             }
             if (c2 !== c1) {
@@ -19529,9 +19359,9 @@ function baseCreateRenderer(options, createHydrationFns) {
             }
         }
         else {
-            if (prevShapeFlag & 16 /* ShapeFlags.ARRAY_CHILDREN */) {
+            if (prevShapeFlag & 16 /* ARRAY_CHILDREN */) {
                 // prev children was array
-                if (shapeFlag & 16 /* ShapeFlags.ARRAY_CHILDREN */) {
+                if (shapeFlag & 16 /* ARRAY_CHILDREN */) {
                     // two arrays, cannot assume anything, do full diff
                     patchKeyedChildren(c1, c2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
                 }
@@ -19543,11 +19373,11 @@ function baseCreateRenderer(options, createHydrationFns) {
             else {
                 // prev children was text OR null
                 // new children is array OR null
-                if (prevShapeFlag & 8 /* ShapeFlags.TEXT_CHILDREN */) {
+                if (prevShapeFlag & 8 /* TEXT_CHILDREN */) {
                     hostSetElementText(container, '');
                 }
                 // mount new if array
-                if (shapeFlag & 16 /* ShapeFlags.ARRAY_CHILDREN */) {
+                if (shapeFlag & 16 /* ARRAY_CHILDREN */) {
                     mountChildren(c2, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
                 }
             }
@@ -19738,7 +19568,7 @@ function baseCreateRenderer(options, createHydrationFns) {
                     // There is no stable subsequence (e.g. a reverse)
                     // OR current node is not among the stable sequence
                     if (j < 0 || i !== increasingNewIndexSequence[j]) {
-                        move(nextChild, container, anchor, 2 /* MoveType.REORDER */);
+                        move(nextChild, container, anchor, 2 /* REORDER */);
                     }
                     else {
                         j--;
@@ -19749,15 +19579,15 @@ function baseCreateRenderer(options, createHydrationFns) {
     };
     const move = (vnode, container, anchor, moveType, parentSuspense = null) => {
         const { el, type, transition, children, shapeFlag } = vnode;
-        if (shapeFlag & 6 /* ShapeFlags.COMPONENT */) {
+        if (shapeFlag & 6 /* COMPONENT */) {
             move(vnode.component.subTree, container, anchor, moveType);
             return;
         }
-        if (shapeFlag & 128 /* ShapeFlags.SUSPENSE */) {
+        if (shapeFlag & 128 /* SUSPENSE */) {
             vnode.suspense.move(container, anchor, moveType);
             return;
         }
-        if (shapeFlag & 64 /* ShapeFlags.TELEPORT */) {
+        if (shapeFlag & 64 /* TELEPORT */) {
             type.move(vnode, container, anchor, internals);
             return;
         }
@@ -19774,11 +19604,11 @@ function baseCreateRenderer(options, createHydrationFns) {
             return;
         }
         // single nodes
-        const needTransition = moveType !== 2 /* MoveType.REORDER */ &&
-            shapeFlag & 1 /* ShapeFlags.ELEMENT */ &&
+        const needTransition = moveType !== 2 /* REORDER */ &&
+            shapeFlag & 1 /* ELEMENT */ &&
             transition;
         if (needTransition) {
-            if (moveType === 0 /* MoveType.ENTER */) {
+            if (moveType === 0 /* ENTER */) {
                 transition.beforeEnter(el);
                 hostInsert(el, container, anchor);
                 queuePostRenderEffect(() => transition.enter(el), parentSuspense);
@@ -19810,42 +19640,42 @@ function baseCreateRenderer(options, createHydrationFns) {
         if (ref != null) {
             setRef(ref, null, parentSuspense, vnode, true);
         }
-        if (shapeFlag & 256 /* ShapeFlags.COMPONENT_SHOULD_KEEP_ALIVE */) {
+        if (shapeFlag & 256 /* COMPONENT_SHOULD_KEEP_ALIVE */) {
             parentComponent.ctx.deactivate(vnode);
             return;
         }
-        const shouldInvokeDirs = shapeFlag & 1 /* ShapeFlags.ELEMENT */ && dirs;
+        const shouldInvokeDirs = shapeFlag & 1 /* ELEMENT */ && dirs;
         const shouldInvokeVnodeHook = !isAsyncWrapper(vnode);
         let vnodeHook;
         if (shouldInvokeVnodeHook &&
             (vnodeHook = props && props.onVnodeBeforeUnmount)) {
             invokeVNodeHook(vnodeHook, parentComponent, vnode);
         }
-        if (shapeFlag & 6 /* ShapeFlags.COMPONENT */) {
+        if (shapeFlag & 6 /* COMPONENT */) {
             unmountComponent(vnode.component, parentSuspense, doRemove);
         }
         else {
-            if (shapeFlag & 128 /* ShapeFlags.SUSPENSE */) {
+            if (shapeFlag & 128 /* SUSPENSE */) {
                 vnode.suspense.unmount(parentSuspense, doRemove);
                 return;
             }
             if (shouldInvokeDirs) {
                 invokeDirectiveHook(vnode, null, parentComponent, 'beforeUnmount');
             }
-            if (shapeFlag & 64 /* ShapeFlags.TELEPORT */) {
+            if (shapeFlag & 64 /* TELEPORT */) {
                 vnode.type.remove(vnode, parentComponent, parentSuspense, optimized, internals, doRemove);
             }
             else if (dynamicChildren &&
                 // #1153: fast path should not be taken for non-stable (v-for) fragments
                 (type !== Fragment ||
-                    (patchFlag > 0 && patchFlag & 64 /* PatchFlags.STABLE_FRAGMENT */))) {
+                    (patchFlag > 0 && patchFlag & 64 /* STABLE_FRAGMENT */))) {
                 // fast path for block nodes: only need to unmount dynamic children.
                 unmountChildren(dynamicChildren, parentComponent, parentSuspense, false, true);
             }
             else if ((type === Fragment &&
                 patchFlag &
-                    (128 /* PatchFlags.KEYED_FRAGMENT */ | 256 /* PatchFlags.UNKEYED_FRAGMENT */)) ||
-                (!optimized && shapeFlag & 16 /* ShapeFlags.ARRAY_CHILDREN */)) {
+                    (128 /* KEYED_FRAGMENT */ | 256 /* UNKEYED_FRAGMENT */)) ||
+                (!optimized && shapeFlag & 16 /* ARRAY_CHILDREN */)) {
                 unmountChildren(children, parentComponent, parentSuspense);
             }
             if (doRemove) {
@@ -19867,7 +19697,7 @@ function baseCreateRenderer(options, createHydrationFns) {
         if (type === Fragment) {
             if (( true) &&
                 vnode.patchFlag > 0 &&
-                vnode.patchFlag & 2048 /* PatchFlags.DEV_ROOT_FRAGMENT */ &&
+                vnode.patchFlag & 2048 /* DEV_ROOT_FRAGMENT */ &&
                 transition &&
                 !transition.persisted) {
                 vnode.children.forEach(child => {
@@ -19894,7 +19724,7 @@ function baseCreateRenderer(options, createHydrationFns) {
                 transition.afterLeave();
             }
         };
-        if (vnode.shapeFlag & 1 /* ShapeFlags.ELEMENT */ &&
+        if (vnode.shapeFlag & 1 /* ELEMENT */ &&
             transition &&
             !transition.persisted) {
             const { leave, delayLeave } = transition;
@@ -19970,10 +19800,10 @@ function baseCreateRenderer(options, createHydrationFns) {
         }
     };
     const getNextHostNode = vnode => {
-        if (vnode.shapeFlag & 6 /* ShapeFlags.COMPONENT */) {
+        if (vnode.shapeFlag & 6 /* COMPONENT */) {
             return getNextHostNode(vnode.component.subTree);
         }
-        if (vnode.shapeFlag & 128 /* ShapeFlags.SUSPENSE */) {
+        if (vnode.shapeFlag & 128 /* SUSPENSE */) {
             return vnode.suspense.next();
         }
         return hostNextSibling((vnode.anchor || vnode.el));
@@ -19987,7 +19817,6 @@ function baseCreateRenderer(options, createHydrationFns) {
         else {
             patch(container._vnode || null, vnode, container, null, null, null, isSVG);
         }
-        flushPreFlushCbs();
         flushPostFlushCbs();
         container._vnode = vnode;
     };
@@ -20037,17 +19866,13 @@ function traverseStaticChildren(n1, n2, shallow = false) {
             // guaranteed to be vnodes
             const c1 = ch1[i];
             let c2 = ch2[i];
-            if (c2.shapeFlag & 1 /* ShapeFlags.ELEMENT */ && !c2.dynamicChildren) {
-                if (c2.patchFlag <= 0 || c2.patchFlag === 32 /* PatchFlags.HYDRATE_EVENTS */) {
+            if (c2.shapeFlag & 1 /* ELEMENT */ && !c2.dynamicChildren) {
+                if (c2.patchFlag <= 0 || c2.patchFlag === 32 /* HYDRATE_EVENTS */) {
                     c2 = ch2[i] = cloneIfMounted(ch2[i]);
                     c2.el = c1.el;
                 }
                 if (!shallow)
                     traverseStaticChildren(c1, c2);
-            }
-            // #6852 also inherit for text nodes
-            if (c2.type === Text) {
-                c2.el = c1.el;
             }
             // also inherit for comment nodes, but not placeholders (e.g. v-if which
             // would have received .el during block patch)
@@ -20166,7 +19991,7 @@ const TeleportImpl = {
             const mount = (container, anchor) => {
                 // Teleport *always* has Array children. This is enforced in both the
                 // compiler and vnode children normalization.
-                if (shapeFlag & 16 /* ShapeFlags.ARRAY_CHILDREN */) {
+                if (shapeFlag & 16 /* ARRAY_CHILDREN */) {
                     mountChildren(children, container, anchor, parentComponent, parentSuspense, isSVG, slotScopeIds, optimized);
                 }
             };
@@ -20202,7 +20027,7 @@ const TeleportImpl = {
                 if (!wasDisabled) {
                     // enabled -> disabled
                     // move into main container
-                    moveTeleport(n2, container, mainAnchor, internals, 1 /* TeleportMoveTypes.TOGGLE */);
+                    moveTeleport(n2, container, mainAnchor, internals, 1 /* TOGGLE */);
                 }
             }
             else {
@@ -20210,7 +20035,7 @@ const TeleportImpl = {
                 if ((n2.props && n2.props.to) !== (n1.props && n1.props.to)) {
                     const nextTarget = (n2.target = resolveTarget(n2.props, querySelector));
                     if (nextTarget) {
-                        moveTeleport(n2, nextTarget, null, internals, 0 /* TeleportMoveTypes.TARGET_CHANGE */);
+                        moveTeleport(n2, nextTarget, null, internals, 0 /* TARGET_CHANGE */);
                     }
                     else if ((true)) {
                         warn('Invalid Teleport target on update:', target, `(${typeof target})`);
@@ -20219,11 +20044,10 @@ const TeleportImpl = {
                 else if (wasDisabled) {
                     // disabled -> enabled
                     // move into teleport target
-                    moveTeleport(n2, target, targetAnchor, internals, 1 /* TeleportMoveTypes.TOGGLE */);
+                    moveTeleport(n2, target, targetAnchor, internals, 1 /* TOGGLE */);
                 }
             }
         }
-        updateCssVars(n2);
     },
     remove(vnode, parentComponent, parentSuspense, optimized, { um: unmount, o: { remove: hostRemove } }, doRemove) {
         const { shapeFlag, children, anchor, targetAnchor, target, props } = vnode;
@@ -20233,7 +20057,7 @@ const TeleportImpl = {
         // an unmounted teleport should always remove its children if not disabled
         if (doRemove || !isTeleportDisabled(props)) {
             hostRemove(anchor);
-            if (shapeFlag & 16 /* ShapeFlags.ARRAY_CHILDREN */) {
+            if (shapeFlag & 16 /* ARRAY_CHILDREN */) {
                 for (let i = 0; i < children.length; i++) {
                     const child = children[i];
                     unmount(child, parentComponent, parentSuspense, true, !!child.dynamicChildren);
@@ -20244,13 +20068,13 @@ const TeleportImpl = {
     move: moveTeleport,
     hydrate: hydrateTeleport
 };
-function moveTeleport(vnode, container, parentAnchor, { o: { insert }, m: move }, moveType = 2 /* TeleportMoveTypes.REORDER */) {
+function moveTeleport(vnode, container, parentAnchor, { o: { insert }, m: move }, moveType = 2 /* REORDER */) {
     // move target anchor if this is a target change.
-    if (moveType === 0 /* TeleportMoveTypes.TARGET_CHANGE */) {
+    if (moveType === 0 /* TARGET_CHANGE */) {
         insert(vnode.targetAnchor, container, parentAnchor);
     }
     const { el, anchor, shapeFlag, children, props } = vnode;
-    const isReorder = moveType === 2 /* TeleportMoveTypes.REORDER */;
+    const isReorder = moveType === 2 /* REORDER */;
     // move main view anchor if this is a re-order.
     if (isReorder) {
         insert(el, container, parentAnchor);
@@ -20260,9 +20084,9 @@ function moveTeleport(vnode, container, parentAnchor, { o: { insert }, m: move }
     // is not a reorder, or the teleport is disabled
     if (!isReorder || isTeleportDisabled(props)) {
         // Teleport has either Array children or no children.
-        if (shapeFlag & 16 /* ShapeFlags.ARRAY_CHILDREN */) {
+        if (shapeFlag & 16 /* ARRAY_CHILDREN */) {
             for (let i = 0; i < children.length; i++) {
-                move(children[i], container, parentAnchor, 2 /* MoveType.REORDER */);
+                move(children[i], container, parentAnchor, 2 /* REORDER */);
             }
         }
     }
@@ -20277,7 +20101,7 @@ function hydrateTeleport(node, vnode, parentComponent, parentSuspense, slotScope
         // if multiple teleports rendered to the same target element, we need to
         // pick up from where the last teleport finished instead of the first node
         const targetNode = target._lpa || target.firstChild;
-        if (vnode.shapeFlag & 16 /* ShapeFlags.ARRAY_CHILDREN */) {
+        if (vnode.shapeFlag & 16 /* ARRAY_CHILDREN */) {
             if (isTeleportDisabled(vnode.props)) {
                 vnode.anchor = hydrateChildren(nextSibling(node), vnode, parentNode(node), parentComponent, parentSuspense, slotScopeIds, optimized);
                 vnode.targetAnchor = targetNode;
@@ -20302,26 +20126,11 @@ function hydrateTeleport(node, vnode, parentComponent, parentSuspense, slotScope
                 hydrateChildren(targetNode, vnode, target, parentComponent, parentSuspense, slotScopeIds, optimized);
             }
         }
-        updateCssVars(vnode);
     }
     return vnode.anchor && nextSibling(vnode.anchor);
 }
 // Force-casted public typing for h and TSX props inference
 const Teleport = TeleportImpl;
-function updateCssVars(vnode) {
-    // presence of .ut method indicates owner component uses css vars.
-    // code path here can assume browser environment.
-    const ctx = vnode.ctx;
-    if (ctx && ctx.ut) {
-        let node = vnode.children[0].el;
-        while (node !== vnode.targetAnchor) {
-            if (node.nodeType === 1)
-                node.setAttribute('data-v-owner', ctx.uid);
-            node = node.nextSibling;
-        }
-        ctx.ut();
-    }
-}
 
 const Fragment = Symbol(( true) ? 'Fragment' : 0);
 const Text = Symbol(( true) ? 'Text' : 0);
@@ -20415,12 +20224,8 @@ function isVNode(value) {
 }
 function isSameVNodeType(n1, n2) {
     if (( true) &&
-        n2.shapeFlag & 6 /* ShapeFlags.COMPONENT */ &&
+        n2.shapeFlag & 6 /* COMPONENT */ &&
         hmrDirtyComponents.has(n2.type)) {
-        // #7042, ensure the vnode being unmounted during HMR
-        // bitwise operations to remove keep alive flags
-        n1.shapeFlag &= ~256 /* ShapeFlags.COMPONENT_SHOULD_KEEP_ALIVE */;
-        n2.shapeFlag &= ~512 /* ShapeFlags.COMPONENT_KEPT_ALIVE */;
         // HMR only: if the component has been hot-updated, force a reload.
         return false;
     }
@@ -20450,7 +20255,7 @@ const normalizeRef = ({ ref, ref_key, ref_for }) => {
             : ref
         : null);
 };
-function createBaseVNode(type, props = null, children = null, patchFlag = 0, dynamicProps = null, shapeFlag = type === Fragment ? 0 : 1 /* ShapeFlags.ELEMENT */, isBlockNode = false, needFullChildrenNormalization = false) {
+function createBaseVNode(type, props = null, children = null, patchFlag = 0, dynamicProps = null, shapeFlag = type === Fragment ? 0 : 1 /* ELEMENT */, isBlockNode = false, needFullChildrenNormalization = false) {
     const vnode = {
         __v_isVNode: true,
         __v_skip: true,
@@ -20476,13 +20281,12 @@ function createBaseVNode(type, props = null, children = null, patchFlag = 0, dyn
         patchFlag,
         dynamicProps,
         dynamicChildren: null,
-        appContext: null,
-        ctx: currentRenderingInstance
+        appContext: null
     };
     if (needFullChildrenNormalization) {
         normalizeChildren(vnode, children);
         // normalize suspense children
-        if (shapeFlag & 128 /* ShapeFlags.SUSPENSE */) {
+        if (shapeFlag & 128 /* SUSPENSE */) {
             type.normalize(vnode);
         }
     }
@@ -20490,8 +20294,8 @@ function createBaseVNode(type, props = null, children = null, patchFlag = 0, dyn
         // compiled element vnode - if children is passed, only possible types are
         // string or Array.
         vnode.shapeFlag |= (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(children)
-            ? 8 /* ShapeFlags.TEXT_CHILDREN */
-            : 16 /* ShapeFlags.ARRAY_CHILDREN */;
+            ? 8 /* TEXT_CHILDREN */
+            : 16 /* ARRAY_CHILDREN */;
     }
     // validate key
     if (( true) && vnode.key !== vnode.key) {
@@ -20507,10 +20311,10 @@ function createBaseVNode(type, props = null, children = null, patchFlag = 0, dyn
         // component nodes also should always be patched, because even if the
         // component doesn't need to update, it needs to persist the instance on to
         // the next vnode so that it can be properly unmounted later.
-        (vnode.patchFlag > 0 || shapeFlag & 6 /* ShapeFlags.COMPONENT */) &&
+        (vnode.patchFlag > 0 || shapeFlag & 6 /* COMPONENT */) &&
         // the EVENTS flag is only for hydration and if it is the only flag, the
         // vnode should not be considered dynamic due to handler caching.
-        vnode.patchFlag !== 32 /* PatchFlags.HYDRATE_EVENTS */) {
+        vnode.patchFlag !== 32 /* HYDRATE_EVENTS */) {
         currentBlock.push(vnode);
     }
     return vnode;
@@ -20532,14 +20336,14 @@ function _createVNode(type, props = null, children = null, patchFlag = 0, dynami
             normalizeChildren(cloned, children);
         }
         if (isBlockTreeEnabled > 0 && !isBlockNode && currentBlock) {
-            if (cloned.shapeFlag & 6 /* ShapeFlags.COMPONENT */) {
+            if (cloned.shapeFlag & 6 /* COMPONENT */) {
                 currentBlock[currentBlock.indexOf(type)] = cloned;
             }
             else {
                 currentBlock.push(cloned);
             }
         }
-        cloned.patchFlag |= -2 /* PatchFlags.BAIL */;
+        cloned.patchFlag |= -2 /* BAIL */;
         return cloned;
     }
     // class component normalization.
@@ -20565,17 +20369,17 @@ function _createVNode(type, props = null, children = null, patchFlag = 0, dynami
     }
     // encode the vnode type information into a bitmap
     const shapeFlag = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(type)
-        ? 1 /* ShapeFlags.ELEMENT */
+        ? 1 /* ELEMENT */
         : isSuspense(type)
-            ? 128 /* ShapeFlags.SUSPENSE */
+            ? 128 /* SUSPENSE */
             : isTeleport(type)
-                ? 64 /* ShapeFlags.TELEPORT */
+                ? 64 /* TELEPORT */
                 : (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isObject)(type)
-                    ? 4 /* ShapeFlags.STATEFUL_COMPONENT */
+                    ? 4 /* STATEFUL_COMPONENT */
                     : (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(type)
-                        ? 2 /* ShapeFlags.FUNCTIONAL_COMPONENT */
+                        ? 2 /* FUNCTIONAL_COMPONENT */
                         : 0;
-    if (( true) && shapeFlag & 4 /* ShapeFlags.STATEFUL_COMPONENT */ && (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.isProxy)(type)) {
+    if (( true) && shapeFlag & 4 /* STATEFUL_COMPONENT */ && (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.isProxy)(type)) {
         type = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.toRaw)(type);
         warn(`Vue received a Component which was made a reactive object. This can ` +
             `lead to unnecessary performance overhead, and should be avoided by ` +
@@ -20614,7 +20418,7 @@ function cloneVNode(vnode, extraProps, mergeRef = false) {
             : ref,
         scopeId: vnode.scopeId,
         slotScopeIds: vnode.slotScopeIds,
-        children: ( true) && patchFlag === -1 /* PatchFlags.HOISTED */ && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(children)
+        children: ( true) && patchFlag === -1 /* HOISTED */ && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(children)
             ? children.map(deepCloneVNode)
             : children,
         target: vnode.target,
@@ -20627,8 +20431,8 @@ function cloneVNode(vnode, extraProps, mergeRef = false) {
         // fast paths only.
         patchFlag: extraProps && vnode.type !== Fragment
             ? patchFlag === -1 // hoisted node
-                ? 16 /* PatchFlags.FULL_PROPS */
-                : patchFlag | 16 /* PatchFlags.FULL_PROPS */
+                ? 16 /* FULL_PROPS */
+                : patchFlag | 16 /* FULL_PROPS */
             : patchFlag,
         dynamicProps: vnode.dynamicProps,
         dynamicChildren: vnode.dynamicChildren,
@@ -20644,9 +20448,7 @@ function cloneVNode(vnode, extraProps, mergeRef = false) {
         ssContent: vnode.ssContent && cloneVNode(vnode.ssContent),
         ssFallback: vnode.ssFallback && cloneVNode(vnode.ssFallback),
         el: vnode.el,
-        anchor: vnode.anchor,
-        ctx: vnode.ctx,
-        ce: vnode.ce
+        anchor: vnode.anchor
     };
     return cloned;
 }
@@ -20711,10 +20513,7 @@ function normalizeVNode(child) {
 }
 // optimized normalization for template-compiled render fns
 function cloneIfMounted(child) {
-    return (child.el === null && child.patchFlag !== -1 /* PatchFlags.HOISTED */) ||
-        child.memo
-        ? child
-        : cloneVNode(child);
+    return child.el === null || child.memo ? child : cloneVNode(child);
 }
 function normalizeChildren(vnode, children) {
     let type = 0;
@@ -20723,10 +20522,10 @@ function normalizeChildren(vnode, children) {
         children = null;
     }
     else if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(children)) {
-        type = 16 /* ShapeFlags.ARRAY_CHILDREN */;
+        type = 16 /* ARRAY_CHILDREN */;
     }
     else if (typeof children === 'object') {
-        if (shapeFlag & (1 /* ShapeFlags.ELEMENT */ | 64 /* ShapeFlags.TELEPORT */)) {
+        if (shapeFlag & (1 /* ELEMENT */ | 64 /* TELEPORT */)) {
             // Normalize slot to plain children for plain element and Teleport
             const slot = children.default;
             if (slot) {
@@ -20738,37 +20537,37 @@ function normalizeChildren(vnode, children) {
             return;
         }
         else {
-            type = 32 /* ShapeFlags.SLOTS_CHILDREN */;
+            type = 32 /* SLOTS_CHILDREN */;
             const slotFlag = children._;
             if (!slotFlag && !(InternalObjectKey in children)) {
                 children._ctx = currentRenderingInstance;
             }
-            else if (slotFlag === 3 /* SlotFlags.FORWARDED */ && currentRenderingInstance) {
+            else if (slotFlag === 3 /* FORWARDED */ && currentRenderingInstance) {
                 // a child component receives forwarded slots from the parent.
                 // its slot type is determined by its parent's slot type.
-                if (currentRenderingInstance.slots._ === 1 /* SlotFlags.STABLE */) {
-                    children._ = 1 /* SlotFlags.STABLE */;
+                if (currentRenderingInstance.slots._ === 1 /* STABLE */) {
+                    children._ = 1 /* STABLE */;
                 }
                 else {
-                    children._ = 2 /* SlotFlags.DYNAMIC */;
-                    vnode.patchFlag |= 1024 /* PatchFlags.DYNAMIC_SLOTS */;
+                    children._ = 2 /* DYNAMIC */;
+                    vnode.patchFlag |= 1024 /* DYNAMIC_SLOTS */;
                 }
             }
         }
     }
     else if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isFunction)(children)) {
         children = { default: children, _ctx: currentRenderingInstance };
-        type = 32 /* ShapeFlags.SLOTS_CHILDREN */;
+        type = 32 /* SLOTS_CHILDREN */;
     }
     else {
         children = String(children);
         // force teleport children to array so it can be moved around
-        if (shapeFlag & 64 /* ShapeFlags.TELEPORT */) {
-            type = 16 /* ShapeFlags.ARRAY_CHILDREN */;
+        if (shapeFlag & 64 /* TELEPORT */) {
+            type = 16 /* ARRAY_CHILDREN */;
             children = [createTextVNode(children)];
         }
         else {
-            type = 8 /* ShapeFlags.TEXT_CHILDREN */;
+            type = 8 /* TEXT_CHILDREN */;
         }
     }
     vnode.children = children;
@@ -20806,20 +20605,20 @@ function mergeProps(...args) {
     return ret;
 }
 function invokeVNodeHook(hook, instance, vnode, prevVNode = null) {
-    callWithAsyncErrorHandling(hook, instance, 7 /* ErrorCodes.VNODE_HOOK */, [
+    callWithAsyncErrorHandling(hook, instance, 7 /* VNODE_HOOK */, [
         vnode,
         prevVNode
     ]);
 }
 
 const emptyAppContext = createAppContext();
-let uid = 0;
+let uid$1 = 0;
 function createComponentInstance(vnode, parent, suspense) {
     const type = vnode.type;
     // inherit parent app context - or - if root, adopt from root vnode
     const appContext = (parent ? parent.appContext : vnode.appContext) || emptyAppContext;
     const instance = {
-        uid: uid++,
+        uid: uid$1++,
         vnode,
         type,
         parent,
@@ -20890,7 +20689,7 @@ function createComponentInstance(vnode, parent, suspense) {
     }
     else {}
     instance.root = parent ? parent.root : instance;
-    instance.emit = emit.bind(null, instance);
+    instance.emit = emit$1.bind(null, instance);
     // apply custom element special handling
     if (vnode.ce) {
         vnode.ce(instance);
@@ -20915,7 +20714,7 @@ function validateComponentName(name, config) {
     }
 }
 function isStatefulComponent(instance) {
-    return instance.vnode.shapeFlag & 4 /* ShapeFlags.STATEFUL_COMPONENT */;
+    return instance.vnode.shapeFlag & 4 /* STATEFUL_COMPONENT */;
 }
 let isInSSRComponentSetup = false;
 function setupComponent(instance, isSSR = false) {
@@ -20970,7 +20769,7 @@ function setupStatefulComponent(instance, isSSR) {
             setup.length > 1 ? createSetupContext(instance) : null);
         setCurrentInstance(instance);
         (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.pauseTracking)();
-        const setupResult = callWithErrorHandling(setup, instance, 0 /* ErrorCodes.SETUP_FUNCTION */, [( true) ? (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.shallowReadonly)(instance.props) : 0, setupContext]);
+        const setupResult = callWithErrorHandling(setup, instance, 0 /* SETUP_FUNCTION */, [( true) ? (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.shallowReadonly)(instance.props) : 0, setupContext]);
         (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.resetTracking)();
         unsetCurrentInstance();
         if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isPromise)(setupResult)) {
@@ -20982,7 +20781,7 @@ function setupStatefulComponent(instance, isSSR) {
                     handleSetupResult(instance, resolvedResult, isSSR);
                 })
                     .catch(e => {
-                    handleError(e, instance, 0 /* ErrorCodes.SETUP_FUNCTION */);
+                    handleError(e, instance, 0 /* SETUP_FUNCTION */);
                 });
             }
             else {
@@ -21062,8 +20861,7 @@ function finishComponentSetup(instance, isSSR, skipOptions) {
         // only do on-the-fly compile if not in SSR - SSR on-the-fly compilation
         // is done by server-renderer
         if (!isSSR && compile && !Component.render) {
-            const template = Component.template ||
-                resolveMergedOptions(instance).template;
+            const template = Component.template;
             if (template) {
                 if ((true)) {
                     startMeasure(instance, `compile`);
@@ -21116,7 +20914,7 @@ function createAttrsProxy(instance) {
         ? {
             get(target, key) {
                 markAttrsAccessed();
-                (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.track)(instance, "get" /* TrackOpTypes.GET */, '$attrs');
+                (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.track)(instance, "get" /* GET */, '$attrs');
                 return target[key];
             },
             set() {
@@ -21132,24 +20930,8 @@ function createAttrsProxy(instance) {
 }
 function createSetupContext(instance) {
     const expose = exposed => {
-        if ((true)) {
-            if (instance.exposed) {
-                warn(`expose() should be called only once per setup().`);
-            }
-            if (exposed != null) {
-                let exposedType = typeof exposed;
-                if (exposedType === 'object') {
-                    if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(exposed)) {
-                        exposedType = 'array';
-                    }
-                    else if ((0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_0__.isRef)(exposed)) {
-                        exposedType = 'ref';
-                    }
-                }
-                if (exposedType !== 'object') {
-                    warn(`expose() should be passed a plain object, received ${exposedType}.`);
-                }
-            }
+        if (( true) && instance.exposed) {
+            warn(`expose() should be called only once per setup().`);
         }
         instance.exposed = exposed || {};
     };
@@ -21183,9 +20965,6 @@ function getExposeProxy(instance) {
                     else if (key in publicPropertiesMap) {
                         return publicPropertiesMap[key](instance);
                     }
-                },
-                has(target, key) {
-                    return key in target || key in publicPropertiesMap;
                 }
             })));
     }
@@ -21415,16 +21194,15 @@ const useSSRContext = () => {
     {
         const ctx = inject(ssrContextKey);
         if (!ctx) {
-            ( true) &&
-                warn(`Server rendering context not provided. Make sure to only call ` +
-                    `useSSRContext() conditionally in the server build.`);
+            warn(`Server rendering context not provided. Make sure to only call ` +
+                `useSSRContext() conditionally in the server build.`);
         }
         return ctx;
     }
 };
 
 function isShallow(value) {
-    return !!(value && value["__v_isShallow" /* ReactiveFlags.IS_SHALLOW */]);
+    return !!(value && value["__v_isShallow" /* IS_SHALLOW */]);
 }
 
 function initCustomFormatter() {
@@ -21644,7 +21422,7 @@ function isMemoSame(cached, memo) {
 }
 
 // Core API ------------------------------------------------------------------
-const version = "3.2.47";
+const version = "3.2.37";
 const _ssrUtils = {
     createComponentInstance,
     setupComponent,
@@ -21694,7 +21472,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Transition": () => (/* binding */ Transition),
 /* harmony export */   "TransitionGroup": () => (/* binding */ TransitionGroup),
 /* harmony export */   "VueElement": () => (/* binding */ VueElement),
-/* harmony export */   "assertNumber": () => (/* reexport safe */ _vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.assertNumber),
 /* harmony export */   "callWithAsyncErrorHandling": () => (/* reexport safe */ _vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.callWithAsyncErrorHandling),
 /* harmony export */   "callWithErrorHandling": () => (/* reexport safe */ _vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.callWithErrorHandling),
 /* harmony export */   "camelize": () => (/* reexport safe */ _vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.camelize),
@@ -21827,8 +21604,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "withModifiers": () => (/* binding */ withModifiers),
 /* harmony export */   "withScopeId": () => (/* reexport safe */ _vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.withScopeId)
 /* harmony export */ });
-/* harmony import */ var _vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @vue/runtime-core */ "./node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js");
 /* harmony import */ var _vue_shared__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @vue/shared */ "./node_modules/@vue/shared/dist/shared.esm-bundler.js");
+/* harmony import */ var _vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @vue/runtime-core */ "./node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js");
 /* harmony import */ var _vue_runtime_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @vue/runtime-core */ "./node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js");
 
 
@@ -21869,6 +21646,22 @@ const nodeOps = {
     querySelector: selector => doc.querySelector(selector),
     setScopeId(el, id) {
         el.setAttribute(id, '');
+    },
+    cloneNode(el) {
+        const cloned = el.cloneNode(true);
+        // #3072
+        // - in `patchDOMProp`, we store the actual value in the `el._value` property.
+        // - normally, elements using `:value` bindings will not be hoisted, but if
+        //   the bound value is a constant, e.g. `:value="true"` - they do get
+        //   hoisted.
+        // - in production, hoisted nodes are cloned when subsequent inserts, but
+        //   cloneNode() does not copy the custom property we attached.
+        // - This may need to account for other custom DOM properties we attach to
+        //   elements in addition to `_value` in the future.
+        if (`_value` in el) {
+            cloned._value = el._value;
+        }
+        return cloned;
     },
     // __UNSAFE__
     // Reason: innerHTML.
@@ -21936,15 +21729,15 @@ function patchStyle(el, prev, next) {
     const style = el.style;
     const isCssString = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(next);
     if (next && !isCssString) {
+        for (const key in next) {
+            setStyle(style, key, next[key]);
+        }
         if (prev && !(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isString)(prev)) {
             for (const key in prev) {
                 if (next[key] == null) {
                     setStyle(style, key, '');
                 }
             }
-        }
-        for (const key in next) {
-            setStyle(style, key, next[key]);
         }
     }
     else {
@@ -21965,7 +21758,6 @@ function patchStyle(el, prev, next) {
         }
     }
 }
-const semicolonRE = /[^\\];\s*$/;
 const importantRE = /\s*!important$/;
 function setStyle(style, name, val) {
     if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(val)) {
@@ -21974,11 +21766,6 @@ function setStyle(style, name, val) {
     else {
         if (val == null)
             val = '';
-        if ((true)) {
-            if (semicolonRE.test(val)) {
-                (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.warn)(`Unexpected semicolon at the end of '${name}' style value: '${val}'`);
-            }
-        }
         if (name.startsWith('--')) {
             // custom property definition
             style.setProperty(name, val);
@@ -22087,6 +21874,7 @@ prevChildren, parentComponent, parentSuspense, unmountChildren) {
         }
         else if (type === 'number') {
             // e.g. <img :width="null">
+            // the value of some IDL attr must be greater than 0, e.g. input.size = 0 -> error
             value = 0;
             needRemove = true;
         }
@@ -22098,8 +21886,7 @@ prevChildren, parentComponent, parentSuspense, unmountChildren) {
         el[key] = value;
     }
     catch (e) {
-        // do not warn if value is auto-coerced from nullish values
-        if (( true) && !needRemove) {
+        if ((true)) {
             (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.warn)(`Failed setting prop "${key}" on <${el.tagName.toLowerCase()}>: ` +
                 `value ${value} is invalid.`, e);
         }
@@ -22107,6 +21894,36 @@ prevChildren, parentComponent, parentSuspense, unmountChildren) {
     needRemove && el.removeAttribute(key);
 }
 
+// Async edge case fix requires storing an event listener's attach timestamp.
+const [_getNow, skipTimestampCheck] = /*#__PURE__*/ (() => {
+    let _getNow = Date.now;
+    let skipTimestampCheck = false;
+    if (typeof window !== 'undefined') {
+        // Determine what event timestamp the browser is using. Annoyingly, the
+        // timestamp can either be hi-res (relative to page load) or low-res
+        // (relative to UNIX epoch), so in order to compare time we have to use the
+        // same timestamp type when saving the flush timestamp.
+        if (Date.now() > document.createEvent('Event').timeStamp) {
+            // if the low-res timestamp which is bigger than the event timestamp
+            // (which is evaluated AFTER) it means the event is using a hi-res timestamp,
+            // and we need to use the hi-res version for event listeners as well.
+            _getNow = performance.now.bind(performance);
+        }
+        // #3485: Firefox <= 53 has incorrect Event.timeStamp implementation
+        // and does not fire microtasks in between event propagation, so safe to exclude.
+        const ffMatch = navigator.userAgent.match(/firefox\/(\d+)/i);
+        skipTimestampCheck = !!(ffMatch && Number(ffMatch[1]) <= 53);
+    }
+    return [_getNow, skipTimestampCheck];
+})();
+// To avoid the overhead of repeatedly calling performance.now(), we cache
+// and use the same timestamp for all event listeners attached in the same tick.
+let cachedNow = 0;
+const p = /*#__PURE__*/ Promise.resolve();
+const reset = () => {
+    cachedNow = 0;
+};
+const getNow = () => cachedNow || (p.then(reset), (cachedNow = _getNow()));
 function addEventListener(el, event, handler, options) {
     el.addEventListener(event, handler, options);
 }
@@ -22146,35 +21963,20 @@ function parseName(name) {
             options[m[0].toLowerCase()] = true;
         }
     }
-    const event = name[2] === ':' ? name.slice(3) : (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hyphenate)(name.slice(2));
-    return [event, options];
+    return [(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hyphenate)(name.slice(2)), options];
 }
-// To avoid the overhead of repeatedly calling Date.now(), we cache
-// and use the same timestamp for all event listeners attached in the same tick.
-let cachedNow = 0;
-const p = /*#__PURE__*/ Promise.resolve();
-const getNow = () => cachedNow || (p.then(() => (cachedNow = 0)), (cachedNow = Date.now()));
 function createInvoker(initialValue, instance) {
     const invoker = (e) => {
-        // async edge case vuejs/vue#6566
-        // inner click event triggers patch, event handler
+        // async edge case #6566: inner click event triggers patch, event handler
         // attached to outer element during patch, and triggered again. This
         // happens because browsers fire microtask ticks between event propagation.
-        // this no longer happens for templates in Vue 3, but could still be
-        // theoretically possible for hand-written render functions.
-        // the solution: we save the timestamp when a handler is attached,
-        // and also attach the timestamp to any event that was handled by vue
-        // for the first time (to avoid inconsistent event timestamp implementations
-        // or events fired from iframes, e.g. #2513)
-        // The handler would only fire if the event passed to it was fired
+        // the solution is simple: we save the timestamp when a handler is attached,
+        // and the handler would only fire if the event passed to it was fired
         // AFTER it was attached.
-        if (!e._vts) {
-            e._vts = Date.now();
+        const timeStamp = e.timeStamp || _getNow();
+        if (skipTimestampCheck || timeStamp >= invoker.attached - 1) {
+            (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.callWithAsyncErrorHandling)(patchStopImmediatePropagation(e, invoker.value), instance, 5 /* NATIVE_EVENT_HANDLER */, [e]);
         }
-        else if (e._vts <= invoker.attached) {
-            return;
-        }
-        (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.callWithAsyncErrorHandling)(patchStopImmediatePropagation(e, invoker.value), instance, 5 /* ErrorCodes.NATIVE_EVENT_HANDLER */, [e]);
     };
     invoker.value = initialValue;
     invoker.attached = getNow();
@@ -22308,21 +22110,12 @@ class VueElement extends BaseClass {
                     `defined as hydratable. Use \`defineSSRCustomElement\`.`);
             }
             this.attachShadow({ mode: 'open' });
-            if (!this._def.__asyncLoader) {
-                // for sync component defs we can immediately resolve props
-                this._resolveProps(this._def);
-            }
         }
     }
     connectedCallback() {
         this._connected = true;
         if (!this._instance) {
-            if (this._resolved) {
-                this._update();
-            }
-            else {
-                this._resolveDef();
-            }
+            this._resolveDef();
         }
     }
     disconnectedCallback() {
@@ -22338,6 +22131,9 @@ class VueElement extends BaseClass {
      * resolve inner component definition (handle possible async component)
      */
     _resolveDef() {
+        if (this._resolved) {
+            return;
+        }
         this._resolved = true;
         // set initial attrs
         for (let i = 0; i < this.attributes.length; i++) {
@@ -22349,26 +22145,38 @@ class VueElement extends BaseClass {
                 this._setAttr(m.attributeName);
             }
         }).observe(this, { attributes: true });
-        const resolve = (def, isAsync = false) => {
+        const resolve = (def) => {
             const { props, styles } = def;
+            const hasOptions = !(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(props);
+            const rawKeys = props ? (hasOptions ? Object.keys(props) : props) : [];
             // cast Number-type props set before resolve
             let numberProps;
-            if (props && !(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(props)) {
-                for (const key in props) {
+            if (hasOptions) {
+                for (const key in this._props) {
                     const opt = props[key];
                     if (opt === Number || (opt && opt.type === Number)) {
-                        if (key in this._props) {
-                            this._props[key] = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.toNumber)(this._props[key]);
-                        }
-                        (numberProps || (numberProps = Object.create(null)))[(0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.camelize)(key)] = true;
+                        this._props[key] = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.toNumber)(this._props[key]);
+                        (numberProps || (numberProps = Object.create(null)))[key] = true;
                     }
                 }
             }
             this._numberProps = numberProps;
-            if (isAsync) {
-                // defining getter/setters on prototype
-                // for sync defs, this already happened in the constructor
-                this._resolveProps(def);
+            // check if there are props set pre-upgrade or connect
+            for (const key of Object.keys(this)) {
+                if (key[0] !== '_') {
+                    this._setProp(key, this[key], true, false);
+                }
+            }
+            // defining getter/setters on prototype
+            for (const key of rawKeys.map(_vue_shared__WEBPACK_IMPORTED_MODULE_1__.camelize)) {
+                Object.defineProperty(this, key, {
+                    get() {
+                        return this._getProp(key);
+                    },
+                    set(val) {
+                        this._setProp(key, val);
+                    }
+                });
             }
             // apply CSS
             this._applyStyles(styles);
@@ -22377,40 +22185,18 @@ class VueElement extends BaseClass {
         };
         const asyncDef = this._def.__asyncLoader;
         if (asyncDef) {
-            asyncDef().then(def => resolve(def, true));
+            asyncDef().then(resolve);
         }
         else {
             resolve(this._def);
         }
     }
-    _resolveProps(def) {
-        const { props } = def;
-        const declaredPropKeys = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.isArray)(props) ? props : Object.keys(props || {});
-        // check if there are props set pre-upgrade or connect
-        for (const key of Object.keys(this)) {
-            if (key[0] !== '_' && declaredPropKeys.includes(key)) {
-                this._setProp(key, this[key], true, false);
-            }
-        }
-        // defining getter/setters on prototype
-        for (const key of declaredPropKeys.map(_vue_shared__WEBPACK_IMPORTED_MODULE_1__.camelize)) {
-            Object.defineProperty(this, key, {
-                get() {
-                    return this._getProp(key);
-                },
-                set(val) {
-                    this._setProp(key, val);
-                }
-            });
-        }
-    }
     _setAttr(key) {
         let value = this.getAttribute(key);
-        const camelKey = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.camelize)(key);
-        if (this._numberProps && this._numberProps[camelKey]) {
+        if (this._numberProps && this._numberProps[key]) {
             value = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.toNumber)(value);
         }
-        this._setProp(camelKey, value, false);
+        this._setProp((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.camelize)(key), value, false);
     }
     /**
      * @internal
@@ -22459,23 +22245,20 @@ class VueElement extends BaseClass {
                             this._styles.length = 0;
                         }
                         this._applyStyles(newStyles);
-                        this._instance = null;
-                        this._update();
+                        // if this is an async component, ceReload is called from the inner
+                        // component so no need to reload the async wrapper
+                        if (!this._def.__asyncLoader) {
+                            // reload
+                            this._instance = null;
+                            this._update();
+                        }
                     };
                 }
-                const dispatch = (event, args) => {
+                // intercept emit
+                instance.emit = (event, ...args) => {
                     this.dispatchEvent(new CustomEvent(event, {
                         detail: args
                     }));
-                };
-                // intercept emit
-                instance.emit = (event, ...args) => {
-                    // dispatch both the raw and hyphenated versions of an event
-                    // to match Vue behavior
-                    dispatch(event, args);
-                    if ((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hyphenate)(event) !== event) {
-                        dispatch((0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.hyphenate)(event), args);
-                    }
                 };
                 // locate nearest Vue custom element parent for provide/inject
                 let parent = this;
@@ -22483,7 +22266,6 @@ class VueElement extends BaseClass {
                     parent && (parent.parentNode || parent.host))) {
                     if (parent instanceof VueElement) {
                         instance.parent = parent._instance;
-                        instance.provides = parent._instance.provides;
                         break;
                     }
                 }
@@ -22541,14 +22323,7 @@ function useCssVars(getter) {
             (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.warn)(`useCssVars is called without current active component instance.`);
         return;
     }
-    const updateTeleports = (instance.ut = (vars = getter(instance.proxy)) => {
-        Array.from(document.querySelectorAll(`[data-v-owner="${instance.uid}"]`)).forEach(node => setVarsOnNode(node, vars));
-    });
-    const setVars = () => {
-        const vars = getter(instance.proxy);
-        setVarsOnVNode(instance.subTree, vars);
-        updateTeleports(vars);
-    };
+    const setVars = () => setVarsOnVNode(instance.subTree, getter(instance.proxy));
     (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.watchPostEffect)(setVars);
     (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.onMounted)(() => {
         const ob = new MutationObserver(setVars);
@@ -22557,7 +22332,7 @@ function useCssVars(getter) {
     });
 }
 function setVarsOnVNode(vnode, vars) {
-    if (vnode.shapeFlag & 128 /* ShapeFlags.SUSPENSE */) {
+    if (vnode.shapeFlag & 128 /* SUSPENSE */) {
         const suspense = vnode.suspense;
         vnode = suspense.activeBranch;
         if (suspense.pendingBranch && !suspense.isHydrating) {
@@ -22570,7 +22345,7 @@ function setVarsOnVNode(vnode, vars) {
     while (vnode.component) {
         vnode = vnode.component.subTree;
     }
-    if (vnode.shapeFlag & 1 /* ShapeFlags.ELEMENT */ && vnode.el) {
+    if (vnode.shapeFlag & 1 /* ELEMENT */ && vnode.el) {
         setVarsOnNode(vnode.el, vars);
     }
     else if (vnode.type === _vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.Fragment) {
@@ -22746,10 +22521,19 @@ function normalizeDuration(duration) {
 }
 function NumberOf(val) {
     const res = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.toNumber)(val);
-    if ((true)) {
-        (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.assertNumber)(res, '<transition> explicit duration');
-    }
+    if ((true))
+        validateDuration(res);
     return res;
+}
+function validateDuration(val) {
+    if (typeof val !== 'number') {
+        (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.warn)(`<transition> explicit duration is not a valid number - ` +
+            `got ${JSON.stringify(val)}.`);
+    }
+    else if (isNaN(val)) {
+        (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_0__.warn)(`<transition> explicit duration is NaN - ` +
+            'the duration expression might be incorrect.');
+    }
 }
 function addTransitionClass(el, cls) {
     cls.split(/\s+/).forEach(c => c && el.classList.add(c));
@@ -22808,11 +22592,11 @@ function getTransitionInfo(el, expectedType) {
     const styles = window.getComputedStyle(el);
     // JSDOM may return undefined for transition properties
     const getStyleProperties = (key) => (styles[key] || '').split(', ');
-    const transitionDelays = getStyleProperties(`${TRANSITION}Delay`);
-    const transitionDurations = getStyleProperties(`${TRANSITION}Duration`);
+    const transitionDelays = getStyleProperties(TRANSITION + 'Delay');
+    const transitionDurations = getStyleProperties(TRANSITION + 'Duration');
     const transitionTimeout = getTimeout(transitionDelays, transitionDurations);
-    const animationDelays = getStyleProperties(`${ANIMATION}Delay`);
-    const animationDurations = getStyleProperties(`${ANIMATION}Duration`);
+    const animationDelays = getStyleProperties(ANIMATION + 'Delay');
+    const animationDurations = getStyleProperties(ANIMATION + 'Duration');
     const animationTimeout = getTimeout(animationDelays, animationDurations);
     let type = null;
     let timeout = 0;
@@ -22847,7 +22631,7 @@ function getTransitionInfo(el, expectedType) {
             : 0;
     }
     const hasTransform = type === TRANSITION &&
-        /\b(transform|all)(,|$)/.test(getStyleProperties(`${TRANSITION}Property`).toString());
+        /\b(transform|all)(,|$)/.test(styles[TRANSITION + 'Property']);
     return {
         type,
         timeout,
@@ -22946,14 +22730,6 @@ const TransitionGroupImpl = {
         };
     }
 };
-/**
- * TransitionGroup does not support "mode" so we need to remove it from the
- * props declarations, but direct delete operation is considered a side effect
- * and will make the entire transition feature non-tree-shakeable, so we do it
- * in a function and mark the function's invocation as pure.
- */
-const removeMode = (props) => delete props.mode;
-/*#__PURE__*/ removeMode(TransitionGroupImpl.props);
 const TransitionGroup = TransitionGroupImpl;
 function callPendingCbs(c) {
     const el = c.el;
@@ -23029,7 +22805,7 @@ const vModelText = {
                 domValue = domValue.trim();
             }
             if (castToNumber) {
-                domValue = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.looseToNumber)(domValue);
+                domValue = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.toNumber)(domValue);
             }
             el._assign(domValue);
         });
@@ -23064,8 +22840,7 @@ const vModelText = {
             if (trim && el.value.trim() === value) {
                 return;
             }
-            if ((number || el.type === 'number') &&
-                (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.looseToNumber)(el.value) === value) {
+            if ((number || el.type === 'number') && (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.toNumber)(el.value) === value) {
                 return;
             }
         }
@@ -23154,7 +22929,7 @@ const vModelSelect = {
         addEventListener(el, 'change', () => {
             const selectedVal = Array.prototype.filter
                 .call(el.options, (o) => o.selected)
-                .map((o) => number ? (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.looseToNumber)(getValue(o)) : getValue(o));
+                .map((o) => number ? (0,_vue_shared__WEBPACK_IMPORTED_MODULE_1__.toNumber)(getValue(o)) : getValue(o));
             el._assign(el.multiple
                 ? isSetModel
                     ? new Set(selectedVal)
@@ -23574,11 +23349,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "isKnownSvgAttr": () => (/* binding */ isKnownSvgAttr),
 /* harmony export */   "isMap": () => (/* binding */ isMap),
 /* harmony export */   "isModelListener": () => (/* binding */ isModelListener),
+/* harmony export */   "isNoUnitNumericStyleProp": () => (/* binding */ isNoUnitNumericStyleProp),
 /* harmony export */   "isObject": () => (/* binding */ isObject),
 /* harmony export */   "isOn": () => (/* binding */ isOn),
 /* harmony export */   "isPlainObject": () => (/* binding */ isPlainObject),
 /* harmony export */   "isPromise": () => (/* binding */ isPromise),
-/* harmony export */   "isRegExp": () => (/* binding */ isRegExp),
 /* harmony export */   "isReservedProp": () => (/* binding */ isReservedProp),
 /* harmony export */   "isSSRSafeAttrName": () => (/* binding */ isSSRSafeAttrName),
 /* harmony export */   "isSVGTag": () => (/* binding */ isSVGTag),
@@ -23589,7 +23364,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "isVoidTag": () => (/* binding */ isVoidTag),
 /* harmony export */   "looseEqual": () => (/* binding */ looseEqual),
 /* harmony export */   "looseIndexOf": () => (/* binding */ looseIndexOf),
-/* harmony export */   "looseToNumber": () => (/* binding */ looseToNumber),
 /* harmony export */   "makeMap": () => (/* binding */ makeMap),
 /* harmony export */   "normalizeClass": () => (/* binding */ normalizeClass),
 /* harmony export */   "normalizeProps": () => (/* binding */ normalizeProps),
@@ -23626,29 +23400,29 @@ function makeMap(str, expectsLowerCase) {
  * dev only flag -> name mapping
  */
 const PatchFlagNames = {
-    [1 /* PatchFlags.TEXT */]: `TEXT`,
-    [2 /* PatchFlags.CLASS */]: `CLASS`,
-    [4 /* PatchFlags.STYLE */]: `STYLE`,
-    [8 /* PatchFlags.PROPS */]: `PROPS`,
-    [16 /* PatchFlags.FULL_PROPS */]: `FULL_PROPS`,
-    [32 /* PatchFlags.HYDRATE_EVENTS */]: `HYDRATE_EVENTS`,
-    [64 /* PatchFlags.STABLE_FRAGMENT */]: `STABLE_FRAGMENT`,
-    [128 /* PatchFlags.KEYED_FRAGMENT */]: `KEYED_FRAGMENT`,
-    [256 /* PatchFlags.UNKEYED_FRAGMENT */]: `UNKEYED_FRAGMENT`,
-    [512 /* PatchFlags.NEED_PATCH */]: `NEED_PATCH`,
-    [1024 /* PatchFlags.DYNAMIC_SLOTS */]: `DYNAMIC_SLOTS`,
-    [2048 /* PatchFlags.DEV_ROOT_FRAGMENT */]: `DEV_ROOT_FRAGMENT`,
-    [-1 /* PatchFlags.HOISTED */]: `HOISTED`,
-    [-2 /* PatchFlags.BAIL */]: `BAIL`
+    [1 /* TEXT */]: `TEXT`,
+    [2 /* CLASS */]: `CLASS`,
+    [4 /* STYLE */]: `STYLE`,
+    [8 /* PROPS */]: `PROPS`,
+    [16 /* FULL_PROPS */]: `FULL_PROPS`,
+    [32 /* HYDRATE_EVENTS */]: `HYDRATE_EVENTS`,
+    [64 /* STABLE_FRAGMENT */]: `STABLE_FRAGMENT`,
+    [128 /* KEYED_FRAGMENT */]: `KEYED_FRAGMENT`,
+    [256 /* UNKEYED_FRAGMENT */]: `UNKEYED_FRAGMENT`,
+    [512 /* NEED_PATCH */]: `NEED_PATCH`,
+    [1024 /* DYNAMIC_SLOTS */]: `DYNAMIC_SLOTS`,
+    [2048 /* DEV_ROOT_FRAGMENT */]: `DEV_ROOT_FRAGMENT`,
+    [-1 /* HOISTED */]: `HOISTED`,
+    [-2 /* BAIL */]: `BAIL`
 };
 
 /**
  * Dev only
  */
 const slotFlagsText = {
-    [1 /* SlotFlags.STABLE */]: 'STABLE',
-    [2 /* SlotFlags.DYNAMIC */]: 'DYNAMIC',
-    [3 /* SlotFlags.FORWARDED */]: 'FORWARDED'
+    [1 /* STABLE */]: 'STABLE',
+    [2 /* DYNAMIC */]: 'DYNAMIC',
+    [3 /* FORWARDED */]: 'FORWARDED'
 };
 
 const GLOBALS_WHITE_LISTED = 'Infinity,undefined,NaN,isFinite,isNaN,parseFloat,parseInt,decodeURI,' +
@@ -23700,134 +23474,6 @@ function generateCodeFrame(source, start = 0, end = source.length) {
     return res.join('\n');
 }
 
-function normalizeStyle(value) {
-    if (isArray(value)) {
-        const res = {};
-        for (let i = 0; i < value.length; i++) {
-            const item = value[i];
-            const normalized = isString(item)
-                ? parseStringStyle(item)
-                : normalizeStyle(item);
-            if (normalized) {
-                for (const key in normalized) {
-                    res[key] = normalized[key];
-                }
-            }
-        }
-        return res;
-    }
-    else if (isString(value)) {
-        return value;
-    }
-    else if (isObject(value)) {
-        return value;
-    }
-}
-const listDelimiterRE = /;(?![^(]*\))/g;
-const propertyDelimiterRE = /:([^]+)/;
-const styleCommentRE = /\/\*.*?\*\//gs;
-function parseStringStyle(cssText) {
-    const ret = {};
-    cssText
-        .replace(styleCommentRE, '')
-        .split(listDelimiterRE)
-        .forEach(item => {
-        if (item) {
-            const tmp = item.split(propertyDelimiterRE);
-            tmp.length > 1 && (ret[tmp[0].trim()] = tmp[1].trim());
-        }
-    });
-    return ret;
-}
-function stringifyStyle(styles) {
-    let ret = '';
-    if (!styles || isString(styles)) {
-        return ret;
-    }
-    for (const key in styles) {
-        const value = styles[key];
-        const normalizedKey = key.startsWith(`--`) ? key : hyphenate(key);
-        if (isString(value) || typeof value === 'number') {
-            // only render valid values
-            ret += `${normalizedKey}:${value};`;
-        }
-    }
-    return ret;
-}
-function normalizeClass(value) {
-    let res = '';
-    if (isString(value)) {
-        res = value;
-    }
-    else if (isArray(value)) {
-        for (let i = 0; i < value.length; i++) {
-            const normalized = normalizeClass(value[i]);
-            if (normalized) {
-                res += normalized + ' ';
-            }
-        }
-    }
-    else if (isObject(value)) {
-        for (const name in value) {
-            if (value[name]) {
-                res += name + ' ';
-            }
-        }
-    }
-    return res.trim();
-}
-function normalizeProps(props) {
-    if (!props)
-        return null;
-    let { class: klass, style } = props;
-    if (klass && !isString(klass)) {
-        props.class = normalizeClass(klass);
-    }
-    if (style) {
-        props.style = normalizeStyle(style);
-    }
-    return props;
-}
-
-// These tag configs are shared between compiler-dom and runtime-dom, so they
-// https://developer.mozilla.org/en-US/docs/Web/HTML/Element
-const HTML_TAGS = 'html,body,base,head,link,meta,style,title,address,article,aside,footer,' +
-    'header,hgroup,h1,h2,h3,h4,h5,h6,nav,section,div,dd,dl,dt,figcaption,' +
-    'figure,picture,hr,img,li,main,ol,p,pre,ul,a,b,abbr,bdi,bdo,br,cite,code,' +
-    'data,dfn,em,i,kbd,mark,q,rp,rt,ruby,s,samp,small,span,strong,sub,sup,' +
-    'time,u,var,wbr,area,audio,map,track,video,embed,object,param,source,' +
-    'canvas,script,noscript,del,ins,caption,col,colgroup,table,thead,tbody,td,' +
-    'th,tr,button,datalist,fieldset,form,input,label,legend,meter,optgroup,' +
-    'option,output,progress,select,textarea,details,dialog,menu,' +
-    'summary,template,blockquote,iframe,tfoot';
-// https://developer.mozilla.org/en-US/docs/Web/SVG/Element
-const SVG_TAGS = 'svg,animate,animateMotion,animateTransform,circle,clipPath,color-profile,' +
-    'defs,desc,discard,ellipse,feBlend,feColorMatrix,feComponentTransfer,' +
-    'feComposite,feConvolveMatrix,feDiffuseLighting,feDisplacementMap,' +
-    'feDistantLight,feDropShadow,feFlood,feFuncA,feFuncB,feFuncG,feFuncR,' +
-    'feGaussianBlur,feImage,feMerge,feMergeNode,feMorphology,feOffset,' +
-    'fePointLight,feSpecularLighting,feSpotLight,feTile,feTurbulence,filter,' +
-    'foreignObject,g,hatch,hatchpath,image,line,linearGradient,marker,mask,' +
-    'mesh,meshgradient,meshpatch,meshrow,metadata,mpath,path,pattern,' +
-    'polygon,polyline,radialGradient,rect,set,solidcolor,stop,switch,symbol,' +
-    'text,textPath,title,tspan,unknown,use,view';
-const VOID_TAGS = 'area,base,br,col,embed,hr,img,input,link,meta,param,source,track,wbr';
-/**
- * Compiler only.
- * Do NOT use in runtime code paths unless behind `(process.env.NODE_ENV !== 'production')` flag.
- */
-const isHTMLTag = /*#__PURE__*/ makeMap(HTML_TAGS);
-/**
- * Compiler only.
- * Do NOT use in runtime code paths unless behind `(process.env.NODE_ENV !== 'production')` flag.
- */
-const isSVGTag = /*#__PURE__*/ makeMap(SVG_TAGS);
-/**
- * Compiler only.
- * Do NOT use in runtime code paths unless behind `(process.env.NODE_ENV !== 'production')` flag.
- */
-const isVoidTag = /*#__PURE__*/ makeMap(VOID_TAGS);
-
 /**
  * On the client we only need to offer special cases for boolean attributes that
  * have different names from their corresponding dom properties:
@@ -23873,6 +23519,18 @@ const propsToAttrMap = {
     htmlFor: 'for',
     httpEquiv: 'http-equiv'
 };
+/**
+ * CSS properties that accept plain numbers
+ */
+const isNoUnitNumericStyleProp = /*#__PURE__*/ makeMap(`animation-iteration-count,border-image-outset,border-image-slice,` +
+    `border-image-width,box-flex,box-flex-group,box-ordinal-group,column-count,` +
+    `columns,flex,flex-grow,flex-positive,flex-shrink,flex-negative,flex-order,` +
+    `grid-row,grid-row-end,grid-row-span,grid-row-start,grid-column,` +
+    `grid-column-end,grid-column-span,grid-column-start,font-weight,line-clamp,` +
+    `line-height,opacity,order,orphans,tab-size,widows,z-index,zoom,` +
+    // SVG
+    `fill-opacity,flood-opacity,stop-opacity,stroke-dasharray,stroke-dashoffset,` +
+    `stroke-miterlimit,stroke-opacity,stroke-width`);
 /**
  * Known attributes, this is used for stringification of runtime static nodes
  * so that we don't stringify bindings that cannot be set from HTML.
@@ -23936,6 +23594,131 @@ const isKnownSvgAttr = /*#__PURE__*/ makeMap(`xmlns,accent-height,accumulate,add
     `writing-mode,x,x-height,x1,x2,xChannelSelector,xlink:actuate,xlink:arcrole,` +
     `xlink:href,xlink:role,xlink:show,xlink:title,xlink:type,xml:base,xml:lang,` +
     `xml:space,y,y1,y2,yChannelSelector,z,zoomAndPan`);
+
+function normalizeStyle(value) {
+    if (isArray(value)) {
+        const res = {};
+        for (let i = 0; i < value.length; i++) {
+            const item = value[i];
+            const normalized = isString(item)
+                ? parseStringStyle(item)
+                : normalizeStyle(item);
+            if (normalized) {
+                for (const key in normalized) {
+                    res[key] = normalized[key];
+                }
+            }
+        }
+        return res;
+    }
+    else if (isString(value)) {
+        return value;
+    }
+    else if (isObject(value)) {
+        return value;
+    }
+}
+const listDelimiterRE = /;(?![^(]*\))/g;
+const propertyDelimiterRE = /:(.+)/;
+function parseStringStyle(cssText) {
+    const ret = {};
+    cssText.split(listDelimiterRE).forEach(item => {
+        if (item) {
+            const tmp = item.split(propertyDelimiterRE);
+            tmp.length > 1 && (ret[tmp[0].trim()] = tmp[1].trim());
+        }
+    });
+    return ret;
+}
+function stringifyStyle(styles) {
+    let ret = '';
+    if (!styles || isString(styles)) {
+        return ret;
+    }
+    for (const key in styles) {
+        const value = styles[key];
+        const normalizedKey = key.startsWith(`--`) ? key : hyphenate(key);
+        if (isString(value) ||
+            (typeof value === 'number' && isNoUnitNumericStyleProp(normalizedKey))) {
+            // only render valid values
+            ret += `${normalizedKey}:${value};`;
+        }
+    }
+    return ret;
+}
+function normalizeClass(value) {
+    let res = '';
+    if (isString(value)) {
+        res = value;
+    }
+    else if (isArray(value)) {
+        for (let i = 0; i < value.length; i++) {
+            const normalized = normalizeClass(value[i]);
+            if (normalized) {
+                res += normalized + ' ';
+            }
+        }
+    }
+    else if (isObject(value)) {
+        for (const name in value) {
+            if (value[name]) {
+                res += name + ' ';
+            }
+        }
+    }
+    return res.trim();
+}
+function normalizeProps(props) {
+    if (!props)
+        return null;
+    let { class: klass, style } = props;
+    if (klass && !isString(klass)) {
+        props.class = normalizeClass(klass);
+    }
+    if (style) {
+        props.style = normalizeStyle(style);
+    }
+    return props;
+}
+
+// These tag configs are shared between compiler-dom and runtime-dom, so they
+// https://developer.mozilla.org/en-US/docs/Web/HTML/Element
+const HTML_TAGS = 'html,body,base,head,link,meta,style,title,address,article,aside,footer,' +
+    'header,h1,h2,h3,h4,h5,h6,nav,section,div,dd,dl,dt,figcaption,' +
+    'figure,picture,hr,img,li,main,ol,p,pre,ul,a,b,abbr,bdi,bdo,br,cite,code,' +
+    'data,dfn,em,i,kbd,mark,q,rp,rt,ruby,s,samp,small,span,strong,sub,sup,' +
+    'time,u,var,wbr,area,audio,map,track,video,embed,object,param,source,' +
+    'canvas,script,noscript,del,ins,caption,col,colgroup,table,thead,tbody,td,' +
+    'th,tr,button,datalist,fieldset,form,input,label,legend,meter,optgroup,' +
+    'option,output,progress,select,textarea,details,dialog,menu,' +
+    'summary,template,blockquote,iframe,tfoot';
+// https://developer.mozilla.org/en-US/docs/Web/SVG/Element
+const SVG_TAGS = 'svg,animate,animateMotion,animateTransform,circle,clipPath,color-profile,' +
+    'defs,desc,discard,ellipse,feBlend,feColorMatrix,feComponentTransfer,' +
+    'feComposite,feConvolveMatrix,feDiffuseLighting,feDisplacementMap,' +
+    'feDistanceLight,feDropShadow,feFlood,feFuncA,feFuncB,feFuncG,feFuncR,' +
+    'feGaussianBlur,feImage,feMerge,feMergeNode,feMorphology,feOffset,' +
+    'fePointLight,feSpecularLighting,feSpotLight,feTile,feTurbulence,filter,' +
+    'foreignObject,g,hatch,hatchpath,image,line,linearGradient,marker,mask,' +
+    'mesh,meshgradient,meshpatch,meshrow,metadata,mpath,path,pattern,' +
+    'polygon,polyline,radialGradient,rect,set,solidcolor,stop,switch,symbol,' +
+    'text,textPath,title,tspan,unknown,use,view';
+const VOID_TAGS = 'area,base,br,col,embed,hr,img,input,link,meta,param,source,track,wbr';
+/**
+ * Compiler only.
+ * Do NOT use in runtime code paths unless behind `(process.env.NODE_ENV !== 'production')` flag.
+ */
+const isHTMLTag = /*#__PURE__*/ makeMap(HTML_TAGS);
+/**
+ * Compiler only.
+ * Do NOT use in runtime code paths unless behind `(process.env.NODE_ENV !== 'production')` flag.
+ */
+const isSVGTag = /*#__PURE__*/ makeMap(SVG_TAGS);
+/**
+ * Compiler only.
+ * Do NOT use in runtime code paths unless behind `(process.env.NODE_ENV !== 'production')` flag.
+ */
+const isVoidTag = /*#__PURE__*/ makeMap(VOID_TAGS);
 
 const escapeRE = /["'&<>]/;
 function escapeHtml(string) {
@@ -24101,7 +23884,6 @@ const isArray = Array.isArray;
 const isMap = (val) => toTypeString(val) === '[object Map]';
 const isSet = (val) => toTypeString(val) === '[object Set]';
 const isDate = (val) => toTypeString(val) === '[object Date]';
-const isRegExp = (val) => toTypeString(val) === '[object RegExp]';
 const isFunction = (val) => typeof val === 'function';
 const isString = (val) => typeof val === 'string';
 const isSymbol = (val) => typeof val === 'symbol';
@@ -24168,20 +23950,8 @@ const def = (obj, key, value) => {
         value
     });
 };
-/**
- * "123-foo" will be parsed to 123
- * This is used for the .number modifier in v-model
- */
-const looseToNumber = (val) => {
-    const n = parseFloat(val);
-    return isNaN(n) ? val : n;
-};
-/**
- * Only conerces number-like strings
- * "123-foo" will be returned as-is
- */
 const toNumber = (val) => {
-    const n = isString(val) ? Number(val) : NaN;
+    const n = parseFloat(val);
     return isNaN(n) ? val : n;
 };
 let _globalThis;
@@ -24275,52 +24045,45 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _assets_sass_app_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/assets/sass/app.scss */ "./resources/js/src/assets/sass/app.scss");
-/* harmony import */ var _composables_use_meta__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/composables/use-meta */ "./resources/js/src/composables/use-meta.js");
+/* harmony import */ var _layouts_app_layout_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./layouts/app-layout.vue */ "./resources/js/src/layouts/app-layout.vue");
+/* harmony import */ var _layouts_auth_layout_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./layouts/auth-layout.vue */ "./resources/js/src/layouts/auth-layout.vue");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _assets_sass_app_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/assets/sass/app.scss */ "./resources/js/src/assets/sass/app.scss");
+/* harmony import */ var _composables_use_meta__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/composables/use-meta */ "./resources/js/src/composables/use-meta.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
-/* harmony import */ var _layouts_app_layout_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./layouts/app-layout.vue */ "./resources/js/src/layouts/app-layout.vue");
-/* harmony import */ var _layouts_auth_layout_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./layouts/auth-layout.vue */ "./resources/js/src/layouts/auth-layout.vue");
-
-
-
- // layouts
-
+// layouts
 
 
 var __default__ = {
   components: {
-    app: _layouts_app_layout_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-    auth: _layouts_auth_layout_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+    app: _layouts_app_layout_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+    auth: _layouts_auth_layout_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   }
 };
+
+
+
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (/*#__PURE__*/Object.assign(__default__, {
   __name: 'App',
   setup: function setup(__props, _ref) {
     var expose = _ref.expose;
     expose();
-    (0,_composables_use_meta__WEBPACK_IMPORTED_MODULE_2__.useMeta)({
+    (0,_composables_use_meta__WEBPACK_IMPORTED_MODULE_4__.useMeta)({
       title: 'App Admin'
     });
     var store = (0,vuex__WEBPACK_IMPORTED_MODULE_5__.useStore)();
-    var layout = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
+    var layout = (0,vue__WEBPACK_IMPORTED_MODULE_2__.computed)(function () {
       return store.getters.layout;
     });
     var __returned__ = {
       store: store,
       layout: layout,
-      appLayout: _layouts_app_layout_vue__WEBPACK_IMPORTED_MODULE_3__["default"],
-      authLayout: _layouts_auth_layout_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-      computed: vue__WEBPACK_IMPORTED_MODULE_0__.computed,
-
-      get useMeta() {
-        return _composables_use_meta__WEBPACK_IMPORTED_MODULE_2__.useMeta;
-      },
-
-      get useStore() {
-        return vuex__WEBPACK_IMPORTED_MODULE_5__.useStore;
-      }
-
+      appLayout: _layouts_app_layout_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+      authLayout: _layouts_auth_layout_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+      computed: vue__WEBPACK_IMPORTED_MODULE_2__.computed,
+      useMeta: _composables_use_meta__WEBPACK_IMPORTED_MODULE_4__.useMeta,
+      useStore: vuex__WEBPACK_IMPORTED_MODULE_5__.useStore
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -24380,11 +24143,7 @@ __webpack_require__.r(__webpack_exports__);
       setLayoutStyle: setLayoutStyle,
       onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
-
-      get useStore() {
-        return vuex__WEBPACK_IMPORTED_MODULE_1__.useStore;
-      }
-
+      useStore: vuex__WEBPACK_IMPORTED_MODULE_1__.useStore
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -24460,23 +24219,10 @@ __webpack_require__.r(__webpack_exports__);
       changeLanguage: changeLanguage,
       onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
-
-      get useI18n() {
-        return vue_i18n__WEBPACK_IMPORTED_MODULE_2__.useI18n;
-      },
-
-      get useStore() {
-        return vuex__WEBPACK_IMPORTED_MODULE_1__.useStore;
-      },
-
-      get useRouter() {
-        return vue_router__WEBPACK_IMPORTED_MODULE_3__.useRouter;
-      },
-
-      get useRoute() {
-        return vue_router__WEBPACK_IMPORTED_MODULE_3__.useRoute;
-      }
-
+      useI18n: vue_i18n__WEBPACK_IMPORTED_MODULE_2__.useI18n,
+      useStore: vuex__WEBPACK_IMPORTED_MODULE_1__.useStore,
+      useRouter: vue_router__WEBPACK_IMPORTED_MODULE_3__.useRouter,
+      useRoute: vue_router__WEBPACK_IMPORTED_MODULE_3__.useRoute
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -24543,11 +24289,7 @@ __webpack_require__.r(__webpack_exports__);
       toggleMobileMenu: toggleMobileMenu,
       onMounted: vue__WEBPACK_IMPORTED_MODULE_0__.onMounted,
       ref: vue__WEBPACK_IMPORTED_MODULE_0__.ref,
-
-      get useStore() {
-        return vuex__WEBPACK_IMPORTED_MODULE_1__.useStore;
-      }
-
+      useStore: vuex__WEBPACK_IMPORTED_MODULE_1__.useStore
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -25006,19 +24748,9 @@ __webpack_require__.r(__webpack_exports__);
       sales_donut_options: sales_donut_options,
       computed: vue__WEBPACK_IMPORTED_MODULE_1__.computed,
       ref: vue__WEBPACK_IMPORTED_MODULE_1__.ref,
-
-      get useStore() {
-        return vuex__WEBPACK_IMPORTED_MODULE_4__.useStore;
-      },
-
-      get ApexChart() {
-        return (vue3_apexcharts__WEBPACK_IMPORTED_MODULE_2___default());
-      },
-
-      get useMeta() {
-        return _composables_use_meta__WEBPACK_IMPORTED_MODULE_3__.useMeta;
-      }
-
+      useStore: vuex__WEBPACK_IMPORTED_MODULE_4__.useStore,
+      ApexChart: (vue3_apexcharts__WEBPACK_IMPORTED_MODULE_2___default()),
+      useMeta: _composables_use_meta__WEBPACK_IMPORTED_MODULE_3__.useMeta
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
@@ -25560,11 +25292,14 @@ var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_6 = {
   "class": "nav-item theme-text"
 };
-var _hoisted_7 = {
+
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" SPBU ");
+
+var _hoisted_8 = {
   "class": "d-none horizontal-menu"
 };
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   width: "24",
   height: "24",
@@ -25594,12 +25329,12 @@ var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_9 = [_hoisted_8];
-var _hoisted_10 = {
+var _hoisted_10 = [_hoisted_9];
+var _hoisted_11 = {
   "class": "navbar-item flex-row ms-md-0 ms-auto"
 };
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("circle", {
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("circle", {
   cx: "11",
   cy: "11",
   r: "8"
@@ -25607,7 +25342,7 @@ var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("line", {
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("line", {
   x1: "21",
   y1: "21",
   x2: "16.65",
@@ -25616,9 +25351,9 @@ var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_13 = [_hoisted_11, _hoisted_12];
+var _hoisted_14 = [_hoisted_12, _hoisted_13];
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "search-bar"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
   type: "text",
@@ -25628,19 +25363,19 @@ var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_15 = [_hoisted_14];
-var _hoisted_16 = {
+var _hoisted_16 = [_hoisted_15];
+var _hoisted_17 = {
   "class": "navbar-item flex-row ms-md-auto"
 };
-var _hoisted_17 = {
+var _hoisted_18 = {
   "class": "dark-mode d-flex align-items-center"
 };
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-sun\"><circle cx=\"12\" cy=\"12\" r=\"5\"></circle><line x1=\"12\" y1=\"1\" x2=\"12\" y2=\"3\"></line><line x1=\"12\" y1=\"21\" x2=\"12\" y2=\"23\"></line><line x1=\"4.22\" y1=\"4.22\" x2=\"5.64\" y2=\"5.64\"></line><line x1=\"18.36\" y1=\"18.36\" x2=\"19.78\" y2=\"19.78\"></line><line x1=\"1\" y1=\"12\" x2=\"3\" y2=\"12\"></line><line x1=\"21\" y1=\"12\" x2=\"23\" y2=\"12\"></line><line x1=\"4.22\" y1=\"19.78\" x2=\"5.64\" y2=\"18.36\"></line><line x1=\"18.36\" y1=\"5.64\" x2=\"19.78\" y2=\"4.22\"></line></svg><span class=\"ms-2\">Light</span>", 2);
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-sun\"><circle cx=\"12\" cy=\"12\" r=\"5\"></circle><line x1=\"12\" y1=\"1\" x2=\"12\" y2=\"3\"></line><line x1=\"12\" y1=\"21\" x2=\"12\" y2=\"23\"></line><line x1=\"4.22\" y1=\"4.22\" x2=\"5.64\" y2=\"5.64\"></line><line x1=\"18.36\" y1=\"18.36\" x2=\"19.78\" y2=\"19.78\"></line><line x1=\"1\" y1=\"12\" x2=\"3\" y2=\"12\"></line><line x1=\"21\" y1=\"12\" x2=\"23\" y2=\"12\"></line><line x1=\"4.22\" y1=\"19.78\" x2=\"5.64\" y2=\"18.36\"></line><line x1=\"18.36\" y1=\"5.64\" x2=\"19.78\" y2=\"4.22\"></line></svg><span class=\"ms-2\">Light</span>", 2);
 
-var _hoisted_20 = [_hoisted_18];
+var _hoisted_21 = [_hoisted_19];
 
-var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   width: "20",
   height: "20",
@@ -25657,15 +25392,15 @@ var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "ms-2"
 }, "Dark", -1
 /* HOISTED */
 );
 
-var _hoisted_23 = [_hoisted_21, _hoisted_22];
+var _hoisted_24 = [_hoisted_22, _hoisted_23];
 
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   width: "20",
   height: "20",
@@ -25684,18 +25419,18 @@ var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "ms-2"
 }, "System", -1
 /* HOISTED */
 );
 
-var _hoisted_26 = [_hoisted_24, _hoisted_25];
-var _hoisted_27 = {
+var _hoisted_27 = [_hoisted_25, _hoisted_26];
+var _hoisted_28 = {
   "class": "dropdown nav-item user-profile-dropdown btn-group"
 };
 
-var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   href: "javascript:;",
   id: "ddluser",
   "data-bs-toggle": "dropdown",
@@ -25708,15 +25443,15 @@ var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_29 = {
+var _hoisted_30 = {
   "class": "dropdown-menu dropdown-menu-right",
   "aria-labelledby": "ddluser"
 };
-var _hoisted_30 = {
+var _hoisted_31 = {
   role: "presentation"
 };
 
-var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   width: "24",
   height: "24",
@@ -25737,11 +25472,13 @@ var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_32 = {
+var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Profile ");
+
+var _hoisted_34 = {
   role: "presentation"
 };
 
-var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   width: "24",
   height: "24",
@@ -25760,11 +25497,13 @@ var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_34 = {
+var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Inbox ");
+
+var _hoisted_37 = {
   role: "presentation"
 };
 
-var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   width: "24",
   height: "24",
@@ -25788,11 +25527,13 @@ var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_36 = {
+var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Lock Screen ");
+
+var _hoisted_40 = {
   role: "presentation"
 };
 
-var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   width: "24",
   height: "24",
@@ -25816,14 +25557,16 @@ var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_38 = {
+var _hoisted_42 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Sign Out ");
+
+var _hoisted_43 = {
   "class": "sub-header-container"
 };
-var _hoisted_39 = {
+var _hoisted_44 = {
   "class": "header navbar navbar-expand-sm"
 };
 
-var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
+var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("svg", {
   xmlns: "http://www.w3.org/2000/svg",
   width: "24",
   height: "24",
@@ -25853,9 +25596,9 @@ var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_41 = [_hoisted_40];
+var _hoisted_46 = [_hoisted_45];
 
-var _hoisted_42 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_47 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   id: "breadcrumb",
   "class": "vue-portal-target"
 }, null, -1
@@ -25879,19 +25622,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "nav-link"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" SPBU ")];
+      return [_hoisted_7];
     }),
     _: 1
     /* STABLE */
 
-  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  })])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: "javascript:void(0);",
     "class": "sidebarCollapse",
     "data-placement": "bottom",
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return _ctx.$store.commit('toggleSideBar', !_ctx.$store.state.is_show_sidebar);
     })
-  }, _hoisted_9)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
+  }, _hoisted_10)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["nav-item align-self-center search-animated", {
       'show-search': _ctx.$store.state.is_show_search
     }])
@@ -25909,84 +25652,84 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "stroke-linecap": "round",
     "stroke-linejoin": "round",
     "class": "feather feather-search toggle-search"
-  }, _hoisted_13)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+  }, _hoisted_14)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["form-inline search-full form-inline search", {
       'input-focused': _ctx.$store.state.is_show_search
     }])
-  }, _hoisted_15, 2
+  }, _hoisted_16, 2
   /* CLASS */
   )], 2
   /* CLASS */
-  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_16, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [_ctx.$store.state.dark_mode == 'light' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [_ctx.$store.state.dark_mode == 'light' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
     key: 0,
     href: "javascript:;",
     "class": "d-flex align-items-center",
     onClick: _cache[2] || (_cache[2] = function ($event) {
       return $setup.toggleMode('dark');
     })
-  }, _hoisted_20)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.$store.state.dark_mode == 'dark' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
+  }, _hoisted_21)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.$store.state.dark_mode == 'dark' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
     key: 1,
     href: "javascript:;",
     "class": "d-flex align-items-center",
     onClick: _cache[3] || (_cache[3] = function ($event) {
       return $setup.toggleMode('system');
     })
-  }, _hoisted_23)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.$store.state.dark_mode == 'system' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
+  }, _hoisted_24)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _ctx.$store.state.dark_mode == 'system' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("a", {
     key: 2,
     href: "javascript:;",
     "class": "d-flex align-items-center",
     onClick: _cache[4] || (_cache[4] = function ($event) {
       return $setup.toggleMode('light');
     })
-  }, _hoisted_26)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"dropdown nav-item language-dropdown btn-group\">\r\n                        <a href=\"javascript:;\" id=\"ddllang\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" class=\"btn dropdown-toggle btn-icon-only nav-link\">\r\n                            <img v-if=\"selectedLang\" :src=\"require(`@/assets/images/flags/${selectedLang.code}.png`)\" class=\"flag-width\" alt=\"flag\" />\r\n                        </a>\r\n                        <ul class=\"dropdown-menu\" aria-labelledby=\"ddllang\">\r\n                            <perfect-scrollbar>\r\n                                <li v-for=\"item in countryList\" :key=\"item.code\">\r\n                                    <a href=\"javascript:;\" class=\"dropdown-item d-flex align-items-center\" :class=\"{ active: $i18n.locale === item.code }\" @click.prevent=\"changeLanguage(item)\">\r\n                                        <img :src=\"require(`@/assets/images/flags/${item.code}.png`)\" class=\"flag-width\" alt=\"\" /> <span>{{ item.name }}</span>\r\n                                    </a>\r\n                                </li>\r\n                            </perfect-scrollbar>\r\n                        </ul>\r\n                    </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"dropdown nav-item message-dropdown btn-group\">\r\n                        <a href=\"javascript:;\" id=\"ddlmsg\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" class=\"btn dropdown-toggle btn-icon-only nav-link\">\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-mail\"\r\n                            >\r\n                                <path d=\"M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z\"></path>\r\n                                <polyline points=\"22,6 12,13 2,6\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"dropdown-menu dropdown-menu-right\" aria-labelledby=\"ddlmsg\">\r\n                            <li role=\"presentation\">\r\n                                <a role=\"menuitem\" href=\"#\" target=\"_self\" class=\"dropdown-item\">\r\n                                    <div class=\"media media\">\r\n                                        <div class=\"media-aside align-self-start\">\r\n                                            <div class=\"avatar avatar-xl\"><span class=\"avatar-title rounded-circle\">KY</span></div>\r\n                                        </div>\r\n                                        <div class=\"media-body\">\r\n                                            <h5 class=\"usr-name\">Kara Young</h5>\r\n                                            <p class=\"msg-title\">ACCOUNT UPDATE</p>\r\n                                        </div>\r\n                                    </div>\r\n                                </a>\r\n                            </li>\r\n                            <li role=\"presentation\">\r\n                                <a role=\"menuitem\" href=\"#\" target=\"_self\" class=\"dropdown-item\">\r\n                                    <div class=\"media media\">\r\n                                        <div class=\"media-aside align-self-start\">\r\n                                            <img src=\"@/assets/images/profile-15.jpeg\" alt=\"avatar\" />\r\n                                        </div>\r\n                                        <div class=\"media-body\">\r\n                                            <h5 class=\"usr-name\">Daisy Anderson</h5>\r\n                                            <p class=\"msg-title\">ACCOUNT UPDATE</p>\r\n                                        </div>\r\n                                    </div>\r\n                                </a>\r\n                            </li>\r\n                            <li role=\"presentation\">\r\n                                <a role=\"menuitem\" href=\"#\" target=\"_self\" class=\"dropdown-item\">\r\n                                    <div class=\"media media\">\r\n                                        <div class=\"media-aside align-self-start\">\r\n                                            <div class=\"avatar avatar-xl\"><span class=\"avatar-title rounded-circle\">OG</span></div>\r\n                                        </div>\r\n                                        <div class=\"media-body\">\r\n                                            <h5 class=\"usr-name\">Oscar Garner</h5>\r\n                                            <p class=\"msg-title\">ACCOUNT UPDATE</p>\r\n                                        </div>\r\n                                    </div>\r\n                                </a>\r\n                            </li>\r\n                        </ul>\r\n                    </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"dropdown nav-item notification-dropdown btn-group\">\r\n                        <a href=\"javascript:;\" id=\"ddlnotify\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" class=\"btn dropdown-toggle btn-icon-only nav-link\">\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-bell\"\r\n                            >\r\n                                <path d=\"M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9\"></path>\r\n                                <path d=\"M13.73 21a2 2 0 0 1-3.46 0\"></path>\r\n                            </svg>\r\n                            <span class=\"badge badge-success\"></span>\r\n                        </a>\r\n                        <ul class=\"dropdown-menu dropdown-menu-right\" aria-labelledby=\"ddlnotify\">\r\n                            <li role=\"presentation\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-item\">\r\n                                    <div class=\"media server-log\">\r\n                                        <div class=\"media-aside align-self-start\">\r\n                                            <svg\r\n                                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                                width=\"24\"\r\n                                                height=\"24\"\r\n                                                viewBox=\"0 0 24 24\"\r\n                                                fill=\"none\"\r\n                                                stroke=\"currentColor\"\r\n                                                stroke-width=\"2\"\r\n                                                stroke-linecap=\"round\"\r\n                                                stroke-linejoin=\"round\"\r\n                                                class=\"feather feather-server\"\r\n                                            >\r\n                                                <rect x=\"2\" y=\"2\" width=\"20\" height=\"8\" rx=\"2\" ry=\"2\"></rect>\r\n                                                <rect x=\"2\" y=\"14\" width=\"20\" height=\"8\" rx=\"2\" ry=\"2\"></rect>\r\n                                                <line x1=\"6\" y1=\"6\" x2=\"6\" y2=\"6\"></line>\r\n                                                <line x1=\"6\" y1=\"18\" x2=\"6\" y2=\"18\"></line>\r\n                                            </svg>\r\n                                        </div>\r\n                                        <div class=\"media-body\">\r\n                                            <div class=\"data-info\">\r\n                                                <h6 class=\"\">Server Rebooted</h6>\r\n                                                <p class=\"\">45 min ago</p>\r\n                                            </div>\r\n\r\n                                            <div class=\"icon-status\">\r\n                                                <svg\r\n                                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                                    width=\"24\"\r\n                                                    height=\"24\"\r\n                                                    viewBox=\"0 0 24 24\"\r\n                                                    fill=\"none\"\r\n                                                    stroke=\"currentColor\"\r\n                                                    stroke-width=\"2\"\r\n                                                    stroke-linecap=\"round\"\r\n                                                    stroke-linejoin=\"round\"\r\n                                                    class=\"feather feather-x\"\r\n                                                >\r\n                                                    <line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"></line>\r\n                                                    <line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"></line>\r\n                                                </svg>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </a>\r\n                            </li>\r\n                            <li role=\"presentation\"><hr role=\"separator\" aria-orientation=\"horizontal\" size=\"0\" class=\"dropdown-divider\" /></li>\r\n                            <li role=\"presentation\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-item\">\r\n                                    <div class=\"media\">\r\n                                        <div class=\"media-aside align-self-start\">\r\n                                            <svg\r\n                                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                                width=\"24\"\r\n                                                height=\"24\"\r\n                                                viewBox=\"0 0 24 24\"\r\n                                                fill=\"none\"\r\n                                                stroke=\"currentColor\"\r\n                                                stroke-width=\"2\"\r\n                                                stroke-linecap=\"round\"\r\n                                                stroke-linejoin=\"round\"\r\n                                                class=\"feather feather-heart\"\r\n                                            >\r\n                                                <path\r\n                                                    d=\"M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z\"\r\n                                                ></path>\r\n                                            </svg>\r\n                                        </div>\r\n                                        <div class=\"media-body\">\r\n                                            <div class=\"data-info\">\r\n                                                <h6>Licence Expiring Soon</h6>\r\n                                                <p>8 hrs ago</p>\r\n                                            </div>\r\n                                            <div class=\"icon-status\">\r\n                                                <svg\r\n                                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                                    width=\"24\"\r\n                                                    height=\"24\"\r\n                                                    viewBox=\"0 0 24 24\"\r\n                                                    fill=\"none\"\r\n                                                    stroke=\"currentColor\"\r\n                                                    stroke-width=\"2\"\r\n                                                    stroke-linecap=\"round\"\r\n                                                    stroke-linejoin=\"round\"\r\n                                                    class=\"feather feather-x\"\r\n                                                >\r\n                                                    <line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"></line>\r\n                                                    <line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"></line>\r\n                                                </svg>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </a>\r\n                            </li>\r\n                            <li role=\"presentation\"><hr role=\"separator\" aria-orientation=\"horizontal\" size=\"0\" class=\"dropdown-divider\" /></li>\r\n                            <li role=\"presentation\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-item\">\r\n                                    <div class=\"media file-upload\">\r\n                                        <div class=\"media-aside align-self-start\">\r\n                                            <svg\r\n                                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                                width=\"24\"\r\n                                                height=\"24\"\r\n                                                viewBox=\"0 0 24 24\"\r\n                                                fill=\"none\"\r\n                                                stroke=\"currentColor\"\r\n                                                stroke-width=\"2\"\r\n                                                stroke-linecap=\"round\"\r\n                                                stroke-linejoin=\"round\"\r\n                                                class=\"feather feather-file-text\"\r\n                                            >\r\n                                                <path d=\"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z\"></path>\r\n                                                <polyline points=\"14 2 14 8 20 8\"></polyline>\r\n                                                <line x1=\"16\" y1=\"13\" x2=\"8\" y2=\"13\"></line>\r\n                                                <line x1=\"16\" y1=\"17\" x2=\"8\" y2=\"17\"></line>\r\n                                                <polyline points=\"10 9 9 9 8 9\"></polyline>\r\n                                            </svg>\r\n                                        </div>\r\n                                        <div class=\"media-body\">\r\n                                            <div class=\"data-info\">\r\n                                                <h6>Kelly Portfolio.pdf</h6>\r\n                                                <p>670 kb</p>\r\n                                            </div>\r\n                                            <div class=\"icon-status\">\r\n                                                <svg\r\n                                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                                    width=\"24\"\r\n                                                    height=\"24\"\r\n                                                    viewBox=\"0 0 24 24\"\r\n                                                    fill=\"none\"\r\n                                                    stroke=\"currentColor\"\r\n                                                    stroke-width=\"2\"\r\n                                                    stroke-linecap=\"round\"\r\n                                                    stroke-linejoin=\"round\"\r\n                                                    class=\"feather feather-check\"\r\n                                                >\r\n                                                    <polyline points=\"20 6 9 17 4 12\"></polyline>\r\n                                                </svg>\r\n                                            </div>\r\n                                        </div></div\r\n                                ></a>\r\n                            </li>\r\n                        </ul>\r\n                    </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_27, [_hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  }, _hoisted_27)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"dropdown nav-item language-dropdown btn-group\">\r\n                        <a href=\"javascript:;\" id=\"ddllang\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" class=\"btn dropdown-toggle btn-icon-only nav-link\">\r\n                            <img v-if=\"selectedLang\" :src=\"require(`@/assets/images/flags/${selectedLang.code}.png`)\" class=\"flag-width\" alt=\"flag\" />\r\n                        </a>\r\n                        <ul class=\"dropdown-menu\" aria-labelledby=\"ddllang\">\r\n                            <perfect-scrollbar>\r\n                                <li v-for=\"item in countryList\" :key=\"item.code\">\r\n                                    <a href=\"javascript:;\" class=\"dropdown-item d-flex align-items-center\" :class=\"{ active: $i18n.locale === item.code }\" @click.prevent=\"changeLanguage(item)\">\r\n                                        <img :src=\"require(`@/assets/images/flags/${item.code}.png`)\" class=\"flag-width\" alt=\"\" /> <span>{{ item.name }}</span>\r\n                                    </a>\r\n                                </li>\r\n                            </perfect-scrollbar>\r\n                        </ul>\r\n                    </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"dropdown nav-item message-dropdown btn-group\">\r\n                        <a href=\"javascript:;\" id=\"ddlmsg\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" class=\"btn dropdown-toggle btn-icon-only nav-link\">\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-mail\"\r\n                            >\r\n                                <path d=\"M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z\"></path>\r\n                                <polyline points=\"22,6 12,13 2,6\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"dropdown-menu dropdown-menu-right\" aria-labelledby=\"ddlmsg\">\r\n                            <li role=\"presentation\">\r\n                                <a role=\"menuitem\" href=\"#\" target=\"_self\" class=\"dropdown-item\">\r\n                                    <div class=\"media media\">\r\n                                        <div class=\"media-aside align-self-start\">\r\n                                            <div class=\"avatar avatar-xl\"><span class=\"avatar-title rounded-circle\">KY</span></div>\r\n                                        </div>\r\n                                        <div class=\"media-body\">\r\n                                            <h5 class=\"usr-name\">Kara Young</h5>\r\n                                            <p class=\"msg-title\">ACCOUNT UPDATE</p>\r\n                                        </div>\r\n                                    </div>\r\n                                </a>\r\n                            </li>\r\n                            <li role=\"presentation\">\r\n                                <a role=\"menuitem\" href=\"#\" target=\"_self\" class=\"dropdown-item\">\r\n                                    <div class=\"media media\">\r\n                                        <div class=\"media-aside align-self-start\">\r\n                                            <img src=\"@/assets/images/profile-15.jpeg\" alt=\"avatar\" />\r\n                                        </div>\r\n                                        <div class=\"media-body\">\r\n                                            <h5 class=\"usr-name\">Daisy Anderson</h5>\r\n                                            <p class=\"msg-title\">ACCOUNT UPDATE</p>\r\n                                        </div>\r\n                                    </div>\r\n                                </a>\r\n                            </li>\r\n                            <li role=\"presentation\">\r\n                                <a role=\"menuitem\" href=\"#\" target=\"_self\" class=\"dropdown-item\">\r\n                                    <div class=\"media media\">\r\n                                        <div class=\"media-aside align-self-start\">\r\n                                            <div class=\"avatar avatar-xl\"><span class=\"avatar-title rounded-circle\">OG</span></div>\r\n                                        </div>\r\n                                        <div class=\"media-body\">\r\n                                            <h5 class=\"usr-name\">Oscar Garner</h5>\r\n                                            <p class=\"msg-title\">ACCOUNT UPDATE</p>\r\n                                        </div>\r\n                                    </div>\r\n                                </a>\r\n                            </li>\r\n                        </ul>\r\n                    </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"dropdown nav-item notification-dropdown btn-group\">\r\n                        <a href=\"javascript:;\" id=\"ddlnotify\" data-bs-toggle=\"dropdown\" aria-expanded=\"false\" class=\"btn dropdown-toggle btn-icon-only nav-link\">\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-bell\"\r\n                            >\r\n                                <path d=\"M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9\"></path>\r\n                                <path d=\"M13.73 21a2 2 0 0 1-3.46 0\"></path>\r\n                            </svg>\r\n                            <span class=\"badge badge-success\"></span>\r\n                        </a>\r\n                        <ul class=\"dropdown-menu dropdown-menu-right\" aria-labelledby=\"ddlnotify\">\r\n                            <li role=\"presentation\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-item\">\r\n                                    <div class=\"media server-log\">\r\n                                        <div class=\"media-aside align-self-start\">\r\n                                            <svg\r\n                                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                                width=\"24\"\r\n                                                height=\"24\"\r\n                                                viewBox=\"0 0 24 24\"\r\n                                                fill=\"none\"\r\n                                                stroke=\"currentColor\"\r\n                                                stroke-width=\"2\"\r\n                                                stroke-linecap=\"round\"\r\n                                                stroke-linejoin=\"round\"\r\n                                                class=\"feather feather-server\"\r\n                                            >\r\n                                                <rect x=\"2\" y=\"2\" width=\"20\" height=\"8\" rx=\"2\" ry=\"2\"></rect>\r\n                                                <rect x=\"2\" y=\"14\" width=\"20\" height=\"8\" rx=\"2\" ry=\"2\"></rect>\r\n                                                <line x1=\"6\" y1=\"6\" x2=\"6\" y2=\"6\"></line>\r\n                                                <line x1=\"6\" y1=\"18\" x2=\"6\" y2=\"18\"></line>\r\n                                            </svg>\r\n                                        </div>\r\n                                        <div class=\"media-body\">\r\n                                            <div class=\"data-info\">\r\n                                                <h6 class=\"\">Server Rebooted</h6>\r\n                                                <p class=\"\">45 min ago</p>\r\n                                            </div>\r\n\r\n                                            <div class=\"icon-status\">\r\n                                                <svg\r\n                                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                                    width=\"24\"\r\n                                                    height=\"24\"\r\n                                                    viewBox=\"0 0 24 24\"\r\n                                                    fill=\"none\"\r\n                                                    stroke=\"currentColor\"\r\n                                                    stroke-width=\"2\"\r\n                                                    stroke-linecap=\"round\"\r\n                                                    stroke-linejoin=\"round\"\r\n                                                    class=\"feather feather-x\"\r\n                                                >\r\n                                                    <line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"></line>\r\n                                                    <line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"></line>\r\n                                                </svg>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </a>\r\n                            </li>\r\n                            <li role=\"presentation\"><hr role=\"separator\" aria-orientation=\"horizontal\" size=\"0\" class=\"dropdown-divider\" /></li>\r\n                            <li role=\"presentation\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-item\">\r\n                                    <div class=\"media\">\r\n                                        <div class=\"media-aside align-self-start\">\r\n                                            <svg\r\n                                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                                width=\"24\"\r\n                                                height=\"24\"\r\n                                                viewBox=\"0 0 24 24\"\r\n                                                fill=\"none\"\r\n                                                stroke=\"currentColor\"\r\n                                                stroke-width=\"2\"\r\n                                                stroke-linecap=\"round\"\r\n                                                stroke-linejoin=\"round\"\r\n                                                class=\"feather feather-heart\"\r\n                                            >\r\n                                                <path\r\n                                                    d=\"M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z\"\r\n                                                ></path>\r\n                                            </svg>\r\n                                        </div>\r\n                                        <div class=\"media-body\">\r\n                                            <div class=\"data-info\">\r\n                                                <h6>Licence Expiring Soon</h6>\r\n                                                <p>8 hrs ago</p>\r\n                                            </div>\r\n                                            <div class=\"icon-status\">\r\n                                                <svg\r\n                                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                                    width=\"24\"\r\n                                                    height=\"24\"\r\n                                                    viewBox=\"0 0 24 24\"\r\n                                                    fill=\"none\"\r\n                                                    stroke=\"currentColor\"\r\n                                                    stroke-width=\"2\"\r\n                                                    stroke-linecap=\"round\"\r\n                                                    stroke-linejoin=\"round\"\r\n                                                    class=\"feather feather-x\"\r\n                                                >\r\n                                                    <line x1=\"18\" y1=\"6\" x2=\"6\" y2=\"18\"></line>\r\n                                                    <line x1=\"6\" y1=\"6\" x2=\"18\" y2=\"18\"></line>\r\n                                                </svg>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </a>\r\n                            </li>\r\n                            <li role=\"presentation\"><hr role=\"separator\" aria-orientation=\"horizontal\" size=\"0\" class=\"dropdown-divider\" /></li>\r\n                            <li role=\"presentation\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-item\">\r\n                                    <div class=\"media file-upload\">\r\n                                        <div class=\"media-aside align-self-start\">\r\n                                            <svg\r\n                                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                                width=\"24\"\r\n                                                height=\"24\"\r\n                                                viewBox=\"0 0 24 24\"\r\n                                                fill=\"none\"\r\n                                                stroke=\"currentColor\"\r\n                                                stroke-width=\"2\"\r\n                                                stroke-linecap=\"round\"\r\n                                                stroke-linejoin=\"round\"\r\n                                                class=\"feather feather-file-text\"\r\n                                            >\r\n                                                <path d=\"M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z\"></path>\r\n                                                <polyline points=\"14 2 14 8 20 8\"></polyline>\r\n                                                <line x1=\"16\" y1=\"13\" x2=\"8\" y2=\"13\"></line>\r\n                                                <line x1=\"16\" y1=\"17\" x2=\"8\" y2=\"17\"></line>\r\n                                                <polyline points=\"10 9 9 9 8 9\"></polyline>\r\n                                            </svg>\r\n                                        </div>\r\n                                        <div class=\"media-body\">\r\n                                            <div class=\"data-info\">\r\n                                                <h6>Kelly Portfolio.pdf</h6>\r\n                                                <p>670 kb</p>\r\n                                            </div>\r\n                                            <div class=\"icon-status\">\r\n                                                <svg\r\n                                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                                    width=\"24\"\r\n                                                    height=\"24\"\r\n                                                    viewBox=\"0 0 24 24\"\r\n                                                    fill=\"none\"\r\n                                                    stroke=\"currentColor\"\r\n                                                    stroke-width=\"2\"\r\n                                                    stroke-linecap=\"round\"\r\n                                                    stroke-linejoin=\"round\"\r\n                                                    class=\"feather feather-check\"\r\n                                                >\r\n                                                    <polyline points=\"20 6 9 17 4 12\"></polyline>\r\n                                                </svg>\r\n                                            </div>\r\n                                        </div></div\r\n                                ></a>\r\n                            </li>\r\n                        </ul>\r\n                    </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_28, [_hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/users/profile",
     "class": "dropdown-item"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_31, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Profile ")];
-    }),
-    _: 1
-    /* STABLE */
-
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/apps/mailbox",
-    "class": "dropdown-item"
-  }, {
-    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_33, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Inbox ")];
+      return [_hoisted_32, _hoisted_33];
     }),
     _: 1
     /* STABLE */
 
   })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-    to: "/auth/lockscreen",
+    to: "/apps/mailbox",
     "class": "dropdown-item"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Lock Screen ")];
+      return [_hoisted_35, _hoisted_36];
     }),
     _: 1
     /* STABLE */
 
-  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+    to: "/auth/lockscreen",
+    "class": "dropdown-item"
+  }, {
+    "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+      return [_hoisted_38, _hoisted_39];
+    }),
+    _: 1
+    /* STABLE */
+
+  })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_40, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/auth/login-boxed",
     onClick: $setup.logOut,
     "class": "dropdown-item"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <a  @click=\"logOut\" class=\"dropdown-item\"> "), _hoisted_37, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Sign Out "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" </a> ")];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <a  @click=\"logOut\" class=\"dropdown-item\"> "), _hoisted_41, _hoisted_42, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" </a> ")];
     }),
     _: 1
     /* STABLE */
 
-  })])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  END NAVBAR  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  BEGIN NAVBAR  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_38, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("header", _hoisted_39, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+  })])])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  END NAVBAR  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  BEGIN NAVBAR  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_43, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("header", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
     href: "javascript:void(0);",
     "class": "sidebarCollapse",
     "data-placement": "bottom",
     onClick: _cache[5] || (_cache[5] = function ($event) {
       return _ctx.$store.commit('toggleSideBar', !_ctx.$store.state.is_show_sidebar);
     })
-  }, _hoisted_41), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Portal vue/Teleport for Breadcrumb "), _hoisted_42])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  END NAVBAR  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  BEGIN TOPBAR  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"topbar-nav header navbar\" role=\"banner\">\r\n            <nav class=\"topbar\">\r\n                <ul class=\"list-unstyled menu-categories\" id=\"topAccordion\">\r\n                    <li class=\"menu single-menu\">\r\n                        <a href=\"javascript:;\" class=\"dropdown-toggle autodroprown\">\r\n                            <div class=\"\">\r\n                                <svg\r\n                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                    width=\"24\"\r\n                                    height=\"24\"\r\n                                    viewBox=\"0 0 24 24\"\r\n                                    fill=\"none\"\r\n                                    stroke=\"currentColor\"\r\n                                    stroke-width=\"2\"\r\n                                    stroke-linecap=\"round\"\r\n                                    stroke-linejoin=\"round\"\r\n                                    class=\"feather feather-home\"\r\n                                >\r\n                                    <path d=\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"></path>\r\n                                    <polyline points=\"9 22 9 12 15 12 15 22\"></polyline>\r\n                                </svg>\r\n                                <span>{{ $t('dashboard') }}</span>\r\n                            </div>\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-chevron-down\"\r\n                            >\r\n                                <polyline points=\"6 9 12 15 18 9\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"collapse submenu list-unstyled\">\r\n                            <li>\r\n                                <router-link to=\"/\"> {{ $t('sales') }} </router-link>\r\n                            </li>\r\n                            <li>\r\n                                <router-link to=\"/index2\">{{ $t('analytics') }}</router-link>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n\r\n                    <li class=\"menu single-menu\">\r\n                        <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                            <div class=\"\">\r\n                                <svg\r\n                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                    width=\"24\"\r\n                                    height=\"24\"\r\n                                    viewBox=\"0 0 24 24\"\r\n                                    fill=\"none\"\r\n                                    stroke=\"currentColor\"\r\n                                    stroke-width=\"2\"\r\n                                    stroke-linecap=\"round\"\r\n                                    stroke-linejoin=\"round\"\r\n                                    class=\"feather feather-cpu\"\r\n                                >\r\n                                    <rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"2\" ry=\"2\"></rect>\r\n                                    <rect x=\"9\" y=\"9\" width=\"6\" height=\"6\"></rect>\r\n                                    <line x1=\"9\" y1=\"1\" x2=\"9\" y2=\"4\"></line>\r\n                                    <line x1=\"15\" y1=\"1\" x2=\"15\" y2=\"4\"></line>\r\n                                    <line x1=\"9\" y1=\"20\" x2=\"9\" y2=\"23\"></line>\r\n                                    <line x1=\"15\" y1=\"20\" x2=\"15\" y2=\"23\"></line>\r\n                                    <line x1=\"20\" y1=\"9\" x2=\"23\" y2=\"9\"></line>\r\n                                    <line x1=\"20\" y1=\"14\" x2=\"23\" y2=\"14\"></line>\r\n                                    <line x1=\"1\" y1=\"9\" x2=\"4\" y2=\"9\"></line>\r\n                                    <line x1=\"1\" y1=\"14\" x2=\"4\" y2=\"14\"></line>\r\n                                </svg>\r\n                                <span>{{ $t('apps') }}</span>\r\n                            </div>\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-chevron-down\"\r\n                            >\r\n                                <polyline points=\"6 9 12 15 18 9\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"collapse submenu list-unstyled\">\r\n                            <li><router-link to=\"/apps/chat\">Chat</router-link></li>\r\n                            <li><router-link to=\"/apps/mailbox\">Mailbox</router-link></li>\r\n                            <li><router-link to=\"/apps/todo-list\">Todo List</router-link></li>\r\n                            <li><router-link to=\"/apps/notes\">Notes</router-link></li>\r\n                            <li><router-link to=\"/apps/scrumboard\">Scrumboard</router-link></li>\r\n                            <li><router-link to=\"/apps/contacts\">Contacts</router-link></li>\r\n\r\n                            <li class=\"sub-sub-submenu-list\">\r\n                                <a href=\"javascript:;\">\r\n                                    Invoice\r\n                                    <svg\r\n                                        xmlns=\"http://www.w3.org/2000/svg\"\r\n                                        width=\"24\"\r\n                                        height=\"24\"\r\n                                        viewBox=\"0 0 24 24\"\r\n                                        fill=\"none\"\r\n                                        stroke=\"currentColor\"\r\n                                        stroke-width=\"2\"\r\n                                        stroke-linecap=\"round\"\r\n                                        stroke-linejoin=\"round\"\r\n                                        class=\"feather feather-chevron-right\"\r\n                                    >\r\n                                        <polyline points=\"9 18 15 12 9 6\"></polyline>\r\n                                    </svg>\r\n                                </a>\r\n                                <ul class=\"collapse list-unstyled sub-submenu\">\r\n                                    <li><router-link to=\"/apps/invoice/list\">List</router-link></li>\r\n                                    <li><router-link to=\"/apps/invoice/preview\">Preview</router-link></li>\r\n                                    <li><router-link to=\"/apps/invoice/add\">Add</router-link></li>\r\n                                    <li><router-link to=\"/apps/invoice/edit\">Edit</router-link></li>\r\n                                </ul>\r\n                            </li>\r\n                            <li><router-link to=\"/apps/calendar\">Calendar</router-link></li>\r\n                        </ul>\r\n                    </li>\r\n\r\n                    <li class=\"menu single-menu\">\r\n                        <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                            <div class=\"\">\r\n                                <svg\r\n                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                    width=\"24\"\r\n                                    height=\"24\"\r\n                                    viewBox=\"0 0 24 24\"\r\n                                    fill=\"none\"\r\n                                    stroke=\"currentColor\"\r\n                                    stroke-width=\"2\"\r\n                                    stroke-linecap=\"round\"\r\n                                    stroke-linejoin=\"round\"\r\n                                    class=\"feather feather-box\"\r\n                                >\r\n                                    <path d=\"M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z\"></path>\r\n                                    <polyline points=\"3.27 6.96 12 12.01 20.73 6.96\"></polyline>\r\n                                    <line x1=\"12\" y1=\"22.08\" x2=\"12\" y2=\"12\"></line>\r\n                                </svg>\r\n                                <span>{{ $t('components') }}</span>\r\n                            </div>\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-chevron-down\"\r\n                            >\r\n                                <polyline points=\"6 9 12 15 18 9\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"collapse submenu list-unstyled\">\r\n                            <li><router-link to=\"/components/tabs\">Tabs</router-link></li>\r\n                            <li><router-link to=\"/components/accordions\">Accordions</router-link></li>\r\n                            <li><router-link to=\"/components/modals\">Modals</router-link></li>\r\n                            <li><router-link to=\"/components/cards\">Cards</router-link></li>\r\n                            <li><router-link to=\"/components/carousel\">Carousel</router-link></li>\r\n                            <li><router-link to=\"/components/countdown\">Countdown</router-link></li>\r\n                            <li><router-link to=\"/components/counter\">Counter</router-link></li>\r\n                            <li><router-link to=\"/components/sweetalert\">Sweet Alerts</router-link></li>\r\n                            <li><router-link to=\"/components/timeline\">Timeline</router-link></li>\r\n                            <li><router-link to=\"/components/notifications\">Notifications</router-link></li>\r\n                            <li><router-link to=\"/components/media-object\">Media Object</router-link></li>\r\n                            <li><router-link to=\"/components/list-group\">List Group</router-link></li>\r\n                            <li><router-link to=\"/components/pricing-table\">Pricing Tables</router-link></li>\r\n                            <li><router-link to=\"/components/lightbox\"> Lightbox </router-link></li>\r\n                        </ul>\r\n                    </li>\r\n\r\n                    <li class=\"menu single-menu\">\r\n                        <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                            <div class=\"\">\r\n                                <svg\r\n                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                    width=\"24\"\r\n                                    height=\"24\"\r\n                                    viewBox=\"0 0 24 24\"\r\n                                    fill=\"none\"\r\n                                    stroke=\"currentColor\"\r\n                                    stroke-width=\"2\"\r\n                                    stroke-linecap=\"round\"\r\n                                    stroke-linejoin=\"round\"\r\n                                    class=\"feather feather-zap\"\r\n                                >\r\n                                    <polygon points=\"13 2 3 14 12 14 11 22 21 10 12 10 13 2\"></polygon>\r\n                                </svg>\r\n                                <span>{{ $t('ui_kit') }}</span>\r\n                            </div>\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-chevron-down\"\r\n                            >\r\n                                <polyline points=\"6 9 12 15 18 9\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"collapse submenu list-unstyled\">\r\n                            <li><router-link to=\"/elements/alerts\">Alerts</router-link></li>\r\n                            <li><router-link to=\"/elements/avatar\">Avatar</router-link></li>\r\n                            <li><router-link to=\"/elements/badges\">Badges</router-link></li>\r\n                            <li><router-link to=\"/elements/breadcrumbs\">Breadcrumbs</router-link></li>\r\n                            <li><router-link to=\"/elements/buttons\">Buttons</router-link></li>\r\n                            <li><router-link to=\"/elements/buttons-group\">Button Groups</router-link></li>\r\n                            <li><router-link to=\"/elements/color-library\">Color Library</router-link></li>\r\n                            <li><router-link to=\"/elements/dropdown\">Dropdown</router-link></li>\r\n                            <li><router-link to=\"/elements/infobox\">Infobox</router-link></li>\r\n                            <li><router-link to=\"/elements/jumbotron\">Jumbotron</router-link></li>\r\n                            <li><router-link to=\"/elements/loader\">Loader</router-link></li>\r\n                            <li><router-link to=\"/elements/pagination\">Pagination</router-link></li>\r\n                            <li><router-link to=\"/elements/popovers\">Popovers</router-link></li>\r\n                            <li><router-link to=\"/elements/progress-bar\">Progress Bar</router-link></li>\r\n                            <li><router-link to=\"/elements/search\">Search</router-link></li>\r\n                            <li><router-link to=\"/elements/tooltips\">Tooltips</router-link></li>\r\n                            <li><router-link to=\"/elements/treeview\">Treeview</router-link></li>\r\n                            <li><router-link to=\"/elements/typography\">Typography</router-link></li>\r\n                        </ul>\r\n                    </li>\r\n\r\n                    <li class=\"menu single-menu\">\r\n                        <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                            <div class=\"\">\r\n                                <svg\r\n                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                    width=\"24\"\r\n                                    height=\"24\"\r\n                                    viewBox=\"0 0 24 24\"\r\n                                    fill=\"none\"\r\n                                    stroke=\"currentColor\"\r\n                                    stroke-width=\"2\"\r\n                                    stroke-linecap=\"round\"\r\n                                    stroke-linejoin=\"round\"\r\n                                    class=\"feather feather-layout\"\r\n                                >\r\n                                    <rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"2\" ry=\"2\"></rect>\r\n                                    <line x1=\"3\" y1=\"9\" x2=\"21\" y2=\"9\"></line>\r\n                                    <line x1=\"9\" y1=\"21\" x2=\"9\" y2=\"9\"></line>\r\n                                </svg>\r\n                                <span>{{ $t('tables') }}</span>\r\n                            </div>\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-chevron-down\"\r\n                            >\r\n                                <polyline points=\"6 9 12 15 18 9\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"collapse submenu list-unstyled\">\r\n                            <li><router-link to=\"/tables/basic\">Basic</router-link></li>\r\n                            <li class=\"sub-sub-submenu-list\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                                    DataTables\r\n                                    <svg\r\n                                        xmlns=\"http://www.w3.org/2000/svg\"\r\n                                        width=\"24\"\r\n                                        height=\"24\"\r\n                                        viewBox=\"0 0 24 24\"\r\n                                        fill=\"none\"\r\n                                        stroke=\"currentColor\"\r\n                                        stroke-width=\"2\"\r\n                                        stroke-linecap=\"round\"\r\n                                        stroke-linejoin=\"round\"\r\n                                        class=\"feather feather-chevron-right\"\r\n                                    >\r\n                                        <polyline points=\"9 18 15 12 9 6\"></polyline>\r\n                                    </svg>\r\n                                </a>\r\n                                <ul class=\"collapse list-unstyled sub-submenu\">\r\n                                    <li><router-link to=\"/tables/basic\">Basic</router-link></li>\r\n                                    <li><router-link to=\"/tables/striped\">Striped Table</router-link></li>\r\n                                    <li><router-link to=\"/tables/order-sorting\">Order Sorting</router-link></li>\r\n                                    <li><router-link to=\"/tables/multi-column\">Multi Column</router-link></li>\r\n                                    <li><router-link to=\"/tables/multiple-tables\">Multiple Tables</router-link></li>\r\n                                    <li><router-link to=\"/tables/alt-pagination\">Alt. Pagination</router-link></li>\r\n                                    <li><router-link to=\"/tables/custom\">Custom</router-link></li>\r\n                                    <li><router-link to=\"/tables/range-search\">Range Search</router-link></li>\r\n                                    <li><router-link to=\"/tables/export\">Export</router-link></li>\r\n                                    <li><router-link to=\"/tables/live-dom-ordering\">Live DOM ordering</router-link></li>\r\n                                    <li><router-link to=\"/tables/miscellaneous\">Miscellaneous</router-link></li>\r\n                                </ul>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n\r\n                    <li class=\"menu single-menu\">\r\n                        <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                            <div class=\"\">\r\n                                <svg\r\n                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                    width=\"24\"\r\n                                    height=\"24\"\r\n                                    viewBox=\"0 0 24 24\"\r\n                                    fill=\"none\"\r\n                                    stroke=\"currentColor\"\r\n                                    stroke-width=\"2\"\r\n                                    stroke-linecap=\"round\"\r\n                                    stroke-linejoin=\"round\"\r\n                                    class=\"feather feather-clipboard\"\r\n                                >\r\n                                    <path d=\"M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2\"></path>\r\n                                    <rect x=\"8\" y=\"2\" width=\"8\" height=\"4\" rx=\"1\" ry=\"1\"></rect>\r\n                                </svg>\r\n                                <span>{{ $t('forms') }}</span>\r\n                            </div>\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-chevron-down\"\r\n                            >\r\n                                <polyline points=\"6 9 12 15 18 9\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"collapse submenu list-unstyled\">\r\n                            <li><router-link to=\"/forms/basic\">Basic</router-link></li>\r\n                            <li><router-link to=\"/forms/input-group\">Input Group</router-link></li>\r\n                            <li><router-link to=\"/forms/layouts\">Layouts</router-link></li>\r\n                            <li><router-link to=\"/forms/validation\">Validation</router-link></li>\r\n                            <li><router-link to=\"/forms/input-mask\">Input Mask</router-link></li>\r\n                            <li><router-link to=\"/forms/select2\">Select2</router-link></li>\r\n                            <li><router-link to=\"/forms/touchspin\">TouchSpin</router-link></li>\r\n                            <li><router-link to=\"/forms/checkbox-radio\">Checkbox &amp; Radio</router-link></li>\r\n                            <li><router-link to=\"/forms/switches\">Switches</router-link></li>\r\n                            <li><router-link to=\"/forms/wizards\">Wizards</router-link></li>\r\n                            <li><router-link to=\"/forms/file-upload\">File Upload</router-link></li>\r\n                            <li><router-link to=\"/forms/quill-editor\">Quill Editor</router-link></li>\r\n                            <li><router-link to=\"/forms/markdown-editor\">Markdown Editor</router-link></li>\r\n                            <li><router-link to=\"/forms/date-picker\">Date &amp; Range Picker </router-link></li>\r\n                            <li><router-link to=\"/forms/clipboard\">Clipboard</router-link></li>\r\n                        </ul>\r\n                    </li>\r\n\r\n                    <li class=\"menu single-menu\">\r\n                        <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                            <div class=\"\">\r\n                                <svg\r\n                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                    width=\"24\"\r\n                                    height=\"24\"\r\n                                    viewBox=\"0 0 24 24\"\r\n                                    fill=\"none\"\r\n                                    stroke=\"currentColor\"\r\n                                    stroke-width=\"2\"\r\n                                    stroke-linecap=\"round\"\r\n                                    stroke-linejoin=\"round\"\r\n                                    class=\"feather feather-file\"\r\n                                >\r\n                                    <path d=\"M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z\"></path>\r\n                                    <polyline points=\"13 2 13 9 20 9\"></polyline>\r\n                                </svg>\r\n                                <span>{{ $t('pages') }}</span>\r\n                            </div>\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-chevron-down\"\r\n                            >\r\n                                <polyline points=\"6 9 12 15 18 9\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"collapse submenu list-unstyled\">\r\n                            <li><router-link to=\"/pages/helpdesk\">Helpdesk</router-link></li>\r\n                            <li><router-link to=\"/pages/contact-us\">Contact Form</router-link></li>\r\n                            <li><router-link to=\"/pages/faq\">FAQ</router-link></li>\r\n                            <li><router-link to=\"/pages/faq2\">FAQ 2</router-link></li>\r\n                            <li><router-link to=\"/pages/privacy-policy\">Privacy Policy</router-link></li>\r\n                            <li><a target=\"_blank\" href=\"/pages/coming-soon\">Coming Soon</a></li>\r\n                            <li><router-link to=\"/pages/blank-page\">Blank Page</router-link></li>\r\n                            <li><router-link to=\"/pages/sample\">Sample Page</router-link></li>\r\n\r\n                            <li><router-link to=\"/users/profile\">Profile</router-link></li>\r\n                            <li><router-link to=\"/users/account-setting\">Account Settings</router-link></li>\r\n                            <li class=\"sub-sub-submenu-list\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                                    Error\r\n                                    <svg\r\n                                        xmlns=\"http://www.w3.org/2000/svg\"\r\n                                        width=\"24\"\r\n                                        height=\"24\"\r\n                                        viewBox=\"0 0 24 24\"\r\n                                        fill=\"none\"\r\n                                        stroke=\"currentColor\"\r\n                                        stroke-width=\"2\"\r\n                                        stroke-linecap=\"round\"\r\n                                        stroke-linejoin=\"round\"\r\n                                        class=\"feather feather-chevron-right\"\r\n                                    >\r\n                                        <polyline points=\"9 18 15 12 9 6\"></polyline>\r\n                                    </svg>\r\n                                </a>\r\n                                <ul class=\"collapse list-unstyled sub-submenu\">\r\n                                    <li><a target=\"_blank\" href=\"/pages/error404\">404</a></li>\r\n                                    <li><a target=\"_blank\" href=\"/pages/error500\">500</a></li>\r\n                                    <li><a target=\"_blank\" href=\"/pages/error503\">503</a></li>\r\n                                    <li><a target=\"_blank\" href=\"/pages/maintenence\">Maintanence</a></li>\r\n                                </ul>\r\n                            </li>\r\n                            <li class=\"sub-sub-submenu-list\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                                    Login\r\n                                    <svg\r\n                                        xmlns=\"http://www.w3.org/2000/svg\"\r\n                                        width=\"24\"\r\n                                        height=\"24\"\r\n                                        viewBox=\"0 0 24 24\"\r\n                                        fill=\"none\"\r\n                                        stroke=\"currentColor\"\r\n                                        stroke-width=\"2\"\r\n                                        stroke-linecap=\"round\"\r\n                                        stroke-linejoin=\"round\"\r\n                                        class=\"feather feather-chevron-right\"\r\n                                    >\r\n                                        <polyline points=\"9 18 15 12 9 6\"></polyline>\r\n                                    </svg>\r\n                                </a>\r\n                                <ul class=\"collapse list-unstyled sub-submenu\">\r\n                                    <li><a target=\"_blank\" href=\"/auth/login\">Login Cover</a></li>\r\n                                    <li><a target=\"_blank\" href=\"/auth/login-boxed\">Login Boxed</a></li>\r\n                                </ul>\r\n                            </li>\r\n                            <li class=\"sub-sub-submenu-list\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                                    Register\r\n                                    <svg\r\n                                        xmlns=\"http://www.w3.org/2000/svg\"\r\n                                        width=\"24\"\r\n                                        height=\"24\"\r\n                                        viewBox=\"0 0 24 24\"\r\n                                        fill=\"none\"\r\n                                        stroke=\"currentColor\"\r\n                                        stroke-width=\"2\"\r\n                                        stroke-linecap=\"round\"\r\n                                        stroke-linejoin=\"round\"\r\n                                        class=\"feather feather-chevron-right\"\r\n                                    >\r\n                                        <polyline points=\"9 18 15 12 9 6\"></polyline>\r\n                                    </svg>\r\n                                </a>\r\n                                <ul class=\"collapse list-unstyled sub-submenu\">\r\n                                    <li><a target=\"_blank\" href=\"/auth/register\">Register Cover</a></li>\r\n                                    <li><a target=\"_blank\" href=\"/auth/register-boxed\">Register Boxed</a></li>\r\n                                </ul>\r\n                            </li>\r\n\r\n                            <li class=\"sub-sub-submenu-list\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                                    Password Recovery\r\n                                    <svg\r\n                                        xmlns=\"http://www.w3.org/2000/svg\"\r\n                                        width=\"24\"\r\n                                        height=\"24\"\r\n                                        viewBox=\"0 0 24 24\"\r\n                                        fill=\"none\"\r\n                                        stroke=\"currentColor\"\r\n                                        stroke-width=\"2\"\r\n                                        stroke-linecap=\"round\"\r\n                                        stroke-linejoin=\"round\"\r\n                                        class=\"feather feather-chevron-right\"\r\n                                    >\r\n                                        <polyline points=\"9 18 15 12 9 6\"></polyline>\r\n                                    </svg>\r\n                                </a>\r\n                                <ul class=\"collapse list-unstyled sub-submenu\">\r\n                                    <li><a target=\"_blank\" href=\"/auth/pass-recovery\">Recover ID Cover</a></li>\r\n                                    <li><a target=\"_blank\" href=\"/auth/pass-recovery-boxed\">Recover ID Boxed</a></li>\r\n                                </ul>\r\n                            </li>\r\n\r\n                            <li class=\"sub-sub-submenu-list\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                                    Lockscreen\r\n                                    <svg\r\n                                        xmlns=\"http://www.w3.org/2000/svg\"\r\n                                        width=\"24\"\r\n                                        height=\"24\"\r\n                                        viewBox=\"0 0 24 24\"\r\n                                        fill=\"none\"\r\n                                        stroke=\"currentColor\"\r\n                                        stroke-width=\"2\"\r\n                                        stroke-linecap=\"round\"\r\n                                        stroke-linejoin=\"round\"\r\n                                        class=\"feather feather-chevron-right\"\r\n                                    >\r\n                                        <polyline points=\"9 18 15 12 9 6\"></polyline>\r\n                                    </svg>\r\n                                </a>\r\n                                <ul class=\"collapse list-unstyled sub-submenu\">\r\n                                    <li><a target=\"_blank\" href=\"/auth/lockscreen\">Unlock Cover</a></li>\r\n                                    <li><a target=\"_blank\" href=\"/auth/lockscreen-boxed\">Unlock Boxed</a></li>\r\n                                </ul>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n\r\n                    <li class=\"menu single-menu\">\r\n                        <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                            <div class=\"\">\r\n                                <svg\r\n                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                    width=\"24\"\r\n                                    height=\"24\"\r\n                                    viewBox=\"0 0 24 24\"\r\n                                    fill=\"none\"\r\n                                    stroke=\"currentColor\"\r\n                                    stroke-width=\"2\"\r\n                                    stroke-linecap=\"round\"\r\n                                    stroke-linejoin=\"round\"\r\n                                    class=\"feather feather-plus-circle\"\r\n                                >\r\n                                    <circle cx=\"12\" cy=\"12\" r=\"10\"></circle>\r\n                                    <line x1=\"12\" y1=\"8\" x2=\"12\" y2=\"16\"></line>\r\n                                    <line x1=\"8\" y1=\"12\" x2=\"16\" y2=\"12\"></line>\r\n                                </svg>\r\n                                <span>{{ $t('more') }}</span>\r\n                            </div>\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-chevron-down\"\r\n                            >\r\n                                <polyline points=\"6 9 12 15 18 9\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"collapse submenu list-unstyled\">\r\n                            <li><router-link to=\"/dragndrop\">Drag and Drop</router-link></li>\r\n                            <li><router-link to=\"/widgets\">Widgets</router-link></li>\r\n                            <li><router-link to=\"/charts/apex-chart\">Charts</router-link></li>\r\n                            <li><router-link to=\"/font-icons\">Font Icons</router-link></li>\r\n                            <li>\r\n                                <a target=\"_blank\" href=\"https://cork-vue.sbthemes.com\"> Documentation </a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                </ul>\r\n            </nav>\r\n        </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  END TOPBAR  ")]);
+  }, _hoisted_46), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Portal vue/Teleport for Breadcrumb "), _hoisted_47])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  END NAVBAR  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  BEGIN TOPBAR  "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"topbar-nav header navbar\" role=\"banner\">\r\n            <nav class=\"topbar\">\r\n                <ul class=\"list-unstyled menu-categories\" id=\"topAccordion\">\r\n                    <li class=\"menu single-menu\">\r\n                        <a href=\"javascript:;\" class=\"dropdown-toggle autodroprown\">\r\n                            <div class=\"\">\r\n                                <svg\r\n                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                    width=\"24\"\r\n                                    height=\"24\"\r\n                                    viewBox=\"0 0 24 24\"\r\n                                    fill=\"none\"\r\n                                    stroke=\"currentColor\"\r\n                                    stroke-width=\"2\"\r\n                                    stroke-linecap=\"round\"\r\n                                    stroke-linejoin=\"round\"\r\n                                    class=\"feather feather-home\"\r\n                                >\r\n                                    <path d=\"M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\"></path>\r\n                                    <polyline points=\"9 22 9 12 15 12 15 22\"></polyline>\r\n                                </svg>\r\n                                <span>{{ $t('dashboard') }}</span>\r\n                            </div>\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-chevron-down\"\r\n                            >\r\n                                <polyline points=\"6 9 12 15 18 9\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"collapse submenu list-unstyled\">\r\n                            <li>\r\n                                <router-link to=\"/\"> {{ $t('sales') }} </router-link>\r\n                            </li>\r\n                            <li>\r\n                                <router-link to=\"/index2\">{{ $t('analytics') }}</router-link>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n\r\n                    <li class=\"menu single-menu\">\r\n                        <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                            <div class=\"\">\r\n                                <svg\r\n                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                    width=\"24\"\r\n                                    height=\"24\"\r\n                                    viewBox=\"0 0 24 24\"\r\n                                    fill=\"none\"\r\n                                    stroke=\"currentColor\"\r\n                                    stroke-width=\"2\"\r\n                                    stroke-linecap=\"round\"\r\n                                    stroke-linejoin=\"round\"\r\n                                    class=\"feather feather-cpu\"\r\n                                >\r\n                                    <rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"2\" ry=\"2\"></rect>\r\n                                    <rect x=\"9\" y=\"9\" width=\"6\" height=\"6\"></rect>\r\n                                    <line x1=\"9\" y1=\"1\" x2=\"9\" y2=\"4\"></line>\r\n                                    <line x1=\"15\" y1=\"1\" x2=\"15\" y2=\"4\"></line>\r\n                                    <line x1=\"9\" y1=\"20\" x2=\"9\" y2=\"23\"></line>\r\n                                    <line x1=\"15\" y1=\"20\" x2=\"15\" y2=\"23\"></line>\r\n                                    <line x1=\"20\" y1=\"9\" x2=\"23\" y2=\"9\"></line>\r\n                                    <line x1=\"20\" y1=\"14\" x2=\"23\" y2=\"14\"></line>\r\n                                    <line x1=\"1\" y1=\"9\" x2=\"4\" y2=\"9\"></line>\r\n                                    <line x1=\"1\" y1=\"14\" x2=\"4\" y2=\"14\"></line>\r\n                                </svg>\r\n                                <span>{{ $t('apps') }}</span>\r\n                            </div>\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-chevron-down\"\r\n                            >\r\n                                <polyline points=\"6 9 12 15 18 9\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"collapse submenu list-unstyled\">\r\n                            <li><router-link to=\"/apps/chat\">Chat</router-link></li>\r\n                            <li><router-link to=\"/apps/mailbox\">Mailbox</router-link></li>\r\n                            <li><router-link to=\"/apps/todo-list\">Todo List</router-link></li>\r\n                            <li><router-link to=\"/apps/notes\">Notes</router-link></li>\r\n                            <li><router-link to=\"/apps/scrumboard\">Scrumboard</router-link></li>\r\n                            <li><router-link to=\"/apps/contacts\">Contacts</router-link></li>\r\n\r\n                            <li class=\"sub-sub-submenu-list\">\r\n                                <a href=\"javascript:;\">\r\n                                    Invoice\r\n                                    <svg\r\n                                        xmlns=\"http://www.w3.org/2000/svg\"\r\n                                        width=\"24\"\r\n                                        height=\"24\"\r\n                                        viewBox=\"0 0 24 24\"\r\n                                        fill=\"none\"\r\n                                        stroke=\"currentColor\"\r\n                                        stroke-width=\"2\"\r\n                                        stroke-linecap=\"round\"\r\n                                        stroke-linejoin=\"round\"\r\n                                        class=\"feather feather-chevron-right\"\r\n                                    >\r\n                                        <polyline points=\"9 18 15 12 9 6\"></polyline>\r\n                                    </svg>\r\n                                </a>\r\n                                <ul class=\"collapse list-unstyled sub-submenu\">\r\n                                    <li><router-link to=\"/apps/invoice/list\">List</router-link></li>\r\n                                    <li><router-link to=\"/apps/invoice/preview\">Preview</router-link></li>\r\n                                    <li><router-link to=\"/apps/invoice/add\">Add</router-link></li>\r\n                                    <li><router-link to=\"/apps/invoice/edit\">Edit</router-link></li>\r\n                                </ul>\r\n                            </li>\r\n                            <li><router-link to=\"/apps/calendar\">Calendar</router-link></li>\r\n                        </ul>\r\n                    </li>\r\n\r\n                    <li class=\"menu single-menu\">\r\n                        <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                            <div class=\"\">\r\n                                <svg\r\n                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                    width=\"24\"\r\n                                    height=\"24\"\r\n                                    viewBox=\"0 0 24 24\"\r\n                                    fill=\"none\"\r\n                                    stroke=\"currentColor\"\r\n                                    stroke-width=\"2\"\r\n                                    stroke-linecap=\"round\"\r\n                                    stroke-linejoin=\"round\"\r\n                                    class=\"feather feather-box\"\r\n                                >\r\n                                    <path d=\"M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z\"></path>\r\n                                    <polyline points=\"3.27 6.96 12 12.01 20.73 6.96\"></polyline>\r\n                                    <line x1=\"12\" y1=\"22.08\" x2=\"12\" y2=\"12\"></line>\r\n                                </svg>\r\n                                <span>{{ $t('components') }}</span>\r\n                            </div>\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-chevron-down\"\r\n                            >\r\n                                <polyline points=\"6 9 12 15 18 9\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"collapse submenu list-unstyled\">\r\n                            <li><router-link to=\"/components/tabs\">Tabs</router-link></li>\r\n                            <li><router-link to=\"/components/accordions\">Accordions</router-link></li>\r\n                            <li><router-link to=\"/components/modals\">Modals</router-link></li>\r\n                            <li><router-link to=\"/components/cards\">Cards</router-link></li>\r\n                            <li><router-link to=\"/components/carousel\">Carousel</router-link></li>\r\n                            <li><router-link to=\"/components/countdown\">Countdown</router-link></li>\r\n                            <li><router-link to=\"/components/counter\">Counter</router-link></li>\r\n                            <li><router-link to=\"/components/sweetalert\">Sweet Alerts</router-link></li>\r\n                            <li><router-link to=\"/components/timeline\">Timeline</router-link></li>\r\n                            <li><router-link to=\"/components/notifications\">Notifications</router-link></li>\r\n                            <li><router-link to=\"/components/media-object\">Media Object</router-link></li>\r\n                            <li><router-link to=\"/components/list-group\">List Group</router-link></li>\r\n                            <li><router-link to=\"/components/pricing-table\">Pricing Tables</router-link></li>\r\n                            <li><router-link to=\"/components/lightbox\"> Lightbox </router-link></li>\r\n                        </ul>\r\n                    </li>\r\n\r\n                    <li class=\"menu single-menu\">\r\n                        <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                            <div class=\"\">\r\n                                <svg\r\n                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                    width=\"24\"\r\n                                    height=\"24\"\r\n                                    viewBox=\"0 0 24 24\"\r\n                                    fill=\"none\"\r\n                                    stroke=\"currentColor\"\r\n                                    stroke-width=\"2\"\r\n                                    stroke-linecap=\"round\"\r\n                                    stroke-linejoin=\"round\"\r\n                                    class=\"feather feather-zap\"\r\n                                >\r\n                                    <polygon points=\"13 2 3 14 12 14 11 22 21 10 12 10 13 2\"></polygon>\r\n                                </svg>\r\n                                <span>{{ $t('ui_kit') }}</span>\r\n                            </div>\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-chevron-down\"\r\n                            >\r\n                                <polyline points=\"6 9 12 15 18 9\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"collapse submenu list-unstyled\">\r\n                            <li><router-link to=\"/elements/alerts\">Alerts</router-link></li>\r\n                            <li><router-link to=\"/elements/avatar\">Avatar</router-link></li>\r\n                            <li><router-link to=\"/elements/badges\">Badges</router-link></li>\r\n                            <li><router-link to=\"/elements/breadcrumbs\">Breadcrumbs</router-link></li>\r\n                            <li><router-link to=\"/elements/buttons\">Buttons</router-link></li>\r\n                            <li><router-link to=\"/elements/buttons-group\">Button Groups</router-link></li>\r\n                            <li><router-link to=\"/elements/color-library\">Color Library</router-link></li>\r\n                            <li><router-link to=\"/elements/dropdown\">Dropdown</router-link></li>\r\n                            <li><router-link to=\"/elements/infobox\">Infobox</router-link></li>\r\n                            <li><router-link to=\"/elements/jumbotron\">Jumbotron</router-link></li>\r\n                            <li><router-link to=\"/elements/loader\">Loader</router-link></li>\r\n                            <li><router-link to=\"/elements/pagination\">Pagination</router-link></li>\r\n                            <li><router-link to=\"/elements/popovers\">Popovers</router-link></li>\r\n                            <li><router-link to=\"/elements/progress-bar\">Progress Bar</router-link></li>\r\n                            <li><router-link to=\"/elements/search\">Search</router-link></li>\r\n                            <li><router-link to=\"/elements/tooltips\">Tooltips</router-link></li>\r\n                            <li><router-link to=\"/elements/treeview\">Treeview</router-link></li>\r\n                            <li><router-link to=\"/elements/typography\">Typography</router-link></li>\r\n                        </ul>\r\n                    </li>\r\n\r\n                    <li class=\"menu single-menu\">\r\n                        <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                            <div class=\"\">\r\n                                <svg\r\n                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                    width=\"24\"\r\n                                    height=\"24\"\r\n                                    viewBox=\"0 0 24 24\"\r\n                                    fill=\"none\"\r\n                                    stroke=\"currentColor\"\r\n                                    stroke-width=\"2\"\r\n                                    stroke-linecap=\"round\"\r\n                                    stroke-linejoin=\"round\"\r\n                                    class=\"feather feather-layout\"\r\n                                >\r\n                                    <rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"2\" ry=\"2\"></rect>\r\n                                    <line x1=\"3\" y1=\"9\" x2=\"21\" y2=\"9\"></line>\r\n                                    <line x1=\"9\" y1=\"21\" x2=\"9\" y2=\"9\"></line>\r\n                                </svg>\r\n                                <span>{{ $t('tables') }}</span>\r\n                            </div>\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-chevron-down\"\r\n                            >\r\n                                <polyline points=\"6 9 12 15 18 9\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"collapse submenu list-unstyled\">\r\n                            <li><router-link to=\"/tables/basic\">Basic</router-link></li>\r\n                            <li class=\"sub-sub-submenu-list\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                                    DataTables\r\n                                    <svg\r\n                                        xmlns=\"http://www.w3.org/2000/svg\"\r\n                                        width=\"24\"\r\n                                        height=\"24\"\r\n                                        viewBox=\"0 0 24 24\"\r\n                                        fill=\"none\"\r\n                                        stroke=\"currentColor\"\r\n                                        stroke-width=\"2\"\r\n                                        stroke-linecap=\"round\"\r\n                                        stroke-linejoin=\"round\"\r\n                                        class=\"feather feather-chevron-right\"\r\n                                    >\r\n                                        <polyline points=\"9 18 15 12 9 6\"></polyline>\r\n                                    </svg>\r\n                                </a>\r\n                                <ul class=\"collapse list-unstyled sub-submenu\">\r\n                                    <li><router-link to=\"/tables/basic\">Basic</router-link></li>\r\n                                    <li><router-link to=\"/tables/striped\">Striped Table</router-link></li>\r\n                                    <li><router-link to=\"/tables/order-sorting\">Order Sorting</router-link></li>\r\n                                    <li><router-link to=\"/tables/multi-column\">Multi Column</router-link></li>\r\n                                    <li><router-link to=\"/tables/multiple-tables\">Multiple Tables</router-link></li>\r\n                                    <li><router-link to=\"/tables/alt-pagination\">Alt. Pagination</router-link></li>\r\n                                    <li><router-link to=\"/tables/custom\">Custom</router-link></li>\r\n                                    <li><router-link to=\"/tables/range-search\">Range Search</router-link></li>\r\n                                    <li><router-link to=\"/tables/export\">Export</router-link></li>\r\n                                    <li><router-link to=\"/tables/live-dom-ordering\">Live DOM ordering</router-link></li>\r\n                                    <li><router-link to=\"/tables/miscellaneous\">Miscellaneous</router-link></li>\r\n                                </ul>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n\r\n                    <li class=\"menu single-menu\">\r\n                        <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                            <div class=\"\">\r\n                                <svg\r\n                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                    width=\"24\"\r\n                                    height=\"24\"\r\n                                    viewBox=\"0 0 24 24\"\r\n                                    fill=\"none\"\r\n                                    stroke=\"currentColor\"\r\n                                    stroke-width=\"2\"\r\n                                    stroke-linecap=\"round\"\r\n                                    stroke-linejoin=\"round\"\r\n                                    class=\"feather feather-clipboard\"\r\n                                >\r\n                                    <path d=\"M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2\"></path>\r\n                                    <rect x=\"8\" y=\"2\" width=\"8\" height=\"4\" rx=\"1\" ry=\"1\"></rect>\r\n                                </svg>\r\n                                <span>{{ $t('forms') }}</span>\r\n                            </div>\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-chevron-down\"\r\n                            >\r\n                                <polyline points=\"6 9 12 15 18 9\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"collapse submenu list-unstyled\">\r\n                            <li><router-link to=\"/forms/basic\">Basic</router-link></li>\r\n                            <li><router-link to=\"/forms/input-group\">Input Group</router-link></li>\r\n                            <li><router-link to=\"/forms/layouts\">Layouts</router-link></li>\r\n                            <li><router-link to=\"/forms/validation\">Validation</router-link></li>\r\n                            <li><router-link to=\"/forms/input-mask\">Input Mask</router-link></li>\r\n                            <li><router-link to=\"/forms/select2\">Select2</router-link></li>\r\n                            <li><router-link to=\"/forms/touchspin\">TouchSpin</router-link></li>\r\n                            <li><router-link to=\"/forms/checkbox-radio\">Checkbox &amp; Radio</router-link></li>\r\n                            <li><router-link to=\"/forms/switches\">Switches</router-link></li>\r\n                            <li><router-link to=\"/forms/wizards\">Wizards</router-link></li>\r\n                            <li><router-link to=\"/forms/file-upload\">File Upload</router-link></li>\r\n                            <li><router-link to=\"/forms/quill-editor\">Quill Editor</router-link></li>\r\n                            <li><router-link to=\"/forms/markdown-editor\">Markdown Editor</router-link></li>\r\n                            <li><router-link to=\"/forms/date-picker\">Date &amp; Range Picker </router-link></li>\r\n                            <li><router-link to=\"/forms/clipboard\">Clipboard</router-link></li>\r\n                        </ul>\r\n                    </li>\r\n\r\n                    <li class=\"menu single-menu\">\r\n                        <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                            <div class=\"\">\r\n                                <svg\r\n                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                    width=\"24\"\r\n                                    height=\"24\"\r\n                                    viewBox=\"0 0 24 24\"\r\n                                    fill=\"none\"\r\n                                    stroke=\"currentColor\"\r\n                                    stroke-width=\"2\"\r\n                                    stroke-linecap=\"round\"\r\n                                    stroke-linejoin=\"round\"\r\n                                    class=\"feather feather-file\"\r\n                                >\r\n                                    <path d=\"M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z\"></path>\r\n                                    <polyline points=\"13 2 13 9 20 9\"></polyline>\r\n                                </svg>\r\n                                <span>{{ $t('pages') }}</span>\r\n                            </div>\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-chevron-down\"\r\n                            >\r\n                                <polyline points=\"6 9 12 15 18 9\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"collapse submenu list-unstyled\">\r\n                            <li><router-link to=\"/pages/helpdesk\">Helpdesk</router-link></li>\r\n                            <li><router-link to=\"/pages/contact-us\">Contact Form</router-link></li>\r\n                            <li><router-link to=\"/pages/faq\">FAQ</router-link></li>\r\n                            <li><router-link to=\"/pages/faq2\">FAQ 2</router-link></li>\r\n                            <li><router-link to=\"/pages/privacy-policy\">Privacy Policy</router-link></li>\r\n                            <li><a target=\"_blank\" href=\"/pages/coming-soon\">Coming Soon</a></li>\r\n                            <li><router-link to=\"/pages/blank-page\">Blank Page</router-link></li>\r\n                            <li><router-link to=\"/pages/sample\">Sample Page</router-link></li>\r\n\r\n                            <li><router-link to=\"/users/profile\">Profile</router-link></li>\r\n                            <li><router-link to=\"/users/account-setting\">Account Settings</router-link></li>\r\n                            <li class=\"sub-sub-submenu-list\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                                    Error\r\n                                    <svg\r\n                                        xmlns=\"http://www.w3.org/2000/svg\"\r\n                                        width=\"24\"\r\n                                        height=\"24\"\r\n                                        viewBox=\"0 0 24 24\"\r\n                                        fill=\"none\"\r\n                                        stroke=\"currentColor\"\r\n                                        stroke-width=\"2\"\r\n                                        stroke-linecap=\"round\"\r\n                                        stroke-linejoin=\"round\"\r\n                                        class=\"feather feather-chevron-right\"\r\n                                    >\r\n                                        <polyline points=\"9 18 15 12 9 6\"></polyline>\r\n                                    </svg>\r\n                                </a>\r\n                                <ul class=\"collapse list-unstyled sub-submenu\">\r\n                                    <li><a target=\"_blank\" href=\"/pages/error404\">404</a></li>\r\n                                    <li><a target=\"_blank\" href=\"/pages/error500\">500</a></li>\r\n                                    <li><a target=\"_blank\" href=\"/pages/error503\">503</a></li>\r\n                                    <li><a target=\"_blank\" href=\"/pages/maintenence\">Maintanence</a></li>\r\n                                </ul>\r\n                            </li>\r\n                            <li class=\"sub-sub-submenu-list\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                                    Login\r\n                                    <svg\r\n                                        xmlns=\"http://www.w3.org/2000/svg\"\r\n                                        width=\"24\"\r\n                                        height=\"24\"\r\n                                        viewBox=\"0 0 24 24\"\r\n                                        fill=\"none\"\r\n                                        stroke=\"currentColor\"\r\n                                        stroke-width=\"2\"\r\n                                        stroke-linecap=\"round\"\r\n                                        stroke-linejoin=\"round\"\r\n                                        class=\"feather feather-chevron-right\"\r\n                                    >\r\n                                        <polyline points=\"9 18 15 12 9 6\"></polyline>\r\n                                    </svg>\r\n                                </a>\r\n                                <ul class=\"collapse list-unstyled sub-submenu\">\r\n                                    <li><a target=\"_blank\" href=\"/auth/login\">Login Cover</a></li>\r\n                                    <li><a target=\"_blank\" href=\"/auth/login-boxed\">Login Boxed</a></li>\r\n                                </ul>\r\n                            </li>\r\n                            <li class=\"sub-sub-submenu-list\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                                    Register\r\n                                    <svg\r\n                                        xmlns=\"http://www.w3.org/2000/svg\"\r\n                                        width=\"24\"\r\n                                        height=\"24\"\r\n                                        viewBox=\"0 0 24 24\"\r\n                                        fill=\"none\"\r\n                                        stroke=\"currentColor\"\r\n                                        stroke-width=\"2\"\r\n                                        stroke-linecap=\"round\"\r\n                                        stroke-linejoin=\"round\"\r\n                                        class=\"feather feather-chevron-right\"\r\n                                    >\r\n                                        <polyline points=\"9 18 15 12 9 6\"></polyline>\r\n                                    </svg>\r\n                                </a>\r\n                                <ul class=\"collapse list-unstyled sub-submenu\">\r\n                                    <li><a target=\"_blank\" href=\"/auth/register\">Register Cover</a></li>\r\n                                    <li><a target=\"_blank\" href=\"/auth/register-boxed\">Register Boxed</a></li>\r\n                                </ul>\r\n                            </li>\r\n\r\n                            <li class=\"sub-sub-submenu-list\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                                    Password Recovery\r\n                                    <svg\r\n                                        xmlns=\"http://www.w3.org/2000/svg\"\r\n                                        width=\"24\"\r\n                                        height=\"24\"\r\n                                        viewBox=\"0 0 24 24\"\r\n                                        fill=\"none\"\r\n                                        stroke=\"currentColor\"\r\n                                        stroke-width=\"2\"\r\n                                        stroke-linecap=\"round\"\r\n                                        stroke-linejoin=\"round\"\r\n                                        class=\"feather feather-chevron-right\"\r\n                                    >\r\n                                        <polyline points=\"9 18 15 12 9 6\"></polyline>\r\n                                    </svg>\r\n                                </a>\r\n                                <ul class=\"collapse list-unstyled sub-submenu\">\r\n                                    <li><a target=\"_blank\" href=\"/auth/pass-recovery\">Recover ID Cover</a></li>\r\n                                    <li><a target=\"_blank\" href=\"/auth/pass-recovery-boxed\">Recover ID Boxed</a></li>\r\n                                </ul>\r\n                            </li>\r\n\r\n                            <li class=\"sub-sub-submenu-list\">\r\n                                <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                                    Lockscreen\r\n                                    <svg\r\n                                        xmlns=\"http://www.w3.org/2000/svg\"\r\n                                        width=\"24\"\r\n                                        height=\"24\"\r\n                                        viewBox=\"0 0 24 24\"\r\n                                        fill=\"none\"\r\n                                        stroke=\"currentColor\"\r\n                                        stroke-width=\"2\"\r\n                                        stroke-linecap=\"round\"\r\n                                        stroke-linejoin=\"round\"\r\n                                        class=\"feather feather-chevron-right\"\r\n                                    >\r\n                                        <polyline points=\"9 18 15 12 9 6\"></polyline>\r\n                                    </svg>\r\n                                </a>\r\n                                <ul class=\"collapse list-unstyled sub-submenu\">\r\n                                    <li><a target=\"_blank\" href=\"/auth/lockscreen\">Unlock Cover</a></li>\r\n                                    <li><a target=\"_blank\" href=\"/auth/lockscreen-boxed\">Unlock Boxed</a></li>\r\n                                </ul>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n\r\n                    <li class=\"menu single-menu\">\r\n                        <a href=\"javascript:;\" class=\"dropdown-toggle\">\r\n                            <div class=\"\">\r\n                                <svg\r\n                                    xmlns=\"http://www.w3.org/2000/svg\"\r\n                                    width=\"24\"\r\n                                    height=\"24\"\r\n                                    viewBox=\"0 0 24 24\"\r\n                                    fill=\"none\"\r\n                                    stroke=\"currentColor\"\r\n                                    stroke-width=\"2\"\r\n                                    stroke-linecap=\"round\"\r\n                                    stroke-linejoin=\"round\"\r\n                                    class=\"feather feather-plus-circle\"\r\n                                >\r\n                                    <circle cx=\"12\" cy=\"12\" r=\"10\"></circle>\r\n                                    <line x1=\"12\" y1=\"8\" x2=\"12\" y2=\"16\"></line>\r\n                                    <line x1=\"8\" y1=\"12\" x2=\"16\" y2=\"12\"></line>\r\n                                </svg>\r\n                                <span>{{ $t('more') }}</span>\r\n                            </div>\r\n                            <svg\r\n                                xmlns=\"http://www.w3.org/2000/svg\"\r\n                                width=\"24\"\r\n                                height=\"24\"\r\n                                viewBox=\"0 0 24 24\"\r\n                                fill=\"none\"\r\n                                stroke=\"currentColor\"\r\n                                stroke-width=\"2\"\r\n                                stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\"\r\n                                class=\"feather feather-chevron-down\"\r\n                            >\r\n                                <polyline points=\"6 9 12 15 18 9\"></polyline>\r\n                            </svg>\r\n                        </a>\r\n                        <ul class=\"collapse submenu list-unstyled\">\r\n                            <li><router-link to=\"/dragndrop\">Drag and Drop</router-link></li>\r\n                            <li><router-link to=\"/widgets\">Widgets</router-link></li>\r\n                            <li><router-link to=\"/charts/apex-chart\">Charts</router-link></li>\r\n                            <li><router-link to=\"/font-icons\">Font Icons</router-link></li>\r\n                            <li>\r\n                                <a target=\"_blank\" href=\"https://cork-vue.sbthemes.com\"> Documentation </a>\r\n                            </li>\r\n                        </ul>\r\n                    </li>\r\n                </ul>\r\n            </nav>\r\n        </div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("  END TOPBAR  ")]);
 }
 
 /***/ }),
@@ -26220,11 +25963,22 @@ var _hoisted_22 = {
   "class": "collapse submenu list-unstyled",
   "data-bs-parent": "#sidebar"
 };
-var _hoisted_23 = {
+
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Pegawai");
+
+var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Supplier");
+
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Persediaan");
+
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Inventaris");
+
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Buku Kas");
+
+var _hoisted_28 = {
   "class": "menu"
 };
 
-var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+var _hoisted_29 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   "class": "dropdown-toggle",
   "data-bs-toggle": "collapse",
   "data-bs-target": "#neraca",
@@ -26249,16 +26003,23 @@ var _hoisted_24 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_25 = {
+var _hoisted_30 = {
   id: "neraca",
   "class": "collapse submenu list-unstyled",
   "data-bs-parent": "#datatables"
 };
-var _hoisted_26 = {
+
+var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Harta");
+
+var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Hutang");
+
+var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Modal");
+
+var _hoisted_34 = {
   "class": "menu"
 };
 
-var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   "class": "dropdown-toggle",
   "data-bs-toggle": "collapse",
   "data-bs-target": "#labarugi",
@@ -26283,16 +26044,27 @@ var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_28 = {
+var _hoisted_36 = {
   id: "labarugi",
   "class": "collapse submenu list-unstyled",
   "data-bs-parent": "#datatables"
 };
-var _hoisted_29 = {
+
+var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Pendapatan");
+
+var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Biaya Penjualan");
+
+var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Biaya");
+
+var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Penhasilan Lain");
+
+var _hoisted_41 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Biaya Lain");
+
+var _hoisted_42 = {
   "class": "menu"
 };
 
-var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+var _hoisted_43 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   "class": "dropdown-toggle",
   "data-bs-toggle": "collapse",
   "data-bs-target": "#apps",
@@ -26380,16 +26152,31 @@ var _hoisted_30 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_31 = {
+var _hoisted_44 = {
   id: "apps",
   "class": "collapse submenu list-unstyled",
   "data-bs-parent": "#sidebar"
 };
-var _hoisted_32 = {
+
+var _hoisted_45 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("PO BBM");
+
+var _hoisted_46 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Kedatangan BBM");
+
+var _hoisted_47 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Pembelian");
+
+var _hoisted_48 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Pembelian Inventaris");
+
+var _hoisted_49 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Penjualan");
+
+var _hoisted_50 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Penjualan Kupon");
+
+var _hoisted_51 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Tera");
+
+var _hoisted_52 = {
   "class": "menu"
 };
 
-var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+var _hoisted_53 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   "class": "dropdown-toggle",
   "data-bs-toggle": "collapse",
   "data-bs-target": "#opnum",
@@ -26414,16 +26201,25 @@ var _hoisted_33 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_34 = {
+var _hoisted_54 = {
   id: "opnum",
   "class": "collapse submenu list-unstyled",
   "data-bs-parent": "#apps"
 };
-var _hoisted_35 = {
+
+var _hoisted_55 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Opnum BBM");
+
+var _hoisted_56 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Opnum Barang");
+
+var _hoisted_57 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Biaya");
+
+var _hoisted_58 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Jurnal Umum");
+
+var _hoisted_59 = {
   "class": "menu"
 };
 
-var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
+var _hoisted_60 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
   "class": "dropdown-toggle",
   "data-bs-toggle": "collapse",
   "data-bs-target": "#forms",
@@ -26468,11 +26264,32 @@ var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 /* HOISTED */
 );
 
-var _hoisted_37 = {
+var _hoisted_61 = {
   id: "forms",
   "class": "collapse submenu list-unstyled",
   "data-bs-parent": "#sidebar"
 };
+
+var _hoisted_62 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Rekapan Harian");
+
+var _hoisted_63 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Daftar Aplusan BBM");
+
+var _hoisted_64 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Penjualan NON BBM");
+
+var _hoisted_65 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Pembelian Persediaan");
+
+var _hoisted_66 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Laporan Opnum");
+
+var _hoisted_67 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Laporan Penyusutan");
+
+var _hoisted_68 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Laba Rugi");
+
+var _hoisted_69 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Neraca Keuangan");
+
+var _hoisted_70 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Checkbox & Radio");
+
+var _hoisted_71 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Switches");
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
@@ -26531,7 +26348,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Pegawai")];
+          return [_hoisted_23];
         }),
         _: 1
         /* STABLE */
@@ -26541,7 +26358,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Supplier")];
+          return [_hoisted_24];
         }),
         _: 1
         /* STABLE */
@@ -26551,7 +26368,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Persediaan")];
+          return [_hoisted_25];
         }),
         _: 1
         /* STABLE */
@@ -26561,27 +26378,27 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Inventaris")];
+          return [_hoisted_26];
         }),
         _: 1
         /* STABLE */
 
       })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-        to: "/kas",
+        to: "/buku-besar",
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Buku Kas")];
+          return [_hoisted_27];
         }),
         _: 1
         /* STABLE */
 
-      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_23, [_hoisted_24, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_25, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_28, [_hoisted_29, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
         to: "/coa/harta",
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Harta")];
+          return [_hoisted_31];
         }),
         _: 1
         /* STABLE */
@@ -26591,7 +26408,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Hutang")];
+          return [_hoisted_32];
         }),
         _: 1
         /* STABLE */
@@ -26601,17 +26418,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Modal")];
+          return [_hoisted_33];
         }),
         _: 1
         /* STABLE */
 
-      })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_26, [_hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_28, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+      })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_34, [_hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
         to: "/coa/pendapatan",
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Pendapatan")];
+          return [_hoisted_37];
         }),
         _: 1
         /* STABLE */
@@ -26621,7 +26438,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Biaya Penjualan")];
+          return [_hoisted_38];
         }),
         _: 1
         /* STABLE */
@@ -26631,7 +26448,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Biaya")];
+          return [_hoisted_39];
         }),
         _: 1
         /* STABLE */
@@ -26641,7 +26458,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Penhasilan Lain")];
+          return [_hoisted_40];
         }),
         _: 1
         /* STABLE */
@@ -26651,17 +26468,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Biaya Lain")];
+          return [_hoisted_41];
         }),
         _: 1
         /* STABLE */
 
-      })])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_29, [_hoisted_30, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_31, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+      })])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_42, [_hoisted_43, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_44, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
         to: "/po-bbm",
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("PO BBM")];
+          return [_hoisted_45];
         }),
         _: 1
         /* STABLE */
@@ -26671,7 +26488,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Kedatangan BBM")];
+          return [_hoisted_46];
         }),
         _: 1
         /* STABLE */
@@ -26681,7 +26498,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Pembelian")];
+          return [_hoisted_47];
         }),
         _: 1
         /* STABLE */
@@ -26691,7 +26508,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Pembelian Inventaris")];
+          return [_hoisted_48];
         }),
         _: 1
         /* STABLE */
@@ -26701,7 +26518,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Penjualan")];
+          return [_hoisted_49];
         }),
         _: 1
         /* STABLE */
@@ -26711,7 +26528,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Penjualan Kupon")];
+          return [_hoisted_50];
         }),
         _: 1
         /* STABLE */
@@ -26721,17 +26538,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Tera")];
+          return [_hoisted_51];
         }),
         _: 1
         /* STABLE */
 
-      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_32, [_hoisted_33, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_34, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_52, [_hoisted_53, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_54, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
         to: "/opnum-bbm",
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Opnum BBM")];
+          return [_hoisted_55];
         }),
         _: 1
         /* STABLE */
@@ -26741,7 +26558,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Opnum Barang")];
+          return [_hoisted_56];
         }),
         _: 1
         /* STABLE */
@@ -26751,7 +26568,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Biaya")];
+          return [_hoisted_57];
         }),
         _: 1
         /* STABLE */
@@ -26761,17 +26578,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Jurnal Umum")];
+          return [_hoisted_58];
         }),
         _: 1
         /* STABLE */
 
-      })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_35, [_hoisted_36, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_37, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+      })])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", _hoisted_59, [_hoisted_60, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("ul", _hoisted_61, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("li", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
         to: "/rekapan/harian",
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Rekapan Harian")];
+          return [_hoisted_62];
         }),
         _: 1
         /* STABLE */
@@ -26781,7 +26598,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Daftar Aplusan BBM")];
+          return [_hoisted_63];
         }),
         _: 1
         /* STABLE */
@@ -26791,7 +26608,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Penjualan NON BBM")];
+          return [_hoisted_64];
         }),
         _: 1
         /* STABLE */
@@ -26801,7 +26618,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Pembelian Persediaan")];
+          return [_hoisted_65];
         }),
         _: 1
         /* STABLE */
@@ -26811,7 +26628,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Laporan Opnum")];
+          return [_hoisted_66];
         }),
         _: 1
         /* STABLE */
@@ -26821,7 +26638,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Laporan Penyusutan")];
+          return [_hoisted_67];
         }),
         _: 1
         /* STABLE */
@@ -26831,7 +26648,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Laba Rugi")];
+          return [_hoisted_68];
         }),
         _: 1
         /* STABLE */
@@ -26841,7 +26658,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Neraca Keuangan")];
+          return [_hoisted_69];
         }),
         _: 1
         /* STABLE */
@@ -26851,7 +26668,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Checkbox & Radio")];
+          return [_hoisted_70];
         }),
         _: 1
         /* STABLE */
@@ -26861,7 +26678,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         onClick: $setup.toggleMobileMenu
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Switches")];
+          return [_hoisted_71];
         }),
         _: 1
         /* STABLE */
@@ -28028,6 +27845,13 @@ var routes = [//dashboard
   name: 'barang',
   component: function component() {
     return __webpack_require__.e(/*! import() | components-tabs */ "components-tabs").then(__webpack_require__.bind(__webpack_require__, /*! ../views/master/indexBarang.vue */ "./resources/js/src/views/master/indexBarang.vue"));
+  } // meta: { requiresAuth: true },
+
+}, {
+  path: '/buku-besar',
+  name: 'buku-besar',
+  component: function component() {
+    return __webpack_require__.e(/*! import() | components-tabs */ "components-tabs").then(__webpack_require__.bind(__webpack_require__, /*! ../views/master/bukuBesar.vue */ "./resources/js/src/views/master/bukuBesar.vue"));
   } // meta: { requiresAuth: true },
 
 }, {
@@ -30400,7 +30224,8 @@ var state = {
   listpenjualankupon: [],
   listbiaya: [],
   listbbmdatang: [],
-  listpenyusutan: []
+  listpenyusutan: [],
+  bukubesar: []
 };
 var getters = {
   SlaporanBbm: function SlaporanBbm(state) {
@@ -30432,6 +30257,9 @@ var getters = {
   },
   SlistPenyusutan: function SlistPenyusutan(state) {
     return state.listpenyusutan;
+  },
+  SBukuBesar: function SBukuBesar(state) {
+    return state.bukubesar;
   }
 };
 var actions = {
@@ -30788,30 +30616,40 @@ var actions = {
       }, _callee11, null, [[1, 8]]);
     }))();
   },
-  EditBarang: function EditBarang(_ref12, Brg) {
+  GetBukuBesar: function GetBukuBesar(_ref12, buku) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee12() {
-      var dispatch;
+      var commit, response;
       return _regeneratorRuntime().wrap(function _callee12$(_context12) {
         while (1) {
           switch (_context12.prev = _context12.next) {
             case 0:
-              dispatch = _ref12.dispatch;
-              _context12.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/update/barang', Brg);
+              commit = _ref12.commit;
+              _context12.prev = 1;
+              _context12.next = 4;
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/buku-besar', buku);
 
-            case 3:
-              _context12.next = 5;
-              return dispatch('GetBarang');
+            case 4:
+              response = _context12.sent;
+              commit('setBukuBesar', response.data.data);
+              _context12.next = 12;
+              break;
 
-            case 5:
+            case 8:
+              _context12.prev = 8;
+              _context12.t0 = _context12["catch"](1);
+              // Handle error
+              alert('error load buku besar');
+              return _context12.abrupt("return");
+
+            case 12:
             case "end":
               return _context12.stop();
           }
         }
-      }, _callee12);
+      }, _callee12, null, [[1, 8]]);
     }))();
   },
-  DeleteBarang: function DeleteBarang(_ref13, id) {
+  EditBarang: function EditBarang(_ref13, Brg) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee13() {
       var dispatch;
       return _regeneratorRuntime().wrap(function _callee13$(_context13) {
@@ -30820,7 +30658,7 @@ var actions = {
             case 0:
               dispatch = _ref13.dispatch;
               _context13.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/hapus/barang/".concat(id));
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/update/barang', Brg);
 
             case 3:
               _context13.next = 5;
@@ -30832,6 +30670,29 @@ var actions = {
           }
         }
       }, _callee13);
+    }))();
+  },
+  DeleteBarang: function DeleteBarang(_ref14, id) {
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee14() {
+      var dispatch;
+      return _regeneratorRuntime().wrap(function _callee14$(_context14) {
+        while (1) {
+          switch (_context14.prev = _context14.next) {
+            case 0:
+              dispatch = _ref14.dispatch;
+              _context14.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/hapus/barang/".concat(id));
+
+            case 3:
+              _context14.next = 5;
+              return dispatch('GetBarang');
+
+            case 5:
+            case "end":
+              return _context14.stop();
+          }
+        }
+      }, _callee14);
     }))();
   } // async editAplus({commit}, da) {
   //     commit('setAplusan', da)
@@ -30869,6 +30730,9 @@ var mutations = {
   },
   setListPenyusutan: function setListPenyusutan(state, listsusut) {
     state.listpenyusutan = listsusut;
+  },
+  setBukuBesar: function setBukuBesar(state, bukubesar) {
+    state.bukubesar = bukubesar;
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -69047,7 +68911,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Transition": () => (/* reexport safe */ _vue_runtime_dom__WEBPACK_IMPORTED_MODULE_0__.Transition),
 /* harmony export */   "TransitionGroup": () => (/* reexport safe */ _vue_runtime_dom__WEBPACK_IMPORTED_MODULE_0__.TransitionGroup),
 /* harmony export */   "VueElement": () => (/* reexport safe */ _vue_runtime_dom__WEBPACK_IMPORTED_MODULE_0__.VueElement),
-/* harmony export */   "assertNumber": () => (/* reexport safe */ _vue_runtime_dom__WEBPACK_IMPORTED_MODULE_0__.assertNumber),
 /* harmony export */   "callWithAsyncErrorHandling": () => (/* reexport safe */ _vue_runtime_dom__WEBPACK_IMPORTED_MODULE_0__.callWithAsyncErrorHandling),
 /* harmony export */   "callWithErrorHandling": () => (/* reexport safe */ _vue_runtime_dom__WEBPACK_IMPORTED_MODULE_0__.callWithErrorHandling),
 /* harmony export */   "camelize": () => (/* reexport safe */ _vue_runtime_dom__WEBPACK_IMPORTED_MODULE_0__.camelize),
@@ -69228,15 +69091,11 @@ function compileToFunction(template, options) {
         // by the server, the template should not contain any user data.
         template = el ? el.innerHTML : ``;
     }
-    const opts = (0,_vue_shared__WEBPACK_IMPORTED_MODULE_2__.extend)({
+    const { code } = (0,_vue_compiler_dom__WEBPACK_IMPORTED_MODULE_3__.compile)(template, (0,_vue_shared__WEBPACK_IMPORTED_MODULE_2__.extend)({
         hoistStatic: true,
         onError: ( true) ? onError : 0,
         onWarn: ( true) ? e => onError(e, true) : 0
-    }, options);
-    if (!opts.isCustomElement && typeof customElements !== 'undefined') {
-        opts.isCustomElement = tag => !!customElements.get(tag);
-    }
-    const { code } = (0,_vue_compiler_dom__WEBPACK_IMPORTED_MODULE_3__.compile)(template, opts);
+    }, options));
     function onError(err, asWarning = false) {
         const message = asWarning
             ? err.message
@@ -75520,7 +75379,7 @@ module.exports = JSON.parse('{"dashboard":"仪表盘","sales":"销售量","analy
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/chunks/" + chunkId + "." + {"index2":"7045ddb6ca6c734e","components-tabs":"4c30cd119dc1d424","components-accordions":"17d6c8eb398eaee9","components-modals":"de76a14a8af35628","components-cards":"a7222fa5f7f7f370","components-carousel":"86fb9827d16b9b34","components-timeline":"198b01382fb45877","components-media-object":"0ae3c66f687828d8","components-list-group":"51fdab44427121df","components-pricing-table":"8e4cf1ccb401d4ea","components-notifications":"689855c13b201aa1","components-lightbox":"7b9f698268d61d21","components-countdown":"8570b1bd8dddf54d","components-counter":"03d555e5c8c986dd","components-sweetalert":"8db42956103c33ea","font-icons":"1eec3e3f47bbc748","pages-helpdesk":"5d945c99e74a3e72","pages-contact-us":"dff5bf5f3202914e","pages-faq":"591e0117e6f31912","pages-faq2":"eab285ac36cd4528","pages-privacy-policy":"f9f92f5ef1c4326d","pages-coming-soon":"453c5fff11e90048","pages-error404":"33bb3750d09cc76c","pages-error500":"8b9bc51fe1d5314f","pages-error503":"56e1ead71ddb58b2","pages-maintenence":"fc718137fbcabd28","pages-blank-page":"924a96e4ffaf8597","pages-sample":"c455968b1873c260","auth-login-boxed":"008e42380e22fac3","auth-register-boxed":"78becc6ce855fafa","auth-lockscreen-boxed":"9f9143a63569379a","auth-pass-recovery-boxed":"e0ff01f08db1c2d2","auth-login":"36f30c87d90d5e09","auth-register":"d441e8e7c03c3efb","auth-lockscreen":"7a2b8fce355b64d5","auth-pass-recovery":"0652100cb3d32730","elements-alerts":"207ccca973e04f44","elements-avatar":"4893a8f7612c08a0","elements-badges":"6d1ac33f5f5baccc","elements-breadcrumbs":"463a45a45b4b4d75","elements-buttons":"b0013f22a1af366c","elements-buttons-group":"907cc488aa8434f6","elements-color-library":"9cea64f4d8fc7f8a","elements-dropdown":"2c38fc2642b39a4d","elements-infobox":"0e4ac68bcdafb5af","elements-jumbotron":"5c29042b656f7598","elements-loader":"83bbe10bbc7472b9","elements-pagination":"6da5611d90acda07","elements-popovers":"ddf9c77e461da386","elements-progress-bar":"2b9c3f75e269b601","elements-search":"dc1090070579757e","elements-tooltips":"947f8e4e867f27c2","elements-treeview":"c8c594ed97fd537b","elements-typography":"d2f45c0a88ef2262","tables":"f1da7438e7d540c4","users-profile":"94e59f7a82e46e1a","users-account-setting":"1b67ab1a5bd11388","dragndrop":"01b942daed551742","charts-apex-chart":"9ff4d00ae93c3039","widgets":"b8523760f9c90b9e","forms-basic":"f805f3ce4463fcf5","forms-input-group":"acf9237940fc9d79","forms-layouts":"7ab972f20169983e","forms-validation":"573eb23246252121","forms-checkbox-radio":"e35604b2f5c13d12","forms-switches":"49e33d5a16f8bbe1","forms-wizards":"26a5e5e46fb1cf82","forms-file-upload":"dffe0d05850fab99","forms-clipboard":"142664f7c41dc430","forms-date-picker":"471db629ffe469b6","forms-input-mask":"ec3964f33e1995f4","forms-quill-editor":"7c3a616a158b080b","forms-touchspin":"51aaf953c96ee243","forms-markdown-editor":"c0408e8f0f463463","forms-select2":"4f0e0cafbe0e55ca","apps-chat":"738d2e6068056b9e","apps-mailbox":"7bef417f361e05ec","apps-todo-list":"24f6783c4a1bbc42","apps-contacts":"393103b9ab419d1a","apps-notes":"b512cdc5fffa1769","apps-scrumboard":"799c1d369b27cda0","apps-calendar":"704486717cd68ab3","apps-invoice-list":"35aa9958001f482f","apps-invoice-preview":"91c2d9896c9e5e63","apps-invoice-add":"37f039cb68bfd4a8","apps-invoice-edit":"d882252d50d4d399","tables-basic":"afa8a2c9e4c65939","tables-striped":"83438cf940690bd6","tables-order-sorting":"9d0ab5c616b6e26b","tables-multi-column":"2725356bfd65f05a","tables-multiple-tables":"0a79617d10db5275","tables-alt-pagination":"0b7f0b3ef2f6d3f6","tables-custom":"78cb6d213d1471c0","tables-range-search":"0e76b122519ddf83","tables-export":"9ce63a168a7be09d","tables-live-dom-ordering":"dcd17b272f708247","tables-miscellaneous":"1789fd18113f1b67","node_modules_html2canvas_dist_html2canvas_js":"5475dc17eb928a5a","node_modules_dompurify_dist_purify_js":"9dabfec756329575","node_modules_canvg_lib_index_es_js":"84de45b397df7f27"}[chunkId] + ".js";
+/******/ 			return "js/chunks/" + chunkId + "." + {"index2":"3f2f5b1faba69db1","components-tabs":"da60d4d4a3277bd0","components-accordions":"958ef92098fb530f","components-modals":"e6514e571555b5c0","components-cards":"e7583a4cf5564f04","components-carousel":"8563fc4e88cba5e0","components-timeline":"7ae9d528985dc414","components-media-object":"d265e1f0556c5b23","components-list-group":"20680dcbffabc997","components-pricing-table":"b87be2673dcf64d6","components-notifications":"9206fc33e5c150fe","components-lightbox":"b9458fb55cd5c6f3","components-countdown":"e221fbc8b2816ca0","components-counter":"f7283742d443ef25","components-sweetalert":"650a94cf22bafd9a","font-icons":"34e69c87195a1b77","pages-helpdesk":"dcb617b851894fab","pages-contact-us":"510879cdb75ffda7","pages-faq":"08ea3b394d276c8f","pages-faq2":"b3656798f889ae16","pages-privacy-policy":"5b1dba6f010460d1","pages-coming-soon":"3625eb8d5e9f9c18","pages-error404":"b6b7b2f9a83218ee","pages-error500":"3339dbd448847368","pages-error503":"a95ec8c784080110","pages-maintenence":"3d08473adb247530","pages-blank-page":"0c1ac99ccc41961d","pages-sample":"9994ba18d7cb12e8","auth-login-boxed":"035dc3c8eeee6d3e","auth-register-boxed":"d614be638b7cb772","auth-lockscreen-boxed":"32b2d256b6dca6d3","auth-pass-recovery-boxed":"57ba933f69001944","auth-login":"11978aa9265265c9","auth-register":"a5f635bb185472b7","auth-lockscreen":"f692ce3fe9e2f169","auth-pass-recovery":"4cc4878d9baefab2","elements-alerts":"cce791b51da55ebf","elements-avatar":"808a6756ade77be7","elements-badges":"ceecf745922b9465","elements-breadcrumbs":"1722a5e9bc7f1a7d","elements-buttons":"fdac3a00bec52991","elements-buttons-group":"df319f66de56889a","elements-color-library":"b9c63e419c8c300b","elements-dropdown":"72e3ecb8205bc421","elements-infobox":"399934d0b9db2526","elements-jumbotron":"67620b84089a4b94","elements-loader":"3b649aacbbfa08fc","elements-pagination":"21204cc9b1c64185","elements-popovers":"130b77ef0926b915","elements-progress-bar":"30e876cd9de41f5b","elements-search":"b464253c225723d6","elements-tooltips":"3a4ec3115056b6b3","elements-treeview":"bca134389bae1a9b","elements-typography":"ac9cf4c49da4113a","tables":"6c7b752437b29866","users-profile":"49b36e78cefd7a4d","users-account-setting":"9e19364198133f22","dragndrop":"45472aaa1012adce","charts-apex-chart":"d2f00a623aa3eb04","widgets":"b7fa9c006c6aebb0","forms-basic":"e774256dd6bf57bd","forms-input-group":"b0a3fce5817ce26b","forms-layouts":"e821a21bb2a879bf","forms-validation":"defac56a58186d1e","forms-checkbox-radio":"8c34dd2d66375144","forms-switches":"d60eef87f12531fd","forms-wizards":"c2b79beef794f1ee","forms-file-upload":"bd9f24848a2ef3ab","forms-clipboard":"0121ffa0f1ea0fc2","forms-date-picker":"52e788a5ab0cfd5b","forms-input-mask":"07ba756f40e98ad2","forms-quill-editor":"9e844664b525b753","forms-touchspin":"43fded85f16c30f9","forms-markdown-editor":"2b08efe290b9b501","forms-select2":"dff731b5e7c71bcd","apps-chat":"52a8d44efc21b078","apps-mailbox":"e6b2012d55856740","apps-todo-list":"9a40985eb471a29c","apps-contacts":"384a513eb6c8af7b","apps-notes":"36ecb7aab3e00af0","apps-scrumboard":"071c60efffbf8f79","apps-calendar":"2667beb3567fe611","apps-invoice-list":"0feaedf5952fdfff","apps-invoice-preview":"d9edd83168389f6b","apps-invoice-add":"087bfcc722043974","apps-invoice-edit":"5918fd58d1493481","tables-basic":"accd1005371fe815","tables-striped":"c14f35060df00cfc","tables-order-sorting":"58cc150f515bdba7","tables-multi-column":"cbd5693c21f08e50","tables-multiple-tables":"3cd0712f58b2a919","tables-alt-pagination":"83a6a0f7048933e6","tables-custom":"5f92dc2605fc71d8","tables-range-search":"10af2f97198a32b7","tables-export":"ca03023830dd14e6","tables-live-dom-ordering":"f380465fda483f23","tables-miscellaneous":"3f826e4b9e0d2831","node_modules_html2canvas_dist_html2canvas_js":"5475dc17eb928a5a","node_modules_dompurify_dist_purify_js":"9dabfec756329575","node_modules_canvg_lib_index_es_js":"84de45b397df7f27"}[chunkId] + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	

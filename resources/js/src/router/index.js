@@ -107,6 +107,12 @@ const routes = [
         // meta: { requiresAuth: true },
     },
     {
+        path: '/buku-besar',
+        name: 'buku-besar',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/bukuBesar.vue'),
+        // meta: { requiresAuth: true },
+    },
+    {
         path: '/persediaan',
         name: 'persediaan',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexPersediaan.vue'),
