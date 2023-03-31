@@ -183,15 +183,15 @@
                                                                         </table>
                                                                     </td>
                                                                     <td>
-                                                                        <!-- {{ hartalist }} -->
+                                                                        <!-- {{ labarugi }} -->
                                                                         <table border="1" cellspacing="3" >
                                                                             <tbody >
-                                                                                <tr :set="data = hartalist.filter(n => n.acc_id === '69999')">
-                                                                                    <td>{{ data }}</td>
+                                                                                <tr >
+                                                                                    <td>{{ labarugi['acc_id'] }}</td>
                                                                                     <td></td>
-                                                                                    <td ><b>&nbsp;&nbsp;{{ data.name }}</b></td>
+                                                                                    <td ><b>&nbsp;&nbsp;{{ labarugi['name'] }}</b></td>
                                                                                     <td></td>
-                                                                                    <td>{{ data.ammount }}</td>
+                                                                                    <td>{{ Number(labarugi['amount']).toLocaleString() }}</td>
                                                                                     <td></td>
                                                                                 </tr>
                                                                                 <tr>
@@ -207,7 +207,7 @@
                                                                                     <td></td>
                                                                                     <td ><b>&nbsp;&nbsp;Total setelah Pajak PPH 22</b></td>
                                                                                     <td></td>
-                                                                                    <td>{{ data.ammount - 20000 }}</td>
+                                                                                    <td>{{ labarugi['amount'] - 20000 }}</td>
                                                                                     <td></td>
                                                                                 </tr>
                                                                             </tbody>
@@ -457,6 +457,7 @@
     
 
     const hartalist = ref([]);
+    const labarugi = ref([]);
     const biayalist = ref();
     onMounted(() => {
         load.value = true;
@@ -476,14 +477,27 @@
             // store.dispatch('GetCoaList')
             hartalist.value = store.getters.StateHarta;
             biayalist.value = store.getters.StateHarta;
+            let lb =  store.getters.StateHarta;
+            labarugi.value = lb.find(n => n.acc_id === '69999');
             load.value = false;
             // const pendapatan = hartalist.value.filter(p => p.acc_id === '60000');
-            // console.log(hartalist.value);
+            // console.log(labarugi.value);
+            // console.log(biayalist.value);
         }, 3000);
-
+        
         
        
-    })
+    });
+
+    // const labaBersih = computed(() => {
+    //     // let lb = hartalist.value.filter(n => n.acc_id === '69999');
+    //     // setTimeout(function() {
+    //         let lb = hartalist.value.filter(n => n.acc_id === '69999');
+    //         // console.log(lb)
+    //     // }, 3000);
+        
+    //     return {lb};
+    // });
 
     const cari = () => {
         load.value = true;
