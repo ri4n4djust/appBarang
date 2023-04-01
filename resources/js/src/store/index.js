@@ -5,7 +5,7 @@ import auth from './auth';
 import barang from './barang';
 import pelanggan from './pelanggan';
 import room from './room';
-import kode from './kode';
+// import kode from './kode';
 import bbm from './bbm';
 import nosel from './nosel';
 import transnosel from './transnosel';
@@ -16,6 +16,7 @@ import laporan from './laporan';
 import labarugi from './labarugi';
 import coa from './coa';
 import inventaris from './inventaris';
+import tax from './tax';
 
 
 export default new createStore({
@@ -117,7 +118,7 @@ export default new createStore({
         auth,
         barang,
         pelanggan,
-        kode,
+        // kode,
         room,
         bbm,
         nosel,
@@ -128,7 +129,8 @@ export default new createStore({
         laporan,
         labarugi,
         coa,
-        inventaris
+        inventaris,
+        tax
     },
     // plugins: [createPersistedState()]
 });

@@ -207,7 +207,7 @@
                                                                                     <td></td>
                                                                                     <td ><b>&nbsp;&nbsp;Total setelah Pajak PPH 22</b></td>
                                                                                     <td></td>
-                                                                                    <td>{{ labarugi['amount'] - 20000 }}</td>
+                                                                                    <td>{{ Number(labarugi['amount'] - 20000).toLocaleString() }}</td>
                                                                                     <td></td>
                                                                                 </tr>
                                                                             </tbody>
