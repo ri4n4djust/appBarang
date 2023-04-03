@@ -525,7 +525,7 @@ class coaController extends Controller
 						$i+=1;        
 						$acc[$i] = array(
 						  'acc_id' => '69999',
-						  'name' => 'Laba Netto Yg di Bagi',
+						  'name' => 'Laba Netto Sebelum PPH 22',
 						  'amount' => ((double)$tot_income-(double)$tot_hpp)-(-1*(double)$tot_byyop),
 						  'level' => '0',
 						  'tipe' => 'H',

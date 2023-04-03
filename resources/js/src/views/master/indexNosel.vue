@@ -359,6 +359,7 @@
 
     const nosel_id = ref();
     const meter_old = ref();
+    const pph22 = ref({});
     const input_perubahan = ref({
         tglPerubahan: moment().format('D-M-YYYY'),
         nosel_id: nosel_id,
@@ -432,6 +433,7 @@
                 'last_meter':  last_meter, // meter_now.value[i],
                 'total': subto,
                 'totalhpp': subtohpp,
+                'pph22' : pph22.value
             })
             // tota += parseInt(subto)
             // total.value = tota
@@ -581,12 +583,18 @@
     const getRegu=() => {
         store.dispatch('GetTransNoselRegu')
     }
+    const GetPph22=() => {
+        store.dispatch('GetPph22');
+        pph22.value = store.getters.StatePph22
+        console.log('pph dari gov : '+ pph22.value)
+    }
 
     onMounted(() => {
         getNosel();
         getTrans();
         getRegu();
-        // console.log('onmount index nosel')
+        GetPph22();
+        // console.log('pph dari gov : '+ pph22.value)
         
         localStorage.setItem('kupon', '[]');
         localStorage.setItem('biaya', '[]');

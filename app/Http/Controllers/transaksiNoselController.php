@@ -95,6 +95,7 @@ class transaksiNoselController extends Controller
                 $kdtrans = $kdtr.$n;
                 $regu = $request[0][0]['r_regu'];
                 $tgl = $detop[0]['tgl_transaksi'];
+                $pph22 = 10 ; //$detop[0]['pph22'];
                 $total_j = 0;
                 // $total_qty = 0;
                 // $total_beli = 0;
@@ -150,6 +151,8 @@ class transaksiNoselController extends Controller
                         ];
 
                         $total_j += $detop[$i]['total'];
+
+
                     
                 };
                 TransaksiNosel::insert($detail);
@@ -354,10 +357,16 @@ class transaksiNoselController extends Controller
                     $acc_id_k = $detpro[$i]['accid_persediaan']; // acc id yg di debet
                     $acc_id_dd = $detpro[$i]['accid_hpp']; // acc id yg di debet
                     $accid = $detpro[$i]['accid']; // acc id yg di debet
-                    $acc_id_d = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
-                    $acc = '32300';
+                    $acc_id_d = '11110'; // Kas
+                    $acc = '32300'; // laba ditahan
+                    $acc_pph = '23100'; // acc hutang pph
                     $memo = 'Aplusan';
                     $jurnal = 'JK';
+                    //===jumlah pph22
+                    $bati = $total_harga - $total_hpp ;
+                    $pph22_dibayar = $bati * $pph22 / 100 ;
+
+                    //====endjumalh pph
                     insert_gl($kdtrans,$tgl,$total_harga,$memo,$jurnal);
                     $rgl = DB::table('general_ledger')->get()->last()->notrans;
                     $ac = [
@@ -400,7 +409,25 @@ class transaksiNoselController extends Controller
                             'kredit' => $total_harga - $total_hpp,
                             'trans_detail' => 'Aplusan-Laba',
                             'void_flag' => 0,
+                        ],
+                        // pph22
+                        [
+                            'rgl' => $rgl,
+                            'acc_id' => $acc_id_k,
+                            'debet' => 0,
+                            'kredit' => $pph22_dibayar,
+                            'trans_detail' => 'Aplusan-pph22',
+                            'void_flag' => 0,
+                        ],
+                        [
+                            'rgl' => $rgl,
+                            'acc_id' => $acc_pph,
+                            'debet' => $pph22_dibayar,
+                            'kredit' => 0,
+                            'trans_detail' => 'Aplusan-pph22',
+                            'void_flag' => 0,
                         ]
+                        //===end pph22
                     ];
                     
                     insert_gl_detail($ac);
@@ -408,6 +435,12 @@ class transaksiNoselController extends Controller
                     
                 };
                 DB::table('tblprofit')->insert($detpr);
+
+                // //======jurnal pph22
+                // $bati = $total_j - $cost;
+                // $pph22_dibayar = $bati * $pph22 / 100 ;
+
+                // //=====end jurnal pph22
 
                 $cost = $total_k + $tot_b + $total_l;
                 DB::table('tblheader_aplusan')->upsert([

@@ -17,8 +17,11 @@ const actions = {
         commit('setPpn', response.data.kdBarang)
     }, 
     async GetPph22({ commit }){
-        let response = await axios.get('kdpelanggan')
-        commit('setPph22', response.data.kdPelanggan)
+        // let response = await axios.get('kdpelanggan')
+        // commit('setPph22', response.data.kdPelanggan)
+        let pph22 = 11;
+        commit('setPph22', pph22)
+        
     },
     // async GetPajak({ commit }){
     //     let response = await axios.get('kdpelanggan')

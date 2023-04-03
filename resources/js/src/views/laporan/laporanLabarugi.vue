@@ -194,12 +194,12 @@
                                                                                     <td>{{ Number(labarugi['amount']).toLocaleString() }}</td>
                                                                                     <td></td>
                                                                                 </tr>
-                                                                                <tr>
-                                                                                    <td>1111</td>
+                                                                                <tr >
+                                                                                    <td>{{ pph22['acc_id'] }}</td>
                                                                                     <td></td>
-                                                                                    <td ><b>&nbsp;&nbsp;Pajak PPH 22</b></td>
+                                                                                    <td ><b>&nbsp;&nbsp;{{ pph22['name'] }}</b></td>
                                                                                     <td></td>
-                                                                                    <td>20,0000</td>
+                                                                                    <td>{{ Number(pph22['amount']).toLocaleString() }}</td>
                                                                                     <td></td>
                                                                                 </tr>
                                                                                 <tr>
@@ -207,7 +207,7 @@
                                                                                     <td></td>
                                                                                     <td ><b>&nbsp;&nbsp;Total setelah Pajak PPH 22</b></td>
                                                                                     <td></td>
-                                                                                    <td>{{ Number(labarugi['amount'] - 20000).toLocaleString() }}</td>
+                                                                                    <td>{{ Number(labarugi['amount'] - pph22['amount']).toLocaleString() }}</td>
                                                                                     <td></td>
                                                                                 </tr>
                                                                             </tbody>
@@ -458,6 +458,7 @@
 
     const hartalist = ref([]);
     const labarugi = ref([]);
+    const pph22 = ref([]);
     const biayalist = ref();
     onMounted(() => {
         load.value = true;
@@ -466,7 +467,7 @@
         // const biaya = ref({group: '4,5,6'});
         // store.dispatch('GetHarta', biaya.value);
 
-        const biaya = ref({group: '4,5,6'});
+        const biaya = ref({group: '2,4,5,6'});
         var d = Object.assign(sorting.value, biaya.value);
         store.dispatch('GetHarta', d );
 
@@ -475,10 +476,12 @@
         // hartalist.value = store.getters.StateHarta;
         setTimeout(function() { 
             // store.dispatch('GetCoaList')
-            hartalist.value = store.getters.StateHarta;
-            biayalist.value = store.getters.StateHarta;
+            let alldata = store.getters.StateHarta;
+            hartalist.value = alldata.filter(p => p.acc_id >= '40000');
+            biayalist.value = alldata.filter(p => p.acc_id >= '40000');
             let lb =  store.getters.StateHarta;
             labarugi.value = lb.find(n => n.acc_id === '69999');
+            pph22.value = lb.find(n => n.acc_id === '23100');
             load.value = false;
             // const pendapatan = hartalist.value.filter(p => p.acc_id === '60000');
             // console.log(labarugi.value);
@@ -505,7 +508,7 @@
         // var c = Object.assign(sorting.value, pendapatan.value);
         // store.dispatch('GetPendapatan', c );
         
-        const biaya = ref({group: '4,5,6'});
+        const biaya = ref({group: '2,4,5,6'});
         var d = Object.assign(sorting.value, biaya.value);
         store.dispatch('GetHarta', d );
 
@@ -513,12 +516,12 @@
         // store.dispatch('GetHarta', biaya.value);
         // hartalist.value = store.getters.StateHarta;
         setTimeout(function() { 
-            // store.dispatch('GetCoaList')
-            hartalist.value = store.getters.StateHarta;
-            biayalist.value = store.getters.StateHarta;
+            let alldata = store.getters.StateHarta;
+            hartalist.value = alldata.filter(p => p.acc_id >= '40000');
+            biayalist.value = alldata.filter(p => p.acc_id >= '40000');
             load.value = false;
-            // const pendapatan = hartalist.value.filter(p => p.acc_id === '60000');
-            // console.log(hartalist.value);
+            // const labrug = hartalist.value.filter(p => p.acc_id >= '40000');
+            // console.log(labrug);
         }, 3000);
     }
 
