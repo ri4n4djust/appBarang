@@ -365,7 +365,6 @@ class transaksiNoselController extends Controller
                     //===jumlah pph22
                     $bati = $total_harga - $total_hpp ;
                     $pph22_dibayar = $bati * $pph22 / 100 ;
-
                     //====endjumalh pph
                     insert_gl($kdtrans,$tgl,$total_harga,$memo,$jurnal);
                     $rgl = DB::table('general_ledger')->get()->last()->notrans;

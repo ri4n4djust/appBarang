@@ -21,6 +21,7 @@ class penjualanController extends Controller
                 $noNota = $request[0]['noNota'];
                 $total =  $request[0]['subtotal'];
                 $diskon = $total * $request[0]['disc'] / 100;
+                $pph22 = 10 ; //$detop[0]['pph22'];
                 $type = $request[0]['term'];
                 $piutang = 0;
                 if($type == '1'){
@@ -97,10 +98,15 @@ class penjualanController extends Controller
                     $acc_hpp = $detpem[$i]['accid_hpp'];
                     $acc_id_k = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
                     $acc = '32300';
+                    $acc_pph = '23100'; // acc hutang pph
                     $memo = 'Penjualan-Barang';
                     $jurnal = 'JK';
                     $subtotal = $detpem[$i]['total'];
                     $subtotal_hpp = $detpem[$i]['totalhpp'];
+                    //===jumlah pph22
+                    $bati = $subtotal - $subtotal_hpp ;
+                    $pph22_dibayar = $bati * $pph22 / 100 ;
+                    //====endjumalh pph
                     insert_gl($noNota,$tglNota,$subtotal,$memo,$jurnal);
                     $rgl = DB::table('general_ledger')->get()->last()->notrans;
                     $ac = [
@@ -143,7 +149,25 @@ class penjualanController extends Controller
                             'kredit' => $subtotal - $subtotal_hpp,
                             'trans_detail' => 'Penjualan-Barang',
                             'void_flag' => 0,
+                        ],
+                        // pph22
+                        [
+                            'rgl' => $rgl,
+                            'acc_id' => $acc_id_k,
+                            'debet' => 0,
+                            'kredit' => $pph22_dibayar,
+                            'trans_detail' => 'Penjualan-pph22',
+                            'void_flag' => 0,
+                        ],
+                        [
+                            'rgl' => $rgl,
+                            'acc_id' => $acc_pph,
+                            'debet' => $pph22_dibayar,
+                            'kredit' => 0,
+                            'trans_detail' => 'Penjualan-pph22',
+                            'void_flag' => 0,
                         ]
+                        //===end pph22
                     ];
                     
                     insert_gl_detail($ac);

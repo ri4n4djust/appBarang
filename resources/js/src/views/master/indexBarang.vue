@@ -160,7 +160,7 @@
 
     const store = useStore();
 
-    const columns = ref(['kdBarang', 'nmBarang', 'hrgPokok', 'hrgJual', 'namaKtg', 'stkBarang', 'action']);
+    const columns = ref(['kdBarang', 'nmBarang', 'hrgPokok', 'hrgJual', 'namaKtg', 'stokPersediaan', 'action']);
 
     const modalinput = ref(false);
     const items = ref([]);
@@ -176,7 +176,7 @@
             filterPlaceholder: 'Search...',
             limit: 'Results:',
         },
-        sortable: ['kdBarang', 'nmBarang', 'hrgPokok', 'hrgJual', 'namaKtg', 'stkBarang',],
+        sortable: ['kdBarang', 'nmBarang', 'hrgPokok', 'hrgJual', 'namaKtg',],
         sortIcon: {
             base: 'sort-icon-none',
             up: 'sort-icon-asc',
