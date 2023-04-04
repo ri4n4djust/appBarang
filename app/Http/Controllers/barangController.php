@@ -181,16 +181,16 @@ class barangController extends Controller
 
                         // $bbm = DB::table('tblbbm')->where('code_bbm', $kdBarang)->first();
                         if($qty != ''){
-                            if(Persediaan::where('kdPersediaan', $kdBarang )->exists()){
+                            // if(Persediaan::where('kdPersediaan', $kdBarang )->exists()){
                                 DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->update([
                                     'stokPersediaan' => $qty,
                                 ]);
-                            }else{
-                                DB::table('tblbarang')->where('kdBarang', $kdBarang)->update([
-                                    'stkBarang' => $qty,
+                            // }else{
+                                // DB::table('tblbarang')->where('kdBarang', $kdBarang)->update([
+                                    // 'stkBarang' => $qty,
                                     // 'hrgJual' => $hrg,
-                                ]);
-                            }
+                                // ]);
+                            // }
                         }
                         // $oldStok = $brg->stokPersediaan;
                         // DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->update([

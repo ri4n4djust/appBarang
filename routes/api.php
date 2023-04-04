@@ -78,6 +78,7 @@ Route::post('/delete/biaya', [App\Http\Controllers\laporanController::class, 'de
 Route::post('/delete/penyusutan', [App\Http\Controllers\laporanController::class, 'deletePenyusutan']);
 Route::post('/delete/pobbm', [App\Http\Controllers\laporanController::class, 'deletePobbm']);
 Route::post('/delete/penjualan', [App\Http\Controllers\laporanController::class, 'deletePenjualan']);
+Route::post('/delete/opnum', [App\Http\Controllers\laporanController::class, 'deleteOpnum']);
 
 //==================detail
 Route::post('/detail/pobbm', [App\Http\Controllers\laporanController::class, 'detailPobbm']);
