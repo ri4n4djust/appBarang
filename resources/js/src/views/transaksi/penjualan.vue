@@ -194,7 +194,7 @@
                                                 <div class="invoice-actions-btn">
                                                     <div class="invoice-action-btn">
                                                         <div class="row">
-                                                            <div class="col-sm-4">
+                                                            <!-- <div class="col-sm-4">
                                                                 <div v-if="divpajak">
                                                                     <a href="javascript:;" class="btn btn-primary btn-send" @click="taxRemove" >- pajak</a>
                                                                 </div>
@@ -203,9 +203,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-4">
-                                                                <!-- <router-link to="/apps/invoice/preview" class="btn btn-dark btn-preview">Preview</router-link> -->
                                                                 <a href="javascript:;" @click="addPayment" class="btn btn-dark btn-preview" data-bs-toggle="modal" data-bs-target="#modalPayment">Pembayaran</a>
-                                                            </div>
+                                                            </div> -->
                                                             <div class="col-sm-4">
                                                                 <a href="javascript:;" @click="simpanPenjualan" class="btn btn-success btn-download">Save</a>
                                                             </div>
@@ -452,11 +451,11 @@
         // params.value.due_date = dt;
 
         divpajak.value = false
-        console.log('on mount page penjualan')
+        // console.log('on mount page penjualan')
         
        
         getBarang();
-        getAcc();
+        // getAcc();
         getPelanggan();
         getCart();
         getNoPenjualan();

@@ -25,7 +25,7 @@
                         <div class="d-flex flex-wrap justify-content-center justify-content-sm-start px-3 pt-3 pb-0">
                             <!-- <button variant="primary" class="btn m-1 btn-primary" @click="export_table('print')">Print</button> -->
                             <!-- <button variant="primary" class="btn m-1 btn-primary" @click="export_table('pdf')">PDF</button> -->
-                            <h5>Daftar Penjualan</h5>
+                            <h5>Daftar Transaksi Opnum</h5>
 <span>{{ bbm }}</span>
                         </div>
                         <div class="panel-body">
