@@ -43,11 +43,17 @@ class biayaController extends Controller
                         ]
                     );
                     //===========jurnal biaya 
+                    $pph22 = 10 ; //$detop[0]['pph22'];
                     // $accid = $detpro[$i]['accid']; // acc id yg di debet
                     $acc_id_d = $det_biaya[$i]['acc']; // $request[0]['subtotal']; // acc id yg di kredit
                     $acc_id_k = '11110'; // $det_biaya[$i]['acc'];
                     $acc_laba = '32300';
+                    $acc_pph = '23100'; // acc hutang pph
                     // $memo = 'Trans-biaya';
+                    //===jumlah pph22
+                    // $bati = $subtotal - $subtotal_hpp ;
+                    $pph22_dibayar = $biaya * $pph22 / 100 ;
+                    //====endjumalh pph
                     $jurnal = 'JK';
                     insert_gl($noNota,$tglNota,$biaya,$memo,$jurnal);
                     $rgl = DB::table('general_ledger')->get()->last()->notrans;
@@ -75,7 +81,25 @@ class biayaController extends Controller
                             'kredit' => 0,
                             'trans_detail' => 'Trans-biaya',
                             'void_flag' => 0,
+                        ],
+                        //=========pph22
+                        [
+                            'rgl' => $rgl,
+                            'acc_id' => $acc_id_k,
+                            'debet' => $pph22_dibayar,
+                            'kredit' => 0,
+                            'trans_detail' => 'Trans-biaya',
+                            'void_flag' => 0,
+                        ],
+                        [
+                            'rgl' => $rgl,
+                            'acc_id' => $acc_pph,
+                            'debet' => 0,
+                            'kredit' => $pph22_dibayar,
+                            'trans_detail' => 'Trans-biaya',
+                            'void_flag' => 0,
                         ]
+                        //==========endpph22
                         
                     ];
                     

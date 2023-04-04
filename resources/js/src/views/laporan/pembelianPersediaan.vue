@@ -52,9 +52,9 @@
                             <template #subTotal="props"> {{ Number(props.row.subTotal).toLocaleString() }} </template>
                             <template #total="props"> {{ Number(props.row.total).toLocaleString() }} </template>
                             <template #action="props">
+
                                 <div class="custom-dropdown dropdown btn-group ">
                                     <div class="btn-group" href="#" role="button" id="pendingTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <!-- <button type="button" class="btn btn-blue">Open</button> -->
                                         <div role="group" class="btn-group">
                                             <div class="dropdown b-dropdown custom-dropdown show btn-group">
                                                 <a class="btn dropdown-toggle btn-dark"
@@ -78,15 +78,15 @@
                                     </div>
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li>
-                                            <!-- <a href="javascript:void(0);" class="btn m-1 btn-light" @click="edit_row(props.row)"> Edit </a> -->
                                             <router-link to="/editpenjualan" class="dropdown-item" @click="edit_row(props.row)">Edit</router-link>
                                         </li>
                                         <li>
                                             <router-link :to="{ name: 'nosel', params: { id: props.row } }" class="dropdown-item">coba</router-link>
-                                            <!-- <a href="javascript:void(0);" class="btn m-1 btn-light" @click="view_row(props.row)"> Delete </a> -->
                                         </li>
                                     </ul>
                                 </div>
+
+                                
                             </template>
                         </v-client-table>
 
@@ -125,7 +125,7 @@
     const store = useStore();
     const router = useRouter()
 
-    const columns = ref(['noNota', 'tglPembelian', 'nmSupplier', 'subTotal', 'disc', 'tax', 'total', 'action']);
+    const columns = ref(['noNota', 'tglPembelian', 'nmSupplier', 'subTotal', 'disc', 'total', 'action']);
     const items = ref([]);
     const table_option = ref({
         perPage: 10,

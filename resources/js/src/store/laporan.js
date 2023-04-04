@@ -12,7 +12,8 @@ const state = {
     listbiaya: [],
     listbbmdatang: [],
     listpenyusutan: [],
-    bukubesar: []
+    bukubesar: [],
+    jurnalumum: [],
   };
   
 const getters = {
@@ -26,7 +27,8 @@ const getters = {
     SlistPenjualanKupon: state => state.listpenjualankupon,
     SlistBbmDatang: state => state.listbbmdatang,
     SlistPenyusutan: state => state.listpenyusutan,
-    SBukuBesar: state => state.bukubesar
+    SBukuBesar: state => state.bukubesar,
+    StateGjList: state => state.jurnalumum
 };
 
 const actions = {  
@@ -156,6 +158,17 @@ const actions = {
             return
         }
     },
+    async GetJurnalUmum({ commit }, gj){
+        let response
+        try {
+            response = await axios.post('/api/list-jurnalumum', gj)
+            commit('setJurnalUmum', response.data.data)
+        } catch (ex) {
+            // Handle error
+            alert('error load jurnal umum')
+            return
+        }
+    },
     async EditBarang({dispatch}, Brg) {
         await axios.post('/api/update/barang', Brg)
         await dispatch('GetBarang')
@@ -206,6 +219,9 @@ const mutations = {
     },
     setBukuBesar(state, bukubesar){
         state.bukubesar = bukubesar
+    },
+    setJurnalUmum(state, ju){
+        state.jurnalumum = ju
     }
 
 

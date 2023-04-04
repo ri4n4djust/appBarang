@@ -47,7 +47,7 @@ class pembelianController extends Controller
                         'lastPrice' => $detpem[$i]['hrgPokok'],
                     ]);
                     DB::table('tblbarang')->where('kdBarang', $kdBarang)->update([
-                        'stkBarang' => $oldStok + $qty,
+                        // 'stkBarang' => $oldStok + $qty,
                         'hrgPokok' => $detpem[$i]['hrgPokok'],
                     ]);
 
@@ -154,8 +154,8 @@ class pembelianController extends Controller
                             // 'lastPrice' => $detgr[$i]['hrgPokok'],
                         ]);
                         DB::table('tblbarang')->where('kdBarang', $kdBarang)->update([
-                            'stkBarang' => $oldStok + $qty_datang,
-                            // 'hrgPokok' => $detgr[$i]['hrgPokok'],
+                            // 'stkBarang' => $oldStok + $qty_datang,
+                            'hrgPokok' => $detgr[$i]['hrgPokok'],
                         ]);
 
                         $pom = DB::table('tblpobbm_detail')

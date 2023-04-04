@@ -54,6 +54,7 @@ Route::post('/laporan-bbm', [App\Http\Controllers\laporanController::class, 'lap
 Route::post('/aplusan', [App\Http\Controllers\laporanController::class, 'aplusan']);
 Route::post('/list-aplusan', [App\Http\Controllers\laporanController::class, 'daftarAplusan']);
 Route::post('/list-biaya', [App\Http\Controllers\laporanController::class, 'daftarBiaya']);
+Route::post('/list-jurnalumum', [App\Http\Controllers\laporanController::class, 'daftarGJ']);
 Route::post('/laporan-barang', [App\Http\Controllers\laporanController::class, 'laporanBrg']);
 Route::post('/laporan-opnum', [App\Http\Controllers\laporanController::class, 'laporanOpnum']);
 Route::post('/laporan-penyusutan', [App\Http\Controllers\laporanController::class, 'laporanPenyusutan']);

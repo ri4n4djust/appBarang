@@ -519,6 +519,9 @@
             let alldata = store.getters.StateHarta;
             hartalist.value = alldata.filter(p => p.acc_id >= '40000');
             biayalist.value = alldata.filter(p => p.acc_id >= '40000');
+            let lb =  store.getters.StateHarta;
+            labarugi.value = lb.find(n => n.acc_id === '69999');
+            pph22.value = lb.find(n => n.acc_id === '23100');
             load.value = false;
             // const labrug = hartalist.value.filter(p => p.acc_id >= '40000');
             // console.log(labrug);

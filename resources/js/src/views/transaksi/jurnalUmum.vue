@@ -290,6 +290,7 @@
     const route = useRoute();
 
     const items = ref([]);
+    const list = ref([]);
     const accs = ref();
     const nobiaya = ref([]);
     const total = ref();
@@ -299,12 +300,20 @@
         total: total,
     });
 
+    const sorting = ref({
+        startDate: moment().subtract(30,'d').format("D-M-YYYY"),
+        endDate: moment().format("D-M-YYYY")
+    });
 
     const GetCoaList=() => {
         store.dispatch('GetCoaList', {acc: ''})
     }
     const GetNoJurnalUmum=() => {
         store.dispatch('GetNoJurnalUmum')
+    }
+    const GetJurnalUmum =() => {
+        store.dispatch('GetJurnalUmum', sorting.value)
+        setTimeout(function() { list.value = store.getters.StateGjList ; }, 2000);
     }
 
 
@@ -353,6 +362,7 @@
        
         GetCoaList();
         GetNoJurnalUmum();
+        GetJurnalUmum();
         setTimeout(function() { accs.value = store.getters.StateCoaList ; }, 2000);
         setTimeout(function() { nobiaya.value = store.getters.NoJurnalUmum ; }, 2000);
         

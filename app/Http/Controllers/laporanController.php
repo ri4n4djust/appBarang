@@ -152,6 +152,22 @@ class laporanController extends Controller
             'data' => $list
         ], 200);
     }
+
+    public function daftarGJ(Request $request){
+        $startDate = date("Y-m-d", strtotime($request->input('startDate')));
+        $endDate = date("Y-m-d", strtotime($request->input('endDate')));
+        $list = DB::table('general_ledger')
+                ->whereBetween('tgl', [$startDate, $endDate])
+                ->where('jurnal', 'GJ')
+                ->orderBy("notrans", "desc")
+                ->get();
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'List Jurnal Umum',
+            'data' => $list
+        ], 200);
+    }
     
 
     public function daftarBbmDatang(Request $request){
