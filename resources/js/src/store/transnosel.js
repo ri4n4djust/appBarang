@@ -37,6 +37,7 @@ const actions = {
                 title: 'Transaksi berhasil tersimpan',
                 padding: '2em',
             });
+            return response ;
         } catch (ex) {
             const toast =  window.Swal.mixin({
                 toast: true,
@@ -52,7 +53,7 @@ const actions = {
                 // confirmButtonText: 'Cool',
                 padding: '2em'
             });
-            return
+            throw 'error bro';
         }
     }, 
     async UpdateMeterNosel({commit, dispatch}, updatemeter) {

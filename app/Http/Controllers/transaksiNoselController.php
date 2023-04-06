@@ -441,15 +441,25 @@ class transaksiNoselController extends Controller
 
                 // //=====end jurnal pph22
 
-                $cost = $total_k + $tot_b + $total_l;
+                // $cost = $total_k + $tot_b + $total_l;
+                $arrkupon = $request[1];
+                $arrbiaya = $request[2];
+                $arrlink = $request[3];
+
+                $kpn = array_sum(array_column($arrkupon, 'nilai'));
+                $by = array_sum(array_column($arrbiaya, 'nilai'));
+                $lk = array_sum(array_column($arrlink, 'jumlahLink'));
+                
+                $cost = $kpn + $by + $lk;
+
                 DB::table('tblheader_aplusan')->upsert([
                     'kd_trans'  => $kdtrans,
                     'r_regu'    => $regu,
                     'tgl_trans' => $tgl,
                     'total_jual'    => $total_j,
-                    'total_kupon'   => $total_k,
-                    'total_biaya'   => $tot_b,
-                    'total_link'    => $total_l,
+                    'total_kupon'   => $kpn,
+                    'total_biaya'   => $by,
+                    'total_link'    => $lk,
                     'total_cash'    => $total_j - $cost,
                     'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                     'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
@@ -458,9 +468,9 @@ class transaksiNoselController extends Controller
                     'r_regu'    => $regu,
                     'tgl_trans' => $tgl,
                     'total_jual'    => $total_j,
-                    'total_kupon'   => $total_k,
-                    'total_biaya'   => $tot_b,
-                    'total_link'    => $total_l,
+                    'total_kupon'   => $kpn,
+                    'total_biaya'   => $by,
+                    'total_link'    => $lk,
                     'total_cash'    => $total_j - $cost,
                     'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                     'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
