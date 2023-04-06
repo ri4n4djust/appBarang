@@ -69,7 +69,7 @@
                                                 <tr v-for="b in cartBiaya" :key="b.ketBiaya" >
                                                     <td aria-colindex="1" role="cell">{{ b.ketBiaya }}</td>
                                                     <td aria-colindex="2" role="cell">{{ b.tglBiaya }}</td>
-                                                    <td aria-colindex="3" role="cell">{{ b.nilaiBiaya }}</td>
+                                                    <td aria-colindex="3" role="cell">{{ Number(b.nilaiBiaya).toLocaleString() }}</td>
                                                     <td aria-colindex="4" role="cell">
                                                         <button type="button" class="btn btn-secondary additem btn-sm" @click="removeBiaya(id=b.ketBiaya)">Hapus</button>
                                                     </td>
@@ -152,6 +152,7 @@ const simpnBiaya = async () =>{
             localStorage.setItem('biaya', JSON.stringify(cartBiaya.value))
             await store.dispatch('NewBiaya', cartBiaya.value)
             getlistb();
+            reset_input();
     }else{
             // cartKupon.value = JSON.parse(localStorage.getItem('kupon'))
             
@@ -160,12 +161,20 @@ const simpnBiaya = async () =>{
             await store.dispatch('NewBiaya', cartBiaya.value)
             // console.log(inputk.value)
             getlistb();
+            reset_input();
     }
     // inputb.value = {
     //     ketBiaya: '',
     //     nilaiBiaya: ''
     // }
     // alert('simpan  biaya')
+}
+
+const reset_input = () => {
+    inputb.value = {
+        tglBiaya: moment().format('D-M-YYYY'),
+    };
+    GetCoaList();
 }
 
 const removeBiaya = (id) =>{

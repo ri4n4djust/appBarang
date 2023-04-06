@@ -65,7 +65,7 @@
                                 <tr v-for="kp in cartKupon" :key="kp.kdp">
                                     <td aria-colindex="1" role="cell">{{ kp.kdp }}</td>
                                     <td aria-colindex="2" role="cell">{{ kp.tglKupon }}</td>
-                                    <td aria-colindex="3" role="cell">{{ kp.nilaiKupon }}</td>
+                                    <td aria-colindex="3" role="cell">{{ Number(kp.nilaiKupon).toLocaleString() }}</td>
                                     <td aria-colindex="4" role="cell">
                                         <button type="button" class="btn btn-secondary additem btn-sm" @click="removeItem(id=kp.kdp)">Hapus</button>
                                     </td>
@@ -164,6 +164,7 @@ const simpnKupon = async () =>{
             localStorage.setItem('kupon', JSON.stringify(cartKupon.value))
             await store.dispatch('NewKupon', cartKupon.value)
             getlist();
+            reset_input();
     }else{
             // cartKupon.value = JSON.parse(localStorage.getItem('kupon'))
             
@@ -172,9 +173,16 @@ const simpnKupon = async () =>{
             await store.dispatch('NewKupon', cartKupon.value)
             // console.log(inputk.value)
             getlist();
+            reset_input();
     }
     
     
+}
+const reset_input = () => {
+    inputk.value = {
+        tglKupon: moment().format('D-M-YYYY')
+    };
+    getPelanggan();
 }
 const removeItem = (id) =>{
     const arrayFromStroage = JSON.parse(localStorage.getItem('kupon'));

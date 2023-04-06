@@ -22,6 +22,50 @@ class inventarisController extends Controller
         ], 200);
     }
 
+    public function daftarPembelianInventaris(Request $request){
+        // try{
+        //     $exception = DB::transaction(function() use ($request){
+                $startDate = date("Y-m-d", strtotime($request->input('startDate')));
+                $endDate = date("Y-m-d", strtotime($request->input('endDate')));
+
+                $detail = DB::table('tblinventaris_pengadaan')
+                        ->join('tblsupplier', 'tblinventaris_pengadaan.supplier_code', 'tblsupplier.kdSupplier')
+                        ->whereBetween('tblinventaris_pengadaan.tgl_spk', [$startDate, $endDate])
+                        ->select('tblinventaris_pengadaan.*', 'tblsupplier.nmSupplier')
+                        ->get();
+                
+                        return response()->json([
+                            'success' => true,
+                            'message' => 'Laporan Pembelian Inventaris',
+                            'data' => $detail
+                        ], 200);
+
+
+        //         DB::commit();
+        //     });
+        //     if(is_null($exception)) {
+        //         return response()->json([
+        //             'success' => true,
+        //             'message' => 'Laporan Pembelian Inventaris',
+        //             'data' => $detail
+        //         ], 200);
+        //     } else {
+        //         DB::rollback();
+        //         return response()->json([
+        //             'success' => false,
+        //             'message' => 'Laporan Pembelian Gagal Diupdate!',
+        //         ], 500);
+        //     }
+        // } catch (\Exception $e) {
+        //     DB::rollback();
+        //     // something went wrong
+        //     return response()->json([
+        //      'success' => false,
+        //      'message' => 'exception'.$e,
+        //  ], 400);
+        // }
+    }
+
     public function tambahInventaris(Request $request){
         try{
             $exception = DB::transaction(function() use ($request){
@@ -337,6 +381,44 @@ class inventarisController extends Controller
          ], 400);
         }
 
+    }
+
+    public function deletePengadaan(Request $request){
+        try{
+            $exception = DB::transaction(function() use ($request){
+                $kd = $request->input('id');
+                //====hapus jurnal
+                $gl = DB::table('general_ledger')->where('order_no', $kd)->get();
+                for($i=0;$i< count($gl);$i++){
+                    DB::table('general_ledger')->where('notrans', $gl[$i]->notrans)->delete();
+                    DB::table('gl_detail')->where('rgl', $gl[$i]->notrans)->delete();
+                };
+                //=====end jurnal
+                DB::table('tblinventaris_pengadaan')->where('pengadaan_sysno', $kd)->delete();
+                DB::table('tblinventaris_pengadaan_detail')->where('rsysno_pengadaan', $kd)->delete();
+                DB::commit();
+            });
+            if(is_null($exception)) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Pengadaan Berhasil di Hapus',
+                    // 'data' => $detail
+                ], 200);
+            } else {
+                DB::rollback();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Pengadaan Gagal Dihapus',
+                ], 500);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            // something went wrong
+            return response()->json([
+             'success' => false,
+             'message' => 'exception'.$e,
+         ], 400);
+        }
     }
 
 }

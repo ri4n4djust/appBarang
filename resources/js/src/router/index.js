@@ -253,6 +253,12 @@ const routes = [
         props: true,
     },
     {
+        path: '/laporan/pembelian-inventaris',
+        name: 'laporan-pembelian-inventaris',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/pembelianInventaris.vue'),
+        props: true,
+    },
+    {
         path: '/laporan/opnum',
         name: 'laporan-opnum',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/laporanOpnum.vue'),

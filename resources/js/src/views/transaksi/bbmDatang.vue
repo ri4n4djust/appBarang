@@ -293,7 +293,7 @@
                                                                         <template #nama_bbm="props"> {{ props.row.nama_bbm }} </template>
                                                                         <template #qty_terima="props"> {{ Number(props.row.qty_terima).toLocaleString() }} </template>
                                                                         <template #action="props">
-                                                                            <router-link :to="{name: 'rekapan', params: {startDate: props.row.tgl_trans, kd_trans:props.row.kd_trans, regu:props.row.r_regu }}" >
+                                                                            <a href="javascript:void(0);" @click="edit_row(props.row)" >
                                                                                 <svg
                                                                                     xmlns="http://www.w3.org/2000/svg"
                                                                                     width="24"
@@ -308,7 +308,8 @@
                                                                                 >
                                                                                     <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                                                                                 </svg>
-                                                                            </router-link>
+                                                                            </a>
+                                                                            <a href="javascript:void(0);" @click="delete_row(props.row)" >
                                                                                 <svg
                                                                                     xmlns="http://www.w3.org/2000/svg"
                                                                                     width="24"
@@ -326,6 +327,7 @@
                                                                                     <line x1="10" y1="11" x2="10" y2="17"></line>
                                                                                     <line x1="14" y1="11" x2="14" y2="17"></line>
                                                                                 </svg>
+                                                                            </a>
                                                                         </template>
                                                                     </v-client-table>
 
@@ -593,5 +595,25 @@
         if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) { // 46 is dot
             $event.preventDefault();
         }   
+    }
+
+    const delete_row = (data) => {
+        // alert(data.kd_trans);
+        new window.Swal({
+            title: 'Anda Yakin?',
+            text: "Hapus BBM Datang !" +data.r_kdterima,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Delete',
+            padding: '2em'
+        }).then(result => {
+            if (result.value) {
+                store.dispatch('DeleteBbmDatang', { id:data.r_kdterima});
+                getListBbmDatang();
+                getNoTerima();
+                new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
+
+            }
+        });
     }
 </script>

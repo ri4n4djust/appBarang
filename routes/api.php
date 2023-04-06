@@ -72,6 +72,7 @@ Route::post('/store/inventaris', [App\Http\Controllers\inventarisController::cla
 Route::post('/pembelian/inventaris', [App\Http\Controllers\inventarisController::class, 'beliInventaris']);
 Route::post('/hapus/inventaris', [App\Http\Controllers\inventarisController::class, 'hapusInventaris']);
 Route::post('/penyusutan/inventaris', [App\Http\Controllers\inventarisController::class, 'penyusutanInventaris']);
+Route::post('/laporan/pembelian-inventaris', [App\Http\Controllers\inventarisController::class, 'daftarPembelianInventaris']);
 
 //=================hapus
 Route::post('/delete/biaya', [App\Http\Controllers\laporanController::class, 'deleteBiaya']);
@@ -79,6 +80,8 @@ Route::post('/delete/penyusutan', [App\Http\Controllers\laporanController::class
 Route::post('/delete/pobbm', [App\Http\Controllers\laporanController::class, 'deletePobbm']);
 Route::post('/delete/penjualan', [App\Http\Controllers\laporanController::class, 'deletePenjualan']);
 Route::post('/delete/opnum', [App\Http\Controllers\laporanController::class, 'deleteOpnum']);
+Route::post('/delete/bbmdatang', [App\Http\Controllers\laporanController::class, 'deleteBbmDatang']);
+Route::post('/delete/pengadaan', [App\Http\Controllers\inventarisController::class, 'deletePengadaan']);
 
 //==================detail
 Route::post('/detail/pobbm', [App\Http\Controllers\laporanController::class, 'detailPobbm']);

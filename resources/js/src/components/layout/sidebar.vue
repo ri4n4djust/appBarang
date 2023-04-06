@@ -378,6 +378,9 @@
                             <router-link to="/laporan/opnum" @click="toggleMobileMenu">Laporan Opnum</router-link>
                         </li>
                         <li>
+                            <router-link to="/laporan/pembelian-inventaris" @click="toggleMobileMenu">Laporan Pembelian inventaris</router-link>
+                        </li>
+                        <li>
                             <router-link to="/laporan/penyusutan" @click="toggleMobileMenu">Laporan Penyusutan</router-link>
                         </li>
                         <li>
