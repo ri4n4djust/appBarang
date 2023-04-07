@@ -28,7 +28,7 @@ const getters = {
     SlistBbmDatang: state => state.listbbmdatang,
     SlistPenyusutan: state => state.listpenyusutan,
     SBukuBesar: state => state.bukubesar,
-    StateGjList: state => state.jurnalumum
+    StateGjList: state => state.jurnalumum,
 };
 
 const actions = {  
@@ -84,7 +84,7 @@ const actions = {
     async GetListPenjualanKupon({ commit }, opnum){
         let response
         try {
-            response = await axios.post('/api/listpejualan-kupon', opnum)
+            response = await axios.post('/api/listpenjualan-kupon', opnum)
             commit('setListPenjualanKupon', response.data.data)
         } catch (ex) {
             // Handle error

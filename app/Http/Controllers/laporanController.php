@@ -73,13 +73,15 @@ class laporanController extends Controller
     public function listKupon(Request $request){
         $startDate = date("Y-m-d", strtotime($request->input('startDate')));
         $endDate = date("Y-m-d", strtotime($request->input('endDate')));
-        // $lap = DB::table('tblopnum')
-        //         ->whereBetween('tblopnum.tglOpnum', [$startDate, $endDate])
+        // $lap = DB::table('tblpenjualankupon')
+        //         ->join('tblpelanggan', 'tblpenjualankupon.r_pelanggan', 'tblpelanggan.kdPelanggan')
+        //         ->whereBetween('tblpenjualankupon.tglPenjualanKupon', [$startDate, $endDate])
+        //         ->select('tblpenjualankupon.*', 'tblpelanggan.nmPelanggan')
         //         ->get();
-        $lap = DB::select('SELECT *,COALESCE(SUM(totalPenjualanKupon),0) total FROM `tblpenjualankupon` GROUP BY noPenjualanKupon;');
+        $lap = DB::select('SELECT noPenjualanKupon,tglPenjualanKupon,COALESCE(SUM(totalPenjualanKupon),0) total,created_at,updated_at FROM tblpenjualankupon GROUP BY noPenjualanKupon,tglPenjualanKupon,created_at,updated_at;');
         return response()->json([
             'success' => true,
-            'message' => 'Laporan opnum Barang',
+            'message' => 'Laporan Penjualan Kupon',
             'data' => $lap
         ], 200);
     }
