@@ -336,6 +336,7 @@ class transaksiNoselController extends Controller
                 
 
                 $detpro = $request[4];
+                $to_bati = 0;
                 for ($i = 0; $i < count($detpro); $i++) {
                     $total_hpp = $detpro[$i]['total_hpp'];
                     $total_harga = $detpro[$i]['total_harga'];
@@ -431,16 +432,15 @@ class transaksiNoselController extends Controller
                     
                     insert_gl_detail($ac);
                     //===========end jurnal
+
+                    //=========hitung bati
+                    $to_bati =+ $bati ;
+                    //====end hitung bati
                     
                 };
                 DB::table('tblprofit')->insert($detpr);
 
-                // //======jurnal pph22
-                // $bati = $total_j - $cost;
-                // $pph22_dibayar = $bati * $pph22 / 100 ;
-
-                // //=====end jurnal pph22
-
+                
                 // $cost = $total_k + $tot_b + $total_l;
                 $arrkupon = $request[1];
                 $arrbiaya = $request[2];
@@ -451,6 +451,40 @@ class transaksiNoselController extends Controller
                 $lk = array_sum(array_column($arrlink, 'jumlahLink'));
                 
                 $cost = $kpn + $by + $lk;
+
+                //======jurnal pph22 setelah bati bersih
+                $acc_kas = '11110'; // Kas
+                $acc_pph = '23100'; // acc hutang pph
+                $acc_laba = '32300'; // laba ditahan
+                $memo = 'Aplusan';
+                $jurnal = 'JK';
+                // $bati_bersih = $to_bati - $by;
+                $pph22_b = $by * $pph22 / 100 ;
+                insert_gl($kdtrans,$tgl,$pph22_b,$memo,$jurnal);
+                $rgl = DB::table('general_ledger')->get()->last()->notrans;
+                $ac = [
+                    [
+                        'rgl' => $rgl,
+                        'acc_id' => $acc_pph,
+                        'debet' => 0,
+                        'kredit' => $pph22_b,
+                        'trans_detail' => 'Aplusan-pph22Net',
+                        'void_flag' => 0,
+                    ],
+                    [
+                        'rgl' => $rgl,
+                        'acc_id' => $acc_kas,
+                        'debet' => $pph22_b,
+                        'kredit' => 0,
+                        'trans_detail' => 'Aplusan-LabaNet',
+                        'void_flag' => 0,
+                    ],
+                    //===end pph22
+                ];
+                
+                insert_gl_detail($ac);
+                // //=====end jurnal pph22
+
 
                 DB::table('tblheader_aplusan')->upsert([
                     'kd_trans'  => $kdtrans,

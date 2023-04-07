@@ -692,6 +692,7 @@
         store.dispatch('CreatePo', [headerfull,detail] )
         setTimeout(function() { getCart(); }, 5000);
         getNoPobbm();
+        reset_form();
     }
 
     const edit_row = (row) => {
@@ -749,6 +750,37 @@
         getNoPobbm();
         getListPo();
     });
+
+    const reset_form = () => {
+        //set default data
+        items.value = []
+        items.value.push({ 
+            id: 1, 
+            title: '',
+            nmBarang: '', 
+            description: '', 
+            rate: '', 
+            quantity: '', 
+            amount: '', 
+            total: '',
+            pph: '' 
+        });
+        
+
+        let dt = new Date();
+        params.value.invoice_date = JSON.parse(JSON.stringify(dt));
+        dt.setDate(dt.getDate() + 5);
+        params.value.due_date = dt;
+
+        // console.log(paramssupplier.value)
+       
+        getBbm();
+        // getAcc();
+        getSupplier();
+        getCart();
+        getNoPobbm();
+        getListPo();
+    }
 
     const change_file = (event) => {
         selected_file.value = URL.createObjectURL(event.target.files[0]);

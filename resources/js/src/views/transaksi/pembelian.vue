@@ -194,7 +194,7 @@
                                                 <div class="invoice-actions-btn">
                                                     <div class="invoice-action-btn">
                                                         <div class="row">
-                                                            <div class="col-sm-4">
+                                                            <!-- <div class="col-sm-4">
                                                                 <div v-if="divpajak">
                                                                     <a href="javascript:;" class="btn btn-primary btn-send" @click="taxRemove" >- pajak</a>
                                                                 </div>
@@ -203,9 +203,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-4">
-                                                                <!-- <router-link to="/apps/invoice/preview" class="btn btn-dark btn-preview">Preview</router-link> -->
                                                                 <a href="javascript:;" @click="addPayment" class="btn btn-dark btn-preview" data-bs-toggle="modal" data-bs-target="#modalPayment">Pembayaran</a>
-                                                            </div>
+                                                            </div> -->
                                                             <div class="col-sm-4">
                                                                 <a href="javascript:;" @click="simpanPembelian" class="btn btn-success btn-download">Save</a>
                                                             </div>
@@ -399,9 +398,9 @@
     const getNoPembelian=() => {
         store.dispatch('GetNoPembelian')
     }
-    const getAcc=() => {
-        store.dispatch('GetAcc')
-    }
+    // const getAcc=() => {
+    //     store.dispatch('GetAcc')
+    // }
 
 
     const getTotal=() =>{
@@ -474,11 +473,28 @@
         // console.log(paramssupplier.value)
        
         getBarang();
-        getAcc();
+        // getAcc();
         getSupplier();
         getCart();
         getNoPembelian();
     });
+
+    const reset_form = () => {
+        items.value.push({ id: 1, title: '', description: '', rate: 0, quantity: 0, amount: 100, is_tax: false });
+
+        let dt = new Date();
+        params.value.invoice_date = JSON.parse(JSON.stringify(dt));
+        dt.setDate(dt.getDate() + 5);
+        params.value.due_date = dt;
+
+        // console.log(paramssupplier.value)
+       
+        getBarang();
+        // getAcc();
+        getSupplier();
+        getCart();
+        getNoPembelian();
+    }
 
     const change_file = (event) => {
         selected_file.value = URL.createObjectURL(event.target.files[0]);
@@ -517,15 +533,41 @@
                 cartItems.value[objIndex].qty = parseInt(newQty);
                 cartItems.value[objIndex].total = parseInt(newTotal);
                 localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
-                alert(oldName+' Quantity Update')
+                // alert(oldName+' Quantity Update')
                 getCart();
+                reset_form();
                 // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
+                const toast = window.Swal.mixin({
+                    toast: true,
+                    position: 'top-center',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    padding: '2em',
+                });
+                toast.fire({
+                    icon: 'success',
+                    title: oldName+' Quantity Update',
+                    padding: '2em',
+                });
             }else{
-            cartItems.value.push({kdBarang:brg.kdPersediaan, nmBarang:brg.nmPersediaan,accid_persediaan:brg.accid_persediaan,hrgPokok:brg.lastPrice,qty:qty.value,satuan:brg.satuanPersediaan,total:qty.value * brg.lastPrice});	
-            localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
-            getCart();
-            // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
-            alert(brg.nmPersediaan+ " berhasil disimpan")
+                cartItems.value.push({kdBarang:brg.kdPersediaan, nmBarang:brg.nmPersediaan,accid_persediaan:brg.accid_persediaan,hrgPokok:brg.lastPrice,qty:qty.value,satuan:brg.satuanPersediaan,total:qty.value * brg.lastPrice});	
+                localStorage.setItem('cartItemsP',JSON.stringify(cartItems.value));
+                getCart();
+                reset_form();
+                // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
+                // alert(brg.nmPersediaan+ " berhasil disimpan")
+                const toast = window.Swal.mixin({
+                        toast: true,
+                        position: 'top-center',
+                        showConfirmButton: false,
+                        timer: 3000,
+                        padding: '2em',
+                    });
+                    toast.fire({
+                        icon: 'success',
+                        title: brg.nmPersediaan+ " berhasil disimpan",
+                        padding: '2em',
+                    });
             }
     }
     function removeItem(id) {

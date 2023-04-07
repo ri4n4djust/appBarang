@@ -82,6 +82,7 @@ Route::post('/delete/penjualan', [App\Http\Controllers\laporanController::class,
 Route::post('/delete/opnum', [App\Http\Controllers\laporanController::class, 'deleteOpnum']);
 Route::post('/delete/bbmdatang', [App\Http\Controllers\laporanController::class, 'deleteBbmDatang']);
 Route::post('/delete/pengadaan', [App\Http\Controllers\inventarisController::class, 'deletePengadaan']);
+Route::post('/delete/penjualan-kupon', [App\Http\Controllers\laporanController::class, 'deletePenjualanKupon']);
 
 //==================detail
 Route::post('/detail/pobbm', [App\Http\Controllers\laporanController::class, 'detailPobbm']);

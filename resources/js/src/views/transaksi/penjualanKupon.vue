@@ -605,4 +605,23 @@
             $event.preventDefault();
         }   
     }
+    const delete_row = (data) => {
+        // alert(data.kd_trans);
+        new window.Swal({
+            title: 'Anda Yakin?',
+            text: "Hapus Biaya !" +data.noPenjualanKupon,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Delete',
+            padding: '2em'
+        }).then(result => {
+            if (result.value) {
+                store.dispatch('DeletePenjualanKupon', { id:data.noPenjualanKupon});
+                get_data();
+                // getNoBiaya();
+                new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
+
+            }
+        });
+    }
 </script>

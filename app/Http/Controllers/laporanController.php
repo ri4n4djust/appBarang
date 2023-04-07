@@ -483,6 +483,51 @@ class laporanController extends Controller
         }
     }
 
+    public function deletePenjualanKupon(Request $request){
+        try{
+            $exception = DB::transaction(function() use ($request){
+                $kd = $request->input('id');
+                //========jurnal
+                $gl = DB::table('general_ledger')->where('order_no', $kd)->get();
+                for($i=0;$i< count($gl);$i++){
+                    DB::table('general_ledger')->where('notrans', $gl[$i]->notrans)->delete();
+                    DB::table('gl_detail')->where('rgl', $gl[$i]->notrans)->delete();
+                };
+                //=========endjurnal
+                DB::table('tblpenjualankupon')->where('noPenjualanKupon', $kd)->delete();
+                // $dtl = DB::table('tblopnum_detail')->where('r_opnum', $kd)->get();
+                // for($i=0;$i< count($dtl);$i++){
+                //     $oldStok = DB::table('tblpersediaan')->where('kdPersediaan', $dtl[$i]->r_kdPersediaan)->first();
+                //     DB::table('tblpersediaan')->where('kdPersediaan', $dtl[$i]->r_kdPersediaan)->update([
+                //         'stokPersediaan' => $oldStok->stokPersediaan + $dtl[$i]->selisihOpnum,
+                //     ]);
+                // };
+                // DB::table('tblopnum_detail')->where('r_opnum', $kd)->delete();
+                DB::commit();
+            });
+            if(is_null($exception)) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Penjualan Berhasil di Hapus',
+                    // 'data' => $detail
+                ], 200);
+            } else {
+                DB::rollback();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Penjualan Gagal Dihapus',
+                ], 500);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            // something went wrong
+            return response()->json([
+             'success' => false,
+             'message' => 'exception'.$e,
+         ], 400);
+        }
+    }
+
     public function bukubesar(Request $request){
         $startDate = date("Y-m-d", strtotime($request->input('startDate')));
         $endDate = date("Y-m-d", strtotime($request->input('endDate')));

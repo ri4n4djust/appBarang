@@ -542,6 +542,9 @@
                 store.dispatch('NewKupon', [])
                 store.dispatch('NewBiaya', [])
                 store.dispatch('NewLink', [])
+                localStorage.setItem('kupon', '[]');
+                localStorage.setItem('biaya', '[]');
+                localStorage.setItem('link', '[]');
             })
             .catch(error => {
                 // console.log('error: ', error)
@@ -561,29 +564,7 @@
     }
 
 
-    // function saveTransBbm(id_nosel,code_bbm,kode_brg,oldmeter,newmeter,hrg,costltr,jual){
-    //         // const idbbm = props.id;
-    //         // const harga = ref(props.last_price);
-    //         // const tgl = date1.value.substring(0, 10)
-    //         const tgl = moment(date1.value).format("YYYY-MM-DD")
-    //         const tglc = moment(date1.value).format("YYYYMMDD")
-    //         store.dispatch('CreateTransNosel', {
-    //             // 'r_bbm': idbbm,
-    //             'kd_bbm': code_bbm,
-    //             'kodeBrg': kode_brg,
-    //             'kd_trans': code_bbm+id_nosel+tglc,
-    //             'r_nosel': id_nosel,
-    //             'r_regu': regu.value,
-    //             'tgl_transaksi': tgl, 
-    //             'cost_ltr': costltr, 
-    //             'last_price': hrg, 
-    //             'awal_meter': oldmeter,
-    //             'last_meter': newmeter, 
-    //             'total': jual
-    //         })
-    //         getNosel();
-    //         getTrans();
-    // }
+    
     const getNosel=() => {
         const id = props.id;
         store.dispatch('GetNosel', {'key1': id})
