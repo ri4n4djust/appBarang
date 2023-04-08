@@ -780,6 +780,7 @@
         getCart();
         getNoPobbm();
         getListPo();
+        pph.value = '';
     }
 
     const change_file = (event) => {
