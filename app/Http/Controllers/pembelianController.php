@@ -344,14 +344,15 @@ class pembelianController extends Controller
                  $memo = 'PPH-PO-BBM';
                  $jurnal = 'JK';
                 //  $subtotal = $pph_bbm;
+                $pphps4_dibayar = $pph_bbm * $pph_ps4 / 100 ;
                  insert_gl($noNota,$tglNota,$pph_bbm,$memo,$jurnal);
                  $rgl = DB::table('general_ledger')->get()->last()->notrans;
                  $ac = [
                      [
                          'rgl' => $rgl,
                          'acc_id' => $accid_pphbbm,
-                         'debet' => $pph_bbm,
-                         'kredit' => 0,
+                         'debet' => 0,
+                         'kredit' => $pph_bbm,
                          'trans_detail' => 'PPH-PO-BBM',
                          'void_flag' => 0,
                      ], 
@@ -371,14 +372,24 @@ class pembelianController extends Controller
                         'trans_detail' => 'PPH-PO-BBM',
                         'void_flag' => 0,
                      ],
+                     //=======pph ps4 dibayar
+                     [
+                        'rgl' => $rgl,
+                        'acc_id' => $accid_kas,
+                        'debet' => $pphps4_dibayar,
+                        'kredit' => 0,
+                        'trans_detail' => 'Trans-biaya',
+                        'void_flag' => 0,
+                     ],
                      [
                         'rgl' => $rgl,
                         'acc_id' => $acc_ps4,
-                        'debet' => -1*($pph_bbm * $pph_ps4 / 100),
-                        'kredit' => 0,
+                        'debet' => 0,
+                        'kredit' => $pphps4_dibayar,
                         'trans_detail' => 'PPH-PO-BBM',
                         'void_flag' => 0,
                     ]
+                    //======end pph ps4 dibayar
                  ];
                  
                  insert_gl_detail($ac);

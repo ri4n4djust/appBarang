@@ -52,7 +52,7 @@ class biayaController extends Controller
                     // $memo = 'Trans-biaya';
                     //===jumlah pph22
                     // $bati = $subtotal - $subtotal_hpp ;
-                    $pph22_dibayar = $biaya * $pph22 / 100 ;
+                    $pphps4_dibayar = $biaya * $pph22 / 100 ;
                     //====endjumalh pph
                     $jurnal = 'JK';
                     insert_gl($noNota,$tglNota,$biaya,$memo,$jurnal);
@@ -82,11 +82,11 @@ class biayaController extends Controller
                             'trans_detail' => 'Trans-biaya',
                             'void_flag' => 0,
                         ],
-                        //=========pph22
+                        //=========pph pasal4
                         [
                             'rgl' => $rgl,
                             'acc_id' => $acc_id_k,
-                            'debet' => $pph22_dibayar,
+                            'debet' => $pphps4_dibayar,
                             'kredit' => 0,
                             'trans_detail' => 'Trans-biaya',
                             'void_flag' => 0,
@@ -95,11 +95,11 @@ class biayaController extends Controller
                             'rgl' => $rgl,
                             'acc_id' => $acc_pph,
                             'debet' => 0,
-                            'kredit' => $pph22_dibayar,
+                            'kredit' => $pphps4_dibayar,
                             'trans_detail' => 'Trans-biaya',
                             'void_flag' => 0,
                         ]
-                        //==========endpph22
+                        //==========endpph pasal 4
                         
                     ];
                     
