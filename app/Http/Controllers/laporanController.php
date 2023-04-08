@@ -240,6 +240,29 @@ class laporanController extends Controller
                     DB::table('gl_detail')->where('rgl', $gl[$i]->notrans)->delete();
                 };
                 //=====end jurnal
+                $getpo = DB::table('tblterimabbm_detail')->where('r_nopo', $kd)->get();
+                for($i=0;$i< count($getpo);$i++){
+
+                    $detterima = DB::table('tblterimabbm_detail')
+                                ->where('r_nopo', $getpo[$i]->r_nopo)
+                                ->where('kd_barang', $getpo[$i]->kd_barang)
+                                ->get();
+                    $qtyterima = $detterima->qty_terima;
+
+                    $detpo = DB::table('tblpobbm_detail')
+                                ->where('r_noPo', $getpo[$i]->r_nopo)
+                                ->where('kdBarang', $getpo[$i]->kd_barang)
+                                ->get();
+                    $qtypo = $detpo->qty_recieve;
+
+                    DB::table('tblpobbm_detail')
+                    ->where('r_noPo', $getpo[$i]->r_nopo)
+                    ->where('kdBarang', $getpo[$i]->kd_barang)
+                    ->update([
+                        'qty_recieve' => $qtypo - $qtyterima
+                    ]);
+
+                };
                 DB::table('tblterimabbm')->where('kd_terima', $kd)->delete();
                 DB::table('tblterimabbm_detail')->where('r_kdterima', $kd)->delete();
                 DB::commit();

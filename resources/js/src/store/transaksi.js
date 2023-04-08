@@ -120,6 +120,7 @@ const actions = {
                 title: 'Pembelian berhasil tersimpan',
                 padding: '2em',
             });
+            return response
         } catch (ex) {
             // Handle error
             const toast =  window.Swal.mixin({
@@ -136,7 +137,7 @@ const actions = {
                 // confirmButtonText: 'Cool',
                 padding: '2em'
             });
-            return
+            throw 'error bro';
         }
         // await dispatch('GetPembelian')
     },

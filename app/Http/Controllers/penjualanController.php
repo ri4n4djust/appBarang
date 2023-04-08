@@ -103,7 +103,7 @@ class penjualanController extends Controller
                     $jurnal = 'JK';
                     $subtotal = $detpem[$i]['total'];
                     $subtotal_hpp = $detpem[$i]['totalhpp'];
-                    //===jumlah pph22
+                    //===jumlah pph
                     $bati = $subtotal - $subtotal_hpp ;
                     $pph22_dibayar = $bati * $pph22 / 100 ;
                     //====endjumalh pph

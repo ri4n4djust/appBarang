@@ -362,7 +362,7 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-xl-12 col-md-3 col-sm-6">
-                                                                            <a href="javascript:;" @click="cari" class="btn btn-success btn-download">Cari</a>
+                                                                            <a href="javascript:;" @click="cari()" class="btn btn-success btn-download">Cari</a>
                                                                         </div>
 
                                                                     </div>
@@ -501,6 +501,9 @@
         store.dispatch('GetListBbmDatang', sorting.value)
         setTimeout(function() { listbbmdatang.value = store.getters.SlistBbmDatang ; }, 4000);
        
+    }
+    const cari = () => {
+         getListBbmDatang();
     }
     
     const simpanKedatangan=() => {

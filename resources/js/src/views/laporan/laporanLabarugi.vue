@@ -485,7 +485,7 @@
             load.value = false;
             // const pendapatan = hartalist.value.filter(p => p.acc_id === '60000');
             // console.log(labarugi.value);
-            // console.log(biayalist.value);
+            console.log(alldata);
         }, 3000);
         
         

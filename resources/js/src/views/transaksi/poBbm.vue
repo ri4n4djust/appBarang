@@ -688,11 +688,16 @@
                 accid_persediaan: data[i].title.accid_persediaan
             })
         }
-        console.log(detail)
+        // console.log(detail)
         store.dispatch('CreatePo', [headerfull,detail] )
-        setTimeout(function() { getCart(); }, 5000);
-        getNoPobbm();
-        reset_form();
+        .then(response => {
+            // setTimeout(function() { getCart(); }, 5000);
+            getNoPobbm();
+            reset_form();
+        }).catch(error => {
+            // console.log('error: ', error)
+            return
+        })
     }
 
     const edit_row = (row) => {

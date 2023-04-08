@@ -251,6 +251,8 @@ class pembelianController extends Controller
                 $tglNota = $request[0]['tgl_so'];
                 $noNota = $request[0]['no_po'];
                 $subtotal = $request[0]['subtotal'];
+                $pph_bbm = $request[0]['pph'];
+                $pph_ps4 = 10; //=====pph pasal 4 ayat 2
                 
                 $post = DB::table('tblpobbm')->insert([
                     'no_po'     => $request[0]['no_po'],
@@ -333,6 +335,54 @@ class pembelianController extends Controller
                     //===========end jurnal
                 }
                 DB::table('tblpobbm_detail')->insert($detail);
+
+                 //===========jurnal ppph bbm
+                 $accid_pphbbm = '62100'; // $detpo[$i]['accid_persediaan']; // acc id yg di debet
+                 $accid_kas = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
+                 $acc_laba = '32300';
+                 $acc_ps4 = '23100'; //===================pph pasal 4
+                 $memo = 'PPH-PO-BBM';
+                 $jurnal = 'JK';
+                //  $subtotal = $pph_bbm;
+                 insert_gl($noNota,$tglNota,$pph_bbm,$memo,$jurnal);
+                 $rgl = DB::table('general_ledger')->get()->last()->notrans;
+                 $ac = [
+                     [
+                         'rgl' => $rgl,
+                         'acc_id' => $accid_pphbbm,
+                         'debet' => $pph_bbm,
+                         'kredit' => 0,
+                         'trans_detail' => 'PPH-PO-BBM',
+                         'void_flag' => 0,
+                     ], 
+                     [
+                         'rgl' => $rgl,
+                         'acc_id' => $accid_kas,
+                         'debet' => 0,
+                         'kredit' => $pph_bbm,
+                         'trans_detail' => 'PPH-PO-BBM',
+                         'void_flag' => 0,
+                     ],
+                     [
+                        'rgl' => $rgl,
+                        'acc_id' => $acc_laba,
+                        'debet' => $pph_bbm,
+                        'kredit' => 0,
+                        'trans_detail' => 'PPH-PO-BBM',
+                        'void_flag' => 0,
+                     ],
+                     [
+                        'rgl' => $rgl,
+                        'acc_id' => $acc_ps4,
+                        'debet' => -1*($pph_bbm * $pph_ps4 / 100),
+                        'kredit' => 0,
+                        'trans_detail' => 'PPH-PO-BBM',
+                        'void_flag' => 0,
+                    ]
+                 ];
+                 
+                 insert_gl_detail($ac);
+                 //===========end jurnal
                 
                 DB::commit();
             });

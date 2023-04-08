@@ -449,7 +449,7 @@ class coaController extends Controller
 					if($h_tipe == 'H'){
 						if($head_level1 == ''){
 						$head_level1 = $value['tipe'];
-						$name_level1 = "Jumlah Total ".$value['name'];
+						$name_level1 = "JUMLAH TOTAL ".$value['name'];
 						$amount_Level1 = $value['amount'];
 						$head_idlevel1 = substr($value['acc_id'], 0,1).'9998';
 						switch ($head_level1) {
@@ -480,7 +480,7 @@ class coaController extends Controller
 					  }else{
 						if($head_level1 != $value['tipe']){
 						  $head_level1 = $value['tipe'];
-						  $name_level1 = "Jumlah Total ".$value['name'];
+						  $name_level1 = "JUMLAH TOTAL ".$value['name'];
 						  $amount_Level1 = $value['amount'];
 						  $head_idlevel1 = substr($value['acc_id'], 0,1).'9998';
 						  switch ($head_level1) {
@@ -525,8 +525,8 @@ class coaController extends Controller
 						$i+=1;        
 						$acc[$i] = array(
 						  'acc_id' => '69999',
-						  'name' => 'Laba Netto Sebelum PPH 22',
-						  'amount' => ((double)$tot_income-(double)$tot_hpp)-(-1*(double)$tot_byyop),
+						  'name' => 'LABA NETO SEBELUM PAJAK',
+						  'amount' => ((double)$tot_income-(double)$tot_hpp)-(double)$tot_byyop,
 						  'level' => '0',
 						  'tipe' => 'H',
 						  'jenis'=> 'Total',
@@ -586,7 +586,7 @@ class coaController extends Controller
 			      if($h_tipe == 'H'){
 			        if($head_level2 == ''){
 			          $head_level2 = $value['tipe'];
-			          $name_level2 = "Total".$value['name'];
+			          $name_level2 = "TOTAL ".$value['name'];
 			          $amount_Level2 = $value['amount'];
 			          $head_idlevel2 = substr($value['acc_id'], 0,2).'999';
 					  $parent2 = $value['parent2'];
@@ -602,7 +602,7 @@ class coaController extends Controller
 			        }else{
 			          if($head_level2 != $value['tipe']){
 			            $head_level2 = $value['tipe'];
-			            $name_level2 = "Total".$value['name'];
+			            $name_level2 = "TOTAL ".$value['name'];
 			            $amount_Level2 = $value['amount'];
 			            $head_idlevel2 = substr($value['acc_id'], 0,2).'999';
 						$parent2 = $value['parent2'];
@@ -648,7 +648,7 @@ class coaController extends Controller
 			      if($h_tipe == 'H'){
 			        if($head_level3 == ''){
 			          $head_level3 = $value['tipe'];
-			          $name_level3 = "T.".$value['name'];
+			          $name_level3 = "TOTAL ".$value['name'];
 			          $amount_Level3 = $value['amount'];
 			          $head_idlevel3 = substr($value['acc_id'], 0,3).'99';
 					  $parent3 = $value['parent3'];
@@ -664,7 +664,7 @@ class coaController extends Controller
 			        }else{
 			          if($head_level3 != $value['tipe']){
 			            $head_level3 = $value['tipe'];
-			            $name_level3 = "T.".$value['name'];
+			            $name_level3 = "TOTAL ".$value['name'];
 			            $amount_Level3 = $value['amount'];
 			            $head_idlevel3 = substr($value['acc_id'], 0,3).'99';
 						$parent3 = $value['parent3'];

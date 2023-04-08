@@ -160,34 +160,8 @@
                         <li>
                             <router-link to="/buku-besar" @click="toggleMobileMenu">Buku Kas</router-link>
                         </li>
-                        <li class="menu">
-                            <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#neraca" aria-controls="neraca" aria-expanded="false">
-                                <div class="">
-                                <span>Neraca</span> 
-                                    <!-- {{ $t('Master') }}</span> -->
-                                </div>
-                                <div>
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="feather feather-chevron-right"
-                                    >
-                                        <polyline points="9 18 15 12 9 6"></polyline>
-                                    </svg>
-                                </div>
-                            </a>
-                            <ul id="neraca" class="collapse submenu list-unstyled" data-bs-parent="#datatables">
-                                <li><router-link to="/coa/harta" @click="toggleMobileMenu">Harta</router-link></li>
-                                <li><router-link to="/coa/hutang" @click="toggleMobileMenu">Hutang</router-link></li>
-                                <li><router-link to="/coa/modal" @click="toggleMobileMenu">Modal</router-link></li>
-                            </ul>
+                        <li>
+                            <router-link to="/coa/neraca" @click="toggleMobileMenu">Neraca</router-link>
                         </li>
                         <li class="menu">
                             <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#labarugi" aria-controls="labarugi" aria-expanded="false">
@@ -216,8 +190,6 @@
                                 <li><router-link to="/coa/pendapatan" @click="toggleMobileMenu">Pendapatan</router-link></li>
                                 <li><router-link to="/coa/biayaPenjualan" @click="toggleMobileMenu">Biaya Penjualan</router-link></li>
                                 <li><router-link to="/coa/biaya" @click="toggleMobileMenu">Biaya</router-link></li>
-                                <li><router-link to="/coa/penghasilanLain" @click="toggleMobileMenu">Penhasilan Lain</router-link></li>
-                                <li><router-link to="/coa/biayaLain" @click="toggleMobileMenu">Biaya Lain</router-link></li>
                             </ul>
                         </li>
                     </ul>

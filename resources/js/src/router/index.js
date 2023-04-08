@@ -37,21 +37,9 @@ const routes = [
         // meta: { requiresAuth: true },
     },
     {
-        path: '/coa/harta',
-        name: 'harta',
-        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/coa/harta.vue'),
-        // meta: { requiresAuth: true },
-    },
-    {
-        path: '/coa/hutang',
-        name: 'hutang',
-        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/coa/hutang.vue'),
-        // meta: { requiresAuth: true },
-    },
-    {
-        path: '/coa/modal',
-        name: 'modal',
-        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/coa/modal.vue'),
+        path: '/coa/neraca',
+        name: 'neraca',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/coa/neraca.vue'),
         // meta: { requiresAuth: true },
     },
     {
@@ -70,18 +58,6 @@ const routes = [
         path: '/coa/biayaPenjualan',
         name: 'biayaPenjualan',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/coa/biayaPenjualan.vue'),
-        // meta: { requiresAuth: true },
-    },
-    {
-        path: '/coa/penghasilanLain',
-        name: 'penghasilanLain',
-        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/coa/penghasilanLain.vue'),
-        // meta: { requiresAuth: true },
-    },
-    {
-        path: '/coa/biayaLain',
-        name: 'biayaLain',
-        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/coa/biayaLain.vue'),
         // meta: { requiresAuth: true },
     },
     //============end oof coa

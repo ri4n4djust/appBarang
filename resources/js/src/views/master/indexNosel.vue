@@ -535,21 +535,20 @@
 
         store.dispatch('CreateTransNosel', [arr,arr_k,arr_b,arr_l,prArr ])
         .then(response => {
-                // console.log('result: ', response)
-                getNosel();
-                getTrans();
-                getRegu();
-                store.dispatch('NewKupon', [])
-                store.dispatch('NewBiaya', [])
-                store.dispatch('NewLink', [])
-                localStorage.setItem('kupon', '[]');
-                localStorage.setItem('biaya', '[]');
-                localStorage.setItem('link', '[]');
-            })
-            .catch(error => {
-                // console.log('error: ', error)
-                return
-            })
+            // console.log('result: ', response)
+            getNosel();
+            getTrans();
+            getRegu();
+            store.dispatch('NewKupon', [])
+            store.dispatch('NewBiaya', [])
+            store.dispatch('NewLink', [])
+            localStorage.setItem('kupon', '[]');
+            localStorage.setItem('biaya', '[]');
+            localStorage.setItem('link', '[]');
+        }).catch(error => {
+            // console.log('error: ', error)
+            return
+        })
  
         // setTimeout(() => {
         //     // getlist();
