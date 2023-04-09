@@ -177,41 +177,41 @@
                                                                         <template #tglOpnum="props"> {{ moment(props.row.tglOpnum).format("DD-MM-YYYY") }} </template>
                                                                         <template #totalOpnum="props"> {{ Number(props.row.totalOpnum).toLocaleString() }} </template>
                                                                         <template #action="props">
-                                                                            <div class="custom-dropdown dropdown btn-group ">
-                                                                                <div class="btn-group" href="#" role="button" id="pendingTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                                    <!-- <button type="button" class="btn btn-blue">Open</button> -->
-                                                                                    <div role="group" class="btn-group">
-                                                                                        <div class="dropdown b-dropdown custom-dropdown show btn-group">
-                                                                                            <a class="btn dropdown-toggle btn-dark"
-                                                                                                ><svg
-                                                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                                                    width="24"
-                                                                                                    height="24"
-                                                                                                    viewBox="0 0 24 24"
-                                                                                                    fill="none"
-                                                                                                    stroke="currentColor"
-                                                                                                    stroke-width="2"
-                                                                                                    stroke-linecap="round"
-                                                                                                    stroke-linejoin="round"
-                                                                                                    class="feather feather-chevron-down"
-                                                                                                >
-                                                                                                    <polyline points="6 9 12 15 18 9"></polyline>
-                                                                                                </svg>
-                                                                                            </a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <ul class="dropdown-menu dropdown-menu-end">
-                                                                                    <li>
-                                                                                        <!-- <a href="javascript:void(0);" class="btn m-1 btn-light" @click="edit_row(props.row)"> Edit </a> -->
-                                                                                        <router-link to="/editpenjualan" class="dropdown-item" @click="edit_row(props.row)">Edit</router-link>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <router-link :to="{ name: 'nosel', params: { id: props.row } }" class="dropdown-item">coba</router-link>
-                                                                                        <!-- <a href="javascript:void(0);" class="btn m-1 btn-light" @click="view_row(props.row)"> Delete </a> -->
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </div>
+                                                                            <a href="javascript:void(0);" @click="edit_row(props.row)" >
+                                                                                <svg
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    width="24"
+                                                                                    height="24"
+                                                                                    viewBox="0 0 24 24"
+                                                                                    fill="none"
+                                                                                    stroke="currentColor"
+                                                                                    stroke-width="2"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    class="feather feather-edit-2"
+                                                                                >
+                                                                                    <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                                                                                </svg>
+                                                                            </a>
+                                                                            <a href="javascript:void(0);" @click="delete_row(props.row)" >
+                                                                                <svg
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    width="24"
+                                                                                    height="24"
+                                                                                    viewBox="0 0 24 24"
+                                                                                    fill="none"
+                                                                                    stroke="currentColor"
+                                                                                    stroke-width="2"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    class="feather feather-trash-2"
+                                                                                >
+                                                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                                                </svg>
+                                                                            </a>
                                                                         </template>
                                                                     </v-client-table>
 
@@ -341,22 +341,22 @@
         endDate: moment().format("D-M-YYYY")
     });
 
-    const bind_list_opnum = async () => {
-        await store.dispatch('GetLaporanOpnum', sorting.value);
-        setTimeout(function() { items.value = store.getters.SlaporanBbm; }, 4000);
+    const bind_list_opnum = () => {
+        store.dispatch('GetLaporanOpnum', sorting.value);
+        setTimeout(function() { items.value = store.getters.SlaporanOpnum; }, 2000);
     }
 
-    const bbm = computed(() => {
-        items.value = store.getters.SlaporanOpnum;
+    // const bbm = computed(() => {
+    //     items.value = store.getters.SlaporanOpnum;
 
-        let sum = 0;
-        items.value.forEach(element => {
-        sum +=  parseInt(element.total);
-        });
+    //     let sum = 0;
+    //     items.value.forEach(element => {
+    //     sum +=  parseInt(element.total);
+    //     });
 
-        // console.log(sum)
-        // return { items }
-    });
+    //     // console.log(sum)
+    //     // return { items }
+    // });
 
     const getNoOpnum= async() => {
         await store.dispatch('GetNoOpnum')

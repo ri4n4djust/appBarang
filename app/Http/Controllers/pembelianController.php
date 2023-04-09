@@ -339,7 +339,7 @@ class pembelianController extends Controller
                  //===========jurnal ppph bbm
                  $accid_pphbbm = '62100'; // $detpo[$i]['accid_persediaan']; // acc id yg di debet
                  $accid_kas = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
-                 $acc_laba = '32300';
+                 $acc_laba = '32300'; //=====acc laba
                  $acc_ps4 = '23100'; //===================pph pasal 4
                  $memo = 'PPH-PO-BBM';
                  $jurnal = 'JK';

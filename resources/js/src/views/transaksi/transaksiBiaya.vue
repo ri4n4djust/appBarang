@@ -243,7 +243,7 @@
                                                                         <template #keterangan_biaya="props"> {{ props.row.keterangan_biaya }} </template>
                                                                         <template #jumlah="props"> {{ Number(props.row.jumlah).toLocaleString() }} </template>
                                                                         <template #action="props">
-                                                                            <router-link :to="{name: 'rekapan', params: {startDate: props.row.tgl_trans, kd_trans:props.row.kd_trans, regu:props.row.r_regu }}" >
+                                                                            <a href="javascript:void(0);" @click="edit_row(props.row)" >
                                                                                 <svg
                                                                                     xmlns="http://www.w3.org/2000/svg"
                                                                                     width="24"
@@ -258,7 +258,7 @@
                                                                                 >
                                                                                     <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                                                                                 </svg>
-                                                                            </router-link>
+                                                                            </a>
                                                                             <a href="javascript:void(0);" @click="delete_row(props.row)" >
                                                                                 <svg
                                                                                     xmlns="http://www.w3.org/2000/svg"

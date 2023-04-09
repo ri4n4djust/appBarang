@@ -43,16 +43,16 @@ class biayaController extends Controller
                         ]
                     );
                     //===========jurnal biaya 
-                    $pph22 = 10 ; //$detop[0]['pph22'];
+                    $pphps4 = 10 ; //$detop[0]['pphps4'];
                     // $accid = $detpro[$i]['accid']; // acc id yg di debet
                     $acc_id_d = $det_biaya[$i]['acc']; // $request[0]['subtotal']; // acc id yg di kredit
                     $acc_id_k = '11110'; // $det_biaya[$i]['acc'];
                     $acc_laba = '32300';
                     $acc_pph = '23100'; // acc hutang pph
                     // $memo = 'Trans-biaya';
-                    //===jumlah pph22
+                    //===jumlah pphps4
                     // $bati = $subtotal - $subtotal_hpp ;
-                    $pphps4_dibayar = $biaya * $pph22 / 100 ;
+                    $pphps4_dibayar = $biaya * $pphps4 / 100 ;
                     //====endjumalh pph
                     $jurnal = 'JK';
                     insert_gl($noNota,$tglNota,$biaya,$memo,$jurnal);

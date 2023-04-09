@@ -214,11 +214,15 @@ class barangController extends Controller
 
                         $total_harga = $detop[$i]['total'];
                         //===========jurnal
+                        $pphps4 = 10 ; //$detop[0]['pphps4'];
                         $acc_id_k = $detop[$i]['accid_persediaan']; // acc id yg di debet
                         $acc_id_d = $detop[$i]['accid_biaya']; // acc id yg di debet
                         // $accid = $detpro[$i]['accid']; // acc id yg di debet
-                        // $accid_kas = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
+                        $accid_kas = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
+
                         $acc_laba = '32300';
+                        $acc_pph = '23100'; // acc hutang pph
+                        $pphps4_dibayar = $total_harga * $pphps4 / 100 ;
 
                         $memo = 'Opnum';
                         $jurnal = 'JK';
@@ -241,14 +245,6 @@ class barangController extends Controller
                                 'trans_detail' => 'Opnum',
                                 'void_flag' => 0,
                             ],
-                            // [
-                            //     'rgl' => $rgl,
-                            //     'acc_id' => $accid_kas,
-                            //     'debet' => 0,
-                            //     'kredit' => $total_harga,
-                            //     'trans_detail' => 'Opnum',
-                            //     'void_flag' => 0,
-                            // ],
                             [
                                 'rgl' => $rgl,
                                 'acc_id' => $acc_laba,
@@ -256,7 +252,25 @@ class barangController extends Controller
                                 'kredit' => 0,
                                 'trans_detail' => 'Opnum',
                                 'void_flag' => 0,
+                            ],
+                            //=========pph ps 4
+                            [
+                                'rgl' => $rgl,
+                                'acc_id' => $accid_kas,
+                                'debet' => $pphps4_dibayar,
+                                'kredit' => 0,
+                                'trans_detail' => 'Trans-biaya',
+                                'void_flag' => 0,
+                            ],
+                            [
+                                'rgl' => $rgl,
+                                'acc_id' => $acc_pph,
+                                'debet' => 0,
+                                'kredit' => $pphps4_dibayar,
+                                'trans_detail' => 'Trans-biaya',
+                                'void_flag' => 0,
                             ]
+                            //=====================endpph ps4
                         ];
                         
                         insert_gl_detail($ac);

@@ -300,8 +300,9 @@ class inventarisController extends Controller
                     //     'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                     // ]
                 ]);
-
+                $subtotal = $detail['jumlah_penyusutan'];
                 //===========jurnal
+                $pphps4 = 10 ; //$detop[0]['pphps4'];
                 $acc_id_d =  $detail['acc_id']; // acc id yg di debet
                 $acc_id_akum =  $detail['accid_akum'];
                 $acc_id_k = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
@@ -309,7 +310,10 @@ class inventarisController extends Controller
                 $acc_id_l = '32300';
                 $memo = 'Penyusutan-Inventaris';
                 $jurnal = 'JK';
-                $subtotal = $detail['jumlah_penyusutan'];
+                $acc_pph = '23100'; // acc hutang pph
+                //===jumlah pphps4
+                $pphps4_dibayar = $subtotal * $pphps4 / 100 ;
+                //====endjumalh pph
                 insert_gl($noNota,$tglNota,$subtotal,$memo,$jurnal);
                 $rgl = DB::table('general_ledger')->get()->last()->notrans;
                 $ac = [
@@ -352,7 +356,25 @@ class inventarisController extends Controller
                         'kredit' => -1*$subtotal,
                         'trans_detail' => 'Penyusutan-Inventaris',
                         'void_flag' => 0,
+                    ],
+                    //===========pph ps4
+                    [
+                        'rgl' => $rgl,
+                        'acc_id' => $acc_id_k,
+                        'debet' => $pphps4_dibayar,
+                        'kredit' => 0,
+                        'trans_detail' => 'Trans-biaya',
+                        'void_flag' => 0,
+                    ],
+                    [
+                        'rgl' => $rgl,
+                        'acc_id' => $acc_pph,
+                        'debet' => 0,
+                        'kredit' => $pphps4_dibayar,
+                        'trans_detail' => 'Trans-biaya',
+                        'void_flag' => 0,
                     ]
+                    //============end pph ps4
                 ];
                 
                 insert_gl_detail($ac);
