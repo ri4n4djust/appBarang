@@ -460,6 +460,45 @@ class pembelianController extends Controller
         ], 200);
     }
 
+    public function deletePembelian(Request $request){
+        try{
+            $exception = DB::transaction(function() use ($request){
+                $kd = $request->input('id');
+                //====hapus jurnal
+                $gl = DB::table('general_ledger')->where('order_no', $kd)->get();
+                for($i=0;$i< count($gl);$i++){
+                    DB::table('general_ledger')->where('notrans', $gl[$i]->notrans)->delete();
+                    DB::table('gl_detail')->where('rgl', $gl[$i]->notrans)->delete();
+                };
+                //=====end jurnal
+                DB::table('tblpembelian')->where('noNota', $kd)->delete();
+                DB::table('tblpembelian_detail')->where('r_noNota', $kd)->delete();
+
+                DB::commit();
+            });
+            if(is_null($exception)) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Pembelian Berhasil di Hapus',
+                    // 'data' => $detail
+                ], 200);
+            } else {
+                DB::rollback();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Pembelian Gagal Dihapus',
+                ], 500);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            // something went wrong
+            return response()->json([
+             'success' => false,
+             'message' => 'exception'.$e,
+         ], 400);
+        }
+    }
+
     public function linkAccount(){
         $listakun = DB::select('SELECT * FROM link_acc'); 
         return response()->json([

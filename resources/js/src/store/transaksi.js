@@ -520,6 +520,45 @@ const actions = {
         // await dispatch('GetPembelian')
     },
 
+    async DeletePembelian({dispatch}, kd) {
+        let response
+        try {
+            response = await axios.post('/api/delete/pembelian', kd)
+            // console.log(response.data.data)
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Transaksi berhasil tersimpan',
+                padding: '2em',
+            });
+            return response ;
+        } catch (ex) {
+            // Handle error
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'Biaya Gagal Dihapus',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            throw 'error bro';
+        }
+        // await dispatch('GetPembelian')
+    },
+
     async DeleteBiaya({dispatch}, kd) {
         let response
         try {

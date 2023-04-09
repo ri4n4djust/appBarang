@@ -126,6 +126,7 @@ Route::post('/store/barang-datang', [App\Http\Controllers\pembelianController::c
 Route::post('/list/po-bbm', [App\Http\Controllers\pembelianController::class, 'listPobbm']);
 Route::post('/detail/po-bbm', [App\Http\Controllers\pembelianController::class, 'detailPobbm']);
 Route::get('/linkacc', [App\Http\Controllers\pembelianController::class, 'linkAccount']);
+Route::post('/delete/pembelian', [App\Http\Controllers\pembelianController::class, 'deletePembelian']);
 
 // Penjualan
 Route::post('/store/penjualan', [App\Http\Controllers\penjualanController::class, 'simpanPenjualan']);
