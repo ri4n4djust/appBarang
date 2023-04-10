@@ -499,6 +499,7 @@ const actions = {
             return response ;
         } catch (ex) {
             // Handle error
+            console.log(ex.response.data.message)
             const toast =  window.Swal.mixin({
                 toast: true,
                 position: 'top-center',
@@ -508,7 +509,7 @@ const actions = {
             });
             toast.fire({
                 title: 'Error!',
-                text: 'PO Gagal Dihapus',
+                text: ex.response.data.message,
                 icon: 'error',
                 // confirmButtonText: 'Cool',
                 padding: '2em'

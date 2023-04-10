@@ -62,7 +62,7 @@
                                                                 <thead>
                                                                     <tr>
                                                                         <th colspan="2">SPBU 54.903.06</th>
-                                                                        <th colspan="2">Nozzel</th>
+                                                                        <th colspan="2">Aplusan Tgl {{ moment(props.startDate).format("D-M-YYYY") }}</th>
                                                                         <th colspan="2">Regu {{props.regu}}</th>
                                                                     </tr>
                                                                     <tr>

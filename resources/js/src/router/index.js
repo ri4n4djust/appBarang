@@ -63,6 +63,12 @@ const routes = [
     //============end oof coa
     //============master
     {
+        path: '/pelanggan',
+        name: 'pelanggan',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexPelanggan.vue'),
+        // meta: { requiresAuth: true },
+    },
+    {
         path: '/transaksi-aplusan',
         name: 'transaksi-aplusan',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/indexNosel.vue'),
@@ -75,7 +81,6 @@ const routes = [
         // meta: { requiresAuth: true },
         props: true,
     },
-
     {
         path: '/barang',
         name: 'barang',

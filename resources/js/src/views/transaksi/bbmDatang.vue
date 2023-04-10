@@ -7,7 +7,7 @@
                         <nav class="breadcrumb-one" aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="javascript:;">Apps</a></li>
-                                <li class="breadcrumb-item active" aria-current="page"><span>Invoice Add</span></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span>Kedatangan BBM</span></li>
                             </ol>
                         </nav>
                     </div>
@@ -499,7 +499,7 @@
     }
     const getListBbmDatang=() => {
         store.dispatch('GetListBbmDatang', sorting.value)
-        setTimeout(function() { listbbmdatang.value = store.getters.SlistBbmDatang ; }, 4000);
+        setTimeout(function() { listbbmdatang.value = store.getters.SlistBbmDatang ; }, 2000);
        
     }
     const cari = () => {

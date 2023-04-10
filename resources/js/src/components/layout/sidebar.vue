@@ -152,6 +152,9 @@
                             <router-link to="/supplier" @click="toggleMobileMenu">Supplier</router-link>
                         </li>
                         <li>
+                            <router-link to="/pelanggan" @click="toggleMobileMenu">Pelanggan</router-link>
+                        </li>
+                        <li>
                             <router-link to="/persediaan" @click="toggleMobileMenu">Persediaan</router-link>
                         </li>
                         <li>

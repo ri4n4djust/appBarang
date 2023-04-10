@@ -195,15 +195,24 @@ class laporanController extends Controller
         try{
             $exception = DB::transaction(function() use ($request){
                 $kd = $request->input('id');
-                //====hapus jurnal
-                $gl = DB::table('general_ledger')->where('order_no', $kd)->get();
-                for($i=0;$i< count($gl);$i++){
-                    DB::table('general_ledger')->where('notrans', $gl[$i]->notrans)->delete();
-                    DB::table('gl_detail')->where('rgl', $gl[$i]->notrans)->delete();
-                };
-                //=====end jurnal
-                DB::table('tblpobbm')->where('no_po', $kd)->delete();
-                DB::table('tblpobbm_detail')->where('r_noPo', $kd)->delete();
+                $cek_data = DB::table('tblterimabbm')->where('no_po', $kd)->first();
+                if(empty($cek_data)){
+                    //====hapus jurnal
+                    $gl = DB::table('general_ledger')->where('order_no', $kd)->get();
+                    for($i=0;$i< count($gl);$i++){
+                        DB::table('general_ledger')->where('notrans', $gl[$i]->notrans)->delete();
+                        DB::table('gl_detail')->where('rgl', $gl[$i]->notrans)->delete();
+                    };
+                    //=====end jurnal
+                    DB::table('tblpobbm')->where('no_po', $kd)->delete();
+                    DB::table('tblpobbm_detail')->where('r_noPo', $kd)->delete();
+                }else{
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'tidak bole di Hapus',
+                        // 'data' => $detail
+                    ], 200);
+                }
                 DB::commit();
             });
             if(is_null($exception)) {
@@ -216,7 +225,7 @@ class laporanController extends Controller
                 DB::rollback();
                 return response()->json([
                     'success' => false,
-                    'message' => 'po Gagal Dihapus',
+                    'message' => 'po bbm Gagal Dihapus',
                 ], 500);
             }
         } catch (\Exception $e) {
@@ -240,26 +249,39 @@ class laporanController extends Controller
                     DB::table('gl_detail')->where('rgl', $gl[$i]->notrans)->delete();
                 };
                 //=====end jurnal
-                $getpo = DB::table('tblterimabbm_detail')->where('r_nopo', $kd)->get();
-                for($i=0;$i< count($getpo);$i++){
-
+                $get_tr = DB::table('tblterimabbm_detail')->where('r_kdterima', $kd)->get();
+                for($i=0;$i< count($get_tr);$i++){
+                    $kodebarang = $get_tr[$i]->kd_barang ;
+                    $kodepo = $get_tr[$i]->r_nopo;
+                    // echo $kodepo.$kodebarang ;
                     $detterima = DB::table('tblterimabbm_detail')
-                                ->where('r_nopo', $getpo[$i]->r_nopo)
-                                ->where('kd_barang', $getpo[$i]->kd_barang)
-                                ->get();
+                                ->where('r_nopo', '=' ,$kodepo)
+                                ->where('kd_barang', '=' ,$kodebarang)
+                                ->first();
                     $qtyterima = $detterima->qty_terima;
-
+                    // echo $qtyterima ;
                     $detpo = DB::table('tblpobbm_detail')
-                                ->where('r_noPo', $getpo[$i]->r_nopo)
-                                ->where('kdBarang', $getpo[$i]->kd_barang)
-                                ->get();
+                                ->where('r_noPo', '=' ,$kodepo)
+                                ->where('kdBarang', '=' ,$kodebarang)
+                                ->first();
                     $qtypo = $detpo->qty_recieve;
-
                     DB::table('tblpobbm_detail')
-                    ->where('r_noPo', $getpo[$i]->r_nopo)
-                    ->where('kdBarang', $getpo[$i]->kd_barang)
+                    ->where('r_noPo', '=' ,$get_tr[$i]->r_nopo)
+                    ->where('kdBarang', '=' ,$get_tr[$i]->kd_barang)
                     ->update([
                         'qty_recieve' => $qtypo - $qtyterima
+                    ]);
+                    DB::table('tblpobbm_detail')
+                    ->where('r_noPo', '=' ,$get_tr[$i]->r_nopo)
+                    ->where('kdBarang', '=' ,$get_tr[$i]->kd_barang)
+                    ->update([
+                        'qty_recieve' => $qtypo - $qtyterima
+                    ]);
+                    $brg = DB::table('tblpersediaan')->where('kdPersediaan', $kodebarang)->first();
+                    $oldStok = $brg->stokPersediaan;
+                    DB::table('tblpersediaan')->where('kdPersediaan', $kodebarang)->update([
+                        'stokPersediaan' => $oldStok - $qtyterima,
+                        // 'lastPrice' => $detgr[$i]['hrgPokok'],
                     ]);
 
                 };
@@ -424,11 +446,13 @@ class laporanController extends Controller
         try{
             $exception = DB::transaction(function() use ($request){
                 $kd = $request->input('id');
+                //========jurnal
                 $gl = DB::table('general_ledger')->where('order_no', $kd)->get();
                 for($i=0;$i< count($gl);$i++){
                     DB::table('general_ledger')->where('notrans', $gl[$i]->notrans)->delete();
                     DB::table('gl_detail')->where('rgl', $gl[$i]->notrans)->delete();
                 };
+                //========end jurnal
                 DB::table('tblpenjualan')->where('noPenjualan', $kd)->delete();
                 $dtl = DB::table('tblpenjualan_detail')->where('r_noPenjualan', $kd)->get();
                 for($i=0;$i< count($dtl);$i++){
