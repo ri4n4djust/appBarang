@@ -445,17 +445,19 @@
         
         }
 
+        // console.log(arr);
+
         const bbmNow = store.getters.StateBbm;
 
-        const totalPXHpp = arr.filter(i => i.kd_bbm === 1).reduce((a, b) => Number(a) + Number(b.totalhpp), 0);
-        const totalPLHpp = arr.filter(i => i.kd_bbm === 2).reduce((a, b) => Number(a) + Number(b.totalhpp), 0);
-        const totalDXHpp = arr.filter(i => i.kd_bbm === 3).reduce((a, b) => Number(a) + Number(b.totalhpp), 0);
-        const totalPX = arr.filter(i => i.kd_bbm === 1).reduce((a, b) => Number(a) + Number(b.total), 0);
-        const totalPL = arr.filter(i => i.kd_bbm === 2).reduce((a, b) => Number(a) + Number(b.total), 0);
-        const totalDX = arr.filter(i => i.kd_bbm === 3).reduce((a, b) => Number(a) + Number(b.total), 0);
-        const totalPXL = arr.filter(i => i.kd_bbm === 1).reduce((a, b) => Number(a) + Number(b.cost_ltr), 0);
-        const totalPLL = arr.filter(i => i.kd_bbm === 2).reduce((a, b) => Number(a) + Number(b.cost_ltr), 0);
-        const totalDXL = arr.filter(i => i.kd_bbm === 3).reduce((a, b) => Number(a) + Number(b.cost_ltr), 0);
+        const totalPXHpp = arr.filter(i => i.kodeBrg === 'BRG0001').reduce((a, b) => Number(a) + Number(b.totalhpp), 0);
+        const totalPLHpp = arr.filter(i => i.kodeBrg === 'BRG0002').reduce((a, b) => Number(a) + Number(b.totalhpp), 0);
+        const totalDXHpp = arr.filter(i => i.kodeBrg === 'BRG0003').reduce((a, b) => Number(a) + Number(b.totalhpp), 0);
+        const totalPX = arr.filter(i => i.kodeBrg === 'BRG0001').reduce((a, b) => Number(a) + Number(b.total), 0);
+        const totalPL = arr.filter(i => i.kodeBrg === 'BRG0002').reduce((a, b) => Number(a) + Number(b.total), 0);
+        const totalDX = arr.filter(i => i.kodeBrg === 'BRG0003').reduce((a, b) => Number(a) + Number(b.total), 0);
+        const totalPXL = arr.filter(i => i.kodeBrg === 'BRG0001').reduce((a, b) => Number(a) + Number(b.cost_ltr), 0);
+        const totalPLL = arr.filter(i => i.kodeBrg === 'BRG0002').reduce((a, b) => Number(a) + Number(b.cost_ltr), 0);
+        const totalDXL = arr.filter(i => i.kodeBrg === 'BRG0003').reduce((a, b) => Number(a) + Number(b.cost_ltr), 0);
 
         const accPersediaanPX = bbmNow.filter(k => k.code_bbm === 'BRG0001');
         const acchppPX = bbmNow.filter(k => k.code_bbm === 'BRG0001');
