@@ -334,7 +334,7 @@ class coaController extends Controller
                 }
             DB::table('coa')->insert($dataCCC);
 			// $action_btn = "concat('<button class=''btn btn-success btn-xs'' href=''#'' accid=''',a.acc_id,'''><span class=''fa fa-pencil''></span></button>') as aksi,concat('<button class=''btn btn-success btn-xs'' href=''#'' accid=''',idparent1,''' disabled><span class=''fa fa-pencil''></span></button>') as aksi1,concat('<button class=''btn btn-success btn-xs'' href=''#'' accid=''',idparent2,'''><span class=''fa fa-pencil''></span></button>') as aksi2,concat('<button class=''btn btn-success btn-xs'' href=''#'' accid=''',idparent3,'''><span class=''fa fa-pencil''></span></button>') as aksi3";
-			$data = DB::select("SELECT idparent1,parent1,parent1level,parent1type,idparent2,parent2,parent2level,parent2type,idparent3,parent3,parent3level,parent3type,a.acc_id,a.name,coalesce(b.amount,0) as amount,a.atype from coa a left join GL b on a.acc_id = b.acc_id where left(a.acc_id,1) in ($filter) order by a.acc_id;");
+			$data = DB::select("SELECT idparent1,parent1,parent1level,parent1type,idparent2,parent2,parent2level,parent2type,idparent3,parent3,parent3level,parent3type,a.acc_id,a.name,coalesce(b.amount,0) as amount,a.atype from coa a left join gl b on a.acc_id = b.acc_id where left(a.acc_id,1) in ($filter) order by a.acc_id;");
 			// $myquery = DB::table('coa as a')
 			// 			->join('GL as b', 'a.acc_id', 'b.acc_id')
 			// 			->select('a.idparent1','a.parent1','a.parent1level','a.parent1type','a.idparent2','a.parent2','a.parent2level','a.parent2type','a.idparent3','a.parent3','a.parent3level','a.parent3type','a.acc_id','a.name',DB::raw('coalesce(b.amount,0) as amount'),'a.atype')
