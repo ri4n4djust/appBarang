@@ -24,9 +24,41 @@ const actions = {
         // await commit('setUser', detUser.data.user)
     },
     async DeleteNosel({dispatch}, id) {
-        await axios.delete(`/api/hapus/nosel/${id}`)
-        await dispatch('GetNosel')
-        // await commit('setUser', detUser.data.user)
+        let response
+        try {
+            response = await axios.delete(`/api/hapus/nosel/${id}`)
+            await dispatch('GetNosel')
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Nosel berhasil tersimpan',
+                padding: '2em',
+            });
+            return response ;
+        } catch (ex) {
+            // Handle error
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'Nosel Gagal di hapus',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            throw 'error' ;
+        }
     },
     
 

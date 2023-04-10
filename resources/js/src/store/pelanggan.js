@@ -26,9 +26,41 @@ const actions = {
         }
     },
     async DeletePelanggan({dispatch}, id) {
-        await axios.delete(`/hapus/pelanggan/${id}`)
-        await dispatch('GetPelanggan')
-        // await commit('setUser', detUser.data.user)
+        let response
+        try {
+            response = await axios.delete(`/api/hapus/pelanggan/${id}`)
+            await dispatch('GetPelanggan')
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Pelanggan berhasil tersimpan',
+                padding: '2em',
+            });
+            return response ;
+        } catch (ex) {
+            // Handle error
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'Pelanggan Gagal di hapus',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            throw 'error' ;
+        }
     },
     
 

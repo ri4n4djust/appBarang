@@ -616,11 +616,14 @@
             padding: '2em'
         }).then(result => {
             if (result.value) {
-                store.dispatch('DeletePenjualanKupon', { id:data.noPenjualanKupon});
-                get_data();
-                // getNoBiaya();
-                new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
-
+                store.dispatch('DeletePenjualanKupon', { id:data.noPenjualanKupon})
+                .then(response => {
+                    get_data();
+                    new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
+                }).catch(error => {
+                    // console.log('error: ', error)
+                    return
+                })
             }
         });
     }

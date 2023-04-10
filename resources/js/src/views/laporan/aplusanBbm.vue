@@ -329,10 +329,15 @@
             padding: '2em'
         }).then(result => {
             if (result.value) {
-                store.dispatch('DeleteAplusan', { id:item.kd_trans});
-                bind_data();
-                new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
-
+                store.dispatch('DeleteAplusan', { id:item.kd_trans})
+                .then(response => {
+                    console.log(response);
+                    bind_data();
+                    new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
+                }).catch(error => {
+                    console.log('error: ', error)
+                    return
+                })
             }
         });
     };

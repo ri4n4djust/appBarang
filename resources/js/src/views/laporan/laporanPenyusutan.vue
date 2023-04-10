@@ -326,10 +326,14 @@
             padding: '2em'
         }).then(result => {
             if (result.value) {
-                store.dispatch('DeletePenyusutan', { id:data.rsysno_penyusutan});
-                bind_data();
-                new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
-
+                store.dispatch('DeletePenyusutan', { id:data.rsysno_penyusutan})
+                .then(response => {
+                    bind_data();
+                    new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
+                }).catch(error => {
+                    // console.log('error: ', error)
+                    return
+                })
             }
         });
     }

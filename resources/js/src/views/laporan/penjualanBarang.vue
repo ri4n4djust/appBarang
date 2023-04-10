@@ -363,11 +363,14 @@
             padding: '2em'
         }).then(result => {
             if (result.value) {
-                store.dispatch('DeletePenjualan', { id:data.noPenjualan});
-                bind_data();
-                // getNoBiaya();
-                new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
-
+                store.dispatch('DeletePenjualan', { id:data.noPenjualan})
+                .then(response => {
+                    bind_data();
+                    new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
+                }).catch(error => {
+                    // console.log('error: ', error)
+                    return
+                })
             }
         });
     }

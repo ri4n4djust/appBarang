@@ -24,9 +24,41 @@ const actions = {
     },
     
     async DeleteSupplier({dispatch}, id) {
-        await axios.delete(`/api/hapus/supplier/${id}`)
-        await dispatch('GetSupplier')
-        // await commit('setUser', detUser.data.user)
+        let response
+        try {
+            response = await axios.delete(`/api/hapus/supplier/${id}`)
+            await dispatch('GetSupplier')
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Supplier berhasil tersimpan',
+                padding: '2em',
+            });
+            return response ;
+        } catch (ex) {
+            // Handle error
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'Supplier Gagal di hapus',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            throw 'error' ;
+        }
     },
     
 

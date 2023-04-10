@@ -27,15 +27,61 @@ const actions = {
         commit('setLaporanInventaris', response.data.data)
     },
     async DeleteInventaris({dispatch}, id) {
-        await axios.post('/api/hapus/bbm', id)
-        await dispatch('GetInventaris')
-        // await commit('setUser', detUser.data.user)
+        let response
+        try {
+            await axios.post('/api/hapus/bbm', id)
+            await dispatch('GetInventaris')
+            // console.log(response.data.data)
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Inventaris berhasil terhapus',
+                padding: '2em',
+            });
+            return response ;
+        } catch (ex) {
+            // Handle error
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'Inventaris Gagal Dihapus',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            throw 'error' ;
+        }
     },
     async DeletePengadaanInv({dispatch}, id) {
         let response
         try {
             response = await axios.post('/api/delete/pengadaan', id)
             // console.log(response.data.data)
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Pengadaan berhasil terhapus',
+                padding: '2em',
+            });
+            return response ;
         } catch (ex) {
             // Handle error
             const toast =  window.Swal.mixin({
@@ -52,7 +98,7 @@ const actions = {
                 // confirmButtonText: 'Cool',
                 padding: '2em'
             });
-            return
+            throw 'error';
         }
     },
     
@@ -107,9 +153,10 @@ const actions = {
             });
             toast.fire({
                 icon: 'success',
-                title: 'Pembelian berhasil tersimpan',
+                title: 'Penyusutan berhasil tersimpan',
                 padding: '2em',
             });
+            return response ;
         } catch (ex) {
             // Handle error
             const toast =  window.Swal.mixin({
@@ -126,7 +173,7 @@ const actions = {
                 // confirmButtonText: 'Cool',
                 padding: '2em'
             });
-            return
+            throw 'error' ;
         }
         // await dispatch('GetPembelian')
     },

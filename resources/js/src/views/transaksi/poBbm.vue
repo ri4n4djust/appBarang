@@ -716,11 +716,15 @@
             padding: '2em'
         }).then(result => {
             if (result.value) {
-                store.dispatch('DeletePObbm', { id:row.no_po});
-                getListPo();
-                getNoPobbm();
-                new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
-
+                store.dispatch('DeletePObbm', { id:row.no_po})
+                .then(response => {
+                    getListPo();
+                    getNoPobbm();
+                    new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
+                }).catch(error => {
+                    // console.log('error: ', error)
+                    return
+                })
             }
         });
     }

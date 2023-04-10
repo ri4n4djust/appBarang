@@ -354,10 +354,17 @@
             padding: '2em'
         }).then(result => {
             if (result.value) {
-                store.dispatch('CreatePenyusutanInventaris', arrp);
-                bind_data();
-                getKdInventaris();
-                getKdPenyusutan();
+                store.dispatch('CreatePenyusutanInventaris', arrp)
+                .then(response => {
+                    bind_data();
+                    getKdInventaris();
+                    getKdPenyusutan();
+                    // new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
+                }).catch(error => {
+                    // console.log('error: ', error)
+                    return
+                })
+                
                 // new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
 
             }

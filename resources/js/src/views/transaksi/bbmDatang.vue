@@ -611,11 +611,16 @@
             padding: '2em'
         }).then(result => {
             if (result.value) {
-                store.dispatch('DeleteBbmDatang', { id:data.r_kdterima});
-                getListBbmDatang();
-                getNoTerima();
-                new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
-
+                store.dispatch('DeleteBbmDatang', { id:data.r_kdterima})
+                .then(response => {
+                    getListBbmDatang();
+                    getNoTerima();
+                    new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
+                }).catch(error => {
+                    // console.log('error: ', error)
+                    return
+                })
+                
             }
         });
     }

@@ -597,11 +597,15 @@
             padding: '2em'
         }).then(result => {
             if (result.value) {
-                store.dispatch('DeleteBiaya', { id:data.kd_trans});
-                getListBiaya();
-                getNoBiaya();
-                new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
-
+                store.dispatch('DeleteBiaya', { id:data.kd_trans})
+                .then(response => {
+                    getListBiaya();
+                    getNoBiaya();
+                    new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
+                }).catch(error => {
+                    // console.log('error: ', error)
+                    return
+                })
             }
         });
     }

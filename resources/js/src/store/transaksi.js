@@ -46,6 +46,7 @@ const actions = {
                 title: 'Pembelian berhasil tersimpan',
                 padding: '2em',
             });
+            return response ;
         } catch (ex) {
             // Handle error
             const toast =  window.Swal.mixin({
@@ -62,7 +63,7 @@ const actions = {
                 // confirmButtonText: 'Cool',
                 padding: '2em'
             });
-            return
+            throw 'error';
         }
         // await dispatch('GetPembelian')
     },
@@ -83,6 +84,7 @@ const actions = {
                 title: 'Barang berhasil tersimpan',
                 padding: '2em',
             });
+            return response ;
         } catch (ex) {
             // Handle error
             const toast =  window.Swal.mixin({
@@ -99,7 +101,7 @@ const actions = {
                 // confirmButtonText: 'Cool',
                 padding: '2em'
             });
-            return
+            throw 'error' ;
         }
         // await dispatch('GetPembelian')
     },
@@ -146,6 +148,8 @@ const actions = {
         try {
             response = await axios.post('/api/list/po-bbm', detail)
             commit('setListpobbm', response.data.data)
+            
+            return response ;
         } catch (ex) {
             // Handle error
             const toast =  window.Swal.mixin({
@@ -162,7 +166,7 @@ const actions = {
                 // confirmButtonText: 'Cool',
                 padding: '2em'
             });
-            return
+            throw 'error' ;
         }
         // await dispatch('GetPembelian')
     },
@@ -183,6 +187,7 @@ const actions = {
                 padding: '2em',
             });
             localStorage.setItem('cartItemsPen', '[]')
+            return response ;
         } catch (ex) {
             // Handle error
             const toast =  window.Swal.mixin({
@@ -199,7 +204,7 @@ const actions = {
                 // confirmButtonText: 'Cool',
                 padding: '2em'
             });
-            return
+            throw 'error' ;
         }
         // await dispatch('GetPembelian')
     },
@@ -221,6 +226,7 @@ const actions = {
                 padding: '2em',
             });
             localStorage.setItem('cartKupon', '[]')
+            return response ;
         } catch (ex) {
             // Handle error
             const toast =  window.Swal.mixin({
@@ -237,7 +243,7 @@ const actions = {
                 // confirmButtonText: 'Cool',
                 padding: '2em'
             });
-            return
+            throw 'error' ;
         }
         // await dispatch('GetPembelian')
     },
@@ -259,6 +265,7 @@ const actions = {
                 padding: '2em',
             });
             // localStorage.setItem('cartItemsPen', '[]')
+            return response ; 
         } catch (ex) {
             // Handle error
             const toast =  window.Swal.mixin({
@@ -275,7 +282,7 @@ const actions = {
                 // confirmButtonText: 'Cool',
                 padding: '2em'
             });
-            return
+            throw 'error' ;
         }
         // await dispatch('GetPembelian')
     },
@@ -297,6 +304,7 @@ const actions = {
                 padding: '2em',
             });
             // localStorage.setItem('cartItemsPen', '[]')
+            return response ;
         } catch (ex) {
             // Handle error
             const toast =  window.Swal.mixin({
@@ -313,7 +321,7 @@ const actions = {
                 // confirmButtonText: 'Cool',
                 padding: '2em'
             });
-            return
+            throw 'error' ;
         }
         // await dispatch('GetPembelian')
     },
@@ -336,6 +344,7 @@ const actions = {
             // });
             localStorage.setItem('terimabarang', JSON.stringify(response.data.data))
             console.log(response.data.data)
+            return response ;
         } catch (ex) {
             // Handle error
             const toast =  window.Swal.mixin({
@@ -352,7 +361,7 @@ const actions = {
                 // confirmButtonText: 'Cool',
                 padding: '2em'
             });
-            return
+            throw 'error' ;
         }
         // await dispatch('GetPembelian')
     },
@@ -374,6 +383,7 @@ const actions = {
                 padding: '2em',
             });
             // console.log(response.data.data)
+            return response ;
         } catch (ex) {
             // Handle error
             const toast =  window.Swal.mixin({
@@ -390,7 +400,7 @@ const actions = {
                 // confirmButtonText: 'Cool',
                 padding: '2em'
             });
-            return
+            throw 'error' ;
         }
         // await dispatch('GetPembelian')
     },
@@ -474,6 +484,19 @@ const actions = {
         try {
             response = await axios.post('/api/delete/pobbm', kd)
             // console.log(response.data.data)
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'PO berhasil terhapus',
+                padding: '2em',
+            });
+            return response ;
         } catch (ex) {
             // Handle error
             const toast =  window.Swal.mixin({
@@ -490,7 +513,7 @@ const actions = {
                 // confirmButtonText: 'Cool',
                 padding: '2em'
             });
-            return
+            throw 'error bro';
         }
         // await dispatch('GetPembelian')
     },
@@ -534,7 +557,7 @@ const actions = {
             });
             toast.fire({
                 icon: 'success',
-                title: 'Transaksi berhasil tersimpan',
+                title: 'Pembelian berhasil terhapus',
                 padding: '2em',
             });
             return response ;
@@ -564,6 +587,19 @@ const actions = {
         try {
             response = await axios.post('/api/delete/biaya', kd)
             // console.log(response.data.data)
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Biaya berhasil terhapus',
+                padding: '2em',
+            });
+            return response ;
         } catch (ex) {
             // Handle error
             const toast =  window.Swal.mixin({
@@ -580,7 +616,7 @@ const actions = {
                 // confirmButtonText: 'Cool',
                 padding: '2em'
             });
-            return
+            throw 'error' ;
         }
         // await dispatch('GetPembelian')
     },
@@ -590,6 +626,19 @@ const actions = {
         try {
             response = await axios.post('/api/delete/penyusutan', kd)
             // console.log(response.data.data)
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Penyusutan berhasil terhapus',
+                padding: '2em',
+            });
+            return response ;
         } catch (ex) {
             // Handle error
             const toast =  window.Swal.mixin({
@@ -606,7 +655,7 @@ const actions = {
                 // confirmButtonText: 'Cool',
                 padding: '2em'
             });
-            return
+            throw 'error' ;
         }
         // await dispatch('GetPembelian')
     },
@@ -616,6 +665,19 @@ const actions = {
         try {
             response = await axios.post('/api/delete/penjualan', kd)
             // console.log(response.data.data)
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Penjualan berhasil terhapus',
+                padding: '2em',
+            });
+            return response ;
         } catch (ex) {
             // Handle error
             const toast =  window.Swal.mixin({
@@ -632,7 +694,7 @@ const actions = {
                 // confirmButtonText: 'Cool',
                 padding: '2em'
             });
-            return
+            throw 'error' ;
         }
         // await dispatch('GetPembelian')
     },
@@ -642,6 +704,19 @@ const actions = {
         try {
             response = await axios.post('/api/delete/opnum', kd)
             // console.log(response.data.data)
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Opnum berhasil terhapus',
+                padding: '2em',
+            });
+            return response ;
         } catch (ex) {
             // Handle error
             const toast =  window.Swal.mixin({
@@ -658,7 +733,7 @@ const actions = {
                 // confirmButtonText: 'Cool',
                 padding: '2em'
             });
-            return
+            throw 'error' ;
         }
         // await dispatch('GetPembelian')
     },
@@ -667,6 +742,19 @@ const actions = {
         try {
             response = await axios.post('/api/delete/bbmdatang', kd)
             // console.log(response.data.data)
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'BBm datang terhapus',
+                padding: '2em',
+            });
+            return response ;
         } catch (ex) {
             // Handle error
             const toast =  window.Swal.mixin({
@@ -683,7 +771,7 @@ const actions = {
                 // confirmButtonText: 'Cool',
                 padding: '2em'
             });
-            return
+            throw 'error' ;
         }
         // await dispatch('GetPembelian')
     },
@@ -692,6 +780,19 @@ const actions = {
         try {
             response = await axios.post('/api/delete/penjualan-kupon', kd)
             // console.log(response.data.data)
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Penjualan Kupon berhasil terhapus',
+                padding: '2em',
+            });
+            return response ;
         } catch (ex) {
             // Handle error
             const toast =  window.Swal.mixin({
@@ -708,7 +809,7 @@ const actions = {
                 // confirmButtonText: 'Cool',
                 padding: '2em'
             });
-            return
+            throw 'error' ;
         }
         // await dispatch('GetPembelian')
     },

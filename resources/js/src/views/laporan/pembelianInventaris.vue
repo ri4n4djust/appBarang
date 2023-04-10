@@ -329,11 +329,14 @@
             padding: '2em'
         }).then(result => {
             if (result.value) {
-                store.dispatch('DeletePengadaanInv', { id:data.pengadaan_sysno});
-                bind_data();
-                // getNoTerima();
-                new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
-
+                store.dispatch('DeletePengadaanInv', { id:data.pengadaan_sysno})
+                .then(response => {
+                    bind_data();
+                    new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
+                }).catch(error => {
+                    // console.log('error: ', error)
+                    return
+                })
             }
         });
     }

@@ -326,11 +326,14 @@
             padding: '2em'
         }).then(result => {
             if (result.value) {
-                store.dispatch('DeleteOpnum', { id:item.kdOpnum});
-                // getListBiaya();
-                bind_data();
-                new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
-
+                store.dispatch('DeleteOpnum', { id:item.kdOpnum})
+                .then(response => {
+                    bind_data();
+                    new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
+                }).catch(error => {
+                    // console.log('error: ', error)
+                    return
+                })
             }
         });
     }

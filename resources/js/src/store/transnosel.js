@@ -69,6 +69,7 @@ const actions = {
                 title: 'Perubahan berhasil tersimpan',
                 padding: '2em',
             });
+            return response ;
         } catch (ex) {
             const toast =  window.Swal.mixin({
                 toast: true,
@@ -84,7 +85,7 @@ const actions = {
                 // confirmButtonText: 'Cool',
                 padding: '2em'
             });
-            return
+            throw 'error' ;
         }
     }, 
     async GetTransNosel({ commit }, payload){
@@ -103,8 +104,41 @@ const actions = {
         // await commit('setUser', detUser.data.user)
     },
     async DeleteAplusan({dispatch}, id) {
-        await axios.post('/api/hapus/aplusan/', id)
-        await dispatch('GetTransNosel')
+        let response
+        try {
+            response = await axios.post('/api/hapus/aplusan/', id)
+            await dispatch('GetTransNosel')
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Aplusan berhasil tersimpan',
+                padding: '2em',
+            });
+            return response ;
+        } catch (ex) {
+            // Handle error
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'Aplusan Gagal di hapus',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            throw 'error' ;
+        }
         // await commit('setUser', detUser.data.user)
     },
     
