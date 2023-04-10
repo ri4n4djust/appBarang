@@ -471,6 +471,25 @@ class pembelianController extends Controller
                     DB::table('gl_detail')->where('rgl', $gl[$i]->notrans)->delete();
                 };
                 //=====end jurnal
+                $det_p = DB::table('tblpembelian_detail')->where('r_noNota', $kd)->get();
+                for($i=0;$i< count($det_p);$i++){
+                    $kdbarang = $det_p[$i]->kdBarang;
+                    $qty_beli = $det_p[$i]->qty;
+
+                    $det_lama = DB::table('tblbarang')->where('kdBarang', $kdbarang)->first();
+                    $stk_lama = $det_lama->stkBarang;
+                    DB::table('tblbarang')->where('kdBarang', $kdbarang)->update([
+                        'stkBarang' => $stk_lama - $qty_beli,
+                    ]);
+
+                    $det_lama_p = DB::table('tblpersediaan')->where('kdPersediaan', $kdbarang)->first();
+                    $stk_lama_p = $det_lama_p->stokPersediaan;
+                    DB::table('tblpersediaan')->where('kdPersediaan', $kdbarang)->update([
+                        'stokPersediaan' => $stk_lama_p - $qty_beli,
+                    ]);
+                
+                };
+
                 DB::table('tblpembelian')->where('noNota', $kd)->delete();
                 DB::table('tblpembelian_detail')->where('r_noNota', $kd)->delete();
 
