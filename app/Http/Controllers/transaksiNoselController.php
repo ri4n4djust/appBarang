@@ -616,13 +616,14 @@ class transaksiNoselController extends Controller
 
             ]);
         };
-
+        //========jurnal
          $del = DB::table('general_ledger')->where('order_no', $id)->get();
         for($i = 0; $i < count($del); $i++){
             $rgl = $del[$i]->notrans;
             // echo $rgl ;
             DB::table('gl_detail')->where('rgl', $rgl)->delete();
         };
+        //========endjurnal
         DB::table('tblheader_aplusan')->where('kd_trans', $id)->delete();
         DB::table('general_ledger')->where('order_no', $id)->delete();
         DB::table('tblheader_aplusan')->where('kd_trans', $id)->delete();
