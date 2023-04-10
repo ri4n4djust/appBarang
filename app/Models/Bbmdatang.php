@@ -9,4 +9,5 @@ class Bbmdatang extends Model
 {
     use HasFactory;
     protected $table = 'tblterimabbm';
+    
 }

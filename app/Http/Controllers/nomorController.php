@@ -13,7 +13,7 @@ use App\Models\Opnum;
 use App\Models\Kupon;
 use App\Models\KuponPenjualan;
 use App\Models\Pobbm;
-use App\Models\BbmDatang;
+use App\Models\Bbmdatang;
 use App\Models\Inventaris;
 use App\Models\Pengadaan;
 use App\Models\Penyusutan;
@@ -395,7 +395,7 @@ class nomorController extends Controller
 
     public function kodeBbmdatang()
     {
-        $count = BbmDatang::all();
+        $count = Bbmdatang::all();
         if($count->isEmpty()){
             $tahun = date('mY');
             $post = 'BR'.$tahun.'1';
@@ -407,15 +407,15 @@ class nomorController extends Controller
         }else{
 
             $no = 0 ;
-            $count = BbmDatang::all()->last();
+            $count = Bbmdatang::all()->last();
             $terakhir = substr($count->kd_terima, 8,  20);
             $kodeBaru = $terakhir + 1  ;
 
             $tahun = date('mY');
             $post = 'BR'.$tahun.''.$kodeBaru;
 
-            if (BbmDatang::where('kd_terima', $post)->exists()) {
-                $count = BbmDatang::all()->last();
+            if (Bbmdatang::where('kd_terima', $post)->exists()) {
+                $count = Bbmdatang::all()->last();
                 $terakhir = substr($count->kd_terima, 8,  20);
                 $kodeBarulagi = $kodeBaru + 1 ;
                 $post = 'BR'.$tahun.$kodeBarulagi;
