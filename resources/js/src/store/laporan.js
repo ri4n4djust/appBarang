@@ -14,6 +14,7 @@ const state = {
     listpenyusutan: [],
     bukubesar: [],
     jurnalumum: [],
+    costbbm: []
   };
   
 const getters = {
@@ -29,6 +30,7 @@ const getters = {
     SlistPenyusutan: state => state.listpenyusutan,
     SBukuBesar: state => state.bukubesar,
     StateGjList: state => state.jurnalumum,
+    StateCostBbm: state => state.costbbm
 };
 
 const actions = {  
@@ -111,6 +113,17 @@ const actions = {
         } catch (ex) {
             // Handle error
             alert('error load Aplusan bbm')
+            return
+        }
+    },
+    async GetCostBbm({ commit }, srt){
+        let response
+        try {
+            response = await axios.post('/api/cost-bbm', srt)
+            commit('setCostBbm', response.data.data)
+        } catch (ex) {
+            // Handle error
+            alert('error load Cost bbm')
             return
         }
     },
@@ -254,6 +267,9 @@ const mutations = {
     },
     setJurnalUmum(state, ju){
         state.jurnalumum = ju
+    },
+    setCostBbm(state, srt){
+        state.costbbm = srt
     }
 
 

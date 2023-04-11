@@ -292,7 +292,7 @@
                                                                     <div class="row">
 
                                                                         <div class="col-xl-12 col-md-3 col-sm-6">
-                                                                            <a href="javascript:;" class="btn btn-secondary btn-print" @click="print()">Print</a>
+                                                                            <a href="javascript:;" class="btn btn-secondary btn-print" @click="export_table(type='print')">Print</a>
                                                                         </div>
                                                                         <div class="col-xl-12 col-md-3 col-sm-6">
                                                                             <div class="row mb-4">
@@ -503,8 +503,9 @@
 
     const export_table = (type) => {
         let cols = columns.value.filter((d) => d != 'profile' && d != 'action');
-        let records = items.value;
-        let filename = 'table';
+        let records = listbiaya.value;
+        let filename = 'Dafta Biaya | Periode Tgl :';
+        let no = 1;
 
         if (type == 'csv') {
             let coldelimiter = ',';
@@ -540,7 +541,7 @@
                 }
             }
         } else if (type == 'print') {
-            var rowhtml = '<p>' + filename + '</p>';
+            var rowhtml = '<p>' + filename + sorting.value.startDate + ' s/d '+ sorting.value.endDate +'</p>';
             rowhtml +=
                 '<table style="width: 95%; " cellpadding="0" cellcpacing="0" border="1"><thead><tr style="color: #515365; background: #eff5ff; -webkit-print-color-adjust: exact; print-color-adjust: exact; "> ';
             cols.map((d) => {
@@ -549,17 +550,36 @@
             rowhtml += '</tr></thead>';
             rowhtml += '<tbody>';
 
-            records.map((item) => {
+                records.map((item) => {
                 rowhtml += '<tr>';
-                cols.map((d) => {
-                    let val = item[d] ? item[d] : '';
-                    rowhtml += '<td>' + val + '</td>';
-                });
+                // rowhtml += '<td>'+ parseInt(no+1)+'</td>';
+                rowhtml += '<td>'+item.kd_trans+'</td>';
+                rowhtml += '<td>'+moment(item.tglBiaya).format("DD-MM-YYYY")+'</td>';
+                rowhtml += '<td>'+item.keterangan_biaya+'</td>';
+                rowhtml += '<td>'+Number(item.jumlah).toLocaleString()+'</td>';
+                rowhtml += '</tr>';
+                // cols.map((d) => {
+                //     let val = item[d] ? item[d] : '';
+                //     rowhtml += '<td>' + val + '</td>';
+                // }); 'kd_trans', 'tglBiaya', 'keterangan_biaya' ,'jumlah',
                 rowhtml += '</tr>';
             });
+
+            let sum = 0;
+            // let sumtax = 0;
+            records.forEach(element => {
+            sum +=  parseInt(element.jumlah);
+            // sumtax +=  parseInt(element.taxPenjualan);
+            });
+
+
             rowhtml +=
                 '<style>body {font-family:Arial; color:#495057;}p{text-align:center;font-size:8px;font-weight:bold;margin:15px;}table{ border-collapse: collapse; border-spacing: 0; }th,td{font-size:8px;text-align:left;padding: 4px;}th{padding:8px 4px;}tr:nth-child(2n-1){background:#f7f7f7; }</style>';
-            rowhtml += '</tbody></table>';
+            rowhtml += '</tbody>';
+            rowhtml += '<tfoot><tr>'
+            rowhtml += '<th></th><th></th><th>Total</th><th>'+Number(sum).toLocaleString()+'</th></tr>'
+            // rowhtml += '<tr><th></th><th></th><th></th><th></th><th>Total Net</th><th></th><th>'+Number(sum - sumtax).toLocaleString()+'</th>'
+            rowhtml += '</tr></tfoot></table>'
             var winPrint = window.open('', '', 'left=0,top=0,width=1000,height=600,toolbar=0,scrollbars=0,status=0');
             winPrint.document.write('<title>Print</title>' + rowhtml);
             winPrint.document.close();
@@ -584,6 +604,28 @@
             });
             doc.save(filename + '.pdf');
         }
+    };
+    const excel_columns = () => {
+        return {
+            Name: 'name',
+            Position: 'position',
+            Office: 'office',
+            Age: 'age',
+            'Start Date': 'start_date',
+            Salary: 'salary',
+        };
+    };
+    const excel_items = () => {
+        return items.value;
+    };
+    const capitalize = (text) => {
+        return text
+            .replace('_', ' ')
+            .replace('-', ' ')
+            .toLowerCase()
+            .split(' ')
+            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+            .join(' ');
     };
 
     const delete_row = (data) => {

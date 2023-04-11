@@ -58,7 +58,7 @@
 
                                                     <div class="table-responsive">
                                                         <!-- <div class="table-responsive"> -->
-                                                            <table class="table table-hover table-bordered">
+                                                            <table class="table">
                                                                 <thead>
                                                                     <tr>
                                                                         <th colspan="2">SPBU 54.903.06</th>
@@ -264,6 +264,9 @@
                                         <div class="col-xl-12 col-md-3 col-sm-6">
                                             <a href="javascript:;" class="btn btn-secondary btn-print action-print" @click="print()">Print</a>
                                         </div>
+                                        <div class="col-xl-12 col-md-3 col-sm-6">
+                                            <a href="javascript:;" class="btn btn-secondary btn-print action-print" >Kembali</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -399,7 +402,7 @@
         totalDexlite.value = totalDX
         totalLiterDexlite.value = totalLiterDX
 
-        console.log(props.regu)
+        // console.log(props.regu)
     }
 
     const barangs = computed(() => {
@@ -535,3 +538,7 @@
         window.print();
     };
 </script>
+<style scoped>
+  /* CSS styling */
+  table{ border-collapse: collapse; border-spacing: 0; }th,td{font-size:12px;text-align:left;padding: 4px;}th{padding:8px 4px;}tr:nth-child(2n-1){background:#f7f7f708; }
+</style>

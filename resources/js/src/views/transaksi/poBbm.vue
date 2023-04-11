@@ -427,7 +427,7 @@
                                                                                 <div class="row">
 
                                                                                     <div class="col-xl-12 col-md-3 col-sm-6">
-                                                                                        <a href="javascript:;" class="btn btn-secondary btn-print" @click="print()">Print</a>
+                                                                                        <a href="javascript:;" class="btn btn-secondary btn-print" @click="export_table(type='print')">Print</a>
                                                                                     </div>
                                                                                     <div class="col-xl-12 col-md-3 col-sm-6">
                                                                                         <div class="row mb-4">
@@ -794,6 +794,129 @@
 
     const change_file = (event) => {
         selected_file.value = URL.createObjectURL(event.target.files[0]);
+    };
+
+    const export_table = (type) => {
+        let cols = columns.value.filter((d) => d != 'profile' && d != 'action');
+        let records = listpobbm.value;
+        let filename = 'Daftar PO BBM | Periode Tgl : ';
+
+        if (type == 'csv') {
+            let coldelimiter = ',';
+            let linedelimiter = '\n';
+            let result = cols
+                .map((d) => {
+                    return capitalize(d);
+                })
+                .join(coldelimiter);
+            result += linedelimiter;
+            records.map((item) => {
+                cols.map((d, index) => {
+                    if (index > 0) {
+                        result += coldelimiter;
+                    }
+                    let val = item[d] ? item[d] : '';
+                    result += val;
+                });
+                result += linedelimiter;
+            });
+
+            if (result == null) return;
+            if (!result.match(/^data:text\/csv/i) && !window.navigator.msSaveOrOpenBlob) {
+                var data = 'data:application/csv;charset=utf-8,' + encodeURIComponent(result);
+                var link = document.createElement('a');
+                link.setAttribute('href', data);
+                link.setAttribute('download', filename + '.csv');
+                link.click();
+            } else {
+                var blob = new Blob([result]);
+                if (window.navigator.msSaveOrOpenBlob) {
+                    window.navigator.msSaveBlob(blob, filename + '.csv');
+                }
+            }
+        } else if (type == 'print') {
+            var rowhtml = '<p>' + filename + sorting.value.startDate + ' s/d ' + sorting.value.endDate + '</p>';
+            rowhtml +=
+                '<table style="width: 95%; " cellpadding="0" cellcpacing="0" border="1"><thead><tr style="color: #515365; background: #eff5ff; -webkit-print-color-adjust: exact; print-color-adjust: exact; "> ';
+            cols.map((d) => {
+                rowhtml += '<th>' + capitalize(d) + '</th>';
+            });
+            rowhtml += '</tr></thead>';
+            rowhtml += '<tbody>';
+
+            // records.map((item) => {
+            //     rowhtml += '<tr>';
+            //     cols.map((d) => {
+            //         let val = item[d] ? item[d] : '';
+            //         rowhtml += '<td>' + val + '</td>';
+            //     });
+            //     rowhtml += '</tr>';
+            // }); 'no_so', 'supplier_name', 'podate', 'qty_grpo', 'qty_recieve','pph','total'
+            records.map((item) => {
+                rowhtml += '<tr>';
+                rowhtml += '<td>'+item.no_so+'</td>';
+                rowhtml += '<td>'+item.supplier_name+'</td>';
+                rowhtml += '<td>'+moment(item.podate).format("DD-MM-YYYY")+'</td>';
+                rowhtml += '<td>'+Number(item.qty_grpo).toLocaleString()+'</td>';
+                rowhtml += '<td>'+Number(item.qty_recieve).toLocaleString()+'</td>';
+                rowhtml += '<td>'+Number(item.pph).toLocaleString()+'</td>';
+                rowhtml += '<td>'+Number(item.total).toLocaleString()+'</td>';
+                rowhtml += '</tr>';
+                // cols.map((d) => {
+                //     let val = item[d] ? item[d] : '';
+                //     rowhtml += '<td>' + val + '</td>';
+                // });
+                rowhtml += '</tr>';
+            });
+            rowhtml +=
+                '<style>body {font-family:Arial; color:#495057;}p{text-align:center;font-size:8px;font-weight:bold;margin:15px;}table{ border-collapse: collapse; border-spacing: 0; }th,td{font-size:8px;text-align:left;padding: 4px;}th{padding:8px 4px;}tr:nth-child(2n-1){background:#f7f7f7; }</style>';
+            rowhtml += '</tbody></table>';
+            var winPrint = window.open('', '', 'left=0,top=0,width=1000,height=600,toolbar=0,scrollbars=0,status=0');
+            winPrint.document.write('<title>Print</title>' + rowhtml);
+            winPrint.document.close();
+            winPrint.focus();
+            winPrint.print();
+            // winPrint.close();
+        } else if (type == 'pdf') {
+            cols = cols.map((d) => {
+                return { header: capitalize(d), dataKey: d };
+            });
+            const doc = new jsPDF('l', 'pt', cols.length > 10 ? 'a3' : 'a4');
+            doc.autoTable({
+                headStyles: { fillColor: '#eff5ff', textColor: '#515365' },
+                columns: cols,
+                body: records,
+                styles: { overflow: 'linebreak' },
+                pageBreak: 'auto',
+                margin: { top: 45 },
+                didDrawPage: () => {
+                    doc.text('Export Table', cols.length > 10 ? 535 : 365, 30);
+                },
+            });
+            doc.save(filename + '.pdf');
+        }
+    };
+    const excel_columns = () => {
+        return {
+            Name: 'name',
+            Position: 'position',
+            Office: 'office',
+            Age: 'age',
+            'Start Date': 'start_date',
+            Salary: 'salary',
+        };
+    };
+    const excel_items = () => {
+        return items.value;
+    };
+    const capitalize = (text) => {
+        return text
+            .replace('_', ' ')
+            .replace('-', ' ')
+            .toLowerCase()
+            .split(' ')
+            .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
+            .join(' ');
     };
 
     // const add_item = () => {

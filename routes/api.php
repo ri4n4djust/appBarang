@@ -118,6 +118,7 @@ Route::post('/update/nosel-meter', [App\Http\Controllers\transaksiNoselControlle
 Route::post('/hapus/aplusan/', [App\Http\Controllers\transaksiNoselController::class, 'deleteAplusan']);
 Route::post('/transnosel', [App\Http\Controllers\transaksiNoselController::class, 'indexTransNosel']);
 Route::post('/transnoselregu', [App\Http\Controllers\transaksiNoselController::class, 'indexTransNoselRegu']);
+Route::post('/cost-bbm', [App\Http\Controllers\transaksiNoselController::class, 'getcostbbm']);
 
 // Pembelian
 Route::post('/store/pembelian', [App\Http\Controllers\pembelianController::class, 'simpanPembelian']);

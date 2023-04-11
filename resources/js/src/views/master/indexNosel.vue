@@ -49,7 +49,7 @@
                                 <div class="w-detail">
                                     <p class="w-title">Tanggal</p>
                                     <flat-pickr v-model="date1" 
-                                    :config="{dateFormat: 'Y-m-d'}" 
+                                    :config="{enableTime: true, dateFormat: 'Y-m-d H:i'}"
                                     class="form-control flatpickr active form-control-sm"></flat-pickr>
                                 </div>
                             </div>

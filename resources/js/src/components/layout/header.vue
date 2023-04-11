@@ -433,7 +433,7 @@
                                 </router-link>
                             </li>
                             <li role="presentation">
-                                <router-link to="/auth/login-boxed" @click="logOut" class="dropdown-item">
+                                <a @click="logOut" class="dropdown-item">
                                 <!-- <a  @click="logOut" class="dropdown-item"> -->
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -453,7 +453,7 @@
                                     </svg>
                                     Sign Out
                                 <!-- </a> -->
-                                </router-link>
+                                </a>
                             </li>
                         </ul>
                     </div>
@@ -1102,7 +1102,7 @@
 
     const logOut = () => {
         store.dispatch('LogOut');
-        router.push({path: '/auth/login-boxed'})
+        // router.push({name: 'Home'})
         
     }
 
