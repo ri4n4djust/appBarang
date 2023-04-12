@@ -86,15 +86,18 @@ class transaksiNoselController extends Controller
             $exception = DB::transaction(function() use ($request){ 
                 
                 $kdtr = $request[0][0]['kd_trans'];
-                $count = DB::table('tbltransaksi_nosel')
-                        ->where('kd_trans', 'like', $kdtr . '%')
-                        ->count();
+                $count = DB::table('tbltransaksi_nosel')->where('kd_trans', 'like', $kdtr . '%')->count();
                 $n = 1 + $count;
                 $last_m = null ;
                 $detop = $request[0];
                 $kdtrans = $kdtr.$n;
                 $regu = $request[0][0]['r_regu'];
-                $tgl = $detop[0]['tgl_transaksi'];
+
+                $date = date('h:i:s');
+                $tgl1 = $detop[0]['tgl_transaksi'];
+                $tgl = $tgl1.' '.$date ;
+                echo $tgl ;
+                
                 $pph22 = 10 ; //$detop[0]['pph22'];
                 $total_j = 0;
                 // $total_qty = 0;
@@ -446,9 +449,9 @@ class transaksiNoselController extends Controller
                 $arrbiaya = $request[2];
                 $arrlink = $request[3];
 
-                $kpn = array_sum(array_column($arrkupon, 'nilai'));
-                $by = array_sum(array_column($arrbiaya, 'nilai'));
-                $lk = array_sum(array_column($arrlink, 'jumlahLink'));
+                if(!empty($arrkupon)){ $kpn = array_sum(array_column($arrkupon, 'nilai')); }else{ $kpn = 0; };
+                if(!empty($arrbiaya)){ $by = array_sum(array_column($arrbiaya, 'nilai')); }else{ $by = 0; };
+                if(!empty($arrlink)){ $lk = array_sum(array_column($arrlink, 'jumlahLink')); }else{ $lk = 0; };
                 
                 $cost = $kpn + $by + $lk;
 
