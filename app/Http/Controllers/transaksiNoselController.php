@@ -591,7 +591,7 @@ class transaksiNoselController extends Controller
         $startDate = date("Y-m-d", strtotime($request->input('startDate')));
         $endDate = date("Y-m-d", strtotime($request->input('endDate')));
 
-        $detail = DB::select("SELECT SUM(a.cost_ltr) total_liter,SUM(a.total) total_jual, a.r_bbm, b.nama_bbm FROM tbltransaksi_nosel a JOIN tblbbm b ON a.r_bbm = b.id WHERE a.tgl_transaksi BETWEEN '$startDate' AND '$endDate' GROUP BY a.r_bbm;");
+        $detail = DB::select("SELECT SUM(a.cost_ltr) total_liter,SUM(a.total) total_jual, a.r_bbm, b.nama_bbm FROM tbltransaksi_nosel a JOIN tblbbm b ON a.r_bbm = b.id WHERE a.tgl_transaksi BETWEEN '$startDate' AND '$endDate' GROUP BY a.r_bbm,b.nama_bbm;");
         return response([
             'success' => true,
             'message' => 'data cost bbm',
