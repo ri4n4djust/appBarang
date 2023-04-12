@@ -425,6 +425,7 @@ const routes = [
         name: 'lockscreen-boxed',
         component: () => import(/* webpackChunkName: "auth-lockscreen-boxed" */ '../views/auth/lockscreen_boxed.vue'),
         meta: { layout: 'auth' },
+        // children: [{ path: '', name: 'Home', component: Home }],
     },
     {
         path: '/auth/pass-recovery-boxed',
@@ -800,24 +801,34 @@ const router = new createRouter({
 //     next('timeline')
 //   }
 
-router.beforeEach((to, from, next) => {
-    if(to.matched.some(record => record.meta.requiresAuth)) {
-      if (store.getters.isAuthenticated) { // jika user sudah login maka route akan diteruskan
-        next()
-        return
-      }
-      next('/auth/login-boxed') // jika tidak maka akan redirect ke halaman login
-    } else {
-      next()
-    }
-  })
+// router.beforeEach((to, from, next) => {
+//     if(to.matched.some(record => record.meta.requiresAuth)) {
+//       if (store.getters.isAuthenticated) { // jika user sudah login maka route akan diteruskan
+//         next()
+//         return
+//       }
+//       next('/auth/login-boxed') // jika tidak maka akan redirect ke halaman login
+//     } else {
+//       next()
+//     }
+//   })
 
 router.beforeEach((to, from, next) => {
     if (to.meta && to.meta.layout && to.meta.layout == 'auth') {
         store.commit('setLayout', 'auth');
     } else {
         store.commit('setLayout', 'app');
-        console.log('unauthenticated user');
+        // console.log('unauthenticated user');
+        // console.log(to)
+        // if(to.matched.some(record => record.meta.requiresAuth)) {
+            if (store.getters.isAuthenticated) { // jika user sudah login maka route akan diteruskan
+              next()
+              return
+            }
+            next('/auth/login-boxed') // jika tidak maka akan redirect ke halaman login
+        //   } else {
+        //     next()
+        //   }
     }
     next(true);
 });

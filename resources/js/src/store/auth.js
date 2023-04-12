@@ -2,7 +2,7 @@
 import axios from 'axios';
 const state = {
     user: [],
-    token: '',
+    token: localStorage.getItem('tokenLogin'),
   };
   
 const getters = {
@@ -36,7 +36,8 @@ const actions = {
                 title: 'Berhasil Login',
                 padding: '2em',
             });
-            localStorage.setItem('tokenLogin', JSON.stringify(response.data.token))
+            axios.defaults.headers.common['Authorization'] = 'Bearer '+response.data.token;
+            localStorage.setItem('tokenLogin', response.data.token)
             commit('setToken', response.data.token)
             return response
         } catch (error) {

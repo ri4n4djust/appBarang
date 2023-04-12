@@ -368,7 +368,7 @@
                             <router-link to="/forms/checkbox-radio" @click="toggleMobileMenu">Checkbox &amp; Radio</router-link>
                         </li>
                         <li>
-                            <router-link to="/forms/switches" @click="toggleMobileMenu">Switches</router-link>
+                            <router-link to="/auth/lockscreen-boxed" @click="toggleMobileMenu">Lock</router-link>
                         </li>
                         
                     </ul>

@@ -58,11 +58,12 @@ import { vfmPlugin } from 'vue-final-modal';
 // import Vue3EasyDataTable from 'vue3-easy-data-table';
 // import 'vue3-easy-data-table/dist/style.css';
 
-
+let AUTH_TOKEN = localStorage.getItem('tokenLogin') ;
 // Axio
-// import axios from 'axios';
+import axios from 'axios';
 // axios.defaults.baseURL = 'http://localhost:8000/';
-// axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+// axios.defaults.headers.common['Authorization'] = 'Bearer'+AUTH_TOKEN;
+axios.defaults.headers.common['Authorization'] = `Bearer ${AUTH_TOKEN}` 
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 app.use(vfmPlugin).use(store).use(router).use(i18n).use(PerfectScrollbar).use(VueNouislider).use(Maska).use(ClientTable).use(vue3JsonExcel).use(VueFormWizard).use(head).mount('#app');
