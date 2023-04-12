@@ -94,9 +94,9 @@ class transaksiNoselController extends Controller
                 $regu = $request[0][0]['r_regu'];
 
                 $date = date('h:i:s');
-                $tgl1 = $detop[0]['tgl_transaksi'];
-                $tgl = $tgl1.' '.$date ;
-                echo $tgl ;
+                $tgl = $detop[0]['tgl_transaksi'];
+                $tgl_header = $tgl.' '.$date ;
+                // echo $tgl ;
                 
                 $pph22 = 10 ; //$detop[0]['pph22'];
                 $total_j = 0;
@@ -492,7 +492,7 @@ class transaksiNoselController extends Controller
                 DB::table('tblheader_aplusan')->upsert([
                     'kd_trans'  => $kdtrans,
                     'r_regu'    => $regu,
-                    'tgl_trans' => $tgl,
+                    'tgl_trans' => $tgl_header,
                     'total_jual'    => $total_j,
                     'total_kupon'   => $kpn,
                     'total_biaya'   => $by,
@@ -503,7 +503,7 @@ class transaksiNoselController extends Controller
                 ],
                 [
                     'r_regu'    => $regu,
-                    'tgl_trans' => $tgl,
+                    'tgl_trans' => $tgl_header,
                     'total_jual'    => $total_j,
                     'total_kupon'   => $kpn,
                     'total_biaya'   => $by,
