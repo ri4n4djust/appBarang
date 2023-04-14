@@ -17,7 +17,7 @@
                                         <div class="row mb-4">
                                             <div class="col-sm">
                                                 <label for="inputState">Biaya</label>
-                                                <input v-model="inputb.nilaiBiaya" class="form-control form-control-sm" placeholder="Biaya" />
+                                                <input v-model="inputb.nilaiBiaya" class="form-control form-control-sm" placeholder="Biaya" @keypress="onlyNumber"  />
                                             </div>
                                             <div class="col-sm-4">
                                                 <label for="inputState">Simpan</label><br>
@@ -195,6 +195,14 @@ const getlistb = () => {
     });
     totalbiaya.value = sumb
     console.log(sumb)
+}
+
+function onlyNumber ($event) {
+    //console.log($event.keyCode); //keyCodes value
+    let keyCode = ($event.keyCode ? $event.keyCode : $event.which);
+    if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) { // 46 is dot
+        $event.preventDefault();
+    }   
 }
     
 

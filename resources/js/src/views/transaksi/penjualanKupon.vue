@@ -153,12 +153,12 @@
                                         </div>
                                         <div class="form-group col-md-2">
                                             <label for="inputState">Alamat</label>
-                                            <input type="text" v-model="paramspelanggan.almtPelanggan" class="form-control form-control-sm" placeholder="Price" />
+                                            <input type="text" v-model="paramspelanggan.almtPelanggan" class="form-control form-control-sm" placeholder="Alamat" />
                                         </div>
                                         <div class="form-group col-md-2">
                                             <label for="inputZip">TOTAL</label><br>
                                             <!-- {{ new Intl.NumberFormat().format(paramspelanggan.hrgJual * qty) }} -->
-                                            <input type="text" v-model="paramspelanggan.total" class="form-control form-control-sm" placeholder="Quantity" @keypress="onlyNumber" />
+                                            <input type="text" v-model="paramspelanggan.total" class="form-control form-control-sm" placeholder="Total" @keypress="onlyNumber" />
                                         </div>
                                         <div class="form-group col-md-1">
                                             <label for="aksi">Aksi</label>

@@ -265,7 +265,7 @@
                                             <a href="javascript:;" class="btn btn-secondary btn-print action-print" @click="print()">Print</a>
                                         </div>
                                         <div class="col-xl-12 col-md-3 col-sm-6">
-                                            <a href="javascript:;" class="btn btn-secondary btn-print action-print" >Kembali</a>
+                                            <a href="javascript:" @click="$router.go(-1)" class="btn btn-secondary btn-print action-print" >Kembali</a>
                                         </div>
                                     </div>
                                 </div>
@@ -375,28 +375,28 @@
         });
         totallink.value = suml
         
-        let totalPX = items.value.filter( (item) => item.r_bbm === 1).reduce((accumulator, item) => {
+        let totalPX = items.value.filter( (item) => item.code_bbm === 'BRG0001').reduce((accumulator, item) => {
             return accumulator += Number(item.total);
         }, 0);
-        let totalLiterPX = items.value.filter( (item) => item.r_bbm === 1).reduce((accumulator, item) => {
+        let totalLiterPX = items.value.filter( (item) => item.code_bbm === 'BRG0001').reduce((accumulator, item) => {
             return accumulator += Number(item.cost_ltr);
         }, 0);
         totalPertamax.value = totalPX
         totalLiterPertamax.value = totalLiterPX
 
-        let totalPL = items.value.filter((item) => item.r_bbm === 2).reduce((accumulator, item) => {
+        let totalPL = items.value.filter((item) => item.code_bbm === 'BRG0002').reduce((accumulator, item) => {
             return accumulator += Number(item.total);
         }, 0);
-        let totalLiterPL = items.value.filter((item) => item.r_bbm === 2).reduce((accumulator, item) => {
+        let totalLiterPL = items.value.filter((item) => item.code_bbm === 'BRG0002').reduce((accumulator, item) => {
             return accumulator += Number(item.cost_ltr);
         }, 0);
         totalPertalite.value = totalPL
         totalLiterPertalite.value = totalLiterPL
 
-        let totalDX = items.value.filter((item) => item.r_bbm === 3).reduce((accumulator, item) => {
+        let totalDX = items.value.filter((item) => item.code_bbm === 'BRG0003').reduce((accumulator, item) => {
             return accumulator += Number(item.total);
         }, 0);
-        let totalLiterDX = items.value.filter((item) => item.r_bbm === 3).reduce((accumulator, item) => {
+        let totalLiterDX = items.value.filter((item) => item.code_bbm === 'BRG0003').reduce((accumulator, item) => {
             return accumulator += Number(item.cost_ltr);
         }, 0);
         totalDexlite.value = totalDX

@@ -229,26 +229,26 @@
             rowhtml += '<tbody>';
             records.map((item) => {
                 rowhtml += '<tr>';
-                rowhtml += '<td>'+item.noPenjualan+'</td>';
-                rowhtml += '<td>'+moment(item.tglPenjualan).format("DD-MM-YYYY")+'</td>';
-                rowhtml += '<td>'+item.nmPelanggan+'</td>';
-                rowhtml += '<td>'+Number(item.subTotalPenjualan).toLocaleString()+'</td>';
-                rowhtml += '<td>'+Number(item.discPenjualan).toLocaleString()+'</td>';
-                rowhtml += '<td>'+Number(item.taxPenjualan).toLocaleString()+'</td>';
-                rowhtml += '<td>'+Number(item.totalPenjualan).toLocaleString()+'</td>';
+                rowhtml += '<td>'+item.kdOpnum+'</td>';
+                rowhtml += '<td>'+moment(item.tglOpnum).format("DD-MM-YYYY")+'</td>';
+                // rowhtml += '<td>'+item.nmPelanggan+'</td>';
+                rowhtml += '<td>'+Number(item.totalOpnum).toLocaleString()+'</td>';
+                // rowhtml += '<td>'+Number(item.discPenjualan).toLocaleString()+'</td>';
+                // rowhtml += '<td>'+Number(item.taxPenjualan).toLocaleString()+'</td>';
+                // rowhtml += '<td>'+Number(item.totalPenjualan).toLocaleString()+'</td>';
                 rowhtml += '</tr>';
                 // cols.map((d) => {
                 //     let val = item[d] ? item[d] : '';
                 //     rowhtml += '<td>' + val + '</td>';
-                // });
+                // });'kdOpnum', 'tglOpnum', 'totalOpnum',
                 rowhtml += '</tr>';
             });
             // tot =+val[d];
             let sum = 0;
-            let sumtax = 0;
+            // let sumtax = 0;
             records.forEach(element => {
-            sum +=  parseInt(element.totalPenjualan);
-            sumtax +=  parseInt(element.taxPenjualan);
+            sum +=  parseInt(element.totalOpnum);
+            // sumtax +=  parseInt(element.taxPenjualan);
             });
 
             // console.log(sum)
@@ -258,8 +258,8 @@
             rowhtml += '</tbody>';
             rowhtml += '<tfoot><tr>'
 
-            rowhtml += '<th></th><th></th><th></th><th></th><th>Total</th><th>'+Number(sumtax).toLocaleString()+'</th><th>'+Number(sum).toLocaleString()+'</th></tr>'
-            rowhtml += '<tr><th></th><th></th><th></th><th></th><th>Total Net</th><th></th><th>'+Number(sum - sumtax).toLocaleString()+'</th>'
+            // rowhtml += '<th></th><th></th><th></th><th></th><th>Total</th><th>'+Number(sumtax).toLocaleString()+'</th><th>'+Number(sum).toLocaleString()+'</th></tr>'
+            rowhtml += '<tr><th>Total Net</th><th></th><th>'+Number(sum).toLocaleString()+'</th>'
             rowhtml += '</tr></tfoot></table>'
             var winPrint = window.open('', '', 'left=0,top=0,width=1000,height=600,toolbar=0,scrollbars=0,status=0');
             winPrint.document.write('<title>Print</title>' + rowhtml);

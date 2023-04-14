@@ -149,7 +149,7 @@
                                                             </select> -->
                                                         </td>
                                                         <td style="padding:0;margin:0;">
-                                                            <input type="text" v-model="item.biaya" :id="'biaya'+index" width="100%" @keyup="getTotal()" placeholder="Biaya" />
+                                                            <input type="text" v-model="item.biaya" :id="'biaya'+index" width="100%" @keyup="getTotal()" placeholder="Biaya" @keypress="onlyNumber"  />
                                                             <!-- <input type="text" v-model="item.kdPersediaan.kdPersediaan" :id="'rate'+index" class="form-control form-control-sm" placeholder="Price" /> -->
                                                         </td>
                                                         <td style="padding:0;margin:0;">

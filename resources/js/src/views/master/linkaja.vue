@@ -23,7 +23,7 @@
                                             </div>
                                             <div class="col-sm">
                                                 <label for="inputState">Jumlah</label>
-                                                <input v-model="inputl.nilaiLink" class="form-control form-control-sm" placeholder="Jumlah" />
+                                                <input v-model="inputl.nilaiLink" class="form-control form-control-sm" placeholder="Jumlah" @keypress="onlyNumber"  />
                                             </div>
                                             <div class="col-sm-4">
                                                 <label for="inputState">Simpan</label><br>
@@ -171,6 +171,14 @@ const getlistb = () => {
     });
     totallink.value = suml
     console.log(suml)
+}
+
+function onlyNumber ($event) {
+    //console.log($event.keyCode); //keyCodes value
+    let keyCode = ($event.keyCode ? $event.keyCode : $event.which);
+    if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) { // 46 is dot
+        $event.preventDefault();
+    }   
 }
     
 
