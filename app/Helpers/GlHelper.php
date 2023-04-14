@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\DB;
 if(!function_exists('insert_gl')){
     function insert_gl($notrans,$tgl,$total_trans,$memo,$jurnal){
 
-        if(DB::table('general_ledger')->where('id', 1)->exists()){
+        if(DB::table('general_ledger')->exists()){
             $rgla = DB::table('general_ledger')->get()->last()->notrans;
             $nomor = substr($rgla, 2);
             $newno = (int)$nomor + 1;
