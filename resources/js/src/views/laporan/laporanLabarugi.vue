@@ -188,7 +188,7 @@
                                                                         <br>
                                                                         <table border="1" cellspacing="3" >
                                                                             <tbody >
-                                                                                <tr v-for="cl in costliter_total">
+                                                                                <tr v-for="cl in costliter_total" :key="cl">
                                                                                     <td>{{cl.nama_bbm}}</td>
                                                                                     <td></td>
                                                                                     <td ><b>{{ Number(cl.total_liter).toLocaleString() }} L</b></td>

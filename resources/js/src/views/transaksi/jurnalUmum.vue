@@ -156,11 +156,11 @@
                                                             </select> -->
                                                         </td>
                                                         <td style="padding:0;margin:0;">
-                                                            <input type="text" v-model="item.debet" :id="'debet'+index" width="100%" @keyup="getTotal()" placeholder="Debet" />
+                                                            <input type="text" v-model="item.debet" :id="'debet'+index" width="100%" @keyup="getTotal()" placeholder="Debet" @keypress="onlyNumber ($event)" />
                                                             <!-- <input type="text" v-model="item.kdPersediaan.kdPersediaan" :id="'rate'+index" class="form-control form-control-sm" placeholder="Price" /> -->
                                                         </td>
                                                         <td style="padding:0;margin:0;">
-                                                            <input type="text" v-model="item.kredit" :id="'kredit'+index" width="100%"  placeholder="Kredit" />
+                                                            <input type="text" v-model="item.kredit" :id="'kredit'+index" width="100%"  placeholder="Kredit" @keypress="onlyNumber ($event)" />
                                                         </td>
                                                         
                                                     </tr>
@@ -248,7 +248,102 @@
                                 <div class="invoice-detail-header">
                                     <div class="row justify-content-between"> 
 
-                                        list
+                                       <div class="row invoice layout-top-spacing layout-spacing apps-invoice">
+                                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                                <div class="doc-container">
+                                                    <div class="row">
+                                                        <div class="col-xl-9">
+                                                            <div class="invoice-container">
+                                                                <div class="custom-table panel-body p-0">
+
+                                                                    <v-client-table :data="list" :columns="columns" :options="table_option">
+                                                                        <template #notrans="props"> {{ props.row.notrans }} </template>
+                                                                        <template #tgl="props"> {{ moment(props.row.tgl).format("DD-MM-YYYY") }} </template>
+                                                                        <template #keterangan_biaya="props"> {{ props.row.memo }} </template>
+                                                                        <template #debet="props"> {{ Number(props.row.debet).toLocaleString() }} </template>
+                                                                        <template #kredit="props"> {{ Number(props.row.kredit).toLocaleString() }} </template>
+                                                                        <template #action="props">
+                                                                            <a href="javascript:void(0);" @click="edit_row(props.row)" >
+                                                                                <svg
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    width="24"
+                                                                                    height="24"
+                                                                                    viewBox="0 0 24 24"
+                                                                                    fill="none"
+                                                                                    stroke="currentColor"
+                                                                                    stroke-width="2"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    class="feather feather-edit-2"
+                                                                                >
+                                                                                    <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                                                                                </svg>
+                                                                            </a>
+                                                                            <a href="javascript:void(0);" @click="delete_row(props.row)" >
+                                                                                <svg
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    width="24"
+                                                                                    height="24"
+                                                                                    viewBox="0 0 24 24"
+                                                                                    fill="none"
+                                                                                    stroke="currentColor"
+                                                                                    stroke-width="2"
+                                                                                    stroke-linecap="round"
+                                                                                    stroke-linejoin="round"
+                                                                                    class="feather feather-trash-2"
+                                                                                >
+                                                                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                                                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                                                    <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                                                    <line x1="14" y1="11" x2="14" y2="17"></line>
+                                                                                </svg>
+                                                                            </a>
+                                                                            <!-- <a href="javascript:void(0);" @click="delete_row(props.row)"> Delete </a> -->
+                                                                        </template>
+                                                                    </v-client-table>
+
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xl-3">
+                                                            <div class="invoice-actions-btn">
+                                                                <div class="invoice-action-btn">
+                                                                    <div class="row">
+
+                                                                        <div class="col-xl-12 col-md-3 col-sm-6">
+                                                                            <a href="javascript:;" class="btn btn-secondary btn-print" @click="export_table(type='print')">Print</a>
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-3 col-sm-6">
+                                                                            <div class="row mb-4">
+                                                                                <div class="col-sm">
+                                                                                    <label for="inputState">Awal</label>
+                                                                                    <flat-pickr v-model="sorting.startDate" 
+                                                                                        :config="{dateFormat: 'd-m-Y'}"
+                                                                                        class="form-control form-control-sm">
+                                                                                    </flat-pickr>
+                                                                                </div>
+                                                                                <div class="col-sm">
+                                                                                    <label for="inputState">Akhir</label>
+                                                                                    <flat-pickr v-model="sorting.endDate" 
+                                                                                        :config="{dateFormat: 'd-m-Y'}"
+                                                                                        class="form-control form-control-sm">
+                                                                                    </flat-pickr>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-xl-12 col-md-3 col-sm-6">
+                                                                            <a href="javascript:;" @click="cari" class="btn btn-success btn-download">Cari</a>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
 
                                     </div>
@@ -300,6 +395,30 @@
         total: total,
     });
 
+    const columns = ref(['notrans', 'tgl', 'name' ,'memo' ,'debet', 'kredit' ,'action']);
+    const table_option = ref({
+        perPage: 10,
+        perPageValues: [5, 10, 20, 50],
+        skin: 'table table-hover',
+        columnsClasses: { action: 'actions text-center' },
+        pagination: { nav: 'scroll', chunk: 5 },
+        texts: {
+            count: 'Showing {from} to {to} of {count}',
+            filter: '',
+            filterPlaceholder: 'Search...',
+            limit: 'Results:',
+        },
+        sortable: ['kd_trans', 'tglBiaya', 'keterangan_biaya' ,'jumlah'],
+        sortIcon: {
+            base: 'sort-icon-none',
+            up: 'sort-icon-asc',
+            down: 'sort-icon-desc',
+        },
+        resizableColumns: true,
+        resizableRows: true,
+    });
+
+
     const sorting = ref({
         startDate: moment().subtract(30,'d').format("D-M-YYYY"),
         endDate: moment().format("D-M-YYYY")
@@ -307,9 +426,11 @@
 
     const GetCoaList=() => {
         store.dispatch('GetCoaList', {acc: ''})
+        setTimeout(function() { accs.value = store.getters.StateCoaList ; }, 2000);
     }
     const GetNoJurnalUmum=() => {
-        store.dispatch('GetNoJurnalUmum')
+        store.dispatch('GetNoJurnalUmum');
+        setTimeout(function() { nobiaya.value = store.getters.NoJurnalUmum ; }, 2000);
     }
     const GetJurnalUmum =() => {
         store.dispatch('GetJurnalUmum', sorting.value)
@@ -351,7 +472,13 @@
             name: '',
             satuan: '', 
             acc: '', 
-        });
+        },{ 
+            id: 2, 
+            name: '',
+            satuan: '', 
+            acc: '', 
+        },
+        );
 
         let dt = new Date();
         params.value.invoice_date = JSON.parse(JSON.stringify(dt));
@@ -363,8 +490,6 @@
         GetCoaList();
         GetNoJurnalUmum();
         GetJurnalUmum();
-        setTimeout(function() { accs.value = store.getters.StateCoaList ; }, 2000);
-        setTimeout(function() { nobiaya.value = store.getters.NoJurnalUmum ; }, 2000);
         
     });
 
@@ -394,5 +519,8 @@
         if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) { // 46 is dot
             $event.preventDefault();
         }   
+    }
+    const cari = () => {
+        GetNoJurnalUmum();
     }
 </script>

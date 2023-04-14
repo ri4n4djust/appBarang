@@ -46,7 +46,7 @@
                             </div>
                         </div>
 
-                        <v-client-table :data="items" :columns="columns" :options="table_option">
+                        <v-client-table :data="items" :columns="columns" :options="table_option" v-if="items.debet != 0 && items.kredit != 0">
                             <template #tgl="props"> {{ moment(props.row.tgl).format("D-M-YYYY") }} </template>
                             <template #debet="props"> {{ Number(props.row.debet).toLocaleString() }} </template>
                             <template #kredit="props"> {{ Number(props.row.kredit).toLocaleString() }} </template>
@@ -121,7 +121,7 @@
     const store = useStore();
     const router = useRouter()
 
-    const columns = ref(['notrans', 'acc_id', 'memo' ,'tgl', 'debet', 'kredit']);
+    const columns = ref(['notrans', 'acc_id','name', 'memo' ,'tgl', 'debet', 'kredit']);
     const items = ref([]);
     const table_option = ref({
         perPage: 100,

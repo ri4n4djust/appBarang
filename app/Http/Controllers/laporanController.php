@@ -159,9 +159,12 @@ class laporanController extends Controller
         $startDate = date("Y-m-d", strtotime($request->input('startDate')));
         $endDate = date("Y-m-d", strtotime($request->input('endDate')));
         $list = DB::table('general_ledger')
-                ->whereBetween('tgl', [$startDate, $endDate])
-                ->where('jurnal', 'GJ')
-                ->orderBy("notrans", "desc")
+                ->join('gl_detail', 'general_ledger.notrans', 'gl_detail.rgl')
+                ->join('coa', 'gl_detail.acc_id', 'coa.acc_id')
+                ->whereBetween('general_ledger.tgl', [$startDate, $endDate])
+                ->where('general_ledger.jurnal', 'GJ')
+                ->select('general_ledger.*', 'gl_detail.*', 'coa.name')
+                ->orderBy("general_ledger.notrans", "desc")
                 ->get();
         
         return response()->json([
@@ -578,10 +581,18 @@ class laporanController extends Controller
     public function bukubesar(Request $request){
         $startDate = date("Y-m-d", strtotime($request->input('startDate')));
         $endDate = date("Y-m-d", strtotime($request->input('endDate')));
+        // $list = DB::table('general_ledger')
+        //         ->join('gl_detail', 'gl_detail.rgl', 'general_ledger.notrans')
+        //         ->whereBetween('general_ledger.tgl', [$startDate, $endDate])
+        //         ->orderBy("general_ledger.id", "desc")
+        //         ->get();
         $list = DB::table('general_ledger')
-                ->join('gl_detail', 'gl_detail.rgl', 'general_ledger.notrans')
+                ->join('gl_detail', 'general_ledger.notrans', 'gl_detail.rgl')
+                ->join('coa', 'gl_detail.acc_id', 'coa.acc_id')
                 ->whereBetween('general_ledger.tgl', [$startDate, $endDate])
-                ->orderBy("general_ledger.id", "desc")
+                // ->where('general_ledger.jurnal', 'GJ')
+                ->select('general_ledger.*', 'gl_detail.*', 'coa.name')
+                ->orderBy("general_ledger.notrans", "desc")
                 ->get();
         
         return response()->json([
