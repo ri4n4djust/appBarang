@@ -1,3 +1,5 @@
+ALTER TABLE `tblnosel_detail` ADD `tera` DECIMAL NOT NULL DEFAULT '0' AFTER `meter_akhir`;
+
 ALTER TABLE `tblpobbm_detail` ADD `pph` DECIMAL(13,2) NOT NULL AFTER `qty_recieve`;
 
 // ALTER TABLE `tblterimabbm_detail` ADD `r_noso` VARCHAR(20) NOT NULL AFTER `r_nopo`;

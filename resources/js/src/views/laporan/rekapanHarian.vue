@@ -69,6 +69,7 @@
                                                                         <th>Nozzel</th>
                                                                         <th>Meter Awal</th>
                                                                         <th>Meter Akhir</th>
+                                                                        <th>Tera</th>
                                                                         <th>Volume/Liter</th>
                                                                         <th>Harga</th>
                                                                         <th>Total</th>
@@ -79,6 +80,7 @@
                                                                         <td>{{ item.nama_nosel }}</td>
                                                                         <td>{{ Number(item.awal_meter).toLocaleString() }}</td>
                                                                         <td>{{ Number(item.last_meter).toLocaleString() }}</td>
+                                                                        <td>{{ Number(item.tera).toLocaleString() }}</td>
                                                                         <td>{{ Number(item.cost_ltr).toLocaleString() }}</td>
                                                                         <td>{{ Number(item.last_price).toLocaleString() }}</td>
                                                                         <td>{{ Number(item.total).toLocaleString() }}</td>
@@ -151,6 +153,33 @@
                                                                                     </tr>
                                                                                 </tbody>
                                                                             </table>
+
+                                                                            <table class="table table-hover table-bordered">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th colspan="3">RETURN</th>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                        <th>BBM</th>
+                                                                                        <th>Volume</th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody role="rowgroup">
+                                                                                    <tr >
+                                                                                        <td aria-colindex="1" role="cell">PERTAMAX</td>
+                                                                                        <td aria-colindex="2" role="cell">{{Number(totalLiterPertamaxTera).toLocaleString()}}</td>
+                                                                                    </tr>
+                                                                                    <tr >
+                                                                                        <td aria-colindex="1" role="cell">PERTALITE</td>
+                                                                                        <td aria-colindex="2" role="cell">{{Number(totalLiterPertaliteTera).toLocaleString()}}</td>
+                                                                                    </tr>
+                                                                                    <tr >
+                                                                                        <td aria-colindex="1" role="cell">DEXLITE</td>
+                                                                                        <td aria-colindex="2" role="cell">{{Number(totalLiterDexliteTera).toLocaleString()}}</td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+
                                                                             </div>
                                                                         </th>
                                                                         <th colspan="2" class="align-top mx-auto" >
@@ -311,11 +340,16 @@
     const totalbiaya = ref();
     const totallink = ref();
     const totalPertamax = ref();
+
     const totalLiterPertamax = ref();
     const totalPertalite = ref();
     const totalLiterPertalite = ref();
     const totalDexlite = ref();
     const totalLiterDexlite = ref();
+
+    const totalLiterPertamaxTera = ref();
+    const totalLiterPertaliteTera = ref();
+    const totalLiterDexliteTera = ref();
 
     const items = ref([]);
     const kupon = ref([]);
@@ -381,14 +415,22 @@
         let totalLiterPX = items.value.filter( (item) => item.code_bbm === 'BRG0001').reduce((accumulator, item) => {
             return accumulator += Number(item.cost_ltr);
         }, 0);
+        totalLiterPertamaxTera.value = items.value.filter( (item) => item.code_bbm === 'BRG0001').reduce((accumulator, item) => {
+            return accumulator += Number(item.tera);
+        }, 0);
         totalPertamax.value = totalPX
         totalLiterPertamax.value = totalLiterPX
+
+        // console.log(totalLiterPertamaxTera.value)
 
         let totalPL = items.value.filter((item) => item.code_bbm === 'BRG0002').reduce((accumulator, item) => {
             return accumulator += Number(item.total);
         }, 0);
         let totalLiterPL = items.value.filter((item) => item.code_bbm === 'BRG0002').reduce((accumulator, item) => {
             return accumulator += Number(item.cost_ltr);
+        }, 0);
+        totalLiterPertaliteTera.value = items.value.filter((item) => item.code_bbm === 'BRG0002').reduce((accumulator, item) => {
+            return accumulator += Number(item.tera);
         }, 0);
         totalPertalite.value = totalPL
         totalLiterPertalite.value = totalLiterPL
@@ -398,6 +440,9 @@
         }, 0);
         let totalLiterDX = items.value.filter((item) => item.code_bbm === 'BRG0003').reduce((accumulator, item) => {
             return accumulator += Number(item.cost_ltr);
+        }, 0);
+        totalLiterDexliteTera.value = items.value.filter((item) => item.code_bbm === 'BRG0003').reduce((accumulator, item) => {
+            return accumulator += Number(item.tera);
         }, 0);
         totalDexlite.value = totalDX
         totalLiterDexlite.value = totalLiterDX

@@ -31,6 +31,25 @@
                         <v-client-table :data="items" :columns="columns" :options="table_option">
                             <template #hrgJual="props"> {{ Number(props.row.hrgJual).toLocaleString() }} </template>
                             <template #hrgPokok="props"> {{ Number(props.row.hrgPokok).toLocaleString() }} </template>
+                            <template #kartuStok="props"> 
+                                <router-link :to="{name: 'kartu-stok', params: {startDate: sorting.startDate, endDate:sorting.endDate ,kdBarang:props.row.kdBarang }}"  >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="feather feather-check-circle text-primary"
+                                    >
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                    </svg>
+                                </router-link>
+                            </template>
                             <template #action="props">
 
                                 <a href="javascript:void(0);" @click="view_row(props.row)" >
@@ -156,6 +175,8 @@
     import jsPDF from 'jspdf';
     import 'jspdf-autotable';
 
+    import moment from "moment";
+
     import { useStore } from 'vuex';
 
     import { useMeta } from '@/composables/use-meta';
@@ -163,7 +184,7 @@
 
     const store = useStore();
 
-    const columns = ref(['kdBarang', 'nmBarang', 'hrgPokok', 'hrgJual', 'namaKtg', 'stokPersediaan', 'action']);
+    const columns = ref(['kdBarang', 'nmBarang', 'hrgPokok', 'hrgJual', 'namaKtg', 'stokPersediaan', 'kartuStok' ,'action']);
 
     const modalinput = ref(false);
     const items = ref([]);
@@ -186,6 +207,11 @@
             down: 'sort-icon-desc',
         },
         resizableColumns: true,
+    });
+
+    const sorting = ref({
+        startDate: moment().subtract(30,'d').format("D-M-YYYY"),
+        endDate: moment().format("D-M-YYYY")
     });
 
     const kdbrg = ref([])

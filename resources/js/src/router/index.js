@@ -204,6 +204,12 @@ const routes = [
         props: true,
     },
     {
+        path: '/rekapan/kartu-stok',
+        name: 'kartu-stok',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/master/kartuStok.vue'),
+        props: true,
+    },
+    {
         path: '/laporan/aplusan-bbm',
         name: 'aplusan-bbm',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/aplusanBbm.vue'),

@@ -271,6 +271,7 @@
                         <th role="columnheader" scope="col" aria-colindex="1"><div>Nozel</div></th>
                         <th role="columnheader" scope="col" aria-colindex="2"><div>Meter Awal</div></th>
                         <th role="columnheader" scope="col" aria-colindex="3"><div>Meter Akhir</div></th>
+                        <th role="columnheader" scope="col" aria-colindex="3"><div>Tera</div></th>
                         <th role="columnheader" scope="col" aria-colindex="4"><div>Volume</div></th>
                         <th role="columnheader" scope="col" aria-colindex="5"><div>Harga</div></th>
                         <th role="columnheader" scope="col" aria-colindex="4"><div>Total</div></th>
@@ -302,10 +303,17 @@
                                 <input type="text" class="form-control form-control-sm col-sm-4" v-model="meter_now[index]" >
                             </div>
                         </td>
-                        <td v-if="meter_now[index] != ''">{{ Math.abs(meter_now[index] - list.meter_akhir) }}</td>
+                        <td >
+                            <div :style="{ 'width': inpt_tera + 'px' }">
+                                <input type="text" class="form-control form-control-sm col-sm-4" v-model="list.tera" >
+                            </div>
+                        </td>
+                        <td v-if="meter_now[index] != '' ">{{ Math.abs((meter_now[index] - list.meter_akhir - list.tera)) }}</td>
                         <td v-else>0</td>
+                        <!-- <td v-if="tera[index] != '' ">{{ Math.abs((meter_now[index] - list.meter_akhir - tera[index])) }}</td>
+                        <td v-else>0</td> -->
                         <td >{{ Number(list.harga).toLocaleString() }}</td>
-                        <td v-if="meter_now[index] != ''">{{ Number((meter_now[index] - list.meter_akhir) * list.harga).toLocaleString() }}</td>
+                        <td v-if="meter_now[index] != ''">{{ Number( ((meter_now[index] - list.meter_akhir) - list.tera)  * list.harga ).toLocaleString() }}</td>
                         <td v-else>0</td>
                     </tr>
                 </tbody>
@@ -353,8 +361,10 @@
     });
     const date1 = ref(moment().format("YYYY-MM-DD"));
     const meter_now = ref({});
+    const tera = ref({});
     const regu = ref(null);
-    const inpt = ref(250);
+    const inpt = ref(200);
+    const inpt_tera = ref(100);
     // const listtrans = ref([]);
 
     const nosel_id = ref();
@@ -388,6 +398,26 @@
         const kupon = store.getters.Skupon;
         const biaya = store.getters.Sbiaya;
         const link = store.getters.Slink;
+
+        // var dataArr = nosel
+        // const arr_nosel = [];
+        // for (let i = 0; i < dataArr.length; i++) {
+
+        //     arr_nosel.push({
+        //         'id_nosel': dataArr[i].id_nosel,
+        //         'r_bbm': dataArr[i].r_bbm,
+        //         'r_code_bbm': dataArr[i].r_code_bbm,
+        //         'nama_nosel': dataArr[i].nama_nosel,
+        //         'meter_awal': dataArr[i].meter_awal,
+        //         'meter_akhir': dataArr[i].meter_akhir,
+        //         'harga': dataArr[i].harga,
+        //         'last_price': dataArr[i].last_price,
+        //         'tera': 0,
+
+        //     });
+
+        // }
+        // console.log(nosel)
         return { nosel, trs, regu, kupon, biaya, link }
     });
     
@@ -406,10 +436,12 @@
             if(meter_now.value[i] === ''){
                 last_meter = dataArr[i].meter_akhir;
             };
+            let tera = dataArr[i].tera ;
             let id_nosel = dataArr[i].id_nosel
-            let cost = last_meter - dataArr[i].meter_akhir  || 0;
+            let cost = (last_meter - dataArr[i].meter_akhir) - tera  || 0;
             let subto = dataArr[i].harga * cost || 0;
             let subtohpp = dataArr[i].last_price * cost || 0;
+            
             // subto = subto ?? 0 ;
             
             // let ket = keterangan.value[i]
@@ -425,7 +457,8 @@
                 'kd_trans': tglc+regu.value,
                 'r_nosel': id_nosel,
                 'r_regu': regu.value,
-                'tgl_transaksi': tgl, 
+                'tgl_transaksi': tgl,
+                'tera': tera,
                 'cost_ltr': cost, 
                 'old_price': dataArr[i].last_price,
                 'last_price': dataArr[i].harga,
@@ -434,6 +467,7 @@
                 'total': subto,
                 'totalhpp': subtohpp,
                 'pph22' : pph22.value
+
             })
             // tota += parseInt(subto)
             // total.value = tota
@@ -455,6 +489,7 @@
         const totalPX = arr.filter(i => i.kodeBrg === 'BRG0001').reduce((a, b) => Number(a) + Number(b.total), 0);
         const totalPL = arr.filter(i => i.kodeBrg === 'BRG0002').reduce((a, b) => Number(a) + Number(b.total), 0);
         const totalDX = arr.filter(i => i.kodeBrg === 'BRG0003').reduce((a, b) => Number(a) + Number(b.total), 0);
+
         const totalPXL = arr.filter(i => i.kodeBrg === 'BRG0001').reduce((a, b) => Number(a) + Number(b.cost_ltr), 0);
         const totalPLL = arr.filter(i => i.kodeBrg === 'BRG0002').reduce((a, b) => Number(a) + Number(b.cost_ltr), 0);
         const totalDXL = arr.filter(i => i.kodeBrg === 'BRG0003').reduce((a, b) => Number(a) + Number(b.cost_ltr), 0);
@@ -569,6 +604,7 @@
     const getNosel=() => {
         const id = props.id;
         store.dispatch('GetNosel', {'key1': id})
+        // setTimeout(function() { nosel_awal.value = store.getters.NoBiaya ; }, 2000);
     }
     const getTrans=() => {
         const id = props.id;
@@ -590,7 +626,7 @@
         getRegu();
         GetPph22();
         // console.log('pph dari gov : '+ pph22.value)
-        
+        tera.value = 0;
         localStorage.setItem('kupon', '[]');
         localStorage.setItem('biaya', '[]');
         localStorage.setItem('link', '[]');

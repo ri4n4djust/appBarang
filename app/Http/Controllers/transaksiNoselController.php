@@ -109,7 +109,7 @@ class transaksiNoselController extends Controller
                         $id_nosel = $detop[$i]['r_nosel'];
                         $hrg = $detop[$i]['last_price'];
                         $costLiter = $detop[$i]['cost_ltr'];
-                        // $total = $detop[$i]['total'];
+                        $tera = $detop[$i]['tera'];
                         // $hrg = $detop[$i]['hrgJual'];
                         $oldStokPer = DB::table('tblpersediaan')->select('stokPersediaan')->where('kdPersediaan', $kdBarang)->first();
                         // $oldStokBbm = DB::table('tblbbm')->select('stokBbm')->where('code_bbm', $kdBarang)->first();
@@ -147,6 +147,7 @@ class transaksiNoselController extends Controller
                             'last_price'     => $detop[$i]['last_price'],
                             'awal_meter'   => $detop[$i]['awal_meter'],
                             'last_meter'   => $last_m,
+                            'tera'   => $tera,
                             'total'    => $detop[$i]['total'],
                             'total_hpp'    => $detop[$i]['totalhpp'],
                             'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
@@ -154,6 +155,17 @@ class transaksiNoselController extends Controller
                         ];
 
                         $total_j += $detop[$i]['total'];
+
+                        //==========insert tera
+                        if($tera != 0 ){
+                            $notrans = $kdtrans;
+                            $r_nosel = $detop[$i]['r_nosel'];
+                            $r_bbm = $detop[$i]['kd_bbm'];
+                            $nama_bbm = 'BBM';
+                            $jumlah_tera = $tera ;
+                            insert_tera($notrans,$r_nosel,$r_bbm,$nama_bbm,$tgl,$jumlah_tera);
+                        }
+                        //===========end insert tera
 
 
                     
@@ -642,7 +654,7 @@ class transaksiNoselController extends Controller
         DB::table('tblheader_aplusan')->where('kd_trans', $id)->delete();
         DB::table('general_ledger')->where('order_no', $id)->delete();
         DB::table('tblheader_aplusan')->where('kd_trans', $id)->delete();
-
+        DB::table('tbltera_detail')->where('r_notrans', $id)->delete();
         DB::table('tblbiaya')->where('kd_trans', $id)->delete();
 
         $old_kupon = DB::table('tblkupon')->where('kd_trans', $id)->get();
