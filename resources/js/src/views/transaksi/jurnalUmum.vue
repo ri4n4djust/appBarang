@@ -522,5 +522,6 @@
     }
     const cari = () => {
         GetNoJurnalUmum();
+        GetJurnalUmum();
     }
 </script>

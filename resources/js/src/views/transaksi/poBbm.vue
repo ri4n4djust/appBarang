@@ -192,7 +192,7 @@
                                                                     <td style="padding:0;margin:0;">
                                                                         <input type="text" v-model="item.total" :id="'total'+index" class="form-control" placeholder="total" />
                                                                         <!-- {{ Number((item.rate * item.quantity) + item.pph).toLocaleString() }} -->
-                                                                        <input type="text" v-model="item.amount" :id="'amount'+index" class="form-control" placeholder="total" />
+                                                                        <input type="hidden" v-model="item.amount" :id="'amount'+index" class="form-control" placeholder="total" />
                                                                         
                                                                     </td>
                                                                 </tr>
@@ -595,7 +595,7 @@
             pph.value += parseFloat(items.value[i].pph);
         }
         getTotal()
-        console.log(pph.value)
+        // console.log(pph.value)
         listpobbm.value = store.getters.SlistPobbm;
 
         return { barangs, pajak, suppliers, nopobbm, accs, subtotal, tot, listpobbm }
