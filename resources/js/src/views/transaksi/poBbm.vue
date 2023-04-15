@@ -145,7 +145,7 @@
                                                                     <th>Description</th>
                                                                     <th>Rate</th>
                                                                     <th>Qty</th>
-                                                                    <!-- <th>pph</th> -->
+                                                                    <th>pph</th>
                                                                     <th>Total</th>
                                                                 </tr>
                                                             </thead>
@@ -186,12 +186,13 @@
                                                                     <td style="padding:0;margin:0;">
                                                                         <input type="text" v-model="item.quantity" :id="'quantity'+index" class="form-control"  placeholder="Quantity" />
                                                                     </td>
-                                                                    <!-- <td style="padding:0;margin:0;">
-                                                                        <input type="text" v-model="item.pph" :id="'pph'+index" class="form-control" placeholder="pph" />
-                                                                    </td> -->
                                                                     <td style="padding:0;margin:0;">
-                                                                        <!-- <input type="text" v-model="item.total" :id="'total'+index" class="form-control" placeholder="total" /> -->
-                                                                        {{ Number(item.rate * item.quantity).toLocaleString() }}
+                                                                        <input type="text" v-model="item.pph" :id="'pph'+index" class="form-control" placeholder="pph" />
+                                                                    </td>
+                                                                    <td style="padding:0;margin:0;">
+                                                                        <input type="text" v-model="item.total" :id="'total'+index" class="form-control" placeholder="total" />
+                                                                        <!-- {{ Number((item.rate * item.quantity) + item.pph).toLocaleString() }} -->
+                                                                        <input type="text" v-model="item.amount" :id="'amount'+index" class="form-control" placeholder="total" />
                                                                         
                                                                     </td>
                                                                 </tr>
@@ -346,6 +347,7 @@
                                                                                     <template #no_so="props"> {{ props.row.no_so }} </template>
                                                                                     <template #qty_grpo="props"> {{ Number(props.row.qty_grpo).toLocaleString() }} </template>
                                                                                     <template #qty_recieve="props"> {{ Number(props.row.qty_recieve).toLocaleString() }} </template>
+                                                                                    <template #subTotal="props"> {{ Number(props.row.subTotal).toLocaleString() }} </template>
                                                                                     <template #pph="props"> {{ Number(props.row.pph).toLocaleString() }} </template>
                                                                                     <template #total="props"> {{ Number(props.row.total).toLocaleString() }} </template>
                                                                                     <template #action="props">
@@ -543,7 +545,7 @@
 
     });
 
-    const columns = ref(['no_so', 'supplier_name', 'podate', 'qty_grpo', 'qty_recieve','pph','total' ,'action']);
+    const columns = ref(['no_so', 'supplier_name', 'podate', 'qty_grpo', 'qty_recieve','subTotal','pph','total' ,'action']);
     const listpobbm = ref([]);
     const table_option = ref({
         perPage: 10,
@@ -584,13 +586,16 @@
         nopobbm.value = store.getters.NoPobbm;
         const pajak = store.state.pajak;
         subtotal.value = 0;
+        pph.value = 0;
         let tot = 0;
         for(let i = 0; i < items.value.length; i++){
             subtotal.value += (parseFloat(items.value[i].rate) * parseFloat(items.value[i].quantity));
-            items.value[i].amount = parseFloat(items.value[i].rate) * parseFloat(items.value[i].quantity)
+            items.value[i].total = (parseFloat(items.value[i].rate) * parseFloat(items.value[i].quantity)) + parseFloat(items.value[i].pph);
+            items.value[i].amount = (parseFloat(items.value[i].rate) * parseFloat(items.value[i].quantity));
+            pph.value += parseFloat(items.value[i].pph);
         }
         getTotal()
-        // console.log(tot)
+        console.log(pph.value)
         listpobbm.value = store.getters.SlistPobbm;
 
         return { barangs, pajak, suppliers, nopobbm, accs, subtotal, tot, listpobbm }
@@ -622,7 +627,7 @@
 
     const getTotal=() =>{
         const pajak = store.state.pajak;
-        const temptotal = subtotal.value - (subtotal.value * disc.value / 100)
+        const temptotal = subtotal.value - (subtotal.value * disc.value / 100);
         total.value = (subtotal.value - (subtotal.value * disc.value / 100)) + parseInt(pph.value)
         tax.value = temptotal * pajak /100
         
@@ -684,7 +689,7 @@
                 quantity: data[i].quantity,
                 rate: data[i].rate,
                 total: data[i].total,
-                pph: data[i].pph,
+                pph_bbm: data[i].pph,
                 accid_persediaan: data[i].title.accid_persediaan
             })
         }
@@ -741,7 +746,7 @@
             quantity: '', 
             amount: '', 
             total: '',
-            pph: '' 
+            pph: 0 
         });
         
 
@@ -772,7 +777,7 @@
             quantity: '', 
             amount: '', 
             total: '',
-            pph: '' 
+            pph: 0 
         });
         
 
@@ -859,6 +864,7 @@
                 rowhtml += '<td>'+moment(item.podate).format("DD-MM-YYYY")+'</td>';
                 rowhtml += '<td>'+Number(item.qty_grpo).toLocaleString()+'</td>';
                 rowhtml += '<td>'+Number(item.qty_recieve).toLocaleString()+'</td>';
+                rowhtml += '<td>'+Number(item.suTotal).toLocaleString()+'</td>';
                 rowhtml += '<td>'+Number(item.pph).toLocaleString()+'</td>';
                 rowhtml += '<td>'+Number(item.total).toLocaleString()+'</td>';
                 rowhtml += '</tr>';
@@ -990,7 +996,7 @@
             max_id = items.value.reduce((max, character) => (character.id > max ? character.id : max), items.value[0].id);
             // items.title.value.focus();
         }
-        items.value.push({ id: max_id + 1, title: '', kdBarang:'', description: '', rate: '', quantity: '', amount: '', total: '', pph: '' });
+        items.value.push({ id: max_id + 1, title: '', kdBarang:'', description: '', rate: '', quantity: '', amount: '', total: '', pph: 0 });
         // items.value[1].title.focus();
     };
     

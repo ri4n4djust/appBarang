@@ -1,10 +1,12 @@
-ALTER TABLE `tblterimabbm_detail` ADD `r_noso` VARCHAR(20) NOT NULL AFTER `r_nopo`;
-ALTER TABLE `tblterimabbm` ADD `no_so` VARCHAR(20) NOT NULL AFTER `no_po`;
-ALTER TABLE `tblbarang` ADD `accid_hpp` VARCHAR(20) NOT NULL AFTER `accid`;
-ALTER TABLE `tblperubahan_hargabbm` ADD `harga_pokok_lama` DECIMAL(10,2) NOT NULL AFTER `code_bbm`, ADD `harga_pokok_baru` DECIMAL(10,2) NOT NULL AFTER `harga_pokok_lama`;
-ALTER TABLE `tblbiaya` ADD `accid` VARCHAR(20) NOT NULL AFTER `jumlah`;
+ALTER TABLE `tblpobbm_detail` ADD `pph` DECIMAL(13,2) NOT NULL AFTER `qty_recieve`;
 
-ALTER TABLE `tblperubahan_hargabbm` ADD `code_bbm` VARCHAR(20) NOT NULL AFTER `id_perubahan`;
+// ALTER TABLE `tblterimabbm_detail` ADD `r_noso` VARCHAR(20) NOT NULL AFTER `r_nopo`;
+// ALTER TABLE `tblterimabbm` ADD `no_so` VARCHAR(20) NOT NULL AFTER `no_po`;
+// ALTER TABLE `tblbarang` ADD `accid_hpp` VARCHAR(20) NOT NULL AFTER `accid`;
+// ALTER TABLE `tblperubahan_hargabbm` ADD `harga_pokok_lama` DECIMAL(10,2) NOT NULL AFTER `code_bbm`, ADD `harga_pokok_baru` DECIMAL(10,2) NOT NULL AFTER `harga_pokok_lama`;
+// ALTER TABLE `tblbiaya` ADD `accid` VARCHAR(20) NOT NULL AFTER `jumlah`;
+
+// ALTER TABLE `tblperubahan_hargabbm` ADD `code_bbm` VARCHAR(20) NOT NULL AFTER `id_perubahan`;
 
 // ALTER TABLE `tblbbm` ADD `accid_hpp` VARCHAR(20) NOT NULL AFTER `accid`;
 

@@ -14,6 +14,8 @@ use App\Http\Controllers\barangController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+//==============RESET DB
+Route::get('/resetdb', [App\Http\Controllers\barangController::class, 'resetdb']);
 //============================
 Route::post('/login', [loginController::class, 'login']);
 Route::post('/register', [App\Http\Controllers\loginController::class, 'register']);
@@ -23,8 +25,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         return auth()->user();
     });
 
-    //==============RESET DB
-    Route::get('/resetdb', [App\Http\Controllers\barangController::class, 'resetdb']);
     //============================logout
     Route::post('/logout', [App\Http\Controllers\loginController::class, 'logout']);
 

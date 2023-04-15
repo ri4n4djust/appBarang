@@ -450,7 +450,7 @@
         // const biaya = ref({group: '4,5,6'});
         // store.dispatch('GetHarta', biaya.value); GetCostBbm
         store.dispatch('GetCostBbm', sorting.value);
-        setTimeout(function() { costliter_total.value = store.getters.StateCostBbm; }, 3000);
+        setTimeout(function() { costliter_total.value = store.getters.StateCostBbm; }, 2000);
         
 
         const biaya = ref({group: '2,4,5,6'});
@@ -493,6 +493,8 @@
         // const pendapatan = ref({group: '4,5'});
         // var c = Object.assign(sorting.value, pendapatan.value);
         // store.dispatch('GetPendapatan', c );
+        store.dispatch('GetCostBbm', sorting.value);
+        setTimeout(function() { costliter_total.value = store.getters.StateCostBbm; }, 2000);
         
         
         const biaya = ref({group: '2,4,5,6'});

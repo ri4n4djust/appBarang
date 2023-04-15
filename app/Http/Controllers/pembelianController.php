@@ -299,7 +299,8 @@ class pembelianController extends Controller
                         'hrgBeli' => $detpo[$i]['rate'],
                         'qty' => $qty,
                         'qty_recieve' => 0,
-                        'total' => $detpo[$i]['amount'],
+                        'pph' => $detpo[$i]['pph_bbm'],
+                        'total' => $detpo[$i]['total'],
                         'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                         'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                     ];
@@ -430,9 +431,9 @@ class pembelianController extends Controller
         }else{
             $where = 'where src.qty_recieve < src.qty_grpo';
         };
-        $list = DB::select("SELECT src.no_po,src.no_so no_so,src.total,src.pph,rtrim(b.nmSupplier) supplier_name,b.kdSupplier,src.podate,src.qty_grpo,src.qty_recieve 
-                            from (SELECT a.no_po,a.no_so,a.r_supplier,a.total,a.pph,cast(a.tgl_po as date) podate,sum(b.qty) qty_grpo,sum(qty_recieve) qty_recieve 
-                            FROM tblpobbm a left join tblpobbm_detail b on a.no_po = b.r_noPo where cast(a.tgl_po as date) between '2023-01-01' and '$endDate' group by a.r_supplier,a.no_po,a.no_so,a.tgl_po,a.total,a.pph) src
+        $list = DB::select("SELECT src.no_po,src.no_so no_so,src.subTotal,src.total,src.pph,rtrim(b.nmSupplier) supplier_name,b.kdSupplier,src.podate,src.qty_grpo,src.qty_recieve 
+                            from (SELECT a.no_po,a.no_so,a.r_supplier,a.subTotal,a.total,a.pph,cast(a.tgl_po as date) podate,sum(b.qty) qty_grpo,sum(qty_recieve) qty_recieve 
+                            FROM tblpobbm a left join tblpobbm_detail b on a.no_po = b.r_noPo where cast(a.tgl_po as date) between '2023-01-01' and '$endDate' group by a.r_supplier,a.no_po,a.no_so,a.tgl_po,a.total,a.pph,a.subTotal) src
                             left join tblsupplier b on src.r_supplier = b.kdSupplier $where order by no_po asc;");
         
         return response()->json([
