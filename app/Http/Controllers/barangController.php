@@ -381,6 +381,7 @@ class barangController extends Controller
         try{
             $exception = DB::transaction(function() use ($request){ 
                 $kdBarang = $request->input('code_bbm');
+                $tgl = date("Y-m-d", strtotime($request->input('tglPerubahan')));
                 Bbm::where('code_bbm', $kdBarang)->update([
                     'last_price' => $request->input('harga_pokok_baru'),
                     'sale_price' => $request->input('harga_baru'),
@@ -402,6 +403,20 @@ class barangController extends Controller
                     'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                     'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                 ]);
+
+                $r_idPerubahan = DB::getPdo()->lastInsertId();
+
+                //======update hpp
+                DB::table('tblstokbbm_hpp')->insert([
+                    'r_perubahan'   => $r_idPerubahan,
+                    'r_bbm'   => $request->input('code_bbm'),
+                    'tgl_stok' => $tgl,
+                    'stok'   => $request->input('stok'),
+                    'h_pokok' => $request->input('harga_pokok_lama'),
+                    'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                ]);
+                //=========end update hpp
                 DB::commit();
             });
             if(is_null($exception)) {

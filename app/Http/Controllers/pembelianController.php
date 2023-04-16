@@ -62,6 +62,15 @@ class pembelianController extends Controller
                         'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                     ];
 
+                    
+
+                    //========insert kartu stok
+                    $total_beli = $detpem[$i]['total'];
+                    $stok_awal = $oldStok ; // DB::table('tblpersediaan')->select('stokPersediaan')->where('kdPersediaan', $kdBarang)->first()->stokPersediaan;
+                    $stok_akhir = $oldStok + $qty ;
+                    insert_kartustok_beli($noNota,$kdBarang,$tglNota,$stok_awal,$qty,$total_beli,$stok_akhir);
+                    //====================end kartu stok
+
                     //===========jurnal
                     $acc_id_d = $detpem[$i]['accid_persediaan']; // acc id yg di debet
                     $acc_id_k = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
@@ -493,7 +502,7 @@ class pembelianController extends Controller
 
                 DB::table('tblpembelian')->where('noNota', $kd)->delete();
                 DB::table('tblpembelian_detail')->where('r_noNota', $kd)->delete();
-
+                DB::table('tblkartu_stok')->where('r_notrans', $kd)->delete();
                 DB::commit();
             });
             if(is_null($exception)) {

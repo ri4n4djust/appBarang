@@ -304,6 +304,7 @@
     const nama_bbm = ref();
     const harga_old = ref();
     const harga_pokok_old = ref();
+    const stok = ref();
     
     const store = useStore();
     const router = useRouter();
@@ -314,6 +315,7 @@
         code_bbm: code,
         harga_lama: harga_old,
         harga_pokok_lama: harga_pokok_old,
+        stok: stok,
         harga_baru: '',
         harga_pokok_baru: ''
     })
@@ -328,6 +330,7 @@
         code.value = list.code_bbm;
         harga_old.value = list.sale_price;
         harga_pokok_old.value = list.last_price;
+        stok.value = list.stokPersediaan;
         isOpen.value = true;
     }
 

@@ -92,6 +92,15 @@ class penjualanController extends Controller
                         'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                         'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                     ];
+
+                    //========insert kartu stok
+                    $total_jual = $detpem[$i]['total'];
+                    $stok_awal = $oldStok ; // DB::table('tblpersediaan')->select('stokPersediaan')->where('kdPersediaan', $kdBarang)->first()->stokPersediaan;
+                    $stok_akhir = $oldStok - $qty ;
+                    insert_kartustok_jual($noNota,$kdBarang,$tglNota,$stok_awal,$qty,$total_jual,$stok_akhir);
+                    //====================end kartu stok
+
+
                     //===========jurnal
                     $accid = $detpem[$i]['accid']; // acc id yg di debet
                     $acc_id_d = $detpem[$i]['accid_persediaan']; // acc id yg di debet

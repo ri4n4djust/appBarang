@@ -63,5 +63,107 @@ if(!function_exists('insert_tera')){
     
 }
 
+if(!function_exists('insert_kartustok_jual')){
+    function insert_kartustok_jual($notrans,$kdBarang,$tgl,$stok_awal,$qty_jual,$total_jual,$stok_akhir){
+
+        // if(DB::table('tblkartu_stok')->exists()){
+        //     $rgla = DB::table('tblkartu_stok')->get()->last()->no_tera;
+        //     $nomor = substr($rgla, 2);
+        //     $newno = (int)$nomor + 1;
+        //     $newno = substr("000000".$newno, -6);
+        // }else{
+        //     $newno = '000001';
+        // }
+
+
+        $sql = DB::table('tblkartu_stok')->insert([
+                'r_notrans' => $notrans,
+                'kd_barang' => $kdBarang,
+                'tgl' => $tgl,
+                'stok_awal' => $stok_awal,
+                'unit_beli' => 0,
+                'total_beli' => 0,
+                'unit_jual' => $qty_jual,
+                'total_jual' => $total_jual,
+                'stok_akhir' => $stok_akhir,
+                'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+            ]
+        );
+        	
+        // $query = DB::select($sql); // $this->db->query($sql)->result_array();
+        return $sql;		
+    }
+    
+}
+
+if(!function_exists('insert_kartustok_beli')){
+    function insert_kartustok_beli($notrans,$kdBarang,$tgl,$stok_awal,$qty_beli,$total_beli,$stok_akhir){
+
+        // if(DB::table('tblkartu_stok')->exists()){
+        //     $rgla = DB::table('tblkartu_stok')->get()->last()->no_tera;
+        //     $nomor = substr($rgla, 2);
+        //     $newno = (int)$nomor + 1;
+        //     $newno = substr("000000".$newno, -6);
+        // }else{
+        //     $newno = '000001';
+        // }
+
+
+        $sql = DB::table('tblkartu_stok')->insert([
+                'r_notrans' => $notrans,
+                'kd_barang' => $kdBarang,
+                'tgl' => $tgl,
+                'stok_awal' => $stok_awal,
+                'unit_beli' => $qty_beli,
+                'total_beli' => $total_beli,
+                'unit_jual' => 0,
+                'total_jual' => 0,
+                'stok_akhir' => $stok_akhir,
+                'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+            ]
+        );
+        	
+        // $query = DB::select($sql); // $this->db->query($sql)->result_array();
+        return $sql;		
+    }
+    
+}
+
+if(!function_exists('insert_kartustok_jual')){
+    function insert_kartustok_jual($notrans,$kdBarang,$tgl,$stok_awal,$qty_jual,$total_jual,$stok_akhir){
+
+        // if(DB::table('tblkartu_stok')->exists()){
+        //     $rgla = DB::table('tblkartu_stok')->get()->last()->no_tera;
+        //     $nomor = substr($rgla, 2);
+        //     $newno = (int)$nomor + 1;
+        //     $newno = substr("000000".$newno, -6);
+        // }else{
+        //     $newno = '000001';
+        // }
+
+
+        $sql = DB::table('tblkartu_stok')->insert([
+                'r_notrans' => $notrans,
+                'kd_barang' => $kdBarang,
+                'tgl' => $tgl,
+                'stok_awal' => $stok_awal,
+                'unit_beli' => 0,
+                'total_beli' => 0,
+                'unit_jual' => $qty_jual,
+                'total_jual' => $total_jual,
+                'stok_akhir' => $stok_akhir,
+                'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+            ]
+        );
+        	
+        // $query = DB::select($sql); // $this->db->query($sql)->result_array();
+        return $sql;		
+    }
+    
+}
+
 
 ?>

@@ -353,7 +353,9 @@ class transaksiNoselController extends Controller
                 $detpro = $request[4];
                 $to_bati = 0;
                 for ($i = 0; $i < count($detpro); $i++) {
+
                     $total_hpp = $detpro[$i]['total_hpp'];
+                    
                     $total_harga = $detpro[$i]['total_harga'];
                     $total_liter = $detpro[$i]['total_liter'];
                     

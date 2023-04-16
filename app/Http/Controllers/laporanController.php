@@ -409,6 +409,27 @@ class laporanController extends Controller
 
     }
 
+    public function listKartustok(Request $request){
+        $startDate = date("Y-m-d", strtotime($request->input('startDate')));
+        $endDate = date("Y-m-d", strtotime($request->input('endDate')));
+        $kodebarang = $request->input('kdBarang');
+        $list = DB::table('tblkartu_stok')
+                // ->join('tblinventaris', 'tblinventaris.kode_inventaris', 'tblinventaris_penyusutan_detail.rkode_inventaris')
+                ->whereBetween('tgl', [$startDate, $endDate])
+                ->where('kd_barang', $kodebarang)
+                ->orderBy("id", "ASC")
+                ->get();
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'List Kartu Stok',
+            'data' => $list
+        ], 200);
+
+    }
+
+    
+
     public function deletePenyusutan(Request $request){
         try{
             $exception = DB::transaction(function() use ($request){
@@ -465,6 +486,7 @@ class laporanController extends Controller
                     ]);
                 };
                 DB::table('tblpenjualan_detail')->where('r_noPenjualan', $kd)->delete();
+                DB::table('tblkartu_stok')->where('r_notrans', $kd)->delete();
                 DB::commit();
             });
             if(is_null($exception)) {
