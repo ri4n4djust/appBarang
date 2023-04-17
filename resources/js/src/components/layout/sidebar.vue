@@ -262,9 +262,6 @@
                         <li>
                             <router-link to="/penjualan-kupon" @click="toggleMobileMenu">Penjualan Kupon</router-link>
                         </li>
-                        <li>
-                            <router-link to="/tera" @click="toggleMobileMenu">Tera</router-link>
-                        </li>
                         <li class="menu">
                             <a class="dropdown-toggle" data-bs-toggle="collapse" data-bs-target="#opnum" aria-controls="opnum" aria-expanded="false">
                                 <div class="">
@@ -351,6 +348,9 @@
                         </li>
                         <li>
                             <router-link to="/laporan/opnum" @click="toggleMobileMenu">Laporan Opnum</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/laporan/tera" @click="toggleMobileMenu">Laporan Tera</router-link>
                         </li>
                         <li>
                             <router-link to="/laporan/pembelian-inventaris" @click="toggleMobileMenu">Laporan Pembelian inventaris</router-link>

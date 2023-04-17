@@ -252,6 +252,12 @@ const routes = [
         props: true,
     },
     {
+        path: '/laporan/tera',
+        name: 'laporan-tera',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/laporanTera.vue'),
+        props: true,
+    },
+    {
         path: '/laporan/labarugi',
         name: 'laporan-labarugi',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/laporanLabarugi.vue'),

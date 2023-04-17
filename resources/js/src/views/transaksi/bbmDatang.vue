@@ -171,16 +171,18 @@
                                                             <th>Qty Order</th>
                                                             <th>Qty Terima</th>
                                                             <th>Qty Datang</th>
+                                                            <th>Total</th>
                                                             <th>Sisa</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <tr v-for="item, index in brg" :key="item.kdBarang">
-                                                            <td class="description">{{ item.nmBarang }}</td>
+                                                            <td class="amount">{{ item.nmBarang }}</td>
                                                             <td class="rate">{{ new Intl.NumberFormat().format(item.hrgBeli) }}</td>
                                                             <td class="qty">{{ item.qty }}</td>
                                                             <td class="qty">{{ item.qty_recieve }}</td>
                                                             <td class="qty"><input type="text" v-model="qty_datang[index]" class="form-control" /></td>
+                                                            <td class="qty">{{ new Intl.NumberFormat().format(qty_datang[index] * item.hrgBeli) }}</td>
                                                             <td class="amount">{{ new Intl.NumberFormat().format((item.qty -item.qty_recieve) - qty_datang[index]) }}</td>
                                                         </tr>
                                                     </tbody>

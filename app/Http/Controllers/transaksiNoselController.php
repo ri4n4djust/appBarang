@@ -355,6 +355,10 @@ class transaksiNoselController extends Controller
                 for ($i = 0; $i < count($detpro); $i++) {
 
                     $total_hpp = $detpro[$i]['total_hpp'];
+                    //========cek harga per liter sesuai stok
+
+                    //==============
+
                     
                     $total_harga = $detpro[$i]['total_harga'];
                     $total_liter = $detpro[$i]['total_liter'];
