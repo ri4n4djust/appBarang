@@ -353,15 +353,19 @@ class transaksiNoselController extends Controller
                 $detpro = $request[4];
                 $to_bati = 0;
                 for ($i = 0; $i < count($detpro); $i++) {
-
+                    $total_harga = $detpro[$i]['total_harga'];
+                    $total_liter = $detpro[$i]['total_liter'];
                     $total_hpp = $detpro[$i]['total_hpp'];
-                    //========cek harga per liter sesuai stok
+                    $kdb = $detpro[$i]['kdBbm'];
 
+                    //========cek harga per liter sesuai stok
+                    $stok_fifo = DB::table('tblstok_fifo')->where('kd_barang', '=', $kdb )->where('stok', '!=', '0')->orderBy('id', 'asc')->first();
+                    print_r( $stok_fifo );
+                    // if()
                     //==============
 
                     
-                    $total_harga = $detpro[$i]['total_harga'];
-                    $total_liter = $detpro[$i]['total_liter'];
+                    
                     
                     $detpr[] = [
                         'tgl_profit' => $tgl,

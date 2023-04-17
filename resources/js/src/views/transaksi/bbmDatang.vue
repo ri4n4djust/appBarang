@@ -178,7 +178,10 @@
                                                     <tbody>
                                                         <tr v-for="item, index in brg" :key="item.kdBarang">
                                                             <td class="amount">{{ item.nmBarang }}</td>
-                                                            <td class="rate">{{ new Intl.NumberFormat().format(item.hrgBeli) }}</td>
+                                                            <td class="rate">
+                                                                {{ new Intl.NumberFormat().format(item.hrgBeli) }}
+                                                                <input type="text" v-model="harga_datang[index]" class="form-control" />
+                                                            </td>
                                                             <td class="qty">{{ item.qty }}</td>
                                                             <td class="qty">{{ item.qty_recieve }}</td>
                                                             <td class="qty"><input type="text" v-model="qty_datang[index]" class="form-control" /></td>
@@ -476,6 +479,7 @@
     const cartItems = ref([])
     const divpajak = ref(false)
     const qty_datang = ref([]);
+    const harga_datang = ref([]);
 
     const pembelian = computed(() => {
         const accs = store.getters.StateAcc;
@@ -519,7 +523,7 @@
                     arrdetail.push({
                         'kdbbm': detail[i].kdBarang,
                         'nmBarang': detail[i].nmBarang,
-                        'hrgPokok': detail[i].hrgBeli,
+                        'hrgPokok': harga_datang.value[i],
                         'qty_order': detail[i].qty,
                         'qty_datang': qty_datang.value[i],
                         'qty_sisa': detail[i].qty - qty_datang.value[i],

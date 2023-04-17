@@ -63,6 +63,38 @@ if(!function_exists('insert_tera')){
     
 }
 
+if(!function_exists('insert_fifo')){
+    function insert_fifo($tgl,$kdBarang,$keterangan,$stok,$harga,$total){
+
+        // if(DB::table('tbltera_detail')->exists()){
+        //     $rgla = DB::table('tbltera_detail')->get()->last()->no_tera;
+        //     $nomor = substr($rgla, 2);
+        //     $newno = (int)$nomor + 1;
+        //     $newno = substr("000000".$newno, -6);
+        // }else{
+        //     $newno = '000001';
+        // }
+
+
+        $sql = DB::table('tblstok_fifo')->insert([
+                'tgl' => $tgl,
+                'kd_barang' => $kdBarang,
+                'keterangan' => $keterangan,
+                'stok' => $stok,
+                'harga' => $harga,
+                'total' => $total,
+                'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+            ]
+           
+        );
+        	
+        // $query = DB::select($sql); // $this->db->query($sql)->result_array();
+        return $sql;		
+    }
+    
+}
+
 if(!function_exists('insert_kartustok_jual')){
     function insert_kartustok_jual($notrans,$kdBarang,$tgl,$stok_awal,$qty_jual,$total_jual,$stok_akhir){
 

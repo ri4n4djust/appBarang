@@ -191,6 +191,12 @@ class pembelianController extends Controller
                             'created_at' => $tgl_terima,
                             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                         ];
+                        //===========insert fifo
+                        $harga = $detgr[$i]['hrgPokok'];
+                        $total = $qty_datang * $harga ;
+                        $keterangan = $request[0]['no_po'];
+                        insert_fifo($tgl_terima,$kdBarang,$keterangan,$qty_datang,$harga,$total);
+                        //============end insert fifo
 
                         //===========jurnal
                         $acc_id_d =  $detgr[$i]['accid_persediaan']; // acc id yg di debet
