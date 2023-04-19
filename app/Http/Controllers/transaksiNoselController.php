@@ -360,12 +360,12 @@ class transaksiNoselController extends Controller
 
                     //========cek harga per liter sesuai stok
                     $id_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
-                    $stok_fifo = DB::table('tblstok_fifo')->select('stok')->where('id', $id_fifo)->first();
+                    $stok_fifo = DB::table('tblstok_fifo')->select('*')->where('id', $id_fifo)->first();
                     $harga_fifo = DB::table('tblstok_fifo')->select('harga')->where('id', $id_fifo)->first();
                     // print_r( $stok_fifo );
                     $total_hpp = 0;
-                    $sisa = 5; // $total_liter;
-                    do {
+                    // $sisa = 5; // $total_liter;
+                    // do {
                         // $idn_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
                         // $stokn_fifo = DB::table('tblstok_fifo')->select('stok')->where('id', $id_fifo)->first();
                         // $hargan_fifo = DB::table('tblstok_fifo')->select('harga')->where('id', $id_fifo)->first();
@@ -375,7 +375,7 @@ class transaksiNoselController extends Controller
                         // $total_hpp = $sisa * $harga_fifo->harga ;
 
                         // echo "<p>ini adalah perulangan ke-$ulangi</p>";
-                        $sisa-1;
+                        // $sisa-1;
                         // if($sisa < $stokn_fifo){
                         //     DB::table('tblstok_fifo')->where('id', '=', $id_fifo )->update([
                         //         'stok' => $stokn_fifo->stok - $sisa,
@@ -387,30 +387,38 @@ class transaksiNoselController extends Controller
                         //     DB::table('tblstok_fifo')->where('id', '=', $id_fifo )->update([
                         //         'stok' => $stokn_fifo - $max_stok,
                         //     ]);
-                            echo $sisa ;
+                            // echo $sisa ;
 
                         //     $sisa - $max_stok;
                         //     $t_hpp = $sisa * $hargan_fifo ;
                         //     $total_hpp += $t_hpp ;
                         // };
-                    } while ($sisa > 0);
+                    // } while ($sisa > 0);
                     // foreach($stok_fifo as $key => $sf){
                         // echo $stok_fifo->stok;
                     // for($i=0;$i < 3;$i++){
-                        if($total_liter < $stok_fifo){
+                        $array = json_decode(json_encode($stok_fifo), true);
+                        if($total_liter < $array['stok']){
+                            
                             DB::table('tblstok_fifo')->where('id', '=', $id_fifo )->update([
-                                'stok' => $stok_fifo->stok - $total_liter,
+                                'stok' => $array['stok'] - $total_liter,
                             ]);
-                            $total_hpp = $total_liter * $harga_fifo->harga ;
+                            $total_hpp = $total_liter * $array['harga'] ;
+                            echo "yang kurang dari stok harga";
                         }else{
-                            $max_stok = $stok_fifo;
+                            $max_stok = $array['stok'];
+                            $id_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
+                            $stok_fifo = DB::table('tblstok_fifo')->select('*')->where('id', $id_fifo)->first();
+                            $harga_fifo = DB::table('tblstok_fifo')->select('harga')->where('id', $id_fifo)->first();
+                            $array = json_decode(json_encode($stok_fifo), true);
+                            
                             DB::table('tblstok_fifo')->where('id', '=', $id_fifo )->update([
-                                'stok' => $stok_fifo - $max_stok,
+                                'stok' => $array['stok'] - $max_stok,
                             ]);
                             echo $max_stok ;
 
                             $sisa = $total_liter - $max_stok;
-                            $t_hpp = $total_liter * $harga_fifo ;
+                            $t_hpp = $total_liter * $array['harga'] ;
                             $total_hpp += $t_hpp ;
                         };
                     // };
