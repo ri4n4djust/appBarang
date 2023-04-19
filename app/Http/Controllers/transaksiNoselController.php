@@ -365,35 +365,29 @@ class transaksiNoselController extends Controller
                     // print_r( $stok_fifo );
                     $total_hpp = 0;
                     // $sisa = 5; // $total_liter;
-                    // do {
-                        // $idn_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
-                        // $stokn_fifo = DB::table('tblstok_fifo')->select('stok')->where('id', $id_fifo)->first();
-                        // $hargan_fifo = DB::table('tblstok_fifo')->select('harga')->where('id', $id_fifo)->first();
-                        // DB::table('tblstok_fifo')->where('id', '=', $id_fifo )->update([
-                        //     'stok' => $stok_fifo->stok - $total_liter,
-                        // ]);
-                        // $total_hpp = $sisa * $harga_fifo->harga ;
+                    
+                    // while($sisa > 0){
+                    //     $idn_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
+                    //     $stokn_fifo = DB::table('tblstok_fifo')->select('stok')->where('id', $idn_fifo)->first()->stok;
+                    //     $hargan_fifo = DB::table('tblstok_fifo')->select('harga')->where('id', $idn_fifo)->first()->harga;
+                    //     if($sisa <= $stokn_fifo){
+                    //         DB::table('tblstok_fifo')->where('id', '=', $idn_fifo )->update([
+                    //             'stok' => $stokn_fifo - $total_liter,
+                    //         ]);
+                    //         $total_hpp += $sisa * $hargan_fifo ;
+                    //         $sisa = 0;
+                    //     } else{
+                    //         $idnew_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
+                    //         $stoknew_fifo = DB::table('tblstok_fifo')->select('stok')->where('id', $id_fifo)->first()->stok;
+                    //         $harganew_fifo = DB::table('tblstok_fifo')->select('harga')->where('id', $id_fifo)->first()->harga;
 
-                        // echo "<p>ini adalah perulangan ke-$ulangi</p>";
-                        // $sisa-1;
-                        // if($sisa < $stokn_fifo){
-                        //     DB::table('tblstok_fifo')->where('id', '=', $id_fifo )->update([
-                        //         'stok' => $stokn_fifo->stok - $sisa,
-                        //     ]);
-                        //     $total_hpp = $sisa * $hargan_fifo->harga ;
-                        //     $sisa - $stokn_fifo->stok ;
-                        // }else{
-                        //     $max_stok = $sisa;
-                        //     DB::table('tblstok_fifo')->where('id', '=', $id_fifo )->update([
-                        //         'stok' => $stokn_fifo - $max_stok,
-                        //     ]);
-                            // echo $sisa ;
-
-                        //     $sisa - $max_stok;
-                        //     $t_hpp = $sisa * $hargan_fifo ;
-                        //     $total_hpp += $t_hpp ;
-                        // };
-                    // } while ($sisa > 0);
+                    //         DB::table('tblstok_fifo')->where('id', '=', $idn_fifo )->update([
+                    //             'stok' => $stoknew_fifo - $stoknew_fifo,
+                    //         ]);
+                    //         $total_hpp += $sisa * $harganew_fifo ;
+                    //         $sisa = $total_liter - $stoknew_fifo; 
+                    //     };
+                    // }
                     // foreach($stok_fifo as $key => $sf){
                         // echo $stok_fifo->stok;
                     // for($i=0;$i < 3;$i++){
@@ -411,7 +405,7 @@ class transaksiNoselController extends Controller
                             $stok_fifo = DB::table('tblstok_fifo')->select('*')->where('id', $id_fifo)->first();
                             $harga_fifo = DB::table('tblstok_fifo')->select('harga')->where('id', $id_fifo)->first();
                             $array = json_decode(json_encode($stok_fifo), true);
-                            
+
                             DB::table('tblstok_fifo')->where('id', '=', $id_fifo )->update([
                                 'stok' => $array['stok'] - $max_stok,
                             ]);
