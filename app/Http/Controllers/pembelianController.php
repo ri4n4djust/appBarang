@@ -156,6 +156,9 @@ class pembelianController extends Controller
                         $kdBarang = $detgr[$i]['kdbbm'];
                         $qty = $detgr[$i]['qty_order'];
                         $qty_datang = $detgr[$i]['qty_datang'];
+                        $harga_terima = $detgr[$i]['hrgPokok'];
+                        $nilai_terima = $qty_datang * $harga_terima;
+
                         $brg = DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->first();
                         $oldStok = $brg->stokPersediaan;
                         DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->update([
@@ -188,6 +191,8 @@ class pembelianController extends Controller
                             'tgl_terima' => $tgl_terima,
                             'kd_barang' => $kdBarang,
                             'qty_terima' => $qty_datang,
+                            'harga_terima' => $harga_terima,
+                            'nilai_terima' => $nilai_terima,
                             'created_at' => $tgl_terima,
                             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                         ];

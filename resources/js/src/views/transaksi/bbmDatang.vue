@@ -180,7 +180,7 @@
                                                             <td class="amount">{{ item.nmBarang }}</td>
                                                             <td class="rate">
                                                                 {{ new Intl.NumberFormat().format(item.hrgBeli) }}
-                                                                <input type="text" v-model="harga_datang[index]" class="form-control" />
+                                                                <input type="text" v-model="item.hrgBeli" class="form-control" />
                                                             </td>
                                                             <td class="qty">{{ item.qty }}</td>
                                                             <td class="qty">{{ item.qty_recieve }}</td>
@@ -523,7 +523,7 @@
                     arrdetail.push({
                         'kdbbm': detail[i].kdBarang,
                         'nmBarang': detail[i].nmBarang,
-                        'hrgPokok': harga_datang.value[i],
+                        'hrgPokok': detail[i].hrgBeli,
                         'qty_order': detail[i].qty,
                         'qty_datang': qty_datang.value[i],
                         'qty_sisa': detail[i].qty - qty_datang.value[i],
@@ -536,13 +536,14 @@
             store.dispatch('CreateBarangDatang', [header,arrdetail] )
             setTimeout(function() { 
                 // getCart(); 
+                brg.value = {};
             }, 5000);
             getNoTerima();
     }
 
     onMounted( async () => {
         //set default data
-        items.value.push({ id: 1, title: '', description: '', rate: 0, quantity: 0, amount: 100, is_tax: false });
+        // items.value.push({ id: 1, title: '', description: '', rate: 0, quantity: 0, amount: 100, is_tax: false });
 
         let dt = new Date();
         params.value.invoice_date = JSON.parse(JSON.stringify(dt));
@@ -579,6 +580,7 @@
         no_so.value = item.no_so
         no_po.value = item.no_po
         r_supplier.value = item.kdSupplier
+        // harga_datang.value =
         isOpen.value = false;
         brg.value = JSON.parse(localStorage.getItem('terimabarang'));
     };

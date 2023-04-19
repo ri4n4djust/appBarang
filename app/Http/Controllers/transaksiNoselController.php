@@ -355,12 +355,66 @@ class transaksiNoselController extends Controller
                 for ($i = 0; $i < count($detpro); $i++) {
                     $total_harga = $detpro[$i]['total_harga'];
                     $total_liter = $detpro[$i]['total_liter'];
-                    $total_hpp = $detpro[$i]['total_hpp'];
+                    // $total_hpp = $detpro[$i]['total_hpp'];
                     $kdb = $detpro[$i]['kdBbm'];
 
                     //========cek harga per liter sesuai stok
-                    $stok_fifo = DB::table('tblstok_fifo')->where('kd_barang', '=', $kdb )->where('stok', '!=', '0')->orderBy('id', 'asc')->first();
-                    print_r( $stok_fifo );
+                    $id_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
+                    $stok_fifo = DB::table('tblstok_fifo')->select('stok')->where('id', $id_fifo)->first();
+                    $harga_fifo = DB::table('tblstok_fifo')->select('harga')->where('id', $id_fifo)->first();
+                    // print_r( $stok_fifo );
+                    $total_hpp = 0;
+                    $sisa = 5; // $total_liter;
+                    do {
+                        // $idn_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
+                        // $stokn_fifo = DB::table('tblstok_fifo')->select('stok')->where('id', $id_fifo)->first();
+                        // $hargan_fifo = DB::table('tblstok_fifo')->select('harga')->where('id', $id_fifo)->first();
+                        // DB::table('tblstok_fifo')->where('id', '=', $id_fifo )->update([
+                        //     'stok' => $stok_fifo->stok - $total_liter,
+                        // ]);
+                        // $total_hpp = $sisa * $harga_fifo->harga ;
+
+                        // echo "<p>ini adalah perulangan ke-$ulangi</p>";
+                        $sisa-1;
+                        // if($sisa < $stokn_fifo){
+                        //     DB::table('tblstok_fifo')->where('id', '=', $id_fifo )->update([
+                        //         'stok' => $stokn_fifo->stok - $sisa,
+                        //     ]);
+                        //     $total_hpp = $sisa * $hargan_fifo->harga ;
+                        //     $sisa - $stokn_fifo->stok ;
+                        // }else{
+                        //     $max_stok = $sisa;
+                        //     DB::table('tblstok_fifo')->where('id', '=', $id_fifo )->update([
+                        //         'stok' => $stokn_fifo - $max_stok,
+                        //     ]);
+                            echo $sisa ;
+
+                        //     $sisa - $max_stok;
+                        //     $t_hpp = $sisa * $hargan_fifo ;
+                        //     $total_hpp += $t_hpp ;
+                        // };
+                    } while ($sisa > 0);
+                    // foreach($stok_fifo as $key => $sf){
+                        // echo $stok_fifo->stok;
+                    // for($i=0;$i < 3;$i++){
+                        if($total_liter < $stok_fifo){
+                            DB::table('tblstok_fifo')->where('id', '=', $id_fifo )->update([
+                                'stok' => $stok_fifo->stok - $total_liter,
+                            ]);
+                            $total_hpp = $total_liter * $harga_fifo->harga ;
+                        }else{
+                            $max_stok = $stok_fifo;
+                            DB::table('tblstok_fifo')->where('id', '=', $id_fifo )->update([
+                                'stok' => $stok_fifo - $max_stok,
+                            ]);
+                            echo $max_stok ;
+
+                            $sisa = $total_liter - $max_stok;
+                            $t_hpp = $total_liter * $harga_fifo ;
+                            $total_hpp += $t_hpp ;
+                        };
+                    // };
+                    // };
                     // if()
                     //==============
 
