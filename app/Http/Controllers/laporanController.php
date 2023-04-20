@@ -290,6 +290,7 @@ class laporanController extends Controller
                 };
                 DB::table('tblterimabbm')->where('kd_terima', $kd)->delete();
                 DB::table('tblterimabbm_detail')->where('r_kdterima', $kd)->delete();
+                DB::table('tblstok_fifo')->where('keterangan', $kd)->delete();
                 DB::commit();
             });
             if(is_null($exception)) {

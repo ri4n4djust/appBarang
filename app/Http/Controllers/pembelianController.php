@@ -199,7 +199,7 @@ class pembelianController extends Controller
                         //===========insert fifo
                         $harga = $detgr[$i]['hrgPokok'];
                         $total = $qty_datang * $harga ;
-                        $keterangan = $request[0]['no_po'];
+                        $keterangan = $request[0]['no_br'];
                         insert_fifo($tgl_terima,$kdBarang,$keterangan,$qty_datang,$harga,$total);
                         //============end insert fifo
 
