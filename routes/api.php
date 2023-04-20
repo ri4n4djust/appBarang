@@ -35,6 +35,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/update/barang', [App\Http\Controllers\barangController::class, 'update']);
     Route::delete('/hapus/barang/{id}', [App\Http\Controllers\barangController::class, 'destroy']);
 
+    Route::get('/stok/stok-fifo', [App\Http\Controllers\barangController::class, 'stokFifo']);
+
     //=====KATEGORI============
     Route::get('/kategori', [App\Http\Controllers\barangController::class, 'indexKategori']);
 

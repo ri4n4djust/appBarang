@@ -175,6 +175,31 @@
                             
                         </div>
                     </div>
+
+                    <div class="widget-content">
+                        <div class="wallet-balance">
+
+                            <div class="table-responsive">
+                                <table role="table" aria-busy="false" aria-colcount="5" class="table table-bordered" id="__BVID__415">
+                                    <thead role="rowgroup">
+                                        <tr role="row">
+                                            <th role="columnheader" scope="col" aria-colindex="1"><div>Stok</div></th>
+                                            <th role="columnheader" scope="col" aria-colindex="2"><div>Harga</div></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody role="rowgroup" v-for="fifo in data_fifo" :key="fifo.id" :role="row">
+                                        <tr v-if="list.code_bbm === fifo.kd_barang">
+                                           
+                                                <td aria-colindex="1" role="cell">{{ Number(fifo.stok).toLocaleString() }}</td>
+                                                <td aria-colindex="2" role="cell">{{ Number(fifo.harga).toLocaleString() }}</td>
+                                           
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div>
                 </div>
 
                 
@@ -305,6 +330,8 @@
     const harga_old = ref();
     const harga_pokok_old = ref();
     const stok = ref();
+
+    const data_fifo = ref([]);
     
     const store = useStore();
     const router = useRouter();
@@ -340,6 +367,11 @@
         return { users, bbm }
     });
 
+    const get_fifo = () => {
+        store.dispatch('GetStokFifo')
+        setTimeout(function() { data_fifo.value = store.getters.StateFifo; }, 2000);
+    }
+
     // const modalRef = ref(null);
     // const openModal = () => Modal.getInstance(modalRef.value)?.show();
 
@@ -348,7 +380,7 @@
             store.dispatch('GetBbm')
         }
         getData();
-       
+        get_fifo();
     })
     
 </script>

@@ -442,6 +442,17 @@ class barangController extends Controller
         }
     }
 
+    public function stokFifo(){
+        $data = DB::table('tblstok_fifo')->where('stok', '!=', '0')->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'data fifo',
+            'data' => $data
+        ], 200);
+
+    }
+
     public function resetdb(Request $request){
         try{
             $exception = DB::transaction(function() use ($request){

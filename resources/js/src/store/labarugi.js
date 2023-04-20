@@ -3,12 +3,14 @@
 import axios from 'axios';
 const state = {
     pendapatan: [],
-    bebanhpp: []
+    bebanhpp: [],
+    stokfifo: []
   };
   
 const getters = {
     StatePendapatan: state => state.pendapatan,
     StateBebanHpp: state => state.bebanhpp,
+    StateFifo: state => state.stokfifo
 };
 
 const actions = {  
@@ -60,6 +62,31 @@ const actions = {
             return
         }
     },
+
+    async GetStokFifo({ commit }){
+        let response
+        try {
+            response = await axios.get('/api/stok/stok-fifo')
+            commit('setStokFifo', response.data.data)
+
+        } catch (ex) {
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'Mohon Lengkapi Data',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            return
+        }
+    },
     
 
 };
@@ -69,6 +96,9 @@ const mutations = {
     },
     setBebanHpp(state, beban){
         state.bebanhpp = beban
+    },
+    setStokFifo(state, fifo){
+        state.stokfifo = fifo
     },
     // DeleteBarang({dispatch}, id) {
     //     axios.delete(`hapus/barang/${id}`)
