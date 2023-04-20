@@ -88,7 +88,7 @@
                                                                                         </b></td>
                                                                                         <td v-else></td>
                                                                                     </tr>
-                                                                                    <tr v-if="hrt.level === '2'">
+                                                                                    <tr v-if="hrt.level === '2' && amount != 0 ">
                                                                                         <td v-if="hrt.jenis != 'Total'" >{{ hrt.acc_id }}</td>
                                                                                         <td v-else></td>
                                                                                         <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'" style="min-width: 200px;"><b>&nbsp;&nbsp;&nbsp;{{ hrt.name }}</b></td>
@@ -113,7 +113,7 @@
                                                                                         <td v-else></td>
                                                                                         <td></td>
                                                                                     </tr>
-                                                                                    <tr v-if="hrt.level === '3'" >
+                                                                                    <tr v-if="hrt.level === '3' && amount != 0" >
                                                                                         <td v-if="hrt.jenis != 'Total'">{{ hrt.acc_id }}</td>
                                                                                         <td v-else></td>
                                                                                         <td v-if="hrt.jenis === 'Total' || hrt.jenis.substring(0,1) === 'H'" style="min-width: 200px;"><b>&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</b></td>
@@ -137,7 +137,7 @@
                                                                                         <td></td>
                                                                                         <td></td>
                                                                                     </tr>
-                                                                                    <tr v-if="hrt.level === '4'" >
+                                                                                    <tr v-if="hrt.level === '4' && amount != 0 " >
                                                                                         <td>{{ hrt.acc_id }}</td>
                                                                                         <td style="min-width: 200px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ hrt.name }}</td>
                                                                                         <td>

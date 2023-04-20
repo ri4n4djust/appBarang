@@ -358,7 +358,7 @@ class transaksiNoselController extends Controller
                     // $total_hpp = $detpro[$i]['total_hpp'];
                     $kdb = $detpro[$i]['kdBbm'];
 
-                    //========cek harga per liter sesuai stok
+                    //========cek harga per liter sesuai stok fifo
                     $id_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
                     $stok_fifo = DB::table('tblstok_fifo')->select('*')->where('id', $id_fifo)->first();
                     // $harga_fifo = DB::table('tblstok_fifo')->select('harga')->where('id', $id_fifo)->first();
