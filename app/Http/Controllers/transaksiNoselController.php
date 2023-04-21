@@ -380,6 +380,7 @@ class transaksiNoselController extends Controller
                                 'stok' => $stokn_fifo['stok'] - $total_liter,
                             ]);
                             $total_hpp += $sisa * $stokn_fifo['harga'] ;
+                            insert_trans_stok($kdtrans,$idn_fifo,$sisa,$stokn_fifo['harga']);
                             $sisa = 0;
                         }else{
                             $idnew_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
@@ -393,6 +394,7 @@ class transaksiNoselController extends Controller
                                 'stok' => $stoknew_fifo['stok'] - $stoknew_fifo['stok'],
                             ]);
                             $total_hpp = $stoknew_fifo['stok'] * $stoknew_fifo['harga'] ;
+                            insert_trans_stok($kdtrans,$idnew_fifo,$stoknew_fifo['stok'],$stoknew_fifo['harga']);
                             $sisa = $total_liter - $stoknew_fifo['stok']; 
                             if($sisa > 0){
                                 $idnew1_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
@@ -406,6 +408,7 @@ class transaksiNoselController extends Controller
                                     'stok' => $stoknew1_fifo['stok'] - $sisa,
                                 ]);
                                 $total_hpp += $sisa * $stoknew1_fifo['harga'] ;
+                                insert_trans_stok($kdtrans,$idnew1_fifo,$sisa,$stoknew1_fifo['harga']);
                                 $sisa = 0;
 
                             }
@@ -726,11 +729,26 @@ class transaksiNoselController extends Controller
             $nilai_old = $olddepo->deposit;
             DB::table('tblpelanggan')->where('kdPelanggan', $pelanggan)
             ->update([
-                'deposit' => $nilai_old + $nilai_old,
+                'deposit' => $nilai_old + $total,
 
             ]);
 
         }
+        $old_stok_trans = DB::table('tbltransaksi_stok')->where('r_trans', $id)->get();
+        for($i = 0;$i < count($old_stok_trans); $i++){
+            $stok = $old_stok_trans[$i]->stok_trans;
+            $id_fifo = $old_stok_trans[$i]->r_fifo;
+            $old_fifo = DB::table('tblstok_fifo')->where('id', $id_fifo)->first();
+            $stok_old = $old_fifo->stok;
+            DB::table('tblstok_fifo')->where('id', $id_fifo)
+            ->update([
+                'stok' => $stok_old + $stok,
+
+            ]);
+
+        }
+
+        DB::table('tbltransaksi_stok')->where('r_trans', $id)->delete();
         DB::table('tblkupon')->where('kd_trans', $id)->delete();
         DB::table('tbltransaksi_nosel')->where('kd_trans', $id)->delete();
 

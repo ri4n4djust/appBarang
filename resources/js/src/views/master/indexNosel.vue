@@ -30,7 +30,7 @@
                                     <!-- <p class="w-stats">Harga  {{ Number(last_price).toLocaleString()}}</p> -->
                                     <button class="btn btn-primary mb-2 me-1" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">KUPON</button>
                                     <button class="btn btn-primary mb-2 me-1" data-bs-toggle="modal" data-bs-target="#modalBiaya">BIAYA</button>
-                                    <button class="btn btn-primary mb-2 me-1" data-bs-toggle="modal" data-bs-target="#modalLinkAja">LINK AJA</button>
+                                    <button class="btn btn-primary mb-2 me-1" data-bs-toggle="modal" data-bs-target="#modalLinkAja">My Pertamina</button>
                                     <button class="btn btn-primary mb-2 me-1" @click="simpan_all">SIMPAN</button>
                                     <button class="btn btn-secondary btn-danger mb-2 me-1" @click="router.go(-1)">Kembali</button>
                                     <!-- <router-link :to="{ name: 'bbm'}" class="btn btn-secondary btn-danger mb-2 me-1">Kembali</router-link> -->

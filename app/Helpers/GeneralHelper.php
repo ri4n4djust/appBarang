@@ -197,5 +197,42 @@ if(!function_exists('insert_kartustok_jual')){
     
 }
 
+if(!function_exists('insert_trans_stok')){
+    function insert_trans_stok($notrans,$r_fifo,$stok_trans,$harga_trans){
+
+        if(DB::table('tbltransaksi_stok')->exists()){
+            $rgla = DB::table('tbltransaksi_stok')->get()->last()->kd_transStok;
+            $nomor = substr($rgla, 2);
+            $newno = (int)$nomor + 1;
+            $newno = substr("000000".$newno, -6);
+        }else{
+            $newno = '000001';
+        }
+
+        $sql = DB::table('tbltransaksi_stok')->insert([
+                'kd_transStok' => 'TS'.$newno,
+                'r_trans' => $notrans,
+                'r_fifo' => $r_fifo,
+                'stok_trans' => $stok_trans,
+                'harga_trans' => $harga_trans,
+                'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+            ],
+            [
+                'r_trans' => $notrans,
+                'r_fifo' => $r_fifo,
+                'stok_trans' => $stok_trans,
+                'harga_trans' => $harga_trans,
+                'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+            ]
+        );
+        	
+        // $query = DB::select($sql); // $this->db->query($sql)->result_array();
+        return $sql;		
+    }
+    
+}
+
 
 ?>
