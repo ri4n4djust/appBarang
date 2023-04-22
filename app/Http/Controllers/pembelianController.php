@@ -170,18 +170,15 @@ class pembelianController extends Controller
                             'hrgPokok' => $detgr[$i]['hrgPokok'],
                         ]);
 
-                        $pom = DB::table('tblpobbm_detail')
-                        ->where('r_noPo', $no_po)
-                        ->where('kdBarang', $kdBarang)
-                        ->first();
+                        $pom = DB::table('tblpobbm_detail')->where('r_noPo', $no_po)->where('kdBarang', $kdBarang)->first();
                         $oldRecieve = $pom->qty_recieve;
+                        $oldTerima = $pom->total_terima;
+                        $total_baru = $qty_datang * $detgr[$i]['hrgPokok'];
 
-                        DB::table('tblpobbm_detail')
-                        ->where('r_noPo', $no_po)
-                        ->where('kdBarang', $kdBarang)
+                        DB::table('tblpobbm_detail')->where('r_noPo', $no_po)->where('kdBarang', $kdBarang)
                         ->update([
                             'qty_recieve' => $oldRecieve + $qty_datang,
-                            // 'hrgPokok' => $detgr[$i]['hrgPokok'],
+                            'total_terima' => $oldTerima + $total_baru,
                         ]);
 
                         $detail[] = [
@@ -319,8 +316,10 @@ class pembelianController extends Controller
                         'hrgBeli' => $detpo[$i]['rate'],
                         'qty' => $qty,
                         'qty_recieve' => 0,
+                        'total_net' => $detpo[$i]['total'] - $detpo[$i]['pph_bbm'],
                         'pph' => $detpo[$i]['pph_bbm'],
                         'total' => $detpo[$i]['total'],
+                        'total_terima' => 0,
                         'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                         'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                     ];
@@ -451,8 +450,8 @@ class pembelianController extends Controller
         }else{
             $where = 'where src.qty_recieve < src.qty_grpo';
         };
-        $list = DB::select("SELECT src.no_po,src.no_so no_so,src.subTotal,src.total,src.pph,rtrim(b.nmSupplier) supplier_name,b.kdSupplier,src.podate,src.qty_grpo,src.qty_recieve 
-                            from (SELECT a.no_po,a.no_so,a.r_supplier,a.subTotal,a.total,a.pph,cast(a.tgl_po as date) podate,sum(b.qty) qty_grpo,sum(qty_recieve) qty_recieve 
+        $list = DB::select("SELECT src.no_po,src.no_so no_so,src.subTotal,src.total,src.pph,rtrim(b.nmSupplier) supplier_name,b.kdSupplier,src.podate,src.qty_grpo,src.qty_recieve,src.total_net,src.total_terima 
+                            from (SELECT a.no_po,a.no_so,a.r_supplier,a.subTotal,a.total,a.pph,cast(a.tgl_po as date) podate,sum(b.qty) qty_grpo,sum(qty_recieve) qty_recieve, sum(total_net) total_net, sum(total_terima) total_terima   
                             FROM tblpobbm a left join tblpobbm_detail b on a.no_po = b.r_noPo where cast(a.tgl_po as date) between '2023-01-01' and '$endDate' group by a.r_supplier,a.no_po,a.no_so,a.tgl_po,a.total,a.pph,a.subTotal) src
                             left join tblsupplier b on src.r_supplier = b.kdSupplier $where order by no_po asc;");
         

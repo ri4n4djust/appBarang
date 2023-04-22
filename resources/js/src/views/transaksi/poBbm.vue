@@ -344,7 +344,26 @@
                                                                             <div class="custom-table panel-body p-0"> 
                                                                                 <v-client-table :data="listpobbm" :columns="columns" :options="table_option">
                                                                                     <template #podate="props"> {{ moment(props.row.podate).format("DD-MM-YYYY") }} </template>
-                                                                                    <template #no_so="props"> {{ props.row.no_so }} </template>
+                                                                                    <template #no_so="props">{{ props.row.no_so }}</template>
+                                                                                    <template #status_po="props">
+
+                                                                                        <div :set="data = listpobbm.filter(n => n.no_so === props.row.no_so)">
+                                                                                            <div v-if="data.qty_recieve === props.row.qty_grpo || data.total_net === props.row.total_terima ">
+                                                                                                Beres
+                                                                                            </div>
+                                                                                            <div v-else-if="data.qty_recieve === props.row.qty_grpo || data.total_net > props.row.total_terima ">
+                                                                                                ada pengembalian dana
+                                                                                            </div>
+                                                                                            <div v-else-if="data.qty_recieve === props.row.qty_grpo || data.total_net < props.row.total_terima ">
+                                                                                                ada po yg harus di bayar
+                                                                                            </div>
+                                                                                            <div v-else>
+                                                                                                dalam proses 
+                                                                                                {{ data }} && {{ props.row.total_net }}
+                                                                                            </div>
+                                                                                        </div> 
+
+                                                                                    </template>
                                                                                     <template #qty_grpo="props"> {{ Number(props.row.qty_grpo).toLocaleString() }} </template>
                                                                                     <template #qty_recieve="props"> {{ Number(props.row.qty_recieve).toLocaleString() }} </template>
                                                                                     <template #subTotal="props"> {{ Number(props.row.subTotal).toLocaleString() }} </template>
@@ -545,7 +564,7 @@
 
     });
 
-    const columns = ref(['no_so', 'supplier_name', 'podate', 'qty_grpo', 'qty_recieve','subTotal','pph','total' ,'action']);
+    const columns = ref(['no_so', 'status_po' ,'supplier_name', 'podate', 'qty_grpo', 'qty_recieve','subTotal','pph','total' ,'action']);
     const listpobbm = ref([]);
     const table_option = ref({
         perPage: 10,

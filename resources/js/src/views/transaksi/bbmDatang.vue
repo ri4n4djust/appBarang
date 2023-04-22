@@ -128,16 +128,24 @@
                                                         <table role="table" aria-busy="false" aria-colcount="5" class="table table-bordered" >
                                                             <thead role="rowgroup">
                                                                 <tr role="row">
-                                                                    <th role="columnheader" scope="col" aria-colindex="1"><div>No Po</div></th>
+                                                                    <!-- <th role="columnheader" scope="col" aria-colindex="1"><div>No Po</div></th> -->
                                                                     <th role="columnheader" scope="col" aria-colindex="2"><div>No SO</div></th>
                                                                     <th role="columnheader" scope="col" aria-colindex="3"><div>Tgl</div></th>
+                                                                    <th role="columnheader" scope="col" aria-colindex="3"><div>Qty Order</div></th>
+                                                                    <th role="columnheader" scope="col" aria-colindex="3"><div>Qty Terima</div></th>
+                                                                    <th role="columnheader" scope="col" aria-colindex="3"><div>Total Order</div></th>
+                                                                    <th role="columnheader" scope="col" aria-colindex="3"><div>Total Terima</div></th>
                                                                     <th role="columnheader" scope="col" aria-colindex="4" class="text-center"><div>Pilih</div></th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody role="rowgroup">
                                                                 <tr v-for="ls in listpo" :key="ls.idPo">
-                                                                    <td role="cell">{{ ls.no_po }}</td>
+                                                                    <!-- <td role="cell">{{ ls.no_po }}</td> -->
                                                                     <td role="cell">{{ ls.no_so }}</td>
+                                                                    <td role="cell">{{ moment(ls.tgl_po).format('D-M-YYYY') }}</td>
+                                                                    <td role="cell">{{ Number(ls.qty_grpo).toLocaleString() }}</td>
+                                                                    <td role="cell">{{ Number(ls.qty_recieve).toLocaleString() }}</td>
+                                                                    <td role="cell">{{ Number(ls.total).toLocaleString() }}</td>
                                                                     <td role="cell">{{ moment(ls.tgl_po).format('D-M-YYYY') }}</td>
                                                                     <td role="cell">
                                                                         <button type="button" class="btn btn-secondary additem btn-sm" @click="get(ls)">Pilih</button>
