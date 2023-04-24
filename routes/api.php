@@ -72,6 +72,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/list-penyusutan', [App\Http\Controllers\laporanController::class, 'laporanPenyusutan']);
     Route::post('/buku-besar', [App\Http\Controllers\laporanController::class, 'bukubesar']);
     Route::post('/kartu-stok', [App\Http\Controllers\laporanController::class, 'listKartustok']);
+    Route::post('/laporan-tera', [App\Http\Controllers\laporanController::class, 'listTera']);
     // Route::delete('/hapus/room/{id}', [App\Http\Controllers\roomController::class, 'destroy']);
 
     //====================inventaris

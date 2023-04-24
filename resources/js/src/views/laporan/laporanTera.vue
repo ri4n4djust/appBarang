@@ -26,7 +26,7 @@
                             <!-- <button variant="primary" class="btn m-1 btn-primary" @click="export_table('print')">Print</button> -->
                             <!-- <button variant="primary" class="btn m-1 btn-primary" @click="export_table('pdf')">PDF</button> -->
                             <h5>Daftar Transaksi Tera</h5>
-<span>{{ bbm }}</span>
+<!-- <span>{{ bbm }}</span> -->
                         </div>
                         <div class="panel-body">
                             <div class="row">
@@ -48,8 +48,8 @@
                         </div>
 
                         <v-client-table :data="items" :columns="columns" :options="table_option">
-                            <template #tglOpnum="props"> {{ moment(props.row.tglOpnum).format("DD-MM-YYYY") }} </template>
-                            <template #totalOpnum="props"> {{ Number(props.row.totalOpnum).toLocaleString() }} </template>
+                            <template #tgl_transaksi="props"> {{ moment(props.row.tgl_transaksi).format("DD-MM-YYYY") }} </template>
+                            <template #tera="props"> {{ Number(props.row.tera).toLocaleString() }} L </template>
                             <template #action="props">
                                 <router-link :to="{name: 'rekapan', params: {startDate: props.row.tgl_trans, kd_trans:props.row.kd_trans, regu:props.row.r_regu }}" >
                                     <svg
@@ -124,7 +124,7 @@
     const store = useStore();
     const router = useRouter()
 
-    const columns = ref(['kdOpnum', 'tglOpnum', 'totalOpnum', 'action']);
+    const columns = ref(['code_bbm', 'nama_bbm', 'tgl_transaksi', 'tera', 'action']);
     const items = ref([]);
     const table_option = ref({
         perPage: 10,
@@ -155,7 +155,7 @@
 
     onMounted(() => {
         bind_data();
-        console.log('on mount pagr')
+        console.log(items.value)
     });
     onBeforeMount(() => {
         console.log(' before onmount')
@@ -164,12 +164,15 @@
 
     
     const bind_data = () => {
-        store.dispatch('GetLaporanOpnum', sorting.value);
-        // items.value = store.getters.SlaporanBbm;
+        store.dispatch('GetListTera', sorting.value);
+        setTimeout(function() { 
+            let tera = store.getters.StateListTera; 
+            items.value = tera.filter((tera) => tera.tera != 0 );
+        },200 );
     }
 
     const bbm = computed(() => {
-        items.value = store.getters.SlaporanOpnum;
+        // items.value = store.getters.SlaporanOpnum;
 
         let sum = 0;
         items.value.forEach(element => {

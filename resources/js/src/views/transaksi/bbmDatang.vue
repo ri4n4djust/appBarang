@@ -187,7 +187,7 @@
                                                         <tr v-for="item, index in brg" :key="item.kdBarang">
                                                             <td class="amount">{{ item.nmBarang }}</td>
                                                             <td class="rate">
-                                                                {{ new Intl.NumberFormat().format(item.hrgBeli) }}
+                                                                <!-- {{ new Intl.NumberFormat().format(item.hrgBeli) }} -->
                                                                 <input type="text" v-model="item.hrgBeli" class="form-control" />
                                                             </td>
                                                             <td class="qty">{{ item.qty }}</td>

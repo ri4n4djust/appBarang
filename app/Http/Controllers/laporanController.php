@@ -192,6 +192,25 @@ class laporanController extends Controller
         ], 200);
     }
 
+    
+    public function listTera(Request $request){
+        $startDate = date("Y-m-d", strtotime($request->input('startDate')));
+        $endDate = date("Y-m-d", strtotime($request->input('endDate')));
+
+        $list = DB::table('tbltransaksi_nosel')
+                ->join('tblbbm', 'tblbbm.id', 'tbltransaksi_nosel.r_bbm')
+                ->select(array(DB::Raw('tblbbm.code_bbm'),DB::Raw('tblbbm.nama_bbm'),DB::Raw('sum(tbltransaksi_nosel.tera) as tera'),DB::Raw('tbltransaksi_nosel.tgl_transaksi')))
+                ->groupBy('tbltransaksi_nosel.tgl_transaksi', 'tblbbm.nama_bbm', 'tblbbm.code_bbm')
+                ->whereBetween('tbltransaksi_nosel.tgl_transaksi', [$startDate, $endDate])
+                ->orderBy("tbltransaksi_nosel.tgl_transaksi", "desc")
+                ->get();
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'List Terima',
+            'data' => $list
+        ], 200);
+    }
 
 
     public function deletePobbm(Request $request){

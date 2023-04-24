@@ -347,19 +347,42 @@
                                                                                     <template #no_so="props">{{ props.row.no_so }}</template>
                                                                                     <template #status_po="props">
 
-                                                                                        <div :set="data = listpobbm.filter(n => n.no_so === props.row.no_so)">
-                                                                                            <div v-if="data.qty_recieve === props.row.qty_grpo || data.total_net === props.row.total_terima ">
-                                                                                                Beres
+                                                                                        <div :set="dat = listpobbm.find(n => n.no_so === props.row.no_so)">
+                                                                                            <div v-if="dat.qty_recieve === props.row.qty_grpo">
+                                                                                                <div v-if="dat.total_net === props.row.total_terima ">
+                                                                                                    <svg
+                                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                                        width="24"
+                                                                                                        height="24"
+                                                                                                        viewBox="0 0 24 24"
+                                                                                                        fill="none"
+                                                                                                        stroke="currentColor"
+                                                                                                        stroke-width="2"
+                                                                                                        stroke-linecap="round"
+                                                                                                        stroke-linejoin="round"
+                                                                                                        class="feather feather-check-circle text-primary"
+                                                                                                    >
+                                                                                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                                                                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                                                                                    </svg>
+                                                                                                </div>
+                                                                                                <div v-if="parseInt(dat.total_net) < parseInt(props.row.total_terima) ">
+                                                                                                    PO kekurangan Bayar
+                                                                                                </div>
+                                                                                                <div v-if="parseInt(dat.total_net) > parseInt(props.row.total_terima) ">
+                                                                                                    Ada Pengembalian Dana
+
+                                                                                                </div>
                                                                                             </div>
-                                                                                            <div v-else-if="data.qty_recieve === props.row.qty_grpo || data.total_net > props.row.total_terima ">
-                                                                                                ada pengembalian dana
+                                                                                            <!-- <div v-else-if="dat.qty_recieve === props.row.qty_grpo && props.row.total_terima < dat.total_net ">
+                                                                                                kurang bayar {{ dat.total_net }} && {{ props.row.total_terima }}
                                                                                             </div>
-                                                                                            <div v-else-if="data.qty_recieve === props.row.qty_grpo || data.total_net < props.row.total_terima ">
-                                                                                                ada po yg harus di bayar
-                                                                                            </div>
-                                                                                            <div v-else>
+                                                                                            <div v-else-if="dat.qty_recieve === props.row.qty_grpo && props.row.total_terima > dat.total_net ">
+                                                                                               kelebihan bayar {{ dat.total_net }} && {{ props.row.total_terima }}
+                                                                                            </div> -->
+                                                                                            <div v-else-if="dat.qty_recieve != props.row.qty_grpo">
                                                                                                 dalam proses 
-                                                                                                {{ data }} && {{ props.row.total_net }}
+                                                                                                <!-- {{ dat.total_net }} && {{ props.row.total_terima }} -->
                                                                                             </div>
                                                                                         </div> 
 
@@ -367,6 +390,7 @@
                                                                                     <template #qty_grpo="props"> {{ Number(props.row.qty_grpo).toLocaleString() }} </template>
                                                                                     <template #qty_recieve="props"> {{ Number(props.row.qty_recieve).toLocaleString() }} </template>
                                                                                     <template #subTotal="props"> {{ Number(props.row.subTotal).toLocaleString() }} </template>
+                                                                                    <template #total_terima="props"> {{ Number(props.row.total_terima).toLocaleString() }} </template>
                                                                                     <template #pph="props"> {{ Number(props.row.pph).toLocaleString() }} </template>
                                                                                     <template #total="props"> {{ Number(props.row.total).toLocaleString() }} </template>
                                                                                     <template #action="props">
@@ -507,6 +531,10 @@
     import 'flatpickr/dist/flatpickr.css';
     import '@/assets/sass/forms/custom-flatpickr.css';
 
+    import '@/assets/sass/font-icons/fontawesome/css/regular.css';
+    import '@/assets/sass/font-icons/fontawesome/css/fontawesome.css';
+    import feather from 'feather-icons';
+
     import Multiselect from '@suadelabs/vue3-multiselect';
     import '@suadelabs/vue3-multiselect/dist/vue3-multiselect.css';
 
@@ -564,7 +592,7 @@
 
     });
 
-    const columns = ref(['no_so', 'status_po' ,'supplier_name', 'podate', 'qty_grpo', 'qty_recieve','subTotal','pph','total' ,'action']);
+    const columns = ref(['no_so', 'status_po' ,'supplier_name', 'podate', 'qty_grpo', 'qty_recieve','subTotal','total_terima','pph','total' ,'action']);
     const listpobbm = ref([]);
     const table_option = ref({
         perPage: 10,
@@ -775,6 +803,8 @@
         params.value.due_date = dt;
 
         // console.log(paramssupplier.value)
+
+        feather.replace();
        
         getBbm();
         // getAcc();

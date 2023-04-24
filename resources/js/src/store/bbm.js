@@ -3,10 +3,12 @@
 import axios from 'axios';
 const state = {
     bbm: null,
+    listtera: []
   };
   
 const getters = {
     StateBbm: state => state.bbm,
+    StateListTera: state => state.listtera
 };
 
 const actions = {  
@@ -96,10 +98,38 @@ const actions = {
         }
     },
 
+    async GetListTera({commit}, tera){
+        let response
+        try{
+            response = await  axios.post('/api/laporan-tera', tera)
+            await commit('setListTera', response.data.data)
+            
+        } catch (err){
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'gagal disimpan',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+
+        }
+    },
+
 };
 const mutations = {
     setBbm(state, bbm){
         state.bbm = bbm
+    },
+    setListTera(state, tera){
+        state.listtera = tera
     },
     // DeleteBarang({dispatch}, id) {
     //     axios.delete(`hapus/barang/${id}`)
