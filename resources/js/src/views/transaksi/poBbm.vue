@@ -851,7 +851,7 @@
     };
 
     const export_table = (type) => {
-        let cols = columns.value.filter((d) => d != 'profile' && d != 'action');
+        let cols = columns.value.filter((d) => d != 'status_po' && d != 'action');
         let records = listpobbm.value;
         let filename = 'Daftar PO BBM | Periode Tgl : ';
 
@@ -913,6 +913,7 @@
                 rowhtml += '<td>'+moment(item.podate).format("DD-MM-YYYY")+'</td>';
                 rowhtml += '<td>'+Number(item.qty_grpo).toLocaleString()+'</td>';
                 rowhtml += '<td>'+Number(item.qty_recieve).toLocaleString()+'</td>';
+                rowhtml += '<td>'+Number(item.total_terima).toLocaleString()+'</td>';
                 rowhtml += '<td>'+Number(item.suTotal).toLocaleString()+'</td>';
                 rowhtml += '<td>'+Number(item.pph).toLocaleString()+'</td>';
                 rowhtml += '<td>'+Number(item.total).toLocaleString()+'</td>';
@@ -923,9 +924,24 @@
                 // });
                 rowhtml += '</tr>';
             });
+            let sumtotal = 0;
+            let sumpph = 0;
+            let sisal = 0;
+            records.forEach(element => {
+            sumtotal +=  parseInt(element.total);
+            sumpph +=  parseInt(element.pph);
+            });
+
+            // console.log(sum)
+
             rowhtml +=
-                '<style>body {font-family:Arial; color:#495057;}p{text-align:center;font-size:8px;font-weight:bold;margin:15px;}table{ border-collapse: collapse; border-spacing: 0; }th,td{font-size:8px;text-align:left;padding: 4px;}th{padding:8px 4px;}tr:nth-child(2n-1){background:#f7f7f7; }</style>';
-            rowhtml += '</tbody></table>';
+                '<style>body {font-family:Arial; color:#495057;}p{text-align:center;font-size:18px;font-weight:bold;margin:15px;}table{ border-collapse: collapse; border-spacing: 0; }th,td{font-size:12px;text-align:left;padding: 4px;}th{padding:8px 4px;}tr:nth-child(2n-1){background:#f7f7f7; }</style>';
+            rowhtml += '</tbody>';
+            rowhtml += '<tfoot><tr>'
+
+            rowhtml += '<tr><th></th><th></th><th></th><th>Total</th><th></th><th></th><th></th><th>'+Number(sumpph).toLocaleString()+'</th><th>'+Number(sumtotal).toLocaleString()+'</th></tr>'
+            // rowhtml += '<tr><th></th><th></th><th></th><th></th><th>Total Net</th><th></th><th>'+Number(sum - sumtax).toLocaleString()+'</th>'
+            rowhtml += '</tr></tfoot></table>'
             var winPrint = window.open('', '', 'left=0,top=0,width=1000,height=600,toolbar=0,scrollbars=0,status=0');
             winPrint.document.write('<title>Print</title>' + rowhtml);
             winPrint.document.close();

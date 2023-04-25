@@ -24,6 +24,7 @@
                             <button class="btn btn-primary mb-2 me-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Tambah</button>
                             <button variant="primary" class="btn m-1 btn-primary" @click="export_table('print')">Print</button>
                             <button variant="primary" class="btn m-1 btn-primary" @click="export_table('pdf')">PDF</button>
+                            <button class="btn btn-primary mb-2 me-2" data-bs-toggle="modal" data-bs-target="#modalPenyusutan">SUSUTKAN BERDASARKAN KATEGORI</button>
                             <!-- <flat-pickr v-model="input.tahun_pembuatan" class="form-control form-control-sm flatpickr active" placeholder="Invoice Date"></flat-pickr> -->
                         </div>
 
@@ -213,6 +214,37 @@
                             </div>
                         </div>
 
+                        <div class="modal fade" id="modalPenyusutan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Penyusutan Inventaris</h5>
+                                        <button type="button" data-dismiss="modal" data-bs-dismiss="modal" aria-label="Close" class="btn-close"></button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="invoice-address-company-fields">
+                                            <div class="form-group row">
+                                                <label for="nama" class="col-sm-3 col-form-label col-form-label-sm">Kategori</label>
+                                                <div class="col-sm-9">
+                                                    <select id="inputState" v-model="input.group_inventaris" class="form-select">
+                                                        <option value="12300" selected>Peralatan Dan Mesin</option>
+                                                        <option value="12400">Kendaraan</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn" data-dismiss="modal" data-bs-dismiss="modal"><i class="flaticon-cancel-12"></i> Discard</button>
+                                        <button type="button" class="btn btn-primary" @click="jurnal_kat()">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         
                         
                     </div>
@@ -371,6 +403,53 @@
         });
 
     };
+
+    const jurnal_kat = () => {
+
+        let group = input.value.group_inventaris;
+        // console.log(group);
+        store.dispatch('getInvKat', {group : group})
+        .then(response => {
+            let brg_inv = response
+            // console.log(brg_inv);
+            const arr_kat = [];
+            for (let i = 0; i < brg_inv.length; i++) {
+
+                let bulan = brg_inv[i].umur_ekonomis * 12 || 0;
+                let qty_aset = brg_inv[i].qty_inventaris ;
+                let nilai_inv = brg_inv[i].nilai_inventaris ;
+                let nilai1 = nilai_inv / qty_aset || 0 ;
+                let penyusutan1bln = Math.floor(nilai1 / bulan || 0) ;
+                let tgl = moment().format("YYYY-M-D");
+
+                arr_kat.push({
+                    'kode_penyusutan': kdpenyusutan.value,
+                    'kode_inventaris' : brg_inv[i].kode_inventaris,
+                    'tgl_penyusutan' : tgl,
+                    'jumlah_penyusutan' : penyusutan1bln,
+                    'acc_id' : brg_inv[i].group_inventaris,
+                    'accid_akum': brg_inv[i].accid_akum
+                });
+
+            }
+            console.log(arr_kat);
+            store.dispatch('CreatePenyusutanInvByKat', {data : arr_kat})
+            .then(response => {
+                bind_data();
+                getKdInventaris();
+                getKdPenyusutan();
+                // new window.Swal('Deleted!', 'berhasil disusutkan.', 'success');
+            }).catch(error => {
+                // console.log('error: ', error)
+                return
+            })
+            // new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
+        }).catch(error => {
+            // console.log('error: ', error)
+            return
+        })
+
+    }
 
     const export_table = (type) => {
         let cols = columns.value.filter((d) => d != 'profile' && d != 'action');

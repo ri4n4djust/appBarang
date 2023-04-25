@@ -4,13 +4,15 @@ import axios from 'axios';
 const state = {
     inventaris: [],
     penyusutan: [],
-    laporanpembelianinventaris: []
+    laporanpembelianinventaris: [],
+    listinvkat: []
   };
   
 const getters = {
     StateInventaris: state => state.inventaris,
     StatePenyusutan: state => state.penyusutan,
-    StateLaporanPembelianInventaris: state => state.laporanpembelianinventaris
+    StateLaporanPembelianInventaris: state => state.laporanpembelianinventaris,
+    StateListInvKat : state => state.listinvkat,
 };
 
 const actions = {  
@@ -119,6 +121,7 @@ const actions = {
                 title: 'Pembelian berhasil tersimpan',
                 padding: '2em',
             });
+             return response ;
         } catch (ex) {
             // Handle error
             const toast =  window.Swal.mixin({
@@ -135,7 +138,7 @@ const actions = {
                 // confirmButtonText: 'Cool',
                 padding: '2em'
             });
-            return
+            throw 'error' ;
         }
         // await dispatch('GetPembelian')
     },
@@ -195,6 +198,35 @@ const actions = {
                 title: 'Penyusutan berhasil tersimpan',
                 padding: '2em',
             });
+            return response ;
+        } catch (ex) {
+            // Handle error
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'Mohon Lengkapi Data',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            throw 'error' ;
+        }
+        // await dispatch('GetPembelian')
+    },
+
+    async getInvKat({commit}, kat) {
+        let response
+        try {
+            response = await axios.post('/api/penyusutan/getinv-bykat', kat)
+            // localStorage.setItem('cartItemsPe', '[]')
+            // commit('setListKat', response.data.data);
+            response = response.data.data;
             return response ;
         } catch (ex) {
             // Handle error
