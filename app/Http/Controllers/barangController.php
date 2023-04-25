@@ -176,7 +176,7 @@ class barangController extends Controller
                         $nmBarang = $detop[$i]['nmBarang'];
                         $qty = $detop[$i]['qty'];
                         $selisih = $detop[$i]['selisih'];
-                        $total = $detop[$i]['total'];
+                        // $total = $detop[$i]['total'];
                         // $hrg = $detop[$i]['hrgJual'];
 
                         // $bbm = DB::table('tblbbm')->where('code_bbm', $kdBarang)->first();
@@ -192,11 +192,67 @@ class barangController extends Controller
                                 // ]);
                             // }
                         }
-                        // $oldStok = $brg->stokPersediaan;
-                        // DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->update([
-                        //     'stokPersediaan' => $qty,
-                        //     // 'salePrice' => $hrg,
-                        // ]);
+                        
+                        //========cek harga per liter sesuai stok fifo
+                        $kdb = $detop[$i]['kdBarang'];
+                        $kdtrans = $request[0]['kdOpnum'];
+                        $id_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
+                        $stok_fifo = DB::table('tblstok_fifo')->select('*')->where('id', $id_fifo)->first();
+                        // $harga_fifo = DB::table('tblstok_fifo')->select('harga')->where('id', $id_fifo)->first();
+                        // print_r( $stok_fifo );
+                        $total_hpp = 0;
+                        $sisa = $selisih;
+                        $total_liter = $selisih;
+                        
+                        while($sisa > 0){
+                            $idn_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
+                            $stokn_fifo = DB::table('tblstok_fifo')->where('id', $idn_fifo)->first();
+                            // $hargan_fifo = DB::table('tblstok_fifo')->where('id', $idn_fifo)->first()->harga;
+
+                            $stokn_fifo = json_decode(json_encode($stokn_fifo), true);
+
+                            if($sisa <= $stokn_fifo['stok']){
+                                DB::table('tblstok_fifo')->where('id', '=', $idn_fifo )->update([
+                                    'stok' => $stokn_fifo['stok'] - $total_liter,
+                                ]);
+                                $total_hpp += $sisa * $stokn_fifo['harga'] ;
+                                insert_trans_stok($kdtrans,$idn_fifo,$sisa,$stokn_fifo['harga']);
+                                $sisa = 0;
+                            }else{
+                                $idnew_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
+                                $stoknew_fifo = DB::table('tblstok_fifo')->where('id', $idnew_fifo)->first();
+                                // $harganew_fifo = DB::table('tblstok_fifo')->select('harga')->where('id', $id_fifo)->first()->harga;
+
+                                $stoknew_fifo = json_decode(json_encode($stoknew_fifo), true);
+                                // $new_sisa = $total_liter - $sisa;
+                                
+                                DB::table('tblstok_fifo')->where('id', '=', $idnew_fifo )->update([
+                                    'stok' => $stoknew_fifo['stok'] - $stoknew_fifo['stok'],
+                                ]);
+                                $total_hpp = $stoknew_fifo['stok'] * $stoknew_fifo['harga'] ;
+                                insert_trans_stok($kdtrans,$idnew_fifo,$stoknew_fifo['stok'],$stoknew_fifo['harga']);
+                                $sisa = $total_liter - $stoknew_fifo['stok']; 
+                                if($sisa > 0){
+                                    $idnew1_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
+                                    $stoknew1_fifo = DB::table('tblstok_fifo')->where('id', $idnew1_fifo)->first();
+                                    // $harganew_fifo = DB::table('tblstok_fifo')->select('harga')->where('id', $id_fifo)->first()->harga;
+
+                                    $stoknew1_fifo = json_decode(json_encode($stoknew1_fifo), true);
+                                    // $new_sisa = $total_liter - $sisa;
+                                    
+                                    DB::table('tblstok_fifo')->where('id', '=', $idnew1_fifo )->update([
+                                        'stok' => $stoknew1_fifo['stok'] - $sisa,
+                                    ]);
+                                    $total_hpp += $sisa * $stoknew1_fifo['harga'] ;
+                                    insert_trans_stok($kdtrans,$idnew1_fifo,$sisa,$stoknew1_fifo['harga']);
+                                    $sisa = 0;
+
+                                }
+                                // echo $sisa ;
+                            };
+                        }
+                        
+                        //============== end hpp fifo
                         
 
                         $detail = [
@@ -205,12 +261,14 @@ class barangController extends Controller
                                 'r_kdPersediaan' => $kdBarang,
                                 'nmPersediaan' => $nmBarang,
                                 'selisihOpnum' => $selisih,
-                                'nilaiOpnum' => $detop[$i]['total'],
+                                'nilaiOpnum' => $total_hpp,
                                 'keteranganOpnum' => $detop[$i]['keterangan'],
                                 'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                             ]
                         ];
+
+                        
 
                         $total_harga = $detop[$i]['total'];
                         //===========jurnal

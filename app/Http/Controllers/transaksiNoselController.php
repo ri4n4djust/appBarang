@@ -734,6 +734,7 @@ class transaksiNoselController extends Controller
             ]);
 
         }
+        //===========stok fifo
         $old_stok_trans = DB::table('tbltransaksi_stok')->where('r_trans', $id)->get();
         for($i = 0;$i < count($old_stok_trans); $i++){
             $stok = $old_stok_trans[$i]->stok_trans;
@@ -749,6 +750,8 @@ class transaksiNoselController extends Controller
         }
 
         DB::table('tbltransaksi_stok')->where('r_trans', $id)->delete();
+
+        //===========end stok fifo
         DB::table('tblkupon')->where('kd_trans', $id)->delete();
         DB::table('tbltransaksi_nosel')->where('kd_trans', $id)->delete();
 

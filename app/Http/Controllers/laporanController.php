@@ -550,6 +550,26 @@ class laporanController extends Controller
                     ]);
                 };
                 DB::table('tblopnum_detail')->where('r_opnum', $kd)->delete();
+
+                //===========stok fifo
+                $old_stok_trans = DB::table('tbltransaksi_stok')->where('r_trans', $kd)->get();
+                for($i = 0;$i < count($old_stok_trans); $i++){
+                    $stok = $old_stok_trans[$i]->stok_trans;
+                    $id_fifo = $old_stok_trans[$i]->r_fifo;
+                    $old_fifo = DB::table('tblstok_fifo')->where('id', $id_fifo)->first();
+                    $stok_old = $old_fifo->stok;
+                    DB::table('tblstok_fifo')->where('id', $id_fifo)
+                    ->update([
+                        'stok' => $stok_old + $stok,
+
+                    ]);
+
+                }
+
+                DB::table('tbltransaksi_stok')->where('r_trans', $kd)->delete();
+                //===========end stok fifo
+
+
                 DB::commit();
             });
             if(is_null($exception)) {

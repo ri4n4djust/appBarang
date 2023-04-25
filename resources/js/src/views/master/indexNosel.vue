@@ -386,8 +386,14 @@
     function Simpan_meter() {
         console.log(input_perubahan.value)
         store.dispatch('UpdateMeterNosel', input_perubahan.value)
-        isOpen.value = false;
-        getNosel();
+        .then(response => {
+            isOpen.value = false;
+            getNosel();
+        }).catch(error => {
+            // console.log('error: ', error)
+            return
+        })
+        
     }
     
     
