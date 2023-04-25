@@ -84,7 +84,7 @@
                                                     <div class="form-group row">
                                                         <label for="company-name" class="col-sm-3 col-form-label col-form-label-sm">No Nota</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" v-model="params.noNota" id="number" class="form-control form-control-sm" placeholder="#0001" />
+                                                            <input type="text" v-model="params.noNota" id="number" class="form-control form-control-sm" placeholder="#0001" disabled />
                                                         </div>
                                                     </div>
 

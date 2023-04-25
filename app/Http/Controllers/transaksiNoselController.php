@@ -703,7 +703,7 @@ class transaksiNoselController extends Controller
             $old_nosel = DB::table('tblnosel_detail')->where('id_nosel', $r_nosel)->first();
             DB::table('tblnosel_detail')->where('id_nosel', $r_nosel)
             ->update([
-                'meter_awal' => $meter_akhir,
+                'meter_akhir' => $meter_akhir,
 
             ]);
         };

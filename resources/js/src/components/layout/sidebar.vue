@@ -245,19 +245,19 @@
                     </a>
                     <ul id="apps" class="collapse submenu list-unstyled" data-bs-parent="#sidebar">
                         <li>
-                            <router-link to="/po-bbm" @click="toggleMobileMenu">PO BBM</router-link>
+                            <router-link to="/po-bbm" @click="toggleMobileMenu">PO BBM / ORDER</router-link>
                         </li>
                         <li>
                             <router-link to="/bbm-datang" @click="toggleMobileMenu">Kedatangan BBM</router-link>
                         </li>
                         <li>
-                            <router-link to="/pembelian" @click="toggleMobileMenu">Pembelian</router-link>
+                            <router-link to="/pembelian" @click="toggleMobileMenu">Pembelian GAS & OLI</router-link>
                         </li>
                         <li>
                             <router-link to="/pembelian-inventaris" @click="toggleMobileMenu">Pembelian Inventaris</router-link>
                         </li>
                         <li>
-                            <router-link to="/penjualan" @click="toggleMobileMenu">Penjualan</router-link>
+                            <router-link to="/penjualan" @click="toggleMobileMenu">Penjualan GAS & OLI</router-link>
                         </li>
                         <li>
                             <router-link to="/penjualan-kupon" @click="toggleMobileMenu">Penjualan Kupon</router-link>
@@ -341,10 +341,10 @@
                             <router-link to="/laporan/aplusan-bbm" @click="toggleMobileMenu">Daftar Aplusan BBM</router-link>
                         </li>
                         <li>
-                            <router-link to="/laporan/penjualan-barang" @click="toggleMobileMenu">Penjualan NON BBM</router-link>
+                            <router-link to="/laporan/penjualan-barang" @click="toggleMobileMenu">Lap. Penjualan GAS & OLI</router-link>
                         </li>
                         <li>
-                            <router-link to="/laporan/pembelian-persediaan" @click="toggleMobileMenu">Pembelian Persediaan</router-link>
+                            <router-link to="/laporan/pembelian-persediaan" @click="toggleMobileMenu">Lap. Pembelian GAS & OLI</router-link>
                         </li>
                         <li>
                             <router-link to="/laporan/opnum" @click="toggleMobileMenu">Laporan Opnum</router-link>
@@ -353,7 +353,7 @@
                             <router-link to="/laporan/tera" @click="toggleMobileMenu">Laporan Tera</router-link>
                         </li>
                         <li>
-                            <router-link to="/laporan/pembelian-inventaris" @click="toggleMobileMenu">Laporan Pembelian inventaris</router-link>
+                            <router-link to="/laporan/pembelian-inventaris" @click="toggleMobileMenu">Lap. Pembelian inventaris</router-link>
                         </li>
                         <li>
                             <router-link to="/laporan/penyusutan" @click="toggleMobileMenu">Laporan Penyusutan</router-link>

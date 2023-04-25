@@ -81,7 +81,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/pembelian/inventaris', [App\Http\Controllers\inventarisController::class, 'beliInventaris']);
     Route::post('/hapus/inventaris', [App\Http\Controllers\inventarisController::class, 'hapusInventaris']);
     Route::post('/penyusutan/inventaris', [App\Http\Controllers\inventarisController::class, 'penyusutanInventaris']);
+    Route::post('/penyusutan/inventaris-bykat', [App\Http\Controllers\inventarisController::class, 'penyusutanInvByKat']);
     Route::post('/laporan/pembelian-inventaris', [App\Http\Controllers\inventarisController::class, 'daftarPembelianInventaris']);
+    
 
     //=================hapus
     Route::post('/delete/biaya', [App\Http\Controllers\laporanController::class, 'deleteBiaya']);

@@ -178,6 +178,46 @@ const actions = {
         // await dispatch('GetPembelian')
     },
 
+    async CreatePenyusutanInvByKat({dispatch}, detail) {
+        let response
+        try {
+            response = await axios.post('/api/penyusutan/inventaris-bykat', detail)
+            // localStorage.setItem('cartItemsPe', '[]')
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Penyusutan berhasil tersimpan',
+                padding: '2em',
+            });
+            return response ;
+        } catch (ex) {
+            // Handle error
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'Mohon Lengkapi Data',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            throw 'error' ;
+        }
+        // await dispatch('GetPembelian')
+    },
+    
+
 };
 const mutations = {
     setInventaris(state, inv){

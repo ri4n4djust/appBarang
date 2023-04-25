@@ -88,7 +88,7 @@
                                             <!-- <div class="row"> -->
                                                 <div class="col-md-4">
                                                     <div class="input-group mb-4">
-                                                        <input type="text" class="form-control form-control-sm" v-model="headopnum.kdOpnum">
+                                                        <input type="text" class="form-control form-control-sm" v-model="headopnum.kdOpnum" disabled>
                                                         <flatPickr v-model="headopnum.tglOpnum" 
                                                             :config="{dateFormat: 'd-m-Y'}"
                                                             class="form-control form-control-sm">

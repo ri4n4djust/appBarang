@@ -25,7 +25,7 @@
                             <button class="btn btn-primary mb-2 me-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Tambah</button>
                             <button class="btn btn-primary mb-2 me-2" @click="export_table('print')">Print</button>
                             <button class="btn btn-primary mb-2 me-2" @click="export_table('pdf')">PDF</button>
-<span>{{ barangs }}</span>
+<!-- <span>{{ barangs }}</span> -->
                         </div>
 
                         <v-client-table :data="items" :columns="columns" :options="table_option">
@@ -203,11 +203,11 @@
     
     const bind_data = () => {
         store.dispatch('GetPelanggan');
-        items.value = store.getters.StatePelanggan;
+        setTimeout(function() { items.value = store.getters.StatePelanggan; }, 2000);
     }
 
     const barangs = computed(() => {
-        items.value = store.getters.StateBarang;
+        // items.value = store.getters.StateBarang;
         kdbrg.value = store.getters.NoBarang;
         // console.log(items)
         // return { kdbrg }

@@ -85,7 +85,7 @@
                                                                 <div class="form-group row">
                                                                     <label for="company-name" class="col-sm-3 col-form-label col-form-label-sm">No PO</label>
                                                                     <div class="col-sm-9">
-                                                                        <input type="text" v-model="params.no_po" id="number" class="form-control form-control-sm" placeholder="#0001" />
+                                                                        <input type="text" v-model="params.no_po" id="number" class="form-control form-control-sm" placeholder="#0001" disabled />
                                                                     </div>
                                                                 </div>
 
