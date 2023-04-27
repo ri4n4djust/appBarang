@@ -437,7 +437,7 @@ class laporanController extends Controller
                 // ->join('tblinventaris', 'tblinventaris.kode_inventaris', 'tblinventaris_penyusutan_detail.rkode_inventaris')
                 ->whereBetween('tgl', [$startDate, $endDate])
                 ->where('kd_barang', $kodebarang)
-                ->orderBy("id", "ASC")
+                ->orderBy("tgl")
                 ->get();
         
         return response()->json([

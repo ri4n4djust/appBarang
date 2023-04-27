@@ -32,7 +32,7 @@
                             <template #hrgJual="props"> {{ Number(props.row.hrgJual).toLocaleString() }} </template>
                             <template #hrgPokok="props"> {{ Number(props.row.hrgPokok).toLocaleString() }} </template>
                             <template #kartuStok="props"> 
-                                <router-link :to="{name: 'kartu-stok', params: {startDate: sorting.startDate, endDate:sorting.endDate ,kdBarang:props.row.kdBarang }}"  >
+                                <router-link :to="{name: 'kartu-stok', params: {startDate: sorting.startDate, endDate:sorting.endDate ,kdBarang:props.row.kdBarang,nmBarang:props.row.nmBarang }}"  >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"

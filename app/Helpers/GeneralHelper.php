@@ -132,16 +132,6 @@ if(!function_exists('insert_kartustok_jual')){
 if(!function_exists('insert_kartustok_beli')){
     function insert_kartustok_beli($notrans,$kdBarang,$tgl,$stok_awal,$qty_beli,$total_beli,$stok_akhir){
 
-        // if(DB::table('tblkartu_stok')->exists()){
-        //     $rgla = DB::table('tblkartu_stok')->get()->last()->no_tera;
-        //     $nomor = substr($rgla, 2);
-        //     $newno = (int)$nomor + 1;
-        //     $newno = substr("000000".$newno, -6);
-        // }else{
-        //     $newno = '000001';
-        // }
-
-
         $sql = DB::table('tblkartu_stok')->insert([
                 'r_notrans' => $notrans,
                 'kd_barang' => $kdBarang,
@@ -157,7 +147,6 @@ if(!function_exists('insert_kartustok_beli')){
             ]
         );
         	
-        // $query = DB::select($sql); // $this->db->query($sql)->result_array();
         return $sql;		
     }
     
@@ -165,16 +154,6 @@ if(!function_exists('insert_kartustok_beli')){
 
 if(!function_exists('insert_kartustok_jual')){
     function insert_kartustok_jual($notrans,$kdBarang,$tgl,$stok_awal,$qty_jual,$total_jual,$stok_akhir){
-
-        // if(DB::table('tblkartu_stok')->exists()){
-        //     $rgla = DB::table('tblkartu_stok')->get()->last()->no_tera;
-        //     $nomor = substr($rgla, 2);
-        //     $newno = (int)$nomor + 1;
-        //     $newno = substr("000000".$newno, -6);
-        // }else{
-        //     $newno = '000001';
-        // }
-
 
         $sql = DB::table('tblkartu_stok')->insert([
                 'r_notrans' => $notrans,
@@ -191,7 +170,6 @@ if(!function_exists('insert_kartustok_jual')){
             ]
         );
         	
-        // $query = DB::select($sql); // $this->db->query($sql)->result_array();
         return $sql;		
     }
     

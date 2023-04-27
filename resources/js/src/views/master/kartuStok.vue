@@ -63,9 +63,9 @@
                                                             <table class="table">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th colspan="2">LAPORAN </th>
-                                                                        <th colspan="2">Aplusan Tgl {{ moment(props.startDate).format("D-M-YYYY, h:mm:ss a") }}</th>
-                                                                        <th colspan="2">Regu {{props.regu}}</th>
+                                                                        <th colspan="2">LAPORAN  BARANG {{ props.nmBarang }}</th>
+                                                                        <th colspan="2">Periode Tgl {{ props.startDate }} sd {{ props.endDate }}</th>
+                                                                        <th colspan="2"></th>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Tanggal</th>
@@ -107,7 +107,7 @@
                                                                         <th></th>
                                                                         <th>{{ Number( total_jual_s - (unit_jual_s * hpp_brg) ).toLocaleString() }}</th>
                                                                     </tr>
-                                                                    <tr>
+                                                                    <!-- <tr>
                                                                         <th></th>
                                                                         <th>Penyisihan</th>
                                                                         <th></th>
@@ -115,7 +115,7 @@
                                                                         <th></th>
                                                                         <th></th>
                                                                         <th>{{ Number( (total_jual_s - (unit_jual_s * hpp_brg)) / 2 ).toLocaleString() }}</th>
-                                                                    </tr>
+                                                                    </tr> -->
                                                                     <tr>
                                                                         <th></th>
                                                                         <th>Laba</th>
@@ -123,7 +123,7 @@
                                                                         <th></th>
                                                                         <th></th>
                                                                         <th></th>
-                                                                        <th>{{ Number( (total_jual_s - (unit_jual_s * hpp_brg)) / 2 ).toLocaleString() }}</th>
+                                                                        <th>{{ Number( (total_jual_s - (unit_jual_s * hpp_brg)) ).toLocaleString() }}</th>
                                                                     </tr>
                                                                     <tr>
                                                                         <th colspan="2" class="align-top mx-auto">
@@ -281,7 +281,7 @@
         endDate: String,
         startDate: String,
         kdBarang: String,
-        // regu: String,
+        nmBarang: String,
     });
 
     onMounted(() => {
@@ -341,7 +341,9 @@
         unit_jual_s.value = sum_unit_jual;
         total_jual_s.value = sum_jual;
         hpp_brg.value = sum_beli / sum_unit_beli;
-        console.log(hpp_brg.value)
+        props.startDate = sorting.startDate.value;
+        props.endDate = sorting.endDate.value;
+        // console.log(hpp_brg.value)
     }
 
     const export_table = (type) => {
