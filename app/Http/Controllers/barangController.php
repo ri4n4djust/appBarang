@@ -149,24 +149,9 @@ class barangController extends Controller
             $exception = DB::transaction(function() use ($request){ 
                 $kdOpnum = $request[0]['kdOpnum'];
                 $userOpnum = $request[0]['userOpnum'];
-                $totalOpnum = $request[0]['totalOpnum'];
+                $totalOpnum = 0 ; // $request[0]['totalOpnum'];
                 $tglOpnum = date("Y-m-d", strtotime($request[0]['tglOpnum']));
-                $post = Opnum::upsert([
-                        'kdOpnum'     => $kdOpnum,
-                        'tglOpnum'     => $tglOpnum,
-                        'totalOpnum'     => $totalOpnum,
-                        'userOpnum'   => $userOpnum,
-                        'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-                    ],
-                    [
-                        'tglOpnum'     => $tglOpnum,
-                        'totalOpnum'     => $totalOpnum,
-                        'userOpnum'   => $userOpnum,
-                        'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-                    ]
-                );
+                
 
                 OpnumDetail::where('r_opnum', $kdOpnum)->delete();
                 $detop = $request[1];
@@ -271,6 +256,7 @@ class barangController extends Controller
                         
 
                         $total_harga = $total_hpp ; // $detop[$i]['total'];
+                        $totalOpnum += $total_hpp ;
                         //===========jurnal
                         $pphps4 = 10 ; //$detop[0]['pphps4'];
                         $acc_id_k = $detop[$i]['accid_persediaan']; // acc id yg di debet
@@ -334,7 +320,24 @@ class barangController extends Controller
                         insert_gl_detail($ac);
                         //===========end jurnal
                         OpnumDetail::insert($detail);
-                    }
+                }
+
+                $post = Opnum::upsert([
+                    'kdOpnum'     => $kdOpnum,
+                    'tglOpnum'     => $tglOpnum,
+                    'totalOpnum'     => $totalOpnum,
+                    'userOpnum'   => $userOpnum,
+                    'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                ],
+                [
+                    'tglOpnum'     => $tglOpnum,
+                    'totalOpnum'     => $totalOpnum,
+                    'userOpnum'   => $userOpnum,
+                    'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                ]
+            );
                     
 
 
