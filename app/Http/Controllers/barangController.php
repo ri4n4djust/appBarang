@@ -270,7 +270,7 @@ class barangController extends Controller
 
                         
 
-                        $total_harga = $detop[$i]['total'];
+                        $total_harga = $total_hpp ; // $detop[$i]['total'];
                         //===========jurnal
                         $pphps4 = 10 ; //$detop[0]['pphps4'];
                         $acc_id_k = $detop[$i]['accid_persediaan']; // acc id yg di debet
