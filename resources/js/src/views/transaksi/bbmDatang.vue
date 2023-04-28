@@ -142,11 +142,11 @@
                                                                 <tr v-for="ls in listpo" :key="ls.idPo">
                                                                     <!-- <td role="cell">{{ ls.no_po }}</td> -->
                                                                     <td role="cell">{{ ls.no_so }}</td>
-                                                                    <td role="cell">{{ moment(ls.tgl_po).format('D-M-YYYY') }}</td>
+                                                                    <td role="cell">{{ moment(ls.podate).format('D-M-YYYY') }}</td>
                                                                     <td role="cell">{{ Number(ls.qty_grpo).toLocaleString() }}</td>
                                                                     <td role="cell">{{ Number(ls.qty_recieve).toLocaleString() }}</td>
                                                                     <td role="cell">{{ Number(ls.total).toLocaleString() }}</td>
-                                                                    <td role="cell">{{ moment(ls.tgl_po).format('D-M-YYYY') }}</td>
+                                                                    <td role="cell">{{ Number(ls.total_terima).toLocaleString() }}</td>
                                                                     <td role="cell">
                                                                         <button type="button" class="btn btn-secondary additem btn-sm" @click="get(ls)">Pilih</button>
                                                                     </td>
