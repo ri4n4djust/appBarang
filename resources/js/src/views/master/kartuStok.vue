@@ -28,7 +28,7 @@
                                         <div class="invoice-00001">
                                             <div class="content-section">
                                                 
-                                                Kode barang : {{ props.kdBarang }}
+                                                
 
                                                 <div class="inv--detail-section inv--customer-detail-section">
                                                     <!-- {{ items }} -->
@@ -65,46 +65,46 @@
                                                                     <tr>
                                                                         <th colspan="2">LAPORAN  BARANG {{ props.nmBarang }}</th>
                                                                         <th colspan="2">Periode Tgl {{ props.startDate }} sd {{ props.endDate }}</th>
-                                                                        <th colspan="2"></th>
+                                                                        <th colspan="2">Kode barang : {{ props.kdBarang }}</th>
                                                                     </tr>
                                                                     <tr>
                                                                         <th>Tanggal</th>
-                                                                        <th>Stok Awal</th>
+                                                                        <!-- <th>Stok Awal</th> -->
                                                                         <th>Qty Beli</th>
                                                                         <th>Nilai Beli</th>
                                                                         <th>Qty Jual</th>
                                                                         <th>Nilai Jual</th>
-                                                                        <th>Stok</th>
+                                                                        <!-- <th>Stok</th> -->
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr v-for="item in items" :key="item.id">
                                                                         <td>{{ moment(item.tgl).format("D-M-YYYY") }}</td>
-                                                                        <td>{{ Number(item.stok_awal).toLocaleString() }}</td>
+                                                                        <!-- <td>{{ Number(item.stok_awal).toLocaleString() }}</td> -->
                                                                         <td>{{ Number(item.unit_beli).toLocaleString() }}</td>
                                                                         <td>{{ Number(item.total_beli).toLocaleString() }}</td>
                                                                         <td>{{ Number(item.unit_jual).toLocaleString() }}</td>
                                                                         <td>{{ Number(item.total_jual).toLocaleString() }}</td>
-                                                                        <td>{{ Number(item.stok_akhir).toLocaleString() }}</td>
+                                                                        <!-- <td>{{ Number((item.stok_akhir + item.unit_beli) - item.unit_jual ).toLocaleString() }}</td> -->
                                                                     </tr>
                                                                 </tbody>
                                                                 <thead>
                                                                     <tr>
-                                                                        <th></th>
+                                                                        <!-- <th></th> -->
                                                                         <th>Total</th>
                                                                         <th>{{ Number(unit_beli_s).toLocaleString() }}</th>
                                                                         <th>{{ Number(total_beli_s).toLocaleString() }}</th>
                                                                         <th>{{ Number(unit_jual_s).toLocaleString() }}</th>
                                                                         <th>{{ Number(total_jual_s).toLocaleString() }}</th>
-                                                                        <th>{{ Number(total_beli_s - total_jual_s).toLocaleString() }}</th>
+                                                                        <!-- <th>{{ Number(total_beli_s - total_jual_s).toLocaleString() }}</th> -->
                                                                     </tr>
                                                                     <tr>
-                                                                        <th></th>
+                                                                        <!-- <th></th> -->
                                                                         <th>HPP</th>
                                                                         <th>{{ Number(unit_jual_s).toLocaleString() }}</th>
                                                                         <th>{{ Number(unit_jual_s * hpp_brg).toLocaleString() }}</th>
                                                                         <th></th>
-                                                                        <th></th>
+                                                                        <!-- <th></th> -->
                                                                         <th>{{ Number( total_jual_s - (unit_jual_s * hpp_brg) ).toLocaleString() }}</th>
                                                                     </tr>
                                                                     <!-- <tr>
@@ -117,12 +117,12 @@
                                                                         <th>{{ Number( (total_jual_s - (unit_jual_s * hpp_brg)) / 2 ).toLocaleString() }}</th>
                                                                     </tr> -->
                                                                     <tr>
-                                                                        <th></th>
+                                                                        <!-- <th></th> -->
                                                                         <th>Laba</th>
                                                                         <th></th>
                                                                         <th></th>
                                                                         <th></th>
-                                                                        <th></th>
+                                                                        <!-- <th></th> -->
                                                                         <th>{{ Number( (total_jual_s - (unit_jual_s * hpp_brg)) ).toLocaleString() }}</th>
                                                                     </tr>
                                                                     <tr>
@@ -310,7 +310,7 @@
     const bind_data = async () => {
         await store.dispatch('GetKartuStok', {startDate: props.startDate, endDate: props.endDate, kdBarang: props.kdBarang});
         setTimeout(function() { items.value = store.getters.StateListKartuStok; }, 2000);
-        console.log(props.kdBarang)
+        // console.log(props.kdBarang)
     }
 
     const barangs = computed(() => {
@@ -341,9 +341,9 @@
         unit_jual_s.value = sum_unit_jual;
         total_jual_s.value = sum_jual;
         hpp_brg.value = sum_beli / sum_unit_beli;
-        props.startDate = sorting.startDate.value;
-        props.endDate = sorting.endDate.value;
-        // console.log(hpp_brg.value)
+        // props.startDate = sorting.startDate.value;
+        // props.endDate = sorting.endDate.value;
+        console.log(sorting.startDate.value)
     }
 
     const export_table = (type) => {

@@ -262,180 +262,38 @@ class inventarisController extends Controller
                 $noNota = $detail['kode_penyusutan'];
                 $tglNota = $detail['tgl_penyusutan'];
 
+                $kode_inventaris = $detail['kode_inventaris'];
+                $old_det = DB::table('tblinventaris')->where('kode_inventaris', $kode_inventaris)->first();
                 // print_r($detail) ;
+                if($old_det->nilai_inventaris > 0){
 
-                DB::table('tblinventaris_penyusutan')->insert([
+                    DB::table('tblinventaris_penyusutan')->insert([
 
-                    'penyusutan_sysno' => $detail['kode_penyusutan'],
-                    'penyusutan_docno' => $detail['kode_penyusutan'],
-                    'tgl_penyusutan' => $detail['tgl_penyusutan'],
-                    'memo_penyusutan' => 'memo',
-                    'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-                ]);
-
-                DB::table('tblinventaris_penyusutan_detail')->insert([
-                    // [
-                    'rsysno_penyusutan' => $detail['kode_penyusutan'],
-                    'rkode_inventaris' => $detail['kode_inventaris'],
-                    'tgl_penyusutan' => $detail['tgl_penyusutan'],
-                    'jumlah_penyusutan' => $detail['jumlah_penyusutan'],
-                    'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-                    'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-                ]);
-                $subtotal = $detail['jumlah_penyusutan'];
-                //===========jurnal
-                $pphps4 = 10 ; //$detop[0]['pphps4'];
-                $acc_id_d =  $detail['acc_id']; // acc id yg di debet
-                $acc_id_akum =  $detail['accid_akum'];
-                $acc_id_k = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
-                $acc_id_p = '61103';
-                $acc_id_l = '32300';
-                $memo = 'Penyusutan-Inventaris';
-                $jurnal = 'JK';
-                $acc_pph = '23100'; // acc hutang pph
-                //===jumlah pphps4
-                $pphps4_dibayar = $subtotal * $pphps4 / 100 ;
-                //====endjumalh pph
-                insert_gl($noNota,$tglNota,$subtotal,$memo,$jurnal);
-                $rgl = DB::table('general_ledger')->get()->last()->notrans;
-                $ac = [
-                    [
-                        'rgl' => $rgl,
-                        'acc_id' => $acc_id_d,
-                        'debet' => 0,
-                        'kredit' => $subtotal,
-                        'trans_detail' => 'Penyusutan-Inventaris',
-                        'void_flag' => 0,
-                    ],
-                    [
-                        'rgl' => $rgl,
-                        'acc_id' => $acc_id_akum,
-                        'debet' => $subtotal,
-                        'kredit' => 0,
-                        'trans_detail' => 'Penyusutan-Inventaris',
-                        'void_flag' => 0,
-                    ], 
-                    [
-                        'rgl' => $rgl,
-                        'acc_id' => $acc_id_k,
-                        'debet' => 0,
-                        'kredit' => $subtotal,
-                        'trans_detail' => 'Penyusutan-Inventaris',
-                        'void_flag' => 0,
-                    ],
-                    [
-                        'rgl' => $rgl,
-                        'acc_id' => $acc_id_p,
-                        'debet' => 0,
-                        'kredit' => $subtotal,
-                        'trans_detail' => 'Penyusutan-Inventaris',
-                        'void_flag' => 0,
-                    ],
-                    [
-                        'rgl' => $rgl,
-                        'acc_id' => $acc_id_l,
-                        'debet' => 0,
-                        'kredit' => -1*$subtotal,
-                        'trans_detail' => 'Penyusutan-Inventaris',
-                        'void_flag' => 0,
-                    ],
-                    //===========pph ps4
-                    [
-                        'rgl' => $rgl,
-                        'acc_id' => $acc_id_k,
-                        'debet' => $pphps4_dibayar,
-                        'kredit' => 0,
-                        'trans_detail' => 'Trans-biaya',
-                        'void_flag' => 0,
-                    ],
-                    [
-                        'rgl' => $rgl,
-                        'acc_id' => $acc_pph,
-                        'debet' => 0,
-                        'kredit' => $pphps4_dibayar,
-                        'trans_detail' => 'Trans-biaya',
-                        'void_flag' => 0,
-                    ]
-                    //============end pph ps4
-                ];
-                
-                insert_gl_detail($ac);
-             
-                DB::commit();
-            });
-            if(is_null($exception)) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Inventaris Berhasil di susutkan!',
-                    // 'data' => $detail
-                ], 200);
-            } else {
-                DB::rollback();
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Inventaris Gagal Diupdate!',
-                ], 500);
-            }
-        } catch (\Exception $e) {
-            DB::rollback();
-            // something went wrong
-            return response()->json([
-             'success' => false,
-             'message' => 'exception'.$e,
-         ], 400);
-        }
-
-    }
-
-    
-    public function getInvBykat(Request $request){
-        $gr = $request->input('group');
-        $detail = DB::table('tblinventaris')->where('group_inventaris', $gr)->get();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'daftar kat inv',
-            'data' => $detail
-        ], 200);
-    }
-
-    public function penyusutanInvByKat(Request $request){
-        try{
-            $exception = DB::transaction(function() use ($request){
-
-                $detail = $request['data'];
-                $noNota = $detail[0]['kode_penyusutan'];
-                $tglNota = $detail[0]['tgl_penyusutan'];
-
-                // print_r($detail) ;
-
-                DB::table('tblinventaris_penyusutan')->insert([
-                    // [
-                        'penyusutan_sysno' => $noNota,
-                        'penyusutan_docno' => $noNota,
-                        'tgl_penyusutan' => $tglNota,
+                        'penyusutan_sysno' => $detail['kode_penyusutan'],
+                        'penyusutan_docno' => $detail['kode_penyusutan'],
+                        'tgl_penyusutan' => $detail['tgl_penyusutan'],
                         'memo_penyusutan' => 'memo',
                         'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                         'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
-                ]);
-
-                for ($i = 0; $i < count($detail); $i++) {
+                    ]);
 
                     DB::table('tblinventaris_penyusutan_detail')->insert([
                         // [
-                            'rsysno_penyusutan' => $detail[$i]['kode_penyusutan'],
-                            'rkode_inventaris' => $detail[$i]['kode_inventaris'],
-                            'tgl_penyusutan' => $detail[$i]['tgl_penyusutan'],
-                            'jumlah_penyusutan' => $detail[$i]['jumlah_penyusutan'],
-                            'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
-                            'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                        'rsysno_penyusutan' => $detail['kode_penyusutan'],
+                        'rkode_inventaris' => $detail['kode_inventaris'],
+                        'tgl_penyusutan' => $detail['tgl_penyusutan'],
+                        'jumlah_penyusutan' => $detail['jumlah_penyusutan'],
+                        'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                     ]);
-                    $subtotal = $detail[$i]['jumlah_penyusutan'];
+                    $subtotal = $detail['jumlah_penyusutan'];
+                    $old_det = DB::table('tblinventaris')->where('kode_inventaris', $kode_inventaris)->first();
+                    DB::table('tblinventaris')->where('kode_inventaris', $kode_inventaris)->update([ 'nilai_inventaris' => $old_det->nilai_inventaris - $subtotal]);
+
                     //===========jurnal
                     $pphps4 = 10 ; //$detop[0]['pphps4'];
-                    $acc_id_d =  $detail[$i]['acc_id']; // acc id yg di debet
-                    $acc_id_akum =  $detail[$i]['accid_akum'];
+                    $acc_id_d =  $detail['acc_id']; // acc id yg di debet
+                    $acc_id_akum =  $detail['accid_akum'];
                     $acc_id_k = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
                     $acc_id_p = '61103';
                     $acc_id_l = '32300';
@@ -507,7 +365,168 @@ class inventarisController extends Controller
                         ]
                         //============end pph ps4
                     ];
+                    
                     insert_gl_detail($ac);
+                    DB::commit();
+                }
+             
+                
+            });
+            if(is_null($exception)) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Inventaris Berhasil di susutkan!',
+                    // 'data' => $detail
+                ], 200);
+            } else {
+                DB::rollback();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Inventaris Gagal Diupdate!',
+                ], 500);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            // something went wrong
+            return response()->json([
+             'success' => false,
+             'message' => 'exception'.$e,
+         ], 400);
+        }
+
+    }
+
+    
+    public function getInvBykat(Request $request){
+        $gr = $request->input('group');
+        $detail = DB::table('tblinventaris')->where('group_inventaris', $gr)->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'daftar kat inv',
+            'data' => $detail
+        ], 200);
+    }
+
+    public function penyusutanInvByKat(Request $request){
+        try{
+            $exception = DB::transaction(function() use ($request){
+
+                $detail = $request['data'];
+                $noNota = $detail[0]['kode_penyusutan'];
+                $tglNota = $detail[0]['tgl_penyusutan'];
+
+                // print_r($detail) ;
+
+                DB::table('tblinventaris_penyusutan')->insert([
+                    // [
+                        'penyusutan_sysno' => $noNota,
+                        'penyusutan_docno' => $noNota,
+                        'tgl_penyusutan' => $tglNota,
+                        'memo_penyusutan' => 'memo',
+                        'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                        'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                ]);
+
+                for ($i = 0; $i < count($detail); $i++) {
+
+                    $kode_inventaris = $detail[$i]['kode_inventaris'];
+                    $old_det = DB::table('tblinventaris')->where('kode_inventaris', $kode_inventaris)->first();
+
+                    if($old_det->nilai_inventaris > 0){
+
+                        DB::table('tblinventaris_penyusutan_detail')->insert([
+                            // [
+                                'rsysno_penyusutan' => $detail[$i]['kode_penyusutan'],
+                                'rkode_inventaris' => $detail[$i]['kode_inventaris'],
+                                'tgl_penyusutan' => $detail[$i]['tgl_penyusutan'],
+                                'jumlah_penyusutan' => $detail[$i]['jumlah_penyusutan'],
+                                'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
+                                'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
+                        ]);
+                        $subtotal = $detail[$i]['jumlah_penyusutan'];
+                        $old_det = DB::table('tblinventaris')->where('kode_inventaris', $kode_inventaris)->first();
+                        DB::table('tblinventaris')->where('kode_inventaris', $kode_inventaris)->update([ 'nilai_inventaris' => $old_det->nilai_inventaris - $subtotal]);
+                        //===========jurnal
+                        $pphps4 = 10 ; //$detop[0]['pphps4'];
+                        $acc_id_d =  $detail[$i]['acc_id']; // acc id yg di debet
+                        $acc_id_akum =  $detail[$i]['accid_akum'];
+                        $acc_id_k = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
+                        $acc_id_p = '61103';
+                        $acc_id_l = '32300';
+                        $memo = 'Penyusutan-Inventaris';
+                        $jurnal = 'JK';
+                        $acc_pph = '23100'; // acc hutang pph
+                        //===jumlah pphps4
+                        $pphps4_dibayar = $subtotal * $pphps4 / 100 ;
+                        //====endjumalh pph
+                        insert_gl($noNota,$tglNota,$subtotal,$memo,$jurnal);
+                        $rgl = DB::table('general_ledger')->get()->last()->notrans;
+                        $ac = [
+                            [
+                                'rgl' => $rgl,
+                                'acc_id' => $acc_id_d,
+                                'debet' => 0,
+                                'kredit' => $subtotal,
+                                'trans_detail' => 'Penyusutan-Inventaris',
+                                'void_flag' => 0,
+                            ],
+                            [
+                                'rgl' => $rgl,
+                                'acc_id' => $acc_id_akum,
+                                'debet' => $subtotal,
+                                'kredit' => 0,
+                                'trans_detail' => 'Penyusutan-Inventaris',
+                                'void_flag' => 0,
+                            ], 
+                            [
+                                'rgl' => $rgl,
+                                'acc_id' => $acc_id_k,
+                                'debet' => 0,
+                                'kredit' => $subtotal,
+                                'trans_detail' => 'Penyusutan-Inventaris',
+                                'void_flag' => 0,
+                            ],
+                            [
+                                'rgl' => $rgl,
+                                'acc_id' => $acc_id_p,
+                                'debet' => 0,
+                                'kredit' => $subtotal,
+                                'trans_detail' => 'Penyusutan-Inventaris',
+                                'void_flag' => 0,
+                            ],
+                            [
+                                'rgl' => $rgl,
+                                'acc_id' => $acc_id_l,
+                                'debet' => 0,
+                                'kredit' => -1*$subtotal,
+                                'trans_detail' => 'Penyusutan-Inventaris',
+                                'void_flag' => 0,
+                            ],
+                            //===========pph ps4
+                            [
+                                'rgl' => $rgl,
+                                'acc_id' => $acc_id_k,
+                                'debet' => $pphps4_dibayar,
+                                'kredit' => 0,
+                                'trans_detail' => 'Trans-biaya',
+                                'void_flag' => 0,
+                            ],
+                            [
+                                'rgl' => $rgl,
+                                'acc_id' => $acc_pph,
+                                'debet' => 0,
+                                'kredit' => $pphps4_dibayar,
+                                'trans_detail' => 'Trans-biaya',
+                                'void_flag' => 0,
+                            ]
+                            //============end pph ps4
+                        ];
+                        insert_gl_detail($ac);
+
+                    }
+                    
+                    
                 }
              
                 DB::commit();
@@ -540,16 +559,40 @@ class inventarisController extends Controller
         try{
             $exception = DB::transaction(function() use ($request){
                 $kd = $request->input('id');
-                //====hapus jurnal
-                $gl = DB::table('general_ledger')->where('order_no', $kd)->get();
-                for($i=0;$i< count($gl);$i++){
-                    DB::table('general_ledger')->where('notrans', $gl[$i]->notrans)->delete();
-                    DB::table('gl_detail')->where('rgl', $gl[$i]->notrans)->delete();
-                };
-                //=====end jurnal
-                DB::table('tblinventaris_pengadaan')->where('pengadaan_sysno', $kd)->delete();
-                DB::table('tblinventaris_pengadaan_detail')->where('rsysno_pengadaan', $kd)->delete();
-                DB::commit();
+                $cek_inv = DB::table('tblinventaris_pengadaan_detail')->where('rsysno_pengadaan', $kd)->get();
+                $jml = 0;
+                for($i=0;$i< count($cek_inv);$i++){
+                    $jml_penyusutan = DB::table('tblinventaris_penyusutan_detail')->where('rkode_inventaris', $cek_inv[$i]->rkode_inventaris)->count();
+                    $jml += $jml_penyusutan ;
+                }
+                // echo $jml ;
+                if($jml <= 0){
+                    //====hapus jurnal
+                    $gl = DB::table('general_ledger')->where('order_no', $kd)->get();
+                    for($i=0;$i< count($gl);$i++){
+                        DB::table('general_ledger')->where('notrans', $gl[$i]->notrans)->delete();
+                        DB::table('gl_detail')->where('rgl', $gl[$i]->notrans)->delete();
+                    };
+                    //=====end jurnal
+
+                    $old_inv = DB::table('tblinventaris_pengadaan_detail')->where('rsysno_pengadaan', $kd)->get();
+                    for($i=0;$i< count($old_inv);$i++){
+                        $old_n = DB::table('tblinventaris')->where('kode_pengadaan', $old_inv[$i]->rsysno_pengadaan)->where('kode_inventaris', $old_inv[$i]->rkode_inventaris)->first();
+                        $inven = DB::table('tblinventaris')->where('kode_pengadaan', $old_inv[$i]->rsysno_pengadaan)->where('kode_inventaris', $old_inv[$i]->rkode_inventaris)
+                        ->update([
+                            'nilai_inventaris' => $old_n->nilai_inventaris - $old_inv[$i]->subtotal,
+                        ]);
+
+                    }
+                    DB::table('tblinventaris_pengadaan')->where('pengadaan_sysno', $kd)->delete();
+                    DB::table('tblinventaris_pengadaan_detail')->where('rsysno_pengadaan', $kd)->delete();
+                    DB::commit();
+                }else{
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Pengadaan Gagal Dihapus karena sudah ada yg disusutkan',
+                    ], 500);
+                }
             });
             if(is_null($exception)) {
                 return response()->json([

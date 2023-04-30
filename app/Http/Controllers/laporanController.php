@@ -433,12 +433,15 @@ class laporanController extends Controller
         $startDate = date("Y-m-d", strtotime($request->input('startDate')));
         $endDate = date("Y-m-d", strtotime($request->input('endDate')));
         $kodebarang = $request->input('kdBarang');
-        $list = DB::table('tblkartu_stok')
-                // ->join('tblinventaris', 'tblinventaris.kode_inventaris', 'tblinventaris_penyusutan_detail.rkode_inventaris')
-                ->whereBetween('tgl', [$startDate, $endDate])
-                ->where('kd_barang', $kodebarang)
-                ->orderBy("tgl")
-                ->get();
+        // $list = DB::table('tblkartu_stok')
+        //         // ->join('tblinventaris', 'tblinventaris.kode_inventaris', 'tblinventaris_penyusutan_detail.rkode_inventaris')
+        //         ->whereBetween('tgl', [$startDate, $endDate])
+        //         ->where('kd_barang', $kodebarang)
+        //         ->orderBy("tgl")
+        //         ->get();
+        $list = DB::select(" SELECT kd_barang,tgl, SUM(stok_awal) stok_awal,SUM(unit_beli) unit_beli,SUM(total_beli) total_beli,
+        SUM(unit_jual) unit_jual, SUM(total_jual) total_jual, SUM(stok_akhir) stok_akhir
+        FROM `tblkartu_stok` WHERE kd_barang='$kodebarang' AND tgl BETWEEN '$startDate' AND '$endDate' GROUP BY tgl ORDER BY tgl ASC ;");
         
         return response()->json([
             'success' => true,
@@ -454,11 +457,23 @@ class laporanController extends Controller
         try{
             $exception = DB::transaction(function() use ($request){
                 $kd = $request->input('id');
+                //====start jurnal
                 $gl = DB::table('general_ledger')->where('order_no', $kd)->get();
                 for($i=0;$i< count($gl);$i++){
                     DB::table('general_ledger')->where('notrans', $gl[$i]->notrans)->delete();
                     DB::table('gl_detail')->where('rgl', $gl[$i]->notrans)->delete();
                 };
+                //======end jurnal
+
+                $det_penyusutan = DB::table('tblinventaris_penyusutan_detail')->where('rsysno_penyusutan', $kd)->get();
+                for($i=0;$i< count($det_penyusutan);$i++){
+                    $old_nilai = DB::table('tblinventaris')->where('kode_inventaris', $det_penyusutan[$i]->rkode_inventaris)->first();
+
+                    DB::table('tblinventaris')->where('kode_inventaris', $det_penyusutan[$i]->rkode_inventaris)->update([
+                        'nilai_inventaris' => $old_nilai->nilai_inventaris + $det_penyusutan[$i]->jumlah_penyusutan,
+                    ]);
+                };
+
                 DB::table('tblinventaris_penyusutan')->where('penyusutan_sysno', $kd)->delete();
                 DB::table('tblinventaris_penyusutan_detail')->where('rsysno_penyusutan', $kd)->delete();
                 DB::commit();

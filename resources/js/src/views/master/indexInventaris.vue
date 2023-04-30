@@ -55,6 +55,28 @@
                                             </svg>
                                         </a>
                                 </div>
+                                <div v-else-if="items.nilai_inventaris === 0 ">
+                                    Belum Di beli 
+                                        <!-- <a href="javascript:void(0);" @click="jurnal_row(props.row)" >
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                width="24"
+                                                height="24"
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                class="feather feather-settings text-primary"
+                                            >
+                                                <circle cx="12" cy="12" r="3"></circle>
+                                                <path
+                                                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                                                ></path>
+                                            </svg>
+                                        </a> -->
+                                </div>
                                 <div v-else>
                                     
                                     <div :set="data = itemsjurnal.filter(n => n.rkode_inventaris === props.row.kode_inventaris)">
@@ -157,8 +179,9 @@
                                                 <label for="nama" class="col-sm-3 col-form-label col-form-label-sm">Kategori</label>
                                                 <div class="col-sm-9">
                                                     <select id="inputState" v-model="input.group_inventaris" class="form-select">
-                                                        <option value="12300" selected>Peralatan Dan Mesin</option>
-                                                        <option value="12400">Kendaraan</option>
+                                                        <option value="12200" selected>GEDUNG DAN BANGUNAN</option>
+                                                        <option value="12300" selected>PERALATAN DAN MESIN</option>
+                                                        <option value="12400">PERLENGKAPAN</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -166,8 +189,9 @@
                                                 <label for="nama" class="col-sm-3 col-form-label col-form-label-sm">Akun Akumulasi</label>
                                                 <div class="col-sm-9">
                                                     <select id="inputState" v-model="input.accid_akum" class="form-select">
-                                                        <option value="12501" selected>Peralatan Dan mesin</option>
-                                                        <option value="12502">BANGUNAN DAN GEDUNG</option>
+                                                        <option value="12501" selected>AKP. PERALATAN DAN MESIN</option>
+                                                        <option value="12502">AKP. BANGUNAN DAN GEDUNG</option>
+                                                        <option value="12503">AKP. PERALATAN</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -228,8 +252,9 @@
                                                 <label for="nama" class="col-sm-3 col-form-label col-form-label-sm">Kategori</label>
                                                 <div class="col-sm-9">
                                                     <select id="inputState" v-model="input.group_inventaris" class="form-select">
-                                                        <option value="12300" selected>Peralatan Dan Mesin</option>
-                                                        <option value="12400">Kendaraan</option>
+                                                        <option value="12200" selected>GEDUNG DAN BANGUNAN</option>
+                                                        <option value="12300" selected>PERALATAN DAN MESIN</option>
+                                                        <option value="12400">PERLENGKAPAN</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -316,6 +341,8 @@
     const kdpenyusutan = ref([]);
     const input = ref({
         kode_inventaris: kd,
+        tahun_pembuatan: moment().format("YYYY-MM-DD"),
+        tahun_perakitan: moment().format("YYYY-MM-DD"),
     });
 
     onMounted(() => {
@@ -559,7 +586,30 @@
             .join(' ');
     };
     const view_row = (item) => {
-        
         alert('ID: ' + item.kdBarang + ', Name: ' + item.nmBarang);
+    };
+    const delete_row = (item) => {
+
+        // alert('ID: ' + item.kdBarang + ', Name: ' + item.nmBarang);
+        new window.Swal({
+            title: 'Anda Yahin?',
+            text: "Hapus Inventaris !" +item.nama_inventaris,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Delete',
+            padding: '2em'
+        }).then(result => {
+            if (result.value) {
+                store.dispatch('DeleteInventaris', item.kode_inventaris)
+                .then(response => {
+                    bind_data();
+                    new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
+                }).catch(error => {
+                    // console.log('error: ', error)
+                    return
+                })
+
+            }
+        });
     };
 </script>
