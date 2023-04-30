@@ -364,7 +364,15 @@
 
     const simpan_inventaris = () => {
         store.dispatch('CreateInventaris', input.value)
-        bind_data();
+        .then(response => {
+            bind_data();
+            getKdInventaris();
+            // new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
+        }).catch(error => {
+            // console.log('error: ', error)
+            return
+        });
+        
     };
 
     const getKdInventaris = () =>{
@@ -372,7 +380,7 @@
         setTimeout(function() { 
             kd.value = store.getters.NoInventaris ; 
             // console.log(kd.value)
-        }, 4000);
+        }, 2000);
     };
 
     const getKdPenyusutan = () =>{
@@ -603,6 +611,7 @@
                 store.dispatch('DeleteInventaris', { id: item.kode_inventaris} )
                 .then(response => {
                     bind_data();
+                    getKdInventaris();
                     new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
                 }).catch(error => {
                     // console.log('error: ', error)

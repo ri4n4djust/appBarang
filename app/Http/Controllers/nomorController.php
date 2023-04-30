@@ -441,7 +441,7 @@ class nomorController extends Controller
         $count = Inventaris::all();
         if($count->isEmpty()){
             $tahun = date('mY');
-            $post = 'INV'.$tahun.'1';
+            $post = 'IV'.$tahun.'1';
             return response()->json([
                 'success' => true,
                 'message' => 'Detail Post!',
@@ -455,13 +455,13 @@ class nomorController extends Controller
             $kodeBaru = $terakhir + 1  ;
 
             $tahun = date('mY');
-            $post = 'INV'.$tahun.''.$kodeBaru;
+            $post = 'IV'.$tahun.''.$kodeBaru;
 
             if (Inventaris::where('kode_inventaris', $post)->exists()) {
                 $count = Inventaris::all()->last();
                 $terakhir = substr($count->kode_inventaris, 8,  20);
                 $kodeBarulagi = $kodeBaru + 1 ;
-                $post = 'INV'.$tahun.$kodeBarulagi;
+                $post = 'IV'.$tahun.$kodeBarulagi;
                 return response()->json([
                     'success' => true,
                     'message' => 'Detail Post!',

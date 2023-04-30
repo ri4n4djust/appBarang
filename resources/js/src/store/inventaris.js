@@ -17,8 +17,30 @@ const getters = {
 
 const actions = {  
     async CreateInventaris({dispatch}, post) {
-        await axios.post('/api/store/inventaris', post)
-        await dispatch('GetInventaris')
+        let response
+        try { 
+            response = await axios.post('/api/store/inventaris', post)
+            await dispatch('GetInventaris')
+            
+            return response ;
+        } catch (ex) {
+            // Handle error
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'Inventaris Gagal disimpan',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            throw 'error' ;
+        }
     }, 
     async GetInventaris({ commit }){
         let response = await axios.get('/api/inventaris')
