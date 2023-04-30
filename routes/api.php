@@ -84,6 +84,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/penyusutan/inventaris-bykat', [App\Http\Controllers\inventarisController::class, 'penyusutanInvByKat']);
     Route::post('/laporan/pembelian-inventaris', [App\Http\Controllers\inventarisController::class, 'daftarPembelianInventaris']);
     Route::post('/penyusutan/getinv-bykat', [App\Http\Controllers\inventarisController::class, 'getInvBykat']);
+    Route::post('/hapus/inventaris', [App\Http\Controllers\inventarisController::class, 'hapusInventaris']);
     
 
     //=================hapus

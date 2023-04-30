@@ -31,7 +31,7 @@ const actions = {
     async DeleteInventaris({dispatch}, id) {
         let response
         try {
-            await axios.post('/api/hapus/bbm', id)
+            await axios.post('/api/hapus/inventaris', id)
             await dispatch('GetInventaris')
             // console.log(response.data.data)
             const toast = window.Swal.mixin({

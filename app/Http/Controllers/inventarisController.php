@@ -617,4 +617,38 @@ class inventarisController extends Controller
         }
     }
 
+    
+    public function hapusInventaris(Request $request){
+        try{
+            $exception = DB::transaction(function() use ($request){
+                $kd = $request->input('id');
+                $cek_nil = DB::table('tblinventaris')->where('kode_inventaris', $kd)->first();
+                if($cek_nil->nilai_inventaris < 100 ){
+                    DB::table('tblinventaris')->where('kode_inventaris', $kd)->delete();
+
+                }
+                DB::commit();
+            });
+            if(is_null($exception)) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Pengadaan Berhasil di Hapus',
+                    // 'data' => $detail
+                ], 200);
+            } else {
+                DB::rollback();
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Pengadaan Gagal Dihapus',
+                ], 500);
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            // something went wrong
+            return response()->json([
+             'success' => false,
+             'message' => 'exception'.$e,
+         ], 400);
+        }
+    }
 }

@@ -600,7 +600,7 @@
             padding: '2em'
         }).then(result => {
             if (result.value) {
-                store.dispatch('DeleteInventaris', item.kode_inventaris)
+                store.dispatch('DeleteInventaris', { id: item.kode_inventaris} )
                 .then(response => {
                     bind_data();
                     new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
