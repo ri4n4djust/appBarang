@@ -542,7 +542,7 @@
         for (let i = 0; i < arr_kupon.length; i++) {
             arr_k.push ({
                 'kdPelanggan': arr_kupon[i].kdp,
-                'tglKupon': arr_kupon[i].tglKupon,
+                'tglKupon': tgl,
                 'r_regu': regu.value,
                 'nilai': arr_kupon[i].nilaiKupon,
                 // 'tgl_transaksi': tgl, 
@@ -555,7 +555,7 @@
         for (let a = 0; a < arr_biaya.length; a++) {
             arr_b.push ({
                 'ketBiaya': arr_biaya[a].ketBiaya,
-                'tglBiaya': arr_biaya[a].tglBiaya,
+                'tglBiaya': tgl,
                 'r_regu': regu.value,
                 'nilai': arr_biaya[a].nilaiBiaya,
                 'acc': arr_biaya[a].acc, 
@@ -569,7 +569,7 @@
         for (let a = 0; a < arr_link.length; a++) {
             arr_l.push ({
                 'nm_bbm': arr_link[a].kdbm,
-                'tgl_link': arr_link[a].tglLink,
+                'tgl_link':tgl,
                 'r_regu': regu.value,
                 'jumlahLink': arr_link[a].nilaiLink,
                 // 'tgl_transaksi': tgl, 
