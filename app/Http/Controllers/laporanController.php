@@ -441,7 +441,7 @@ class laporanController extends Controller
         //         ->get();
         $list = DB::select(" SELECT kd_barang,tgl, SUM(stok_awal) stok_awal,SUM(unit_beli) unit_beli,SUM(total_beli) total_beli,
         SUM(unit_jual) unit_jual, SUM(total_jual) total_jual, SUM(stok_akhir) stok_akhir
-        FROM `tblkartu_stok` WHERE kd_barang='$kodebarang' AND tgl BETWEEN '$startDate' AND '$endDate' GROUP BY tgl ORDER BY tgl ASC ;");
+        FROM `tblkartu_stok` WHERE kd_barang='$kodebarang' AND tgl BETWEEN '$startDate' AND '$endDate' GROUP BY tgl,kd_barang ORDER BY tgl ASC ;");
         
         return response()->json([
             'success' => true,
