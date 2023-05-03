@@ -300,7 +300,7 @@
                         <td>{{ Number(list.meter_akhir).toLocaleString() }}</td>
                         <td >
                             <div :style="{ 'width': inpt + 'px' }">
-                                <input type="text" class="form-control form-control-sm col-sm-4" v-model="meter_now[index]" >
+                                <input type="text" class="form-control form-control-sm col-sm-4" v-model="meter_now[index]" @keyup="hitung_total()" @keypress="onlyNumber">
                             </div>
                         </td>
                         <td >
@@ -317,6 +317,17 @@
                         <td v-else>0</td>
                     </tr>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th role="columnheader" scope="col" aria-colindex="1"><div></div></th>
+                        <th role="columnheader" scope="col" aria-colindex="2"><div>Meter Awal</div></th>
+                        <th role="columnheader" scope="col" aria-colindex="3"><div>Meter Akhir</div></th>
+                        <th role="columnheader" scope="col" aria-colindex="3"><div>Tera</div></th>
+                        <th role="columnheader" scope="col" aria-colindex="4"><div>Volume</div></th>
+                        <th role="columnheader" scope="col" aria-colindex="5"><div>Total</div></th>
+                        <th role="columnheader" scope="col" aria-colindex="4"><div>Total</div></th>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>
@@ -365,7 +376,7 @@
     const regu = ref(null);
     const inpt = ref(200);
     const inpt_tera = ref(100);
-    // const listtrans = ref([]);
+    const nosel = ref([]);
 
     const nosel_id = ref();
     const meter_old = ref();
@@ -396,7 +407,7 @@
         
     }
     
-    
+    const total_trx = ref();
     const nosels = computed(() => {
         const nosel = store.getters.StateNosel;
         const trs = store.getters.STransNosel;
@@ -405,27 +416,22 @@
         const biaya = store.getters.Sbiaya;
         const link = store.getters.Slink;
 
-        // var dataArr = nosel
-        // const arr_nosel = [];
-        // for (let i = 0; i < dataArr.length; i++) {
-
-        //     arr_nosel.push({
-        //         'id_nosel': dataArr[i].id_nosel,
-        //         'r_bbm': dataArr[i].r_bbm,
-        //         'r_code_bbm': dataArr[i].r_code_bbm,
-        //         'nama_nosel': dataArr[i].nama_nosel,
-        //         'meter_awal': dataArr[i].meter_awal,
-        //         'meter_akhir': dataArr[i].meter_akhir,
-        //         'harga': dataArr[i].harga,
-        //         'last_price': dataArr[i].last_price,
-        //         'tera': 0,
-
-        //     });
-
+        // const items = ref(store.getters.StateNosel)
+        // var dataArr = nosel;
+        // total_trx.value = 0;
+        // for(let i = 0; i < nosel.length; i++){
+        //     let last_meter =  meter_now.value[i];
+        //     let tera = nosel[i].tera ;
+        //     let cost = (last_meter - nosel[i].meter_akhir) - tera  || 0;
+        //     total_trx.value += (parseFloat(nosel[i].harga) * parseFloat(cost));
         // }
-        // console.log(nosel)
+        // console.log(total_trx.value)
         return { nosel, trs, regu, kupon, biaya, link }
     });
+
+    const hitung_total = () => {
+        console.log(nosels.nosel)
+    };
     
     const simpan_all = () =>{
         const nosel = store.getters.StateNosel;
@@ -452,7 +458,12 @@
             
             // let ket = keterangan.value[i]
             if (subto === 0){
-                last_meter = dataArr[i].meter_akhir;
+                if(tera != 0 ){
+                    last_meter =  meter_now.value[i];
+                }else{
+                    last_meter = dataArr[i].meter_akhir;
+                }
+
             } else{
                 last_meter =  meter_now.value[i];
             };
@@ -610,7 +621,7 @@
     const getNosel=() => {
         const id = props.id;
         store.dispatch('GetNosel', {'key1': id})
-        // setTimeout(function() { nosel_awal.value = store.getters.NoBiaya ; }, 2000);
+        setTimeout(function() { nosel.value = store.getters.StateNosel ; }, 1000);
     }
     const getTrans=() => {
         const id = props.id;
@@ -643,6 +654,14 @@
         // };
 
     })
+
+    function onlyNumber ($event) {
+        //console.log($event.keyCode); //keyCodes value
+        let keyCode = ($event.keyCode ? $event.keyCode : $event.which);
+        if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) { // 46 is dot
+            $event.preventDefault();
+        }   
+    }
 
    
 

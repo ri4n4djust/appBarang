@@ -188,7 +188,7 @@
     const export_table = (type) => {
         let cols = columns.value.filter((d) => d != 'profile' && d != 'action');
         let records = items.value;
-        let filename = 'table';
+        let filename = 'Daftar Aplusan';
 
         if (type == 'csv') {
             let coldelimiter = ',';
@@ -235,24 +235,33 @@
             records.map((item) => {
                 rowhtml += '<tr>';
                 rowhtml += '<td>'+item.kd_trans+'</td>';
-                rowhtml += '<td>'+item.nama_bbm+'</td>';
-                rowhtml += '<td>'+item.nama_nosel+'</td>';
-                rowhtml += '<td>'+item.r_regu+'</td>';
                 rowhtml += '<td>'+moment(item.tgl_transaksi).format("DD-MM-YYYY")+'</td>';
-                rowhtml += '<td>'+Number(item.last_price).toLocaleString()+'</td>';
-                rowhtml += '<td>'+Number(item.cost_ltr).toLocaleString()+'</td>';
-                rowhtml += '<td>'+Number(item.total).toLocaleString()+'</td>';
+                rowhtml += '<td>'+item.r_regu+'</td>';
+                rowhtml += '<td>'+Number(item.total_jual).toLocaleString()+'</td>';
+                rowhtml += '<td>'+Number(item.total_kupon).toLocaleString()+'</td>';
+                rowhtml += '<td>'+Number(item.total_biaya).toLocaleString()+'</td>';
+                rowhtml += '<td>'+Number(item.total_link).toLocaleString()+'</td>';
+                rowhtml += '<td>'+Number(item.total_cash).toLocaleString()+'</td>';
                 rowhtml += '</tr>';
                 // cols.map((d) => {
                 //     let val = item[d] ? item[d] : '';
                 //     rowhtml += '<td>' + val + '</td>';
                 // });
-                rowhtml += '</tr>';
+                // rowhtml += '</tr>';
             });
             // tot =+val[d];
-            let sum = 0;
+            // 'total_jual', 'total_kupon', 'total_biaya', 'total_link', 'total_cash'
+            let sum_tj = 0;
+            let sum_tk = 0;
+            let sum_tb = 0;
+            let sum_tl = 0;
+            let sum_tc = 0;
             records.forEach(element => {
-            sum +=  parseInt(element.total);
+            sum_tj +=  parseInt(element.total_jual);
+            sum_tk +=  parseInt(element.total_kupon);
+            sum_tb +=  parseInt(element.total_biaya);
+            sum_tl +=  parseInt(element.total_link);
+            sum_tc +=  parseInt(element.total_cash);
             });
 
             // console.log(sum)
@@ -262,7 +271,7 @@
             rowhtml += '</tbody>';
             rowhtml += '<tfoot><tr>'
 
-            rowhtml += '<th></th><th></th><th></th><th></th><th></th><th></th><th>Total</th>:<th>'+Number(sum).toLocaleString()+'</th>'
+            rowhtml += '<th></th><<th></th><th></th><th>'+Number(sum_tj).toLocaleString()+'</th><th>'+Number(sum_tk).toLocaleString()+'</th><th>'+Number(sum_tb).toLocaleString()+'</th><th>'+Number(sum_tl).toLocaleString()+'</th><th>'+Number(sum_tc).toLocaleString()+'</th>'
             rowhtml += '</tr></tfoot></table>'
             var winPrint = window.open('', '', 'left=0,top=0,width=1000,height=600,toolbar=0,scrollbars=0,status=0');
             winPrint.document.write('<title>Print</title>' + rowhtml);
