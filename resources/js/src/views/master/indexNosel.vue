@@ -305,7 +305,7 @@
                         </td>
                         <td >
                             <div :style="{ 'width': inpt_tera + 'px' }">
-                                <input type="text" class="form-control form-control-sm col-sm-4" v-model="list.tera" >
+                                <input type="text" class="form-control form-control-sm col-sm-4" v-model="list.tera" @keyup="hitung_total()" >
                             </div>
                         </td>
                         <td v-if="meter_now[index] != '' ">{{ Math.abs((meter_now[index] - list.meter_akhir - list.tera)) }}</td>
@@ -317,7 +317,7 @@
                         <td v-else>0</td>
                     </tr>
                 </tbody>
-                <tfoot>
+                <thead>
                     <tr>
                         <th role="columnheader" scope="col" aria-colindex="1"><div></div></th>
                         <th role="columnheader" scope="col" aria-colindex="2"><div>Meter Awal</div></th>
@@ -325,9 +325,9 @@
                         <th role="columnheader" scope="col" aria-colindex="3"><div>Tera</div></th>
                         <th role="columnheader" scope="col" aria-colindex="4"><div>Volume</div></th>
                         <th role="columnheader" scope="col" aria-colindex="5"><div>Total</div></th>
-                        <th role="columnheader" scope="col" aria-colindex="4"><div>Total</div></th>
+                        <th role="columnheader" scope="col" aria-colindex="4"><div>{{ Number(tota).toLocaleString() }}</div></th>
                     </tr>
-                </tfoot>
+                </thead>
             </table>
         </div>
     </div>
@@ -407,7 +407,7 @@
         
     }
     
-    const total_trx = ref();
+    
     const nosels = computed(() => {
         const nosel = store.getters.StateNosel;
         const trs = store.getters.STransNosel;
@@ -429,8 +429,38 @@
         return { nosel, trs, regu, kupon, biaya, link }
     });
 
+    const tota = ref();
     const hitung_total = () => {
-        console.log(nosels.nosel)
+        const nosel = store.getters.StateNosel;
+        // console.log(nosel)
+        
+        var dataArr = nosel
+        tota.value = 0;
+        for (let i = 0; i < dataArr.length; i++) {
+            // console.log({kdBarang : dataArr[i].r_kdBarang, nmBarang : dataArr[i].r_nmBarang,});
+            let last_meter =  meter_now.value[i];
+            if(meter_now.value[i] === ''){
+                last_meter = dataArr[i].meter_akhir;
+            };
+            let tera = dataArr[i].tera ;
+            let cost = (last_meter - dataArr[i].meter_akhir) - tera  || 0;
+            let subto = dataArr[i].harga * cost || 0;
+                        
+            // let ket = keterangan.value[i]
+            if (subto === 0){
+                if(tera != 0 ){
+                    last_meter =  meter_now.value[i];
+                }else{
+                    last_meter = dataArr[i].meter_akhir;
+                }
+
+            } else{
+                last_meter =  meter_now.value[i];
+            };
+            tota.value += parseInt(subto)
+        
+        }
+        // console.log(tota.value);
     };
     
     const simpan_all = () =>{
