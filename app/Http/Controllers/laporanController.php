@@ -58,11 +58,12 @@ class laporanController extends Controller
     public function laporanOpnum(Request $request){
         $startDate = date("Y-m-d", strtotime($request->input('startDate')));
         $endDate = date("Y-m-d", strtotime($request->input('endDate')));
-        $lap = DB::table('tblopnum')
-                // ->join('tblsupplier', 'tblpembelian.r_supplier', 'tblsupplier.kdSupplier')
-                // ->select('tblpembelian.*', 'tblsupplier.nmSupplier')
-                ->whereBetween('tblopnum.tglOpnum', [$startDate, $endDate])
-                ->get();
+        // $lap = DB::table('tblopnum')
+        //         // ->join('tblsupplier', 'tblpembelian.r_supplier', 'tblsupplier.kdSupplier')
+        //         // ->select('tblpembelian.*', 'tblsupplier.nmSupplier')
+        //         ->whereBetween('tblopnum.tglOpnum', [$startDate, $endDate])
+        //         ->get();
+        $lap = DB::select("SELECT a.*,b.tglOpnum FROM tblopnum_detail a LEFT JOIN tblopnum b ON a.r_opnum = b.kdOpnum WHERE tglOpnum between '$startDate' AND '$endDate';");
         return response()->json([
             'success' => true,
             'message' => 'Laporan opnum Barang',

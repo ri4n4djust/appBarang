@@ -49,7 +49,8 @@
 
                         <v-client-table :data="items" :columns="columns" :options="table_option">
                             <template #tglOpnum="props"> {{ moment(props.row.tglOpnum).format("DD-MM-YYYY") }} </template>
-                            <template #totalOpnum="props"> {{ Number(props.row.totalOpnum).toLocaleString() }} </template>
+                            <template #selisihOpnum="props"> {{ Number(props.row.selisihOpnum).toLocaleString() }} </template>
+                            <template #nilaiOpnum="props"> {{ Number(props.row.nilaiOpnum).toLocaleString() }} </template>
                             <template #action="props">
                                 <router-link :to="{name: 'rekapan', params: {startDate: props.row.tgl_trans, kd_trans:props.row.kd_trans, regu:props.row.r_regu }}" >
                                     <svg
@@ -89,6 +90,17 @@
                             </template>
                         </v-client-table>
 
+                        <div class="table-condensed table-responsive">
+                            <table role="table" aria-busy="false" aria-colcount="4" class="table b-table table-hover table-bordered" id="__BVID__354">
+                                <thead role="rowgroup" class="">
+                                    <tr role="row" class="">
+                                        <th role="columnheader" scope="col" aria-colindex="1" class=""><div>PERTAMAX : {{ Number(total_px).toLocaleString() }}</div></th>
+                                        <th role="columnheader" scope="col" aria-colindex="2" class=""><div>PERTALITE : {{ Number(total_pl).toLocaleString() }}</div></th>
+                                        <th role="columnheader" scope="col" aria-colindex="3" class=""><div>DEXLITE : {{ Number(total_dx).toLocaleString() }}</div></th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
                         
                         
                     </div>
@@ -124,7 +136,7 @@
     const store = useStore();
     const router = useRouter()
 
-    const columns = ref(['kdOpnum', 'tglOpnum', 'totalOpnum', 'action']);
+    const columns = ref(['r_opnum', 'tglOpnum', 'nmPersediaan', 'selisihOpnum' ,'nilaiOpnum', 'action']);
     const items = ref([]);
     const table_option = ref({
         perPage: 10,
@@ -155,10 +167,10 @@
 
     onMounted(() => {
         bind_data();
-        console.log('on mount pagr')
+        // console.log('on mount pagr')
     });
     onBeforeMount(() => {
-        console.log(' before onmount')
+        // console.log(' before onmount')
         
     })
 
@@ -168,8 +180,16 @@
         // items.value = store.getters.SlaporanBbm;
     }
 
+    const total_px = ref();
+    const total_pl = ref();
+    const total_dx = ref();
+
     const bbm = computed(() => {
         items.value = store.getters.SlaporanOpnum;
+
+        total_px.value = items.value .filter(i => i.r_kdPersediaan === 'BRG0001').reduce((a, b) => Number(a) + Number(b.selisihOpnum), 0);
+        total_pl.value = items.value .filter(i => i.r_kdPersediaan === 'BRG0002').reduce((a, b) => Number(a) + Number(b.selisihOpnum), 0);
+        total_dx.value = items.value .filter(i => i.r_kdPersediaan === 'BRG0003').reduce((a, b) => Number(a) + Number(b.selisihOpnum), 0);
 
         let sum = 0;
         items.value.forEach(element => {

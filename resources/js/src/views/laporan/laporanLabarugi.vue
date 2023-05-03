@@ -157,41 +157,58 @@
                                                                     </td>
                                                                     <td>
                                                                         <!-- {{ labarugi }} -->
-                                                                        <table border="1" cellspacing="3" >
+                                                                        <table border="1" cellspacing="3" width="100%" >
                                                                             <tbody >
                                                                                 <tr >
                                                                                     <!-- <td>{{ labarugi['acc_id'] }}</td> -->
-                                                                                    <td></td>
                                                                                     <td ><b>&nbsp;&nbsp;{{ labarugi['name'] }}</b></td>
-                                                                                    <td></td>
                                                                                     <td>{{ Number(labarugi['amount']).toLocaleString() }}</td>
-                                                                                    <td></td>
                                                                                 </tr>
                                                                                 <tr >
                                                                                     <!-- <td>{{ pph22['acc_id'] }}</td> -->
-                                                                                    <td></td>
                                                                                     <td ><b>&nbsp;&nbsp;{{ pph22['name'] }}</b></td>
-                                                                                    <td></td>
                                                                                     <td>{{ Number(pph22['amount']).toLocaleString() }}</td>
-                                                                                    <td></td>
                                                                                 </tr>
                                                                                 <tr>
                                                                                     <!-- <td>1111</td> -->
-                                                                                    <td></td>
-                                                                                    <td ><b>&nbsp;&nbsp;Total setelah Pajak PPH 22</b></td>
-                                                                                    <td></td>
+                                                                                    <td ><b>&nbsp;&nbsp;TOTAL SETELAH PAJAK PPH 22</b></td>
                                                                                     <td>{{ Number(labarugi['amount'] - pph22['amount']).toLocaleString() }}</td>
-                                                                                    <td></td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>
                                                                         <br>
-                                                                        <table border="1" cellspacing="3" >
+                                                                        <table border="1" cellspacing="3" width="100%" >
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <td colspan="2">PENJUALAN BBM</td>
+                                                                                </tr>
+                                                                            </thead>
                                                                             <tbody >
                                                                                 <tr v-for="cl in costliter_total" :key="cl">
                                                                                     <td>{{cl.nama_bbm}}</td>
-                                                                                    <td></td>
                                                                                     <td ><b>{{ Number(cl.total_liter).toLocaleString() }} L</b></td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                        <br>
+                                                                        <table border="1" cellspacing="3" width="100%" >
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <td colspan="2">TEKOR BBM</td>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td>PERTAMAX</td>
+                                                                                    <td ><b>{{ Number(tekor_px).toLocaleString() }} L</b></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>PERTALITE</td>
+                                                                                    <td ><b>{{ Number(tekor_pl).toLocaleString() }} L</b></td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td>DEXLITE</td>
+                                                                                    <td ><b>{{ Number(tekor_dx).toLocaleString() }} L</b></td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>
@@ -443,6 +460,10 @@
     const labarugi = ref([]);
     const pph22 = ref([]);
     const biayalist = ref();
+
+    const tekor_px = ref();
+    const tekor_pl = ref();
+    const tekor_dx = ref();
     onMounted(() => {
         load.value = true;
         // const pendapatan = ref({group: '4,5'});
@@ -451,7 +472,12 @@
         // store.dispatch('GetHarta', biaya.value); GetCostBbm
         store.dispatch('GetCostBbm', sorting.value);
         setTimeout(function() { costliter_total.value = store.getters.StateCostBbm; }, 2000);
-        
+
+        store.dispatch('GetLaporanOpnum', sorting.value);
+        let arr_tekor = store.getters.SlaporanOpnum;
+        tekor_px.value = arr_tekor.filter(i => i.r_kdPersediaan === 'BRG0001').reduce((a, b) => Number(a) + Number(b.selisihOpnum), 0);
+        tekor_pl.value = arr_tekor.filter(i => i.r_kdPersediaan === 'BRG0002').reduce((a, b) => Number(a) + Number(b.selisihOpnum), 0);
+        tekor_dx.value = arr_tekor.filter(i => i.r_kdPersediaan === 'BRG0003').reduce((a, b) => Number(a) + Number(b.selisihOpnum), 0);
 
         const biaya = ref({group: '2,4,5,6'});
         var d = Object.assign(sorting.value, biaya.value);
@@ -495,6 +521,12 @@
         // store.dispatch('GetPendapatan', c );
         store.dispatch('GetCostBbm', sorting.value);
         setTimeout(function() { costliter_total.value = store.getters.StateCostBbm; }, 2000);
+
+        store.dispatch('GetLaporanOpnum', sorting.value);
+        let arr_tekor = store.getters.SlaporanOpnum;
+        tekor_px.value = arr_tekor.filter(i => i.r_kdPersediaan === 'BRG0001').reduce((a, b) => Number(a) + Number(b.selisihOpnum), 0);
+        tekor_pl.value = arr_tekor.filter(i => i.r_kdPersediaan === 'BRG0002').reduce((a, b) => Number(a) + Number(b.selisihOpnum), 0);
+        tekor_dx.value = arr_tekor.filter(i => i.r_kdPersediaan === 'BRG0003').reduce((a, b) => Number(a) + Number(b.selisihOpnum), 0);
         
         
         const biaya = ref({group: '2,4,5,6'});
