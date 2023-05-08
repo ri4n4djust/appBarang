@@ -189,9 +189,9 @@
                                                 <label for="nama" class="col-sm-3 col-form-label col-form-label-sm">Akun Akumulasi</label>
                                                 <div class="col-sm-9">
                                                     <select id="inputState" v-model="input.accid_akum" class="form-select">
-                                                        <option value="12501" selected>AKP. PERALATAN DAN MESIN</option>
                                                         <option value="12502">AKP. BANGUNAN DAN GEDUNG</option>
-                                                        <option value="12503">AKP. PERALATAN</option>
+                                                        <option value="12501" selected>AKP. PERALATAN DAN MESIN</option>
+                                                        <option value="12503">AKP. PERLENGKAPAN</option>
                                                     </select>
                                                 </div>
                                             </div>
