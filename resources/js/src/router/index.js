@@ -269,6 +269,12 @@ const routes = [
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/neracaKeuangan.vue'),
         // props: true,
     },
+    {
+        path: '/laporan/ledger',
+        name: 'ledger',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/laporan/generalLedger.vue'),
+        // props: true,
+    },
 
 
     //components

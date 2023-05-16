@@ -365,6 +365,9 @@
                             <router-link to="/laporan/neraca" @click="toggleMobileMenu">Neraca Keuangan</router-link>
                         </li>
                         <li>
+                            <router-link to="/laporan/ledger" @click="toggleMobileMenu">General Ledger/Buku Besar</router-link>
+                        </li>
+                        <li>
                             <router-link to="/forms/checkbox-radio" @click="toggleMobileMenu">Checkbox &amp; Radio</router-link>
                         </li>
                         <li>

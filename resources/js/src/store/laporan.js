@@ -15,7 +15,8 @@ const state = {
     bukubesar: [],
     jurnalumum: [],
     costbbm: [],
-    listkartustok: []
+    listkartustok: [],
+    generalledger: []
   };
   
 const getters = {
@@ -32,7 +33,8 @@ const getters = {
     SBukuBesar: state => state.bukubesar,
     StateGjList: state => state.jurnalumum,
     StateCostBbm: state => state.costbbm,
-    StateListKartuStok: state => state.listkartustok
+    StateListKartuStok: state => state.listkartustok,
+    StateGL: state => state.generalledger
 };
 
 const actions = {  
@@ -173,6 +175,17 @@ const actions = {
             return
         }
     },
+    async GetGL({ commit }, buku){
+        let response
+        try {
+            response = await axios.post('/api/general-ledger', buku)
+            commit('setGL', response.data.data)
+        } catch (ex) {
+            // Handle error
+            alert('error load buku besar')
+            return
+        }
+    },
     async GetJurnalUmum({ commit }, gj){
         let response
         try {
@@ -287,6 +300,9 @@ const mutations = {
     },
     setKartuStok(state, krt){
         state.listkartustok = krt
+    },
+    setGL(state, gl){
+        state.generalledger = gl
     }
 
 

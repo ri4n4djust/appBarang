@@ -680,4 +680,20 @@ class laporanController extends Controller
         ], 200);
 
     }
+    public function ledger(Request $request){
+        $startDate = date("Y-m-d", strtotime($request->input('startDate')));
+        $endDate = date("Y-m-d", strtotime($request->input('endDate')));
+        $acc = $request->input('acc_id');
+        
+        DB::statement( DB::raw("SET @saldo = 0;"));
+
+        $list = DB::select("SELECT a.notrans,a.tgl,a.memo,b.debet,b.kredit,(@saldo:=@saldo+b.debet-b.kredit) as saldo,a.r_anggaran,c.nama_rekening,b.acc_id FROM general_ledger a left join gl_detail b on a.notrans = b.rgl left join rekening_anggaran c on a.r_anggaran = c.id_rekening where b.acc_id = '$acc' and a.rlocation = '01020' ORDER BY tgl ASC;");
+        
+        return response()->json([
+            'success' => true,
+            'message' => 'ledger',
+            'data' => $list
+        ], 200);
+
+    }
 }
