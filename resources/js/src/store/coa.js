@@ -10,6 +10,7 @@ const state = {
 const getters = {
     StateHarta: state => state.harta,
     StateCoaList: state => state.coalist,
+    StateListCoa: state => state.listcoa,
     StateCoaPendapatan: state => state.pendapatan,
 };
 
@@ -37,6 +38,10 @@ const actions = {
         let response = await axios.post('/api/get/coa', list)
         commit('setCoa', response.data.data)
     },
+    async GetListCoa({ commit } ){
+        let response = await axios.get('/api/get-acc-list')
+        commit('setListCoa', response.data.data)
+    },
     
 
 };
@@ -49,6 +54,9 @@ const mutations = {
     },
     setCoa(state, coa){
         state.coalist = coa
+    },
+    setListCoa(state, coa){
+        state.listcoa = coa
     },
     // DeleteBarang({dispatch}, id) {
     //     axios.delete(`hapus/barang/${id}`)

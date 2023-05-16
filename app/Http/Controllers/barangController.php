@@ -518,6 +518,9 @@ class barangController extends Controller
         try{
             $exception = DB::transaction(function() use ($request){
                 
+                DB::table('tblstok_fifo')->truncate();
+                DB::table('tblstokbbm_hpp')->truncate();                
+                DB::table('tbltera_detail')->truncate();
                 DB::table('tblprofit')->truncate();
                 DB::table('tbltransaksi_nosel')->truncate();
                 DB::table('tblheader_aplusan')->truncate();

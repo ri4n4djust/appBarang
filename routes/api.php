@@ -161,6 +161,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/store/coa-acc', [App\Http\Controllers\coaController::class, 'create_acc']);
     //============HELPERS
     Route::post('/get/acc-list', [App\Http\Controllers\coaController::class, 'get_acc_list']);
+    Route::get('/get-acc-list', [App\Http\Controllers\coaController::class, 'get_list_acc']);
     //========================
 
 

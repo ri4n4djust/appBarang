@@ -39,6 +39,11 @@
                                             :config="{dateFormat: 'd-m-Y'}"
                                             class="form-control form-control-sm">
                                         </flat-pickr>
+                                        <div class="input-group input-group-sm mb-4">
+                                            <select v-model="sorting.acc_id" class="form-control">
+                                                <option v-for="hrt in items_coa" :key="hrt.acc_id" :value="hrt.acc_id">{{ hrt.name }}</option>
+                                            </select>
+                                        </div>
                                         <button variant="primary" class="btn m-1 btn-primary" @click="bind_data()" >CARI</button>
                                         <button variant="primary" class="btn m-1 btn-primary" @click="export_table('print')">Print</button>
                                     </div>
@@ -46,7 +51,7 @@
                             </div>
                         </div>
 
-                        <v-client-table :data="items" :columns="columns" :options="table_option" v-if="items.debet != 0 && items.kredit != 0">
+                        <v-client-table :data="items" :columns="columns" :options="table_option" v-if="items.debet != 0 || items.kredit != 0">
                             <template #tgl="props"> {{ moment(props.row.tgl).format("D-M-YYYY") }} </template>
                             <template #debet="props"> {{ Number(props.row.debet).toLocaleString() }} </template>
                             <template #kredit="props"> {{ Number(props.row.kredit).toLocaleString() }} </template>
@@ -122,8 +127,9 @@
     const store = useStore();
     const router = useRouter()
 
-    const columns = ref(['notrans', 'acc_id','name', 'memo' ,'tgl', 'debet', 'kredit', 'saldo']);
+    const columns = ref(['notrans', 'acc_id','memo' ,'tgl', 'debet', 'kredit', 'saldo']);
     const items = ref([]);
+    const items_coa = ref([]);
     const table_option = ref({
         perPage: 100,
         perPageValues: [100, 200],
@@ -147,13 +153,14 @@
     const sorting = ref({
         startDate: moment().subtract(30,'d').format("D-M-YYYY"),
         endDate: moment().format("D-M-YYYY"),
-        acc_id: '11401'
+        // acc_id: acc
     });
 
     
 
     onMounted(() => {
         bind_data();
+        bind_acc();
         // console.log('on mount pagr')
     });
     onBeforeMount(() => {
@@ -166,6 +173,11 @@
         store.dispatch('GetGL', sorting.value);
         setTimeout(function() { items.value = store.getters.StateGL; }, 2000);
     }
+    const bind_acc = () => {
+        store.dispatch('GetListCoa');
+        setTimeout(function() { items_coa.value = store.getters.StateListCoa; }, 1000);
+    }
+    
 
     // const bbm = computed(() => {
     //     items.value = store.getters.SlaporanPembelian;

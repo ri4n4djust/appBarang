@@ -554,6 +554,7 @@
         const prArr = []
         prArr.push(
             {'kdBbm':'BRG0001',
+            'nmBarang': 'PERTAMAX',
             'total_hpp':totalPXHpp,
             'total_harga': totalPX,
             'total_liter': totalPXL,
@@ -561,6 +562,7 @@
             'accid_hpp': acchppPX[0].accid_hpp,
             'accid': accidPX[0].accid},
             {'kdBbm':'BRG0002',
+            'nmBarang': 'PERTALITE',
             'total_hpp':totalPLHpp,
             'total_harga': totalPL,
             'total_liter': totalPLL,
@@ -568,6 +570,7 @@
             'accid_hpp': acchppPL[0].accid_hpp,
             'accid': accidPL[0].accid},
             {'kdBbm':'BRG0003',
+            'nmBarang': 'DEXLITE',
             'total_hpp':totalDXHpp,
             'total_harga': totalDX,
             'total_liter': totalDXL,

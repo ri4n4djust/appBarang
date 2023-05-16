@@ -110,6 +110,15 @@ class coaController extends Controller
 		echo json_encode($data);
 	}
 
+	public function get_list_acc(){
+		$list = DB::select("SELECT * FROM (SELECT acc_id,name FROM `level2` where atype = 'D' union SELECT acc_id,name FROM `level3` where atype = 'D' union SELECT acc_id,name FROM `level4` where atype = 'D') acc order by acc_id; ");
+		return response()->json([
+            'success' => true,
+            'message' => 'List COA',
+            'data' => $list
+        ], 200);
+	}
+
 	public function get_coa(Request $request){
 		$ac = $request->input('acc');
 		if($ac == ''){

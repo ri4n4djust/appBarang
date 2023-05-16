@@ -154,6 +154,7 @@ class pembelianController extends Controller
 
                         // $no_po = $request[$i]['no_po'];
                         $kdBarang = $detgr[$i]['kdbbm'];
+                        $nmBarang = $detgr[$i]['nmBarang'];
                         $qty = $detgr[$i]['qty_order'];
                         $qty_datang = $detgr[$i]['qty_datang'];
                         $harga_terima = $detgr[$i]['hrgPokok'];
@@ -203,7 +204,7 @@ class pembelianController extends Controller
                         //===========jurnal
                         $acc_id_d =  $detgr[$i]['accid_persediaan']; // acc id yg di debet
                         $acc_id_k = '11401'; // $request[0]['subtotal']; // acc id yg di kredit
-                        $memo = 'BBM-Datang';
+                        $memo = 'BBM-Datang '.$nmBarang;
                         $jurnal = 'JK';
                         $subtotal = $detgr[$i]['nilai_datang'];
                         insert_gl($no_gr,$tgl_terima,$subtotal,$memo,$jurnal);
@@ -214,7 +215,7 @@ class pembelianController extends Controller
                                 'acc_id' => $acc_id_d,
                                 'debet' => $subtotal,
                                 'kredit' => 0,
-                                'trans_detail' => 'BBM-Datang',
+                                'trans_detail' => 'BBM-Datang '.$nmBarang,
                                 'void_flag' => 0,
                             ], 
                             [
@@ -222,7 +223,7 @@ class pembelianController extends Controller
                                 'acc_id' => $acc_id_k,
                                 'debet' => 0,
                                 'kredit' => $subtotal,
-                                'trans_detail' => 'BBM-Datang',
+                                'trans_detail' => 'BBM-Datang '.$nmBarang,
                                 'void_flag' => 0,
                             ]
                         ];
@@ -292,6 +293,7 @@ class pembelianController extends Controller
                 for ($i = 0; $i < count($detpo); $i++) {
 
                     $kdBarang = $detpo[$i]['kdBarang'];
+                    $nmBarang = $detpo[$i]['nmBarang'];
                     $qty = $detpo[$i]['quantity'];
                     $brg = DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->first();
                     $oldStok = $brg->stokPersediaan;
@@ -327,7 +329,7 @@ class pembelianController extends Controller
                     //===========jurnal
                     $acc_id_d = '11401'; // $detpo[$i]['accid_persediaan']; // acc id yg di debet
                     $acc_id_k = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
-                    $memo = 'PO-BBM';
+                    $memo = 'PO-BBM '.$nmBarang;
                     $jurnal = 'JK';
                     $subtotal = $detpo[$i]['amount'];
                     insert_gl($noNota,$tglNota,$subtotal,$memo,$jurnal);
@@ -338,7 +340,7 @@ class pembelianController extends Controller
                             'acc_id' => $acc_id_d,
                             'debet' => $subtotal,
                             'kredit' => 0,
-                            'trans_detail' => 'PO-BBM',
+                            'trans_detail' => 'PO-BBM'.$nmBarang,
                             'void_flag' => 0,
                         ], 
                         [
@@ -346,7 +348,7 @@ class pembelianController extends Controller
                             'acc_id' => $acc_id_k,
                             'debet' => 0,
                             'kredit' => $subtotal,
-                            'trans_detail' => 'PO-BBM',
+                            'trans_detail' => 'PO-BBM'.$nmBarang,
                             'void_flag' => 0,
                         ]
                     ];
@@ -373,7 +375,7 @@ class pembelianController extends Controller
                          'acc_id' => $accid_pphbbm,
                          'debet' => 0,
                          'kredit' => $pph_bbm,
-                         'trans_detail' => 'PPH-PO-BBM',
+                         'trans_detail' => 'PPH-PO-BBM '.$nmBarang,
                          'void_flag' => 0,
                      ], 
                      [
@@ -381,7 +383,7 @@ class pembelianController extends Controller
                          'acc_id' => $accid_kas,
                          'debet' => 0,
                          'kredit' => $pph_bbm,
-                         'trans_detail' => 'PPH-PO-BBM',
+                         'trans_detail' => 'PPH-PO-BBM '.$nmBarang,
                          'void_flag' => 0,
                      ],
                      [
@@ -389,7 +391,7 @@ class pembelianController extends Controller
                         'acc_id' => $acc_laba,
                         'debet' => $pph_bbm,
                         'kredit' => 0,
-                        'trans_detail' => 'PPH-PO-BBM',
+                        'trans_detail' => 'PPH-PO-BBM '.$nmBarang,
                         'void_flag' => 0,
                      ],
                      //=======pph ps4 dibayar
@@ -398,7 +400,7 @@ class pembelianController extends Controller
                         'acc_id' => $accid_kas,
                         'debet' => $pphps4_dibayar,
                         'kredit' => 0,
-                        'trans_detail' => 'Trans-biaya',
+                        'trans_detail' => 'Trans-biaya'.$nmBarang,
                         'void_flag' => 0,
                      ],
                      [
@@ -406,7 +408,7 @@ class pembelianController extends Controller
                         'acc_id' => $acc_ps4,
                         'debet' => 0,
                         'kredit' => $pphps4_dibayar,
-                        'trans_detail' => 'PPH-PO-BBM',
+                        'trans_detail' => 'PPH-PO-BBM '.$nmBarang,
                         'void_flag' => 0,
                     ]
                     //======end pph ps4 dibayar
