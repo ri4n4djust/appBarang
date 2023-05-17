@@ -39,6 +39,7 @@ class pembelianController extends Controller
                 for ($i = 0; $i < count($detpem); $i++) {
 
                     $kdBarang = $detpem[$i]['kdBarang'];
+                    $nmBarang = $detpem[$i]['nmBarang'];
                     $qty = $detpem[$i]['qty'];
                     $brg = DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->first();
                     $oldStok = $brg->stokPersediaan;
@@ -74,7 +75,7 @@ class pembelianController extends Controller
                     //===========jurnal
                     $acc_id_d = $detpem[$i]['accid_persediaan']; // acc id yg di debet
                     $acc_id_k = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
-                    $memo = 'Pembelian-Barang';
+                    $memo = 'Pembelian-Barang'.$nmBarang;
                     $jurnal = 'JK';
                     $subtotal = $detpem[$i]['total'];
                     insert_gl($noNota,$tglNota,$subtotal,$memo,$jurnal);
@@ -85,7 +86,7 @@ class pembelianController extends Controller
                             'acc_id' => $acc_id_d,
                             'debet' => $subtotal,
                             'kredit' => 0,
-                            'trans_detail' => 'Pembelian-Barang',
+                            'trans_detail' => 'Pembelian-Barang'.$nmBarang,
                             'void_flag' => 0,
                         ], 
                         [
@@ -93,7 +94,7 @@ class pembelianController extends Controller
                             'acc_id' => $acc_id_k,
                             'debet' => 0,
                             'kredit' => $subtotal,
-                            'trans_detail' => 'Pembelian-Barang',
+                            'trans_detail' => 'Pembelian-Barang'.$nmBarang,
                             'void_flag' => 0,
                         ]
                     ];

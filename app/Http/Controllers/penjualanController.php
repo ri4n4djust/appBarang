@@ -65,6 +65,7 @@ class penjualanController extends Controller
                 for ($i = 0; $i < count($detpem); $i++) {
 
                     $kdBarang = $detpem[$i]['kdBarang'];
+                    $nmBarang = $detpem[$i]['nmBarang'];
                     $qty = $detpem[$i]['qty'];
                     $hrg = $detpem[$i]['hrgJual'];
                     $brg = DB::table('tblpersediaan')->where('kdPersediaan', $kdBarang)->first();
@@ -108,7 +109,7 @@ class penjualanController extends Controller
                     $acc_id_k = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
                     $acc = '32300';
                     $acc_pph = '23100'; // acc hutang pph
-                    $memo = 'Penjualan-Barang';
+                    $memo = 'Penjualan-'.$nmBarang;
                     $jurnal = 'JK';
                     $subtotal = $detpem[$i]['total'];
                     $subtotal_hpp = $detpem[$i]['totalhpp'];
@@ -124,7 +125,7 @@ class penjualanController extends Controller
                             'acc_id' => $accid,
                             'debet' => $subtotal,
                             'kredit' => 0,
-                            'trans_detail' => 'Penjualan-Barang',
+                            'trans_detail' => 'Penjualan-Barang'.$nmBarang,
                             'void_flag' => 0,
                         ], 
                         [
@@ -132,7 +133,7 @@ class penjualanController extends Controller
                             'acc_id' => $acc_id_k ,
                             'debet' => $subtotal + ($subtotal - $subtotal_hpp),
                             'kredit' => 0,
-                            'trans_detail' => 'Penjualan-Barang',
+                            'trans_detail' => 'Penjualan-Barang'.$nmBarang,
                             'void_flag' => 0,
                         ],
                         [
@@ -140,7 +141,7 @@ class penjualanController extends Controller
                             'acc_id' => $acc_id_d,
                             'debet' => 0,
                             'kredit' => $subtotal,
-                            'trans_detail' => 'Penjualan-Barang',
+                            'trans_detail' => 'Penjualan-Barang'.$nmBarang,
                             'void_flag' => 0,
                         ],
                         [
@@ -148,7 +149,7 @@ class penjualanController extends Controller
                             'acc_id' => $acc_hpp,
                             'debet' => $subtotal_hpp,
                             'kredit' => 0,
-                            'trans_detail' => 'Penjualan-Barang',
+                            'trans_detail' => 'Penjualan-Barang'.$nmBarang,
                             'void_flag' => 0,
                         ],
                         [
@@ -156,7 +157,7 @@ class penjualanController extends Controller
                             'acc_id' => $acc,
                             'debet' => 0,
                             'kredit' => $subtotal - $subtotal_hpp,
-                            'trans_detail' => 'Penjualan-Barang',
+                            'trans_detail' => 'Penjualan-Barang'.$nmBarang,
                             'void_flag' => 0,
                         ],
                         // pph22
@@ -165,7 +166,7 @@ class penjualanController extends Controller
                             'acc_id' => $acc_id_k,
                             'debet' => 0,
                             'kredit' => $pph22_dibayar,
-                            'trans_detail' => 'Penjualan-pph22',
+                            'trans_detail' => 'Penjualan-pph22'.$nmBarang,
                             'void_flag' => 0,
                         ],
                         [
@@ -173,7 +174,7 @@ class penjualanController extends Controller
                             'acc_id' => $acc_pph,
                             'debet' => $pph22_dibayar,
                             'kredit' => 0,
-                            'trans_detail' => 'Penjualan-pph22',
+                            'trans_detail' => 'Penjualan-pph22'.$nmBarang,
                             'void_flag' => 0,
                         ]
                         //===end pph22
