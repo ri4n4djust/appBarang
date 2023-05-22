@@ -685,9 +685,10 @@ class laporanController extends Controller
         $endDate = date("Y-m-d", strtotime($request->input('endDate')));
         $acc = $request->input('acc_id');
         
-        DB::statement( DB::raw("SET @saldo = 0;"));
-
-        $list = DB::select("SELECT a.notrans,a.tgl,a.memo,b.debet,b.kredit,(@saldo:=@saldo+b.debet-b.kredit) as saldo,a.r_anggaran,c.nama_rekening,b.acc_id FROM general_ledger a left join gl_detail b on a.notrans = b.rgl left join rekening_anggaran c on a.r_anggaran = c.id_rekening where b.acc_id = '$acc' and a.rlocation = '01020' AND a.tgl BETWEEN '$startDate' AND '$endDate' ORDER BY a.id ASC;");
+        // DB::statement( DB::raw("SET @saldo := 0;"));
+        DB::select("SELECT @saldo:= sum(debet-kredit) from gl_detail a left join general_ledger b on a.rgl = b.notrans where acc_id = '$acc' and cast(b.tgl as date) < '$startDate'; ");
+        $list = DB::select("SELECT dealer_repcode_desc Cabang,'SLA.GJ000001' NoTransaksi,'$startDate' Tanggal,'Saldo Awal' Memo,case when coalesce(@saldo,0)>=0 then coalesce(@saldo,0) else 0 end as Debet,case when coalesce(@saldo,0)<0 then 0 else coalesce(@saldo,0) end as Kredit,coalesce(@saldo,0) as Saldo,0 as KodeAnggaran,'Default Anggaran' Nama_rekening from setup_dealer where dealer_repcode = '01020' union
+        SELECT d.dealer_repcode_desc,a.notrans,a.tgl,a.memo,b.debet,b.kredit,(@saldo:=coalesce(@saldo,0)+b.debet-b.kredit) as saldo,a.r_anggaran,case when a.r_anggaran = 0 then 'Default Anggaran' else c.nama_rekening end as NamaAnggaran FROM general_ledger a left join gl_detail b on a.notrans = b.rgl left join rekening_anggaran c on a.r_anggaran = c.id_rekening left join setup_dealer d on a.rlocation = d.dealer_repcode where b.acc_id = '$acc' and a.rlocation = '01020' and cast(a.tgl as date) between '$startDate' and '$endDate' ;");
         
         return response()->json([
             'success' => true,

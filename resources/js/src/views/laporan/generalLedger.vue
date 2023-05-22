@@ -56,10 +56,10 @@
                         </button>
 
                         <v-client-table :data="items" :columns="columns" :options="table_option" v-if="items.debet != 0 || items.kredit != 0">
-                            <template #tgl="props"> {{ moment(props.row.tgl).format("D-M-YYYY") }} </template>
-                            <template #debet="props"> {{ Number(props.row.debet).toLocaleString() }} </template>
-                            <template #kredit="props"> {{ Number(props.row.kredit).toLocaleString() }} </template>
-                            <template #saldo="props"> {{ Number(props.row.saldo).toLocaleString() }} </template>
+                            <template #Tanggal="props"> {{ moment(props.row.Tanggal).format("D-M-YYYY") }} </template>
+                            <template #Debet="props"> {{ Number(props.row.Debet).toLocaleString() }} </template>
+                            <template #Kredit="props"> {{ Number(props.row.Kredit).toLocaleString() }} </template>
+                            <template #Saldo="props"> {{ Number(props.row.Saldo).toLocaleString() }} </template>
                             <!-- <template #action="props">
                                 <div class="custom-dropdown dropdown btn-group ">
                                     <div class="btn-group" href="#" role="button" id="pendingTask" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -132,7 +132,7 @@
     const router = useRouter()
     const load = ref();
 
-    const columns = ref(['notrans', 'acc_id','memo' ,'tgl', 'debet', 'kredit', 'saldo']);
+    const columns = ref(['NoTransaksi','Memo' ,'Tanggal', 'Debet', 'Kredit', 'Saldo']);
     const items = ref([]);
     const acc_id = ref('-');
     const items_coa = ref([]);
