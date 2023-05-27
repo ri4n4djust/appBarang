@@ -55,7 +55,7 @@
                             <span class="spinner-border text-white me-2 align-self-center loader-sm">Loading...</span> Loading
                         </button>
 
-                        <v-client-table :data="items" :columns="columns" :options="table_option" v-if="items.debet != 0 || items.kredit != 0">
+                        <v-client-table :data="items" :columns="columns" :options="table_option" v-if="items.debet != 0 && items.kredit != 0">
                             <template #Tanggal="props"> {{ moment(props.row.Tanggal).format("D-M-YYYY") }} </template>
                             <template #Debet="props"> {{ Number(props.row.Debet).toLocaleString() }} </template>
                             <template #Kredit="props"> {{ Number(props.row.Kredit).toLocaleString() }} </template>
@@ -208,7 +208,7 @@
     const export_table = (type) => {
         let cols = columns.value.filter((d) => d != 'profile' && d != 'action');
         let records = items.value;
-        let filename = 'table';
+        let filename = 'Laporan PT. TAMAN KUSUMA';
 
         if (type == 'csv') {
             let coldelimiter = ',';
@@ -245,22 +245,30 @@
             }
         } else if (type == 'print') {
             var rowhtml = '<p>' + filename + '</p>';
+            
             rowhtml +=
                 '<table style="width: 100%; " cellpadding="0" cellcpacing="0"><thead><tr style="color: #515365; background: #eff5ff; -webkit-print-color-adjust: exact; print-color-adjust: exact; "> ';
+            
+            rowhtml += '<td colspan=3>LAPORAN BUKU BESAR</td>';
+            rowhtml += '<td>'+moment(cols[0].Tanggal).format("DD-MM-YYYY")+'</td>';
+            rowhtml += '<td></td>';
+            rowhtml += '<td></td>';
+            rowhtml += '</tr>';
+            rowhtml += '<tr>';
             cols.map((d) => {
                 rowhtml += '<th>' + capitalize(d) + '</th>';
             });
             rowhtml += '</tr></thead>';
+
             rowhtml += '<tbody>';
             records.map((item) => {
                 rowhtml += '<tr>';
-                rowhtml += '<td>'+item.noPenjualan+'</td>';
-                rowhtml += '<td>'+moment(item.tglPenjualan).format("DD-MM-YYYY")+'</td>';
-                rowhtml += '<td>'+item.nmPelanggan+'</td>';
-                rowhtml += '<td>'+Number(item.subTotalPenjualan).toLocaleString()+'</td>';
-                rowhtml += '<td>'+Number(item.discPenjualan).toLocaleString()+'</td>';
-                rowhtml += '<td>'+Number(item.taxPenjualan).toLocaleString()+'</td>';
-                rowhtml += '<td>'+Number(item.totalPenjualan).toLocaleString()+'</td>';
+                rowhtml += '<td>'+item.NoTransaksi+'</td>';
+                rowhtml += '<td>'+item.Memo+'</td>';
+                rowhtml += '<td>'+moment(item.Tanggal).format("DD-MM-YYYY")+'</td>';
+                rowhtml += '<td>'+Number(item.Debet).toLocaleString()+'</td>';
+                rowhtml += '<td>'+Number(item.Kredit).toLocaleString()+'</td>';
+                rowhtml += '<td>'+Number(item.Saldo).toLocaleString()+'</td>';
                 rowhtml += '</tr>';
                 // cols.map((d) => {
                 //     let val = item[d] ? item[d] : '';
@@ -269,12 +277,12 @@
                 rowhtml += '</tr>';
             });
             // tot =+val[d];
-            let sum = 0;
-            let sumtax = 0;
-            records.forEach(element => {
-            sum +=  parseInt(element.totalPenjualan);
-            sumtax +=  parseInt(element.taxPenjualan);
-            });
+            // let sum = 0;
+            // let sumtax = 0;
+            // records.forEach(element => {
+            // sum +=  parseInt(element.totalPenjualan);
+            // sumtax +=  parseInt(element.taxPenjualan);
+            // });
 
             // console.log(sum)
 
@@ -283,8 +291,8 @@
             rowhtml += '</tbody>';
             rowhtml += '<tfoot><tr>'
 
-            rowhtml += '<th></th><th></th><th></th><th></th><th>Total</th><th>'+Number(sumtax).toLocaleString()+'</th><th>'+Number(sum).toLocaleString()+'</th></tr>'
-            rowhtml += '<tr><th></th><th></th><th></th><th></th><th>Total Net</th><th></th><th>'+Number(sum - sumtax).toLocaleString()+'</th>'
+            rowhtml += '<th></th><th></th><th></th><th></th><th></th><th></th></tr>'
+            rowhtml += '<tr><th></th><th></th><th></th><th> Net</th><th></th><th></th>'
             rowhtml += '</tr></tfoot></table>'
             var winPrint = window.open('', '', 'left=0,top=0,width=1000,height=600,toolbar=0,scrollbars=0,status=0');
             winPrint.document.write('<title>Print</title>' + rowhtml);

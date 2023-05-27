@@ -185,14 +185,14 @@
                                         <tr role="row">
                                             <th role="columnheader" scope="col" aria-colindex="1"><div>Stok</div></th>
                                             <th role="columnheader" scope="col" aria-colindex="2"><div>Harga</div></th>
+                                            <th role="columnheader" scope="col" aria-colindex="2"><div>Tgl Terima</div></th>
                                         </tr>
                                     </thead>
                                     <tbody role="rowgroup" v-for="fifo in data_fifo" :key="fifo.id" :role="row">
                                         <tr v-if="list.code_bbm === fifo.kd_barang">
-                                           
-                                                <td aria-colindex="1" role="cell">{{ Number(fifo.stok).toLocaleString() }}</td>
-                                                <td aria-colindex="2" role="cell">{{ Number(fifo.harga).toLocaleString() }}</td>
-                                           
+                                            <td aria-colindex="1" role="cell">{{ Number(fifo.stok).toLocaleString() }}</td>
+                                            <td aria-colindex="2" role="cell">{{ Number(fifo.harga).toLocaleString() }}</td>
+                                            <td aria-colindex="2" role="cell">{{ moment(fifo.tgl).format('DD-MM-YYYY') }}</td>
                                         </tr>
                                     </tbody>
                                 </table>

@@ -11,6 +11,7 @@ use App\Models\Kupon;
 use App\Models\Biaya;
 use App\Models\Linkaja;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\PDO;
 
 class transaksiNoselController extends Controller
 {
@@ -359,62 +360,113 @@ class transaksiNoselController extends Controller
                     $kdb = $detpro[$i]['kdBbm'];
 
                     //========cek harga per liter sesuai stok fifo
-                    $id_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
-                    $stok_fifo = DB::table('tblstok_fifo')->select('*')->where('id', $id_fifo)->first();
+                    // $id_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
+                    // $stok_fifo = DB::table('tblstok_fifo')->select('*')->where('id', $id_fifo)->first();
+                    // $data_tr = DB::table('tblstok_fifo')
+                    //         ->select('*')
+                    //         ->where('kd_barang', '=', $kdb)
+                    //         ->where('stok', '>', '0')
+                    //         ->orderBy('tgl', 'ASC')
+                    //         ->get()->toArray();
+                    $data_tr = DB::select(" SELECT * FROM tblstok_fifo WHERE kd_barang = '$kdb' AND stok > 0 ORDER by tgl ASC");
                     // $harga_fifo = DB::table('tblstok_fifo')->select('harga')->where('id', $id_fifo)->first();
                     // print_r( $stok_fifo );
                     $total_hpp = 0;
                     $sisa = $total_liter;
+                    // $qty = $total_liter;
 
                     
                     
-                    while($sisa > 0){
-                        $idn_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
-                        $stokn_fifo = DB::table('tblstok_fifo')->where('id', $idn_fifo)->first();
-                        // $hargan_fifo = DB::table('tblstok_fifo')->where('id', $idn_fifo)->first()->harga;
+                    // while($sisa > 0){
+                    //     $idn_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
+                    //     $stokn_fifo = DB::table('tblstok_fifo')->where('id', $idn_fifo)->first();
+                    //     // $hargan_fifo = DB::table('tblstok_fifo')->where('id', $idn_fifo)->first()->harga;
 
-                        $stokn_fifo = json_decode(json_encode($stokn_fifo), true);
+                    //     $stokn_fifo = json_decode(json_encode($stokn_fifo), true);
 
-                        if($sisa <= $stokn_fifo['stok']){
-                            DB::table('tblstok_fifo')->where('id', '=', $idn_fifo )->update([
-                                'stok' => $stokn_fifo['stok'] - $total_liter,
-                            ]);
-                            $total_hpp += $sisa * $stokn_fifo['harga'] ;
-                            insert_trans_stok($kdtrans,$idn_fifo,$sisa,$stokn_fifo['harga']);
-                            $sisa = 0;
-                        }else{
-                            $idnew_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
-                            $stoknew_fifo = DB::table('tblstok_fifo')->where('id', $idnew_fifo)->first();
-                            // $harganew_fifo = DB::table('tblstok_fifo')->select('harga')->where('id', $id_fifo)->first()->harga;
-
-                            $stoknew_fifo = json_decode(json_encode($stoknew_fifo), true);
-                            // $new_sisa = $total_liter - $sisa;
+                    //     if($sisa <= $stokn_fifo['stok']){
+                    //         DB::table('tblstok_fifo')->where('id', '=', $idn_fifo )->update([
+                    //             'stok' => $stokn_fifo['stok'] - $total_liter,
+                    //         ]);
+                    //         $total_hpp += $sisa * $stokn_fifo['harga'] ;
+                    //         insert_trans_stok($kdtrans,$idn_fifo,$sisa,$stokn_fifo['harga']);
+                    //         $sisa = 0;
+                    //     }else{
                             
-                            DB::table('tblstok_fifo')->where('id', '=', $idnew_fifo )->update([
-                                'stok' => $stoknew_fifo['stok'] - $stoknew_fifo['stok'],
-                            ]);
-                            $total_hpp = $stoknew_fifo['stok'] * $stoknew_fifo['harga'] ;
-                            insert_trans_stok($kdtrans,$idnew_fifo,$stoknew_fifo['stok'],$stoknew_fifo['harga']);
-                            $sisa = $total_liter - $stoknew_fifo['stok']; 
-                            if($sisa > 0){
-                                $idnew1_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
-                                $stoknew1_fifo = DB::table('tblstok_fifo')->where('id', $idnew1_fifo)->first();
-                                // $harganew_fifo = DB::table('tblstok_fifo')->select('harga')->where('id', $id_fifo)->first()->harga;
+                    //         $idnew_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
+                    //         $stoknew_fifo = DB::table('tblstok_fifo')->where('id', $idnew_fifo)->first();
+                    //         // $harganew_fifo = DB::table('tblstok_fifo')->select('harga')->where('id', $id_fifo)->first()->harga;
 
-                                $stoknew1_fifo = json_decode(json_encode($stoknew1_fifo), true);
-                                // $new_sisa = $total_liter - $sisa;
+                    //         $stoknew_fifo = json_decode(json_encode($stoknew_fifo), true);
+                    //         // $new_sisa = $total_liter - $sisa;
+                            
+                    //         DB::table('tblstok_fifo')->where('id', '=', $idnew_fifo )->update([
+                    //             'stok' => $stoknew_fifo['stok'] - $stoknew_fifo['stok'],
+                    //         ]);
+                    //         $total_hpp = $stoknew_fifo['stok'] * $stoknew_fifo['harga'] ;
+                    //         insert_trans_stok($kdtrans,$idnew_fifo,$stoknew_fifo['stok'],$stoknew_fifo['harga']);
+                    //         $sisa = $total_liter - $stoknew_fifo['stok']; 
+                    //         if($sisa > 0){
+                    //             $idnew1_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
+                    //             $stoknew1_fifo = DB::table('tblstok_fifo')->where('id', $idnew1_fifo)->first();
+                    //             // $harganew_fifo = DB::table('tblstok_fifo')->select('harga')->where('id', $id_fifo)->first()->harga;
+
+                    //             $stoknew1_fifo = json_decode(json_encode($stoknew1_fifo), true);
+                    //             // $new_sisa = $total_liter - $sisa;
                                 
-                                DB::table('tblstok_fifo')->where('id', '=', $idnew1_fifo )->update([
-                                    'stok' => $stoknew1_fifo['stok'] - $sisa,
-                                ]);
-                                $total_hpp += $sisa * $stoknew1_fifo['harga'] ;
-                                insert_trans_stok($kdtrans,$idnew1_fifo,$sisa,$stoknew1_fifo['harga']);
-                                $sisa = 0;
+                    //             DB::table('tblstok_fifo')->where('id', '=', $idnew1_fifo )->update([
+                    //                 'stok' => $stoknew1_fifo['stok'] - $sisa,
+                    //             ]);
+                    //             $total_hpp += $sisa * $stoknew1_fifo['harga'] ;
+                    //             insert_trans_stok($kdtrans,$idnew1_fifo,$sisa,$stoknew1_fifo['harga']);
+                    //             $sisa = $sisa - $stoknew1_fifo['stok'];
 
+                    //         }
+                    //         // echo $sisa ;
+                    //     };
+                    // }
+                    
+                    $qty = $total_liter;
+                    foreach($data_tr as $tr){
+                        // print_r($tr->stok);
+                        $id = $tr->id;
+                        $stok = $tr->stok;
+                        $harga = $tr->harga;
+                        $tgl_stok = $tr->tgl;
+
+                        if($qty > 0) { 
+              
+                            // buat var $temp sbg. pengurang
+                            $temp = $qty;
+              
+                            //proses pengurangan
+                            $qty = $qty - $stok;
+                            // $qty_berkurang = $stok - $stok ;
+                            
+                            if($qty > 0) {      
+                                $stok_update = 0;
+                                $hpp = $stok * $harga;
+                                $temp = $stok;
+                            }else{
+                                $stok_update = $stok - $temp;
+                                $hpp = $temp * $harga;
+                                // $temp = $qty;
                             }
-                            // echo $sisa ;
-                        };
-                    }
+                            
+                            $total_hpp += $qty * $harga;
+                            insert_trans_stok($kdtrans,$id,$temp,$harga);
+                            // $idnew1_fifo = DB::table('tblstok_fifo')->where('kd_barang','=',$kdb)->where('id', '!=', $id)->first();
+                            // DB::table('tblstok_fifo')->where('id', '=', $id )->update([
+                            //     'stok' => $idnew1_fifo->stok - $temp,
+                            // ]);
+
+                            DB::statement("UPDATE tblstok_fifo SET stok = $stok_update WHERE kd_barang = '$kdb' AND tgl = '$tgl_stok'");
+                            // echo "<br>$sql<br><br>";
+                            // echo "<br>Hpp : $hpp<br><br>";
+                            // echo "<br>stok dikurang : $temp dengan id : $id<br><br>";
+                            // mysqli_query($conn, $sql);
+                        }
+                    } 
                     
                     //============== end hpp fifo
 
@@ -426,7 +478,7 @@ class transaksiNoselController extends Controller
                         'kd_trans'  => $kdtrans,
                         'kdBarang'  => $detpro[$i]['kdBbm'],
                         'hpp_beli'  => $total_hpp,
-                        'qty_laku'  =>$total_liter,
+                        'qty_laku'  => $total_liter,
                         'total_laku'    => $total_harga,
                         'margin_laku'   => $total_harga - $total_hpp,
                         'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
