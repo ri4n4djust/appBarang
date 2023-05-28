@@ -453,7 +453,7 @@ class transaksiNoselController extends Controller
                                 // $temp = $qty;
                             }
                             
-                            $total_hpp += $qty * $harga;
+                            $total_hpp += $temp * $harga;
                             insert_trans_stok($kdtrans,$id,$temp,$harga);
                             // $idnew1_fifo = DB::table('tblstok_fifo')->where('kd_barang','=',$kdb)->where('id', '!=', $id)->first();
                             // DB::table('tblstok_fifo')->where('id', '=', $id )->update([
