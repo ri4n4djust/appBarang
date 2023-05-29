@@ -64,7 +64,7 @@
                                                                 <thead>
                                                                     <tr>
                                                                         <th colspan="2">LAPORAN  BARANG {{ props.nmBarang }}</th>
-                                                                        <th colspan="2">Periode Tgl {{ props.startDate }} sd {{ props.endDate }}</th>
+                                                                        <th colspan="2">Periode Tgl {{ sorting.startDate }} sd {{ sorting.endDate }}</th>
                                                                         <th colspan="2">Kode barang : {{ props.kdBarang }}</th>
                                                                     </tr>
                                                                     <tr>
@@ -320,8 +320,15 @@
     });
     
     const cari = async () =>{
+       
         await store.dispatch('GetKartuStok', {startDate: sorting.value.startDate, endDate: sorting.value.endDate, kdBarang: sorting.value.kdBarang});
         setTimeout(function() { items.value = store.getters.StateListKartuStok; }, 2000);
+
+         sorting.value = {
+            startDate: sorting.value.startDate,
+            endDate: sorting.value.endDate,
+
+        }
 
         let arr = store.getters.StateListKartuStok;
         let sum_beli = 0;
@@ -343,7 +350,7 @@
         hpp_brg.value = sum_beli / sum_unit_beli;
         // props.startDate = sorting.startDate.value;
         // props.endDate = sorting.endDate.value;
-        console.log(sorting.startDate.value)
+        // console.log(sorting.startDate.value)
     }
 
     const export_table = (type) => {
