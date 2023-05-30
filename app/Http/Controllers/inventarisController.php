@@ -266,6 +266,7 @@ class inventarisController extends Controller
                 $old_det = DB::table('tblinventaris')->where('kode_inventaris', $kode_inventaris)->first();
                 // print_r($detail) ;
                 if($old_det->nilai_inventaris > 0){
+                    $old_det = DB::table('tblinventaris')->where('kode_inventaris', $kode_inventaris)->first();
 
                     DB::table('tblinventaris_penyusutan')->insert([
 
@@ -282,13 +283,13 @@ class inventarisController extends Controller
                         'rsysno_penyusutan' => $detail['kode_penyusutan'],
                         'rkode_inventaris' => $detail['kode_inventaris'],
                         'tgl_penyusutan' => $detail['tgl_penyusutan'],
-                        'jumlah_penyusutan' => $detail['jumlah_penyusutan'],
+                        'jumlah_penyusutan' => $detail['jumlah_penyusutan'] * $old_det->qty_inventaris,
                         'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                         'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                     ]);
-                    $subtotal = $detail['jumlah_penyusutan'];
-                    $old_det = DB::table('tblinventaris')->where('kode_inventaris', $kode_inventaris)->first();
-                    DB::table('tblinventaris')->where('kode_inventaris', $kode_inventaris)->update([ 'nilai_inventaris' => $old_det->nilai_inventaris - $subtotal]);
+                    $subtotal = $detail['jumlah_penyusutan'] * $old_det->qty_inventaris;
+                    
+                    DB::table('tblinventaris')->where('kode_inventaris', $kode_inventaris)->update([ 'nilai_inventaris' => $old_det->nilai_inventaris - $subtotal ]);
 
                     //===========jurnal
                     $pphps4 = 10 ; //$detop[0]['pphps4'];
@@ -440,13 +441,13 @@ class inventarisController extends Controller
                                 'rsysno_penyusutan' => $detail[$i]['kode_penyusutan'],
                                 'rkode_inventaris' => $detail[$i]['kode_inventaris'],
                                 'tgl_penyusutan' => $detail[$i]['tgl_penyusutan'],
-                                'jumlah_penyusutan' => $detail[$i]['jumlah_penyusutan'],
+                                'jumlah_penyusutan' => $detail[$i]['jumlah_penyusutan'] * $old_det->qty_inventaris,
                                 'created_at' => \Carbon\Carbon::now()->toDateTimeString(),
                                 'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                         ]);
-                        $subtotal = $detail[$i]['jumlah_penyusutan'];
-                        $old_det = DB::table('tblinventaris')->where('kode_inventaris', $kode_inventaris)->first();
-                        DB::table('tblinventaris')->where('kode_inventaris', $kode_inventaris)->update([ 'nilai_inventaris' => $old_det->nilai_inventaris - $subtotal]);
+                        $subtotal = $detail[$i]['jumlah_penyusutan']  * $old_det->qty_inventaris;
+                        // $old_det = DB::table('tblinventaris')->where('kode_inventaris', $kode_inventaris)->first();
+                        DB::table('tblinventaris')->where('kode_inventaris', $kode_inventaris)->update([ 'nilai_inventaris' => $old_det->nilai_inventaris - $subtotal ]);
                         //===========jurnal
                         $pphps4 = 10 ; //$detop[0]['pphps4'];
                         $acc_id_d =  $detail[$i]['acc_id']; // acc id yg di debet

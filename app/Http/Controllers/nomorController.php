@@ -537,7 +537,7 @@ class nomorController extends Controller
 
             $no = 0 ;
             $count = Pengadaan::all()->last();
-            $terakhir = substr($count->pengadaan_sysno, 8,  20);
+            $terakhir = substr($count->pengadaan_sysno, 9,  20);
             $kodeBaru = $terakhir + 1  ;
 
             $tahun = date('mY');
@@ -545,7 +545,7 @@ class nomorController extends Controller
 
             if (Pengadaan::where('pengadaan_sysno', $post)->exists()) {
                 $count = Pengadaan::all()->last();
-                $terakhir = substr($count->pengadaan_sysno, 8,  20);
+                $terakhir = substr($count->pengadaan_sysno, 9,  20);
                 $kodeBarulagi = $kodeBaru + 1 ;
                 $post = 'PGA'.$tahun.$kodeBarulagi;
                 return response()->json([
