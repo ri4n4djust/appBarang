@@ -349,8 +349,8 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-3">
-                                                            <div class="invoice-actions-btn">
-                                                                <div class="invoice-action-btn">
+                                                            <!-- <div class="invoice-actions-btn">
+                                                                <div class="invoice-action-btn"> -->
                                                                     <div class="row">
 
                                                                         <div class="col-xl-12 col-md-3 col-sm-6">
@@ -379,8 +379,8 @@
                                                                         </div>
 
                                                                     </div>
-                                                                </div>
-                                                            </div>
+                                                                <!-- </div>
+                                                            </div> -->
                                                         </div>
                                                     </div>
                                                 </div>
