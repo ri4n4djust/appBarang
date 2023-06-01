@@ -146,143 +146,13 @@
         
 
         <div class="table-responsive">
-            <table class="table table-hover table-bordered">
-                <thead>
-                    <tr>
-                        <th>Nozzel</th>
-                        <th>Meter Awal</th>
-                        <th>Meter Akhir</th>
-                        <th>Volume/Liter</th>
-                        <th>Harga</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="item, index in items" :key="item.id">
-                        <td>{{ item.nama_nosel }}</td>
-                        <td>{{ item.awal_meter }}</td>
-                        <td>
-                            <!-- {{ item.last_meter }} -->
-                            <div :style="{ 'width': inpt + 'px' }">
-                                <input type="text" class="form-control form-control-sm col-sm-4" v-model="meter_now[index]" >
-                            </div>
-                        </td>
-                        <td>{{ Math.abs(meter_now[index] - item.awal_meter) }}</td>
-                        <td>{{ Number(item.last_price).toLocaleString() }}</td>
-                        <td>{{ Number((meter_now[index] - item.awal_meter) * item.last_price).toLocaleString() }}</td>
-                    </tr>
-                </tbody>
-                <!-- <tfoot>
-                    <tr>
-                        <th colspan="2" class="align-top mx-auto">
-
-                            <div class="table-responsive">
-                                <table class="table table-hover table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th colspan="2">Langganan Kupon</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="pon in kupon" :key="pon.r_kdPelanggan">
-                                            <td aria-colindex="1" role="cell">{{ pon.nmPelanggan }}</td>
-                                            <td aria-colindex="2" role="cell">{{ Number(pon.total).toLocaleString() }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-hover table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th colspan="2">Link Aja</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="lk in link" :key="lk.id">
-                                            <td aria-colindex="1" role="cell">{{ lk.nm_bbm }}</td>
-                                            <td aria-colindex="2" role="cell">{{ Number(lk.jumlah_link).toLocaleString() }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </th>
-                        <th colspan="2" class="align-top mx-auto">
-                            <div class="table-responsive">
-                            <table class="table table-hover table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th colspan="3">Total Penjualan Regu A</th>
-                                    </tr>
-                                    <tr>
-                                        <th>BBM</th>
-                                        <th>Volume</th>
-                                        <th>Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody role="rowgroup">
-                                    <tr >
-                                        <td aria-colindex="1" role="cell">PERTAMAX</td>
-                                        <td aria-colindex="2" role="cell">{{Number(totalLiterPertamax).toLocaleString()}}</td>
-                                        <td aria-colindex="2" role="cell">{{Number(totalPertamax).toLocaleString()}}</td>
-                                    </tr>
-                                    <tr >
-                                        <td aria-colindex="1" role="cell">PERTALITE</td>
-                                        <td aria-colindex="2" role="cell">{{Number(totalLiterPertalite).toLocaleString()}}</td>
-                                        <td aria-colindex="2" role="cell">{{Number(totalPertalite).toLocaleString()}}</td>
-                                    </tr>
-                                    <tr >
-                                        <td aria-colindex="1" role="cell">DEXLITE</td>
-                                        <td aria-colindex="2" role="cell">{{Number(totalLiterDexlite).toLocaleString()}}</td>
-                                        <td aria-colindex="2" role="cell">{{Number(totalDexlite).toLocaleString()}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            </div>
-                        </th>
-                        <th colspan="2" class="align-top mx-auto" >
-                            <div class="table-responsive">
-                                <table class="table table-hover table-bordered">
-                                    <thead role="rowgroup">
-                                        <tr >
-                                            <th aria-colindex="1" role="cell">Total</th>
-                                            <th aria-colindex="2" role="cell">{{ Number(totaljual).toLocaleString() }}</th>
-                                        </tr>
-                                        <tr >
-                                            <th >Kupon</th>
-                                            <th >{{ Number(totalkupon).toLocaleString() }}</th>
-                                        </tr>
-                                        <tr >
-                                            <th >Biaya</th>
-                                            <th >{{ Number(totalbiaya).toLocaleString() }}</th>
-                                        </tr>
-                                        <tr >
-                                            <th >Link Aja</th>
-                                            <th >{{ Number(totallink).toLocaleString() }}</th>
-                                        </tr>
-                                        <tr >
-                                            <th >Total Cash</th>
-                                            <th >{{ Number(totaljual -totalkupon -totalbiaya - totallink).toLocaleString() }}</th>
-                                        </tr>
-                                        <tr >
-                                            <th >Saldo Plus</th>
-                                            <th >0</th>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                                
-                        </th>
-                    </tr>
-                </tfoot> -->
-            </table>
             <table role="table" aria-busy="false" aria-colcount="5" class="table table-hover table-bordered" >
                 <thead role="rowgroup">
                     <tr role="row">
                         <th role="columnheader" scope="col" aria-colindex="1"><div>Nozel</div></th>
                         <th role="columnheader" scope="col" aria-colindex="2"><div>Meter Awal</div></th>
                         <th role="columnheader" scope="col" aria-colindex="3"><div>Meter Akhir</div></th>
+                        <th role="columnheader" scope="col" aria-colindex="3"><div>Tera</div></th>
                         <th role="columnheader" scope="col" aria-colindex="4"><div>Volume</div></th>
                         <th role="columnheader" scope="col" aria-colindex="5"><div>Harga</div></th>
                         <th role="columnheader" scope="col" aria-colindex="4"><div>Total</div></th>
@@ -290,18 +160,55 @@
                 </thead>
                 <tbody role="rowgroup">
                     <tr role="row" v-for="list, index in nosels.nosel" :key="list.id_nosel">
-                        <td> {{ list.nama_nosel }}</td>
-                        <td>{{ Number(list.meter_akhir).toLocaleString() }}</td>
+                        <td> {{ list.nama_nosel }} 
+                            <a href="javascript:void(0);" data-bs-toggle="tooltip" title="Edit" @click="openModal(list)">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="24"
+                                    height="24"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="feather feather-edit-2"
+                                >
+                                    <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                                </svg>
+                            </a>
+                        </td>
+                        <td>{{ Number(list.awal_meter).toLocaleString() }}</td>
                         <td >
                             <div :style="{ 'width': inpt + 'px' }">
-                                <input type="text" class="form-control form-control-sm col-sm-4" v-model="meter_now[index]" >
+                                <input type="text" class="form-control form-control-sm col-sm-4" v-model="list.last_meter" @keyup="hitung_total()" @keypress="onlyNumber">
                             </div>
                         </td>
-                        <td>{{ Math.abs(meter_now[index] - list.meter_akhir) }}</td>
-                        <td>{{ Number(list.harga).toLocaleString() }}</td>
-                        <td>{{ Number((meter_now[index] - list.meter_akhir) * list.harga).toLocaleString() }}</td>
+                        <td >
+                            <div :style="{ 'width': inpt_tera + 'px' }">
+                                <input type="text" class="form-control form-control-sm col-sm-4" v-model="list.tera" @keyup="hitung_total()" >
+                            </div>
+                        </td>
+                        <td v-if="list.last_meter != '' ">{{ Math.abs((list.last_meter - list.awal_meter - list.tera)) }}</td>
+                        <td v-else>0</td>
+                        <!-- <td v-if="tera[index] != '' ">{{ Math.abs((meter_now[index] - list.meter_akhir - tera[index])) }}</td>
+                        <td v-else>0</td> -->
+                        <td >{{ Number(list.last_price).toLocaleString() }}</td>
+                        <td v-if="list.last_meter != ''">{{ Number( (list.last_meter - list.awal_meter - list.tera) * list.last_price ).toLocaleString() }}</td>
+                        <td v-else>0</td>
                     </tr>
                 </tbody>
+                <thead>
+                    <tr>
+                        <th role="columnheader" scope="col" aria-colindex="1"><div></div></th>
+                        <th role="columnheader" scope="col" aria-colindex="2"><div>Meter Awal</div></th>
+                        <th role="columnheader" scope="col" aria-colindex="3"><div>Meter Akhir</div></th>
+                        <th role="columnheader" scope="col" aria-colindex="3"><div>Tera</div></th>
+                        <th role="columnheader" scope="col" aria-colindex="4"><div>Volume</div></th>
+                        <th role="columnheader" scope="col" aria-colindex="5"><div>Total</div></th>
+                        <th role="columnheader" scope="col" aria-colindex="4"><div>{{ Number(tota).toLocaleString() }}</div></th>
+                    </tr>
+                </thead>
             </table>
         </div>
 
@@ -352,6 +259,9 @@
     const totalDexlite = ref();
     const totalLiterDexlite = ref();
 
+    const inpt = ref(200);
+    const inpt_tera = ref(100);
+
     const meter_now = ref({});
     const regu = ref(null);
 
@@ -392,7 +302,7 @@
     })
 
     const nosels = computed(() => {
-        const nosel = store.getters.Saplusan;
+        const nosel = store.getters.Saplusan[0];
         const trs = store.getters.STransNosel;
         const regu = store.getters.STransNoselRegu;
 
