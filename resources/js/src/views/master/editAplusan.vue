@@ -263,7 +263,7 @@
     const inpt_tera = ref(100);
 
     const meter_now = ref({});
-    const regu = ref(null);
+    const regu = ref(props.regu);
 
     const items = ref([]);
     const kupon = ref([]);
