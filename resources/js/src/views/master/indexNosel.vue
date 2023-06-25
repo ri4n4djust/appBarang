@@ -297,22 +297,32 @@
                                 </svg>
                             </a>
                         </td>
-                        <td>{{ Number(list.meter_akhir).toLocaleString() }}</td>
+                        <td>
+                            <!-- {{ Number(list.meter_akhir).toLocaleString() }} -->
+                            <div :style="{ 'width': inpt + 'px' }">
+                                <input type="text" @input="formatCurrency()" class="form-control form-control-sm" v-model="list.meter_akhir " @keypress="onlyNumber">
+                            </div>
+                        </td>
                         <td >
                             <div :style="{ 'width': inpt + 'px' }">
-                                <input type="text" class="form-control form-control-sm col-sm-4" v-model="meter_now[index]" @keyup="hitung_total()" @keypress="onlyNumber">
+                                <input type="text" @input="formatCurrency()" class="form-control form-control-sm" v-model="meter_now[index]" @keyup="hitung_total()" @keypress="onlyNumber">
                             </div>
                         </td>
                         <td >
                             <div :style="{ 'width': inpt_tera + 'px' }">
-                                <input type="text" class="form-control form-control-sm col-sm-4" v-model="list.tera" @keyup="hitung_total()" >
+                                <input type="text" class="form-control form-control-sm" v-model="list.tera" @keyup="hitung_total()" >
                             </div>
                         </td>
                         <td v-if="meter_now[index] != '' ">{{ Math.abs((meter_now[index] - list.meter_akhir - list.tera)) }}</td>
                         <td v-else>0</td>
                         <!-- <td v-if="tera[index] != '' ">{{ Math.abs((meter_now[index] - list.meter_akhir - tera[index])) }}</td>
                         <td v-else>0</td> -->
-                        <td >{{ Number(list.harga).toLocaleString() }}</td>
+                        <td >
+                            <!-- {{ Number(list.harga).toLocaleString() }} -->
+                            <div :style="{ 'width': inpt_tera + 'px' }">
+                                <input type="text" @input="formatCurrency()" class="form-control form-control-sm" v-model="list.harga" @keyup="hitung_total()" >
+                            </div>
+                        </td>
                         <td v-if="meter_now[index] != ''">{{ Number( ((meter_now[index] - list.meter_akhir) - list.tera)  * list.harga ).toLocaleString() }}</td>
                         <td v-else>0</td>
                     </tr>
@@ -374,7 +384,7 @@
     const meter_now = ref({});
     const tera = ref({});
     const regu = ref(null);
-    const inpt = ref(200);
+    const inpt = ref(150);
     const inpt_tera = ref(100);
     const nosel = ref([]);
 
@@ -405,6 +415,40 @@
             return
         })
         
+    }
+
+    const formatCurrency = () => {
+        const locale = "id-ID" // your local formatting
+        const currency = "IDR" // your currency
+        const input = inputForm.value
+        const formatter = new Intl.NumberFormat(locale, { style: "currency", currency: currency})
+        const digits = new Intl.NumberFormat(locale, { useGrouping: false, }).format(-1234567809)
+        const notDigit = new RegExp("[^" + digits + "]+", "ug")
+        const comma = notDigit.exec( new Intl.NumberFormat(locale, { useGrouping: false }).format(1.5))[0]
+        const notDigitOrComma = new RegExp( "[^" + digits + comma + "]+", "ug")
+
+        const val = input.value
+        const cursor = input.selectionStart
+        const numsToCursor = val.slice(0, cursor).replace(notDigit, "").length
+        const afterSign = notDigit.test(val.slice(cursor - 2, cursor - 1))
+        const newVal = formatter.format(val.replace(notDigitOrComma, "").replace(comma, "."))
+        const reCursor = new RegExp(
+            "^(?:[^" +
+                digits +
+                "]*[" +
+                digits +
+                "]){" +
+                numsToCursor +
+                "}" +
+                (afterSign ? "[^" + digits + "]*" : ""),
+            "ug"
+        );
+
+        input.value = newVal;
+        reCursor.exec(newVal);
+        input.selectionStart = reCursor.lastIndex;
+        input.selectionEnd = reCursor.lastIndex;
+        inputFormatted.value = newVal
     }
     
     
