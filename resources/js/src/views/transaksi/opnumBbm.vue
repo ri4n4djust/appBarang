@@ -115,7 +115,20 @@
                                                     </thead>
                                                     <tbody role="rowgroup">
                                                         <tr v-for="item, index in table_1" :key="item.index" role="row">
-                                                            <td aria-colindex="1" role="cell">{{ item.code_bbm }}</td>
+                                                            <td aria-colindex="1" role="cell">
+                                                                Post - 
+                                                                    <select v-model="posting[index]">
+                                                                        <option value="0">Tidak</option>
+                                                                        <option value="1">Ya</option>
+                                                                    </select>
+                                                                    <!-- <input
+                                                                        type="checkbox"
+                                                                        :checked="checked"
+                                                                        v-model="posting[index]"
+                                                                        class="mr-2"
+                                                                    /> -->
+                                                                    
+                                                                {{ item.code_bbm }}</td>
                                                             <td aria-colindex="2" role="cell">{{ item.nama_bbm }}</td>
                                                             <td aria-colindex="3" role="cell">{{ Number(item.stokPersediaan).toLocaleString() }}</td>
                                                             <td aria-colindex="4" role="cell">Liter</td>
@@ -291,6 +304,7 @@
     const store = useStore();
     const table_1 = ref([]);
     const item_now = ref({});
+    const posting = ref([0,0,0]);
     const keterangan = ref({});
     const noopnum = ref([]);
     const total = ref([]);
@@ -380,6 +394,11 @@
             // console.log({kdBarang : dataArr[i].r_kdBarang, nmBarang : dataArr[i].r_nmBarang,});
             let subto = dataArr[i].last_price * (dataArr[i].stokPersediaan - item_now.value[i])
             let ket = keterangan.value[i]
+            // if (posting === true) {
+            //     var pos = "1";
+            // }else{
+            //     var pos = "0";
+            // }
             if (!isNaN(subto)) {
                 if(!ket){
                     ket = '-'
@@ -391,6 +410,7 @@
                     'accid_biaya' : dataArr[i].accid_biaya,
                     'keterangan' : ket,
                     'qty' : item_now.value[i],
+                    'posting' : posting.value[i],
                     'selisih' : dataArr[i].stokPersediaan - item_now.value[i],
                     'total' : subto
                 })

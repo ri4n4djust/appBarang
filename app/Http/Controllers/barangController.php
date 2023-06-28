@@ -160,6 +160,7 @@ class barangController extends Controller
                         $kdBarang = $detop[$i]['kdBarang'];
                         $nmBarang = $detop[$i]['nmBarang'];
                         $qty = $detop[$i]['qty'];
+                        $posting = $detop[$i]['posting'];
                         $selisih = $detop[$i]['selisih'];
                         // $total = $detop[$i]['total'];
                         // $hrg = $detop[$i]['hrgJual'];
@@ -254,71 +255,72 @@ class barangController extends Controller
                         ];
 
                         
+                        if($posting === "1"){
+                            $total_harga = $total_hpp ; // $detop[$i]['total'];
+                            $totalOpnum += $total_hpp ;
+                            //===========jurnal
+                            $pphps4 = 10 ; //$detop[0]['pphps4'];
+                            $acc_id_k = $detop[$i]['accid_persediaan']; // acc id yg di debet
+                            $acc_id_d = $detop[$i]['accid_biaya']; // acc id yg di debet
+                            // $accid = $detpro[$i]['accid']; // acc id yg di debet
+                            $accid_kas = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
 
-                        $total_harga = $total_hpp ; // $detop[$i]['total'];
-                        $totalOpnum += $total_hpp ;
-                        //===========jurnal
-                        $pphps4 = 10 ; //$detop[0]['pphps4'];
-                        $acc_id_k = $detop[$i]['accid_persediaan']; // acc id yg di debet
-                        $acc_id_d = $detop[$i]['accid_biaya']; // acc id yg di debet
-                        // $accid = $detpro[$i]['accid']; // acc id yg di debet
-                        $accid_kas = '11110'; // $request[0]['subtotal']; // acc id yg di kredit
+                            $acc_laba = '32300';
+                            $acc_pph = '23100'; // acc hutang pph
+                            $pphps4_dibayar = $total_harga * $pphps4 / 100 ;
 
-                        $acc_laba = '32300';
-                        $acc_pph = '23100'; // acc hutang pph
-                        $pphps4_dibayar = $total_harga * $pphps4 / 100 ;
-
-                        $memo = 'Opnum';
-                        $jurnal = 'JK';
-                        insert_gl($kdOpnum,$tglOpnum,$total_harga,$memo,$jurnal);
-                        $rgl = DB::table('general_ledger')->get()->last()->notrans;
-                        $ac = [
-                            [
-                                'rgl' => $rgl,
-                                'acc_id' => $acc_id_d,
-                                'debet' => $total_harga,
-                                'kredit' => 0,
-                                'trans_detail' => 'Opnum',
-                                'void_flag' => 0,
-                            ],
-                            [
-                                'rgl' => $rgl,
-                                'acc_id' => $acc_id_k,
-                                'debet' => 0,
-                                'kredit' => $total_harga,
-                                'trans_detail' => 'Opnum',
-                                'void_flag' => 0,
-                            ],
-                            [
-                                'rgl' => $rgl,
-                                'acc_id' => $acc_laba,
-                                'debet' => $total_harga,
-                                'kredit' => 0,
-                                'trans_detail' => 'Opnum',
-                                'void_flag' => 0,
-                            ],
-                            //=========pph ps 4
-                            [
-                                'rgl' => $rgl,
-                                'acc_id' => $accid_kas,
-                                'debet' => $pphps4_dibayar,
-                                'kredit' => 0,
-                                'trans_detail' => 'Trans-biaya',
-                                'void_flag' => 0,
-                            ],
-                            [
-                                'rgl' => $rgl,
-                                'acc_id' => $acc_pph,
-                                'debet' => 0,
-                                'kredit' => $pphps4_dibayar,
-                                'trans_detail' => 'Trans-biaya',
-                                'void_flag' => 0,
-                            ]
-                            //=====================endpph ps4
-                        ];
-                        
-                        insert_gl_detail($ac);
-                        //===========end jurnal
+                            $memo = 'Opnum';
+                            $jurnal = 'JK';
+                            insert_gl($kdOpnum,$tglOpnum,$total_harga,$memo,$jurnal);
+                            $rgl = DB::table('general_ledger')->get()->last()->notrans;
+                            $ac = [
+                                [
+                                    'rgl' => $rgl,
+                                    'acc_id' => $acc_id_d,
+                                    'debet' => $total_harga,
+                                    'kredit' => 0,
+                                    'trans_detail' => 'Opnum',
+                                    'void_flag' => 0,
+                                ],
+                                [
+                                    'rgl' => $rgl,
+                                    'acc_id' => $acc_id_k,
+                                    'debet' => 0,
+                                    'kredit' => $total_harga,
+                                    'trans_detail' => 'Opnum',
+                                    'void_flag' => 0,
+                                ],
+                                [
+                                    'rgl' => $rgl,
+                                    'acc_id' => $acc_laba,
+                                    'debet' => $total_harga,
+                                    'kredit' => 0,
+                                    'trans_detail' => 'Opnum',
+                                    'void_flag' => 0,
+                                ],
+                                //=========pph ps 4
+                                [
+                                    'rgl' => $rgl,
+                                    'acc_id' => $accid_kas,
+                                    'debet' => $pphps4_dibayar,
+                                    'kredit' => 0,
+                                    'trans_detail' => 'Trans-biaya',
+                                    'void_flag' => 0,
+                                ],
+                                [
+                                    'rgl' => $rgl,
+                                    'acc_id' => $acc_pph,
+                                    'debet' => 0,
+                                    'kredit' => $pphps4_dibayar,
+                                    'trans_detail' => 'Trans-biaya',
+                                    'void_flag' => 0,
+                                ]
+                                //=====================endpph ps4
+                            ];
+                            
+                            insert_gl_detail($ac);
+                            //===========end jurnal
+                        }
                         OpnumDetail::insert($detail);
                 }
 

@@ -339,14 +339,14 @@
         // alert(data.kd_trans);
         new window.Swal({
             title: 'Anda Yahin?',
-            text: "Hapus Opnum !" +item.kdOpnum,
+            text: "Hapus Opnum !" +item.r_opnum,
             type: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Delete',
             padding: '2em'
         }).then(result => {
             if (result.value) {
-                store.dispatch('DeleteOpnum', { id:item.kdOpnum})
+                store.dispatch('DeleteOpnum', { id:item.r_opnum})
                 .then(response => {
                     bind_data();
                     new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
