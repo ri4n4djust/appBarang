@@ -455,7 +455,7 @@ class pembelianController extends Controller
         };
         $list = DB::select("SELECT src.no_po,src.no_so no_so,src.subTotal,src.total,src.pph,rtrim(b.nmSupplier) supplier_name,b.kdSupplier,src.podate,src.qty_grpo,src.qty_recieve,src.total_net,src.total_terima 
                             from (SELECT a.no_po,a.no_so,a.r_supplier,a.subTotal,a.total,a.pph,cast(a.tgl_po as date) podate,sum(b.qty) qty_grpo,sum(qty_recieve) qty_recieve, sum(total_net) total_net, sum(total_terima) total_terima   
-                            FROM tblpobbm a left join tblpobbm_detail b on a.no_po = b.r_noPo where cast(a.tgl_po as date) between '2023-01-01' and '$endDate' group by a.r_supplier,a.no_po,a.no_so,a.tgl_po,a.total,a.pph,a.subTotal) src
+                            FROM tblpobbm a left join tblpobbm_detail b on a.no_po = b.r_noPo where cast(a.tgl_po as date) between '$startDate' and '$endDate' group by a.r_supplier,a.no_po,a.no_so,a.tgl_po,a.total,a.pph,a.subTotal) src
                             left join tblsupplier b on src.r_supplier = b.kdSupplier $where order by no_po asc;");
         
         return response()->json([
