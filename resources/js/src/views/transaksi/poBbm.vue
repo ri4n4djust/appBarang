@@ -926,9 +926,10 @@
             });
             let sumtotal = 0;
             let sumpph = 0;
-            let sisal = 0;
+            let subtota = 0;
             records.forEach(element => {
             sumtotal +=  parseInt(element.total);
+            subtota +=  parseInt(element.subTotal);
             sumpph +=  parseInt(element.pph);
             });
 
@@ -939,7 +940,7 @@
             rowhtml += '</tbody>';
             rowhtml += '<tfoot><tr>'
 
-            rowhtml += '<tr><th></th><th></th><th></th><th>Total</th><th></th><th></th><th></th><th>'+Number(sumpph).toLocaleString()+'</th><th>'+Number(sumtotal).toLocaleString()+'</th></tr>'
+            rowhtml += '<tr><th></th><th></th><th></th><th>Total</th><th></th><th>'+Number(subtota).toLocaleString()+'</th><th></th><th>'+Number(sumpph).toLocaleString()+'</th><th>'+Number(sumtotal).toLocaleString()+'</th></tr>'
             // rowhtml += '<tr><th></th><th></th><th></th><th></th><th>Total Net</th><th></th><th>'+Number(sum - sumtax).toLocaleString()+'</th>'
             rowhtml += '</tr></tfoot></table>'
             var winPrint = window.open('', '', 'left=0,top=0,width=1000,height=600,toolbar=0,scrollbars=0,status=0');
