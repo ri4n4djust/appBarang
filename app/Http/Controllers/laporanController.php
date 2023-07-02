@@ -272,6 +272,8 @@ class laporanController extends Controller
                     DB::table('gl_detail')->where('rgl', $gl[$i]->notrans)->delete();
                 };
                 //=====end jurnal
+
+
                 $get_tr = DB::table('tblterimabbm_detail')->where('r_kdterima', $kd)->get();
                 for($i=0;$i< count($get_tr);$i++){
                     $kodebarang = $get_tr[$i]->kd_barang ;
@@ -292,14 +294,15 @@ class laporanController extends Controller
                     ->where('r_noPo', '=' ,$get_tr[$i]->r_nopo)
                     ->where('kdBarang', '=' ,$get_tr[$i]->kd_barang)
                     ->update([
-                        'qty_recieve' => $qtypo - $qtyterima
+                        'qty_recieve' => $qtypo - $qtyterima,
+                        'total_terima'=> 0
                     ]);
-                    DB::table('tblpobbm_detail')
-                    ->where('r_noPo', '=' ,$get_tr[$i]->r_nopo)
-                    ->where('kdBarang', '=' ,$get_tr[$i]->kd_barang)
-                    ->update([
-                        'qty_recieve' => $qtypo - $qtyterima
-                    ]);
+                    // DB::table('tblpobbm_detail')
+                    // ->where('r_noPo', '=' ,$get_tr[$i]->r_nopo)
+                    // ->where('kdBarang', '=' ,$get_tr[$i]->kd_barang)
+                    // ->update([
+                    //     'qty_recieve' => $qtypo - $qtyterima
+                    // ]);
                     $brg = DB::table('tblpersediaan')->where('kdPersediaan', $kodebarang)->first();
                     $oldStok = $brg->stokPersediaan;
                     DB::table('tblpersediaan')->where('kdPersediaan', $kodebarang)->update([
