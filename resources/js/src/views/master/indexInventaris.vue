@@ -258,6 +258,24 @@
                                                     </select>
                                                 </div>
                                             </div>
+
+                                            <div class="form-group row">
+                                                <label for="nama" class="col-sm-3 col-form-label col-form-label-sm">Bulan Penyusutan</label>
+                                                <div class="col-sm-3">
+                                                    <select v-model="input.bulan" class="form-select">
+                                                        <option value="-01-20" selected>JANUARI</option>
+                                                        <option value="-02-20" selected>FEBRUARI</option>
+                                                        <option value="-03-20" selected>MARET</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-3">
+                                                    <select v-model="input.tahun" class="form-select">
+                                                        <option value="2021" selected>2021</option>
+                                                        <option value="2022" selected>2022</option>
+                                                        <option value="2023" selected>2023</option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                         
                                         
@@ -442,6 +460,9 @@
     const jurnal_kat = () => {
 
         let group = input.value.group_inventaris;
+        let bula = input.value.bulan;
+        let tahun = input.value.tahun;
+        
         // console.log(group);
         store.dispatch('getInvKat', {group : group})
         .then(response => {
@@ -455,7 +476,7 @@
                 let nilai_inv = brg_inv[i].nilai_inventaris ;
                 let nilai1 = nilai_inv / qty_aset || 0 ;
                 let penyusutan1bln = Math.floor(nilai1 / bulan || 0) ;
-                let tgl = moment().format("YYYY-M-D");
+                let tgl = tahun+bula; // moment().format("YYYY-M-D");
 
                 arr_kat.push({
                     'kode_penyusutan': kdpenyusutan.value,

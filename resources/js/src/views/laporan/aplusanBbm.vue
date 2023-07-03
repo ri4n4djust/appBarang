@@ -254,7 +254,7 @@
             records.map((item) => {
                 rowhtml += '<tr>';
                 rowhtml += '<td>'+item.kd_trans+'</td>';
-                rowhtml += '<td>'+moment(item.tgl_transaksi).format("DD-MM-YYYY")+'</td>';
+                rowhtml += '<td>'+moment(item.tgl_trans).format("DD-MM-YYYY")+'</td>';
                 rowhtml += '<td>'+item.r_regu+'</td>';
                 rowhtml += '<td>'+Number(item.total_jual).toLocaleString()+'</td>';
                 rowhtml += '<td>'+Number(item.total_kupon).toLocaleString()+'</td>';

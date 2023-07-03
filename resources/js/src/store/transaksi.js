@@ -622,6 +622,45 @@ const actions = {
         // await dispatch('GetPembelian')
     },
 
+    async DeleteJurnalUmum({dispatch}, kd) {
+        let response
+        try {
+            response = await axios.post('/api/delete/jurnal-umum', kd)
+            // console.log(response.data.data)
+            const toast = window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em',
+            });
+            toast.fire({
+                icon: 'success',
+                title: 'Jurnal berhasil terhapus',
+                padding: '2em',
+            });
+            return response ;
+        } catch (ex) {
+            // Handle error
+            const toast =  window.Swal.mixin({
+                toast: true,
+                position: 'top-center',
+                showConfirmButton: false,
+                timer: 3000,
+                padding: '2em'
+            });
+            toast.fire({
+                title: 'Error!',
+                text: 'Jurnal Gagal Dihapus',
+                icon: 'error',
+                // confirmButtonText: 'Cool',
+                padding: '2em'
+            });
+            throw 'error' ;
+        }
+        // await dispatch('GetPembelian')
+    },
+
     async DeletePenyusutan({dispatch}, kd) {
         let response
         try {

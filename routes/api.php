@@ -90,6 +90,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     //=================hapus
     Route::post('/delete/biaya', [App\Http\Controllers\laporanController::class, 'deleteBiaya']);
+    Route::post('/delete/jurnal-umum', [App\Http\Controllers\laporanController::class, 'deleteJurnalUmum']);
     Route::post('/delete/penyusutan', [App\Http\Controllers\laporanController::class, 'deletePenyusutan']);
     Route::post('/delete/pobbm', [App\Http\Controllers\laporanController::class, 'deletePobbm']);
     Route::post('/delete/penjualan', [App\Http\Controllers\laporanController::class, 'deletePenjualan']);

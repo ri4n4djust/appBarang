@@ -524,4 +524,28 @@
         GetNoJurnalUmum();
         GetJurnalUmum();
     }
+
+    const delete_row = (data) => {
+        // alert(data.kd_trans);
+        new window.Swal({
+            title: 'Anda Yahin?',
+            text: "Hapus Jurnal !" +data.notrans,
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Delete',
+            padding: '2em'
+        }).then(result => {
+            if (result.value) {
+                store.dispatch('DeleteJurnalUmum', { id:data.notrans})
+                .then(response => {
+                    GetNoJurnalUmum();
+                    GetJurnalUmum();
+                    new window.Swal('Deleted!', 'Your file has been deleted.', 'success');
+                }).catch(error => {
+                    // console.log('error: ', error)
+                    return
+                })
+            }
+        });
+    }
 </script>
