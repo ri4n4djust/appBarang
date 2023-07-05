@@ -422,7 +422,7 @@ class laporanController extends Controller
         try{
             $exception = DB::transaction(function() use ($request){
                 $kd = $request->input('id');
-                $gl = DB::table('general_ledger')->where('order_no', $kd)->get();
+                $gl = DB::table('general_ledger')->where('notrans', $kd)->get();
                 for($i=0;$i< count($gl);$i++){
                     // DB::table('general_ledger')->where('notrans', $gl[$i]->notrans)->delete();
                     DB::table('gl_detail')->where('rgl', $gl[$i]->notrans)->delete();
