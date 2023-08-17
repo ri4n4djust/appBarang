@@ -178,7 +178,12 @@
                                 </svg>
                             </a>
                         </td>
-                        <td>{{ Number(list.awal_meter).toLocaleString() }}</td>
+                        <td>
+                            <!-- {{ Number(list.awal_meter).toLocaleString() }} -->
+                            <div :style="{ 'width': inpt + 'px' }">
+                                <input type="text" class="form-control form-control-sm col-sm-4" v-model="list.awal_meter" @keyup="hitung_total()" @keypress="onlyNumber">
+                            </div>
+                        </td>
                         <td >
                             <div :style="{ 'width': inpt + 'px' }">
                                 <input type="text" class="form-control form-control-sm col-sm-4" v-model="list.last_meter" @keyup="hitung_total()" @keypress="onlyNumber">
@@ -206,7 +211,7 @@
                         <th role="columnheader" scope="col" aria-colindex="3"><div>Tera</div></th>
                         <th role="columnheader" scope="col" aria-colindex="4"><div>Volume</div></th>
                         <th role="columnheader" scope="col" aria-colindex="5"><div>Total</div></th>
-                        <th role="columnheader" scope="col" aria-colindex="4"><div>{{ Number(tota).toLocaleString() }}</div></th>
+                        <th role="columnheader" scope="col" aria-colindex="4"><div>{{ Number(totalAplusan).toLocaleString() }}</div></th>
                     </tr>
                 </thead>
             </table>
@@ -242,7 +247,7 @@
 
     import { useMeta } from '@/composables/use-meta';
 
-    useMeta({ title: 'Aplusan' });
+    useMeta({ title: 'Edit Aplusan' });
 
     const store = useStore();
     const router = useRouter();
@@ -258,6 +263,7 @@
     const totalLiterPertalite = ref();
     const totalDexlite = ref();
     const totalLiterDexlite = ref();
+    const totalAplusan = ref(0)
 
     const inpt = ref(200);
     const inpt_tera = ref(100);
@@ -352,7 +358,7 @@
             })
             tota += parseInt(subto)
             // total.value = tota
-                console.log(tota)
+                // console.log(tota)
         
         }
         // console.log(arr)
@@ -406,7 +412,7 @@
         items.value = store.getters.Saplusan[0];
         var dataArr = items.value
         const arr = [];
-        let tota = 0;
+        let totala = 0;
         for (let i = 0; i < dataArr.length; i++) {
             // console.log({kdBarang : dataArr[i].r_kdBarang, nmBarang : dataArr[i].r_nmBarang,});
             let id_nosel = dataArr[i].id_nosel
@@ -432,11 +438,12 @@
                 'last_meter':   dataArr[i].last_meter,
                 'total': subto
             })
-            tota += parseInt(subto)
+            // totala += parseInt(subto)
             // total.value = tota
-                console.log(tota)
+                console.log('total per nosel' + subto)
         
         }
+        
         // await store.dispatch('editAplus', arr)
 
         kupon.value = store.getters.Saplusan[1];
@@ -444,9 +451,11 @@
         let kuponArr = kupon.value
         for (let i = 0; i < kuponArr.length; i++) {
             kupona.push ({
-                'kdp': kuponArr[i].r_kdPelanggan,
+                'r_kdPelanggan': kuponArr[i].r_kdPelanggan,
                 'tglKupon': moment(kuponArr[i].tgl_trans).format('DD-MM-YYYY'),
                 'nilaiKupon': kuponArr[i].total,
+                // 'r_kdPelanggan': kuponArr[i].r_kdPelanggan,
+                'id': kuponArr[i].r_kdPelanggan
 
             })
         }
@@ -461,6 +470,8 @@
                 'ketBiaya': biayaArr[i].keterangan_biaya,
                 'tglBiaya': moment(biayaArr[i].tglBiaya).format('DD-MM-YYYY'),
                 'nilaiBiaya': biayaArr[i].jumlah,
+                'acc': biayaArr[i].accid,
+                'id_biaya': biayaArr[i].id_biaya,
 
             })
         }
@@ -472,9 +483,10 @@
         let linkArr = link.value
         for (let i = 0; i < biayaArr.length; i++) {
             linkc.push ({
-                'kdbm': linkArr[i].nama_bbm,
+                'kdbm': linkArr[i].nm_bbm,
                 'tglLink': moment(linkArr[i].tgl_link).format('DD-MM-YYYY'),
                 'nilaiLink': linkArr[i].jumlah_link,
+                'id': linkArr[i].id,
 
             })
         }
@@ -559,6 +571,39 @@
     const getRegu=() => {
         store.dispatch('GetTransNoselRegu')
     }
+
+    const hitung_total = () => {
+        // const nosel = store.getters.Saplusan[0];
+        // // console.log(nosel)
+        
+        // var dataArr = nosel
+        // // const tota = ref(0);
+        // for (let i = 0; i < dataArr.length; i++) {
+        //     // console.log({kdBarang : dataArr[i].r_kdBarang, nmBarang : dataArr[i].r_nmBarang,});
+        //     let last_meter =  meter_now.value[i];
+        //     if(meter_now.value[i] === ''){
+        //         last_meter = dataArr[i].meter_akhir;
+        //     };
+        //     let tera = dataArr[i].tera ;
+        //     let cost = (last_meter - dataArr[i].meter_akhir) - tera  || 0;
+        //     let subto = dataArr[i].harga * cost || 0;
+                        
+        //     // let ket = keterangan.value[i]
+        //     if (subto === 0){
+        //         if(tera != 0 ){
+        //             last_meter =  meter_now.value[i];
+        //         }else{
+        //             last_meter = dataArr[i].meter_akhir;
+        //         }
+
+        //     } else{
+        //         last_meter =  meter_now.value[i];
+        //     };
+        //     totalAplusan.value += parseInt(subto)
+        
+        // }
+        // console.log(totalAplusan.value);
+    };
 
     const export_table = (type) => {
         let cols = columns.value.filter((d) => d != 'profile' && d != 'action');
