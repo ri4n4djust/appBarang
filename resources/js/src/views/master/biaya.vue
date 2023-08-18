@@ -108,12 +108,14 @@ import 'vue3-quill/lib/vue3-quill.css';
 
 import { computed, ref, onMounted } from 'vue';
 import { useStore } from 'vuex';
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router';
+import { getCurrentInstance } from "vue";
 
 const store = useStore();
 const router = useRouter();
 const route = useRoute();
 
+const instance = getCurrentInstance();
 
 const cartBiaya = ref([]);
 const noBiaya = ref([]);
@@ -122,7 +124,8 @@ const accs = ref();
 
 
 const inputb = ref({
-    tglBiaya: moment().format('D-M-YYYY'),
+    tglBiaya: moment(instance.parent.proxy.startDate).format('DD-MM-YYYY'),
+    // tglBiaya: moment(instance.parent.proxy.startDate).format('DD-MM-YYYY'),
     // notransbiaya: noBiaya,
     // ketBiaya: content1,
     // regu: regu,
@@ -138,6 +141,7 @@ onMounted(() =>{
     }, 1000);
     setTimeout(function() { accs.value = store.getters.StateCoaList; }, 2000);
     // localStorage.setItem('biaya', '[]')
+    // console.log(instance.parent.proxy.startDate);
 });
 const GetCoaList=() => {
     store.dispatch('GetCoaList', {acc: '6'})

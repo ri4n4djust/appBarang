@@ -412,11 +412,11 @@
         items.value = store.getters.Saplusan[0];
         var dataArr = items.value
         const arr = [];
-        let totala = 0;
+        // let totala = 0;
         for (let i = 0; i < dataArr.length; i++) {
             // console.log({kdBarang : dataArr[i].r_kdBarang, nmBarang : dataArr[i].r_nmBarang,});
             let id_nosel = dataArr[i].id_nosel
-            let cost = parseInt(meter_now.value[i]) - parseInt(dataArr[i].awal_meter);
+            let cost = parseInt(dataArr[i].last_meter) - parseInt(dataArr[i].awal_meter);
             let subto = dataArr[i].last_price * cost;
             // let last_meter =  awal_meter.value[i];
             // let ket = keterangan.value[i]
@@ -438,9 +438,9 @@
                 'last_meter':   dataArr[i].last_meter,
                 'total': subto
             })
-            // totala += parseInt(subto)
+            totalAplusan.value += parseInt(subto)
             // total.value = tota
-                console.log('total per nosel' + subto)
+                // console.log('total per nosel' + subto)
         
         }
         
@@ -574,34 +574,35 @@
 
     const hitung_total = () => {
         // const nosel = store.getters.Saplusan[0];
-        // // console.log(nosel)
+        // console.log(nosel)
         
-        // var dataArr = nosel
-        // // const tota = ref(0);
-        // for (let i = 0; i < dataArr.length; i++) {
-        //     // console.log({kdBarang : dataArr[i].r_kdBarang, nmBarang : dataArr[i].r_nmBarang,});
-        //     let last_meter =  meter_now.value[i];
-        //     if(meter_now.value[i] === ''){
-        //         last_meter = dataArr[i].meter_akhir;
-        //     };
-        //     let tera = dataArr[i].tera ;
-        //     let cost = (last_meter - dataArr[i].meter_akhir) - tera  || 0;
-        //     let subto = dataArr[i].harga * cost || 0;
+        var dataArr = items.value
+        // const tota = ref(0);
+        for (let i = 0; i < dataArr.length; i++) {
+            // console.log({kdBarang : dataArr[i].r_kdBarang, nmBarang : dataArr[i].r_nmBarang,});
+            var last_meter ;
+            if(meter_now.value[i] === ''){
+                last_meter = dataArr[i].meter_akhir;
+            };
+            let tera = dataArr[i].tera ;
+            let cost = (dataArr[i].last_meter - dataArr[i].meter_akhir) - tera  || 0;
+            let subto = dataArr[i].harga * cost || 0;
                         
-        //     // let ket = keterangan.value[i]
-        //     if (subto === 0){
-        //         if(tera != 0 ){
-        //             last_meter =  meter_now.value[i];
-        //         }else{
-        //             last_meter = dataArr[i].meter_akhir;
-        //         }
+            // let ket = keterangan.value[i]
+            if (subto === 0){
+                if(tera != 0 ){
+                    last_meter =  dataArr[i].last_meter;
+                }else{
+                    last_meter = dataArr[i].meter_akhir;
+                }
 
-        //     } else{
-        //         last_meter =  meter_now.value[i];
-        //     };
-        //     totalAplusan.value += parseInt(subto)
+            } else{
+                last_meter =  dataArr[i].last_meter;
+            };
+            totalAplusan.value += parseInt(subto);
+            console.log(totalAplusan.value);
         
-        // }
+        }
         // console.log(totalAplusan.value);
     };
 
