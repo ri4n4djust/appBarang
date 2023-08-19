@@ -333,9 +333,9 @@
         for (let i = 0; i < dataArr.length; i++) {
             // console.log({kdBarang : dataArr[i].r_kdBarang, nmBarang : dataArr[i].r_nmBarang,});
             let id_nosel = dataArr[i].id_nosel
-            let cost = parseInt(meter_now.value[i]) - parseInt(dataArr[i].meter_akhir);
+            let cost = parseInt(dataArr[i].last_meter) - parseInt(dataArr[i].meter_akhir);
             let subto = dataArr[i].last_price * cost;
-            let last_meter =  meter_now.value[i];
+            let last_meter =  dataArr[i].last_meter;
             // let ket = keterangan.value[i]
             // if (!isNaN(subto)){
             //     last_meter = '0';
@@ -349,11 +349,11 @@
                 'kd_trans': dataArr[i].kd_trans,
                 'r_nosel': dataArr[i].r_nosel,
                 'r_regu': dataArr[i].r_regu,
-                'tgl_transaksi': dataArr[i].tgl_transaksi,
+                'tgl_transaksi': tgl,
                 'cost_ltr': dataArr[i].cost_ltr,
                 'last_price': dataArr[i].last_price,
                 'awal_meter': dataArr[i].awal_meter,
-                'last_meter':   meter_now.value[i],
+                'last_meter':   dataArr[i].last_meter,
                 'total': subto
             })
             tota += parseInt(subto)
@@ -363,12 +363,13 @@
         }
         // console.log(arr)
         const arr_k = [];
-        const arr_kupon = store.getters.Saplusan[1];
+        // const arr_kupon = store.getters.Saplusan[1];
+        const arr_kupon = JSON.parse(localStorage.getItem('kupon'));
         let totak = 0;
         for (let i = 0; i < arr_kupon.length; i++) {
             arr_k.push ({
                 'kdPelanggan': arr_kupon[i].r_kdPelanggan,
-                'tglKupon': arr_kupon[i].tgl_trans,
+                'tglKupon': tgl,
                 'r_regu': regu.value,
                 'nilai': arr_kupon[i].total,
                 // 'tgl_transaksi': tgl, 
@@ -381,7 +382,7 @@
         for (let a = 0; a < arr_biaya.length; a++) {
             arr_b.push ({
                 'ketBiaya': arr_biaya[a].keterangan_biaya,
-                'tglBiaya': arr_biaya[a].tglBiaya,
+                'tglBiaya': tgl,
                 'r_regu': regu.value,
                 'nilai': arr_biaya[a].jumlah,
                 // 'tgl_transaksi': tgl, 
@@ -395,7 +396,7 @@
         for (let a = 0; a < arr_link.length; a++) {
             arr_l.push ({
                 'nm_bbm': arr_link[a].nm_bbm,
-                'tgl_link': arr_link[a].tgl_link,
+                'tgl_link': tgl,
                 'r_regu': regu.value,
                 'jumlahLink': arr_link[a].jumlah_link,
                 // 'tgl_transaksi': tgl, 
@@ -454,7 +455,7 @@
                 'r_kdPelanggan': kuponArr[i].r_kdPelanggan,
                 'tglKupon': moment(kuponArr[i].tgl_trans).format('DD-MM-YYYY'),
                 'nilaiKupon': kuponArr[i].total,
-                // 'r_kdPelanggan': kuponArr[i].r_kdPelanggan,
+                'kdp': kuponArr[i].r_kdPelanggan,
                 'id': kuponArr[i].r_kdPelanggan
 
             })
@@ -600,7 +601,7 @@
                 last_meter =  dataArr[i].last_meter;
             };
             totalAplusan.value += parseInt(subto);
-            console.log(totalAplusan.value);
+            // console.log(totalAplusan.value);
         
         }
         // console.log(totalAplusan.value);
