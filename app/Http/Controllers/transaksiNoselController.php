@@ -94,6 +94,10 @@ class transaksiNoselController extends Controller
                 $kdtrans = $kdtr.$n;
                 $regu = $request[0][0]['r_regu'];
 
+                if(empty($regu)){
+                    new \Exception("Regu Belum Dipilih");
+                }
+
                 $date = date('h:i:s');
                 $tgl = $detop[0]['tgl_transaksi'];
                 $tgl_header = $tgl.' '.$date ;
@@ -315,36 +319,7 @@ class transaksiNoselController extends Controller
                             'updated_at' => \Carbon\Carbon::now()->toDateTimeString()
                         ];
                         $total_l += $nilai;
-                        //===========jurnal link aja
-                        // $accid = $detpro[$i]['accid']; // acc id yg di debet
-                        // $acc_id_d = $det_biaya[$i]['acc']; // $request[0]['subtotal']; // acc id yg di kredit
-                        // $acc_id_k = '11110'; // $det_biaya[$i]['acc'];
-                        // $memo = 'Aplusan-biaya';
-                        // $jurnal = 'JK';
-                        // insert_gl($kdtrans,$tgl,$t,$memo,$jurnal);
-                        // $rgl = DB::table('general_ledger')->get()->last()->notrans;
-                        // $ac = [
-                        //     [
-                        //         'rgl' => $rgl,
-                        //         'acc_id' => $acc_id_d,
-                        //         'debet' => $nilai,
-                        //         'kredit' => 0,
-                        //         'trans_detail' => 'Aplusan-biaya',
-                        //         'void_flag' => 0,
-                        //     ],
-                        //     [
-                        //         'rgl' => $rgl,
-                        //         'acc_id' => $acc_id_k,
-                        //         'debet' => 0,
-                        //         'kredit' => $nilai,
-                        //         'trans_detail' => 'Aplusan-biaya',
-                        //         'void_flag' => 0,
-                        //     ],
-                            
-                        // ];
                         
-                        // insert_gl_detail($ac);
-                        //===========end jurnal
                     }
                     Linkaja::insert($detli);
                 }
@@ -359,72 +334,20 @@ class transaksiNoselController extends Controller
                     // $total_hpp = $detpro[$i]['total_hpp'];
                     $kdb = $detpro[$i]['kdBbm'];
 
+                    $totalStok = DB::table('tblstok_fifo')->where('kd_barang', $kdb)->sum('stok');
+                    if($total_liter > $totalStok){
+                        throw new \Exception("Stok Kurang");
+                    }
+                    
+
+
                     //========cek harga per liter sesuai stok fifo
-                    // $id_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
-                    // $stok_fifo = DB::table('tblstok_fifo')->select('*')->where('id', $id_fifo)->first();
-                    // $data_tr = DB::table('tblstok_fifo')
-                    //         ->select('*')
-                    //         ->where('kd_barang', '=', $kdb)
-                    //         ->where('stok', '>', '0')
-                    //         ->orderBy('tgl', 'ASC')
-                    //         ->get()->toArray();
                     $data_tr = DB::select(" SELECT * FROM tblstok_fifo WHERE kd_barang = '$kdb' AND stok > 0 ORDER by tgl ASC");
                     // $harga_fifo = DB::table('tblstok_fifo')->select('harga')->where('id', $id_fifo)->first();
                     // print_r( $stok_fifo );
                     $total_hpp = 0;
                     $sisa = $total_liter;
                     // $qty = $total_liter;
-
-                    
-                    
-                    // while($sisa > 0){
-                    //     $idn_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
-                    //     $stokn_fifo = DB::table('tblstok_fifo')->where('id', $idn_fifo)->first();
-                    //     // $hargan_fifo = DB::table('tblstok_fifo')->where('id', $idn_fifo)->first()->harga;
-
-                    //     $stokn_fifo = json_decode(json_encode($stokn_fifo), true);
-
-                    //     if($sisa <= $stokn_fifo['stok']){
-                    //         DB::table('tblstok_fifo')->where('id', '=', $idn_fifo )->update([
-                    //             'stok' => $stokn_fifo['stok'] - $total_liter,
-                    //         ]);
-                    //         $total_hpp += $sisa * $stokn_fifo['harga'] ;
-                    //         insert_trans_stok($kdtrans,$idn_fifo,$sisa,$stokn_fifo['harga']);
-                    //         $sisa = 0;
-                    //     }else{
-                            
-                    //         $idnew_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
-                    //         $stoknew_fifo = DB::table('tblstok_fifo')->where('id', $idnew_fifo)->first();
-                    //         // $harganew_fifo = DB::table('tblstok_fifo')->select('harga')->where('id', $id_fifo)->first()->harga;
-
-                    //         $stoknew_fifo = json_decode(json_encode($stoknew_fifo), true);
-                    //         // $new_sisa = $total_liter - $sisa;
-                            
-                    //         DB::table('tblstok_fifo')->where('id', '=', $idnew_fifo )->update([
-                    //             'stok' => $stoknew_fifo['stok'] - $stoknew_fifo['stok'],
-                    //         ]);
-                    //         $total_hpp = $stoknew_fifo['stok'] * $stoknew_fifo['harga'] ;
-                    //         insert_trans_stok($kdtrans,$idnew_fifo,$stoknew_fifo['stok'],$stoknew_fifo['harga']);
-                    //         $sisa = $total_liter - $stoknew_fifo['stok']; 
-                    //         if($sisa > 0){
-                    //             $idnew1_fifo = DB::table('tblstok_fifo')->select('*')->where('kd_barang','=',$kdb)->where('stok', '!=', '0')->min('id');
-                    //             $stoknew1_fifo = DB::table('tblstok_fifo')->where('id', $idnew1_fifo)->first();
-                    //             // $harganew_fifo = DB::table('tblstok_fifo')->select('harga')->where('id', $id_fifo)->first()->harga;
-
-                    //             $stoknew1_fifo = json_decode(json_encode($stoknew1_fifo), true);
-                    //             // $new_sisa = $total_liter - $sisa;
-                                
-                    //             DB::table('tblstok_fifo')->where('id', '=', $idnew1_fifo )->update([
-                    //                 'stok' => $stoknew1_fifo['stok'] - $sisa,
-                    //             ]);
-                    //             $total_hpp += $sisa * $stoknew1_fifo['harga'] ;
-                    //             insert_trans_stok($kdtrans,$idnew1_fifo,$sisa,$stoknew1_fifo['harga']);
-                    //             $sisa = $sisa - $stoknew1_fifo['stok'];
-
-                    //         }
-                    //         // echo $sisa ;
-                    //     };
-                    // }
                     
                     $qty = $total_liter;
                     foreach($data_tr as $tr){
@@ -435,10 +358,8 @@ class transaksiNoselController extends Controller
                         $tgl_stok = $tr->tgl;
 
                         if($qty > 0) { 
-              
                             // buat var $temp sbg. pengurang
                             $temp = $qty;
-              
                             //proses pengurangan
                             $qty = $qty - $stok;
                             // $qty_berkurang = $stok - $stok ;
@@ -657,11 +578,11 @@ class transaksiNoselController extends Controller
                 ], 500);
             }
         } catch (\Exception $e) {
-            //DB::rollback();
+            DB::rollback();
             // something went wrong
             return response()->json([
              'success' => false,
-             'message' => 'exception'.$e,
+             'message' => $e->getMessage() // 'exception'.$e,
          ], 400);
         }
     }

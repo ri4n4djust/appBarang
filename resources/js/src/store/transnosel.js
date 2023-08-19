@@ -33,7 +33,8 @@ const actions = {
                 padding: '2em',
             });
             return response ;
-        } catch (ex) {
+        } catch (error) {
+            // console.log(error.response.data.message)
             const toast =  window.Swal.mixin({
                 toast: true,
                 position: 'top-center',
@@ -43,7 +44,7 @@ const actions = {
             });
             toast.fire({
                 title: 'Error!',
-                text: 'Mohon Lengkapi Data',
+                text: error.response.data.message, // 'Mohon Lengkapi Data',
                 icon: 'error',
                 // confirmButtonText: 'Cool',
                 padding: '2em'
