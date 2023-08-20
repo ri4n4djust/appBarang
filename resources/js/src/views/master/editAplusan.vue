@@ -333,7 +333,7 @@
         for (let i = 0; i < dataArr.length; i++) {
             // console.log({kdBarang : dataArr[i].r_kdBarang, nmBarang : dataArr[i].r_nmBarang,});
             let id_nosel = dataArr[i].id_nosel
-            let cost = parseInt(dataArr[i].last_meter) - parseInt(dataArr[i].meter_akhir);
+            let cost = parseInt(dataArr[i].last_meter) - parseInt(dataArr[i].awal_meter);
             let subto = dataArr[i].last_price * cost;
             let last_meter =  dataArr[i].last_meter;
             // let ket = keterangan.value[i]
@@ -348,13 +348,15 @@
                 'nm_bbm': dataArr[i].nama_bbm,
                 'kd_trans': dataArr[i].kd_trans,
                 'r_nosel': dataArr[i].r_nosel,
-                'r_regu': dataArr[i].r_regu,
+                'r_regu': regu.value,
                 'tgl_transaksi': tgl,
                 'cost_ltr': dataArr[i].cost_ltr,
                 'last_price': dataArr[i].last_price,
                 'awal_meter': dataArr[i].awal_meter,
                 'last_meter':   dataArr[i].last_meter,
-                'total': subto
+                'tera': dataArr[i].tera,
+                'total': subto,
+                'totalhpp': dataArr[i].total_hpp
             })
             tota += parseInt(subto)
             // total.value = tota
@@ -362,48 +364,103 @@
         
         }
         // console.log(arr)
+        const bbmNow = store.getters.StateBbm;
+
+        const totalPXHpp = arr.filter(i => i.kodeBrg === 'BRG0001').reduce((a, b) => Number(a) + Number(b.totalhpp), 0);
+        const totalPLHpp = arr.filter(i => i.kodeBrg === 'BRG0002').reduce((a, b) => Number(a) + Number(b.totalhpp), 0);
+        const totalDXHpp = arr.filter(i => i.kodeBrg === 'BRG0003').reduce((a, b) => Number(a) + Number(b.totalhpp), 0);
+        const totalPX = arr.filter(i => i.kodeBrg === 'BRG0001').reduce((a, b) => Number(a) + Number(b.total), 0);
+        const totalPL = arr.filter(i => i.kodeBrg === 'BRG0002').reduce((a, b) => Number(a) + Number(b.total), 0);
+        const totalDX = arr.filter(i => i.kodeBrg === 'BRG0003').reduce((a, b) => Number(a) + Number(b.total), 0);
+
+        const totalPXL = arr.filter(i => i.kodeBrg === 'BRG0001').reduce((a, b) => Number(a) + Number(b.cost_ltr), 0);
+        const totalPLL = arr.filter(i => i.kodeBrg === 'BRG0002').reduce((a, b) => Number(a) + Number(b.cost_ltr), 0);
+        const totalDXL = arr.filter(i => i.kodeBrg === 'BRG0003').reduce((a, b) => Number(a) + Number(b.cost_ltr), 0);
+
+        const accPersediaanPX = bbmNow.filter(k => k.code_bbm === 'BRG0001');
+        const acchppPX = bbmNow.filter(k => k.code_bbm === 'BRG0001');
+        const accidPX = bbmNow.filter(k => k.code_bbm === 'BRG0001');
+        const accPersediaanPL = bbmNow.filter(k => k.code_bbm === 'BRG0002');
+        const acchppPL = bbmNow.filter(k => k.code_bbm === 'BRG0002');
+        const accidPL = bbmNow.filter(k => k.code_bbm === 'BRG0002');
+        const accPersediaanDX = bbmNow.filter(k => k.code_bbm === 'BRG0003');
+        const acchppDX = bbmNow.filter(k => k.code_bbm === 'BRG0003');
+        const accidDX = bbmNow.filter(k => k.code_bbm === 'BRG0003');
+
+        const prArr = []
+        prArr.push(
+            {'kdBbm':'BRG0001',
+            'nmBarang': 'PERTAMAX',
+            'total_hpp':totalPXHpp,
+            'total_harga': totalPX,
+            'total_liter': totalPXL,
+            'accid_persediaan': accPersediaanPX[0].accid_persediaan,
+            'accid_hpp': acchppPX[0].accid_hpp,
+            'accid': accidPX[0].accid},
+            {'kdBbm':'BRG0002',
+            'nmBarang': 'PERTALITE',
+            'total_hpp':totalPLHpp,
+            'total_harga': totalPL,
+            'total_liter': totalPLL,
+            'accid_persediaan': accPersediaanPL[0].accid_persediaan,
+            'accid_hpp': acchppPL[0].accid_hpp,
+            'accid': accidPL[0].accid},
+            {'kdBbm':'BRG0003',
+            'nmBarang': 'DEXLITE',
+            'total_hpp':totalDXHpp,
+            'total_harga': totalDX,
+            'total_liter': totalDXL,
+            'accid_persediaan': accPersediaanDX[0].accid_persediaan,
+            'accid_hpp': acchppDX[0].accid_hpp,
+            'accid': accidDX[0].accid}
+        )
+
         const arr_k = [];
         // const arr_kupon = store.getters.Saplusan[1];
         const arr_kupon = JSON.parse(localStorage.getItem('kupon'));
         let totak = 0;
         for (let i = 0; i < arr_kupon.length; i++) {
             arr_k.push ({
-                'kdPelanggan': arr_kupon[i].r_kdPelanggan,
+                'kdPelanggan': arr_kupon[i].kdp,
                 'tglKupon': tgl,
                 'r_regu': regu.value,
-                'nilai': arr_kupon[i].total,
+                'nilai': arr_kupon[i].nilaiKupon,
                 // 'tgl_transaksi': tgl, 
             })
         }
         // console.log(arr)
         const arr_b = [];
-        const arr_biaya = store.getters.Saplusan[2];
+        // const arr_biaya = store.getters.Saplusan[2];
+        const arr_biaya = JSON.parse(localStorage.getItem('biaya'));
         let totab = 0;
         for (let a = 0; a < arr_biaya.length; a++) {
             arr_b.push ({
-                'ketBiaya': arr_biaya[a].keterangan_biaya,
+                'ketBiaya': arr_biaya[a].ketBiaya,
                 'tglBiaya': tgl,
                 'r_regu': regu.value,
-                'nilai': arr_biaya[a].jumlah,
-                // 'tgl_transaksi': tgl, 
+                'nilai': arr_biaya[a].nilaiBiaya,
+                'acc': arr_biaya[a].acc, 
             })
         }
 
         // console.log(arr)
         const arr_l = [];
-        const arr_link = store.getters.Saplusan[3];
+        // const arr_link = store.getters.Saplusan[3];
+        const arr_link = JSON.parse(localStorage.getItem('link'));
         let totall = 0;
         for (let a = 0; a < arr_link.length; a++) {
             arr_l.push ({
-                'nm_bbm': arr_link[a].nm_bbm,
+                'nm_bbm': arr_link[a].kdbm,
                 'tgl_link': tgl,
                 'r_regu': regu.value,
-                'jumlahLink': arr_link[a].jumlah_link,
+                'jumlahLink': arr_link[a].nilaiLink,
                 // 'tgl_transaksi': tgl, 
             })
         }
 
-        store.dispatch('CreateTransNosel', [arr,arr_k,arr_b,arr_l ])
+        store.dispatch('DeleteAplusan', { id:dataArr[0].kd_trans})
+        // console.log(dataArr[0].kd_trans);
+        store.dispatch('CreateTransNosel', [arr,arr_k,arr_b,arr_l,prArr ])
 
     }
 
@@ -452,7 +509,7 @@
         let kuponArr = kupon.value
         for (let i = 0; i < kuponArr.length; i++) {
             kupona.push ({
-                'r_kdPelanggan': kuponArr[i].r_kdPelanggan,
+                // 'r_kdPelanggan': kuponArr[i].r_kdPelanggan,
                 'tglKupon': moment(kuponArr[i].tgl_trans).format('DD-MM-YYYY'),
                 'nilaiKupon': kuponArr[i].total,
                 'kdp': kuponArr[i].r_kdPelanggan,
