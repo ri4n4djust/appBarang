@@ -1,5 +1,5 @@
 {
-    "/js/main.js": "/js/main.js?id=64c1467d790ccf8c1c10ff821bdaf257",
+    "/js/main.js": "/js/main.js?id=8ca96515b7273ec38b4acf586844d853",
     "/js/chunks/index2.84eadc35cc80d7ca.js": "/js/chunks/index2.84eadc35cc80d7ca.js?id=c624315454d3b5bf632dd57d57319d2a",
     "/js/chunks/components-tabs.76d49c15b1ff365d.js": "/js/chunks/components-tabs.76d49c15b1ff365d.js?id=102efaf00003bba53d11b7230f24adf9",
     "/js/chunks/components-accordions.85f750f841c8771c.js": "/js/chunks/components-accordions.85f750f841c8771c.js?id=a5a768c225ef6c68821cf585e6f305c1",
@@ -117,5 +117,9 @@
     "/js/chunks/components-tabs.c17ac0a527de872b.js": "/js/chunks/components-tabs.c17ac0a527de872b.js?id=63b6d9704a802e33a65ac242e8bf51eb",
     "/js/chunks/components-tabs.41890d84dd642838.js": "/js/chunks/components-tabs.41890d84dd642838.js?id=d5a952b28b9f37d549bd169c096a9c51",
     "/js/chunks/components-tabs.1dea74eee74b7808.js": "/js/chunks/components-tabs.1dea74eee74b7808.js?id=47e1ae2c82d10b0a9ca11ad981f12df1",
-    "/js/chunks/components-tabs.d51170d28081c9a3.js": "/js/chunks/components-tabs.d51170d28081c9a3.js?id=2c099ca82208bc23f6013780cb6c633c"
+    "/js/chunks/components-tabs.d51170d28081c9a3.js": "/js/chunks/components-tabs.d51170d28081c9a3.js?id=2c099ca82208bc23f6013780cb6c633c",
+    "/js/chunks/components-tabs.0994cdeb01e865af.js": "/js/chunks/components-tabs.0994cdeb01e865af.js?id=461d1f6a795763008b50fcf5eb21f3fc",
+    "/js/chunks/components-tabs.3ea94102ea2fcbd8.js": "/js/chunks/components-tabs.3ea94102ea2fcbd8.js?id=c97c46a9b5b6beb5d7c0bfbe9c9b05e9",
+    "/js/chunks/components-tabs.2292576821f28b2c.js": "/js/chunks/components-tabs.2292576821f28b2c.js?id=cc1748247d6ea6b1cd5fdd9d5413a7d7",
+    "/js/chunks/components-tabs.e1c8f87b1e9f3f5c.js": "/js/chunks/components-tabs.e1c8f87b1e9f3f5c.js?id=bda2c132bc7894741594494f52a60d1d"
 }

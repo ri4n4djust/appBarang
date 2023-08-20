@@ -55,9 +55,9 @@
                                                 <tr v-for="b in cartLink" :key="b.id" >
                                                     <td aria-colindex="1" role="cell">{{ b.kdbm }}</td>
                                                     <td aria-colindex="2" role="cell">{{ b.tglLink }}</td>
-                                                    <td aria-colindex="3" role="cell">{{ b.nilaiLink }}</td>
+                                                    <td aria-colindex="3" role="cell">{{ Number(b.nilaiLink).toLocaleString() }}</td>
                                                     <td aria-colindex="4" role="cell">
-                                                        <button type="button" class="btn btn-secondary additem btn-sm" @click="removeBiaya(id=b.ketBiaya)">Hapus</button>
+                                                        <button type="button" class="btn btn-secondary additem btn-sm" @click="removeLink(id=b.ketBiaya)">Hapus</button>
                                                     </td>
                                                     
                                                 </tr>
@@ -119,7 +119,10 @@ const link = computed(() => {
 onMounted(() =>{
     // getPelanggan();
     getBbm();
-    localStorage.setItem('link', '[]')
+    // localStorage.setItem('link', '[]')
+    setTimeout(() => {
+        getlistLink();
+    }, 1000)
 })
 
 const getBbm = async () => {
@@ -136,7 +139,7 @@ const simpnLink = async () =>{
             cartLink.value.push(inputl.value);
             localStorage.setItem('link', JSON.stringify(cartLink.value))
             await store.dispatch('NewLink', cartLink.value)
-            getlistb();
+            getlistLink();
     }else{
             // cartKupon.value = JSON.parse(localStorage.getItem('kupon'))
             
@@ -144,7 +147,7 @@ const simpnLink = async () =>{
             localStorage.setItem('link',JSON.stringify(cartLink.value));
             await store.dispatch('NewLink', cartLink.value)
             // console.log(inputk.value)
-            getlistb();
+            getlistLink();
     }
     // inputb.value = {
     //     ketBiaya: '',
@@ -153,15 +156,15 @@ const simpnLink = async () =>{
     // alert('simpan  biaya')
 }
 
-const removeBiaya = (id) =>{
+const removeLink = (id) =>{
     const arrayFromStroage = JSON.parse(localStorage.getItem('link'));
     const filtered = arrayFromStroage.filter(arrayFromStroage => arrayFromStroage.ketBiaya !== id);
     localStorage.setItem('link', JSON.stringify(filtered));
     store.dispatch('NewLink', filtered)
-    getlistb();
+    getlistLink();
 }
 
-const getlistb = () => {
+const getlistLink = () => {
     // await store.dispatch('GetPelanggan')
     cartLink.value = JSON.parse(localStorage.getItem('link')) || [];
     let suml = 0;

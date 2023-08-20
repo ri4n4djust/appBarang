@@ -539,7 +539,7 @@
         link.value = store.getters.Saplusan[3];
         var linkc = [];
         let linkArr = link.value
-        for (let i = 0; i < biayaArr.length; i++) {
+        for (let i = 0; i < linkArr.length; i++) {
             linkc.push ({
                 'kdbm': linkArr[i].nm_bbm,
                 'tglLink': moment(linkArr[i].tgl_link).format('DD-MM-YYYY'),
