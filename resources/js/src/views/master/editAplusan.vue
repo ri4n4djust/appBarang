@@ -159,7 +159,7 @@
                     </tr>
                 </thead>
                 <tbody role="rowgroup">
-                    <tr role="row" v-for="list, index in nosels.nosel" :key="list.id_nosel">
+                    <tr role="row" v-for="list, index in items" :key="list.id_nosel">
                         <td> {{ list.nama_nosel }} 
                             <a href="javascript:void(0);" data-bs-toggle="tooltip" title="Edit" @click="openModal(list)">
                                 <svg
@@ -333,7 +333,7 @@
         for (let i = 0; i < dataArr.length; i++) {
             // console.log({kdBarang : dataArr[i].r_kdBarang, nmBarang : dataArr[i].r_nmBarang,});
             let id_nosel = dataArr[i].id_nosel
-            let cost = parseInt(dataArr[i].last_meter) - parseInt(dataArr[i].awal_meter);
+            let cost = (parseInt(dataArr[i].last_meter) - parseInt(dataArr[i].awal_meter)) - parseInt(dataArr[i].tera);
             let subto = dataArr[i].last_price * cost;
             let last_meter =  dataArr[i].last_meter;
             // let ket = keterangan.value[i]
@@ -342,6 +342,15 @@
             // } else{
             //     last_meter =  meter_now.value[i];
             // }
+            // if (subto === 0){
+            //     if(tera != 0 ){
+            //         last_meter =  meter_now.value[i];
+            //     }else{
+            //         last_meter = dataArr[i].meter_akhir;
+            //     }
+            // } else{
+            //     last_meter =  meter_now.value[i];
+            // };
             arr.push ({
                 'kd_bbm': dataArr[i].r_bbm,
                 'kodeBrg': dataArr[i].code_bbm,
@@ -350,7 +359,7 @@
                 'r_nosel': dataArr[i].r_nosel,
                 'r_regu': regu.value,
                 'tgl_transaksi': tgl,
-                'cost_ltr': dataArr[i].cost_ltr,
+                'cost_ltr': cost,
                 'last_price': dataArr[i].last_price,
                 'awal_meter': dataArr[i].awal_meter,
                 'last_meter':   dataArr[i].last_meter,
