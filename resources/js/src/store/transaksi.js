@@ -5,26 +5,31 @@ const state = {
     pembelian: [],
     penjualan:[],
     linkacc: [],
-    editpenjualan: [],
     stokopnum: [],
-    editaplusan:[],
+    
     kupon: [],
     biaya: [],
     link: [],
-    listpobbm: []
+    listpobbm: [],
+    //==========Edit
+    editpenjualan: [],
+    editaplusan:[],
+    editbiaya: []
   };
   
 const getters = {
     StatePembelian: state => state.pembelian,
     StatePenjualan: state => state.penjualan,
     StateAcc: state => state.linkacc,
-    SeditPenjualan: state => state.editpenjualan,
     SstokOpnum: state => state.stokopnum,
-    SeditAplusan: state => state.editaplusan,
     Skupon: state => state.kupon,
     Sbiaya: state => state.biaya,
     Slink: state => state.link,
     SlistPobbm: state => state.listpobbm,
+    //==========Edit
+    SeditPenjualan: state => state.editpenjualan,
+    SeditAplusan: state => state.editaplusan,
+    SeditBiaya: state => state.editbiaya,
 };
 
 const actions = {
@@ -405,6 +410,12 @@ const actions = {
         // await dispatch('GetPembelian')
     },
 
+    async CreateEditPenjualan({commit}, item) {
+        // await axios.post('/api/tambah/pelanggan', pel)
+        await commit('setEditPenjualan', item)
+        localStorage.setItem('headerEditPen', JSON.stringify([item]))
+    },
+
     async NewKupon({ commit }, data){
             commit('setKupon', data)
     },
@@ -414,21 +425,7 @@ const actions = {
     async NewLink({ commit }, b){
         commit('setLink', b)
     },
-
-    async GetEditAplusan({ commit }, sort){
-        let response
-        try {
-            response = await axios.post('/api/getedit-aplusam', sort)
-            commit('setEditAplusan', response.data.data)
-            commit('setKupon', data)
-            commit('setBiaya', b)
-            commit('setLink', b)
-        } catch (ex) {
-            // Handle error
-            return
-        }
     
-    },
     async GetPembelian({ commit }){
         let response
         try {
@@ -854,12 +851,34 @@ const actions = {
         // await dispatch('GetPembelian')
     },
     
-    
-    async CreateEditPenjualan({commit}, item) {
-        // await axios.post('/api/tambah/pelanggan', pel)
-        await commit('setEditPenjualan', item)
-        localStorage.setItem('headerEditPen', JSON.stringify([item]))
+//========edit
+    async GetEditAplusan({ commit }, sort){
+        let response
+        try {
+            response = await axios.post('/api/getedit-aplusam', sort)
+            commit('setEditAplusan', response.data.data)
+            commit('setKupon', data)
+            commit('setBiaya', b)
+            commit('setLink', b)
+        } catch (ex) {
+            // Handle error
+            return
+        }
+
     },
+
+    async GetEditBiaya({ commit }, sort){
+        let response
+        try {
+            response = await axios.post('/api/getedit-biaya', sort)
+            commit('setEditBiaya', response.data.data)
+        } catch (ex) {
+            // Handle error
+            return
+        }
+
+    },
+    
 
 };
 const mutations = {
@@ -868,12 +887,6 @@ const mutations = {
     },
     setAcc(state, acc){
         state.linkacc = acc
-    },
-    setEditPenjualan(state, editjual){
-        state.editpenjualan = editjual
-    },
-    setEditAplusan(state, edita){
-        state.editaplusan = edita
     },
     setKupon(state, data){
         state.kupon = data
@@ -886,12 +899,22 @@ const mutations = {
     },
     setListpobbm(state, po){
         state.listpobbm = po
-    }
+    },
     // DeleteBarang({dispatch}, id) {
     //     axios.delete(`hapus/barang/${id}`)
     //     dispatch('GetBarang')
     //     // await commit('setUser', detUser.data.user)
     // },
+    //=============Edit
+    setEditPenjualan(state, editjual){
+        state.editpenjualan = editjual
+    },
+    setEditAplusan(state, edita){
+        state.editaplusan = edita
+    },
+    setEditBiaya(state, b){
+        state.editbiaya = b
+    },
 
 };
 

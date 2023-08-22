@@ -187,6 +187,13 @@ const routes = [
         // meta: { requiresAuth: true },
     },
     {
+        path: '/edit-biaya',
+        name: 'editBiaya',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/editBiaya.vue'),
+        // props: true,
+        // meta: { requiresAuth: true },
+    },
+    {
         path: '/jurnal-umum',
         name: 'jurnal-umum',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/jurnalUmum.vue'),
