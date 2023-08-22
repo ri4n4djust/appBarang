@@ -190,7 +190,7 @@ const routes = [
         path: '/edit-biaya',
         name: 'editBiaya',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/editBiaya.vue'),
-        // props: true,
+        props: true,
         // meta: { requiresAuth: true },
     },
     {

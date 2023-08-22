@@ -28076,8 +28076,8 @@ var routes = [//dashboard
   name: 'editBiaya',
   component: function component() {
     return __webpack_require__.e(/*! import() | components-tabs */ "components-tabs").then(__webpack_require__.bind(__webpack_require__, /*! ../views/transaksi/editBiaya.vue */ "./resources/js/src/views/transaksi/editBiaya.vue"));
-  } // props: true,
-  // meta: { requiresAuth: true },
+  },
+  props: true // meta: { requiresAuth: true },
 
 }, {
   path: '/jurnal-umum',
@@ -30770,7 +30770,8 @@ var state = {
   jurnalumum: [],
   costbbm: [],
   listkartustok: [],
-  generalledger: []
+  generalledger: [],
+  detailbiaya: []
 };
 var getters = {
   SlaporanBbm: function SlaporanBbm(state) {
@@ -30817,6 +30818,9 @@ var getters = {
   },
   StateGL: function StateGL(state) {
     return state.generalledger;
+  },
+  StateBiayaDetail: function StateBiayaDetail(state) {
+    return state.detailbiaya;
   }
 };
 var actions = {
@@ -31074,7 +31078,7 @@ var actions = {
       }, _callee8, null, [[1, 8]]);
     }))();
   },
-  GetCostBbm: function GetCostBbm(_ref9, srt) {
+  GetBiayaDetail: function GetBiayaDetail(_ref9, biaya) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9() {
       var commit, response;
       return _regeneratorRuntime().wrap(function _callee9$(_context9) {
@@ -31084,11 +31088,11 @@ var actions = {
               commit = _ref9.commit;
               _context9.prev = 1;
               _context9.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/cost-bbm', srt);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/detail-biaya', biaya);
 
             case 4:
               response = _context9.sent;
-              commit('setCostBbm', response.data.data);
+              commit('setBiayaDetail', response.data.data);
               _context9.next = 12;
               break;
 
@@ -31096,7 +31100,7 @@ var actions = {
               _context9.prev = 8;
               _context9.t0 = _context9["catch"](1);
               // Handle error
-              alert('error load Cost bbm');
+              alert('error load Detail Biaya');
               return _context9.abrupt("return");
 
             case 12:
@@ -31107,7 +31111,7 @@ var actions = {
       }, _callee9, null, [[1, 8]]);
     }))();
   },
-  GetListAplusan: function GetListAplusan(_ref10, laplus) {
+  GetCostBbm: function GetCostBbm(_ref10, srt) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee10() {
       var commit, response;
       return _regeneratorRuntime().wrap(function _callee10$(_context10) {
@@ -31117,11 +31121,11 @@ var actions = {
               commit = _ref10.commit;
               _context10.prev = 1;
               _context10.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/list-aplusan', laplus);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/cost-bbm', srt);
 
             case 4:
               response = _context10.sent;
-              commit('setListAplusan', response.data.data);
+              commit('setCostBbm', response.data.data);
               _context10.next = 12;
               break;
 
@@ -31129,7 +31133,7 @@ var actions = {
               _context10.prev = 8;
               _context10.t0 = _context10["catch"](1);
               // Handle error
-              alert('error load list Aplusan bbm');
+              alert('error load Cost bbm');
               return _context10.abrupt("return");
 
             case 12:
@@ -31140,7 +31144,7 @@ var actions = {
       }, _callee10, null, [[1, 8]]);
     }))();
   },
-  GetListBbmDatang: function GetListBbmDatang(_ref11, bbmdatang) {
+  GetListAplusan: function GetListAplusan(_ref11, laplus) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee11() {
       var commit, response;
       return _regeneratorRuntime().wrap(function _callee11$(_context11) {
@@ -31150,11 +31154,11 @@ var actions = {
               commit = _ref11.commit;
               _context11.prev = 1;
               _context11.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/list-bbmdatang', bbmdatang);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/list-aplusan', laplus);
 
             case 4:
               response = _context11.sent;
-              commit('setListBbmDatang', response.data.data);
+              commit('setListAplusan', response.data.data);
               _context11.next = 12;
               break;
 
@@ -31162,7 +31166,7 @@ var actions = {
               _context11.prev = 8;
               _context11.t0 = _context11["catch"](1);
               // Handle error
-              alert('error load list bbm datang');
+              alert('error load list Aplusan bbm');
               return _context11.abrupt("return");
 
             case 12:
@@ -31173,7 +31177,7 @@ var actions = {
       }, _callee11, null, [[1, 8]]);
     }))();
   },
-  GetListPenyusutan: function GetListPenyusutan(_ref12, penyusutan) {
+  GetListBbmDatang: function GetListBbmDatang(_ref12, bbmdatang) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee12() {
       var commit, response;
       return _regeneratorRuntime().wrap(function _callee12$(_context12) {
@@ -31183,11 +31187,11 @@ var actions = {
               commit = _ref12.commit;
               _context12.prev = 1;
               _context12.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/list-penyusutan', penyusutan);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/list-bbmdatang', bbmdatang);
 
             case 4:
               response = _context12.sent;
-              commit('setListPenyusutan', response.data.data);
+              commit('setListBbmDatang', response.data.data);
               _context12.next = 12;
               break;
 
@@ -31195,7 +31199,7 @@ var actions = {
               _context12.prev = 8;
               _context12.t0 = _context12["catch"](1);
               // Handle error
-              alert('error load list penyusutan');
+              alert('error load list bbm datang');
               return _context12.abrupt("return");
 
             case 12:
@@ -31206,7 +31210,7 @@ var actions = {
       }, _callee12, null, [[1, 8]]);
     }))();
   },
-  GetBukuBesar: function GetBukuBesar(_ref13, buku) {
+  GetListPenyusutan: function GetListPenyusutan(_ref13, penyusutan) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee13() {
       var commit, response;
       return _regeneratorRuntime().wrap(function _callee13$(_context13) {
@@ -31216,11 +31220,11 @@ var actions = {
               commit = _ref13.commit;
               _context13.prev = 1;
               _context13.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/buku-besar', buku);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/list-penyusutan', penyusutan);
 
             case 4:
               response = _context13.sent;
-              commit('setBukuBesar', response.data.data);
+              commit('setListPenyusutan', response.data.data);
               _context13.next = 12;
               break;
 
@@ -31228,7 +31232,7 @@ var actions = {
               _context13.prev = 8;
               _context13.t0 = _context13["catch"](1);
               // Handle error
-              alert('error load buku besar');
+              alert('error load list penyusutan');
               return _context13.abrupt("return");
 
             case 12:
@@ -31239,7 +31243,7 @@ var actions = {
       }, _callee13, null, [[1, 8]]);
     }))();
   },
-  GetGL: function GetGL(_ref14, buku) {
+  GetBukuBesar: function GetBukuBesar(_ref14, buku) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee14() {
       var commit, response;
       return _regeneratorRuntime().wrap(function _callee14$(_context14) {
@@ -31249,11 +31253,11 @@ var actions = {
               commit = _ref14.commit;
               _context14.prev = 1;
               _context14.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/general-ledger', buku);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/buku-besar', buku);
 
             case 4:
               response = _context14.sent;
-              commit('setGL', response.data.data);
+              commit('setBukuBesar', response.data.data);
               _context14.next = 12;
               break;
 
@@ -31272,7 +31276,7 @@ var actions = {
       }, _callee14, null, [[1, 8]]);
     }))();
   },
-  GetJurnalUmum: function GetJurnalUmum(_ref15, gj) {
+  GetGL: function GetGL(_ref15, buku) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee15() {
       var commit, response;
       return _regeneratorRuntime().wrap(function _callee15$(_context15) {
@@ -31282,11 +31286,11 @@ var actions = {
               commit = _ref15.commit;
               _context15.prev = 1;
               _context15.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/list-jurnalumum', gj);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/general-ledger', buku);
 
             case 4:
               response = _context15.sent;
-              commit('setJurnalUmum', response.data.data);
+              commit('setGL', response.data.data);
               _context15.next = 12;
               break;
 
@@ -31294,7 +31298,7 @@ var actions = {
               _context15.prev = 8;
               _context15.t0 = _context15["catch"](1);
               // Handle error
-              alert('error load jurnal umum');
+              alert('error load buku besar');
               return _context15.abrupt("return");
 
             case 12:
@@ -31305,7 +31309,7 @@ var actions = {
       }, _callee15, null, [[1, 8]]);
     }))();
   },
-  GetKartuStok: function GetKartuStok(_ref16, kr) {
+  GetJurnalUmum: function GetJurnalUmum(_ref16, gj) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee16() {
       var commit, response;
       return _regeneratorRuntime().wrap(function _callee16$(_context16) {
@@ -31315,11 +31319,11 @@ var actions = {
               commit = _ref16.commit;
               _context16.prev = 1;
               _context16.next = 4;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/kartu-stok', kr);
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/list-jurnalumum', gj);
 
             case 4:
               response = _context16.sent;
-              commit('setKartuStok', response.data.data);
+              commit('setJurnalUmum', response.data.data);
               _context16.next = 12;
               break;
 
@@ -31327,7 +31331,7 @@ var actions = {
               _context16.prev = 8;
               _context16.t0 = _context16["catch"](1);
               // Handle error
-              alert('error load kartu stok');
+              alert('error load jurnal umum');
               return _context16.abrupt("return");
 
             case 12:
@@ -31338,45 +31342,78 @@ var actions = {
       }, _callee16, null, [[1, 8]]);
     }))();
   },
-  EditBarang: function EditBarang(_ref17, Brg) {
+  GetKartuStok: function GetKartuStok(_ref17, kr) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee17() {
-      var dispatch;
+      var commit, response;
       return _regeneratorRuntime().wrap(function _callee17$(_context17) {
         while (1) {
           switch (_context17.prev = _context17.next) {
             case 0:
-              dispatch = _ref17.dispatch;
-              _context17.next = 3;
-              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/update/barang', Brg);
+              commit = _ref17.commit;
+              _context17.prev = 1;
+              _context17.next = 4;
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/kartu-stok', kr);
 
-            case 3:
-              _context17.next = 5;
-              return dispatch('GetBarang');
+            case 4:
+              response = _context17.sent;
+              commit('setKartuStok', response.data.data);
+              _context17.next = 12;
+              break;
 
-            case 5:
+            case 8:
+              _context17.prev = 8;
+              _context17.t0 = _context17["catch"](1);
+              // Handle error
+              alert('error load kartu stok');
+              return _context17.abrupt("return");
+
+            case 12:
             case "end":
               return _context17.stop();
           }
         }
-      }, _callee17);
+      }, _callee17, null, [[1, 8]]);
     }))();
   },
-  DeleteBarang: function DeleteBarang(_ref18, id) {
+  EditBarang: function EditBarang(_ref18, Brg) {
     return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee18() {
-      var dispatch, response, toast, _toast;
-
+      var dispatch;
       return _regeneratorRuntime().wrap(function _callee18$(_context18) {
         while (1) {
           switch (_context18.prev = _context18.next) {
             case 0:
               dispatch = _ref18.dispatch;
-              _context18.prev = 1;
-              _context18.next = 4;
+              _context18.next = 3;
+              return axios__WEBPACK_IMPORTED_MODULE_0__["default"].post('/api/update/barang', Brg);
+
+            case 3:
+              _context18.next = 5;
+              return dispatch('GetBarang');
+
+            case 5:
+            case "end":
+              return _context18.stop();
+          }
+        }
+      }, _callee18);
+    }))();
+  },
+  DeleteBarang: function DeleteBarang(_ref19, id) {
+    return _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee19() {
+      var dispatch, response, toast, _toast;
+
+      return _regeneratorRuntime().wrap(function _callee19$(_context19) {
+        while (1) {
+          switch (_context19.prev = _context19.next) {
+            case 0:
+              dispatch = _ref19.dispatch;
+              _context19.prev = 1;
+              _context19.next = 4;
               return axios__WEBPACK_IMPORTED_MODULE_0__["default"]["delete"]("/api/hapus/barang/".concat(id));
 
             case 4:
-              response = _context18.sent;
-              _context18.next = 7;
+              response = _context19.sent;
+              _context19.next = 7;
               return dispatch('GetBarang');
 
             case 7:
@@ -31392,11 +31429,11 @@ var actions = {
                 title: 'Barang berhasil terhapus',
                 padding: '2em'
               });
-              return _context18.abrupt("return", response);
+              return _context19.abrupt("return", response);
 
             case 12:
-              _context18.prev = 12;
-              _context18.t0 = _context18["catch"](1);
+              _context19.prev = 12;
+              _context19.t0 = _context19["catch"](1);
               // Handle error
               _toast = window.Swal.mixin({
                 toast: true,
@@ -31418,10 +31455,10 @@ var actions = {
 
             case 17:
             case "end":
-              return _context18.stop();
+              return _context19.stop();
           }
         }
-      }, _callee18, null, [[1, 12]]);
+      }, _callee19, null, [[1, 12]]);
     }))();
   } // async editAplus({commit}, da) {
   //     commit('setAplusan', da)
@@ -31450,6 +31487,9 @@ var mutations = {
   },
   setAplusan: function setAplusan(state, ap) {
     state.aplusan = ap;
+  },
+  setBiayaDetail: function setBiayaDetail(state, detbiaya) {
+    state.detailbiaya = detbiaya;
   },
   setListAplusan: function setListAplusan(state, lisap) {
     state.listaplusan = lisap;
@@ -76822,7 +76862,7 @@ module.exports = JSON.parse('{"dashboard":"仪表盘","sales":"销售量","analy
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/chunks/" + chunkId + "." + {"index2":"84eadc35cc80d7ca","components-tabs":"8d73295da9ac8667","components-accordions":"85f750f841c8771c","components-modals":"debe2f1e7c7d67bf","components-cards":"bac524a6c15875d5","components-carousel":"a06852a5afb4ab7d","components-timeline":"ddaa7e6a0c6ffef5","components-media-object":"82697c9850371d6f","components-list-group":"57d9bdc439a2198c","components-pricing-table":"d3bb3f3289461100","components-notifications":"d74b5a7090bd4441","components-lightbox":"8b0ef57e0a7a3590","components-countdown":"b1472633091dbd4a","components-counter":"9a3d576760ebd99e","components-sweetalert":"c42ea76a41479be9","font-icons":"78908ee868756819","pages-helpdesk":"8ec04fc8836164e1","pages-contact-us":"5ecfae6d35f178f1","pages-faq":"4b47984893569076","pages-faq2":"22a09e0b40cd6504","pages-privacy-policy":"868cd3ee7390c6bb","pages-coming-soon":"05aab4ea15c9e884","pages-error404":"ee43660010bf44c1","pages-error500":"c1fc29fb5c42e10a","pages-error503":"ef8aa8663f29e63d","pages-maintenence":"fa65750d1777b514","pages-blank-page":"eb2113bf116bef8f","pages-sample":"ce70ce1b3403d7a7","auth-login-boxed":"7578c66bd532a053","auth-register-boxed":"991df672814c85e9","auth-lockscreen-boxed":"80482b0161ee0326","auth-pass-recovery-boxed":"e3fdae4318943fc4","auth-login":"e0f36ec5e77f7d8d","auth-register":"493ba71821d33c3f","auth-lockscreen":"1ed73ce0d787cfb2","auth-pass-recovery":"18f15317d37f1f7f","elements-alerts":"d64a7051cbdda307","elements-avatar":"b4b3b21d3f9fb19d","elements-badges":"536fd01344149e59","elements-breadcrumbs":"fd46189dce3462b1","elements-buttons":"29334042a236fcff","elements-buttons-group":"ca7d09452771be16","elements-color-library":"39e8798a0f2b8bf4","elements-dropdown":"57c112df03baf4d0","elements-infobox":"c3fcf9a8f1ebdb01","elements-jumbotron":"6b596826348a0781","elements-loader":"743e3a254d5004df","elements-pagination":"601f77747a112ec8","elements-popovers":"e6f86d43719a51c3","elements-progress-bar":"b0a8c6405a40c6cd","elements-search":"1d2fe177726302e4","elements-tooltips":"c1afd2e9dfc58860","elements-treeview":"b6c96fb42c649472","elements-typography":"26a1c8655475cbca","tables":"738cfd6a6e5121ee","users-profile":"c4000fc34efa7b02","users-account-setting":"5e86768e13cb8c90","dragndrop":"4b19725d63ac7434","charts-apex-chart":"fff72f1dd6919e25","widgets":"d1a0907c92dda293","forms-basic":"afd4641179d19667","forms-input-group":"bd8ab012013cafc3","forms-layouts":"9cc40dc8762d768f","forms-validation":"a219da524921aa50","forms-checkbox-radio":"68b1a1ff79c653e1","forms-switches":"655c3ca16aa2fcd8","forms-wizards":"219cf215b25b6e20","forms-file-upload":"b02ec1849db37671","forms-clipboard":"1ba983c99834d2be","forms-date-picker":"4d838b7d7a315ea9","forms-input-mask":"76e51e53ca23b967","forms-quill-editor":"d003b4aa4e6689ee","forms-touchspin":"1a2d82ed023e6384","forms-markdown-editor":"df19aab502ffba20","forms-select2":"0eb11a6b9650318b","apps-chat":"822df26038002037","apps-mailbox":"8c5fc626a7401d05","apps-todo-list":"cf6fcd95aad1f402","apps-contacts":"9400a485e5762641","apps-notes":"dbaf02713659e75f","apps-scrumboard":"c9d82525e1578d6e","apps-calendar":"517783e3bd9035bf","apps-invoice-list":"7110ca1b3cb0a8d3","apps-invoice-preview":"9a1abeb3c93467bf","apps-invoice-add":"9fc9c8795d0fbc07","apps-invoice-edit":"332c7d058eace154","tables-basic":"46fe1cf19164c607","tables-striped":"34bc98b8f60de052","tables-order-sorting":"7fa2e1a00d17ac5e","tables-multi-column":"355614247e4d5e58","tables-multiple-tables":"e57b34bb3a5fccec","tables-alt-pagination":"31eaea3b70580aeb","tables-custom":"d1c17e04bdc04744","tables-range-search":"3ac25a9bca3a32db","tables-export":"adab343eeba82b5b","tables-live-dom-ordering":"3488a229ec6fd8af","tables-miscellaneous":"b05c8ca7c4787656","node_modules_html2canvas_dist_html2canvas_js":"5475dc17eb928a5a","node_modules_dompurify_dist_purify_js":"9dabfec756329575","node_modules_canvg_lib_index_es_js":"84de45b397df7f27"}[chunkId] + ".js";
+/******/ 			return "js/chunks/" + chunkId + "." + {"index2":"84eadc35cc80d7ca","components-tabs":"ca9d089406b93ad6","components-accordions":"85f750f841c8771c","components-modals":"debe2f1e7c7d67bf","components-cards":"bac524a6c15875d5","components-carousel":"a06852a5afb4ab7d","components-timeline":"ddaa7e6a0c6ffef5","components-media-object":"82697c9850371d6f","components-list-group":"57d9bdc439a2198c","components-pricing-table":"d3bb3f3289461100","components-notifications":"d74b5a7090bd4441","components-lightbox":"8b0ef57e0a7a3590","components-countdown":"b1472633091dbd4a","components-counter":"9a3d576760ebd99e","components-sweetalert":"c42ea76a41479be9","font-icons":"78908ee868756819","pages-helpdesk":"8ec04fc8836164e1","pages-contact-us":"5ecfae6d35f178f1","pages-faq":"4b47984893569076","pages-faq2":"22a09e0b40cd6504","pages-privacy-policy":"868cd3ee7390c6bb","pages-coming-soon":"05aab4ea15c9e884","pages-error404":"ee43660010bf44c1","pages-error500":"c1fc29fb5c42e10a","pages-error503":"ef8aa8663f29e63d","pages-maintenence":"fa65750d1777b514","pages-blank-page":"eb2113bf116bef8f","pages-sample":"ce70ce1b3403d7a7","auth-login-boxed":"7578c66bd532a053","auth-register-boxed":"991df672814c85e9","auth-lockscreen-boxed":"80482b0161ee0326","auth-pass-recovery-boxed":"e3fdae4318943fc4","auth-login":"e0f36ec5e77f7d8d","auth-register":"493ba71821d33c3f","auth-lockscreen":"1ed73ce0d787cfb2","auth-pass-recovery":"18f15317d37f1f7f","elements-alerts":"d64a7051cbdda307","elements-avatar":"b4b3b21d3f9fb19d","elements-badges":"536fd01344149e59","elements-breadcrumbs":"fd46189dce3462b1","elements-buttons":"29334042a236fcff","elements-buttons-group":"ca7d09452771be16","elements-color-library":"39e8798a0f2b8bf4","elements-dropdown":"57c112df03baf4d0","elements-infobox":"c3fcf9a8f1ebdb01","elements-jumbotron":"6b596826348a0781","elements-loader":"743e3a254d5004df","elements-pagination":"601f77747a112ec8","elements-popovers":"e6f86d43719a51c3","elements-progress-bar":"b0a8c6405a40c6cd","elements-search":"1d2fe177726302e4","elements-tooltips":"c1afd2e9dfc58860","elements-treeview":"b6c96fb42c649472","elements-typography":"26a1c8655475cbca","tables":"738cfd6a6e5121ee","users-profile":"c4000fc34efa7b02","users-account-setting":"5e86768e13cb8c90","dragndrop":"4b19725d63ac7434","charts-apex-chart":"fff72f1dd6919e25","widgets":"d1a0907c92dda293","forms-basic":"afd4641179d19667","forms-input-group":"bd8ab012013cafc3","forms-layouts":"9cc40dc8762d768f","forms-validation":"a219da524921aa50","forms-checkbox-radio":"68b1a1ff79c653e1","forms-switches":"655c3ca16aa2fcd8","forms-wizards":"219cf215b25b6e20","forms-file-upload":"b02ec1849db37671","forms-clipboard":"1ba983c99834d2be","forms-date-picker":"4d838b7d7a315ea9","forms-input-mask":"76e51e53ca23b967","forms-quill-editor":"d003b4aa4e6689ee","forms-touchspin":"1a2d82ed023e6384","forms-markdown-editor":"df19aab502ffba20","forms-select2":"0eb11a6b9650318b","apps-chat":"822df26038002037","apps-mailbox":"8c5fc626a7401d05","apps-todo-list":"cf6fcd95aad1f402","apps-contacts":"9400a485e5762641","apps-notes":"dbaf02713659e75f","apps-scrumboard":"c9d82525e1578d6e","apps-calendar":"517783e3bd9035bf","apps-invoice-list":"7110ca1b3cb0a8d3","apps-invoice-preview":"9a1abeb3c93467bf","apps-invoice-add":"9fc9c8795d0fbc07","apps-invoice-edit":"332c7d058eace154","tables-basic":"46fe1cf19164c607","tables-striped":"34bc98b8f60de052","tables-order-sorting":"7fa2e1a00d17ac5e","tables-multi-column":"355614247e4d5e58","tables-multiple-tables":"e57b34bb3a5fccec","tables-alt-pagination":"31eaea3b70580aeb","tables-custom":"d1c17e04bdc04744","tables-range-search":"3ac25a9bca3a32db","tables-export":"adab343eeba82b5b","tables-live-dom-ordering":"3488a229ec6fd8af","tables-miscellaneous":"b05c8ca7c4787656","node_modules_html2canvas_dist_html2canvas_js":"5475dc17eb928a5a","node_modules_dompurify_dist_purify_js":"9dabfec756329575","node_modules_canvg_lib_index_es_js":"84de45b397df7f27"}[chunkId] + ".js";
 /******/ 		};
 /******/ 	})();
 /******/ 	

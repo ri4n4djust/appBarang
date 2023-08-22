@@ -263,7 +263,7 @@
 
     import { useMeta } from '@/composables/use-meta';
 
-    useMeta({ title: 'Input Biaya' });
+    useMeta({ title: 'Edit Biaya' });
 
     const store = useStore();
     const router = useRouter();
@@ -275,9 +275,13 @@
     const nobiaya = ref([]);
     const total = ref();
     const params = ref({
-        noNota: nobiaya,
-        tglNota: moment().format("YYYY-MM-DD"),
+        noNota: props.kd_trans,
+        tglNota: moment(props.startDate).format("YYYY-MM-DD"),
         total: total,
+    });
+    const props = defineProps({
+        id: String,
+        kd_trans: String,
     });
 
     const columns = ref(['kd_trans', 'tglBiaya', 'keterangan_biaya' ,'jumlah', 'action']);
@@ -304,6 +308,7 @@
     });
 
     const sorting = ref({
+        kd_trans: props.kd_trans,
         startDate: moment().subtract(30,'d').format("D-M-YYYY"),
         endDate: moment().format("D-M-YYYY")
     });
@@ -311,10 +316,10 @@
     const GetCoaList=() => {
         store.dispatch('GetCoaList', {acc: '6'})
     }
-    const getNoBiaya=() => {
-        store.dispatch('GetNoBiaya')
-        setTimeout(function() { nobiaya.value = store.getters.NoBiaya ; }, 2000);
-    }
+    // const getNoBiaya=() => {
+    //     store.dispatch('GetNoBiaya')
+    //     setTimeout(function() { nobiaya.value = store.getters.NoBiaya ; }, 2000);
+    // }
 
 
     const getTotal=() =>{
@@ -343,23 +348,34 @@
         getNoBiaya();
     }
 
-    onMounted(  () => {
+    onMounted( async  () => {
         //set default data
-        items.value = []
+        await store.dispatch('GetBiayaDetail', sorting.value);
 
-        let dt = new Date();
-        params.value.invoice_date = JSON.parse(JSON.stringify(dt));
-        dt.setDate(dt.getDate() + 5);
-        params.value.due_date = dt;
+        const byArr = store.getters.StateBiayaDetail;
+        for (let a = 0; a < byArr.length; a++) {
+            items.value.push({ 
+                id: a + 1, 
+                name: byArr[a].keterangan_biaya, 
+                biaya: byArr[a].jumlah, 
+                satuan: byArr[a].jumlah, 
+                acc: byArr[a].accid 
+            });
+        }
+
+        // let dt = new Date();
+        // params.value.invoice_date = JSON.parse(JSON.stringify(dt));
+        // dt.setDate(dt.getDate() + 5);
+        // params.value.due_date = dt;
 
         // console.log(paramssupplier.value)
        
         GetCoaList();
-        getNoBiaya();
-        getListBiaya();
+        // getNoBiaya();
+        // getListBiaya();
         setTimeout(function() { 
             accs.value = store.getters.StateCoaList ; 
-            nobiaya.value = store.getters.NoBiaya ;
+            // nobiaya.value = store.getters.NoBiaya ;
             // listbiaya.value = store.getters.StateListBiaya ;
             // console.log(listbiaya.value);
         }, 4000);

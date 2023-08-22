@@ -16,7 +16,8 @@ const state = {
     jurnalumum: [],
     costbbm: [],
     listkartustok: [],
-    generalledger: []
+    generalledger: [],
+    detailbiaya: []
   };
   
 const getters = {
@@ -34,7 +35,8 @@ const getters = {
     StateGjList: state => state.jurnalumum,
     StateCostBbm: state => state.costbbm,
     StateListKartuStok: state => state.listkartustok,
-    StateGL: state => state.generalledger
+    StateGL: state => state.generalledger,
+    StateBiayaDetail: state => state.detailbiaya
 };
 
 const actions = {  
@@ -117,6 +119,17 @@ const actions = {
         } catch (ex) {
             // Handle error
             alert('error load Aplusan bbm')
+            return
+        }
+    },
+    async GetBiayaDetail({ commit }, biaya){
+        let response
+        try {
+            response = await axios.post('/api/detail-biaya', biaya)
+            commit('setBiayaDetail', response.data.data)
+        } catch (ex) {
+            // Handle error
+            alert('error load Detail Biaya')
             return
         }
     },
@@ -279,6 +292,9 @@ const mutations = {
     },
     setAplusan(state, ap){
         state.aplusan = ap
+    },
+    setBiayaDetail(state, detbiaya){
+        state.detailbiaya = detbiaya
     },
     setListAplusan(state, lisap){
         state.listaplusan = lisap

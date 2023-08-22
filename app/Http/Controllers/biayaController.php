@@ -130,7 +130,14 @@ class biayaController extends Controller
          ], 400);
         }
 
-
-
+    }
+    public function detailBiaya(Request $request){
+        $kd = $request->input('kd_trans');
+        $det = DB::table('tblbiaya')->where('kd_trans', $kd)->get();
+        return response([
+            'success' => true,
+            'message' => 'detail transaksi biaya',
+            'data' => $det
+        ], 200);
     }
 }
