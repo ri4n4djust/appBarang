@@ -37,29 +37,10 @@
                             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                             <polyline points="9 22 9 12 15 12 15 22"></polyline>
                         </svg>
-                        Transaksi
+                        Edit Transaksi Biaya
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" id="underline-profile-tab" data-bs-toggle="tab" href="#underline-profile" role="tab" aria-controls="underline-profile" aria-selected="false"
-                        ><svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            stroke-width="2"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            class="feather feather-user"
-                        >
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                        Daftar
-                    </a>
-                </li>
+                
             </ul>
 
             <div class="tab-content" id="lineTabContent-3">
@@ -277,11 +258,13 @@
     const params = ref({
         noNota: props.kd_trans,
         tglNota: moment(props.startDate).format("YYYY-MM-DD"),
-        total: total,
+        // total: props.total,
     });
     const props = defineProps({
         id: String,
         kd_trans: String,
+        startDate: String,
+        // total: String
     });
 
     const columns = ref(['kd_trans', 'tglBiaya', 'keterangan_biaya' ,'jumlah', 'action']);
@@ -309,8 +292,8 @@
 
     const sorting = ref({
         kd_trans: props.kd_trans,
-        startDate: moment().subtract(30,'d').format("D-M-YYYY"),
-        endDate: moment().format("D-M-YYYY")
+        startDate: moment(props.startDate).format("YYYY-MM-DD"),
+        // endDate: moment().format("D-M-YYYY")
     });
 
     const GetCoaList=() => {
@@ -338,6 +321,9 @@
 
 
     const simpanBiaya=() => {
+
+        store.dispatch('DeleteBiaya', { id:params.value.noNota})
+
         const header =params.value
         // const headers =paramssupplier.value
         // const headerfull = Object.assign(header, headers)
@@ -345,22 +331,24 @@
         console.log(detail);
         store.dispatch('CreateBiaya', [header,detail] )
         // setTimeout(function() { getCart(); }, 5000);
-        getNoBiaya();
+        // getNoBiaya();
     }
 
     onMounted( async  () => {
         //set default data
         await store.dispatch('GetBiayaDetail', sorting.value);
 
+        total.value = 0;
         const byArr = store.getters.StateBiayaDetail;
         for (let a = 0; a < byArr.length; a++) {
             items.value.push({ 
                 id: a + 1, 
                 name: byArr[a].keterangan_biaya, 
                 biaya: byArr[a].jumlah, 
-                satuan: byArr[a].jumlah, 
+                satuan: byArr[a].satuan, 
                 acc: byArr[a].accid 
             });
+            total.value += parseInt(byArr[a].jumlah)
         }
 
         // let dt = new Date();
@@ -368,11 +356,9 @@
         // dt.setDate(dt.getDate() + 5);
         // params.value.due_date = dt;
 
-        // console.log(paramssupplier.value)
+        console.log(total.value)
        
         GetCoaList();
-        // getNoBiaya();
-        // getListBiaya();
         setTimeout(function() { 
             accs.value = store.getters.StateCoaList ; 
             // nobiaya.value = store.getters.NoBiaya ;

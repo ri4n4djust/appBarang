@@ -21,12 +21,14 @@ class biayaController extends Controller
                     $memo = $det_biaya[$i]['name'];
                     $biaya = $det_biaya[$i]['biaya'];
                     $acc = $det_biaya[$i]['acc'];
+                    $satuan = $det_biaya[$i]['satuan'];
 
                     DB::table('tblbiaya')->upsert([
                             'kd_trans' => $noNota,
                             'tglBiaya' => $tglNota,
                             'keterangan_biaya' => $memo,
                             'jumlah' => $biaya,
+                            'satuan' => $satuan,
                             'accid' => $acc,
                             'r_regu' => 'Z',
                             'created_at' => $tglNota,
@@ -36,6 +38,7 @@ class biayaController extends Controller
                             'tglBiaya' => $tglNota,
                             'keterangan_biaya' => $memo,
                             'jumlah' => $biaya,
+                            'satuan' => $satuan,
                             'accid' => $acc,
                             'r_regu' => 'Z',
                             'created_at' => $tglNota,
