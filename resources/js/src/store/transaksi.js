@@ -12,7 +12,7 @@ const state = {
     link: [],
     listpobbm: [],
     //==========Edit
-    editpenjualan: [],
+    detailpenjualan: [],
     editaplusan:[],
     editbiaya: []
   };
@@ -27,7 +27,7 @@ const getters = {
     Slink: state => state.link,
     SlistPobbm: state => state.listpobbm,
     //==========Edit
-    SeditPenjualan: state => state.editpenjualan,
+    SdetailPenjualan: state => state.detailpenjualanpenjualan,
     SeditAplusan: state => state.editaplusan,
     SeditBiaya: state => state.editbiaya,
 };
@@ -452,24 +452,24 @@ const actions = {
         let response
         try {
             response = await axios.post('/api/getdetail-penjualan', kdPenjualan)
-            // commit('setAcc', response.data.data)
-            var dataArr = response.data.data
+            commit('setDetailPenjualan', response.data.data)
+            // var dataArr = response.data.data
 
-            const arr = [];
-            for (let i = 0; i < dataArr.length; i++) {
-                // console.log({kdBarang : dataArr[i].r_kdBarang, nmBarang : dataArr[i].r_nmBarang,});
-                arr.push ({
-                    'kdBarang' : dataArr[i].r_kdBarang,
-                    'nmBarang' : dataArr[i].r_nmBarang,
-                    'hrgJual' : dataArr[i].hrgJual,
-                    'qty' : dataArr[i].qty,
-                    'satuan' : dataArr[i].satuanJual,
-                    'total' : dataArr[i].totalJual
-                })
-              }
+            // const arr = [];
+            // for (let i = 0; i < dataArr.length; i++) {
+            //     // console.log({kdBarang : dataArr[i].r_kdBarang, nmBarang : dataArr[i].r_nmBarang,});
+            //     arr.push ({
+            //         'kdBarang' : dataArr[i].r_kdBarang,
+            //         'nmBarang' : dataArr[i].r_nmBarang,
+            //         'hrgJual' : dataArr[i].hrgJual,
+            //         'qty' : dataArr[i].qty,
+            //         'satuan' : dataArr[i].satuanJual,
+            //         'total' : dataArr[i].totalJual
+            //     })
+            //   }
             // console.log(arr)
 
-            localStorage.setItem('cartItemsPen', JSON.stringify(arr))
+            // localStorage.setItem('cartItemsPen', JSON.stringify(arr))
         } catch (ex) {
             // Handle error
             return
@@ -906,8 +906,8 @@ const mutations = {
     //     // await commit('setUser', detUser.data.user)
     // },
     //=============Edit
-    setEditPenjualan(state, editjual){
-        state.editpenjualan = editjual
+    setDetailPenjualan(state, editjual){
+        state.detailpenjualan = editjual
     },
     setEditAplusan(state, edita){
         state.editaplusan = edita

@@ -154,8 +154,8 @@ const routes = [
     {
         path: '/editpenjualan',
         name: 'editpenjualan',
-        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/editpenjualan.vue'),
-        // props: true,
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/editPenjualan.vue'),
+        props: true,
         // meta: { requiresAuth: true },
     },
     {

@@ -315,7 +315,7 @@
 
     const cartItemsPen = ref([])
     const headerfull = ref([])
-    const nop = ref([])
+    // const nop = ref([])
     const kdPel = ref([])
     const nmPel = ref([])
     const tglP = ref([])
@@ -329,17 +329,23 @@
     const divpajak = ref(false)
     // const oldnota = ref(headerfull.value.noPenjualan);
     // let nop = headerfull[0].noPenjualan;
+    const props = defineProps({
+        id: String,
+        startDate: String,
+        kd_trans: String,
+        regu: String,
+    });
 
     const params = ref({
-        noNota: nop,
-        tglNota: tglP,// moment(tglP).format("YYYY-MM-DD"),
-        term: 0,
-        jthTempo: moment().format("YYYY-MM-DD"),
-        notes: '',
-        subtotal: subtotal,
-        tax: tax,
-        disc: disc,
-        total: total,
+        noNota: props.kd_trans,
+        tglNota: props.startDate,// moment(tglP).format("YYYY-MM-DD"),
+        // term: 0,
+        // jthTempo: moment().format("YYYY-MM-DD"),
+        // notes: '',
+        // subtotal: subtotal,
+        // tax: tax,
+        // disc: disc,
+        // total: total,
     });
 
     const paramspelanggan = ref({
@@ -349,9 +355,6 @@
         noHpPelanggan: '',
 
     });
-
-   
-   
 
     const penjualan = computed(() => {
         const barangs = store.getters.StateBarang;
@@ -368,8 +371,9 @@
     onMounted(  () => {
         // console.log(headerfull.value[0].noPenjualan)
         // params.noNota.value = headerfull.value[0].noPenjualan
+        store.dispatch('GetDetailPenjualan', params.value);
         setTimeout(() => {
-            console.log(' before onmount edit')
+            // console.log(' before onmount edit')
             try {
                 store.dispatch('GetBarang')
                 cartItemsPen.value = JSON.parse(localStorage.getItem('cartItemsPen'))
