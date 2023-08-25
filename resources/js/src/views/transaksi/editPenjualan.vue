@@ -50,7 +50,7 @@
                                                     <div class="form-group row">
                                                         <label for="company-address" class="col-sm-3 col-form-label col-form-label-sm">Term</label>
                                                         <div class="col-sm-9">
-                                                            <select id="inputState" v-model="params.term" class="form-select">
+                                                            <select id="inputState" v-model="params.termPenjualan" class="form-select">
                                                                 <option value="0" selected>Cash</option>
                                                                 <option value="1">Kredit</option>
                                                             </select>
@@ -265,7 +265,7 @@
                                                     <label for="invoice-detail-notes" class="col-sm-12 col-form-label col-form-label-sm">Notes:</label>
                                                     <div class="col-sm-12">
                                                         <textarea
-                                                            v-model="headerfull.notes"
+                                                            v-model="params.notes"
                                                             rows="3"
                                                             id="invoice-detail-notes"
                                                             class="form-control"
@@ -315,7 +315,7 @@
 
     const cartItemsPen = ref([])
     const headerfull = ref([])
-    // const nop = ref([])
+    const nop = ref([])
     const kdPel = ref([])
     const nmPel = ref([])
     const tglP = ref([])
@@ -345,14 +345,14 @@
         // subtotal: subtotal,
         // tax: tax,
         // disc: disc,
-        // total: total,
+        // total: total, 
     });
 
     const paramspelanggan = ref({
-        kdPelanggan: kdPel,
-        nmPelanggan: nmPel,
-        almtPelanggan: '',
-        noHpPelanggan: '',
+        // kdPelanggan: kdPel.value,
+        // nmPelanggan: nmPel.value,
+        // almtPelanggan: '',
+        // noHpPelanggan: '',
 
     });
 
@@ -368,28 +368,32 @@
 
     
 
-    onMounted(  () => {
+    onMounted( async () => {
         // console.log(headerfull.value[0].noPenjualan)
         // params.noNota.value = headerfull.value[0].noPenjualan
-        store.dispatch('GetDetailPenjualan', params.value);
-        setTimeout(() => {
-            // console.log(' before onmount edit')
-            try {
-                store.dispatch('GetBarang')
-                cartItemsPen.value = JSON.parse(localStorage.getItem('cartItemsPen'))
-                headerfull.value = JSON.parse(localStorage.getItem('headerEditPen'))
-                console.log(headerfull.value[0].noPenjualan)
-                nop.value = headerfull.value[0].noPenjualan
-                kdPel.value = headerfull.value[0].r_pelanggan
-                nmPel.value = headerfull.value[0].nmPelanggan
-                disc.value = headerfull.value[0].discPercentP
-                tglP.value = headerfull.value[0].tglPenjualan
-                getCart()
-                getPelanggan()
-            } catch(e) {
-                cartItemsPen.value = []
-            }
-        }, 1000) // 1 seems to work better for me than 0
+        await store.dispatch('GetDetailPenjualan', params.value);
+        const arr = store.getters.SdetailPenjualan;
+        cartItemsPen.value = arr[1];
+        // setTimeout(() => {
+        //     // console.log(' before onmount edit')
+        //     try {
+        //         store.dispatch('GetBarang')
+        //         // cartItemsPen.value = JSON.parse(localStorage.getItem('cartItemsPen'))
+        //         // headerfull.value = JSON.parse(localStorage.getItem('headerEditPen'))
+        //         console.log(arr[0])
+        //         // nop.value = arr.noPenjualan
+        //         // kdPel.value = arr[0].r_pelanggan
+        //         // nmPel.value = arr[0].nmPelanggan
+        //         // disc.value = arr[0].discPercentP
+        //         // tglP.value = arr[0].tglPenjualan
+        //         paramspelanggan.value = arr[0];
+                
+        //         getCart()
+        //         getPelanggan()
+        //     } catch(e) {
+        //         // cartItemsPen.value = []
+        //     }
+        // }, 1000) // 1 seems to work better for me than 0
     });
 
     onBeforeMount(() => {

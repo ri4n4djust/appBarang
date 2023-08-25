@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\PenjualanDetail;
+use App\Models\Penjualan;
 use App\Models\GeneralLedger;
 use App\Models\KuponPenjualan;
 class penjualanController extends Controller
@@ -298,13 +299,14 @@ class penjualanController extends Controller
     }
 
     public function getDetailPenjualan(Request $request){
-        $noPenjualan = $request->input('kd');
+        $noPenjualan = $request->input('noNota');
 
-        $data = PenjualanDetail::where('r_noPenjualan', $noPenjualan)->get();
+        $dataH = Penjualan::where('noPenjualan', $noPenjualan)->join('tblpelanggan', 'tblpenjualan.r_pelanggan', 'tblpelanggan.kdPelanggan')->get();
+        $dataD = PenjualanDetail::where('r_noPenjualan', $noPenjualan)->get();
         return response()->json([
             'success' => true,
             'message' => 'Detail Penjualan!',
-            'data' => $data
+            'data' => [$dataH, $dataD]
         ], 200);
     }
 }

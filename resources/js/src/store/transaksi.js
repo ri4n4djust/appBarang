@@ -27,7 +27,7 @@ const getters = {
     Slink: state => state.link,
     SlistPobbm: state => state.listpobbm,
     //==========Edit
-    SdetailPenjualan: state => state.detailpenjualanpenjualan,
+    SdetailPenjualan: state => state.detailpenjualan,
     SeditAplusan: state => state.editaplusan,
     SeditBiaya: state => state.editbiaya,
 };
