@@ -91,14 +91,14 @@
                                                     <div class="form-group row">
                                                         <label for="client-address" class="col-sm-3 col-form-label col-form-label-sm">Address</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" v-model="paramspelanggan.almtPelanggan" id="client-address" class="form-control form-control-sm" placeholder="XYZ Street" />
+                                                            <input type="text" v-model="paramspelanggan.almtPelanggan" class="form-control form-control-sm" placeholder="XYZ Street" />
                                                         </div>
                                                     </div>
 
                                                     <div class="form-group row">
                                                         <label for="client-phone" class="col-sm-3 col-form-label col-form-label-sm">Phone</label>
                                                         <div class="col-sm-9">
-                                                            <input type="text" v-model="paramspelanggan.noHpPelanggan" id="client-phone" class="form-control form-control-sm" placeholder="(123) 456 789" />
+                                                            <input type="text" v-model="paramspelanggan.noHpPelanggan" class="form-control form-control-sm" placeholder="(123) 456 789" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -373,11 +373,29 @@
         // params.noNota.value = headerfull.value[0].noPenjualan
         await store.dispatch('GetDetailPenjualan', params.value);
         const arr = store.getters.SdetailPenjualan;
-        cartItemsPen.value = arr[1];
+        const brgArr = arr[1];
+
+        for(let i = 0; i < brgArr.length; i++){
+
+            cartItemsPen.value.push({
+                kdBarang: brgArr[i].r_kdBarang,
+                nmBarang: brgArr[i].r_nmBarang,
+                hrgJual: brgArr[i].hrgJual,
+                qty: brgArr[i].qty,
+                satuan: brgArr[i].satuanJual,
+                total: brgArr[i].totalJual
+
+            })
+        };
+        localStorage.setItem('cartItemsPen', JSON.stringify(cartItemsPen.value));
+        store.dispatch('GetBarang');
+        paramspelanggan.value = arr[0];
+        getPelanggan();
+        getAcc();
         // setTimeout(() => {
         //     // console.log(' before onmount edit')
         //     try {
-        //         store.dispatch('GetBarang')
+                
         //         // cartItemsPen.value = JSON.parse(localStorage.getItem('cartItemsPen'))
         //         // headerfull.value = JSON.parse(localStorage.getItem('headerEditPen'))
         //         console.log(arr[0])
@@ -386,10 +404,10 @@
         //         // nmPel.value = arr[0].nmPelanggan
         //         // disc.value = arr[0].discPercentP
         //         // tglP.value = arr[0].tglPenjualan
-        //         paramspelanggan.value = arr[0];
+                
                 
         //         getCart()
-        //         getPelanggan()
+                
         //     } catch(e) {
         //         // cartItemsPen.value = []
         //     }
@@ -413,7 +431,7 @@
         // window.onbeforeunload = null
         // alert('kal tutup')
         localStorage.setItem('cartItemsPen', '[]')
-        localStorage.setItem('headerEditPen', '[]')
+        // localStorage.setItem('headerEditPen', '[]')
     })
 
     // const getBarang=() => {
@@ -478,6 +496,9 @@
     }
 
     const simpanPenjualan=() => {
+
+        store.dispatch('DeletePenjualan', { id:props.kd_trans})
+
         const header =params.value
         const headers =paramspelanggan.value
         const headerfull = Object.assign(header, headers)
