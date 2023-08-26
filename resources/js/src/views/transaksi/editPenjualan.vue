@@ -321,7 +321,7 @@
     const tglP = ref([])
     const subtotal = ref()
     const total = ref();
-    const disc = ref([]);
+    const disc = ref(0);
     const tax = ref(0);
     const brg = ref({});
     const qty = ref(1);
@@ -339,22 +339,16 @@
     const params = ref({
         noNota: props.kd_trans,
         tglNota: props.startDate,// moment(tglP).format("YYYY-MM-DD"),
-        // term: 0,
-        // jthTempo: moment().format("YYYY-MM-DD"),
-        // notes: '',
-        // subtotal: subtotal,
-        // tax: tax,
-        // disc: disc,
-        // total: total, 
+        term: 0,
+        jthTempo: moment().format("YYYY-MM-DD"),
+        notes: '',
+        subtotal: subtotal,
+        tax: tax,
+        disc: disc,
+        total: total, 
     });
 
-    const paramspelanggan = ref({
-        // kdPelanggan: kdPel.value,
-        // nmPelanggan: nmPel.value,
-        // almtPelanggan: '',
-        // noHpPelanggan: '',
-
-    });
+    const paramspelanggan = ref([]);
 
     const penjualan = computed(() => {
         const barangs = store.getters.StateBarang;
@@ -383,15 +377,29 @@
                 hrgJual: brgArr[i].hrgJual,
                 qty: brgArr[i].qty,
                 satuan: brgArr[i].satuanJual,
-                total: brgArr[i].totalJual
+                total: brgArr[i].totalJual,
+                accid:brgArr[i].accid,
+                accid_persediaan:brgArr[i].accid_persediaan,
+                accid_hpp:brgArr[i].accid_hpp,
+                totalhpp:brgArr[i].qty * brgArr[i].hrgPokok,
+                kategori:brgArr[i].ktgBarang
 
             })
         };
         localStorage.setItem('cartItemsPen', JSON.stringify(cartItemsPen.value));
         store.dispatch('GetBarang');
-        paramspelanggan.value = arr[0];
+        const detp = arr[0];
+        for(let i = 0; i < detp.length; i++){
+        // paramspelanggan.value = arr[0];
+            paramspelanggan.value.push({
+                kdPelanggan : detp[i].r_kdPelanggan,
+                nmPelanggan : detp[i].nmPelanggan
+            })
+        }
         getPelanggan();
         getAcc();
+        getSubtotal();
+        getTotal();
         // setTimeout(() => {
         //     // console.log(' before onmount edit')
         //     try {
@@ -503,7 +511,7 @@
         const headers =paramspelanggan.value
         const headerfull = Object.assign(header, headers)
         const detail =cartItemsPen.value
-        store.dispatch('CreatePenjualan', [headerfull,detail] )
+        store.dispatch('CreatePenjualan', [headers,detail] )
         total.value = 0
         subtotal.value = 0
         tax.value = 0
