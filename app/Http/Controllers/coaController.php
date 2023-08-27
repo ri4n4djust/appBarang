@@ -158,6 +158,8 @@ class coaController extends Controller
 				$table->increments('id');
 				$table->string('acc_id', 18)->nullable()->default('0');
 				$table->decimal('amount', 15,2)->nullable()->default('0');
+				$table->charset = 'latin1';
+				$table->collation = 'latin1_general_ci';
 				// Table only lasts as long as the connection persists.
 				// $table->temporary();
 				// The lookup column, with an index.
@@ -169,6 +171,8 @@ class coaController extends Controller
 				$table->increments('id');
 				$table->string('acc_id', 18)->nullable()->default('0');
 				$table->decimal('amount', 15,2)->nullable()->default('0');
+				$table->charset = 'latin1';
+				$table->collation = 'latin1_general_ci';
 				// $table->temporary();
 			});
 			Schema::create('coa', function (Blueprint $table) {
@@ -188,6 +192,8 @@ class coaController extends Controller
 				$table->string('acc_id', 11);
 				$table->string('name', 50);
 				$table->string('atype', 1);
+				$table->charset = 'latin1';
+				$table->collation = 'latin1_general_ci';
 				// $table->temporary();
 			});
 
