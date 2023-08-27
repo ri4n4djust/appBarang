@@ -348,7 +348,9 @@
         total: total, 
     });
 
-    const paramspelanggan = ref([]);
+    const paramspelanggan = ref({
+
+    });
 
     const penjualan = computed(() => {
         const barangs = store.getters.StateBarang;
@@ -388,20 +390,18 @@
         };
         localStorage.setItem('cartItemsPen', JSON.stringify(cartItemsPen.value));
         store.dispatch('GetBarang');
-        const detp = arr[0];
-        for(let i = 0; i < detp.length; i++){
-        // paramspelanggan.value = arr[0];
-            paramspelanggan.value.push({
-                kdPelanggan : detp[i].r_kdPelanggan,
-                nmPelanggan : detp[i].nmPelanggan
-            })
-        }
+
+        paramspelanggan.value.kdPelanggan = arr[0][0].kdPelanggan;
+        paramspelanggan.value.nmPelanggan = arr[0][0].nmPelanggan;
+        paramspelanggan.value.noHpPelanggan = arr[0][0].noHpPelanggan;
+        paramspelanggan.value.almtPelanggan = arr[0][0].almtPelanggan;
+
         getPelanggan();
         getAcc();
         getSubtotal();
         getTotal();
         // setTimeout(() => {
-        //     // console.log(' before onmount edit')
+        console.log(arr[0])
         //     try {
                 
         //         // cartItemsPen.value = JSON.parse(localStorage.getItem('cartItemsPen'))
@@ -511,7 +511,7 @@
         const headers =paramspelanggan.value
         const headerfull = Object.assign(header, headers)
         const detail =cartItemsPen.value
-        store.dispatch('CreatePenjualan', [headers,detail] )
+        store.dispatch('CreatePenjualan', [headerfull,detail] )
         total.value = 0
         subtotal.value = 0
         tax.value = 0
@@ -539,18 +539,23 @@
                 const oldName = cartItemsPen.value[objIndex].nmBarang;
                 const oldQty = cartItemsPen.value[objIndex].qty;
                 const oldTotal = cartItemsPen.value[objIndex].total;
+                const oldTotalHpp = cartItemsPen.value[objIndex].totalhpp;
                 const newQty = parseInt(oldQty) + parseInt(qty.value) ;
                 const newTotal = parseInt(oldTotal) + parseInt(qty.value * brg.hrgJual) ;
+                const newTotalHpp = parseInt(oldTotalHpp) + parseInt(qty.value * brg.hrgPokok) ;
                 cartItemsPen.value[objIndex].qty = parseInt(newQty);
                 cartItemsPen.value[objIndex].total = parseInt(newTotal);
+                cartItemsPen.value[objIndex].totalhpp = parseInt(newTotalHpp);
                 localStorage.setItem('cartItemsPen',JSON.stringify(cartItemsPen.value));
                 alert(oldName+' Quantity Update')
                 getCart();
+                getTotal()
                 // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
             }else{
-            cartItemsPen.value.push({kdBarang:brg.kdBarang, nmBarang:brg.nmBarang,hrgJual:brg.hrgJual,qty:qty.value,satuan:brg.satuanBarang,total:qty.value * brg.hrgJual});	
+            cartItemsPen.value.push({kdBarang:brg.kdBarang, nmBarang:brg.nmBarang,accid:brg.accid,accid_persediaan:brg.accid_persediaan,accid_hpp:brg.accid_hpp,hrgJual:brg.hrgJual,accid:brg.accid,accid_persediaan:brg.accid_persediaan,qty:qty.value,satuan:brg.satuanBarang,total:qty.value * brg.hrgJual,totalhpp:qty.value * brg.hrgPokok, kategori:brg.ktgBarang});	
             localStorage.setItem('cartItemsPen',JSON.stringify(cartItemsPen.value));
             getCart();
+            getTotal()
             // isicart = Object.keys(JSON.parse(localStorage.getItem('cartItemsP'))).length;
             alert(brg.nmBarang+ " berhasil disimpan")
             }
