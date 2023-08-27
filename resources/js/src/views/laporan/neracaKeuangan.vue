@@ -237,7 +237,7 @@
             // store.dispatch('GetCoaList')
             hartalist.value = store.getters.StateHarta;
             load.value = false ;
-        }, 5000);
+        }, 10000);
 
         
        
@@ -255,7 +255,7 @@
             // const pendapatan = hartalist.value.filter(p => p.acc_id === '60000');
             // console.log(hartalist.value);
             load.value = false;
-        }, 3000);
+        }, 10000);
     }
 
     const export_table = (type) => {
