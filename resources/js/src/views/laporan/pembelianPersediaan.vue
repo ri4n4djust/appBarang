@@ -53,7 +53,7 @@
                             <template #total="props"> {{ Number(props.row.total).toLocaleString() }} </template>
                             <template #action="props">
 
-                                <a href="javascript:void(0);" @click="edit_row(props.row)" >
+                                <router-link :to="{name: 'editpembelian', params: {startDate: props.row.tglPenjualan, kd_trans:props.row.noPenjualan, regu:props.row.r_regu }}" >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="24"
@@ -68,7 +68,7 @@
                                     >
                                         <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                                     </svg>
-                                </a>
+                                </router-link>
                                 <a href="javascript:void(0);" @click="delete_row(props.row)" >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -159,10 +159,10 @@
 
     onMounted(() => {
         bind_data();
-        console.log('on mount pagr')
+        // console.log('on mount pagr')
     });
     onBeforeMount(() => {
-        console.log(' before onmount')
+        // console.log(' before onmount')
         
     })
 
@@ -314,12 +314,12 @@
             .map((s) => s.charAt(0).toUpperCase() + s.substring(1))
             .join(' ');
     };
-    const edit_row = (item) => {
-        store.dispatch('GetDetailPmbelian', {kd : item.noNota})
-        store.dispatch('CreateEditPembelian', item);
-        // router.push({ path: '/editpenjualan' })
-        // alert('ID: '+ item.noPenjualan);
-    };
+    // const edit_row = (item) => {
+    //     store.dispatch('GetDetailPembelian', {noNota : item.noNota})
+    //     store.dispatch('CreateEditPembelian', item);
+    //     // router.push({ path: '/editpenjualan' })
+    //     // alert('ID: '+ item.noPenjualan);
+    // };
     const delete_row = (item) => {
         new window.Swal({
             title: 'Anda Yakin?',

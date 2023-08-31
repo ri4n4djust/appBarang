@@ -13,6 +13,7 @@ const state = {
     listpobbm: [],
     //==========Edit
     detailpenjualan: [],
+    detailpembelian: [],
     editaplusan:[],
     editbiaya: []
   };
@@ -28,6 +29,7 @@ const getters = {
     SlistPobbm: state => state.listpobbm,
     //==========Edit
     SdetailPenjualan: state => state.detailpenjualan,
+    SdetailPembelian: state => state.detailpembelian,
     SeditAplusan: state => state.editaplusan,
     SeditBiaya: state => state.editbiaya,
 };
@@ -410,11 +412,11 @@ const actions = {
         // await dispatch('GetPembelian')
     },
 
-    async CreateEditPenjualan({commit}, item) {
-        // await axios.post('/api/tambah/pelanggan', pel)
-        await commit('setEditPenjualan', item)
-        localStorage.setItem('headerEditPen', JSON.stringify([item]))
-    },
+    // async CreateEditPenjualan({commit}, item) {
+    //     // await axios.post('/api/tambah/pelanggan', pel)
+    //     await commit('setEditPenjualan', item)
+    //     localStorage.setItem('headerEditPen', JSON.stringify([item]))
+    // },
 
     async NewKupon({ commit }, data){
             commit('setKupon', data)
@@ -453,6 +455,34 @@ const actions = {
         try {
             response = await axios.post('/api/getdetail-penjualan', kdPenjualan)
             commit('setDetailPenjualan', response.data.data)
+            // var dataArr = response.data.data
+
+            // const arr = [];
+            // for (let i = 0; i < dataArr.length; i++) {
+            //     // console.log({kdBarang : dataArr[i].r_kdBarang, nmBarang : dataArr[i].r_nmBarang,});
+            //     arr.push ({
+            //         'kdBarang' : dataArr[i].r_kdBarang,
+            //         'nmBarang' : dataArr[i].r_nmBarang,
+            //         'hrgJual' : dataArr[i].hrgJual,
+            //         'qty' : dataArr[i].qty,
+            //         'satuan' : dataArr[i].satuanJual,
+            //         'total' : dataArr[i].totalJual
+            //     })
+            //   }
+            // console.log(arr)
+
+            // localStorage.setItem('cartItemsPen', JSON.stringify(arr))
+        } catch (ex) {
+            // Handle error
+            return
+        }
+    },
+
+    async GetDetailPembelian({ commit }, kdBeli){
+        let response
+        try {
+            response = await axios.post('/api/getdetail-pembelian', kdBeli)
+            commit('setDetailPembelian', response.data.data)
             // var dataArr = response.data.data
 
             // const arr = [];
@@ -908,6 +938,9 @@ const mutations = {
     //=============Edit
     setDetailPenjualan(state, editjual){
         state.detailpenjualan = editjual
+    },
+    setDetailPembelian(state, editbeli){
+        state.detailpembelian = editbeli
     },
     setEditAplusan(state, edita){
         state.editaplusan = edita

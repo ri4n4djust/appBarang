@@ -269,11 +269,12 @@
     const unit_jual_s = ref();
     const total_jual_s  = ref();
     const hpp_brg = ref();
+    const kdb = ref();
 
     const items = ref([]);
     const sorting = ref({
         startDate: moment().subtract(30,'d').format("D-M-YYYY"),
-        kdBarang: props.kdBarang,
+        // kdBarang: kdb.value,
         endDate: moment().format("D-M-YYYY")
     });
 
@@ -286,6 +287,7 @@
 
     onMounted(() => {
         bind_data();
+        kdb.value = props.kdBarang ;
         // total_aplusan();
         // console.log(props)
         // const awal = moment(props.startDate, 'YYYY-MM-DD');
@@ -321,7 +323,7 @@
     
     const cari = async () =>{
        
-        await store.dispatch('GetKartuStok', {startDate: sorting.value.startDate, endDate: sorting.value.endDate, kdBarang: sorting.value.kdBarang});
+        await store.dispatch('GetKartuStok', {startDate: sorting.value.startDate, endDate: sorting.value.endDate, kdBarang: kdb.value});
         setTimeout(function() { items.value = store.getters.StateListKartuStok; }, 2000);
 
          sorting.value = {
@@ -351,6 +353,7 @@
         // props.startDate = sorting.startDate.value;
         // props.endDate = sorting.endDate.value;
         // console.log(sorting.startDate.value)
+        // console.log(arr);
     }
 
     const export_table = (type) => {

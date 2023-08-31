@@ -143,6 +143,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/detail/po-bbm', [App\Http\Controllers\pembelianController::class, 'detailPobbm']);
     Route::get('/linkacc', [App\Http\Controllers\pembelianController::class, 'linkAccount']);
     Route::post('/delete/pembelian', [App\Http\Controllers\pembelianController::class, 'deletePembelian']);
+    Route::post('/getdetail-pembelian', [App\Http\Controllers\pembelianController::class, 'getDetailPembelian']);
 
     // Penjualan
     Route::post('/store/penjualan', [App\Http\Controllers\penjualanController::class, 'simpanPenjualan']);

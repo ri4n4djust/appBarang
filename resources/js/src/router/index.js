@@ -134,6 +134,12 @@ const routes = [
         props: true,
     },
     {
+        path: '/editpembelian',
+        name: 'editpembelian',
+        component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/editPembelian.vue'),
+        props: true,
+    },
+    {
         path: '/pembelian-inventaris',
         name: 'pembelian-inventaris',
         component: () => import(/* webpackChunkName: "components-tabs" */ '../views/transaksi/pembelianInventaris.vue'),

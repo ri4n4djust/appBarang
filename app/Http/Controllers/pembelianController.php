@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\PembelianDetail;
+use App\Models\Pembelian;
 use App\Models\Persediaan;
 
 class pembelianController extends Controller
@@ -547,6 +548,18 @@ class pembelianController extends Controller
             'success' => true,
             'message' => 'List Link acc',
             'data' => $listakun
+        ], 200);
+    }
+
+    public function getDetailPembelian(Request $request){
+        $noPembelian = $request->input('noNota');
+
+        $dataH = Pembelian::where('noNota', $noPembelian)->join('tblsupplier', 'tblpembelian.r_supplier', 'tblsupplier.kdSupplier')->get();
+        $dataD = PembelianDetail::where('r_noNota', $noPembelian)->join('tblbarang', 'tblpembelian_detail.kdBarang', 'tblbarang.kdBarang')->get();
+        return response()->json([
+            'success' => true,
+            'message' => 'Detail Pembelian!',
+            'data' => [$dataH, $dataD]
         ], 200);
     }
 }
