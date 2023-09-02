@@ -370,6 +370,7 @@
     const get_fifo = () => {
         store.dispatch('GetStokFifo')
         setTimeout(function() { data_fifo.value = store.getters.StateFifo; }, 2000);
+        stok.value = data_fifo.value.reduce((a, b) => Number(a) + Number(b.stok), 0); ;
     }
 
     // const modalRef = ref(null);
@@ -381,6 +382,7 @@
         }
         getData();
         get_fifo();
+        console.log(stok.value);
     })
     
 </script>

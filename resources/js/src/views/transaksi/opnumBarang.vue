@@ -95,7 +95,14 @@
                                     </thead>
                                     <tbody role="rowgroup">
                                         <tr v-for="item, index in table_1" :key="item.index" role="row">
-                                            <td aria-colindex="1" role="cell">{{ item.kdBarang }}</td>
+                                            <td aria-colindex="1" role="cell">
+                                                Post - 
+                                                <select v-model="posting[index]">
+                                                    <option value="0">Tidak</option>
+                                                    <option value="1">Ya</option>
+                                                </select>
+                                                {{ item.kdBarang }}
+                                            </td>
                                             <td aria-colindex="2" role="cell">{{ item.nmBarang }}</td>
                                             <td aria-colindex="3" role="cell">{{ item.stokPersediaan }}</td>
                                             <td aria-colindex="4" role="cell">{{ item.namaKtg }}</td>
@@ -168,6 +175,7 @@
     const store = useStore();
     const table_1 = ref([]);
     const item_now = ref({});
+    const posting = ref([0,0,0,0]);
     const keterangan = ref({});
     const noopnum = ref([]);
     const total = ref([]);
@@ -222,6 +230,7 @@
                     'accid_persediaan' : dataArr[i].accid_persediaan,
                     'accid_biaya' : dataArr[i].accid_biaya,
                     'keterangan' : ket,
+                    'posting' : posting.value[i],
                     'qty' : item_now.value[i],
                     'selisih' : dataArr[i].stokPersediaan - item_now.value[i],
                     'total' : subto
