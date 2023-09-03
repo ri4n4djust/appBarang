@@ -369,7 +369,8 @@
         store.dispatch('GetPelanggan')
     }
     const getNoPenjualan=() => {
-        store.dispatch('GetNoPenjualan')
+        store.dispatch('GetNoPenjualan');
+        nopenjualan.value = store.getters.NoPenjualan;
     }
     const getAcc=() => {
         store.dispatch('GetAcc')
@@ -435,8 +436,9 @@
         tax.value = 0
         setTimeout(function() { 
             getCart(); 
+            getNoPenjualan();
         }, 5000);
-        getNoPenjualan();
+        // getNoPenjualan();
         total.value = 0
         divpajak.value = false
     }
