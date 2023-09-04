@@ -504,23 +504,27 @@
     }
 
     const simpanPenjualan=() => {
-
         store.dispatch('DeletePenjualan', { id:props.kd_trans})
-
-        const header =params.value
-        const headers =paramspelanggan.value
-        const headerfull = Object.assign(header, headers)
-        const detail =cartItemsPen.value
-        store.dispatch('CreatePenjualan', [headerfull,detail] )
-        total.value = 0
-        subtotal.value = 0
-        tax.value = 0
-        // setTimeout(function() { 
-        //     getCart(); 
-        // }, 5000);
-        router.push({ name: 'penjualan-barang' })
-        total.value = 0
-        divpajak.value = false
+        .then(response => {
+            const header =params.value
+            const headers =paramspelanggan.value
+            const headerfull = Object.assign(header, headers)
+            const detail =cartItemsPen.value
+            store.dispatch('CreatePenjualan', [headerfull,detail] )
+            total.value = 0
+            subtotal.value = 0
+            tax.value = 0
+            // setTimeout(function() { 
+            //     getCart(); 
+            // }, 5000);
+            router.push({ name: 'penjualan-barang' })
+            total.value = 0
+            divpajak.value = false
+        }).catch(error => {
+            console.log('error: ', error)
+            return
+        })
+        
     }
 
     function addToCart(brg) {

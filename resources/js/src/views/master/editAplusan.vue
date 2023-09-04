@@ -468,9 +468,14 @@
         }
 
         store.dispatch('DeleteAplusan', { id:dataArr[0].kd_trans})
+        .then(response => {
+            store.dispatch('CreateTransNosel', [arr,arr_k,arr_b,arr_l,prArr ])
+        }).catch(error => {
+            console.log('error: ', error)
+            return
+        })
         // console.log(dataArr[0].kd_trans);
-        store.dispatch('CreateTransNosel', [arr,arr_k,arr_b,arr_l,prArr ])
-
+        
     }
 
     

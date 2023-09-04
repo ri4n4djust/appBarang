@@ -323,15 +323,21 @@
     const simpanBiaya=() => {
 
         store.dispatch('DeleteBiaya', { id:params.value.noNota})
+        .then(response => {
+            // console.log(response)
+            const header =params.value
+            // const headers =paramssupplier.value
+            // const headerfull = Object.assign(header, headers)
+            const detail =items.value ;
+            // console.log(detail);
+            store.dispatch('CreateBiaya', [header,detail] )
+            // setTimeout(function() { getCart(); }, 5000);
+            // getNoBiaya();
+        }).catch(error => {
+            console.log('error: ', error)
+            return
+        })
 
-        const header =params.value
-        // const headers =paramssupplier.value
-        // const headerfull = Object.assign(header, headers)
-        const detail =items.value ;
-        console.log(detail);
-        store.dispatch('CreateBiaya', [header,detail] )
-        // setTimeout(function() { getCart(); }, 5000);
-        // getNoBiaya();
     }
 
     onMounted( async  () => {

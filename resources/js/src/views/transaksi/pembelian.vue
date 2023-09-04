@@ -396,7 +396,8 @@
         store.dispatch('GetSupplier')
     }
     const getNoPembelian=() => {
-        store.dispatch('GetNoPembelian')
+        store.dispatch('GetNoPembelian');
+        nopembelian.value = store.getters.NoPembelian;
     }
     // const getAcc=() => {
     //     store.dispatch('GetAcc')
@@ -457,8 +458,11 @@
             const headerfull = Object.assign(header, headers)
             const detail =cartItems.value
             store.dispatch('CreatePembelian', [headerfull,detail] )
-            setTimeout(function() { getCart(); }, 5000);
-            getNoPembelian();
+            setTimeout(function() { 
+                getCart();
+                getNoPembelian();
+            }, 5000);
+            
     }
 
     onMounted(() => {
