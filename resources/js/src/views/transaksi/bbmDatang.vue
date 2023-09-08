@@ -672,8 +672,21 @@
                 // });
                 rowhtml += '</tr>';
             });
+            // records.filter((item) =>item.my).map((item) => +item.my).reduce((sum, current) => sum + current);
+            const totalPX = records.filter(i => i.code_bbm === 'BRG0001').reduce((a, b) => Number(a) + Number(b.qty_terima), 0);
+            const totalPL = records.filter(i => i.code_bbm === 'BRG0002').reduce((a, b) => Number(a) + Number(b.qty_terima), 0);
+            const totalDX = records.filter(i => i.code_bbm === 'BRG0003').reduce((a, b) => Number(a) + Number(b.qty_terima), 0);
+
             rowhtml +=
                 '<style>body {font-family:Arial; color:#495057;}p{text-align:center;font-size:8px;font-weight:bold;margin:15px;}table{ border-collapse: collapse; border-spacing: 0; }th,td{font-size:8px;text-align:left;padding: 4px;}th{padding:8px 4px;}tr:nth-child(2n-1){background:#f7f7f7; }</style>';
+            rowhtml += '</tbody></table>';
+
+            rowhtml += '<table style="width: 95%; " cellpadding="0" cellcpacing="0" border="1"><thead><tr> ';
+            rowhtml += '</tr></thead>';
+            rowhtml += '<tbody>';
+            rowhtml += '<tr><td>PERTAMAX :</td><td>'+totalPX+'</td></tr>';
+            rowhtml += '<tr><td>PERTALITE :</td><td>'+totalPL+'</td></tr>';
+            rowhtml += '<tr><td>DEXLITE :</td><td>'+totalDX+'</td></tr>';
             rowhtml += '</tbody></table>';
             var winPrint = window.open('', '', 'left=0,top=0,width=1000,height=600,toolbar=0,scrollbars=0,status=0');
             winPrint.document.write('<title>Print</title>' + rowhtml);
