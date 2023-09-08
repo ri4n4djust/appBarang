@@ -195,6 +195,11 @@
                                             <td aria-colindex="2" role="cell">{{ moment(fifo.tgl).format('DD-MM-YYYY') }}</td>
                                         </tr>
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td>{{ data_fifo.filter(i => i.kd_barang === list.code_bbm).reduce((a, b) => Number(a) + Number(b.stok), 0) }}</td>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                             
