@@ -614,12 +614,22 @@ class laporanController extends Controller
                     $stok = $old_stok_trans[$i]->stok_trans;
                     $id_fifo = $old_stok_trans[$i]->r_fifo;
                     $old_fifo = DB::table('tblstok_fifo')->where('id', $id_fifo)->first();
-                    $stok_old = $old_fifo->stok;
-                    DB::table('tblstok_fifo')->where('id', $id_fifo)
-                    ->update([
-                        'stok' => $stok_old + $stok,
+                    if(!empty($old_fifo)){
+                        $stok_old = $old_fifo->stok;
+                        DB::table('tblstok_fifo')->where('id', $id_fifo)
+                        ->update([
+                            'stok' => $stok_old + $stok,
 
-                    ]);
+                        ]);
+
+                    }
+                    // $old_fifo = DB::table('tblstok_fifo')->where('id', $id_fifo)->first();
+                    // $stok_old = $old_fifo->stok;
+                    // DB::table('tblstok_fifo')->where('id', $id_fifo)
+                    // ->update([
+                    //     'stok' => $stok_old + $stok,
+
+                    // ]);
 
                 }
 
